@@ -15,10 +15,6 @@ Now execute the dependency manager (https://getcomposer.org/download/) in your p
 
     php composer.phar install
 
-## Tests
-
-    ./vendor/bin/phpunit
-
 ## Examples
 
 ### Single Driver Route Optimization
@@ -118,3 +114,7 @@ $problem = Route4Me\OptimizationProblem::optimize($optimizationParams);
 
 var_dump($problem);
 ```
+
+## Tests
+
+    ./vendor/bin/phpunit
