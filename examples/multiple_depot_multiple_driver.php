@@ -25,7 +25,7 @@ foreach($json as $address) {
 }
 
 $parameters = RouteParameters::fromArray(array(
-    "algorithm_type"          => Algorithmtype::CVRP_TW_SD,
+    "algorithm_type"          => AlgorithmType::CVRP_TW_SD,
     "distance_unit"           => DistanceUnit::MILES,
     "device_type"             => DeviceType::WEB,
     "optimize"                => OptimizationType::DISTANCE,
