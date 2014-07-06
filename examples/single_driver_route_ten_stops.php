@@ -26,7 +26,7 @@ foreach($json as $address) {
 }
 
 $parameters = RouteParameters::fromArray(array(
-    "algorithm_type"          => Algorithmtype::TSP,
+    "algorithm_type"          => AlgorithmType::TSP,
     "distance_unit"           => DistanceUnit::MILES,
     "device_type"             => DeviceType::WEB,
     "optimize"                => OptimizationType::DISTANCE,
