@@ -1,6 +1,6 @@
 {
   "name": "route4me/route4me-php",
-  "description": "Route4me php SDK",
+  "description": "Access Route4Me's logistics-as-a-service API using our PHP SDK",
   "minimum-stability": "dev",
   "version": "0.1.0",
 
