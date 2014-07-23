@@ -183,4 +183,38 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf("Route4me\Route", $routes[0]);
         $this->assertNotNull($routes[0]->getRouteId());
     }
+
+    function testGetProblem()
+    {
+        $parameters = RouteParameters::fromArray(array(
+            "disable_optimization"    => false,
+            "route_name"              => "phpunit test"
+        ));
+
+        $optimizationParameters = new OptimizationProblemParams;
+        $optimizationParameters->setAddresses(self::$addresses);
+        $optimizationParameters->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParameters);
+
+        $problem = OptimizationProblem::get(array(
+            'optimization_problem_id' => $problem->getOptimizationId()
+        ));
+
+        $this->assertNotNull($problem);
+        $this->assertNotNull($problem->getRoutes());
+    }
+
+    function testGetThreeProblem()
+    {
+        $problem = OptimizationProblem::get(array(
+            'limit' => 3
+        ));
+
+        $this->assertEquals(count($problem), 3);
+        foreach($problem as $p) {
+            $this->assertNotNull($p);
+            $this->assertNotNull($p->getRoutes());
+        }
+    }
 }
