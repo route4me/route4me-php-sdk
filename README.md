@@ -7,7 +7,7 @@ set in composer.json
 
     {
         "require": {
-            "route4me/route4me-php": "~0.1.0"
+            "route4me/route4me-php": "~1.1.0"
         }
     }
 
