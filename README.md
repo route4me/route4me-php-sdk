@@ -1,6 +1,8 @@
 Route4Me PHP SDK
 ----------------
 
+[![Build Status](https://travis-ci.org/route4me/route4me-php-sdk.svg?branch=master)](https://travis-ci.org/route4me/route4me-php-sdk)
+
 ## Setup
 
 set in composer.json
