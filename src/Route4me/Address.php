@@ -9,7 +9,7 @@ use Route4me\Common;
 
 class Address extends Common
 {
-    static public $apiUrl = 'http://route4me.com/api.v4/address.php';
+    static public $apiUrl = '/api.v4/address.php';
 
     private $route_destination_id;
     public $alias;
@@ -77,68 +77,45 @@ class Address extends Common
 
     public static function getAddress($routeId, $addressId)
     {
-        // TODO: throw NotFound Exception if address not found
-        try {
-            $client = new Client;
-            $response = $client->get(self::$apiUrl, array(
-                'query' => array(
-                    'route_id'             => $routeId,
-                    'route_destination_id' => $addressId,
-                    'api_key'              => Route4me::getApiKey()
-                ),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
+        $address = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => array(
+                'route_id'             => $routeId,
+                'route_destination_id' => $addressId,
+            )
+        ));
 
-            return Address::fromArray($response->json());
-        } catch (\Exception $e) {
-            return null;
-        }
+        return Address::fromArray($address);
     }
 
     public function update()
     {
-        try {
-            $client = new Client;
-            $response = $client->put(self::$apiUrl, array(
-                'query' => array(
-                    'route_id'             => $this->route_id,
-                    'route_destination_id' => $this->route_destination_id,
-                    'api_key'              => Route4me::getApiKey()
-                ),
-                'body' => json_encode($this->toArray()),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
+        $address = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'PUT',
+            'body'   => $this->toArray(),
+            'query'  => array(
+                'route_id'             => $this->route_id,
+                'route_destination_id' => $this->route_destination_id,
+            ),
+        ));
 
-            return (bool)$response->json();
-        } catch (\Exception $e) {
-            return false;
-        }
+        return Address::fromArray($address);
     }
 
     public function delete()
     {
-        try {
-            $client = new Client;
-            $response = $client->delete(self::$apiUrl, array(
-                'query' => array(
-                    'route_id'             => $this->route_id,
-                    'route_destination_id' => $this->route_destination_id,
-                    'api_key'              => Route4me::getApiKey()
-                ),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
+        $address = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'DELETE',
+            'query'  => array(
+                'route_id'             => $this->route_id,
+                'route_destination_id' => $this->route_destination_id,
+            )
+        ));
 
-            $body = $response->json();
-            return (bool)$body['deleted'];
-        } catch (\Exception $e) {
-            return false;
-        }
+        return (bool)$address['deleted'];
     }
 
     function getAddressId()
