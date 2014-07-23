@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
 
 class Route extends Common
 {
-    static public $apiUrl = 'http://route4me.com/api.v4/route.php';
+    static public $apiUrl = '/api.v4/route.php';
 
     private $route_id;
     private $optimization_problem_id;
@@ -86,105 +86,63 @@ class Route extends Common
             }
 
             $query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
-            $query['offset'] = isset($params['offset']) ? $params['offset'] : 30;
+            $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
         }
 
-        try {
-            $client = new Client;
-            $response = $client->get(self::$apiUrl, array(
-                'query' => array_filter($query),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
+        $json = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => $query
+        ));
 
-            $routeResponse = $response->json();
-            if ($routeId) {
-                return self::fromArray($routeResponse);
-            } else {
-                $routes = array();
-                foreach($routeResponse as $route) {
-                    $routes[] = self::fromArray($route);
-                }
-                return $routes;
+        if ($routeId) {
+            return Route::fromArray($json);
+        } else {
+            $routes = array();
+            foreach($json as $route) {
+                $routes[] = Route::fromArray($route);
             }
-        // } catch(\GuzzleHttp\Exception\RequestException $e) {
-        //     if ($e->getCode()) {
-        //         throw new Not();
-        //     }
-        } catch (\Exception $e) {
-            return null;
+            return $routes;
         }
     }
 
     public function update()
     {
-        $body = array(
-            'parameters' => $this->parameters->toArray()
-        );
+        $route = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'PUT',
+            'query'  => array(
+                'route_id' => $this->route_id,
+            ),
+            'body' => array(
+                'parameters' => $this->parameters->toArray()
+            )
+        ));
 
-        try {
-            $client = new Client;
-            $response = $client->put(self::$apiUrl, array(
-                'query' => array(
-                    'route_id' => $this->route_id,
-                    'api_key'  => Route4me::getApiKey()
-                ),
-                'body' => json_encode($body),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
-
-            return (bool)$response->json();
-        } catch (\Exception $e) {
-            return false;
-        }
+        return Route::fromArray($route);
     }
 
     public function addAddresses(array $addresses)
     {
-        $body = array('addresses' => $addresses);
+        $route = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'PUT',
+            'query'  => array( 'route_id'  => $this->route_id ),
+            'body'   => array( 'addresses' => $addresses )
+        ));
 
-        try {
-            $client = new Client;
-            $response = $client->put(self::$apiUrl, array(
-                'query' => array(
-                    'route_id' => $this->route_id,
-                    'api_key'  => Route4me::getApiKey()
-                ),
-                'body' => json_encode($body),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
-
-            // add new address to routes
-            $this->addresses = array_merge($this->addresses, $addresses);
-            return (bool)$response->json();
-        } catch (\Exception $e) {
-            var_dump($e);
-            return false;
-        }
+        return Route::fromArray($route);
     }
 
     public function delete()
     {
-        try {
-            $client = new Client;
-            $response = $client->delete(self::$apiUrl, array(
-                'query' => array(
-                    'route_id' => $this->route_id,
-                    'api_key'  => Route4me::getApiKey()
-                ),
-                'headers' => array( 'User-Agent' => 'Route4me php sdk' )
-            ));
+        $route = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'DELETE',
+            'query'  => array( 'route_id' => $this->route_id )
+        ));
 
-            $body = $response->json();
-            return (bool)$body['deleted'];
-        } catch (\Exception $e) {
-            return false;
-        }
+        return $route['deleted'];
     }
 
     public function getRouteId()
