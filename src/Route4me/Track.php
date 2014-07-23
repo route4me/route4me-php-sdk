@@ -2,35 +2,25 @@
 
 namespace Route4me;
 
-use Route4me\Exception\BadParam;
-use Route4me\TrackSetParams;
 use Route4me\Route4me;
-use Route4me\Base;
-
-use GuzzleHttp\Client;
+use Route4me\TrackSetParams;
 
 class Track extends Common
 {
-    public static $apiUrl = 'http://route4me.com/track/set.php';
+    public static $apiUrl = '/track/set.php';
+
     public static function set(TrackSetParams $param)
     {
         $query = array_merge($param->toArray(), array(
             'api_key' => Route4me::getApiKey()
         ));
 
-        try {
-            $client = new Client;
-            $response = $client->get(self::$apiUrl, array(
-                'query' => $query,
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
+        $json = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => $query
+        ));
 
-            $json = $response->json();
-            return $json['status'] == true;
-        } catch (\Exception $e) {
-            return false;
-        }
+        return $json->status;
     }
 }
