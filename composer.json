@@ -1,8 +1,13 @@
 {
   "name": "route4me/route4me-php",
   "description": "Access Route4Me's logistics-as-a-service API using our PHP SDK",
-  "minimum-stability": "stable",
+
   "version": "1.0.0",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.0"
+    }
+  },
 
   "authors": [
     {
