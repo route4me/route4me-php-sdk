@@ -1,14 +1,14 @@
 {
   "name": "route4me/route4me-php",
   "description": "Access Route4Me's logistics-as-a-service API using our PHP SDK",
-  "minimum-stability": "dev",
-  "version": "0.1.0",
+  "minimum-stability": "stable",
+  "version": "1.0.0",
 
   "authors": [
     {
     "name": "Skrynkovskyy Igor",
     "email": "igor@route4me.com"
-  }
+    }
   ],
 
   "require": {
