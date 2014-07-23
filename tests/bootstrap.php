@@ -7,4 +7,3 @@ use Route4me\Route4me;
 
 // Set Global api key
 Route4me::setApiKey($GLOBALS['TEST_APIKEY']);
-Route4me::setBaseUrl('http://staging.route4me.com:8080');
