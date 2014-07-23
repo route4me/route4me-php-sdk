@@ -12,7 +12,7 @@ use GuzzleHttp\Client;
 
 class OptimizationProblem extends Common
 {
-    static public $apiUrl = 'http://route4me.com/api.v4/optimization_problem.php';
+    static public $apiUrl = '/api.v4/optimization_problem.php';
 
     private $optimization_problem_id;
     public $user_errors = array();
@@ -60,35 +60,50 @@ class OptimizationProblem extends Common
         return $problem;
     }
 
-    public static function optimize($param)
+    public static function optimize(OptimizationProblemParams $params)
     {
-        $params = array(
-            'addresses' => $param->getAddressesArray(),
-            'parameters' => $param->getParametersArray()
-        );
+        $optimize = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'POST',
+            'query'  => array(
+                'directions'             => $params->directions,
+                'format'                 => $params->format,
+                'route_path_output'      => $params->route_path_output,
+                'optimized_callback_url' => $params->optimized_callback_url
+            ),
+            'body'   => array(
+                'addresses'  => $params->getAddressesArray(),
+                'parameters' => $params->getParametersArray()
+            )
+        ));
 
-        $query = array(
-            'directions'             => $param->directions,
-            'format'                 => $param->format,
-            'route_path_output'      => $param->route_path_output,
-            'optimized_callback_url' => $param->optimized_callback_url,
-            'api_key'                => Route4me::getApiKey()
-        );
+        return OptimizationProblem::fromArray($optimize);
+    }
 
-        try {
-            $client = new Client;
-            $response = $client->post(self::$apiUrl, array(
-                'query'   => array_filter($query),
-                'body'    => json_encode($params),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
+    public static function get($params)
+    {
+        $optimize = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => array(
+                'state' => isset($params['state']) ? $params['state'] : null,
+                'limit' => isset($params['limit']) ? $params['limit'] : null,
+                'offset' => isset($params['offset']) ? $params['offset'] : null,
+                'optimization_problem_id' => isset($params['optimization_problem_id']) 
+                    ? $params['optimization_problem_id'] : null,
+                'wait_for_final_state' => isset($params['wait_for_final_state']) 
+                    ? $params['wait_for_final_state'] : null,
+            )
+        ));
 
-            return OptimizationProblem::fromArray($response->json());
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
-            return null;
+        if (isset($optimize['optimizations'])) {
+            $problems = array();
+            foreach($optimize['optimizations'] as $problem) {
+                $problems[] = OptimizationProblem::fromArray($problem);
+            }
+            return $problems;
+        } else {
+            return OptimizationProblem::fromArray($optimize);
         }
     }
 
@@ -103,36 +118,7 @@ class OptimizationProblem extends Common
 
     public static function update($param)
     {
-        $params = array(
-            'addresses' => $param->getAddressesArray(),
-            'parameters' => $param->getParametersArray()
-        );
 
-        $query = array(
-            'directions'              => $param->directions,
-            'format'                  => $param->format,
-            'route_path_output'       => $param->route_path_output,
-            'optimized_callback_url'  => $param->optimized_callback_url,
-            'reoptimize'              => $param->reoptimize,
-            'optimization_problem_id' => $param->optimization_problem_id,
-            'api_key'                 => Route4me::getApiKey()
-        );
-
-        try {
-            $client = new Client;
-            $response = $client->put(self::$apiUrl, array(
-                'query'   => array_filter($query),
-                'body'    => json_encode($params),
-                'headers' => array(
-                    'User-Agent' => 'Route4me php sdk'
-                )
-            ));
-
-            return (bool)$response->json();
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
-            return null;
-        }
     }
 
     public function getOptimizationId()
