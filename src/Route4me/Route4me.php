@@ -68,8 +68,8 @@ class Route4me
         $json = json_decode($result, true);
         if (200 == $code) {
             return $json;
-        } elseif (isset($json->errors)) {
-            throw new ApiError($json->errors);
+        } elseif (isset($json['errors'])) {
+            throw new ApiError(implode(', ', $json['errors']));
         } else {
             throw new ApiError('Something wrong');
         }
