@@ -31,8 +31,10 @@ class Route4me
 
     public static function makeRequst($options) {
         $method = isset($options['method']) ? $options['method'] : 'GET';
-        $query = isset($options['query']) ? $options['query'] : array();
-        $body = isset($options['body']) ? $options['body'] : null;
+        $query = isset($options['query']) ?
+            array_filter($options['query']) : array();
+        $body = isset($options['body']) ?
+            array_filter($options['body']) : null;
 
         $ch = curl_init();
         $url = $options['url'] . '?' . http_build_query(array_merge(
@@ -58,7 +60,7 @@ class Route4me
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        $json = json_decode($result);
+        $json = json_decode($result, true);
         if (200 == $code) {
             return $json;
         } elseif (isset($json->errors)) {
