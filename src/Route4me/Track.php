@@ -21,6 +21,6 @@ class Track extends Common
             'query'  => $query
         ));
 
-        return $json->status;
+        return $json['status'];
     }
 }
