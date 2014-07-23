@@ -52,8 +52,13 @@ class Route4me
         );
 
         curl_setopt_array($ch, $curlOpts);
-        if ('POST' == $method) {
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+        switch($method) {
+        case 'DELETE':
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); break;
+        case 'PUT':
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        case 'POST':
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); break;
         }
 
         $result = curl_exec($ch);
