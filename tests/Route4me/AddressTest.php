@@ -178,11 +178,9 @@ class AddressTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($address);
 
         $address->address = 'Updated address';
-        $saveState = $address->update();
+        $newAddress = $address->update();
 
-        $this->assertTrue($saveState);
-        $address = Address::getAddress(self::$route_id, self::$address_id);
-        $this->assertEquals($address->address, 'Updated address');
+        $this->assertEquals($newAddress->address, 'Updated address');
     }
 
     public function testDeleteAddress()
@@ -194,9 +192,11 @@ class AddressTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($state);
     }
 
+    /**
+     *  @expectedException Route4me\Exception\ApiError
+     **/
     function testRemovedAddress()
     {
-        $address = Address::getAddress(self::$route_id, self::$address_id);
-        $this->assertNull($address);
+        Address::getAddress(self::$route_id, self::$address_id);
     }
 }
