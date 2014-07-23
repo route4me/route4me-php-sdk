@@ -19,31 +19,22 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     {
         $addresses = array();
         $addresses[] = Address::fromArray(array(
-          "address" => "11497 Columbia Park Dr W, Jacksonville, FL 32258",
+          "address"  => "11497 Columbia Park Dr W, Jacksonville, FL 32258",
           "is_depot" => true,
-          "lat" => 30.159341812134,
-          "lng" => -81.538619995117,
-          "time" => 300,
-          "time_window_start" => 28800,
-          "time_window_end" => 32400
+          "lat"      => 30.159341812134,
+          "lng"      => -81.538619995117
         ));
 
         $addresses[] = Address::fromArray(array(
           "address" => "214 Edgewater Branch Drive 32259",
-          "lat" => 30.103567123413,
-          "lng" => -81.595352172852,
-          "time" => 300,
-          "time_window_start" => 36000,
-          "time_window_end" => 37200
+          "lat"     => 30.103567123413,
+          "lng"     => -81.595352172852
         ));
 
         $addresses[] = Address::fromArray(array(
-            "address" => "756 eagle point dr 32092",
-            "lat" => 30.046422958374,
-            "lng" => -81.508758544922,
-            "time" => 300,
-            "time_window_start" => 39600,
-            "time_window_end" => 41400
+          "address" => "756 eagle point dr 32092",
+          "lat"     => 30.046422958374,
+          "lng"     => -81.508758544922
         ));
 
         $parameters = RouteParameters::fromArray(array(
@@ -116,10 +107,10 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($route);
         $route->parameters->route_name = 'phpunit test';
         $route->parameters->device_type = DeviceType::IPAD;
+        $route = $route->update();
 
-        $state = $route->update();
-
-        $this->assertTrue($state);
+        $this->assertInstanceOf("Route4me\Route", $route);
+        $this->assertEquals($route->parameters->route_name, 'phpunit test');
     }
 
     function testAddAddresses()
@@ -129,24 +120,19 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
         $addresses = array();
         $addresses[] = Address::fromArray(array(
-            "address" => "214 Edgewater Branch Drive 32259",
-            "lat" => 30.103567123413,
-            "lng" => -81.595352172852,
-            "time" => 300,
-            "time_window_start" => 36000,
-            "time_window_end" => 37200
+          "address" => "214 Edgewater Branch Drive 32259",
+          "lat"     => 30.103567123413,
+          "lng"     => -81.595352172852
         ));
         $addresses[] = Address::fromArray(array(
           "address" => "756 eagle point dr 32092",
-          "lat" => 30.046422958374,
-          "lng" => -81.508758544922,
-          "time" => 300,
-          "time_window_start" => 39600,
-          "time_window_end" => 41400
+          "lat"     => 30.046422958374,
+          "lng"     => -81.508758544922
         ));
 
-        $state = $route->addAddresses($addresses);
-        $this->assertTrue($state);
+        $route = $route->addAddresses($addresses);
+        $this->assertInstanceOf("Route4me\Route", $route);
+        $this->assertEquals(count($route->addresses), 5);
     }
 
     function testRemoveRoute()
