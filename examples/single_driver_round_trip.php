@@ -42,6 +42,15 @@ $optimizationParams = new OptimizationProblemParams;
 $optimizationParams->setAddresses($addresses);
 $optimizationParams->setParameters($parameters);
 
-$problem = OptimizationProblem::optimize($optimizationParams);
+$problems = OptimizationProblem::optimize($optimizationParams);
 
-var_dump($problem);
+foreach ($problems as $problem) {
+	if (is_array($problem) || is_object($problem)) {
+		foreach ($problem as $key => $value) {
+			if (!is_object($value)) {
+				echo $key." --> ".$value."<br>";
+			}
+		}
+	}
+}
+

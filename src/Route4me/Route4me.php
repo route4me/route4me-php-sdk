@@ -35,7 +35,6 @@ class Route4me
             array_filter($options['query']) : array();
         $body = isset($options['body']) ?
             array_filter($options['body']) : null;
-
         $ch = curl_init();
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
@@ -54,11 +53,21 @@ class Route4me
         curl_setopt_array($ch, $curlOpts);
         switch($method) {
         case 'DELETE':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); break;
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+            break;
+		case 'DELETEARRAY':
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+            break;
         case 'PUT':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+			//curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+			break;
         case 'POST':
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); break;
+		case 'ADD':
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
 
         $result = curl_exec($ch);
@@ -66,6 +75,9 @@ class Route4me
         curl_close($ch);
 
         $json = json_decode($result, true);
+		//echo "code --> $code <br>";
+		//var_dump($result);
+		//die("Stop");
         if (200 == $code) {
             return $json;
         } elseif (isset($json['errors'])) {
@@ -74,4 +86,31 @@ class Route4me
             throw new ApiError('Something wrong');
         }
     }
+	
+	/**
+	 * Prints on the screen main keys and values of the array 
+	 *
+	 */
+	public static function simplePrint($results)
+	{
+		if (isset($results)) {
+			if (is_array($results)) {
+				foreach ($results as $key=>$result) {
+					if (is_array($result)) {
+						foreach ($result as $key1=>$result1) {
+							if (is_array($result1)) {
+								echo $key1." --> "."Array()";
+							} else {
+								echo $key1." --> ".$result1."<br>";	
+							}
+						}
+					} else {
+						echo $key." --> ".$result."<br>";
+					}
+					echo "<br>";
+				}
+			} 
+		}
+	}
+
 }
