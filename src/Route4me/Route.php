@@ -12,9 +12,9 @@ use GuzzleHttp\Client;
 class Route extends Common
 {
     static public $apiUrl = '/api.v4/route.php';
-
-    private $route_id;
-    private $optimization_problem_id;
+	static public $apiUrlDuplicate='/actions/duplicate_route.php';
+    public $route_id;
+    public $optimization_problem_id;
     public $vehicle_alias;
     public $driver_alias;
     public $trip_distance;
@@ -105,6 +105,48 @@ class Route extends Common
             return $routes;
         }
     }
+
+	public function duplicateRoute($route_id)
+	{
+		$result = Route4me::makeRequst(array(
+            'url'    => self::$apiUrlDuplicate,
+            'method' => 'GET',
+            'query'  => array(
+            	'api_key' => Route4me::getApiKey(),
+                'route_id' => $route_id,
+                'to' => 'none',
+            )
+        ));
+		
+		return $result;
+	}
+	
+	// Getting random route_id from existing routes between $offset and $offset+$limit
+	public function getRandomRouteId($offset,$limit)
+	{
+		$query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
+        $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
+			
+		$json = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => $query
+        ));
+		
+		$routes = array();
+            foreach($json as $route) {
+                $routes[] = Route::fromArray($route);
+            }
+			
+			$num=rand(0,sizeof($routes)-1);
+			$rRoute=(array)$routes[$num];
+			
+			if (is_array($rRoute)) 
+			{
+				return $rRoute["route_id"];
+			}
+			else return null;
+	}
 
     public function update()
     {

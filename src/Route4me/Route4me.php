@@ -49,7 +49,8 @@ class Route4me
                 'User-Agent' => 'Route4me php-sdk'
             )
         );
-
+//var_dump($options);
+//die("stop");
         curl_setopt_array($ch, $curlOpts);
         switch($method) {
         case 'DELETE':
@@ -99,13 +100,37 @@ class Route4me
 					if (is_array($result)) {
 						foreach ($result as $key1=>$result1) {
 							if (is_array($result1)) {
-								echo $key1." --> "."Array()";
+								echo $key1." --> "."Array() <br>";
+								/**
+								 * for deep printing here should be recursive call:
+								 * Route4me::simplePrint($result1); 
+								 */
 							} else {
-								echo $key1." --> ".$result1."<br>";	
+								if (is_object($result1)) {
+									echo $key." --> "."Object <br>";
+									/**
+									 * for deep printing here should be recursive call:
+									 * $oarray=(array)$result1;
+									 * Route4me::simplePrint($oarray);
+									 */
+								} else {
+									echo $key1." --> ".$result1."<br>";	
+								}
+								
 							}
 						}
 					} else {
-						echo $key." --> ".$result."<br>";
+						if (is_object($result)) {
+							echo $key." --> "."Object <br>";
+							/**
+							 * for deep printing here should be recursive call:
+							 * $oarray=(array)$result;
+							 * Route4me::simplePrint($oarray);
+							 */
+						} else {
+							echo $key." --> ".$result."<br>";
+						}
+						
 					}
 					echo "<br>";
 				}

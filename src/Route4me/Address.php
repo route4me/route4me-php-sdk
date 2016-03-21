@@ -47,6 +47,7 @@ class Address extends Common
     public $time_window_start;
     public $time_window_end;
     public $time;
+	public $notes;
     public $timestamp_last_visited;
     public $custom_fields = array();
     public $manifest = array();
