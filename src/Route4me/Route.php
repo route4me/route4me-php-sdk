@@ -13,6 +13,8 @@ class Route extends Common
 {
     static public $apiUrl = '/api.v4/route.php';
 	static public $apiUrlDuplicate='/actions/duplicate_route.php';
+	static public $apiUrlDelete='/actions/delete_routes.php';
+	//static public $apiUrlMove='/actions/route/move_route_destination.php';
     public $route_id;
     public $optimization_problem_id;
     public $vehicle_alias;
@@ -164,28 +166,64 @@ class Route extends Common
         return Route::fromArray($route);
     }
 
-    public function addAddresses(array $addresses)
+    public function addAddresses(array $params)
     {
         $route = Route4me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'PUT',
-            'query'  => array( 'route_id'  => $this->route_id ),
-            'body'   => array( 'addresses' => $addresses )
+            'query'  => array(
+            	'api_key' => Route4me::getApiKey(),
+                'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+                'addresses' => isset($params['addresses']) ? $params['addresses'] : null
+            )
         ));
 
         return Route::fromArray($route);
     }
 
-    public function delete()
+    public function delete($route_id)
     {
-        $route = Route4me::makeRequst(array(
+        $result = Route4me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'DELETE',
-            'query'  => array( 'route_id' => $this->route_id )
+            'query'  => array( 'route_id' => $route_id )
         ));
-
-        return $route['deleted'];
+		
+		// The code below doesn't work, altough this method is described as workable in REST API 
+		/*
+		$result = Route4me::makeRequst(array(
+            'url'    => self::$apiUrlDelete,
+            'method' => 'GET',
+            'query'  => array(
+            	'api_key' => Route4me::getApiKey(),
+                'route_id' => $route_id,
+            )
+        ));
+		*/
+        return $result;
     }
+	
+	public function GetAddressesFromRoute($route_id)
+	{
+		$route1=Route::getRoutes($route_id,null);
+		if (isset($route1)) {
+			return $route1->addresses();
+		} else { return null;}
+	}
+	
+	public function GetRandomAddressFromRoute($route_id)
+	{
+		$route1=Route::getRoutes($route_id,null);
+		
+		if (isset($route1)) {
+			$addresses=$route1->addresses;
+			
+			$rnd=rand(0,sizeof($addresses)-1);
+			
+			return $addresses[$rnd];
+			
+		} else { return null;}
+	}
 
     public function getRouteId()
     {

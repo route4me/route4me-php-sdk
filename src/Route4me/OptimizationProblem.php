@@ -14,7 +14,7 @@ class OptimizationProblem extends Common
 {
     static public $apiUrl = '/api.v4/optimization_problem.php';
 
-    private $optimization_problem_id;
+    public $optimization_problem_id;
     public $user_errors = array();
     public $state;
     public $parameters;
@@ -116,9 +116,19 @@ class OptimizationProblem extends Common
         return self::update($param);
     }
 
-    public static function update($param)
+    public static function update($params)
     {
-
+		$optimize = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'PUT',
+            'query'  => array(
+                'optimization_problem_id' => isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
+                'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
+                'reoptimize' => isset($params['reoptimize']) ? $params['reoptimize'] : null,
+            )
+        ));
+		
+		return $optimize;
     }
 
     public function getOptimizationId()

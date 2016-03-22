@@ -15,6 +15,8 @@
 	
 	$route_id=$route->getRandomRouteId(0, 10);
 	
+	//$route_id='8B4E277A54990986CD80BE36977517E2';
+	
 	if (is_null($route_id)) {
 		echo "can't retrieve random route_id!.. Try again.";
 		return;

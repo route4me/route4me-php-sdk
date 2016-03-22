@@ -39,9 +39,11 @@ class Route4me
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
-
+		
+		$baseUrl=self::getBaseUrl();
+		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
         $curlOpts = arraY(
-            CURLOPT_URL            => self::getBaseUrl() . $url,
+            CURLOPT_URL            => $baseUrl. $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT        => 60,
             CURLOPT_FOLLOWLOCATION => true,
@@ -49,8 +51,7 @@ class Route4me
                 'User-Agent' => 'Route4me php-sdk'
             )
         );
-//var_dump($options);
-//die("stop");
+
         curl_setopt_array($ch, $curlOpts);
         switch($method) {
         case 'DELETE':
@@ -66,7 +67,8 @@ class Route4me
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
 			break;
         case 'POST':
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); break;
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
 		case 'ADD':
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
@@ -76,9 +78,7 @@ class Route4me
         curl_close($ch);
 
         $json = json_decode($result, true);
-		//echo "code --> $code <br>";
-		//var_dump($result);
-		//die("Stop");
+		
         if (200 == $code) {
             return $json;
         } elseif (isset($json['errors'])) {

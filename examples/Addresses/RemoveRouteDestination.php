@@ -7,6 +7,7 @@
 	
 	use Route4me\Route4me;
 	use Route4me\Route;
+	use Route4me\OptimizationProblem;
 	
 	// Set the api key in the Route4me class
 	Route4me::setApiKey('11111111111111111111111111111111');
@@ -23,7 +24,7 @@
 	}
 	//--------------------------------------------------------
 	
-	// Get random address's id from selected route above
+	// Get random destination from selected route above
 	//--------------------------------------------------------
 	$addressRand=(array)$route->GetRandomAddressFromRoute($route_id);
 	$route_destination_id=$addressRand['route_destination_id'];
@@ -32,11 +33,15 @@
 		echo "can't retrieve random address!.. Try again.";
 		return;
 	}
+	
+	echo "route_destination_id = $route_destination_id <br>";
 	//--------------------------------------------------------
 	
 	$address=new Address();
 	
-	$addressRetrieved=$address->getAddress($route_id, $route_destination_id);
+	$address->route_id = $route_id;
+	$address->route_destination_id = $route_destination_id;
+	$result=$address->delete();
 	
-	Route4me::simplePrint((array)$addressRetrieved);
+	var_dump($result);
 ?>

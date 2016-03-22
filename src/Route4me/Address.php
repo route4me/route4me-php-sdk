@@ -10,8 +10,9 @@ use Route4me\Common;
 class Address extends Common
 {
     static public $apiUrl = '/api.v4/address.php';
+	static public $apiUrlMove='/actions/route/move_route_destination.php';
 
-    private $route_destination_id;
+    public $route_destination_id;
     public $alias;
     public $member_id;
     public $address;
@@ -118,6 +119,22 @@ class Address extends Common
 
         return (bool)$address['deleted'];
     }
+	
+	public function MoveDestinationToRoute($params)
+	{
+		$result = Route4me::makeRequst(array(
+            'url'    => self::$apiUrlMove,
+            'method' => 'POST',
+            'query'  => array(
+                'to_route_id' => isset($params['to_route_id']) ? $params['to_route_id'] : null,
+                'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
+                'after_destination_id' => isset($params['after_destination_id']) ? $params['after_destination_id'] : null
+            )
+        ));
+
+        return $result;
+		
+	}
 
     function getAddressId()
     {
