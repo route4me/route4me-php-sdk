@@ -2,7 +2,7 @@
 
 namespace Route4me\Enum;
 
-class TravelMode
+class Avoidance
 {
     const HIGHWAYS = 'Highways';
     const TOLLS = 'Tolls';
