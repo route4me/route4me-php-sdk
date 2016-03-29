@@ -67,8 +67,10 @@ class Route4me
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
 			break;
         case 'POST':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
+			if (!isset($body)) {curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); echo "IS NOT SET BODY <br>";}
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
+			if (isset($body)) {curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); echo "IS SET BODY <br>";}
+			break;
 		case 'ADD':
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
