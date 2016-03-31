@@ -1,4 +1,5 @@
 <?php
+namespace Route4me;
 require __DIR__.'/../vendor/autoload.php';;
 
 use Route4me\Route4me;
@@ -26,18 +27,17 @@ foreach($json as $address) {
 
 $parameters = RouteParameters::fromArray(array(
     "algorithm_type"          => Algorithmtype::CVRP_TW_SD,
-    "route_name"			  => "Multiple Depot, Multiple Driver, Time Window",
+    "route_name"			  => "Multiple Depot, Multiple Driver with 24 Stops, Time Window",
     "route_date"			  => time() + 24*60*60,
     "route_time"			  => 60 * 60 * 7,
-    "rt"					  => TRUE,
     "distance_unit"           => DistanceUnit::MILES,
     "device_type"             => DeviceType::WEB,
-    "optimize"                => OptimizationType::TIME,
+    "optimize"                => OptimizationType::DISTANCE,
     "metric"                  => Metric::GEODESIC,
-    "route_max_duration"      => 86400 * 3,
+    "route_max_duration"      => 86400,
     "travel_mode"             => TravelMode::DRIVING,
-    "vehicle_capacity"        => 99,
-    "vehicle_max_distance_mi" => 99999
+    "vehicle_capacity"        => 1,
+    "vehicle_max_distance_mi" => 10000
 ));
 
 $optimizationParams = new OptimizationProblemParams;
@@ -58,4 +58,5 @@ foreach ((array)$problem as $key => $value) {
 		echo "******************************* <br>";
 	}
 }
+
 ?>
