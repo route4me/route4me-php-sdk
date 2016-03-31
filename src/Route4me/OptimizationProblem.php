@@ -107,13 +107,13 @@ class OptimizationProblem extends Common
         }
     }
 
-    public static function reoptimize($problemId)
+    public static function reoptimize($params)
     {
         $param = new OptimizationProblemParams;
-        $param->optimization_problem_id = $problemId;
+        $param->optimization_problem_id = isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null;
         $param->reoptimize = 1;
 
-        return self::update($param);
+        return self::update((array)$param);
     }
 
     public static function update($params)
