@@ -234,4 +234,20 @@ class Route extends Common
     {
         return $this->optimization_problem_id;
     }
+	
+	public function GetLastLocation(array $params)
+	{
+		$route = Route4me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => array(
+            	'api_key' => Route4me::getApiKey(),
+                'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+                'device_tracking_history' => isset($params['device_tracking_history']) ? $params['device_tracking_history'] : null
+            )
+        ));
+
+        return Route::fromArray($route);
+		
+	}
 }

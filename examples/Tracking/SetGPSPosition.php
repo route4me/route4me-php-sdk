@@ -1,5 +1,10 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';;
+namespace Route4me;
+	
+$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
+
+require $vdir.'/../vendor/autoload.php';
+//require __DIR__.'/../vendor/autoload.php';;
 
 use Route4me\Enum\DeviceType;
 use Route4me\Enum\Format;
@@ -22,3 +27,5 @@ $params = TrackSetParams::fromArray(array(
 $status = Track::set($params);
 
 var_dump($status);
+
+?>
