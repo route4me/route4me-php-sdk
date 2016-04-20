@@ -1,6 +1,7 @@
 <?php
 namespace Route4me;
-require __DIR__.'/../vendor/autoload.php';;
+require __DIR__.'/../vendor/autoload.php';
+//See video tutorial here: http://support.route4me.com/route-planning-help.php?id=manual0:tutorial2:chapter1:subchapter3
 
 use Route4me\Route4me;
 use Route4me\Enum\OptimizationType;
