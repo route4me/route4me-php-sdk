@@ -2,6 +2,9 @@
 
 namespace Route4me;
 
+$d="C:/Program Files (x86)/EasyPHP-Devserver-16.1/eds-www/route4me";
+require_once $d.'/vendor/autoload.php';
+
 use Route4me\Track;
 use Route4me\TrackSetParams;
 use Route4me\Route;
@@ -17,6 +20,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     static $route_id = null;
     static function setUpBeforeClass()
     {
+    	Route4me::setApiKey('11111111111111111111111111111111');
         $addresses = array();
         $addresses[] = Address::fromArray(array(
           "address"  => "11497 Columbia Park Dr W, Jacksonville, FL 32258",
@@ -115,9 +119,13 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     function testAddAddresses()
     {
+    	Route4me::setApiKey('11111111111111111111111111111111');
+		self::setRouteId();
         $route = Route::getRoutes(self::$route_id);
         $this->assertNotNull($route);
-
+		
+		$initial_addresses=count($route->addresses);
+		
         $addresses = array();
         $addresses[] = Address::fromArray(array(
           "address" => "214 Edgewater Branch Drive 32259",
@@ -129,18 +137,43 @@ class RouteTest extends \PHPUnit_Framework_TestCase
           "lat"     => 30.046422958374,
           "lng"     => -81.508758544922
         ));
+		
+		$routeParameters=array(
+			"route_id"	=> self::$route_id,
+			"addresses"		=> $addresses,
+		);
 
-        $route = $route->addAddresses($addresses);
+        $route = $route->addAddresses($routeParameters);
         $this->assertInstanceOf("Route4me\Route", $route);
-        $this->assertEquals(count($route->addresses), 5);
+        $this->assertEquals(count($route->addresses), $initial_addresses+2);
     }
 
     function testRemoveRoute()
     {
+    	self::setRouteId();
         $route = Route::getRoutes(self::$route_id);
         $this->assertNotNull($route);
 
-        $state = $route->delete();
-        $this->assertTrue($state);
+        $state = $route->delete(self::$route_id);
+        $this->assertTrue($state["deleted"]);
     }
+    
+    static function setRouteId()
+	{
+		// Get random route from test routes
+		//--------------------------------------------------------
+		$route=new Route();
+		self::$route_id=$route->getRandomRouteId(0, 10);
+		
+		if (is_null(self::$route_id)) {
+			echo "can't retrieve random route_id!.. Try again.";
+			return;
+		}
+		//--------------------------------------------------------
+	}
 }
+
+$routetest=new RouteTest();
+$routetest->testAddAddresses();
+$routetest->testRemoveRoute();
+?>
