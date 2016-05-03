@@ -21,7 +21,6 @@ class RouteParameters extends Common
     public $travel_mode;
     public $avoid;
     public $vehicle_id;
-    public $driver_id;
     public $dev_lat;
     public $dev_lng;
     public $route_max_duration;

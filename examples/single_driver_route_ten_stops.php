@@ -1,6 +1,5 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';
-//See video tutorial here: http://support.route4me.com/route-planning-help.php?id=manual0:tutorial2:chapter1:subchapter1
+require __DIR__.'/../vendor/autoload.php';;
 
 use Route4me\Route4me;
 use Route4me\Enum\OptimizationType;
@@ -16,6 +15,7 @@ use Route4me\Address;
 use Route4me\Route;
 
 Route4me::setApiKey('11111111111111111111111111111111');
+//See video tutorial here: http://support.route4me.com/route-planning-help.php?id=manual0:tutorial2:chapter1:subchapter1
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('./addresses.json'), true);
@@ -33,7 +33,6 @@ $parameters = RouteParameters::fromArray(array(
     "optimize"                => OptimizationType::DISTANCE,
     "travel_mode"             => TravelMode::DRIVING,
     "route_max_duration"      => 86400,
-    "store_route"             => true,
     "vehicle_capacity"        => 1,
     "vehicle_max_distance_mi" => 10000
 ));

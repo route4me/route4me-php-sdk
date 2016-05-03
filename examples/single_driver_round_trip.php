@@ -33,7 +33,6 @@ $parameters = RouteParameters::fromArray(array(
     "optimize"                => OptimizationType::DISTANCE,
     "travel_mode"             => TravelMode::DRIVING,
     "route_max_duration"      => 86400,
-    "store_route"             => true,
     "vehicle_capacity"        => 1,
     "vehicle_max_distance_mi" => 10000,
     "rt"                      => true
