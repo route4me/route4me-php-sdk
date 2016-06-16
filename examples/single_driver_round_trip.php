@@ -2,20 +2,20 @@
 require __DIR__.'/../vendor/autoload.php';
 //See video tutorial here: http://support.route4me.com/route-planning-help.php?id=manual0:tutorial2:chapter1:subchapter1
 
-use Route4me\Route4me;
-use Route4me\Enum\OptimizationType;
-use Route4me\OptimizationProblem;
-use Route4me\OptimizationProblemParams;
-use Route4me\Enum\AlgorithmType;
-use Route4me\Enum\DistanceUnit;
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\TravelMode;
-use Route4me\Enum\Metric;
-use Route4me\RouteParameters;
-use Route4me\Address;
-use Route4me\Route;
+use Route4Me\Route4Me;
+use Route4Me\Enum\OptimizationType;
+use Route4Me\OptimizationProblem;
+use Route4Me\OptimizationProblemParams;
+use Route4Me\Enum\AlgorithmType;
+use Route4Me\Enum\DistanceUnit;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\TravelMode;
+use Route4Me\Enum\Metric;
+use Route4Me\RouteParameters;
+use Route4Me\Address;
+use Route4Me\Route;
 
-Route4me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('./addresses.json'), true);
@@ -53,4 +53,3 @@ foreach ($problems as $problem) {
 		}
 	}
 }
-

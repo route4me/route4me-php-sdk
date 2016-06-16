@@ -1,15 +1,15 @@
 <?php
-namespace Route4me;
+namespace Route4Me;
 	
 $vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
 
 require $vdir.'/../vendor/autoload.php';
 //require __DIR__.'/../vendor/autoload.php';;
 
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\Format;
-use Route4me\TrackSetParams;
-use Route4me\Track;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\Format;
+use Route4Me\TrackSetParams;
+use Route4Me\Track;
 
 $params = TrackSetParams::fromArray(array(
     'format'           => Format::CSV,

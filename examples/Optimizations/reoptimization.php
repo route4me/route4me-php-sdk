@@ -1,15 +1,15 @@
 <?php
-namespace Route4me;
+namespace Route4Me;
 
 $vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
 
 require $vdir.'/../vendor/autoload.php';
 
-use Route4me\OptimizationProblem;
-use Route4me\Route;
-use Route4me\Route4me;
+use Route4Me\OptimizationProblem;
+use Route4Me\Route;
+use Route4Me\Route4Me;
 
-Route4me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route from test routes
 	//--------------------------------------------------------
@@ -31,6 +31,6 @@ Route4me::setApiKey('11111111111111111111111111111111');
 	);
 	$problem = OptimizationProblem::reoptimize($problemParams);
 	
-	Route4me::simplePrint($problem);
+	Route4Me::simplePrint($problem);
 
 ?>

@@ -7,7 +7,6 @@
 	
 	use Route4Me\Route4Me;
 	use Route4Me\Route;
-	use Route4Me\OptimizationProblem;
 	
 	// Set the api key in the Route4Me class
 	Route4Me::setApiKey('11111111111111111111111111111111');
@@ -27,35 +26,30 @@
 	// Get random address's id from selected route above
 	//--------------------------------------------------------
 	$addressRand=(array)$route->GetRandomAddressFromRoute($route_id);
-	$optimization_problem_id=$addressRand['optimization_problem_id'];
+	$route_destination_id=$addressRand['route_destination_id'];
 	
-	if (is_null($optimization_problem_id)) {
+	if (is_null($route_destination_id)) {
 		echo "can't retrieve random address!.. Try again.";
 		return;
 	}
 	//--------------------------------------------------------
+	$route_id='6EC2759FD551516356AB2C9B335CAC16';
+	$route_destination_id='152555738';
+	$noteParameters=array(
+		"route_id"		=> $route_id,
+		"route_destination_id"	=> $route_destination_id
+	);
 	
-	$addresses=array();
+	$address=new Address();
 	
-	$address1=(array)Address::fromArray(array(
-		'address' 	=>	'717 5th Ave New York, NY 10021',
-		'alias'		=>	'Giorgio Armani',
-		'lat'		=>	40.7669692,
-		'lng'		=>	73.9693864,
-		'time'		=>	0
-	));
+	$notes=$address->GetAddressesNotes($noteParameters);
+	
+	echo "destination_note_count --> ".$notes['destination_note_count']."<br>";
+	foreach ($notes['notes'] as $note) {
+		echo "========== Notes ==================<br>";
+		echo "note_id --> ".$note->note_id."<br>";
+	}
 
-	$addresses[0]=$address1;
-	
-	$OptimizationParameters=(array)OptimizationProblem::fromArray(array(
-		"optimization_problem_id"	=> $optimization_problem_id,
-		"addresses"		=> $addresses,
-		"reoptimize"	=> 1,
-	));
-	
-	$optimizationproblem=new OptimizationProblem();
-	
-	$result=$optimizationproblem->update($OptimizationParameters);
-	
-	Route4Me::simplePrint($result);
+	//var_dump($notes);
+	//Route4Me::simplePrint($notes)
 ?>

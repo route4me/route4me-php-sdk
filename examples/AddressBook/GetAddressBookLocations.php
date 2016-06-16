@@ -11,19 +11,17 @@
 	// Set the api key in the Route4Me class
 	Route4Me::setApiKey('11111111111111111111111111111111');
 	
-	$routeId = '3F48838FB3F25B59B372ABC951A79F8F';
-	
-	$activityParameters=ActivityParameters::fromArray(array(
-		"route_id"	=> $routeId,
-		"limit"		=> 10,
+	$AdressBookLocationParameters=AddressBookLocation::fromArray(array(
+		"limit"		=> 30,
 		"offset"	=> 0
 	));
 	
-	$activities=new ActivityParameters();
-	$actresults=$activities->get($activityParameters);
+	$abContacts=new AddressBookLocation();
 	
-	$results=$activities->getValue($actresults,"results");
+	$abcResults=$abContacts->getAddressBookLocations($AdressBookLocationParameters);
+	
+	$results=$abContacts->getValue($abcResults,"results");
 	
 	Route4Me::simplePrint($results);
-	 
+
 ?>
