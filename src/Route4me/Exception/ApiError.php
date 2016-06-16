@@ -1,6 +1,6 @@
 <?php
 
-namespace Route4me\Exception;
+namespace Route4Me\Exception;
 
 class ApiError extends \Exception
 {

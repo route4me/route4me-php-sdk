@@ -1,10 +1,10 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Exception\ApiError;
+use Route4Me\Exception\ApiError;
 
-class Route4me
+class Route4Me
 {
     static public $apiKey;
     static public $baseUrl = 'http://route4me.com';
@@ -39,7 +39,8 @@ class Route4me
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
-		
+		//self::simplePrint($query);
+		//die("<br> Stop");
 		$baseUrl=self::getBaseUrl();
 		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
         $curlOpts = arraY(
@@ -48,7 +49,7 @@ class Route4me
             CURLOPT_TIMEOUT        => 60,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTPHEADER     => array(
-                'User-Agent' => 'Route4me php-sdk'
+                'User-Agent' => 'Route4Me php-sdk'
             )
         );
 
@@ -67,19 +68,35 @@ class Route4me
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
 			break;
         case 'POST':
-			if (!isset($body)) {curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); echo "IS NOT SET BODY <br>";}
+			if (!isset($body)) {curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); }
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
-			if (isset($body)) {curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); echo "IS SET BODY <br>";}
+			if (isset($body)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+				echo "IS SET BODY <br>";
+			} else {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, "");
+			}
 			break;
 		case 'ADD':
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
 
         $result = curl_exec($ch);
+		$isxml=FALSE;
+		$jxml="";
+		if (strpos($result, '<?xml')>-1)
+		{
+			$xml = simplexml_load_string($result);
+			$jxml = json_encode($xml);
+			$isxml = TRUE;
+		}
+		
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-
-        $json = json_decode($result, true);
+		
+		if ($isxml) {
+			$json = $jxml;
+		} else $json = json_decode($result, true);
 		
         if (200 == $code) {
             return $json;
@@ -105,7 +122,7 @@ class Route4me
 								echo $key1." --> "."Array() <br>";
 								/**
 								 * for deep printing here should be recursive call:
-								 * Route4me::simplePrint($result1); 
+								 * Route4Me::simplePrint($result1); 
 								 */
 							} else {
 								if (is_object($result1)) {
@@ -113,7 +130,7 @@ class Route4me
 									/**
 									 * for deep printing here should be recursive call:
 									 * $oarray=(array)$result1;
-									 * Route4me::simplePrint($oarray);
+									 * Route4Me::simplePrint($oarray);
 									 */
 								} else {
 									echo $key1." --> ".$result1."<br>";	
@@ -127,7 +144,7 @@ class Route4me
 							/**
 							 * for deep printing here should be recursive call:
 							 * $oarray=(array)$result;
-							 * Route4me::simplePrint($oarray);
+							 * Route4Me::simplePrint($oarray);
 							 */
 						} else {
 							echo $key." --> ".$result."<br>";

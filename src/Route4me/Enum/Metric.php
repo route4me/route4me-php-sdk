@@ -1,6 +1,6 @@
 <?php
 
-namespace Route4me\Enum;
+namespace Route4Me\Enum;
 
 class Metric
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Route4me;
-use Route4me\TrackSetParams;
+use Route4Me\Route4Me;
+use Route4Me\TrackSetParams;
 
 class Track extends Common
 {
@@ -12,10 +12,10 @@ class Track extends Common
     public static function set(TrackSetParams $param)
     {
         $query = array_merge($param->toArray(), array(
-            'api_key' => Route4me::getApiKey()
+            'api_key' => Route4Me::getApiKey()
         ));
 
-        $json = Route4me::makeRequst(array(
+        $json = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'GET',
             'query'  => $query

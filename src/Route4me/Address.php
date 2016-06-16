@@ -1,11 +1,11 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Exception\BadParam;
-use Route4me\Route4me;
+use Route4Me\Exception\BadParam;
+use Route4Me\Route4Me;
 use GuzzleHttp\Client;
-use Route4me\Common;
+use Route4Me\Common;
 
 class Address extends Common
 {
@@ -79,7 +79,7 @@ class Address extends Common
 
     public static function getAddress($routeId, $addressId)
     {
-        $address = Route4me::makeRequst(array(
+        $address = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'GET',
             'query'  => array(
@@ -93,7 +93,7 @@ class Address extends Common
 
     public function update()
     {
-        $address = Route4me::makeRequst(array(
+        $address = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'PUT',
             'body'   => $this->toArray(),
@@ -108,7 +108,7 @@ class Address extends Common
 
     public function delete()
     {
-        $address = Route4me::makeRequst(array(
+        $address = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'DELETE',
             'query'  => array(
@@ -122,7 +122,7 @@ class Address extends Common
 	
 	public function MoveDestinationToRoute($params)
 	{
-		$result = Route4me::makeRequst(array(
+		$result = Route4Me::makeRequst(array(
             'url'    => self::$apiUrlMove,
             'method' => 'POST',
             'query'  => array(

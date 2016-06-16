@@ -1,8 +1,8 @@
 <?php
-	namespace Route4me;
+	namespace Route4Me;
 	
-	use Route4me\Common;
-	use Route4me\Exception\BadParam;
+	use Route4Me\Common;
+	use Route4Me\Exception\BadParam;
 	
 	class AvoidanceZone extends Common
 	{
@@ -43,7 +43,7 @@
 		
 		public static function getAvoidanceZone($territory_id)
 	    {
-	        $avoidancezone = Route4me::makeRequst(array(
+	        $avoidancezone = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'GET',
 	            'query'  => array(
@@ -56,7 +56,7 @@
 		
 		public static function getAvoidanceZones($params)
 	    {
-	        $avoidancezones = Route4me::makeRequst(array(
+	        $avoidancezones = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'GET',
 	            'query'  => array(
@@ -70,7 +70,7 @@
 
 		public static function addAvoidanceZone($params)
 	    {
-	    	$abcontacts = Route4me::makeRequst(array(
+	    	$abcontacts = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'ADD',
 	            'query'  => array(
@@ -85,7 +85,7 @@
 		
 		public function deleteAvoidanceZone($territory_id)
 	    {
-	        $result = Route4me::makeRequst(array(
+	        $result = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'DELETEARRAY',
 	            'query'  => array(
@@ -98,7 +98,7 @@
 		
 		public function updateAvoidanceZone($params)
 	    {
-	        $avoidancezone = Route4me::makeRequst(array(
+	        $avoidancezone = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'PUT',
 	            'query'   => (array)$params,

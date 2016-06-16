@@ -1,7 +1,7 @@
 <?php
-	namespace Route4me;
+	namespace Route4Me;
 	
-	use Route4me\Common;
+	use Route4Me\Common;
 	
 	class Territory extends Common
 	{

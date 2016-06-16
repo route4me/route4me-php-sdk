@@ -1,12 +1,12 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Common;
-use Route4me\Address;
-use Route4me\Exception\BadParam;
-use Route4me\RouteParameters;
-use Route4me\Route4me;
+use Route4Me\Common;
+use Route4Me\Address;
+use Route4Me\Exception\BadParam;
+use Route4Me\RouteParameters;
+use Route4Me\Route4Me;
 use GuzzleHttp\Client;
 
 class Route extends Common
@@ -67,7 +67,7 @@ class Route extends Common
     public static function getRoutes($routeId=null, $params=null)
     {
         $query = array(
-            'api_key' => Route4me::getApiKey()
+            'api_key' => Route4Me::getApiKey()
         );
 
         if ($routeId) {
@@ -91,7 +91,7 @@ class Route extends Common
             $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
         }
 
-        $json = Route4me::makeRequst(array(
+        $json = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'GET',
             'query'  => $query
@@ -110,11 +110,11 @@ class Route extends Common
 
 	public function duplicateRoute($route_id)
 	{
-		$result = Route4me::makeRequst(array(
+		$result = Route4Me::makeRequst(array(
             'url'    => self::$apiUrlDuplicate,
             'method' => 'GET',
             'query'  => array(
-            	'api_key' => Route4me::getApiKey(),
+            	'api_key' => Route4Me::getApiKey(),
                 'route_id' => $route_id,
                 'to' => 'none',
             )
@@ -129,7 +129,7 @@ class Route extends Common
 		$query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
         $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
 			
-		$json = Route4me::makeRequst(array(
+		$json = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'GET',
             'query'  => $query
@@ -152,7 +152,7 @@ class Route extends Common
 
     public function update()
     {
-        $route = Route4me::makeRequst(array(
+        $route = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'PUT',
             'query'  => array(
@@ -168,11 +168,11 @@ class Route extends Common
 
     public function addAddresses(array $params)
     {
-        $route = Route4me::makeRequst(array(
+        $route = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'PUT',
             'query'  => array(
-            	'api_key' => Route4me::getApiKey(),
+            	'api_key' => Route4Me::getApiKey(),
                 'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
                 'addresses' => isset($params['addresses']) ? $params['addresses'] : null
             )
@@ -183,7 +183,7 @@ class Route extends Common
 
     public function delete($route_id)
     {
-        $result = Route4me::makeRequst(array(
+        $result = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'DELETE',
             'query'  => array( 'route_id' => $route_id )
@@ -191,11 +191,11 @@ class Route extends Common
 		
 		// The code below doesn't work, altough this method is described as workable in REST API 
 		/*
-		$result = Route4me::makeRequst(array(
+		$result = Route4Me::makeRequst(array(
             'url'    => self::$apiUrlDelete,
             'method' => 'GET',
             'query'  => array(
-            	'api_key' => Route4me::getApiKey(),
+            	'api_key' => Route4Me::getApiKey(),
                 'route_id' => $route_id,
             )
         ));
@@ -237,11 +237,11 @@ class Route extends Common
 	
 	public function GetLastLocation(array $params)
 	{
-		$route = Route4me::makeRequst(array(
+		$route = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'GET',
             'query'  => array(
-            	'api_key' => Route4me::getApiKey(),
+            	'api_key' => Route4Me::getApiKey(),
                 'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
                 'device_tracking_history' => isset($params['device_tracking_history']) ? $params['device_tracking_history'] : null
             )

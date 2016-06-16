@@ -1,7 +1,7 @@
 <?php
-	namespace Route4me;
+	namespace Route4Me;
 	
-	use Route4me\Common;
+	use Route4Me\Common;
 	
 	class ActivityParameters extends Common
 	{
@@ -32,7 +32,7 @@
 		
 		public static function get($params)
 	    {
-	    	$activity = Route4me::makeRequst(array(
+	    	$activity = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'GET',
 	            'query'  => array(

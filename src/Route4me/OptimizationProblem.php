@@ -1,13 +1,13 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Address;
-use Route4me\Common;
-use Route4me\RouteParameters;
-use Route4me\OptimizationProblemParams;
-use Route4me\Route;
-use Route4me\Route4me;
+use Route4Me\Address;
+use Route4Me\Common;
+use Route4Me\RouteParameters;
+use Route4Me\OptimizationProblemParams;
+use Route4Me\Route;
+use Route4Me\Route4Me;
 use GuzzleHttp\Client;
 
 class OptimizationProblem extends Common
@@ -62,7 +62,7 @@ class OptimizationProblem extends Common
 
     public static function optimize(OptimizationProblemParams $params)
     {
-        $optimize = Route4me::makeRequst(array(
+        $optimize = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'POST',
             'query'  => array(
@@ -82,7 +82,7 @@ class OptimizationProblem extends Common
 
     public static function get($params)
     {
-        $optimize = Route4me::makeRequst(array(
+        $optimize = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'GET',
             'query'  => array(
@@ -118,7 +118,7 @@ class OptimizationProblem extends Common
 
     public static function update($params)
     {
-		$optimize = Route4me::makeRequst(array(
+		$optimize = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'PUT',
             'query'  => array(

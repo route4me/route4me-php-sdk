@@ -1,10 +1,10 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Exception\BadParam;
-use Route4me\RouteParameters;
-use Route4me\Common;
+use Route4Me\Exception\BadParam;
+use Route4Me\RouteParameters;
+use Route4Me\Common;
 
 class OptimizationProblemParams extends Common
 {

@@ -1,9 +1,9 @@
 <?php
-	namespace Route4me;
+	namespace Route4Me;
 	
-	use Route4me\Common;
+	use Route4Me\Common;
 	
-	class AddressBookContact extends Common
+	class AddressBookLocation extends Common
 	{
 		static public $apiUrl = '/api.v4/address_book.php';
 		static public $apiUrl00 = '/api/address_book/modify_contact.php';
@@ -31,19 +31,19 @@
 		public function __construct () {  }
 		
 		public static function fromArray(array $params) {
-			$addressbookcontact = new AddressBookContact();
+			$addressbooklocation = new AddressBookLocation();
 	        foreach($params as $key => $value) {
-	            if (property_exists($addressbookcontact, $key)) {
-	                $addressbookcontact->{$key} = $value;
+	            if (property_exists($addressbooklocation, $key)) {
+	                $addressbooklocation->{$key} = $value;
 	            }
 			}
 			
-			return $addressbookcontact;
+			return $addressbooklocation;
 		}
 		
-		public static function getAddressBookContact($addressId)
+		public static function getAddressBookLocation($addressId)
 	    {
-	    	$abcontacts = Route4me::makeRequst(array(
+	    	$ablocations = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'GET',
 	            'query'  => array(
@@ -52,12 +52,12 @@
 	            )
 	        ));
 
-			return $abcontacts;
+			return $ablocations;
 		}
 		
-		public static function getAddressBookContacts($params)
+		public static function getAddressBookLocations($params)
 	    {
-	    	$abcontacts = Route4me::makeRequst(array(
+	    	$ablocations = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'GET',
 	            'query'  => array(
@@ -66,12 +66,12 @@
 	            )
 	        ));
 
-			return $abcontacts;
+			return $ablocations;
 		}
 		
-		public static function addAdressBookContact($params)
+		public static function addAdressBookLocation($params)
 	    {
-	    	$abcontacts = Route4me::makeRequst(array(
+	    	$ablocations = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'ADD',
 	            'query'  => array(
@@ -82,12 +82,12 @@
 	            )
 	        ));
 
-			return $abcontacts;
+			return $ablocations;
 		}
 		
-		public function deleteAdressBookContact($address_ids)
+		public function deleteAdressBookLocation($address_ids)
 	    {
-	        $address = Route4me::makeRequst(array(
+	        $address = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'DELETEARRAY',
 	            'query'  => array(
@@ -98,10 +98,10 @@
 	        return $address;
 	    }
 		
-		public function updateAdressBookContact($params)
+		public function updateAdressBookLocation($params)
 	    {
 	    	//echo "address_id --> ".$params["address_id"]."<br";
-	        $address = Route4me::makeRequst(array(
+	        $address = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'PUT',
 	            'query'   => $params,
@@ -113,7 +113,7 @@
 			
 		public static function get($params)
 	    {
-	    	$abcontacts = Route4me::makeRequst(array(
+	    	$ablocations = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'ADD',
 	            'query'  => array(
@@ -124,7 +124,7 @@
 	            )
 	        ));
 
-			return $abcontacts;
+			return $ablocations;
 		}
 	}
 	

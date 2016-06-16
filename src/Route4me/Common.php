@@ -1,6 +1,6 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
 class Common
 {

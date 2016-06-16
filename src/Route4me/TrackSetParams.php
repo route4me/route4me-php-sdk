@@ -1,11 +1,11 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Exception\BadParam;
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\Format;
-use Route4me\Common;
+use Route4Me\Exception\BadParam;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\Format;
+use Route4Me\Common;
 
 class TrackSetParams extends Common
 {
