@@ -1,11 +1,11 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\Format;
-use Route4me\TrackSetParams;
-use Route4me\Track;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\Format;
+use Route4Me\TrackSetParams;
+use Route4Me\Track;
 
 class TrackTest extends \PHPUnit_Framework_TestCase
 {

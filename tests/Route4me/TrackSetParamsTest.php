@@ -1,17 +1,17 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Exception\BadParam;
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\Format;
-use Route4me\TrackSetParams;
+use Route4Me\Exception\BadParam;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\Format;
+use Route4Me\TrackSetParams;
 
 class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
 {
     protected $test_route_id = '196cf29ed924523e198009cd96deada3';
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutParams()
     {
@@ -19,7 +19,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithBadFormat()
     {
@@ -29,7 +29,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutRouteId()
     {
@@ -39,7 +39,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutMemberId()
     {
@@ -50,7 +50,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutCourse()
     {
@@ -62,7 +62,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutSpeed()
     {
@@ -75,7 +75,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutLat()
     {
@@ -89,7 +89,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutLng()
     {
@@ -104,7 +104,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutDeviceType()
     {
@@ -120,7 +120,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithInvalidDeviceType()
     {
@@ -137,7 +137,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithoutDeviceGuid()
     {
@@ -154,7 +154,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testTrackWithBadDeviceTimestamp()
     {
@@ -173,7 +173,7 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      **/
     function testBadDeviceTimestamp() 
     {

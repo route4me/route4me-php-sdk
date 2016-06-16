@@ -1,26 +1,26 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
 $d="C:/Program Files (x86)/EasyPHP-Devserver-16.1/eds-www/route4me";
 require_once $d.'/vendor/autoload.php';
 
-use Route4me\Track;
-use Route4me\TrackSetParams;
-use Route4me\Route;
-use Route4me\Address;
-use Route4me\RouteParameters;
-use Route4me\OptimizationProblem;
-use Route4me\OptimizationProblemParams;
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\Format;
+use Route4Me\Track;
+use Route4Me\TrackSetParams;
+use Route4Me\Route;
+use Route4Me\Address;
+use Route4Me\RouteParameters;
+use Route4Me\OptimizationProblem;
+use Route4Me\OptimizationProblemParams;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\Format;
 
 class RouteTest extends \PHPUnit_Framework_TestCase
 {
     static $route_id = null;
     static function setUpBeforeClass()
     {
-    	Route4me::setApiKey('11111111111111111111111111111111');
+    	Route4Me::setApiKey('11111111111111111111111111111111');
         $addresses = array();
         $addresses[] = Address::fromArray(array(
           "address"  => "11497 Columbia Park Dr W, Jacksonville, FL 32258",
@@ -59,7 +59,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     function testGetRouteById()
     {
         $route = Route::getRoutes(self::$route_id);
-        $this->assertInstanceOf("Route4me\Route", $route);
+        $this->assertInstanceOf("Route4Me\Route", $route);
         $this->assertNotNull($route);
         $this->assertNotNull($route->addresses);
         $this->assertEmpty($route->tracking_history);
@@ -86,7 +86,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $route = Route::getRoutes(self::$route_id, array(
             'device_tracking_history' => true
         ));
-        $this->assertInstanceOf("Route4me\Route", $route);
+        $this->assertInstanceOf("Route4Me\Route", $route);
         $this->assertNotNull($route);
         $this->assertNotNull($route->addresses);
         $this->assertNotEmpty($route->tracking_history);
@@ -101,7 +101,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($routes) > 0);
 
         foreach($routes as $route) {
-            $this->assertInstanceOf("Route4me\Route", $route);
+            $this->assertInstanceOf("Route4Me\Route", $route);
         }
     }
 
@@ -113,13 +113,13 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $route->parameters->device_type = DeviceType::IPAD;
         $route = $route->update();
 
-        $this->assertInstanceOf("Route4me\Route", $route);
+        $this->assertInstanceOf("Route4Me\Route", $route);
         $this->assertEquals($route->parameters->route_name, 'phpunit test');
     }
 
     function testAddAddresses()
     {
-    	Route4me::setApiKey('11111111111111111111111111111111');
+    	Route4Me::setApiKey('11111111111111111111111111111111');
 		self::setRouteId();
         $route = Route::getRoutes(self::$route_id);
         $this->assertNotNull($route);
@@ -144,7 +144,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 		);
 
         $route = $route->addAddresses($routeParameters);
-        $this->assertInstanceOf("Route4me\Route", $route);
+        $this->assertInstanceOf("Route4Me\Route", $route);
         $this->assertEquals(count($route->addresses), $initial_addresses+2);
     }
 

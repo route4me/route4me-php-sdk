@@ -1,9 +1,9 @@
 <?php
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
-$loader->add('Route4me\\', __DIR__);
+$loader->add('Route4Me\\', __DIR__);
 
-use Route4me\Route4me;
+use Route4Me\Route4Me;
 
 // Set Global api key
-Route4me::setApiKey($GLOBALS['TEST_APIKEY']);
+Route4Me::setApiKey($GLOBALS['TEST_APIKEY']);

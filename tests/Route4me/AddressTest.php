@@ -1,10 +1,10 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\Route4me;
-use Route4me\Address;
-use Route4me\Enum\DeviceType;
+use Route4Me\Route4Me;
+use Route4Me\Address;
+use Route4Me\Enum\DeviceType;
 
 class AddressTest extends \PHPUnit_Framework_TestCase
 {
@@ -107,7 +107,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      *  @expectedExceptionMessage address must be provided
      **/
     function testAddressNotProvided()
@@ -119,7 +119,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      *  @expectedExceptionMessage lat must be provided
      **/
     function testLatNotProvided()
@@ -130,7 +130,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      *  @expectedExceptionMessage lng must be provided
      **/
     function testLngNotProvided()
@@ -193,7 +193,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\ApiError
+     *  @expectedException Route4Me\Exception\ApiError
      **/
     function testRemovedAddress()
     {

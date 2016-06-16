@@ -1,17 +1,17 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\OptimizationProblem;
-use Route4me\OptimizationProblemParams;
-use Route4me\Address;
-use Route4me\Route;
-use Route4me\RouteParameters;
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\DistanceUnit;
-use Route4me\Enum\OptimizationType;
-use Route4me\Enum\AlgorithmType;
-use Route4me\Enum\TravelMode;
+use Route4Me\OptimizationProblem;
+use Route4Me\OptimizationProblemParams;
+use Route4Me\Address;
+use Route4Me\Route;
+use Route4Me\RouteParameters;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\DistanceUnit;
+use Route4Me\Enum\OptimizationType;
+use Route4Me\Enum\AlgorithmType;
+use Route4Me\Enum\TravelMode;
 
 class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
 {
@@ -72,7 +72,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
         $problem = OptimizationProblem::optimize($optimizationParameters);
 
         $this->assertNotNull($problem);
-        $this->assertInstanceOf('Route4me\OptimizationProblem', $problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
         $this->assertNotNull($problem->getOptimizationId());
         $this->assertNotNull($problem->getRoutes());
     }
@@ -99,7 +99,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
         $problem = OptimizationProblem::optimize($optimizationParameters);
 
         $this->assertNotNull($problem);
-        $this->assertInstanceOf('Route4me\OptimizationProblem', $problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
         $this->assertNotNull($problem->getOptimizationId());
         $this->assertNotNull($problem->getRoutes());
     }
@@ -127,7 +127,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
         $problem = OptimizationProblem::optimize($optimizationParameters);
 
         $this->assertNotNull($problem);
-        $this->assertInstanceOf('Route4me\OptimizationProblem', $problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
         $this->assertNotNull($problem->getOptimizationId());
         $this->assertNotNull($problem->getRoutes());
     }
@@ -155,7 +155,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
         $problem = OptimizationProblem::optimize($optimizationParameters);
 
         $this->assertNotNull($problem);
-        $this->assertInstanceOf('Route4me\OptimizationProblem', $problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
         $this->assertNotNull($problem->getOptimizationId());
         $this->assertNotNull($problem->getRoutes());
     }
@@ -174,13 +174,13 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
         $problem = OptimizationProblem::optimize($optimizationParameters);
 
         $this->assertNotNull($problem);
-        $this->assertInstanceOf('Route4me\OptimizationProblem', $problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
         $this->assertNotNull($problem->getOptimizationId());
         $this->assertNotNull($problem->getRoutes());
         $routes = $problem->getRoutes();
 
         $this->assertNotNull($routes[0]);
-        $this->assertInstanceOf("Route4me\Route", $routes[0]);
+        $this->assertInstanceOf("Route4Me\Route", $routes[0]);
         $this->assertNotNull($routes[0]->getRouteId());
     }
 

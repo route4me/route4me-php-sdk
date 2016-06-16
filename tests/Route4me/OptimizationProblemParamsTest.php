@@ -1,20 +1,20 @@
 <?php
 
-namespace Route4me;
+namespace Route4Me;
 
-use Route4me\RouteParameters;
-use Route4me\OptimizationProblemParams;
-use Route4me\Exception\BadParam;
-use Route4me\Enum\DeviceType;
-use Route4me\Enum\DistanceUnit;
-use Route4me\Enum\OptimizationType;
-use Route4me\Enum\AlgorithmType;
-use Route4me\Enum\TravelMode;
+use Route4Me\RouteParameters;
+use Route4Me\OptimizationProblemParams;
+use Route4Me\Exception\BadParam;
+use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\DistanceUnit;
+use Route4Me\Enum\OptimizationType;
+use Route4Me\Enum\AlgorithmType;
+use Route4Me\Enum\TravelMode;
 
 class OptimizationProblemParamsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      *  @expectedExceptionMessage addresses must be provided.
      **/
     function testWithoutParams()
@@ -70,7 +70,7 @@ class OptimizationProblemParamsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @expectedException Route4me\Exception\BadParam
+     *  @expectedException Route4Me\Exception\BadParam
      *  @expectedExceptionMessage parameters must be provided.
      **/
     function testWithoutParameters()

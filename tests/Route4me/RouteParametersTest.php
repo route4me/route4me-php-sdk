@@ -1,8 +1,8 @@
 <?php
 
-namespace Route4me\Components;
+namespace Route4Me\Components;
 
-use Route4me\RouteParameters;
+use Route4Me\RouteParameters;
 
 class RouteParametersTest extends \PHPUnit_Framework_TestCase
 {
