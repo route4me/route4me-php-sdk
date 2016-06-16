@@ -69,6 +69,19 @@
 			return $ablocations;
 		}
 		
+		public static function getAddressBookLocationsByIds($ids)
+	    {
+	    	$ablocations = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrl,
+	            'method' => 'GET',
+	            'query'  => array(
+	                'address_id' => $ids
+	            )
+	        ));
+
+			return $ablocations;
+		}
+		
 		public static function addAdressBookLocation($params)
 	    {
 	    	$ablocations = Route4Me::makeRequst(array(

@@ -21,14 +21,4 @@
 	
 	Route4Me::simplePrint($results);
 	//--------------------------------------------------------- 
-	
-	//Example for retrieving all records, which contains 'Richmond' in any field 
-	//--------------------------------------------------------- 
-	$query='Richmond';
-	$abcResult=$abLocation->getAddressBookLocation($query);
-	
-	$results=$abLocation->getValue($abcResult,"results");
-	
-	Route4Me::simplePrint($results);
-	//--------------------------------------------------------- 
 ?>
