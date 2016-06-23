@@ -1,0 +1,77 @@
+{
+	"addresses": [{
+		"address": "273 Canal St, New York, NY 10013, USA",
+		"lat": 40.7191558,
+		"lng": -74.0011966,
+		"alias": "",
+		"curbside_lat": 40.7191558,
+		"curbside_lng": -74.0011966,
+		"is_depot": true
+	}, 
+	{
+		"address": "106 Liberty St, New York, NY 10006, USA",
+		"alias": "BK Restaurant #: 2446",
+		"lat": 40.709637,
+		"lng": -74.011912,
+		"curbside_lat": 40.709637,
+		"curbside_lng": -74.011912,
+		"email": "",
+		"phone": "(917) 338-1887",
+		"first_name": "",
+		"last_name": "",
+		"custom_fields": {
+			"icon": "NULL"
+		},
+		"time": 0,
+		"order_id": 7205705
+	}, 
+	{
+		"address": "325 Broadway, New York, NY 10007, USA",
+		"alias": "BK Restaurant #: 20333",
+		"lat": 40.71615,
+		"lng": -74.00505,
+		"curbside_lat": 40.71615,
+		"curbside_lng": -74.00505,
+		"email": "",
+		"phone": "(212) 227-7535",
+		"first_name": "",
+		"last_name": "",
+		"custom_fields": {
+			"icon": "NULL"
+		},
+		"time": 0,
+		"order_id": 7205704
+	}, 
+	{
+		"address": "106 Fulton St, Farmingdale, NY 11735, USA",
+		"alias": "BK Restaurant #: 17871",
+		"lat": 40.73073,
+		"lng": -73.459283,
+		"curbside_lat": 40.73073,
+		"curbside_lng": -73.459283,
+		"email": "",
+		"phone": "(212) 566-5132",
+		"first_name": "",
+		"last_name": "",
+		"custom_fields": {
+			"icon": "NULL"
+		},
+		"time": 0,
+		"order_id": 7205703
+	}],
+	"parameters": {
+		"route_name": "Wednesday 15th of June 2016 07:01 PM (+03:00)",
+		"route_date": 1465948800,
+		"route_time": 14400,
+		"override_addresses": {},
+		"optimize": "Time",
+		"routeType": "single",
+		"algorithm_type": 1,
+		"rt": false,
+		"lock_last": false,
+		"member_id": "1116",
+		"vehicle_id": "",
+		"disable_optimization": false,
+		"uploads": []
+	}
+}
