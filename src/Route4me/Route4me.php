@@ -39,8 +39,7 @@ class Route4Me
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
-		//self::simplePrint($query);
-		//die("<br> Stop");
+
 		$baseUrl=self::getBaseUrl();
 		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
         $curlOpts = arraY(
@@ -57,6 +56,10 @@ class Route4Me
         switch($method) {
         case 'DELETE':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+
+			if (isset($body)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+			}
             break;
 		case 'DELETEARRAY':
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
@@ -64,15 +67,20 @@ class Route4Me
             break;
         case 'PUT':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-			//curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+			if (isset($query)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+			}
+
+			if (isset($body)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+			}
 			break;
         case 'POST':
 			if (!isset($body)) {curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); }
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
 			if (isset($body)) {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-				echo "IS SET BODY <br>";
+				//echo "IS SET BODY <br>";
 			} else {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, "");
 			}
