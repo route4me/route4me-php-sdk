@@ -14,6 +14,7 @@
 		public $offset;
 		public $start;
 		public $end;
+		public $activity_type;
 		
 		public function __construct () {
 			
@@ -39,6 +40,22 @@
 	                'route_id' => isset($params->route_id) ? $params->route_id : null,
 	                'limit' => isset($params->limit) ? $params->limit: null,
 	                'offset' => isset($params->offset) ? $params->offset : null,
+	            )
+	        ));
+
+			return $activity;
+		}
+
+		public static function searcActivities($params)
+	    {
+	    	$activity = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrl,
+	            'method' => 'GET',
+	            'query'  => array(
+	                'route_id' => isset($params->route_id) ? $params->route_id : null,
+	                'limit' => isset($params->limit) ? $params->limit: null,
+	                'offset' => isset($params->offset) ? $params->offset : null,
+	                'activity_type' => isset($params->activity_type) ? $params->activity_type : null,
 	            )
 	        ));
 
