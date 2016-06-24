@@ -7,7 +7,7 @@ use Route4Me\Exception\ApiError;
 class Route4Me
 {
     static public $apiKey;
-    static public $baseUrl = 'http://route4me.com';
+    static public $baseUrl = 'https://route4me.com';
 
     public static function setApiKey($apiKey)
     {
@@ -47,6 +47,8 @@ class Route4Me
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT        => 60,
             CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
             CURLOPT_HTTPHEADER     => array(
                 'User-Agent' => 'Route4Me php-sdk'
             )
@@ -76,14 +78,15 @@ class Route4Me
 			}
 			break;
         case 'POST':
-			if (!isset($body)) {curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); }
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); 
+			if (isset($query)) {
+            	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
+			}
+
 			if (isset($body)) {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
 				//echo "IS SET BODY <br>";
-			} else {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, "");
-			}
+			} 
 			break;
 		case 'ADD':
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
