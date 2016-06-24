@@ -111,7 +111,7 @@
 			return $response;
 		}
 		
-		public static function getOrders($params)
+		public static function getOrders()
 	    {
 	    	$response = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
