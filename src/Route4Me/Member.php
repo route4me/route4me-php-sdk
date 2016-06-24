@@ -38,6 +38,10 @@
 		public $company_name;
 		public $webiinar_date;
 		
+		public $subscription_name;
+		public $token;
+		public $payload;
+		
 		public function __construct () {  }
 		
 		public static function fromArray(array $params) {
@@ -127,7 +131,7 @@
 		public static function webinarRegistration($body)
 	    {
 	    	$response = Route4Me::makeRequst(array(
-	            'url'    => self::$apiUrlAuthen,
+	            'url'    => self::$apiUrlWebinar,
 	            'method' => 'POST',
 	            'body'  => array(
 					'email_address' => 	isset($body->email_address) ? $body->email_address: null,
@@ -137,6 +141,26 @@
 	                'phone_number' => isset($body->phone_number) ? $body->phone_number : null,
 	                'member_id' => isset($body->member_id) ? $body->member_id : null,
 	                'webiinar_date' => isset($body->webiinar_date) ? $body->webiinar_date : null,
+				)
+
+			));
+			return $response;
+		}
+		
+		public static function purchaseUserLicense($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrlLicense,
+	            'method' => 'POST',
+	            'body'  => array(
+					'member_id' => 	isset($body->member_id) ? $body->member_id: null,
+	                'session_guid' => isset($body->session_guid) ? $body->session_guid : null,
+	                'device_id' => isset($body->device_id) ? $body->device_id : null,
+	                'device_type' => isset($body->device_type) ? $body->device_type : null,
+	                'subscription_name' => isset($body->subscription_name) ? $body->subscription_name : null,
+	                'token' => isset($body->token) ? $body->token : null,
+	                'payload' => isset($body->payload) ? $body->payload : null,
+	                'format' => isset($body->format) ? $body->format : null,
 				)
 
 			));
