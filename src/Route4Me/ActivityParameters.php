@@ -6,6 +6,7 @@
 	class ActivityParameters extends Common
 	{
 		static public $apiUrl = '/api/get_activities.php';
+		static public $apiUrlv4 = '/api.v4/activity_feed.php';
 		
 		public $route_id;
 		public $device_id;
@@ -15,6 +16,7 @@
 		public $start;
 		public $end;
 		public $activity_type;
+		public $activity_message;
 		
 		public function __construct () {
 			
@@ -60,6 +62,21 @@
 	        ));
 
 			return $activity;
+		}
+		
+		public static function sendUserMessage($postParameters)
+		{
+			$result = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrlv4,
+	            'method' => 'POST',
+	            'body'  => array(
+	            	'activity_type' => isset($postParameters->activity_type) ? $postParameters->activity_type : null,
+	            	'activity_message' => isset($postParameters->activity_message) ? $postParameters->activity_message: null,
+	                'route_id' => isset($postParameters->route_id) ? $postParameters->route_id : null,
+	            )
+	        ));
+			
+			return $result;
 		}
 		
 	}
