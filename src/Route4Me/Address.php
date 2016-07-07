@@ -55,7 +55,7 @@ class Address extends Common
 
     public static function fromArray(array $params)
     {
-        if (!isset($params['address'])) {
+        /*if (!isset($params['address'])) {
             throw new BadParam('address must be provided');
         }
 
@@ -65,7 +65,7 @@ class Address extends Common
 
         if (!isset($params['lng'])) {
             throw new BadParam('lng must be provided');
-        }
+        }*/
 
         $address = new Address();
         foreach($params as $key => $value) {
@@ -104,6 +104,21 @@ class Address extends Common
         ));
 
         return Address::fromArray($address);
+    }
+	
+	public function markAddress($params, $body)
+    {
+        $result = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'PUT',
+            'query'  => array(
+                'route_id'  => isset($params['route_id']) ? $params['route_id']: null, 
+                'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
+            ),
+            'body'   => $body
+        ));
+
+        return $result;
     }
 
     public function delete()
