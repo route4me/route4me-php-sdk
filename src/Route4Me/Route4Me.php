@@ -39,7 +39,7 @@ class Route4Me
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
-
+		//$jfile=json_encode($query); echo $jfile; die("");
 		$baseUrl=self::getBaseUrl();
 		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
         $curlOpts = arraY(
@@ -85,7 +85,6 @@ class Route4Me
 
 			if (isset($body)) {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-				//echo "IS SET BODY <br>";
 			} 
 			break;
 		case 'ADD':
@@ -117,6 +116,90 @@ class Route4Me
             throw new ApiError('Something wrong');
         }
     }
+
+	public static function makeUrlRequst($url, $options) {
+		$method = isset($options['method']) ? $options['method'] : 'GET';
+        $query = isset($options['query']) ?
+            array_filter($options['query']) : array();
+        $body = isset($options['body']) ?
+            array_filter($options['body']) : null;
+        $ch = curl_init();
+		
+		$curlOpts = arraY(
+            CURLOPT_URL            => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 60,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_HTTPHEADER     => array(
+                'User-Agent' => 'Route4Me php-sdk'
+            )
+        );
+		
+		curl_setopt_array($ch, $curlOpts);
+		
+        switch($method) {
+        case 'DELETE':
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+
+			if (isset($body)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+			}
+            break;
+		case 'DELETEARRAY':
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+            break;
+        case 'PUT':
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+			if (isset($query)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+			}
+
+			if (isset($body)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+			}
+			break;
+        case 'POST':
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); 
+			if (isset($query)) {
+            	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
+			}
+
+			if (isset($body)) {
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+			} 
+			break;
+		case 'ADD':
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
+        }
+
+		$result = curl_exec($ch);
+		$isxml=FALSE;
+		$jxml="";
+		if (strpos($result, '<?xml')>-1)
+		{
+			$xml = simplexml_load_string($result);
+			$jxml = json_encode($xml);
+			$isxml = TRUE;
+		}
+		
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+		
+		if ($isxml) {
+			$json = $jxml;
+		} else $json = json_decode($result, true);
+		
+        if (200 == $code) {
+            return $json;
+        } elseif (isset($json['errors'])) {
+            throw new ApiError(implode(', ', $json['errors']));
+        } else {
+            throw new ApiError('Something wrong');
+        }
+	}
 	
 	/**
 	 * Prints on the screen main keys and values of the array 
