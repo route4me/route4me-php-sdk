@@ -13,6 +13,7 @@ use GuzzleHttp\Client;
 class OptimizationProblem extends Common
 {
     static public $apiUrl = '/api.v4/optimization_problem.php';
+	static public $apiUrl_addr = '/api.v4/address.php';
 
     public $optimization_problem_id;
     public $user_errors = array();
@@ -140,4 +141,72 @@ class OptimizationProblem extends Common
     {
         return $this->routes;
     }
+	
+	public function getRandomOptimizationId($offset,$limit)
+	{
+		$query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
+        $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
+			
+		$json = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => $query
+        ));
+		
+		$optimizations = array();
+            foreach($json as $optimization) {
+				if (gettype($optimization)!="array") continue;
+				foreach ($optimization as $otp1) {
+					$optimizations[] = $otp1;
+				}
+            }
+			
+			$num=rand(0,sizeof($optimizations)-1);
+			//echo "num=$num.<br>".sizeof($optimizations)."<br>";
+			$rOptimization=$optimizations[$num];
+			return $rOptimization;
+	}
+	
+	public function getAddresses($opt_id)
+	{
+		if ($opt_id==null) return null;
+		
+		$params = array( "optimization_problem_id" => $opt_id );
+		
+		$optimization = (array)$this->get($params);
+		
+		$addresses = $optimization["addresses"];
+		
+		return $addresses;
+		
+	}
+	
+	public function getRandomAddressFromOptimization($opt_id)
+	{
+		$addresses = (array)$this->getAddresses($opt_id);
+		
+		if ($addresses == null) {
+			echo "There are no addresses in this optimization!.. Try again.";
+			return null;
+		}
+		
+		$num=rand(0,sizeof($addresses)-1);
+		$rAddress=$addresses[$num];
+		
+		return $rAddress;
+	}
+	
+	public function removeAddress($params)
+	{
+		$response = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl_addr,
+            'method' => 'DELETE',
+            'query'  => array(
+                'optimization_problem_id' => isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
+                'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
+            )
+        ));
+		
+		return $response;
+	}
 }
