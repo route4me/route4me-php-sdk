@@ -98,7 +98,7 @@ class Route extends Common
         ));
 
         if ($routeId) {
-            return Route::fromArray($json);
+            return Route::fromArray($json); die("");
         } else {
             $routes = array();
             foreach($json as $route) {
@@ -107,6 +107,22 @@ class Route extends Common
             return $routes;
         }
     }
+
+	public function getRoutePoints($routeId, $params)
+	{
+		$result = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => array(
+            	'api_key' => Route4Me::getApiKey(),
+                'route_id' => $routeId,
+                'route_path_output' => isset($params['route_path_output']) ? $params['route_path_output'] : null,
+                'directions' => isset($params['directions']) ? $params['directions'] : null,
+            )
+        ));
+
+		return $result;
+	}
 
 	public function duplicateRoute($route_id)
 	{
