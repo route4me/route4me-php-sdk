@@ -180,6 +180,24 @@ class Route extends Common
 
         return Route::fromArray($route);
     }
+	
+	public function insertAddressOptimalPosition(array $params)
+	{
+		$route = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'PUT',
+            'query'  => array(
+            	'api_key' => Route4Me::getApiKey(),
+                'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+            ),
+            'body'  => array(
+				'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
+				'optimal_position' => isset($params['optimal_position']) ? $params['optimal_position'] : null,
+			)
+        ));
+
+        return Route::fromArray($route);
+	}
 
     public function delete($route_id)
     {
