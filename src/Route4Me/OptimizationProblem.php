@@ -209,4 +209,20 @@ class OptimizationProblem extends Common
 		
 		return $response;
 	}
+	
+	public function removeOptimization($params)
+	{
+		$response = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'DELETE',
+            'query'  => array(
+                'redirect' => isset($params['redirect']) ? $params['redirect'] : null,
+            ),
+            'body'  => array(
+				'optimization_problem_ids' => isset($params['optimization_problem_ids']) ? $params['optimization_problem_ids'] : null,
+			)
+        ));
+		
+		return $response;
+	}
 }
