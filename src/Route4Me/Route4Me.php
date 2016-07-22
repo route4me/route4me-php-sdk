@@ -35,12 +35,17 @@ class Route4Me
             array_filter($options['query']) : array();
         $body = isset($options['body']) ?
             array_filter($options['body']) : null;
+		$contentType = isset($options['Content-Type']) ?
+            $options['Content-Type'] : null;
+			
         $ch = curl_init();
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
+		
 		//$jfile=json_encode($query); echo $jfile; die("");
 		$baseUrl=self::getBaseUrl();
+		
 		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
         $curlOpts = arraY(
             CURLOPT_URL            => $baseUrl. $url,
@@ -53,7 +58,7 @@ class Route4Me
                 'User-Agent' => 'Route4Me php-sdk'
             )
         );
-
+		//echo "url=".$baseUrl.$url."<br>";die("");
         curl_setopt_array($ch, $curlOpts);
         switch($method) {
         case 'DELETE':
@@ -68,6 +73,7 @@ class Route4Me
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
             break;
         case 'PUT':
+			//$jfile=json_encode($body); echo $jfile; die("");
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 			if (isset($query)) {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
@@ -78,7 +84,7 @@ class Route4Me
 			}
 			break;
         case 'POST':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); 
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 			if (isset($query)) {
             	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
 			}
@@ -91,7 +97,10 @@ class Route4Me
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
 
+		if ($contentType!=null) curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: '.$contentType));
+		
         $result = curl_exec($ch);
+		//var_dump($result); die("");
 		$isxml=FALSE;
 		$jxml="";
 		if (strpos($result, '<?xml')>-1)
@@ -107,7 +116,7 @@ class Route4Me
 		if ($isxml) {
 			$json = $jxml;
 		} else $json = json_decode($result, true);
-		
+		//var_dump($json); die("");
         if (200 == $code) {
             return $json;
         } elseif (isset($json['errors'])) {

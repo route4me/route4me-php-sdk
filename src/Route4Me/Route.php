@@ -15,6 +15,8 @@ class Route extends Common
 	static public $apiUrlDuplicate='/actions/duplicate_route.php';
 	static public $apiUrlDelete='/actions/delete_routes.php';
 	static public $apiUrlReseq='/api.v3/route/reoptimize_2.php';
+	static public $apiUrlMerge='/actions/merge_routes.php';
+	static public $apiUrlShare='/actions/route/share_route.php';
 	//static public $apiUrlMove='/actions/route/move_route_destination.php';
     public $route_id;
 	public $route_destination_id;
@@ -31,6 +33,7 @@ class Route extends Common
     public $directions = array();
     public $path = array();
     public $tracking_history = array();
+	public $recipient_email;
 
     public static function fromArray(array $params) 
     {
@@ -174,6 +177,41 @@ class Route extends Common
 		
 		return $result;
 		
+	}
+
+	public function mergeRoutes($params)
+	{
+		$result = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrlMerge,
+            'method' => 'POST',
+            'query'  => array(
+            	'api_key' => Route4Me::getApiKey(),
+            ),
+            'body'  => array(
+				'route_ids' => isset($params['route_ids']) ? $params['route_ids'] : null,
+			),
+			'Content-Type' => 'multipart/form-data'
+        ));
+		
+		return $result;
+	}
+	
+	public function shareRoute($params)
+	{
+		$result = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrlShare,
+            'method' => 'POST',
+            'query'  => array(
+            	'api_key' => Route4Me::getApiKey(),
+            	'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+            ),
+            'body'  => array(
+				'recipient_email' => isset($params['recipient_email']) ? $params['recipient_email'] : null,
+			),
+			'Content-Type' => 'multipart/form-data'
+        ));
+		
+		return $result;
 	}
 	
 	// Getting random route_id from existing routes between $offset and $offset+$limit
