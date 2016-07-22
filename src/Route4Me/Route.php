@@ -14,8 +14,10 @@ class Route extends Common
     static public $apiUrl = '/api.v4/route.php';
 	static public $apiUrlDuplicate='/actions/duplicate_route.php';
 	static public $apiUrlDelete='/actions/delete_routes.php';
+	static public $apiUrlReseq='/api.v3/route/reoptimize_2.php';
 	//static public $apiUrlMove='/actions/route/move_route_destination.php';
     public $route_id;
+	public $route_destination_id;
     public $optimization_problem_id;
     public $vehicle_alias;
     public $driver_alias;
@@ -137,6 +139,41 @@ class Route extends Common
         ));
 		
 		return $result;
+	}
+	
+	public function resequenceRoute($params)
+	{
+		$result = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'PUT',
+            'query'  => array(
+            	'api_key' => Route4Me::getApiKey(),
+                'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+                'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
+            ),
+            'body'  => array(
+				'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
+			)
+        ));
+		
+		return $result;
+	}
+	
+	public function resequenceAllAddresses($params)
+	{
+		$result = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrlReseq,
+            'method' => 'GET',
+            'query'  => array(
+            	'api_key' => Route4Me::getApiKey(),
+                'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+                'disable_optimization' => isset($params['disable_optimization']) ? $params['disable_optimization'] : null,
+                'optimize' => isset($params['optimize']) ? $params['optimize'] : null,
+            )
+        ));
+		
+		return $result;
+		
 	}
 	
 	// Getting random route_id from existing routes between $offset and $offset+$limit
