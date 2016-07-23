@@ -12,6 +12,7 @@ use GuzzleHttp\Client;
 class Route extends Common
 {
     static public $apiUrl = '/api.v4/route.php';
+	static public $apiUrlAddress = '/api.v4/address.php';
 	static public $apiUrlDuplicate='/actions/duplicate_route.php';
 	static public $apiUrlDelete='/actions/delete_routes.php';
 	static public $apiUrlReseq='/api.v3/route/reoptimize_2.php';
@@ -34,6 +35,7 @@ class Route extends Common
     public $path = array();
     public $tracking_history = array();
 	public $recipient_email;
+	public $httpheaders;
 
     public static function fromArray(array $params) 
     {
@@ -247,14 +249,32 @@ class Route extends Common
             'url'    => self::$apiUrl,
             'method' => 'PUT',
             'query'  => array(
-                'route_id' => $this->route_id,
+                'route_id' => isset($this->route_id) ? $this->route_id : null,
+                'route_destination_id' => isset($this->route_destination_id) ? $this->route_destination_id : null,
             ),
-            'body' => array(
-                'parameters' => $this->parameters->toArray()
-            )
+            'body' => array (
+            	'parameters' => $this->parameters,
+            	),
+            'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
         ));
 
         return Route::fromArray($route);
+    }
+	
+	public function updateAddress()
+    {
+        $result = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrlAddress,
+            'method' => 'PUT',
+            'query'  => array(
+                'route_id' => isset($this->route_id) ? $this->route_id : null,
+                'route_destination_id' => isset($this->route_destination_id) ? $this->route_destination_id : null,
+            ),
+            'body' => get_object_vars($this->parameters),
+            'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
+        ));
+
+        return $result;
     }
 
     public function addAddresses(array $params)

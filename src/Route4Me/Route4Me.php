@@ -35,15 +35,14 @@ class Route4Me
             array_filter($options['query']) : array();
         $body = isset($options['body']) ?
             array_filter($options['body']) : null;
-		$contentType = isset($options['Content-Type']) ?
-            $options['Content-Type'] : null;
+		$httpHeader = isset($options['HTTPHEADER']) ? $options['HTTPHEADER'] : null;
 			
         $ch = curl_init();
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
 		
-		//$jfile=json_encode($query); echo $jfile; die("");
+		//$jfile=json_encode($body); echo $jfile; die("");
 		$baseUrl=self::getBaseUrl();
 		
 		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
@@ -97,7 +96,7 @@ class Route4Me
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
 
-		if ($contentType!=null) curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: '.$contentType));
+		if ($httpHeader!=null) curl_setopt($ch, CURLOPT_HTTPHEADER, $httpHeader);
 		
         $result = curl_exec($ch);
 		//var_dump($result); die("");
