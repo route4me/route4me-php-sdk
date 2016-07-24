@@ -11,6 +11,8 @@ class Address extends Common
 {
     static public $apiUrl = '/api.v4/address.php';
 	static public $apiUrlMove='/actions/route/move_route_destination.php';
+	static public $apiUrDeparted='/api/route/mark_address_departed.php';
+	static public $apiUrVisited='/actions/address/update_address_visited.php';
 
     public $route_destination_id;
     public $alias;
@@ -120,6 +122,38 @@ class Address extends Common
 
         return $result;
     }
+	
+	public function markAsDeparted($params)
+	{
+		$address = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrDeparted,
+            'method' => 'GET',
+            'query'  => array(
+                'route_id'   => isset($params['route_id']) ? $params['route_id']: null,
+                'address_id'   => isset($params['address_id']) ? $params['address_id']: null,
+                'is_departed'   => isset($params['is_departed']) ? $params['is_departed']: null,
+                'member_id'   => isset($params['member_id']) ? $params['member_id']: null,
+            ),
+        ));
+
+        return $address;
+	}
+	
+	public function markAsVisited($params)
+	{
+		$address = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrVisited,
+            'method' => 'GET',
+            'query'  => array(
+                'route_id'   => isset($params['route_id']) ? $params['route_id']: null,
+                'address_id'   => isset($params['address_id']) ? $params['address_id']: null,
+                'is_visited'   => isset($params['is_visited']) ? $params['is_visited']: null,
+                'member_id'   => isset($params['member_id']) ? $params['member_id']: null,
+            ),
+        ));
+
+        return $address;
+	}
 
     public function delete()
     {
