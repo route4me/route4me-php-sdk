@@ -55,6 +55,19 @@
 			return $ablocations;
 		}
 		
+		public static function searchRoutedLocation($params)
+	    {
+	    	$result= Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrl,
+	            'method' => 'GET',
+	            'query'  => array(
+	                'display' => isset($params['display']) ? $params['display']: null,
+	            )
+	        ));
+
+			return $result;
+		}
+		
 		public static function getAddressBookLocations($params)
 	    {
 	    	$ablocations = Route4Me::makeRequst(array(
