@@ -11,10 +11,17 @@
 
     $ablocation=new AddressBookLocation();
 
-    //Example for retrieving all records, which contains 'Richmond' in any field 
+    //Example refers to the process of retrieving sepcified fields by containg specified text in any field 
     //--------------------------------------------------------- 
-    $query='Richmond';
-    $abcResult=$ablocation->getAddressBookLocation($query);
+	
+	$params = array(
+		"query"  => "David",
+		"fields"  => "first_name,address_email",
+		"offset"  => 0,
+		"limit"  => 20,
+	);
+	
+    $abcResult=$ablocation->searchRoutedLocation($params);
 
     $results=$ablocation->getValue($abcResult,"results");
 

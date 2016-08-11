@@ -62,6 +62,10 @@
 	            'method' => 'GET',
 	            'query'  => array(
 	                'display' => isset($params['display']) ? $params['display']: null,
+	                'query' => isset($params['query']) ? $params['query']: null,
+	                'fields' => isset($params['fields']) ? $params['fields']: null,
+	                'limit' => isset($params['limit']) ? $params['limit']: null,
+	                'offset' => isset($params['offset']) ? $params['offset'] : null,
 	            )
 	        ));
 
