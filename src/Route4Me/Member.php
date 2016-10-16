@@ -5,7 +5,8 @@
 	
 	class Member extends Common
 	{
-		static public $apiUrl = '/api/member/view_users.php';
+		//static public $apiUrl = '/api/member/view_users.php';
+		static public $apiUrl = '/api.v4/user.php';
 		static public $apiUrlDevice = '/api/device/verify_device_license.php';
 		static public $apiUrlLicense = '/api/member/user_license.php';
 		static public $apiUrlWebinar = '/actions/webinar_register.php';
@@ -42,6 +43,22 @@
 		public $token;
 		public $payload;
 		
+		public $HIDE_ROUTED_ADDRESSES;
+		public $member_phone;
+		public $member_zipcode;
+		public $route_count;
+		public $member_email;
+		public $HIDE_VISITED_ADDRESSES;
+		public $READONLY_USER;
+		public $member_type;
+		public $date_of_birth;
+		public $member_first_name;
+		public $member_password;
+		public $HIDE_NONFUTURE_ROUTES;
+		public $member_last_name;
+		public $SHOW_ALL_VEHICLES;
+		public $SHOW_ALL_DRIVERS;
+		
 		public function __construct () {  }
 		
 		public static function fromArray(array $params) {
@@ -61,7 +78,20 @@
 	            'url'    => self::$apiUrl,
 	            'method' => 'GET'
 	        ));
-
+			//var_dump($response); die("");
+			return $response;
+		}
+		
+		public static function getUser($params)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrl,
+	            'method' => 'GET',
+	            'query'  => array(
+	            	'member_id' => isset($params['member_id']) ? $params['member_id'] : null
+				)
+	        ));
+			//var_dump($response); die("");
 			return $response;
 		}
 		
@@ -74,6 +104,72 @@
 					'device_id' => 	isset($body->device_id) ? $body->device_id: null,
 	                'device_type' => isset($body->device_type) ? $body->device_type : null,
 	                'format' => isset($body->format) ? $body->format : null
+				)
+
+			));
+			return $response;
+		}
+		
+		public static function createMember($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrl,
+	            'method' => 'POST',
+	            'body'  => array(
+					'HIDE_ROUTED_ADDRESSES' => 	isset($body->HIDE_ROUTED_ADDRESSES) ? $body->HIDE_ROUTED_ADDRESSES: null,
+	                'member_phone' => isset($body->member_phone) ? $body->member_phone : null,
+	                'member_zipcode' => isset($body->member_zipcode) ? $body->member_zipcode : null,
+	                'route_count' => isset($body->route_count) ? $body->route_count : null,
+	                'member_email' => isset($body->member_email) ? $body->member_email : null,
+	                'HIDE_VISITED_ADDRESSES' => isset($body->HIDE_VISITED_ADDRESSES) ? $body->HIDE_VISITED_ADDRESSES : null,
+	                'READONLY_USER' => isset($body->READONLY_USER) ? $body->READONLY_USER : null,
+	                'date_of_birth' => isset($body->date_of_birth) ? $body->date_of_birth : null,
+	                'member_first_name' => isset($body->member_first_name) ? $body->member_first_name : null,
+	                'member_password' => isset($body->member_password) ? $body->member_password : null,
+	                'HIDE_NONFUTURE_ROUTES' => isset($body->HIDE_NONFUTURE_ROUTES) ? $body->HIDE_NONFUTURE_ROUTES : null,
+	                'member_last_name' => isset($body->member_last_name) ? $body->member_last_name : null,
+	                'SHOW_ALL_VEHICLES' => isset($body->SHOW_ALL_VEHICLES) ? $body->SHOW_ALL_VEHICLES : null,
+	                'SHOW_ALL_DRIVERS' => isset($body->SHOW_ALL_DRIVERS) ? $body->SHOW_ALL_DRIVERS : null
+				)
+
+			));
+			return $response;
+		}
+
+		public static function updateMember($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrl,
+	            'method' => 'PUT',
+	            'body'  => array(
+					'member_id' => 	isset($body->member_id) ? $body->member_id: null,
+	                'member_phone' => isset($body->member_phone) ? $body->member_phone : null,
+	                'HIDE_ROUTED_ADDRESSES' => 	isset($body->HIDE_ROUTED_ADDRESSES) ? $body->HIDE_ROUTED_ADDRESSES: null,
+	                'member_zipcode' => isset($body->member_zipcode) ? $body->member_zipcode : null,
+	                'route_count' => isset($body->route_count) ? $body->route_count : null,
+	                'member_email' => isset($body->member_email) ? $body->member_email : null,
+	                'HIDE_VISITED_ADDRESSES' => isset($body->HIDE_VISITED_ADDRESSES) ? $body->HIDE_VISITED_ADDRESSES : null,
+	                'READONLY_USER' => isset($body->READONLY_USER) ? $body->READONLY_USER : null,
+	                'date_of_birth' => isset($body->date_of_birth) ? $body->date_of_birth : null,
+	                'member_first_name' => isset($body->member_first_name) ? $body->member_first_name : null,
+	                'member_password' => isset($body->member_password) ? $body->member_password : null,
+	                'HIDE_NONFUTURE_ROUTES' => isset($body->HIDE_NONFUTURE_ROUTES) ? $body->HIDE_NONFUTURE_ROUTES : null,
+	                'member_last_name' => isset($body->member_last_name) ? $body->member_last_name : null,
+	                'SHOW_ALL_VEHICLES' => isset($body->SHOW_ALL_VEHICLES) ? $body->SHOW_ALL_VEHICLES : null,
+	                'SHOW_ALL_DRIVERS' => isset($body->SHOW_ALL_DRIVERS) ? $body->SHOW_ALL_DRIVERS : null
+				)
+
+			));
+			return $response;
+		}
+
+		public static function deleteMember($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUrl,
+	            'method' => 'DELETE',
+	            'body'  => array(
+					'member_id' => 	isset($body->member_id) ? $body->member_id: null
 				)
 
 			));
