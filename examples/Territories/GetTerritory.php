@@ -41,7 +41,10 @@
 	echo "------------------------------------------------------------------------<br><br>";
 	//-----------------------------------------------------------
 	
-	$result1 = $territory->getTerritory($territory_id);
+	$params = array(
+		"territory_id" => $territory_id
+	);
+	$result1 = $territory->getTerritory($params);
 	
 	Route4Me::simplePrint($result1);
 ?>

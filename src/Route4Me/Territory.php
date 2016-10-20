@@ -11,6 +11,7 @@
 		public $territory_id;  // Territory id
 		public $territory_name; 
 		public $territory_color;
+		public $addresses;
 		public $member_id;
 		public $territory; // Territory parameters
 		
@@ -41,13 +42,14 @@
 			return $territoryparameters;
 		}
 		
-		public static function getTerritory($territory_id)
+		public static function getTerritory($params)
 	    {
 	        $territory = Route4Me::makeRequst(array(
 	            'url'    => self::$apiUrl,
 	            'method' => 'GET',
 	            'query'  => array(
-	                'territory_id' => $territory_id
+	                'territory_id' => isset($params['territory_id']) ? $params['territory_id']: null,
+	                'addresses' => isset($params['addresses']) ? $params['addresses']: null,
 	            )
 	        ));
 	
