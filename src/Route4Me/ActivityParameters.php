@@ -11,6 +11,7 @@
 		public $route_id;
 		public $device_id;
 		public $member_id;
+		public $team;
 		public $limit;
 		public $offset;
 		public $start;
@@ -40,6 +41,7 @@
 	            'method' => 'GET',
 	            'query'  => array(
 	                'route_id' => isset($params->route_id) ? $params->route_id : null,
+	                'team' => isset($params->team) ? $params->team: null,
 	                'limit' => isset($params->limit) ? $params->limit: null,
 	                'offset' => isset($params->offset) ? $params->offset : null,
 	            )
