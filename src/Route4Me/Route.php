@@ -18,6 +18,7 @@ class Route extends Common
 	static public $apiUrlReseq='/api.v3/route/reoptimize_2.php';
 	static public $apiUrlMerge='/actions/merge_routes.php';
 	static public $apiUrlShare='/actions/route/share_route.php';
+	static public $apiUrlNoteFile='/actions/addRouteNotes.php';
 	//static public $apiUrlMove='/actions/route/move_route_destination.php';
     public $route_id;
 	public $route_destination_id;
@@ -36,6 +37,9 @@ class Route extends Common
     public $tracking_history = array();
 	public $recipient_email;
 	public $httpheaders;
+	
+	public $dev_lat;
+	public $dev_lng;
 
     public static function fromArray(array $params) 
     {
@@ -92,6 +96,10 @@ class Route extends Common
 
             if (isset($params['device_tracking_history'])) {
                 $query['device_tracking_history'] = $params['device_tracking_history'];
+            }
+			
+			if (isset($params['query'])) {
+                $query['query'] = $params['query'];
             }
 
             $query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
@@ -192,7 +200,7 @@ class Route extends Common
             'body'  => array(
 				'route_ids' => isset($params['route_ids']) ? $params['route_ids'] : null,
 			),
-			'Content-Type' => 'multipart/form-data'
+			'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
         ));
 		
 		return $result;
@@ -308,6 +316,38 @@ class Route extends Common
         ));
 
         return Route::fromArray($route);
+	}
+	
+	public function addNoteFile($params)
+	{
+		$fname = isset($params['strFilename']) ? $params['strFilename'] : null;
+		$rpath = realpath($fname);
+		//echo $rpath;die("");
+		$result= Route4Me::makeRequst(array(
+            'url'    => self::$apiUrlNoteFile,
+            'method' => 'POST',
+            'query'  => array(
+            	'api_key' => Route4Me::getApiKey(),
+                'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+                'address_id' => isset($params['address_id']) ? $params['address_id'] : null,
+                'dev_lat' => isset($params['dev_lat']) ? $params['dev_lat'] : null,
+                'dev_lng' => isset($params['dev_lng']) ? $params['dev_lng'] : null,
+                'device_type' => isset($params['device_type']) ? $params['device_type'] : null,
+                'dev_lng' => isset($params['dev_lng']) ? $params['dev_lng'] : null,
+            ),
+            'body'  => array(
+				'strUpdateType' => isset($params['strUpdateType']) ? $params['strUpdateType'] : null,
+				'strFilename' => isset($params['strFilename']) ? $params['strFilename'] : null,
+				'strNoteContents' => isset($params['strNoteContents']) ? $params['strNoteContents'] : null,
+			),
+			'FILE' => $rpath,
+
+			'HTTPHEADER' => array(
+				'Content-Type: application/x-www-form-urlencoded'
+			)
+        ));
+
+        return $result;
 	}
 
     public function delete($route_id)
