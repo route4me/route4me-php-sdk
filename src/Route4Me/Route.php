@@ -20,6 +20,7 @@ class Route extends Common
 	static public $apiUrlShare='/actions/route/share_route.php';
 	static public $apiUrlNoteFile='/actions/addRouteNotes.php';
 	static public $apiUrlAsset='/api.v4/status.php';
+	static public $apiUrlDeviceLocation='/api/track/get_device_location.php';
 	//static public $apiUrlMove='/actions/route/move_route_destination.php';
     public $route_id;
 	public $route_destination_id;
@@ -424,14 +425,14 @@ class Route extends Common
 	public function GetTrackingHistoryFromTimeRange(array $params)
 	{
 		$route = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => self::$apiUrlDeviceLocation,
             'method' => 'GET',
             'query'  => array(
             	'api_key' => Route4Me::getApiKey(),
                 'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
                 'format' => isset($params['format']) ? $params['format'] : null,
                 'time_period' => isset($params['time_period']) ? $params['time_period'] : null,
-                'start_date' => isset($params['start_date']) ? $params['device_tracking_history'] : null,
+                'start_date' => isset($params['start_date']) ? $params['start_date'] : null,
                 'end_date' => isset($params['end_date']) ? $params['end_date'] : null
                 )
         ));

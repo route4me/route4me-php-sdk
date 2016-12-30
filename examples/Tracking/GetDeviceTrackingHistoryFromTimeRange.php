@@ -14,12 +14,15 @@
 	
 	Route4Me::setApiKey('11111111111111111111111111111111');
 	
+	$startDate = strtotime("2016-10-20 0:00:00");
+	$endDate = strtotime("2016-10-26 23:59:59");
+	
 	$params = array(
 		'route_id'  =>  '814FB49CEA8188D134E9D4D4B8B0DAF7',
 		'format'    => 'json',
 		'time_period'  =>  'custom',
-		'start_date'   => '',
-		'end_date'   => ''
+		'start_date'   => $startDate,
+		'end_date'   => $endDate
 	);
 	
 	$route = new Route();
