@@ -14,6 +14,8 @@
 		static public $apiUrlSessValid = '/datafeed/session/validate_session.php';
 		static public $apiUrlAuthen = '/actions/authenticate.php';
 		static public $apiUrlRegistr = '/actions/register_action.php';
+		static public $apiUserLocations = '/api/track/view_user_locations.php';
+		static public $apiMemberConfig = '/api.v4/configuration-settings.php';
 		
 		public $device_id;
 		public $device_type;
@@ -59,6 +61,9 @@
 		public $SHOW_ALL_VEHICLES;
 		public $SHOW_ALL_DRIVERS;
 		
+		public $config_key;
+		public $config_value;
+		
 		public function __construct () {  }
 		
 		public static function fromArray(array $params) {
@@ -89,6 +94,19 @@
 	            'method' => 'GET',
 	            'query'  => array(
 	            	'member_id' => isset($params['member_id']) ? $params['member_id'] : null
+				)
+	        ));
+			//var_dump($response); die("");
+			return $response;
+		}
+		
+		public static function getUserLocations($param)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiUserLocations,
+	            'method' => 'GET',
+	            'query'  => array(
+	            	'query' => $param
 				)
 	        ));
 			//var_dump($response); die("");
@@ -259,6 +277,56 @@
 	                'format' => isset($body->format) ? $body->format : null,
 				)
 
+			));
+			return $response;
+		}
+		
+		public static function newMemberConfigKey($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiMemberConfig,
+	            'method' => 'POST',
+	            'body'  => array(
+					'config_key' => 	isset($body->config_key) ? $body->config_key: null,
+	                'config_value' => isset($body->config_value) ? $body->config_value : null
+				)
+			));
+			return $response;
+		}
+		
+		public static function removeMemberConfigKey($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiMemberConfig,
+	            'method' => 'DELETE',
+	            'body'  => array(
+					'config_key' => 	isset($body->config_key) ? $body->config_key: null
+				)
+			));
+			return $response;
+		}
+		
+		public static function getMemberConfigData($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiMemberConfig,
+	            'method' => 'GET',
+	            'query'  => array(
+					'config_key' => 	isset($body->config_key) ? $body->config_key: null
+				)
+			));
+			return $response;
+		}
+
+		public static function updateMemberConfigKey($body)
+	    {
+	    	$response = Route4Me::makeRequst(array(
+	            'url'    => self::$apiMemberConfig,
+	            'method' => 'PUT',
+	            'body'  => array(
+					'config_key' => 	isset($body->config_key) ? $body->config_key: null,
+	                'config_value' => isset($body->config_value) ? $body->config_value : null
+				)
 			));
 			return $response;
 		}
