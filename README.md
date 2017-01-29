@@ -1,4 +1,6 @@
 Access Route4Me's logistics-as-a-service API using our PHP SDK
+[![Build Status](https://travis-ci.org/route4me/route4me-php-sdk.svg?branch=master)](https://travis-ci.org/route4me/route4me-php-sdk)
+
 -------------------
 
 
@@ -93,7 +95,6 @@ The time required to integrate the SDK can be as little as 1 hour or may take se
 
 
 
-[![Build Status](https://travis-ci.org/route4me/route4me-php-sdk.svg?branch=master)](https://travis-ci.org/route4me/route4me-php-sdk)
 
 ## Setup
 
