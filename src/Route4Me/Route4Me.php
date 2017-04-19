@@ -28,21 +28,95 @@ class Route4Me
     {
         return self::$baseUrl;
     }
+	
+	public static function fileUploadRequest($options) {
+		$query = isset($options['query']) ?
+            array_filter($options['query']) : array();
+
+		if (sizeof($query)==0) return null;
+
+		$body = isset($options['body']) ?
+            array_filter($options['body']) : null;
+			
+		$fname = isset($body['strFilename']) ? $body['strFilename'] : '';
+		if ($fname=='') return null;
+
+		$rpath = realpath($fname);
+		
+		$fp=fopen(realpath($fname),"r");
+		
+		$url = self::$baseUrl.$options['url'] . '?' . http_build_query(array_merge(
+            array( 'api_key' => self::getApiKey()), $query)
+        );
+		
+		//self::simplePrint($body);die("");
+		//echo "url=".$url."<br>";die("");
+		
+		$ch = curl_init($url);
+		
+		$curlOpts = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 60,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYPEER => FALSE
+        );
+		
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			"Content-Type: multipart/form-data",
+			'Content-Disposition: form-data; name="strFilename"',
+			'User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)'
+		));
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+		
+		$result = curl_exec($ch);
+		fclose($fp);
+		//var_dump($result); die('');
+		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+		//echo "code = $code <br>";
+		$json = json_decode($result, true);
+		//var_dump($json); die("");
+        if (200 == $code) {
+            return $json;
+        } elseif (isset($json['errors'])) {
+            throw new ApiError(implode(', ', $json['errors']));
+        } else {
+            throw new ApiError('Something wrong');
+        }
+	}
 
     public static function makeRequst($options) {
         $method = isset($options['method']) ? $options['method'] : 'GET';
         $query = isset($options['query']) ?
             array_filter($options['query']) : array();
+		//echo "query=".$query['member_id'];die("");
         $body = isset($options['body']) ?
             array_filter($options['body']) : null;
-		$httpHeader = isset($options['HTTPHEADER']) ? $options['HTTPHEADER'] : null;
-			
+		$file = isset($options['FILE']) ? $options['FILE'] : null;
+        $headers = array(
+            "User-Agent: Route4Me php-sdk"
+        );
+        
+        if (isset($options['HTTPHEADER'])) {
+            $headers[]=$options['HTTPHEADER'];
+        }
+
+		if (isset($options['HTTPHEADERS'])) {
+		    foreach ($options['HTTPHEADERS'] As $header) $headers[]=$header;
+        }
+        //self::simplePrint($headers); die("");
         $ch = curl_init();
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
 		
 		//$jfile=json_encode($body); echo $jfile; die("");
+
+        //self::simplePrint($headers); die("");
 		$baseUrl=self::getBaseUrl();
 		
 		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
@@ -53,12 +127,19 @@ class Route4Me
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_SSL_VERIFYHOST => FALSE,
             CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_HTTPHEADER     => array(
-                'User-Agent' => 'Route4Me php-sdk'
-            )
+            CURLOPT_HTTPHEADER     => $headers
         );
+		
 		//echo "url=".$baseUrl.$url."<br>";die("");
         curl_setopt_array($ch, $curlOpts);
+		
+		if ($file !=null) {
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			$fp=fopen($file,'r');
+			curl_setopt($ch, CURLOPT_INFILE , $fp);
+			curl_setopt($ch, CURLOPT_INFILESIZE, filesize($file));
+		}
+		
         switch($method) {
         case 'DELETE':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
@@ -83,11 +164,11 @@ class Route4Me
 			}
 			break;
         case 'POST':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 			if (isset($query)) {
-            	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
+            	curl_setopt($ch,  CURLOPT_POSTFIELDS, json_encode($query)); 
 			}
-
+            
+			//echo json_encode($body); die("");
 			if (isset($body)) {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
 			} 
@@ -96,8 +177,6 @@ class Route4Me
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
 
-		if ($httpHeader!=null) curl_setopt($ch, CURLOPT_HTTPHEADER, $httpHeader);
-		
         $result = curl_exec($ch);
 		//var_dump($result); die("");
 		$isxml=FALSE;
@@ -184,6 +263,7 @@ class Route4Me
         }
 
 		$result = curl_exec($ch);
+        
 		$isxml=FALSE;
 		$jxml="";
 		if (strpos($result, '<?xml')>-1)
@@ -199,6 +279,7 @@ class Route4Me
 		if ($isxml) {
 			$json = $jxml;
 		} else $json = json_decode($result, true);
+		
 		
         if (200 == $code) {
             return $json;
