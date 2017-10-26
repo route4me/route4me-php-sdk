@@ -207,7 +207,10 @@
 	                'strLastName' => 	isset($body->strLastName) ? $body->strLastName: null,
 	                'strIndustry' => 	isset($body->strIndustry) ? $body->strIndustry: null,
 	                'chkTerms' => 	isset($body->chkTerms) ? $body->chkTerms: null,
-	                'plan' => 	isset($body->plan) ? $body->plan: null
+	                'plan' => 	isset($body->plan) ? $body->plan: null,
+	                'strSubAccountType' =>  isset($body->strSubAccountType) ? $body->strSubAccountType: null,
+	                'blDisableMarketing' => isset($body->blDisableMarketing) ? $body->blDisableMarketing: false,
+	                'blDisableAccountActivationEmail' => isset($body->blDisableAccountActivationEmail) ? $body->blDisableAccountActivationEmail: false
 				)
 			));
 			return $response;
