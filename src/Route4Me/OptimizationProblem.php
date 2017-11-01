@@ -14,6 +14,8 @@ class OptimizationProblem extends Common
 {
     static public $apiUrl = '/api.v4/optimization_problem.php';
 	static public $apiUrl_addr = '/api.v4/address.php';
+    static public $apiHybridUrl = '/api.v4/hybrid_date_optimization.php';
+    static public $apiHybridDepotUrl = '/api/change_hybrid_optimization_depot.php';
 
     public $optimization_problem_id;
     public $user_errors = array();
@@ -67,10 +69,10 @@ class OptimizationProblem extends Common
             'url'    => self::$apiUrl,
             'method' => 'POST',
             'query'  => array(
-                'directions'             => $params->directions,
-                'format'                 => $params->format,
-                'route_path_output'      => $params->route_path_output,
-                'optimized_callback_url' => $params->optimized_callback_url
+                'directions'             => isset($params->directions) ? $params->directions: null, 
+                'format'                 => isset($params->format) ? $params->format: null,
+                'route_path_output'      => isset($params->route_path_output) ? $params->route_path_output: null,
+                'optimized_callback_url' => isset($params->optimized_callback_url) ? $params->optimized_callback_url: null
             ),
             'body'   => array(
                 'addresses'  => $params->getAddressesArray(),
@@ -225,4 +227,36 @@ class OptimizationProblem extends Common
 		
 		return $response;
 	}
+    
+    public function getHybridOptimization($params)
+    {
+        $optimize = Route4Me::makeRequst(array(
+            'url'    => self::$apiHybridUrl,
+            'method' => 'GET',
+            'query'  => array(
+                'target_date_string' => isset($params['target_date_string']) ? $params['target_date_string'] : null,
+                'timezone_offset_minutes' => isset($params['timezone_offset_minutes']) ? $params['timezone_offset_minutes'] : null
+            )
+        ));
+
+        return $optimize;
+    }
+    
+    Public function addDepotsToHybrid($params)
+    {
+        $depots = Route4Me::makeRequst(array( 
+            'url'    => self::$apiHybridDepotUrl,
+            'method' => 'POST',
+            'query'  => array(
+                'optimization_problem_id' => isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
+                ),
+            'body'  => array(
+                'optimization_problem_id' => isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
+                'delete_old_depots' => isset($params['delete_old_depots']) ? $params['delete_old_depots'] : null,
+                'new_depots' => isset($params['new_depots']) ? $params['new_depots'] : null,
+            )
+        ));
+        
+        return $depots;
+    }
 }
