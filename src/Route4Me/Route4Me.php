@@ -3,6 +3,7 @@
 namespace Route4Me;
 
 use Route4Me\Exception\ApiError;
+use Route4Me\Exception\myErrorHandler;
 
 class Route4Me
 {
@@ -90,6 +91,9 @@ class Route4Me
 	}
 
     public static function makeRequst($options) {
+        $errorHandler = new myErrorHandler();
+    
+        $old_error_handler = set_error_handler(array( $errorHandler, "proc_error"));
         $method = isset($options['method']) ? $options['method'] : 'GET';
         $query = isset($options['query']) ?
             array_filter($options['query']) : array();
@@ -113,8 +117,8 @@ class Route4Me
         $url = $options['url'] . '?' . http_build_query(array_merge(
             $query, array( 'api_key' => self::getApiKey())
         ));
-		
-		//$jfile=json_encode($body); echo $jfile; die("");
+		//var_dump($body); echo "<br><br>";
+		//$jfile=json_encode($body); echo "<br><br>".$jfile; die("STOPPPP");
 
         //self::simplePrint($headers); die("");
 		$baseUrl=self::getBaseUrl();
@@ -168,7 +172,7 @@ class Route4Me
             	curl_setopt($ch,  CURLOPT_POSTFIELDS, json_encode($query)); 
 			}
             
-			//echo json_encode($body); die("");
+			//echo "<br><br>". json_encode($body); 
 			if (isset($body)) {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
 			} 
@@ -190,15 +194,21 @@ class Route4Me
 		
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+		//echo "code -> $code <br>";
 		
-		if ($isxml) {
-			$json = $jxml;
-		} else $json = json_decode($result, true);
-		//var_dump($json); die("");
         if (200 == $code) {
-            return $json;
-        } elseif (isset($json['errors'])) {
-            throw new ApiError(implode(', ', $json['errors']));
+            if ($isxml) {
+                $json = $jxml;
+            } else $json = json_decode($result, true);
+            //var_dump($json); die("");
+            if (isset($json['errors'])) {
+                throw new ApiError(implode(', ', $json['errors']));
+            } else {
+                return $json;
+            }
+        }  elseif (409 == $code) {
+            
+            //throw new ApiError('Wrong API key');
         } else {
             throw new ApiError('Something wrong');
         }

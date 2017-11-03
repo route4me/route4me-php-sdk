@@ -15,160 +15,80 @@ use Route4Me\Route4Me;
  * http://support.route4me.com/route-planning-help.php?id=manual11:tutorial3:chapter12
  */ 
 
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey('bd48828717021141485a701453273458');
 
 $source_file="addresses_1000.csv";
 $max_line_length = 512;
 $delemietr=',';
 
 
-/* Add Address Book Locations with schedules */
+/* Add Address Book Locations with schedules from a CSV file */
+
+/* Mapping of a CSV file with the address book locations - which of the CSV table column is corresponding to which of the Address Book's field*/
+$locationsFieldsMapping['cached_lat']=0;
+$locationsFieldsMapping['cached_lng']=1;
+$locationsFieldsMapping['address_alias']=2;
+$locationsFieldsMapping['address_1']=3;
+$locationsFieldsMapping['address_city']=4;
+$locationsFieldsMapping['address_state_id']=5;
+$locationsFieldsMapping['address_zip']=6;
+$locationsFieldsMapping['address_phone_number']=7;
+$locationsFieldsMapping['schedule_mode']=8;
+$locationsFieldsMapping['schedule_enabled']=9;
+$locationsFieldsMapping['schedule_every']=10;
+$locationsFieldsMapping['schedule_weekdays']=11;
+$locationsFieldsMapping['monthly_mode']=12;
+$locationsFieldsMapping['monthly_dates']=13;
+$locationsFieldsMapping['monthly_nth_n']=16;
+$locationsFieldsMapping['monthly_nth_wwhat']=17;
 
 if (($handle = fopen("$source_file", "r")) !== FALSE) {
-        $columns = fgetcsv($handle, $max_line_length, $delemietr);
-        if (!$columns) {
-            $error['message'] = 'Empty';
-             return ($error);
+        $oAbook = new AddressBookLocation();
+
+        $results=$oAbook->addLocationsFromCsvFile($handle, $locationsFieldsMapping); //Temporarry
+        
+        echo "Errors: <br><br>";
+        foreach ($results['fail'] as $evalue) {
+            echo $evalue."<br>";
         }
         
-        $iRow=1;
-        
-        while (($rows = fgetcsv($handle, $max_line_length, $delemietr)) !== false) {
-            //if ($iRow==1) {$iRow++; continue;}
-            
-            if ($rows[0] && $rows[1] && $rows[3] && array(null) !== $rows) { // ignore blank lines
-                    //$data1 = $rows[0].", ".$rows[1].", ".$rows[3];
-                    
-                    $schedule="";
-                    $mode="";
-                    
-                    if (isset($rows[8])) {
-                        if (AddressBookLocation::validateScheduleMode($rows[8])) {
-                            $schedule='"mode":"'.$rows[8].'",'; 
-                            $mode=$rows[8];
-                        }
-                        else {echo "$iRow --> Wrong schedule mode parameter <br>"; $schedule="";}
-                    }
-                    else {echo "$iRow --> The schedule mode parameter is not set <br>"; $schedule="";}
-                    
-                    if ($schedule=="") {$iRow++; continue;}
-                    
-                    if (isset($rows[9])) {
-                        if (AddressBookLocation::validateScheduleEnable($rows[9])) { 
-                            $schedule.='"enabled":'.$rows[9].',';
-                        }
-                        else {echo "$iRow --> The schedule enabled parameter is not set <br>"; $schedule="";}
-                    }
-                    
-                    if ($schedule=="") {$iRow++; continue;}
-                    
-                    if (isset($rows[10])) {
-                        if (AddressBookLocation::validateScheduleEvery($rows[10])) {
-                            $schedule.='"'.$mode.'":{'.'"every":'.$rows[10].','; 
-                            if ($mode=='daily') {
-                                $schedule=trim($schedule,',');
-                                $schedule.='}';
-                            }
-                        }
-                        else {echo "$iRow --> The parameter sched_every is not set <br>"; $schedule=""; }
-                    }
-                    
-                    if ($schedule=="") {$iRow++; continue;}
-                    
-                    if ($mode!='daily') {
-                        switch ($mode) {
-                            case 'weekly':
-                                if (isset($rows[11])) {
-                                    if (AddressBookLocation::validateScheduleWeekDays($rows[11])) {
-                                         $schedule.='"weekdays":['.$rows[11].']}';
-                                    }
-                                    else {echo "$iRow --> Wrong weekdays <br>";$schedule="";}
-                                }
-                                else {echo "$iRow --> The parameters sched_weekdays is not set <br>"; $schedule="";}
-                                break;
-                            case 'monthly':
-                                $monthlyMode="";
-                                if (isset($rows[12])) {
-                                    if (AddressBookLocation::validateScheduleMonthlyMode($rows[12])) {
-                                         $monthlyMode=$rows[12];
-                                         $schedule.='"mode": "'.$rows[12].'",';
-                                    }
-                                    else {echo "$iRow --> Wrong monthly mode <br>"; $schedule="";}
-                                }
-                                else {echo "$iRow --> The parameter sched_monthly_mode is not set <br>"; $schedule="";}
-                                
-                                if ($monthlyMode!="") {
-                                    switch ($monthlyMode) {
-                                        case 'dates':
-                                            if (isset($rows[13])) {
-                                                if (AddressBookLocation::validateScheduleMonthlyDates($rows[13])) {
-                                                     $schedule.='"dates":['.$rows[13].']}';
-                                                }
-                                                else {echo "$iRow --> Wrong monthly dates <br>"; $schedule="";}
-                                            }
-                                            break;
-                                        case 'nth':
-                                            if (isset($rows[16])) {
-                                                if (AddressBookLocation::validateScheduleNthN($rows[16])) {
-                                                     $schedule.='"nth":{"n":'.$rows[16].',';
-                                                }
-                                                else {echo "$iRow --> Wrong parameter sched_nth_n <br>"; $schedule="";}
-                                            }
-                                            else {echo "$iRow --> The parameter sched_nth_n is not set <br>"; $schedule="";}
-                                            
-                                            if ($schedule!="") {
-                                                if (isset($rows[17])) {
-                                                    if (AddressBookLocation::validateScheduleNthWhat($rows[17])) {
-                                                         $schedule.='"what":'.$rows[17].'}}';
-                                                    }
-                                                    else {echo "$iRow --> Wrong parameter sched_nth_what <br>"; $schedule="";}
-                                                }
-                                                else {echo "$iRow --> The parameter sched_nth_what is not set <br>"; $schedule="";}
-                                            }
-                                            
-                                            break;
-                                    }
-                                }
-                                break;
-                            default:
-                                $schedule=="";
-                                break;
-                        }
-                        
-                    }
-                    
-                    if ($schedule=="") {$iRow++; continue;}
-                    
-                    $schedule=strtolower($schedule);
-                    
-                    $schedule='[{'.$schedule.'}]';
+        echo "Successes: <br><br>";
+        foreach ($results['success'] as $svalue) {
+            echo $svalue."<br>";
+        }
 
-                    //echo "$iRow --> ".$schedule."<br>";
-                    $oSchedule= json_decode($schedule,TRUE);
-                    
-                    //echo "<br>"; var_dump($oSchedule); echo "<br>";
-                    
-                    $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
-                        "cached_lat"    => $rows[0],
-                        "cached_lng"    => $rows[1],
-                        "address_alias"     => $rows[2],
-                        "address_1"     => $rows[3],
-                        "address_city"     => isset($rows[4]) ? $rows[4] : null,
-                        "address_state_id"     => isset($rows[5]) ? $rows[5] : null,
-                        "address_zip"     => isset($rows[6]) ? "$rows[6]" : null,
-                        "address_phone_number"  => isset($rows[7]) ? $rows[7] : null,
-                        "schedule" => isset($oSchedule) ? $oSchedule : null,
-                    ));
-                    
-                    $abContacts=new AddressBookLocation();
-    
-                    $abcResults=$abContacts->addAdressBookLocation($AdressBookLocationParameters); //temporarry
-                    
-                    echo "The schedule location with address_id = ".strval($abcResults["address_id"])." added successfuly <br>"; //temporarry
-              }
-              else echo "$iRow --> Wrong Address or latitude or longitude <br>";
-              $iRow++;
-            }
+    }
+
+/* Add orders with schedules from a CSV file  */
+
+$orders_file="orders_baton.csv";
+
+/* Mapping of a CSV file with the orders - which of the CSV table column is corresponding to which of the Order's field */
+
+$ordersFieldsMapping['cached_lat']=1;
+$ordersFieldsMapping['cached_lng']=0;
+$ordersFieldsMapping['address_alias']=2;
+$ordersFieldsMapping['address_1']=3;
+$ordersFieldsMapping['order_city']=4;
+$ordersFieldsMapping['order_state_id']=5;
+$ordersFieldsMapping['order_zip_code']=6;
+$ordersFieldsMapping['EXT_FIELD_phone']=7;
+$ordersFieldsMapping['day_scheduled_for_YYMMDD']=8;
+
+if (($handle = fopen("$orders_file", "r")) !== FALSE) {
+        $order = new Order();
+        $results=$order->addOrdersFromCsvFile($handle, $ordersFieldsMapping);
+        
+        echo "Errors: <br><br>";
+        foreach ($results['fail'] as $evalue) {
+            echo $evalue."<br>";
+        }
+        
+        echo "Successes: <br><br>";
+        foreach ($results['success'] as $svalue) {
+            echo $svalue."<br>";
+        }
+  
     }
 
 /* Get Hybrid Optimization */
