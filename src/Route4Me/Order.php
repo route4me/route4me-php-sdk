@@ -210,12 +210,13 @@
             $max_line_length = 512;
             $delemietr=',';
             
+            $results=array();
             $results['fail']=array();
             $results['success']=array();
             
             $columns = fgetcsv($csvFileHandle, $max_line_length, $delemietr);
             
-            if (!$columns) {
+            if (!empty($columns)) {
                  array_push($results['fail'],'Empty CSV table');
                  return ($results);
             }
@@ -242,8 +243,6 @@
                         continue;
                     }
                     else $cached_lng=doubleval($rows[$ordersFieldsMapping['cached_lng']]);
-                    
-                    
                     
                     if (isset($ordersFieldsMapping['curbside_lat'])) {
                         if (!$this->validateLatitude($rows[$ordersFieldsMapping['curbside_lat']])) {
@@ -309,4 +308,3 @@
 
 	}
 	
-?>
