@@ -47,7 +47,9 @@
 	echo "destination_note_count --> ".$notes['destination_note_count']."<br>";
 	foreach ($notes['notes'] as $note) {
 		echo "========== Notes ==================<br>";
-		echo "note_id --> ".$note->note_id."<br>";
+		echo "note_id --> ".$note['note_id']."<br>";
+        $content = isset($note['contents']) ? $note['contents'] : "";
+        if (strlen($content)>0) echo "contents --> $content"."<br>";
 	}
 
 	//var_dump($notes);
