@@ -92,6 +92,24 @@ class Address extends Common
 
         return Address::fromArray($address);
     }
+	
+	/*Get notes from the specified route destination
+     * Returns an address object with notes, if an address exists, otherwise - return null.
+     */
+    public static function GetAddressesNotes($noteParams)
+    {
+        $address = Route4Me::makeRequst(array(
+            'url'    => self::$apiUrl,
+            'method' => 'GET',
+            'query'  => array(
+                'route_id'             => isset($noteParams['route_id']) ? $noteParams['route_id']: null, 
+                'route_destination_id' => isset($noteParams['route_destination_id']) ? $noteParams['route_destination_id'] : null,
+                'notes' => 1,
+            )
+        ));
+
+        return $address;
+    }
 
     public function update()
     {
