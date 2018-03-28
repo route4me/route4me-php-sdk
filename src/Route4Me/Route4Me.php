@@ -8,7 +8,7 @@ use Route4Me\Exception\myErrorHandler;
 class Route4Me
 {
     static public $apiKey;
-    static public $baseUrl = 'https://route4me.com';
+    static public $baseUrl = 'https://api.route4me.com';
 
     public static function setApiKey($apiKey)
     {
@@ -123,7 +123,7 @@ class Route4Me
         //self::simplePrint($headers); die("");
 		$baseUrl=self::getBaseUrl();
 		
-		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
+		if (strpos($url,'move_route_destination')>0) $baseUrl='https://api.route4me.com';
         $curlOpts = arraY(
             CURLOPT_URL            => $baseUrl. $url,
             CURLOPT_RETURNTRANSFER => true,
