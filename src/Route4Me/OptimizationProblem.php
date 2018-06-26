@@ -55,7 +55,7 @@ class OptimizationProblem extends Common
         if (isset($params['routes'])) {
             $routes = array();
             foreach ($params['routes'] as $route) {
-                $routes[] = Route::fromArray($address);
+                $routes[] = Route::fromArray($route);
             }
             $problem->routes = $routes;
         }
