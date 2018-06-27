@@ -39,6 +39,7 @@ class Route extends Common
     public $tracking_history = array();
 	public $recipient_email;
 	public $httpheaders;
+	public $is_unrouted;
 	
 	public $dev_lat;
 	public $dev_lng;
@@ -54,6 +55,7 @@ class Route extends Common
         $route->mpg = Common::getValue($params, 'mpg');
         $route->gas_price = Common::getValue($params, 'gas_price');
         $route->route_duration_sec = Common::getvalue($params, 'route_duration_sec');
+        $route->is_unrouted = Common::getvalue($params, 'is_unrouted');
 
         // Make RouteParameters
         if (isset($params['parameters'])) {
