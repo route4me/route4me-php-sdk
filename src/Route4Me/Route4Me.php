@@ -207,8 +207,7 @@ class Route4Me
                 return $json;
             }
         }  elseif (409 == $code) {
-            
-            //throw new ApiError('Wrong API key');
+            throw new ApiError('Wrong API key');
         } else {
             throw new ApiError('Something wrong');
         }
