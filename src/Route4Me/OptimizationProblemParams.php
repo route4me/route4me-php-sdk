@@ -16,6 +16,7 @@ class OptimizationProblemParams extends Common
     public $format;
     public $route_path_output;
     public $optimized_callback_url;
+    public $redirect = true;
 
     public static function fromArray($params)
     {
@@ -47,6 +48,8 @@ class OptimizationProblemParams extends Common
         $param->optimized_callback_url = self::getValue($params, 'optimized_callback_url');
         $param->optimization_problem_id = self::getValue($params, 'optimization_problem_id');
         $param->reoptimize = self::getValue($params, 'reoptimize');
+        $param->redirect = filter_var(
+            self::getValue($params, 'redirect', true), FILTER_VALIDATE_BOOLEAN);
 
         return $param;
     }

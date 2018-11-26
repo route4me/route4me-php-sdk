@@ -96,10 +96,9 @@ class Route4Me
         $old_error_handler = set_error_handler(array( $errorHandler, "proc_error"));
         $method = isset($options['method']) ? $options['method'] : 'GET';
         $query = isset($options['query']) ?
-            array_filter($options['query']) : array();
-		//echo "query=".$query['member_id'];die("");
-        $body = isset($options['body']) ?
-            array_filter($options['body']) : null;
+            array_filter($options['query'], function($x) { return !is_null($x); } ) : array();
+        //echo "query=".$query['member_id'];die("");
+        $body = isset($options['body']) ? $options['body'] : null;
 		$file = isset($options['FILE']) ? $options['FILE'] : null;
         $headers = array(
             "User-Agent: Route4Me php-sdk"
@@ -216,9 +215,8 @@ class Route4Me
 	public static function makeUrlRequst($url, $options) {
 		$method = isset($options['method']) ? $options['method'] : 'GET';
         $query = isset($options['query']) ?
-            array_filter($options['query']) : array();
-        $body = isset($options['body']) ?
-            array_filter($options['body']) : null;
+            array_filter($options['query'], function($x) { return !is_null($x); } ) : array();
+        $body = isset($options['body']) ? $options['body'] : null;
         $ch = curl_init();
 		
 		$curlOpts = arraY(

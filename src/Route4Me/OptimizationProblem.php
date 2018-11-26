@@ -69,6 +69,7 @@ class OptimizationProblem extends Common
             'url'    => self::$apiUrl,
             'method' => 'POST',
             'query'  => array(
+                'redirect'               => isset($params->redirect) ? $params->redirect : null,
                 'directions'             => isset($params->directions) ? $params->directions: null, 
                 'format'                 => isset($params->format) ? $params->format: null,
                 'route_path_output'      => isset($params->route_path_output) ? $params->route_path_output: null,
