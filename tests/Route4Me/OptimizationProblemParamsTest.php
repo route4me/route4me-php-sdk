@@ -80,6 +80,25 @@ class OptimizationProblemParamsTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
+    function testRedirectDefaultParam()
+    {
+        $optimizationParameters = new OptimizationProblemParams;
+        $this->assertObjectHasAttribute('redirect', $optimizationParameters);
+        $this->assertTrue($optimizationParameters->redirect);
+    }
+
+    function testRedefineRedirectParam()
+    {
+        $optimizationParameters = OptimizationProblemParams::fromArray(array(
+            'addresses' => $this->addresses,
+            'parameters' => $this->parameters,
+            'redirect' => false
+        ));
+
+        $this->assertObjectHasAttribute('redirect', $optimizationParameters);
+        $this->assertFalse($optimizationParameters->redirect);
+    }
+
     function testParameters()
     {
         $opParams = OptimizationProblemParams::fromArray(array(
