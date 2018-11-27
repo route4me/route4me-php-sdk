@@ -18,6 +18,7 @@ class Address extends Common
     public $alias;
     public $member_id;
     public $address;
+    public $addressUpdate;
     public $is_depot = false;
     public $lat;
     public $lng;
@@ -113,7 +114,7 @@ class Address extends Common
 
     public function update()
     {
-        $address = Route4Me::makeRequst(array(
+        $addressUpdate = Route4Me::makeRequst(array(
             'url'    => self::$apiUrl,
             'method' => 'PUT',
             'body'   => $this->toArray(),
@@ -123,7 +124,7 @@ class Address extends Common
             ),
         ));
 
-        return Address::fromArray($address);
+        return Address::fromArray($addressUpdate);
     }
 	
 	public function markAddress($params, $body)
