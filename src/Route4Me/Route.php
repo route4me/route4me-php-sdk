@@ -239,20 +239,24 @@ class Route extends Common
             'method' => 'GET',
             'query'  => $query
         ));
-		
-		$routes = array();
+        
+        if (sizeof($json)>0) {
+            $routes = array();
             foreach($json as $route) {
                 $routes[] = Route::fromArray($route);
             }
-			
-			$num=rand(0,sizeof($routes)-1);
-			$rRoute=(array)$routes[$num];
-			
-			if (is_array($rRoute)) 
-			{
-				return $rRoute["route_id"];
-			}
-			else return null;
+            
+            $num=rand(0,sizeof($routes)-1);
+            $rRoute=(array)$routes[$num];
+            
+            if (is_array($rRoute)) 
+            {
+                return $rRoute["route_id"];
+            }
+            else return null;
+        } else return null;
+		
+		
 	}
 
     public function update()
