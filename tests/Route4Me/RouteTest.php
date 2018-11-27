@@ -2,9 +2,6 @@
 
 namespace Route4Me;
 
-$d="C:/Program Files (x86)/EasyPHP-Devserver-16.1/eds-www/route4me";
-require_once $d.'/vendor/autoload.php';
-
 use Route4Me\Track;
 use Route4Me\TrackSetParams;
 use Route4Me\Route;

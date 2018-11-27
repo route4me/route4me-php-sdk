@@ -50,6 +50,34 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
         self::$addresses = $addresses;
     }
 
+    function testOptimizationAsyncRedirect()
+    {
+        $parameters = RouteParameters::fromArray(array(
+            "algorithm_type"          => Algorithmtype::TSP,
+            "device_type"             => DeviceType::WEB,
+            "distance_unit"           => DistanceUnit::MILES,
+            "optimize"                => OptimizationType::DISTANCE,
+            "route_max_duration"      => 86400,
+            "store_route"             => true,
+            "travel_mode"             => TravelMode::DRIVING,
+            "vehicle_capacity"        => 1,
+            "vehicle_max_distance_mi" => 10000,
+            "route_name"              => "phpunit test"
+        ));
+
+        $optimizationParameters = new OptimizationProblemParams;
+        $optimizationParameters->setAddresses(self::$addresses);
+        $optimizationParameters->setParameters($parameters);
+        $optimizationParameters->redirect = false;
+
+        $problem = OptimizationProblem::optimize($optimizationParameters);
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertEmpty($problem->getRoutes());
+    }
+
     function testCreateSingleDriverRoute()
     {
         $parameters = RouteParameters::fromArray(array(
