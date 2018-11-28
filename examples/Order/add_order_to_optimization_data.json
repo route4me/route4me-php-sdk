@@ -1,13 +1,5 @@
 {
-	"addresses": [{
-		"address": "273 Canal St, New York, NY 10013, USA",
-		"lat": 40.7191558,
-		"lng": -74.0011966,
-		"alias": "",
-		"curbside_lat": 40.7191558,
-		"curbside_lng": -74.0011966,
-		"is_depot": true
-	}, 
+	"addresses": [
 	{
 		"address": "106 Liberty St, New York, NY 10006, USA",
 		"alias": "BK Restaurant #: 2446",

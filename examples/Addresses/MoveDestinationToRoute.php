@@ -68,8 +68,8 @@
 	));
 	
 	$address=new Address();
-	$result = $address->MoveDestinationToRoute($routeparams);
-	//$result=$route->MoveDestinationToRoute($routeparams);
+	$result = $address->moveDestinationToRoute($routeparams);
+	//$result=$route->moveDestinationToRoute($routeparams);
 	
 	// ATTENTION: this module doesn't work yet. It will be updated later
 	var_dump($result);

@@ -12,15 +12,23 @@
 	
 	// Set the api key in the Route4me class
 	Route4Me::setApiKey('11111111111111111111111111111111');
+    
+    //$optimization = new OptimizationProblem();
+    //$optimizationProblemID = $optimization->getRandomOptimizationId(0, 10);
+    
+    //die($optimizationProblemID);
 	
-	$orderParameters=Order::fromArray(array(
-		"optimization_problem_id"	=> "E0883C1A2C7B3AAA9397BDDF90C9CFF8",
+	$orderParameters=array(
+		"optimization_problem_id"	=> '5BB30F31FCB17CE761C98F967553EFD9',
 		"redirect"	=> 0,
-	));
+		"device_type" => "web",
+	);
 	
 	$jfile = file_get_contents("add_order_to_optimization_data.json");
 	
 	$body = json_decode($jfile);
+    
+    //echo "-- <br>"; var_dump($jfile); echo " --- <br>";
 
 	$order = new Order();
 	

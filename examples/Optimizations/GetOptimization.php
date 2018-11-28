@@ -6,16 +6,16 @@
     require $vdir.'/../vendor/autoload.php';
 	
 	use Route4Me\Route4Me;
-	use Route4me\Route;
+	use Route4Me\Route;
 	
 	// Set the api key in the Route4Me class
 	Route4Me::setApiKey('11111111111111111111111111111111');
 	
 	// Get random route from test routes
 	//--------------------------------------------------------
-	$route=new Route();
+	$route=new Route;
 	
-	$route_id=$route->getRandomRouteId(10, 20);
+	$route_id=$route->getRandomRouteId(0, 10);
 	
 	if (is_null($route_id)) {
 		echo "can't retrieve random route_id!.. Try again.";

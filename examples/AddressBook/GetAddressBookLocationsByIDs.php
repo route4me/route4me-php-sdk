@@ -5,20 +5,38 @@
     require $vdir.'/../vendor/autoload.php';
 
     use Route4Me\Route4Me;
+    use Route4Me\Route;
 
     // Set the api key in the Route4Me class
     Route4Me::setApiKey('11111111111111111111111111111111');
 
-    $ablocation=new AddressBookLocation();
-
+    // Get two random locations IDs
+    //---------------------------------------------------------
+    $ids="";
+    $adressBookLocationParameters=array(
+        "limit"     => 30,
+        "offset"    => 0
+    ); 
+    
+    $abContacts=new AddressBookLocation();
+    
+    $abcResults=$abContacts->getAddressBookLocations($adressBookLocationParameters);
+    
+    $results=$abContacts->getValue($abcResults,"results");
+    
+    $contactsNumber = sizeof($results);
+    $id1=$results[rand(1, $contactsNumber)-1]['address_id'];
+    $id2=$results[rand(1, $contactsNumber)-1]['address_id'];
+    $ids=$id1.",".$id2;
+    
     //Example for retrieving Address Book Locations by address_ids
     //--------------------------------------------------------- 
-    $ids="4623361,6281217";
-	//$ablocation->address_id = $ids;
-    $abcResult=$ablocation->getAddressBookLocationsByIds($ids);
+    $ablocation=new AddressBookLocation();
 
-    $results=$ablocation->getValue($abcResult,"results");
+    $abcResult=$ablocation->getAddressBookLocationsByIDs($ids);
 
-    Route4Me::simplePrint($results);
+    $result=$ablocation->getValue($abcResult,"results");
+
+    Route4Me::simplePrint($result);
     //--------------------------------------------------------- 
 ?>

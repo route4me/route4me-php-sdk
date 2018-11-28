@@ -12,8 +12,8 @@
 	Route4Me::setApiKey('11111111111111111111111111111111');
 	
 	$routeParameters = array(
-		'limit'  =>  10,
-		'offset' =>  5
+		'limit'  =>  5,
+		'offset' => 0
 	);
 	
 	$optimizationProblem = new OptimizationProblem();
