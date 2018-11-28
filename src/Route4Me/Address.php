@@ -6,14 +6,10 @@ use Route4Me\Exception\BadParam;
 use Route4Me\Route4Me;
 use GuzzleHttp\Client;
 use Route4Me\Common;
+use Route4Me\Enum\Endpoint;
 
 class Address extends Common
 {
-    static public $apiUrl = '/api.v4/address.php';
-	static public $apiUrlMove='/actions/route/move_route_destination.php';
-	static public $apiUrDeparted='/api/route/mark_address_departed.php';
-	static public $apiUrVisited='/actions/address/update_address_visited.php';
-
     public $route_destination_id;
     public $alias;
     public $member_id;
@@ -51,7 +47,7 @@ class Address extends Common
     public $time_window_start;
     public $time_window_end;
     public $time;
-	public $notes;
+    public $notes;
     public $timestamp_last_visited;
     public $custom_fields = array();
     public $manifest = array();
@@ -83,7 +79,7 @@ class Address extends Common
     public static function getAddress($routeId, $addressId)
     {
         $address = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => Endpoint::ADDRESS_V4,
             'method' => 'GET',
             'query'  => array(
                 'route_id'             => $routeId,
@@ -93,19 +89,20 @@ class Address extends Common
 
         return Address::fromArray($address);
     }
-	
-	/*Get notes from the specified route destination
+    
+    /*Get notes from the specified route destination
      * Returns an address object with notes, if an address exists, otherwise - return null.
      */
     public static function GetAddressesNotes($noteParams)
     {
         $address = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => Endpoint::ADDRESS_V4,
             'method' => 'GET',
             'query'  => array(
-                'route_id'             => isset($noteParams['route_id']) ? $noteParams['route_id']: null, 
-                'route_destination_id' => isset($noteParams['route_destination_id']) ? $noteParams['route_destination_id'] : null,
-                'notes' => 1,
+                'route_id'             => isset($noteParams['route_id']) ? $noteParams['route_id'] : null, 
+                'route_destination_id' => isset($noteParams['route_destination_id']) 
+                                             ? $noteParams['route_destination_id'] : null,
+                'notes'                => 1,
             )
         ));
 
@@ -115,7 +112,7 @@ class Address extends Common
     public function update()
     {
         $addressUpdate = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => Endpoint::ADDRESS_V4,
             'method' => 'PUT',
             'body'   => $this->toArray(),
             'query'  => array(
@@ -126,14 +123,14 @@ class Address extends Common
 
         return Address::fromArray($addressUpdate);
     }
-	
-	public function markAddress($params, $body)
+    
+    public function markAddress($params, $body)
     {
         $result = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => Endpoint::ADDRESS_V4,
             'method' => 'PUT',
             'query'  => array(
-                'route_id'  => isset($params['route_id']) ? $params['route_id']: null, 
+                'route_id'             => isset($params['route_id']) ? $params['route_id'] : null, 
                 'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
             ),
             'body'   => $body
@@ -141,43 +138,43 @@ class Address extends Common
 
         return $result;
     }
-	
-	public function markAsDeparted($params)
-	{
-		$address = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrDeparted,
+    
+    public function markAsDeparted($params)
+    {
+        $address = Route4Me::makeRequst(array(
+            'url'    => Endpoint::MARK_ADDRESS_DEPARTED,
             'method' => 'GET',
             'query'  => array(
-                'route_id'   => isset($params['route_id']) ? $params['route_id']: null,
+                'route_id'     => isset($params['route_id']) ? $params['route_id']: null,
                 'address_id'   => isset($params['address_id']) ? $params['address_id']: null,
-                'is_departed'   => isset($params['is_departed']) ? $params['is_departed']: null,
-                'member_id'   => isset($params['member_id']) ? $params['member_id']: null,
+                'is_departed'  => isset($params['is_departed']) ? $params['is_departed']: null,
+                'member_id'    => isset($params['member_id']) ? $params['member_id']: null,
             ),
         ));
 
         return $address;
-	}
-	
-	public function markAsVisited($params)
-	{
-		$address = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrVisited,
+    }
+    
+    public function markAsVisited($params)
+    {
+        $address = Route4Me::makeRequst(array(
+            'url'    => Endpoint::UPDATE_ADDRESS_VISITED,
             'method' => 'GET',
             'query'  => array(
-                'route_id'   => isset($params['route_id']) ? $params['route_id']: null,
-                'address_id'   => isset($params['address_id']) ? $params['address_id']: null,
-                'is_visited'   => isset($params['is_visited']) ? $params['is_visited']: null,
-                'member_id'   => isset($params['member_id']) ? $params['member_id']: null,
+                'route_id'   => isset($params['route_id']) ? $params['route_id'] : null,
+                'address_id' => isset($params['address_id']) ? $params['address_id'] : null,
+                'is_visited' => isset($params['is_visited']) ? $params['is_visited'] : null,
+                'member_id'  => isset($params['member_id']) ? $params['member_id'] : null,
             ),
         ));
 
         return $address;
-	}
+    }
 
     public function delete()
     {
         $address = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => Endpoint::ADDRESS_V4,
             'method' => 'DELETE',
             'query'  => array(
                 'route_id'             => $this->route_id,
@@ -187,22 +184,22 @@ class Address extends Common
 
         return (bool)$address['deleted'];
     }
-	
-	public function MoveDestinationToRoute($params)
-	{
-		$result = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrlMove,
+    
+    public function moveDestinationToRoute($params)
+    {
+        $result = Route4Me::makeRequst(array(
+            'url'    => Endpoint::MOVE_ROUTE_DESTINATION,
             'method' => 'POST',
             'query'  => array(
-                'to_route_id' => isset($params['to_route_id']) ? $params['to_route_id'] : null,
+                'to_route_id'          => isset($params['to_route_id']) ? $params['to_route_id'] : null,
                 'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
                 'after_destination_id' => isset($params['after_destination_id']) ? $params['after_destination_id'] : null
             )
         ));
 
         return $result;
-		
-	}
+        
+    }
 
     function getAddressId()
     {

@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me;
 
 use Route4Me\Exception\BadParam;
@@ -39,6 +38,7 @@ class OptimizationProblemParams extends Common
             if (!($address instanceof Address)) {
                 $address = Address::fromArray($address);
             }
+            
             $param->addAddress($address);
         }
 
@@ -62,21 +62,25 @@ class OptimizationProblemParams extends Common
     public function setParameters(RouteParameters $params)
     {
         $this->parameters = $params;
+        
         return $this;
     }
 
     public function addAddress(Address $address)
     {
         $this->addresses[] = $address;
+        
         return $this;
     }
     
     public function getAddressesArray()
     {
         $addresses = array();
+        
         foreach($this->addresses as $address) {
             $addresses[] = $address->toArray();
         }
+        
         return $addresses;
     }
 
@@ -90,6 +94,7 @@ class OptimizationProblemParams extends Common
         foreach ($addresses as $address) {
             $this->addAddress($address);
         }
+        
         return $this;
     }
 }
