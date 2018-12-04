@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me\Exception;
 
 class myErrorHandler extends \Exception
@@ -10,5 +9,3 @@ class myErrorHandler extends \Exception
     
     }
 }
-
-?>

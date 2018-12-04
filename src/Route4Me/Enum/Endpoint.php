@@ -1,10 +1,13 @@
 <?php
-
 namespace Route4Me\Enum;
 
 class Endpoint
 {
+  const BASE_URL = 'https://api.route4me.com';
+  const WH_BASE_URL = 'https://wh.route4me.com/modules';
+  
   const AVOIDANCE_ZONE = '/api.v4/avoidance.php';
+  const TERRITORY_V4 = '/api.v4/territory.php';
   
   const GET_ACTIVITIES = '/api/get_activities.php';
   const ACTIVITY_FEED = '/api.v4/activity_feed.php';
@@ -39,7 +42,14 @@ class Endpoint
   const CHANGE_HYBRID_OPTIMIZATION_DEPOT = '/api/change_hybrid_optimization_depot.php';
   
   const ORDER_V4 = '/api.v4/order.php';
-  const ROUTE_V4 = '/api.v4/route.php';
-
   
+  const ROUTE_V4 = '/api.v4/route.php';
+  const ROUTE_DUPLICATE ='/actions/duplicate_route.php';
+  const ROUTES_DELETE ='/actions/delete_routes.php';
+  const REOPTIMIZE_V3_2 ='/api.v3/route/reoptimize_2.php';
+  const ROUTES_MERGE ='/actions/merge_routes.php';
+  const ROUTE_SHARE ='/actions/route/share_route.php';
+  const ROUTE_NOTES_ADD ='/actions/addRouteNotes.php';
+  const STATUS_V4 ='/api.v4/status.php';
+  const GET_DEVICE_LOCATION ='/api/track/get_device_location.php';
 }

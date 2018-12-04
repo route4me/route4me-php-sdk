@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me\Enum;
 
 class TerritoryTypes
@@ -8,5 +7,3 @@ class TerritoryTypes
     const POLY = 'poly';
     const RECT = 'rect';
 }
-
-?>

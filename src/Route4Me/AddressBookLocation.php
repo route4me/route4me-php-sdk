@@ -46,7 +46,7 @@ class AddressBookLocation extends Common
     public static function getAddressBookLocation($addressId)
     {
         $ablocations = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
             'query'  => array(
                 'query' => $addressId,
@@ -101,6 +101,29 @@ class AddressBookLocation extends Common
         return $ablocations;
     }
     
+    public static function getRandomAddressBookLocation($params)
+    {
+        $ablocations = Route4Me::makeRequst(array(
+            'url'    => Endpoint::ADDRESS_BOOK_V4,
+            'method' => 'GET',
+            'query'  => array(
+                'limit'  => isset($params['limit']) ? $params['limit'] : 0,
+                'offset' => isset($params['offset']) ? $params['offset'] : 10,
+            )
+        ));
+        
+        if (isset($ablocations["results"])) {
+            $locationsSize = sizeof($ablocations["results"]);
+            
+            if ($locationsSize > 0) {
+                $randomLocationIndex = rand(0, $locationsSize - 1);
+                return $ablocations["results"][$randomLocationIndex];
+            } 
+        } 
+
+        return null;
+    }
+    
     public static function addAdressBookLocation($params)
     {
         $ablocations = Route4Me::makeRequst(array(
@@ -149,7 +172,7 @@ class AddressBookLocation extends Common
     
     public function deleteAdressBookLocation($address_ids)
     {
-        $address = Route4Me::makeRequst(array(
+        $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'DELETEARRAY',
             'query'  => array(
@@ -157,7 +180,7 @@ class AddressBookLocation extends Common
             )
         ));
 
-        return $address;
+        return $result;
     }
     
     public function updateAdressBookLocation($params)
@@ -165,8 +188,7 @@ class AddressBookLocation extends Common
         $address = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'PUT',
-            'query'  => $params,
-
+            'body'  => $params,
         ));
 
         return $address;
