@@ -163,9 +163,11 @@ class Address extends Common
             'query'  => array(
                 'route_id'   => isset($params['route_id']) ? $params['route_id'] : null,
                 'address_id' => isset($params['address_id']) ? $params['address_id'] : null,
-                'is_visited' => isset($params['is_visited']) ? $params['is_visited'] : null,
                 'member_id'  => isset($params['member_id']) ? $params['member_id'] : null,
             ),
+            'body'  =>  array(
+                'is_visited' => isset($params['is_visited']) ? $params['is_visited'] : null
+            )
         ));
 
         return $address;
@@ -190,11 +192,12 @@ class Address extends Common
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::MOVE_ROUTE_DESTINATION,
             'method' => 'POST',
-            'query'  => array(
+            'body'  => array(
                 'to_route_id'          => isset($params['to_route_id']) ? $params['to_route_id'] : null,
                 'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
                 'after_destination_id' => isset($params['after_destination_id']) ? $params['after_destination_id'] : null
-            )
+            ),
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
 
         return $result;

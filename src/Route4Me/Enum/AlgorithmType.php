@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me\Enum;
 
 class AlgorithmType

@@ -103,7 +103,7 @@ class AvoidanceZone extends Common
         $avoidanceZone = Route4Me::makeRequst(array(
             'url'    => Endpoint::AVOIDANCE_ZONE,
             'method' => 'PUT',
-            'query'  => (array)$params,
+            'body'  => $params,
 
         ));
 

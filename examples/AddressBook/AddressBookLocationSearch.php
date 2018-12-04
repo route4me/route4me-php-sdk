@@ -1,30 +1,27 @@
 <?php
-    namespace Route4Me;
+namespace Route4Me;
 
-    $vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
-    require $vdir.'/../vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
-    use Route4Me\Route4Me;
+use Route4Me\Route4Me;
 
-    // Set the api key in the Route4Me class
-    Route4Me::setApiKey('11111111111111111111111111111111');
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
 
-    $ablocation=new AddressBookLocation();
+//Example refers to the process of retrieving sepcified fields by containg specified text in any field 
+//--------------------------------------------------------- 
+$ablocation=new AddressBookLocation();
 
-    //Example refers to the process of retrieving sepcified fields by containg specified text in any field 
-    //--------------------------------------------------------- 
-	
-	$params = array(
-		"query"  => "David",
-		"fields"  => "first_name,address_email",
-		"offset"  => 0,
-		"limit"  => 20,
-	);
-	
-    $abcResult=$ablocation->searchRoutedLocation($params);
+$params = array(
+    "query"  => "David",
+    "fields" => "first_name,address_email",
+    "offset" => 0,
+    "limit"  => 20,
+);
 
-    $results=$ablocation->getValue($abcResult,"results");
+$abcResult=$ablocation->searchRoutedLocation($params);
 
-    Route4Me::simplePrint($results);
-    //--------------------------------------------------------- 
-?>
+$results=$ablocation->getValue($abcResult,"results");
+
+Route4Me::simplePrint($results);

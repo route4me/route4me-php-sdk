@@ -108,12 +108,8 @@ class Order extends Common
         return $response;
     }
     
-    public static function addOrder2Destination($params,$body)
+    public static function addOrder2Optimization($params,$body)
     {
-        // echo "<br> ------ <br>";
-        // var_dump($body); die();
-        // echo "br>------ <br>";
-        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'PUT',
