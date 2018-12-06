@@ -52,4 +52,6 @@ class Endpoint
   const ROUTE_NOTES_ADD ='/actions/addRouteNotes.php';
   const STATUS_V4 ='/api.v4/status.php';
   const GET_DEVICE_LOCATION ='/api/track/get_device_location.php';
+  
+  const NOTE_CUSTOM_TYPES_V4 ='/api.v4/note_custom_types.php';
 }
