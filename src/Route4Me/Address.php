@@ -203,6 +203,98 @@ class Address extends Common
         return $result;
         
     }
+    
+    public function AddAddressNote($params)
+    {
+        $result = Route4Me::makeRequst(array(
+            'url'    => Endpoint::ROUTE_NOTES_ADD,
+            'method' => 'POST',
+            'query'  => array(
+                'route_id'     =>  isset($params['route_id']) ? $params['route_id'] : null,
+                'address_id'   =>  isset($params['address_id']) ? $params['address_id'] : null,
+                'dev_lat'      =>  isset($params['dev_lat']) ? $params['dev_lat'] : null,
+                'dev_lng'      =>  isset($params['dev_lng']) ? $params['dev_lng'] : null,
+                'device_type'  =>  isset($params['device_type']) ? $params['device_type'] : null
+            ),
+            'body'  => array(
+                'strNoteContents' => isset($params['strNoteContents']) ? $params['strNoteContents'] : null,
+                'strUpdateType'   => isset($params['strUpdateType']) ? $params['strUpdateType'] : null
+            ),
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
+        ));
+
+        return $result;
+    }
+
+    public function AddNoteFile($params)
+    {
+        $result = Route4Me::fileUploadRequest(array(
+            'url'    => Endpoint::ROUTE_NOTES_ADD,
+            'method' => 'POST',
+            'query'  => array(
+                'route_id'      =>  isset($params['route_id']) ? $params['route_id'] : null,
+                'address_id'    =>  isset($params['address_id']) ? $params['address_id'] : null,
+                'dev_lat'       =>  isset($params['dev_lat']) ? $params['dev_lat'] : null,
+                'dev_lng'       =>  isset($params['dev_lng']) ? $params['dev_lng'] : null,
+                'device_type'   =>  isset($params['device_type']) ? $params['device_type'] : null,
+                'strUpdateType' =>  isset($params['strUpdateType']) ? $params['strUpdateType'] : null
+            ),
+            'body'  => array(
+                'strFilename' => isset($params['strFilename']) ? $params['strFilename'] : null
+            ),
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
+        ));
+
+        return $result;
+    }
+
+    public function createCustomNoteType($params)
+    {
+        $result = Route4Me::makeRequst(array(
+            'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'POST',
+            'body'  => array(
+                'type' => isset($params['type']) ? $params['type'] : null,
+                'values' => isset($params['values']) ? $params['values'] : null
+                
+            )
+        ));
+
+        return $result;
+    }
+    
+    public function addCustomNoteToRoute($params)
+    {
+        $customArray = array();
+        
+        foreach ($params as $key => $value) {
+            $kpos = strpos($key, "custom_note_type");
+            
+            if ($kpos !== false) {
+                $customArray[$key]=$value;
+            }
+        }
+        
+        $result = Route4Me::makeRequst(array(
+            'url'    => Endpoint::ROUTE_NOTES_ADD,
+            'method' => 'POST',
+            'query'  => array(
+                'route_id'      =>  isset($params['route_id']) ? $params['route_id'] : null,
+                'address_id'    =>  isset($params['address_id']) ? $params['address_id'] : null,
+                'format'        =>  isset($params['format']) ? $params['format'] : null,
+                'dev_lat'       =>  isset($params['dev_lat']) ? $params['dev_lat'] : null,
+                'dev_lng'       =>  isset($params['dev_lng']) ? $params['dev_lng'] : null
+            ),
+            'body'  => array_merge(array(
+                'strUpdateType'   =>  isset($params['strUpdateType']) ? $params['strUpdateType'] : null,
+                'strUpdateType'   =>  isset($params['strUpdateType']) ? $params['strUpdateType'] : null,
+                'strNoteContents' =>  isset($params['strNoteContents']) ? $params['strNoteContents'] : null
+            ), $customArray),
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
+        ));
+
+        return $result;
+    }
 
     function getAddressId()
     {

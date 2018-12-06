@@ -134,6 +134,7 @@ class Member extends Common
                 'member_email'           => isset($body->member_email) ? $body->member_email : null,
                 'HIDE_VISITED_ADDRESSES' => isset($body->HIDE_VISITED_ADDRESSES) ? $body->HIDE_VISITED_ADDRESSES : null,
                 'READONLY_USER'          => isset($body->READONLY_USER) ? $body->READONLY_USER : null,
+                'member_type'            => isset($body->member_type) ? $body->member_type : null,
                 'date_of_birth'          => isset($body->date_of_birth) ? $body->date_of_birth : null,
                 'member_first_name'      => isset($body->member_first_name) ? $body->member_first_name : null,
                 'member_password'        => isset($body->member_password) ? $body->member_password : null,
@@ -147,6 +148,29 @@ class Member extends Common
         
         return $response;
     }
+
+    public static function getRandomMemberByType($memberType)
+    {
+        $members = self::getUsers();
+        
+        if (is_null($members)) return null;
+        if (!isset($members['results'])) return null;
+        
+        $memberIDs = array();
+        
+        foreach ($members['results'] as $memb) {
+            if (isset($memb['member_id']) && isset($memb['member_type'])) {
+                if ($memberType==$memb['member_type']) $memberIDs[]=$memb['member_id'];
+            }
+        }
+        
+        if (sizeof($memberIDs)<1) return null;
+        
+        $randomIndex = rand(0, sizeof($memberIDs)-1);
+        
+        return $memberIDs[$randomIndex];
+    }
+
 
     public static function updateMember($body)
     {
@@ -195,20 +219,25 @@ class Member extends Common
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::REGISTER_ACTION,
             'method' => 'POST',
+            'query'  => array(
+                'plan' => isset($body->plan) ? $body->plan : null
+            ),
             'body'   => array(
                 'strEmail'                        => isset($body->strEmail) ? $body->strEmail : null,
                 'strPassword_1'                   => isset($body->strPassword_1) ? $body->strPassword_1 : null,
                 'strPassword_2'                   => isset($body->strPassword_2) ? $body->strPassword_2 : null,
                 'strFirstName'                    => isset($body->strFirstName) ? $body->strFirstName : null,
                 'strLastName'                     => isset($body->strLastName) ? $body->strLastName : null,
+                'format'                          => isset($body->format) ? $body->format : null,
                 'strIndustry'                     => isset($body->strIndustry) ? $body->strIndustry : null,
                 'chkTerms'                        => isset($body->chkTerms) ? $body->chkTerms : null,
-                'plan'                            => isset($body->plan) ? $body->plan : null,
+                'device_type'                     => isset($body->device_type) ? $body->device_type : null,
                 'strSubAccountType'               => isset($body->strSubAccountType) ? $body->strSubAccountType : null,
                 'blDisableMarketing'              => isset($body->blDisableMarketing) ? $body->blDisableMarketing : false,
                 'blDisableAccountActivationEmail' => isset($body->blDisableAccountActivationEmail) 
                                                      ? $body->blDisableAccountActivationEmail : false
-            )
+            ),
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
         return $response;
@@ -238,7 +267,8 @@ class Member extends Common
                 'strEmail'    => isset($body->strEmail) ? $body->strEmail : null,
                 'strPassword' => isset($body->strPassword) ? $body->strPassword : null,
                 'format'      => isset($body->format) ? $body->format : null
-            )
+            ),
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
         return $response;

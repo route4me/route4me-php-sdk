@@ -43,9 +43,7 @@ class Route4Me
         $fname = isset($body['strFilename']) ? $body['strFilename'] : '';
         if ($fname=='') return null;
 
-        $rpath = realpath($fname);
-        
-        $fp=fopen(realpath($fname),"r");
+        $rpath = function_exists('curl_file_create') ? curl_file_create(realpath($fname)) : '@'.realpath($fname);
         
         $url = self::$baseUrl.$options['url'] . '?' . http_build_query(array_merge(
             array( 'api_key' => self::getApiKey()), $query)
@@ -54,31 +52,32 @@ class Route4Me
         $ch = curl_init($url);
         
         $curlOpts = array(
-            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => false,
             CURLOPT_TIMEOUT        => 60,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_SSL_VERIFYHOST => FALSE,
             CURLOPT_SSL_VERIFYPEER => FALSE
         );
         
+        curl_setopt_array($ch, $curlOpts);
+        
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: multipart/form-data",
-            'Content-Disposition: form-data; name="strFilename"',
-            'User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)'
+            'Content-Disposition: form-data; name="strFilename"'
         ));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array('strFilename' => $rpath)); 
         
         $result = curl_exec($ch);
-        fclose($fp);
 
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         $json = json_decode($result, true);
-
+        
         if (200 == $code) {
             return $json;
         } elseif (isset($json['errors'])) {
@@ -117,7 +116,7 @@ class Route4Me
         ));
 
         $baseUrl=self::getBaseUrl();
-        
+        //var_dump($options); echo("<br><br>");
         $curlOpts = arraY(
             CURLOPT_URL            => $baseUrl. $url,
             CURLOPT_RETURNTRANSFER => true,
@@ -158,17 +157,13 @@ class Route4Me
             }
             break;
         case 'POST':
-            // if (isset($query)) {
-                // curl_setopt($ch,  CURLOPT_POSTFIELDS, json_encode($query)); 
-            // }
-            
-            if (isset($body)) {
+           if (isset($body)) {
                 $bodyData = json_encode($body);
                if (isset($options['HTTPHEADER'])) {
                   if (strpos($options['HTTPHEADER'], "multipart/form-data")>0) $bodyData = $body;
                }
-                
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData); 
+               
+               curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData); 
             } 
             break;
         case 'ADD':
@@ -189,7 +184,7 @@ class Route4Me
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         
-        echo "<br> code -> $code <br>";
+        //echo "<br> code -> $code <br>";
         
         if (200 == $code) {
             if ($isxml) {
