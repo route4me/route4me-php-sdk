@@ -11,7 +11,7 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('51d0c0701ce83855c9f62d0440096e7c');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route from test routes
 $route=new Route();
@@ -27,7 +27,7 @@ $route_destination_id=$addressRand['route_destination_id'];
 assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Add an address note
-$noteParameters=array(
+$noteParameters = array(
     "route_id"        => $route_id,
     "address_id"      => $route_destination_id,
     "dev_lat"         => 33.132675170898,

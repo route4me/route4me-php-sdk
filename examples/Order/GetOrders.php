@@ -1,25 +1,27 @@
 <?php
-	namespace Route4Me;
-	
-	$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
+namespace Route4Me;
 
-    require $vdir.'/../vendor/autoload.php';
-	
-	use Route4Me\Route4Me;
-	use Route4Me\Order;
-	
-	// Example refers to getting of orders list with details.
-	
-	// Set the api key in the Route4me class
-	Route4Me::setApiKey('11111111111111111111111111111111');
-	
-	
-	$order = new Order();
-	
-	$response = $order->getOrders();
-	
-	foreach ($response as $key => $order) {
-		Route4Me::simplePrint($order);
-	}
-	
-?>
+$root=realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
+
+use Route4Me\Route4Me;
+use Route4Me\Order;
+
+// Example refers to getting of orders list with details.
+
+// Set the api key in the Route4me class
+// This example not available for demo API key
+Route4Me::setApiKey('11111111111111111111111111111111');
+
+$order = new Order();
+
+$orderParameters=Order::fromArray(array(
+    "offset" => 0,
+    'limit'  => 5,
+));
+
+$response = $order->getOrders($orderParameters);
+
+foreach ($response as $key => $order) {
+    Route4Me::simplePrint($order);
+}

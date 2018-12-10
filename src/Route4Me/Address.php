@@ -39,6 +39,7 @@ class Address extends Common
     public $pieces;
     public $email;
     public $phone;
+    public $tracking_number;
     public $destination_note_count;
     public $drive_time_to_next_destination;
     public $distance_to_next_destination;
@@ -258,6 +259,29 @@ class Address extends Common
                 'values' => isset($params['values']) ? $params['values'] : null
                 
             )
+        ));
+
+        return $result;
+    }
+    
+    public function removeCustomNoteType($params)
+    {
+        $result = Route4Me::makeRequst(array(
+            'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'DELETE',
+            'body'  => array(
+                'id' => isset($params['id']) ? $params['id'] : null
+            )
+        ));
+
+        return $result;
+    }
+    
+    public function getAllCustomNoteTypes()
+    {
+        $result = Route4Me::makeRequst(array(
+            'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'GET'
         ));
 
         return $result;

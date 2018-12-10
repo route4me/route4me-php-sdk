@@ -13,6 +13,7 @@ use Route4Me\Enum\Endpoint;
 class Route extends Common
 {
     public $route_id;
+    public $member_id;
     public $route_destination_id;
     public $optimization_problem_id;
     public $vehicle_alias;
@@ -21,6 +22,7 @@ class Route extends Common
     public $mpg;
     public $gas_price;
     public $route_duration_sec;
+    public $destination_count;
     public $parameters;
     public $addresses = array();
     public $links = array();
@@ -39,6 +41,7 @@ class Route extends Common
     {
         $route = new Route();
         $route->route_id = Common::getValue($params, 'route_id');
+        $route->member_id = Common::getValue($params, 'member_id');
         $route->optimization_problem_id = Common::getValue($params, 'optimization_problem_id');
         $route->vehicle_alias = Common::getValue($params, 'vehicle_alias');
         $route->driver_alias = Common::getValue($params, 'driver_alias');
@@ -46,6 +49,7 @@ class Route extends Common
         $route->mpg = Common::getValue($params, 'mpg');
         $route->gas_price = Common::getValue($params, 'gas_price');
         $route->route_duration_sec = Common::getvalue($params, 'route_duration_sec');
+        $route->destination_count = Common::getvalue($params, 'destination_count');
         $route->is_unrouted = Common::getvalue($params, 'is_unrouted');
 
         // Make RouteParameters
@@ -79,53 +83,14 @@ class Route extends Common
                 'api_key'           => Route4Me::getApiKey(),
                 'route_id'          => !is_null($routeId) ? implode(',', (array) $routeId) : null,
                 'route_path_output' => isset($params['route_path_output']) ? $params['route_path_output'] : null,
+                'query' => isset($params['query']) ? $params['query'] : null,
                 'directions'        => isset($params['directions']) ? $params['directions'] : null,
                 'device_tracking_history'        => isset($params['device_tracking_history']) ? $params['device_tracking_history'] : null,
-                'limit' => isset($params['limit']) ? $params['limit'] : 30,
-                'offset' => isset($params['offset']) ? $params['offset'] : 0
+                'limit' => isset($params['limit']) ? $params['limit'] : null,
+                'offset' => isset($params['offset']) ? $params['offset'] : null
             )
         ));
         
-        /*
-        $query = array(
-            'api_key' => Route4Me::getApiKey()
-        );
-
-        if ($routeId) {
-            $query['route_id'] = implode(',', (array) $routeId);
-        }
-
-        if ($params) {
-            if (isset($params['directions'])) {
-                $query['directions'] = $params['directions'];
-            }
-
-            if (isset($params['route_path_output'])) {
-                $query['route_path_output'] = $params['route_path_output'];
-            }
-
-            if (isset($params['device_tracking_history'])) {
-                $query['device_tracking_history'] = $params['device_tracking_history'];
-            }
-            
-            if (isset($params['query'])) {
-                $query['query'] = $params['query'];
-            }
-
-            $query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
-            $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
-        }
-         
-
-        $json = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ROUTE_V4,
-            'method' => 'GET',
-            'query'  => $query
-        ));
-         */
-        // echo "<br> --- <br>";
-        // var_dump($result); die();
-
         if ($routeId) {
             return Route::fromArray($result); die("");
         } else {
@@ -200,7 +165,6 @@ class Route extends Common
         ));
         
         return $result;
-        
     }
 
     public function mergeRoutes($params)
@@ -212,9 +176,13 @@ class Route extends Common
                 'api_key' => Route4Me::getApiKey(),
               ),
             'body'   => array(
-                'route_ids' => isset($params['route_ids']) ? $params['route_ids'] : null,
+                'route_ids'     => isset($params['route_ids']) ? $params['route_ids'] : null,
+                'depot_address' => isset($params['depot_address']) ? $params['depot_address'] : null,
+                'remove_origin' => isset($params['remove_origin']) ? $params['remove_origin'] : null,
+                'depot_lat'     => isset($params['depot_lat']) ? $params['depot_lat'] : null,
+                'depot_lat'     => isset($params['depot_lat']) ? $params['depot_lat'] : null
               ),
-            'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
         return $result;
@@ -226,13 +194,14 @@ class Route extends Common
             'url'    => Endpoint::ROUTE_SHARE,
             'method' => 'POST',
             'query'  => array(
-                'api_key'  => Route4Me::getApiKey(),
-                'route_id' => isset($params['route_id']) ? $params['route_id'] : null,
+                'api_key'         => Route4Me::getApiKey(),
+                'route_id'        => isset($params['route_id']) ? $params['route_id'] : null,
+                'response_format' => isset($params['response_format']) ? $params['response_format'] : null,
             ),
             'body'  => array(
                 'recipient_email' => isset($params['recipient_email']) ? $params['recipient_email'] : null,
             ),
-            'Content-Type' => 'multipart/form-data'
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
         return $result;
@@ -270,8 +239,6 @@ class Route extends Common
             echo "<br> There are no routes in the account. Please, create the routes first. <br>";
             return null;
         }
-        
-        
     }
 
     public function update()
@@ -280,10 +247,9 @@ class Route extends Common
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'PUT',
             'query'  => array(
-                'route_id'             => isset($this->route_id) ? $this->route_id : null,
-                'route_destination_id' => isset($this->route_destination_id) ? $this->route_destination_id : null,
+                'route_id'     => isset($this->route_id) ? $this->route_id : null
             ),
-            'body'   => array (
+            'body' => array (
                 'parameters' => $this->parameters,
                 ),
             'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
@@ -402,7 +368,7 @@ class Route extends Common
     {
         $route1=Route::getRoutes($route_id,null);
         if (isset($route1)) {
-            return $route1->addresses();
+            return $route1->addresses;
         } else {
             return null;
         }

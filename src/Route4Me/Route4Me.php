@@ -102,7 +102,6 @@ class Route4Me
         );
         
         if (isset($options['HTTPHEADER'])) {
-            //echo "<nbr> HTTP header -> " . $options['HTTPHEADER'] . "<br>";
             $headers[]=$options['HTTPHEADER'];
         }
          
@@ -116,7 +115,7 @@ class Route4Me
         ));
 
         $baseUrl=self::getBaseUrl();
-        //var_dump($options); echo("<br><br>");
+
         $curlOpts = arraY(
             CURLOPT_URL            => $baseUrl. $url,
             CURLOPT_RETURNTRANSFER => true,
@@ -151,7 +150,7 @@ class Route4Me
             break;
         case 'PUT':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-            
+
             if (isset($body)) {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
             }
@@ -314,7 +313,7 @@ class Route4Me
                                      * Route4Me::simplePrint($oarray);
                                      */
                                 } else {
-                                    echo $key1." --> ".$result1."<br>";    
+                                    if (!is_null($result1)) echo $key1." --> ".$result1."<br>";    
                                 }
                                 
                             }
@@ -328,11 +327,11 @@ class Route4Me
                              * Route4Me::simplePrint($oarray);
                              */
                         } else {
-                            echo $key." --> ".$result."<br>";
+                            if (!is_null($result)) echo $key." --> ".$result."<br>";
                         }
                         
                     }
-                    echo "<br>";
+                    //echo "<br>";
                 }
             } 
         }

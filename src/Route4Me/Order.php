@@ -65,28 +65,28 @@ class Order extends Common
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'POST',
-            'body'  => array(
-                'address_1' =>     isset($params->address_1) ? $params->address_1: null,
-                'address_2' =>     isset($params->address_2) ? $params->address_2: null,
-                'cached_lat' => isset($params->cached_lat) ? $params->cached_lat : null,
-                'cached_lng' => isset($params->cached_lng) ? $params->cached_lng : null,
-                'curbside_lat' => isset($params->curbside_lat) ? $params->curbside_lat : null,
-                'curbside_lng' => isset($params->curbside_lng) ? $params->curbside_lng : null,
-                'color' => isset($params->color) ? $params->color : null,
-                'order_icon' => isset($params->order_icon) ? $params->order_icon : null,
-                'day_scheduled_for_YYMMDD' => isset($params->day_scheduled_for_YYMMDD) ? $params->day_scheduled_for_YYMMDD : null,
-                'address_alias' => isset($params->address_alias) ? $params->address_alias : null,
-                'address_city' =>     isset($params->address_city) ? $params->address_city: null,
-                'local_time_window_start' =>  isset($params->local_time_window_start) ? $params->local_time_window_start: null,
-                'local_time_window_end' =>  isset($params->local_time_window_end) ? $params->local_time_window_end: null,
+            'body'   => array(
+                'address_1'                 =>  isset($params->address_1) ? $params->address_1: null,
+                'address_2'                 =>  isset($params->address_2) ? $params->address_2: null,
+                'cached_lat'                =>  isset($params->cached_lat) ? $params->cached_lat : null,
+                'cached_lng'                =>  isset($params->cached_lng) ? $params->cached_lng : null,
+                'curbside_lat'              =>  isset($params->curbside_lat) ? $params->curbside_lat : null,
+                'curbside_lng'              =>  isset($params->curbside_lng) ? $params->curbside_lng : null,
+                'color'                     =>  isset($params->color) ? $params->color : null,
+                'order_icon'                =>  isset($params->order_icon) ? $params->order_icon : null,
+                'day_scheduled_for_YYMMDD'  =>  isset($params->day_scheduled_for_YYMMDD) ? $params->day_scheduled_for_YYMMDD : null,
+                'address_alias'             =>  isset($params->address_alias) ? $params->address_alias : null,
+                'address_city'              =>  isset($params->address_city) ? $params->address_city: null,
+                'local_time_window_start'   =>  isset($params->local_time_window_start) ? $params->local_time_window_start: null,
+                'local_time_window_end'     =>  isset($params->local_time_window_end) ? $params->local_time_window_end: null,
                 'local_time_window_start_2' =>  isset($params->local_time_window_start_2) ? $params->local_time_window_start_2: null,
-                'local_time_window_end_2' =>  isset($params->local_time_window_end_2) ? $params->local_time_window_end_2: null,
-                'service_time' =>  isset($params->service_time) ? $params->service_time: null,
-                'EXT_FIELD_first_name' =>     isset($params->EXT_FIELD_first_name) ? $params->EXT_FIELD_first_name: null,
-                'EXT_FIELD_last_name' =>     isset($params->EXT_FIELD_last_name) ? $params->EXT_FIELD_last_name: null,
-                'EXT_FIELD_email' =>     isset($params->EXT_FIELD_email) ? $params->EXT_FIELD_email: null,
-                'EXT_FIELD_phone' =>     isset($params->EXT_FIELD_phone) ? $params->EXT_FIELD_phone: null,
-                'EXT_FIELD_custom_data' =>     isset($params->EXT_FIELD_custom_data) ? $params->EXT_FIELD_custom_data: null,
+                'local_time_window_end_2'   =>  isset($params->local_time_window_end_2) ? $params->local_time_window_end_2: null,
+                'service_time'              =>  isset($params->service_time) ? $params->service_time: null,
+                'EXT_FIELD_first_name'      =>  isset($params->EXT_FIELD_first_name) ? $params->EXT_FIELD_first_name: null,
+                'EXT_FIELD_last_name'       =>  isset($params->EXT_FIELD_last_name) ? $params->EXT_FIELD_last_name: null,
+                'EXT_FIELD_email'           =>  isset($params->EXT_FIELD_email) ? $params->EXT_FIELD_email: null,
+                'EXT_FIELD_phone'           =>  isset($params->EXT_FIELD_phone) ? $params->EXT_FIELD_phone: null,
+                'EXT_FIELD_custom_data'     =>  isset($params->EXT_FIELD_custom_data) ? $params->EXT_FIELD_custom_data: null,
             )
         ));
 
@@ -99,10 +99,10 @@ class Order extends Common
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'PUT',
             'query'  => array(
-                'route_id' =>     isset($params->route_id) ? $params->route_id: null,
+                'route_id' => isset($params->route_id) ? $params->route_id: null,
                 'redirect' => isset($params->redirect) ? $params->redirect : null
             ),
-            'body'  => (array)$body
+            'body' => (array)$body
         ));
 
         return $response;
@@ -115,8 +115,8 @@ class Order extends Common
             'method' => 'PUT',
             'query'  => array(
                 'optimization_problem_id' =>  isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
-                'redirect' => isset($params['redirect']) ? $params['redirect'] : null,
-                'device_type' => isset($params['device_type']) ? $params['device_type'] : null
+                'redirect'                => isset($params['redirect']) ? $params['redirect'] : null,
+                'device_type'             => isset($params['device_type']) ? $params['device_type'] : null
             ),
             'body'  => (array)$body
         ));
@@ -130,21 +130,63 @@ class Order extends Common
             'url'    => Endpoint::ORDER_V4,
             'method' => 'GET',
             'query'  => array(
-                'order_id' =>     isset($params->order_id) ? $params->order_id: null,
+                'order_id'             => isset($params->order_id) ? $params->order_id: null,
+                'fields'               => isset($params->fields) ? $params->fields: null,
+                'day_added_YYMMDD'     => isset($params->day_added_YYMMDD) ? $params->day_added_YYMMDD: null,
+                'scheduled_for_YYMMDD' => isset($params->scheduled_for_YYMMDD) ? $params->scheduled_for_YYMMDD: null,
+                'query'                => isset($params->query) ? $params->query: null,
+                'offset'               => isset($params->offset) ? $params->offset: null,
+                'limit'                => isset($params->limit) ? $params->limit: null
             )
         ));
 
         return $response;
     }
     
-    public static function getOrders()
+    public static function getOrders($params)
     {
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
-            'method' => 'GET'
+            'method' => 'GET',
+            'query'  => array(
+                'offset' => isset($params->offset) ? $params->offset: null,
+                'limit'  => isset($params->limit) ? $params->limit: null
+            )
         ));
 
         return $response;
+    }
+    
+    public function getRandomOrderId($offset,$limit)
+    {
+        $params = array('offset' => $offset, 'limit' => $limit);
+        
+        $orders = self::getOrders($params);
+        
+        if (is_null($orders)) return null;
+        if (!isset($orders['results'])) return null;
+        
+        $randomIndex = rand(0, sizeof($orders['results'])-1);
+        
+        $order = $orders['results'][$randomIndex];
+        
+        return $order['order_id'];
+    }
+    
+    public function getRandomOrder($offset,$limit)
+    {
+        $params = array('offset' => $offset, 'limit' => $limit);
+        
+        $orders = self::getOrders($params);
+        
+        if (is_null($orders)) return null;
+        if (!isset($orders['results'])) return null;
+        
+        $randomIndex = rand(0, sizeof($orders['results'])-1);
+        
+        $order = $orders['results'][$randomIndex];
+        
+        return $order;
     }
     
     public static function removeOrder($params)
@@ -152,8 +194,8 @@ class Order extends Common
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'DELETE',
-            'body'  => array(
-                'order_ids' =>     isset($params->order_ids) ? $params->order_ids: null
+            'body'   => array(
+                'order_ids' =>  isset($params->order_ids) ? $params->order_ids: null
             )
         ));
 
@@ -165,7 +207,7 @@ class Order extends Common
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'PUT',
-            'body'  => (array)$body
+            'body'   => (array)$body
         ));
 
         return $response;
@@ -177,12 +219,12 @@ class Order extends Common
             'url'    => Endpoint::ORDER_V4,
             'method' => 'GET',
             'query'  => array(
-                'day_added_YYMMDD' =>     isset($params->day_added_YYMMDD) ? $params->day_added_YYMMDD: null,
-                'scheduled_for_YYMMDD' =>     isset($params->scheduled_for_YYMMDD) ? $params->scheduled_for_YYMMDD: null,
-                'fields' =>     isset($params->fields) ? $params->fields: null,
-                'offset' =>     isset($params->offset) ? $params->offset: null,
-                'limit' =>     isset($params->limit) ? $params->limit: null,
-                'query' =>     isset($params->query) ? $params->query: null,
+                'day_added_YYMMDD'     =>  isset($params->day_added_YYMMDD) ? $params->day_added_YYMMDD: null,
+                'scheduled_for_YYMMDD' =>  isset($params->scheduled_for_YYMMDD) ? $params->scheduled_for_YYMMDD: null,
+                'fields'               =>  isset($params->fields) ? $params->fields: null,
+                'offset'               =>  isset($params->offset) ? $params->offset: null,
+                'limit'                =>  isset($params->limit) ? $params->limit: null,
+                'query'                =>  isset($params->query) ? $params->query: null,
             )
         ));
 
@@ -272,26 +314,37 @@ class Order extends Common
                 echo "$iRow --> ".$ordersFieldsMapping['day_scheduled_for_YYMMDD'].", ".$rows[$ordersFieldsMapping['day_scheduled_for_YYMMDD']]."<br>";
                 
                 $orderParameters = Order::fromArray(array(
-                    "cached_lat"    => $cached_lat,
-                    "cached_lng"    => $cached_lng,
-                    "curbside_lat"     => isset($ordersFieldsMapping['curbside_lat']) ? $rows[$ordersFieldsMapping['curbside_lat']] : null,
-                    "curbside_lng"     => isset($ordersFieldsMapping['curbside_lng']) ? $rows[$ordersFieldsMapping['curbside_lng']] : null,
-                    "color"     => isset($ordersFieldsMapping['color']) ? $rows[$ordersFieldsMapping['color']] : null,
-                    "day_scheduled_for_YYMMDD"     => isset($ordersFieldsMapping['day_scheduled_for_YYMMDD']) ? $rows[$ordersFieldsMapping['day_scheduled_for_YYMMDD']] : null,
-                    "address_alias"     => isset($ordersFieldsMapping['address_alias']) ? $rows[$ordersFieldsMapping['address_alias']] : null,
-                    "address_1"     => $address,
-                    "address_2"     => isset($ordersFieldsMapping['address_2']) ? $rows[$ordersFieldsMapping['address_2']] : null,
-                    "local_time_window_start"     => isset($ordersFieldsMapping['local_time_window_start']) ? $rows[$ordersFieldsMapping['local_time_window_start']] : null,
-                    "local_time_window_end"     => isset($ordersFieldsMapping['local_time_window_end']) ? $rows[$ordersFieldsMapping['local_time_window_end']] : null,
-                    "local_time_window_start_2"     => isset($ordersFieldsMapping['local_time_window_start_2']) ? $rows[$ordersFieldsMapping['local_time_window_start_2']] : null,
-                    "local_time_window_end_2"     => isset($ordersFieldsMapping['local_time_window_end_2']) ? $rows[$ordersFieldsMapping['local_time_window_end_2']] : null,
-                    "service_time"     => isset($ordersFieldsMapping['service_time']) ? $rows[$ordersFieldsMapping['service_time']] : null,
-                    "EXT_FIELD_first_name"     => isset($ordersFieldsMapping['EXT_FIELD_first_name']) ? $rows[$ordersFieldsMapping['EXT_FIELD_first_name']] : null,
-                    "EXT_FIELD_last_name"     => isset($ordersFieldsMapping['EXT_FIELD_last_name']) ? $rows[$ordersFieldsMapping['EXT_FIELD_last_name']] : null,
-                    "EXT_FIELD_email"     => isset($ordersFieldsMapping['EXT_FIELD_email']) ? $rows[$ordersFieldsMapping['EXT_FIELD_email']] : null,
-                    "EXT_FIELD_phone"     => isset($ordersFieldsMapping['EXT_FIELD_phone']) ? $rows[$ordersFieldsMapping['EXT_FIELD_phone']] : null,
-                    "EXT_FIELD_custom_data"     => isset($ordersFieldsMapping['EXT_FIELD_custom_data']) ? $rows[$ordersFieldsMapping['EXT_FIELD_custom_data']] : null,
-                    "order_icon"     => isset($ordersFieldsMapping['order_icon']) ? $rows[$ordersFieldsMapping['order_icon']] : null,
+                    "cached_lat"                => $cached_lat,
+                    "cached_lng"                => $cached_lng,
+                    "curbside_lat"              => isset($ordersFieldsMapping['curbside_lat']) ? $rows[$ordersFieldsMapping['curbside_lat']] : null,
+                    "curbside_lng"              => isset($ordersFieldsMapping['curbside_lng']) ? $rows[$ordersFieldsMapping['curbside_lng']] : null,
+                    "color"                     => isset($ordersFieldsMapping['color']) ? $rows[$ordersFieldsMapping['color']] : null,
+                    "day_scheduled_for_YYMMDD"  => isset($ordersFieldsMapping['day_scheduled_for_YYMMDD'])
+                                                      ? $rows[$ordersFieldsMapping['day_scheduled_for_YYMMDD']] : null,
+                    "address_alias"             => isset($ordersFieldsMapping['address_alias']) ? $rows[$ordersFieldsMapping['address_alias']] : null,
+                    "address_1"                 => $address,
+                    "address_2"                 => isset($ordersFieldsMapping['address_2']) ? $rows[$ordersFieldsMapping['address_2']] : null,
+                    "local_time_window_start"   => isset($ordersFieldsMapping['local_time_window_start'])
+                                                      ? $rows[$ordersFieldsMapping['local_time_window_start']] : null,
+                    "local_time_window_end"     => isset($ordersFieldsMapping['local_time_window_end'])
+                                                      ? $rows[$ordersFieldsMapping['local_time_window_end']] : null,
+                    "local_time_window_start_2" => isset($ordersFieldsMapping['local_time_window_start_2'])
+                                                      ? $rows[$ordersFieldsMapping['local_time_window_start_2']] : null,
+                    "local_time_window_end_2"   => isset($ordersFieldsMapping['local_time_window_end_2'])
+                                                      ? $rows[$ordersFieldsMapping['local_time_window_end_2']] : null,
+                    "service_time"              => isset($ordersFieldsMapping['service_time'])
+                                                      ? $rows[$ordersFieldsMapping['service_time']] : null,
+                    "EXT_FIELD_first_name"      => isset($ordersFieldsMapping['EXT_FIELD_first_name'])
+                                                      ? $rows[$ordersFieldsMapping['EXT_FIELD_first_name']] : null,
+                    "EXT_FIELD_last_name"       => isset($ordersFieldsMapping['EXT_FIELD_last_name'])
+                                                      ? $rows[$ordersFieldsMapping['EXT_FIELD_last_name']] : null,
+                    "EXT_FIELD_email"           => isset($ordersFieldsMapping['EXT_FIELD_email'])
+                                                      ? $rows[$ordersFieldsMapping['EXT_FIELD_email']] : null,
+                    "EXT_FIELD_phone"           => isset($ordersFieldsMapping['EXT_FIELD_phone'])
+                                                      ? $rows[$ordersFieldsMapping['EXT_FIELD_phone']] : null,
+                    "EXT_FIELD_custom_data"     => isset($ordersFieldsMapping['EXT_FIELD_custom_data'])
+                                                      ? $rows[$ordersFieldsMapping['EXT_FIELD_custom_data']] : null,
+                    "order_icon"                => isset($ordersFieldsMapping['order_icon']) ? $rows[$ordersFieldsMapping['order_icon']] : null,
                 ));
                 
                 $order = new Order();

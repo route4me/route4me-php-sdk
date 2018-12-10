@@ -64,6 +64,7 @@ class Territory extends Common
 			'query'  => array(
 				'offset'  => isset($params->offset) ? $params->offset : null,
 				'limit'   => isset($params->limit) ? $params->limit : null,
+				'addresses'    => isset($params['addresses']) ? $params['addresses'] : null,
 			)
 		));
 
@@ -100,10 +101,19 @@ class Territory extends Common
 	
 	public function updateTerritory($params)
 	{
+	    //var_dump($params); die("");
 		$response = Route4Me::makeRequst(array(
 			'url'    => Endpoint::TERRITORY_V4,
 			'method' => 'PUT',
-			'query'  => (array)$params,
+			'query'  => array(
+                'territory_id'  => isset($params->territory_id) ? $params->territory_id : null
+            ),
+            'body'   => array(
+                'territory_name'   => isset($params->territory_name) ? $params->territory_name : null,
+                'member_id'        => isset($params->member_id) ? $params->member_id : null,
+                'territory_color'  => isset($params->territory_color) ? $params->territory_color : null,
+                'territory'        => isset($params->territory) ? $params->territory : null
+            ) 
 
 		));
 

@@ -1,21 +1,21 @@
 <?php
 namespace Route4Me;
 
-$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
-
-require $vdir.'/../vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\OptimizationProblem;
 use Route4Me\Route;
 use Route4Me\Route4Me;
 
 /* The example demonstrates process of creating a Hybrid Optimization using scheduling addresses and orders.
+ * Please, use your own API key for this example.
  * Useful links:
  * http://support.route4me.com/route-planning-help.php?id=manual11:tutorial2:chapter7
  * http://support.route4me.com/route-planning-help.php?id=manual11:tutorial3:chapter12
  */ 
 
-Route4Me::setApiKey('bd48828717021141485a701453273458');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 $source_file="addresses_1000.csv";
 $max_line_length = 512;
@@ -76,91 +76,90 @@ $ordersFieldsMapping['EXT_FIELD_phone']=7;
 $ordersFieldsMapping['day_scheduled_for_YYMMDD']=8;
 
 if (($handle = fopen("$orders_file", "r")) !== FALSE) {
-        $order = new Order();
-        $results=$order->addOrdersFromCsvFile($handle, $ordersFieldsMapping);
-        
-        echo "Errors: <br><br>";
-        foreach ($results['fail'] as $evalue) {
-            echo $evalue."<br>";
-        }
-        
-        echo "Successes: <br><br>";
-        foreach ($results['success'] as $svalue) {
-            echo $svalue."<br>";
-        }
-  
+    $order = new Order();
+    $results=$order->addOrdersFromCsvFile($handle, $ordersFieldsMapping);
+    
+    echo "Errors: <br><br>";
+    foreach ($results['fail'] as $evalue) {
+        echo $evalue."<br>";
     }
+    
+    echo "Successes: <br><br>";
+    foreach ($results['success'] as $svalue) {
+        echo $svalue."<br>";
+    }
+  
+}
 
 /* Get Hybrid Optimization */
 
-    $ep = time()+604800;
-    $sched_date = date("Y-m-d", $ep);
+$ep = time()+604800;
+$sched_date = date("Y-m-d", $ep);
 
-    $hybridParams = array(
-        "target_date_string" => $sched_date,
-        "timezone_offset_minutes" => 480
-    );
+$hybridParams = array(
+    "target_date_string" => $sched_date,
+    "timezone_offset_minutes" => 480
+);
+
+$optimization = new OptimizationProblem(); 
+$hybridOptimization = $optimization->getHybridOptimization($hybridParams);
+
+if ($hybridOptimization!=null) {
     
-    $optimization = new OptimizationProblem(); 
-    $hybridOptimization = $optimization->getHybridOptimization($hybridParams);
-    
-    if ($hybridOptimization!=null) {
+    if (isset($hybridOptimization['optimization_problem_id'])) {
+        $optid = $hybridOptimization['optimization_problem_id'];
         
-        if (isset($hybridOptimization['optimization_problem_id'])) {
-            $optid = $hybridOptimization['optimization_problem_id'];
+        echo "Hibrid optimization with optimization_problem_id=$optid <br><br>";
+        
+        /* Add depots to the Hybrid Optimization */
+        $depotfile = "depots.csv";
+        
+        if (($handle = fopen("$depotfile", "r")) !== FALSE) {
             
-            echo "Hibrid optimization with optimization_problem_id=$optid <br><br>";
+            $columns = fgetcsv($handle, $max_line_length, $delemietr);
             
-            /* Add depots to the Hybrid Optimization */
-            $depotfile = "depots.csv";
+            if (!$columns) {
+                $error['message'] = 'Empty';
+                 return ($error);
+            }
             
-            if (($handle = fopen("$depotfile", "r")) !== FALSE) {
-                
-                $columns = fgetcsv($handle, $max_line_length, $delemietr);
-                
-                if (!$columns) {
-                    $error['message'] = 'Empty';
-                     return ($error);
-                }
-                
-                $depotsParams = array(
-                    'optimization_problem_id' => $optid,
-                    'delete_old_depots'  => true,
-                );
-                
-                $iRow=1;
-                $depotAddresses = array();
-                
-                while (($rows = fgetcsv($handle, $max_line_length, $delemietr)) !== false) {
-                    if ($rows[0] && $rows[1] && $rows[3] && array(null) !== $rows) {
-                        $depotAddress['lat']= $rows[0];
-                        $depotAddress['lng']= $rows[1];
-                        $depotAddress['address']= $rows[3];   
-                        array_push($depotAddresses,$depotAddress);
-                    }
-                }
-                
-                $depotsParams['new_depots'] = $depotAddresses;
-                
-                $optProblem = new OptimizationProblem();
-                
-                $resultDepots = $optProblem->addDepotsToHybrid($depotsParams);
-                
-                var_dump($resultDepots);
-                
-                /* Reoptimize hybrid optimization */
-                
-                if ($resultDepots!=null) {
-                    $problemParams = array(
-                        'optimization_problem_id'  =>  $optid
-                    );
-                    $problem = OptimizationProblem::reoptimize($problemParams);
-                    
-                    Route4Me::simplePrint($problem);
+            $depotsParams = array(
+                'optimization_problem_id' => $optid,
+                'delete_old_depots'  => true,
+            );
+            
+            $iRow=1;
+            $depotAddresses = array();
+            
+            while (($rows = fgetcsv($handle, $max_line_length, $delemietr)) !== false) {
+                if ($rows[0] && $rows[1] && $rows[3] && array(null) !== $rows) {
+                    $depotAddress['lat']= $rows[0];
+                    $depotAddress['lng']= $rows[1];
+                    $depotAddress['address']= $rows[3];   
+                    array_push($depotAddresses,$depotAddress);
                 }
             }
+            
+            $depotsParams['new_depots'] = $depotAddresses;
+            
+            $optProblem = new OptimizationProblem();
+            
+            $resultDepots = $optProblem->addDepotsToHybrid($depotsParams);
+            
+            var_dump($resultDepots);
+            
+            /* Reoptimize hybrid optimization */
+            
+            if ($resultDepots!=null) {
+                $problemParams = array(
+                    'optimization_problem_id'  =>  $optid
+                );
+                $problem = OptimizationProblem::reoptimize($problemParams);
                 
+                Route4Me::simplePrint($problem);
+            }
         }
-
+            
     }
-?>
+
+}
