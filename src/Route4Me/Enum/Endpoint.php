@@ -54,4 +54,6 @@ class Endpoint
   const GET_DEVICE_LOCATION ='/api/track/get_device_location.php';
   
   const NOTE_CUSTOM_TYPES_V4 ='/api.v4/note_custom_types.php';
+  
+  const VEHICLE_V4 = '/api/vehicles';
 }

@@ -1,22 +1,25 @@
 <?php
-	namespace Route4Me;
-	
-	$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
+namespace Route4Me;
 
-    require $vdir.'/../vendor/autoload.php';
-	
-	use Route4Me\Route4Me;
-	use Route4Me\Route;
-	
-	// Set the api key in the Route4Me class
-	Route4Me::setApiKey('11111111111111111111111111111111');
-	
-	$route=new Route();
-	
-	$route_id=$route->getRandomRouteId(0, 10);
+$root=realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
-	//$route_id='5D88D72CE6B1D794DDD677AE48A05BA7';
-	$routeDuplicate=$route->duplicateRoute($route_id);
-	
-	Route4Me::simplePrint($routeDuplicate);
-?>
+use Route4Me\Route4Me;
+use Route4Me\Route;
+
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
+
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
+
+$route=new Route();
+
+// Get random route ID
+$randomRouteID = $route->getRandomRouteId(0, 25);
+assert(!is_null($randomRouteID), "Can't retrieve a random route ID");
+
+// Duplicate the selected route
+$routeDuplicate=$route->duplicateRoute($randomRouteID);
+
+Route4Me::simplePrint($routeDuplicate);

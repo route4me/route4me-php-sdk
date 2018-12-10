@@ -27,7 +27,7 @@ $route_destination_id=$addressRand['route_destination_id'];
 assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Add an address note
-$noteParameters=array(
+$noteParameters = array(
     "route_id"        => $route_id,
     "address_id"      => $route_destination_id,
     "dev_lat"         => 33.132675170898,
