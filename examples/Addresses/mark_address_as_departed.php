@@ -14,18 +14,18 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route ID
-$route=new Route();
-$routeId=$route->getRandomRouteId(0, 10);
+$route = new Route();
+$routeId = $route->getRandomRouteId(0, 10);
 
 assert(!is_null($routeId), "can't retrieve random route_id");
 
 // Get random address's id from selected route above
-$addressRand=(array)$route->GetRandomAddressFromRoute($routeId);
-$route_destination_id=$addressRand['route_destination_id'];
+$addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
+$route_destination_id = $addressRand['route_destination_id'];
 
 assert(!is_null($route_destination_id), "can't retrieve random address");
 
-//--------------------------------------------------------
+// Mark the address as deoarted
 $address=new Address();
 
 $params = array(
@@ -35,6 +35,6 @@ $params = array(
     "member_id"    => 1
 );
 
-$result=$address->markAsDeparted($params);
+$result = $address->markAsDeparted($params);
 
 var_dump($result); 

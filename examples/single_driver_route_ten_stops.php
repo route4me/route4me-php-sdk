@@ -1,5 +1,6 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';;
+$root=realpath(dirname(__FILE__).'/../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Enum\OptimizationType;
@@ -14,8 +15,8 @@ use Route4Me\RouteParameters;
 use Route4Me\Address;
 use Route4Me\Route;
 
+// Set the api key in the Route4me class
 Route4Me::setApiKey('11111111111111111111111111111111');
-//See video tutorial here: http://support.route4me.com/route-planning-help.php?id=manual0:tutorial2:chapter1:subchapter1
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('./addresses.json'), true);

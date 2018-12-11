@@ -40,17 +40,17 @@ class Route extends Common
     public static function fromArray(array $params) 
     {
         $route = new Route();
-        $route->route_id = Common::getValue($params, 'route_id');
-        $route->member_id = Common::getValue($params, 'member_id');
+        $route->route_id                = Common::getValue($params, 'route_id');
+        $route->member_id               = Common::getValue($params, 'member_id');
         $route->optimization_problem_id = Common::getValue($params, 'optimization_problem_id');
-        $route->vehicle_alias = Common::getValue($params, 'vehicle_alias');
-        $route->driver_alias = Common::getValue($params, 'driver_alias');
-        $route->trip_distance = Common::getValue($params, 'trip_distance');
-        $route->mpg = Common::getValue($params, 'mpg');
-        $route->gas_price = Common::getValue($params, 'gas_price');
-        $route->route_duration_sec = Common::getvalue($params, 'route_duration_sec');
-        $route->destination_count = Common::getvalue($params, 'destination_count');
-        $route->is_unrouted = Common::getvalue($params, 'is_unrouted');
+        $route->vehicle_alias           = Common::getValue($params, 'vehicle_alias');
+        $route->driver_alias            = Common::getValue($params, 'driver_alias');
+        $route->trip_distance           = Common::getValue($params, 'trip_distance');
+        $route->mpg                     = Common::getValue($params, 'mpg');
+        $route->gas_price               = Common::getValue($params, 'gas_price');
+        $route->route_duration_sec      = Common::getvalue($params, 'route_duration_sec');
+        $route->destination_count       = Common::getvalue($params, 'destination_count');
+        $route->is_unrouted             = Common::getvalue($params, 'is_unrouted');
 
         // Make RouteParameters
         if (isset($params['parameters'])) {
@@ -66,9 +66,9 @@ class Route extends Common
             $route->addresses = $addresses;
         }
 
-        $route->links = Common::getValue($params, 'links', array());
-        $route->directions = Common::getValue($params, 'directions', array());
-        $route->path = Common::getValue($params, 'path', array());
+        $route->links            = Common::getValue($params, 'links', array());
+        $route->directions       = Common::getValue($params, 'directions', array());
+        $route->path             = Common::getValue($params, 'path', array());
         $route->tracking_history = Common::getValue($params, 'tracking_history', array());
 
         return $route;
@@ -80,14 +80,14 @@ class Route extends Common
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'GET',
             'query'  => array(
-                'api_key'           => Route4Me::getApiKey(),
-                'route_id'          => !is_null($routeId) ? implode(',', (array) $routeId) : null,
-                'route_path_output' => isset($params['route_path_output']) ? $params['route_path_output'] : null,
-                'query' => isset($params['query']) ? $params['query'] : null,
-                'directions'        => isset($params['directions']) ? $params['directions'] : null,
-                'device_tracking_history'        => isset($params['device_tracking_history']) ? $params['device_tracking_history'] : null,
-                'limit' => isset($params['limit']) ? $params['limit'] : null,
-                'offset' => isset($params['offset']) ? $params['offset'] : null
+                'api_key'                  => Route4Me::getApiKey(),
+                'route_id'                 => !is_null($routeId) ? implode(',', (array) $routeId) : null,
+                'route_path_output'        => isset($params['route_path_output']) ? $params['route_path_output'] : null,
+                'query'                    => isset($params['query']) ? $params['query'] : null,
+                'directions'               => isset($params['directions']) ? $params['directions'] : null,
+                'device_tracking_history'  => isset($params['device_tracking_history']) ? $params['device_tracking_history'] : null,
+                'limit'                    => isset($params['limit']) ? $params['limit'] : null,
+                'offset'                   => isset($params['offset']) ? $params['offset'] : null
             )
         ));
         
@@ -221,6 +221,7 @@ class Route extends Common
         
         if (sizeof($json)>0) {
             $routes = array();
+            
             foreach($json as $route) {
                 $routes[] = Route::fromArray($route);
             }
@@ -228,11 +229,9 @@ class Route extends Common
             $num=rand(0,sizeof($routes)-1);
             $rRoute=(array)$routes[$num];
             
-            if (is_array($rRoute)) 
-            {
+            if (is_array($rRoute)) {
                 return $rRoute["route_id"];
-            }
-            else {
+            } else {
                 return null;
             }
         } else {
@@ -247,7 +246,7 @@ class Route extends Common
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'PUT',
             'query'  => array(
-                'route_id'     => isset($this->route_id) ? $this->route_id : null
+                'route_id'  => isset($this->route_id) ? $this->route_id : null
             ),
             'body' => array (
                 'parameters' => $this->parameters,

@@ -14,7 +14,6 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Add Avoidance Zone and get territory_id
-//---------------------------------------------------------
 $territory = new Territory();
 $territory->type =  TerritoryTypes::CIRCLE;
 $territory->data = array (
@@ -22,15 +21,15 @@ $territory->data = array (
     "5000"
 );
 
-$AvoisanceZoneParameters=AvoidanceZone::fromArray(array(
+$AvoidanceZoneParameters = AvoidanceZone::fromArray(array(
     "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territory
 ));
 
-$avoidancezone=new AvoidanceZone();
+$avoidancezone = new AvoidanceZone();
 
-$result = (array)$avoidancezone->addAvoidanceZone($AvoisanceZoneParameters);
+$result = (array)$avoidancezone->addAvoidanceZone($AvoidanceZoneParameters);
 
 assert(isset($result), "Failed to create new Avoidance Zone");
 
@@ -39,20 +38,20 @@ $territory_id = $result["territory_id"];
 echo "New Avoidance Zone with territory_id = $territory_id created successfuly<br>";
 
 $territory = new Territory();
-$territory->type =  TerritoryTypes::RECT;
+$territory->type = TerritoryTypes::RECT;
 $territory->data = array (
     "37.869752822786455,-77.49833251953125",
     "5000"
 );
 
-$AvoisanceZoneParameters=array(
+$AvoidanceZoneParameters = array(
     "territory_id"     => $territory_id,
     "territory_name"   => "Test Territory Updated",
     "territory_color"  => "ff5500",
     "territory"        => $territory
 );
 
-$result1 = $avoidancezone->updateAvoidanceZone($AvoisanceZoneParameters);
+$result1 = $avoidancezone->updateAvoidanceZone($AvoidanceZoneParameters);
 
 assert(isset($result), "Cannot updated the avoidance zone with territory_id = $territory_id");
 

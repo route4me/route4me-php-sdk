@@ -22,4 +22,8 @@ $activities = new ActivityParameters();
 $actresults = $activities->get($activityParameters);
 $results = $activities->getValue($actresults, "results");
 
-Route4Me::simplePrint($results);
+foreach ($results as $result) {
+    Route4Me::simplePrint($result);
+    echo "<br>";
+}
+

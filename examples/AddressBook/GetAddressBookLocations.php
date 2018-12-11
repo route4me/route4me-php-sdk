@@ -10,15 +10,17 @@ use Route4Me\Route;
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$AdressBookLocationParameters=array(
-    "limit"     => 30,
-    "offset"    => 0
+// Example refers to getting the address book locations
+
+$AdressBookLocationParameters = array(
+    "limit"   => 30,
+    "offset"  => 0
 );
 
-$abContacts=new AddressBookLocation();
+$abContacts = new AddressBookLocation();
 
-$abcResults=$abContacts->getAddressBookLocations($AdressBookLocationParameters);
+$abcResults = $abContacts->getAddressBookLocations($AdressBookLocationParameters);
 
-$results=$abContacts->getValue($abcResults,"results");
+$results = $abContacts->getValue($abcResults,"results");
 
 Route4Me::simplePrint($results);

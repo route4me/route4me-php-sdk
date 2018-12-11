@@ -14,31 +14,29 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route ID
-$route=new Route();
-$routeId=$route->getRandomRouteId(0, 10);
+$route = new Route();
+$routeId = $route->getRandomRouteId(0, 10);
 
 assert(!is_null($routeId), "can't retrieve random route_id");
 
 // Get random address's id from selected route above
-//--------------------------------------------------------
 $addressRand=(array)$route->GetRandomAddressFromRoute($routeId);
 
-if (isset($addressRand['is_depot']))
-{
-    if ($addressRand['is_depot'])
-    {
+if (isset($addressRand['is_depot'])) {
+    if ($addressRand['is_depot']) {
         echo "Random choosed address is depot, it can't be marked!.. Try again.";
         return;
     }
 }
 
 // Get random address's id from selected route above
-$addressRand=(array)$route->GetRandomAddressFromRoute($routeId);
-$route_destination_id=$addressRand['route_destination_id'];
+$addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
+$route_destination_id = $addressRand['route_destination_id'];
 
 assert(!is_null($route_destination_id), "can't retrieve random address");
 
-$address=new Address();
+// Mark the address as visited
+$address = new Address();
 
 $params = array(
     "route_id"    => $routeId,
@@ -47,9 +45,9 @@ $params = array(
     "member_id"   => 1
 );
 
-$result=$address->markAsVisited($params);
+$result = $address->markAsVisited($params);
 
 assert($result==1, "Cannot marked the address as visited"); 
 
-echo "<br> THe address " . $route_destination_id . " was marked as visited";
+echo "<br> The address " . $route_destination_id . " was marked as visited";
  

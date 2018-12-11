@@ -26,14 +26,14 @@ $territory->data = array (
         "37.76641925847049,-77.66846199035645"
 );
 
-$AvoisanceZoneParameters=AvoidanceZone::fromArray(array(
+$AvoidanceZoneParameters = AvoidanceZone::fromArray(array(
     "territory_name"   => "Test Poligonian Avoidance Zone ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territory
 ));
 
-$avoidancezone=new AvoidanceZone();
+$avoidancezone =new AvoidanceZone();
 
-$result = $avoidancezone->addAvoidanceZone($AvoisanceZoneParameters);
+$result = $avoidancezone->addAvoidanceZone($AvoidanceZoneParameters);
 
 Route4Me::simplePrint($result);

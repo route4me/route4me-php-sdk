@@ -10,10 +10,13 @@ use Route4Me\Enum\TerritoryTypes;
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$avoidancezone=new AvoidanceZone();
+$avoidancezone = new AvoidanceZone();
 
-$queryparameters=array ();
+$queryparameters = array ();
 
 $azones = $avoidancezone->getAvoidanceZones($queryparameters);
 
-Route4Me::simplePrint($azones);
+foreach ($azones as $azone) {
+    Route4Me::simplePrint($azone);
+    echo "<br>";
+}

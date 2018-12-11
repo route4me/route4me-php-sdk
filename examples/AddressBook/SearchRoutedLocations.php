@@ -12,17 +12,17 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$ablocation=new AddressBookLocation();
+$ablocation = new AddressBookLocation();
 
-//Example refers to the process of search for routed addresses 
-//--------------------------------------------------------- 
-$params= array(
+// Example refers to the process of searching for the routed addresses 
+
+$params = array(
     'offset'  => 0,
     'limit'   => 5,
     'display' => 'routed'
 );
 
-$abcResult=$ablocation->searchRoutedLocation($params);
+$abcResult = $ablocation->searchRoutedLocation($params);
 
 assert(isset($abcResult['results']) && isset($abcResult['total']), "Cannot done search for the locations");
 
