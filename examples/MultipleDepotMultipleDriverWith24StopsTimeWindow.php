@@ -1,7 +1,6 @@
 <?php
-namespace Route4Me;
-require __DIR__.'/../vendor/autoload.php';;
-//See video tutorial here: http://support.route4me.com/route-planning-help.php?id=manual0:tutorial2:chapter2:subchapter2
+$root=realpath(dirname(__FILE__).'/../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Enum\OptimizationType;
@@ -16,6 +15,8 @@ use Route4Me\RouteParameters;
 use Route4Me\Address;
 use Route4Me\Route;
 
+// Set the api key in the Route4me class
+// This example is not available for demo API key
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Huge list of addresses
@@ -28,9 +29,9 @@ foreach($json as $address) {
 
 $parameters = RouteParameters::fromArray(array(
     "algorithm_type"          => Algorithmtype::CVRP_TW_SD,
-    "route_name"			  => "Multiple Depot, Multiple Driver with 24 Stops, Time Window",
-    "route_date"			  => time() + 24*60*60,
-    "route_time"			  => 60 * 60 * 7,
+    "route_name"              => "Multiple Depot, Multiple Driver with 24 Stops, Time Window",
+    "route_date"              => time() + 24*60*60,
+    "route_time"              => 60 * 60 * 7,
     "distance_unit"           => DistanceUnit::MILES,
     "device_type"             => DeviceType::WEB,
     "optimize"                => OptimizationType::DISTANCE,
@@ -48,16 +49,16 @@ $optimizationParams->setParameters($parameters);
 $problem = OptimizationProblem::optimize($optimizationParams);
 
 foreach ((array)$problem as $key => $value) {
-	if (is_string($value))
-	{
-		echo $key." --> ".$value."<br>";
-	}
-	else 
-	{
-		echo "************ $key ************* <br>";
-		Route4Me::simplePrint((array)$value);
-		echo "******************************* <br>";
-	}
+    if (is_string($value))
+    {
+        echo $key." --> ".$value."<br>";
+    }
+    else 
+    {
+        echo "************ $key ************* <br>";
+        Route4Me::simplePrint((array)$value);
+        echo "******************************* <br>";
+    }
 }
 
-?>
+

@@ -22,13 +22,13 @@ $territory->data = array (
     "5000"
 );
 
-$AvoisanceZoneParameters=AvoidanceZone::fromArray(array(
+$AvoisanceZoneParameters = AvoidanceZone::fromArray(array(
     "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territory
 ));
 
-$avoidancezone=new AvoidanceZone();
+$avoidancezone = new AvoidanceZone();
 
 $result = (array)$avoidancezone->addAvoidanceZone($AvoisanceZoneParameters);
 
@@ -40,7 +40,7 @@ echo "New Avoidance Zone with territory_id = $territory_id created successfuly<b
 
 $result1 = $avoidancezone->deleteAvoidanceZone($territory_id);
 
-assert(isset($result), "Failed to delete the avoidance zone with territory_id=".$territory_id);
+assert(isset($result), "Failed to delete the avoidance zone with territory_id = ".$territory_id);
 
 echo "Avoidance Zone with territory_id = $territory_id was deleted successfuly<br>";
 

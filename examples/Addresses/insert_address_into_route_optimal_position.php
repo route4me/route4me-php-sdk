@@ -16,16 +16,15 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route ID
-$route=new Route();
-$routeId=$route->getRandomRouteId(0, 10);
+$route = new Route();
+$routeId = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeId), "can't retrieve random route_id");
+assert(!is_null($routeId), "Can't retrieve random route_id");
 
-//--------------------------------------------------------
+// Insert the address into the route's optimal position
+$addresses = array();
 
-$addresses=array();
-
-$params=array(
+$params = array(
     "route_id"  => $routeId,
     "addresses" => array(
         "0" => array(
@@ -42,8 +41,16 @@ $params=array(
     "optimal_position" => true
 );
 
-$route1=new Route();
+$route1 = new Route();
 
-$result=$route1->insertAddressOptimalPosition($params);
+$result = $route1->insertAddressOptimalPosition($params);
 
-Route4Me::simplePrint((array)$result);
+assert(!is_null($result), "Can't insert a destination into the route");
+
+echo " Route ID -> $routeId <br><br>";
+
+assert(isset($result->addresses), "Can't insert a destination into the route");
+
+foreach ($result->addresses as $address) {
+	echo "Address -> " . $address->address , ", Sequence number -> " . $address->sequence_no . "<br>";
+}

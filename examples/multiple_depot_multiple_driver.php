@@ -1,6 +1,6 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';
-//See video tutorial here: http://support.route4me.com/route-planning-help.php?id=manual0:tutorial2:chapter2:subchapter1
+$root=realpath(dirname(__FILE__).'/../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Enum\OptimizationType;
@@ -15,6 +15,8 @@ use Route4Me\RouteParameters;
 use Route4Me\Address;
 use Route4Me\Route;
 
+// Set the api key in the Route4me class
+// This example is not available for demo API key
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Huge list of addresses

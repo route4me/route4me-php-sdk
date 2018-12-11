@@ -9,10 +9,10 @@ use Route4Me\Route4Me;
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$abLocation=new AddressBookLocation();
+$abLocation = new AddressBookLocation();
 
 // Get reandom address book location
-$AdressBookLocationParameters=array(
+$AdressBookLocationParameters = array(
         "limit"     => 30,
         "offset"    => 0
     );
@@ -21,11 +21,10 @@ $AdressBookLocationParameters=array(
  
  if (assert($randomLocation!=null, "Cannot get a randoma address book location"));
 
-//Example for retrieving Address Book Location by address_id
-//--------------------------------------------------------- 
+// Get the address book location by address_id
 $addressID = $randomLocation["address_id"];
-$abcResult=$abLocation->getAddressBookLocation($addressID);
+$abcResult = $abLocation->getAddressBookLocation($addressID);
 
-$results=$abLocation->getValue($abcResult,"results");
+$results = $abLocation->getValue($abcResult,"results");
 
 Route4Me::simplePrint($results);

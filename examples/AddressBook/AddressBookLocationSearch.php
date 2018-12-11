@@ -10,18 +10,18 @@ use Route4Me\Route4Me;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 //Example refers to the process of retrieving sepcified fields by containg specified text in any field 
-//--------------------------------------------------------- 
-$ablocation=new AddressBookLocation();
+
+$ablocation = new AddressBookLocation();
 
 $params = array(
     "query"  => "David",
-    "fields" => "first_name,address_email",
+    "fields" => "first_name,last_name,address_email, address_alias, address_1",
     "offset" => 0,
     "limit"  => 20,
 );
 
-$abcResult=$ablocation->searchRoutedLocation($params);
+$abcResult = $ablocation->searchRoutedLocation($params);
 
-$results=$ablocation->getValue($abcResult,"results");
+$results = $ablocation->getValue($abcResult,"results");
 
 Route4Me::simplePrint($results);

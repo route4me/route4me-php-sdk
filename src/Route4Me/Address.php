@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me;
 
 use Route4Me\Exception\BadParam;
@@ -254,10 +253,9 @@ class Address extends Common
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
             'method' => 'POST',
-            'body'  => array(
-                'type' => isset($params['type']) ? $params['type'] : null,
+            'body'   => array(
+                'type'   => isset($params['type']) ? $params['type'] : null,
                 'values' => isset($params['values']) ? $params['values'] : null
-                
             )
         ));
 

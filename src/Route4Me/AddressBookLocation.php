@@ -126,48 +126,25 @@ class AddressBookLocation extends Common
     
     public static function addAdressBookLocation($params)
     {
-        $ablocations = Route4Me::makeRequst(array(
+        $body = array();
+        $abLocations = new AddressBookLocation();
+        
+        foreach($params as $key => $value) {
+            if ($key=="address_id") continue; 
+            if (property_exists($abLocations, $key)) {
+                if (isset($params->{$key})) {
+                    $body[$key] = $params->{$key};
+                } 
+            }
+        }
+        
+        $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'POST',
-            'body'   => array(
-                'address_1'                 => isset($params->address_1) ? $params->address_1 : null,
-                'address_2'                 => isset($params->address_alias) ? $params->address_alias : null,
-                'cached_lat'                => isset($params->cached_lat) ? $params->cached_lat : null,
-                'cached_lng'                => isset($params->cached_lng) ? $params->cached_lng : null,
-                'curbside_lat'              => isset($params->curbside_lat) ? $params->curbside_lat : null,
-                'curbside_lng'              => isset($params->curbside_lng) ? $params->curbside_lng : null,
-                'address_phone_number'      => isset($params->address_phone_number) ? $params->address_phone_number : null,
-                'address_group'             => isset($params->address_group) ? $params->address_group : null,
-                'first_name'                => isset($params->first_name) ? $params->first_name : null,
-                'last_name'                 => isset($params->last_name) ? $params->last_name : null,
-                'local_time_window_start'   => isset($params->local_time_window_start) ? $params->local_time_window_start : null,
-                'local_time_window_end'     => isset($params->local_time_window_end) ? $params->local_time_window_end : null,
-                'local_time_window_start_2' => isset($params->local_time_window_start_2) ? $params->local_time_window_start_2 : null,
-                'local_time_window_end_2'   => isset($params->local_time_window_end_2) ? $params->local_time_window_end_2 : null,
-                'address_email'             => isset($params->address_email) ? $params->address_email : null,
-                'address_city'              => isset($params->address_city) ? $params->address_city : null,
-                'address_state_id'          => isset($params->address_state_id) ? $params->address_state_id : null,
-                'address_country_id'        => isset($params->address_country_id) ? $params->address_country_id : null,
-                'address_zip'               => isset($params->address_zip) ? $params->address_zip : null,
-                'address_custom_data'       => isset($params->address_custom_data) ? $params->address_custom_data : null,
-                'schedule'                  => isset($params->schedule) ? $params->schedule : null,
-                'schedule_blacklist'        => isset($params->schedule_blacklist) ? $params->schedule_blacklist : null,
-                'service_time'              => isset($params->service_time) ? $params->service_time : null,
-                'local_timezone_string'     => isset($params->local_timezone_string) ? $params->local_timezone_string : null,
-                'color'                     => isset($params->color) ? $params->color : null,
-                'address_icon'              => isset($params->address_icon) ? $params->address_icon : null,
-                'address_stop_type'         => isset($params->address_stop_type) ? $params->address_stop_type : null,
-                'address_cube'              => isset($params->address_cube) ? $params->address_cube : null,
-                'address_pieces'            => isset($params->address_pieces) ? $params->address_pieces : null,
-                'address_reference_no'      => isset($params->address_reference_no) ? $params->address_reference_no : null,
-                'address_revenue'           => isset($params->address_revenue) ? $params->address_revenue : null,
-                'address_weight'            => isset($params->address_weight) ? $params->address_weight : null,
-                'address_priority'          => isset($params->address_priority) ? $params->address_priority : null,
-                'address_customer_po'       => isset($params->address_customer_po) ? $params->address_customer_po : null,
-            )
+            'body'   => $body
         ));
 
-        return $ablocations;
+        return $response;
     }
     
     public function deleteAdressBookLocation($address_ids)
@@ -185,13 +162,24 @@ class AddressBookLocation extends Common
     
     public function updateAdressBookLocation($params)
     {
-        $address = Route4Me::makeRequst(array(
+        $body = array();
+        $abLocations = new AddressBookLocation();
+        
+        foreach($params as $key => $value) {
+            if (property_exists($abLocations, $key)) {
+                if (isset($params->{$key})) {
+                    $body[$key] = $params->{$key};
+                } 
+            }
+        }
+
+        $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'PUT',
-            'body'  => $params,
+            'body'   => $body,
         ));
 
-        return $address;
+        return $response;
     }
         
     public static function get($params)

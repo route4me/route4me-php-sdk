@@ -11,30 +11,29 @@ use Route4Me\Route;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get two random locations IDs
-//---------------------------------------------------------
-$ids="";
-$adressBookLocationParameters=array(
+$ids = "";
+
+$adressBookLocationParameters = array(
     "limit"   => 30,
     "offset"  => 0
 ); 
 
-$abContacts=new AddressBookLocation();
+$abContacts = new AddressBookLocation();
 
-$abcResults=$abContacts->getAddressBookLocations($adressBookLocationParameters);
+$abcResults = $abContacts->getAddressBookLocations($adressBookLocationParameters);
 
-$results=$abContacts->getValue($abcResults,"results");
+$results = $abContacts->getValue($abcResults,"results");
 
 $contactsNumber = sizeof($results);
-$id1=$results[rand(1, $contactsNumber)-1]['address_id'];
-$id2=$results[rand(1, $contactsNumber)-1]['address_id'];
-$ids=$id1.",".$id2;
+$id1 = $results[rand(1, $contactsNumber)-1]['address_id'];
+$id2 = $results[rand(1, $contactsNumber)-1]['address_id'];
+$ids = $id1.",".$id2;
 
-//Example for retrieving Address Book Locations by address_ids
-//--------------------------------------------------------- 
-$ablocation=new AddressBookLocation();
+// Retrieve address book locations by address_ids
+$ablocation = new AddressBookLocation();
 
-$abcResult=$ablocation->getAddressBookLocationsByIDs($ids);
+$abcResult = $ablocation->getAddressBookLocationsByIDs($ids);
 
-$result=$ablocation->getValue($abcResult,"results");
+$result = $ablocation->getValue($abcResult,"results");
 
 Route4Me::simplePrint($result);

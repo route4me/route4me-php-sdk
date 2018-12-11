@@ -17,9 +17,9 @@ $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
     "cached_lng"  => -77.338814
 ));
 
-$abContacts=new AddressBookLocation();
+$abContacts = new AddressBookLocation();
 
-$abcResults=$abContacts->addAdressBookLocation($AdressBookLocationParameters);
+$abcResults = $abContacts->addAdressBookLocation($AdressBookLocationParameters);
 
 echo "address_id = ".strval($abcResults["address_id"])."<br>";
 

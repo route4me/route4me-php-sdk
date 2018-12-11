@@ -76,7 +76,7 @@ class AvoidanceZone extends Common
             'url'    => Endpoint::AVOIDANCE_ZONE,
             'method' => 'ADD',
             'query'  => array(
-                'territory_name'  =>  isset($params->territory_name) ? $params->territory_name : null,
+                'territory_name'  => isset($params->territory_name) ? $params->territory_name : null,
                 'territory_color' => isset($params->territory_color) ? $params->territory_color : null,
                 'territory'       => isset($params->territory) ? $params->territory : null,
             )
@@ -103,7 +103,7 @@ class AvoidanceZone extends Common
         $avoidanceZone = Route4Me::makeRequst(array(
             'url'    => Endpoint::AVOIDANCE_ZONE,
             'method' => 'PUT',
-            'body'  => $params,
+            'body'   => $params,
 
         ));
 

@@ -32,9 +32,9 @@ $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
     "service_time" => 900
 ));
 
-$abContacts1=new AddressBookLocation();
+$abContacts1 = new AddressBookLocation();
 
-$abcResults1=$abContacts1->addAdressBookLocation($AdressBookLocationParameters);
+$abcResults1 = $abContacts1->addAdressBookLocation($AdressBookLocationParameters);
 
 echo "address_id = ".strval($abcResults1["address_id"])."<br>";
 
@@ -42,7 +42,7 @@ Route4Me::simplePrint($abcResults1);
 #endregion
 
 #region // Add a location, scheduled weekly.
-$AdressBookLocationParameters=AddressBookLocation::fromArray(array(
+$AdressBookLocationParameters = AddressBookLocation::fromArray(array(
     "address_1"            => "1407 MCCOY, Louisville, KY, 40215",
     "address_alias"        => "1407 MCCOY 40215",
     "address_group"        => "Scheduled weekly",
@@ -66,9 +66,9 @@ $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
     "service_time" => 600
 ));
 
-$abContacts2=new AddressBookLocation();
+$abContacts2 = new AddressBookLocation();
 
-$abcResults2=$abContacts2->addAdressBookLocation($AdressBookLocationParameters);
+$abcResults2 = $abContacts2->addAdressBookLocation($AdressBookLocationParameters);
 
 echo "address_id = ".strval($abcResults2["address_id"])."<br>";
 
@@ -76,7 +76,7 @@ Route4Me::simplePrint($abcResults2);
 #endregion
 
 #region // Add a location, scheduled monthly (dates mode).
-$AdressBookLocationParameters=AddressBookLocation::fromArray(array(
+$AdressBookLocationParameters = AddressBookLocation::fromArray(array(
     "address_1"            => "4805 BELLEVUE AVE, Louisville, KY, 40215",
     "address_2"            => "4806 BELLEVUE AVE, Louisville, KY, 40215",
     "address_alias"        => "4805 BELLEVUE AVE 40215",
@@ -106,9 +106,9 @@ $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
     "color" => "red"
 ));
 
-$abContacts3=new AddressBookLocation();
+$abContacts3 = new AddressBookLocation();
 
-$abcResults3=$abContacts3->addAdressBookLocation($AdressBookLocationParameters);
+$abcResults3 = $abContacts3->addAdressBookLocation($AdressBookLocationParameters);
 
 echo "address_id = ".strval($abcResults3["address_id"])."<br>";
 
@@ -117,7 +117,7 @@ Route4Me::simplePrint($abcResults3);
 #endregion
 
 #region // AAdd a location, scheduled monthly (nth mode).
-$AdressBookLocationParameters=AddressBookLocation::fromArray(array(
+$AdressBookLocationParameters = AddressBookLocation::fromArray(array(
     "address_1"            => "730 CECIL AVENUE, Louisville, KY, 40211",
     "address_alias"        => "730 CECIL AVENUE 40211",
     "address_group"        => "Scheduled monthly",
@@ -150,9 +150,9 @@ $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
     "address_icon" => "emoji/emoji-bus"
 ));
 
-$abContacts4=new AddressBookLocation();
+$abContacts4 = new AddressBookLocation();
 
-$abcResults4=$abContacts4->addAdressBookLocation($AdressBookLocationParameters);
+$abcResults4 = $abContacts4->addAdressBookLocation($AdressBookLocationParameters);
 
 echo "address_id = ".strval($abcResults4["address_id"])."<br>";
 
@@ -160,7 +160,7 @@ Route4Me::simplePrint($abcResults4);
 #endregion
 
 #region // Add a location with the daily scheduling and blacklist.
-$AdressBookLocationParameters=AddressBookLocation::fromArray(array(
+$AdressBookLocationParameters = AddressBookLocation::fromArray(array(
 
     "address_1"            => "4629 HILLSIDE DRIVE, Louisville, KY, 40216",
     "address_alias"        => "4629 HILLSIDE DRIVE 40216",
@@ -187,12 +187,11 @@ $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
     "service_time"       => 300
 ));
 
-$abContacts5=new AddressBookLocation();
+$abContacts5 = new AddressBookLocation();
 
-$abcResults5=$abContacts5->addAdressBookLocation($AdressBookLocationParameters);
+$abcResults5 = $abContacts5->addAdressBookLocation($AdressBookLocationParameters);
 
 echo "address_id = ".strval($abcResults5["address_id"])."<br>";
 
 Route4Me::simplePrint($abcResults5);
 #endregion
-

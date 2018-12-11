@@ -14,21 +14,20 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Add Avoidance Zone and get territory_id
-//---------------------------------------------------------
 $territory = new Territory();
-$territory->type =  TerritoryTypes::CIRCLE;
+$territory->type = TerritoryTypes::CIRCLE;
 $territory->data = array (
     "37.569752822786455,-77.47833251953125",
     "5000"
 );
 
-$AvoisanceZoneParameters=AvoidanceZone::fromArray(array(
+$AvoisanceZoneParameters = AvoidanceZone::fromArray(array(
     "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territory
 ));
 
-$avoidancezone=new AvoidanceZone();
+$avoidancezone = new AvoidanceZone();
 
 $result = (array)$avoidancezone->addAvoidanceZone($AvoisanceZoneParameters);
 
