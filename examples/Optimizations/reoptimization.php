@@ -15,7 +15,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 // Get random optimization problem ID
 $optimization = new OptimizationProblem();
 
-$optimizationProblemId=$optimization->getRandomOptimizationId(0, 10);
+$optimizationProblemId = $optimization->getRandomOptimizationId(0, 10);
 
 assert(!is_null($optimizationProblemId), "Can't retrieve a random optimization problem ID");
 
@@ -27,4 +27,3 @@ $problemParams = array(
 $problem = OptimizationProblem::reoptimize($problemParams);
 
 Route4Me::simplePrint($problem);
-

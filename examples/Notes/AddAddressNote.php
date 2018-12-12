@@ -14,19 +14,19 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route ID
-$route=new Route();
-$route_id=$route->getRandomRouteId(0, 10);
+$route = new Route();
+$route_id = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($route_id), "can't retrieve random route_id");
+assert(!is_null($route_id), "Can't retrieve random route_id");
 
 // Get random address's id from selected route above
-$addressRand=(array)$route->GetRandomAddressFromRoute($route_id);
-$route_destination_id=$addressRand['route_destination_id'];
+$addressRand = (array)$route->GetRandomAddressFromRoute($route_id);
+$route_destination_id = $addressRand['route_destination_id'];
 
-assert(!is_null($route_destination_id), "can't retrieve random address");
+assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Add an address note
-$noteParameters=array(
+$noteParameters = array(
     "route_id"        => $route_id,
     "address_id"      => $route_destination_id,
     "dev_lat"         => 33.132675170898,
