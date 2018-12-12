@@ -41,17 +41,21 @@ class OptimizationProblem extends Common
 
         if (isset($params['addresses'])) {
             $addresses = array();
+            
             foreach ($params['addresses'] as $address) {
                 $addresses[] = Address::fromArray($address);
             }
+            
             $problem->addresses = $addresses;
         }
 
         if (isset($params['routes'])) {
             $routes = array();
+            
             foreach ($params['routes'] as $route) {
                 $routes[] = Route::fromArray($route);
             }
+            
             $problem->routes = $routes;
         }
 
@@ -85,8 +89,8 @@ class OptimizationProblem extends Common
             'url'    => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'GET',
             'query'  => array(
-                'state'  => isset($params['state']) ? $params['state'] : null,
-                'limit'  => isset($params['limit']) ? $params['limit'] : null,
+                'state'  => isset($params['state'])  ? $params['state'] : null,
+                'limit'  => isset($params['limit'])  ? $params['limit'] : null,
                 'offset' => isset($params['offset']) ? $params['offset'] : null,
                 'optimization_problem_id' => isset($params['optimization_problem_id']) 
                     ? $params['optimization_problem_id'] : null,
@@ -163,16 +167,16 @@ class OptimizationProblem extends Common
                 }
             }
             
-            $num=rand(0,sizeof($optimizations)-1);
+            $num = rand(0,sizeof($optimizations)-1);
             
-            $rOptimization=$optimizations[$num];
+            $rOptimization = $optimizations[$num];
             
             return $rOptimization['optimization_problem_id'];
     }
     
     public function getAddresses($opt_id)
     {
-        if ($opt_id==null) return null;
+        if ($opt_id == null) return null;
         
         $params = array( "optimization_problem_id" => $opt_id );
         
@@ -192,9 +196,9 @@ class OptimizationProblem extends Common
             return null;
         }
         
-        $num=rand(0,sizeof($addresses)-1);
+        $num = rand(0,sizeof($addresses)-1);
         
-        $rAddress=$addresses[$num];
+        $rAddress = $addresses[$num];
         
         return $rAddress;
     }

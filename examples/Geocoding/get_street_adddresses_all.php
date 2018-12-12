@@ -18,4 +18,7 @@ $geocoding = new Geocoding();
 
 $response = $geocoding->getStreetData($gcParameters);
 
-Route4Me::simplePrint($response);
+foreach ($response as $gcode) {
+    Route4Me::simplePrint($gcode);
+    echo "<br>";
+}

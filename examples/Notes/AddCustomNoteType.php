@@ -10,7 +10,6 @@ use Route4Me\Route;
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-
 // Create a custom note type
 $noteParameters=array(
     "type"        => 'To Do',

@@ -130,7 +130,7 @@ class AddressBookLocation extends Common
         $abLocations = new AddressBookLocation();
         
         foreach($params as $key => $value) {
-            if ($key=="address_id") continue; 
+            if ($key == "address_id") continue; 
             if (property_exists($abLocations, $key)) {
                 if (isset($params->{$key})) {
                     $body[$key] = $params->{$key};
@@ -200,7 +200,7 @@ class AddressBookLocation extends Common
     
     public static function validateScheduleMode($scheduleMode)
     {
-        $schedMmodes=array("daily","weekly","monthly","annually");
+        $schedMmodes = array("daily","weekly","monthly","annually");
         
         if (in_array($scheduleMode, $schedMmodes)) 
             return TRUE; 
@@ -210,7 +210,7 @@ class AddressBookLocation extends Common
     
     public static function validateScheduleEnable($scheduleEnabled)
     {
-        $schedEnambles=array(TRUE,FALSE);
+        $schedEnambles = array(TRUE,FALSE);
         
         if (in_array($scheduleEnabled, $schedEnambles))
             return TRUE;
@@ -230,16 +230,16 @@ class AddressBookLocation extends Common
     {
         $weekdays = explode(',', $scheduleWeekDays);
         
-        if (sizeof($weekdays)<1) return FALSE;
+        if (sizeof($weekdays) < 1) return FALSE;
         
-        $isValid=TRUE;
+        $isValid = TRUE;
         
         for ($i=0; $i < sizeof($weekdays); $i++) { 
             if (is_numeric($weekdays[$i])) {
-                $wday=intval($weekdays[$i]);
-                if ($wday<1 || $wday>7) $isValid=FALSE;
+                $wday = intval($weekdays[$i]);
+                if ($wday < 1 || $wday > 7) $isValid = FALSE;
             }
-            else $isValid=FALSE;
+            else $isValid = FALSE;
         }
         
         return $isValid;
@@ -247,7 +247,7 @@ class AddressBookLocation extends Common
     
     public static function validateScheduleMonthlyMode($scheduleMonthlyMode)
     {
-        $schedMonthlyMmodes=array("dates","nth");
+        $schedMonthlyMmodes = array("dates","nth");
         
         if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes))
             return TRUE;
@@ -259,16 +259,16 @@ class AddressBookLocation extends Common
     {
         $monthlyDates = explode(',', $scheduleMonthlyDates);
         
-        if (sizeof($monthlyDates)<1) return FALSE;
+        if (sizeof($monthlyDates) <1) return FALSE;
         
-        $isValid=TRUE;
+        $isValid = TRUE;
         
         for ($i=0; $i < sizeof($monthlyDates); $i++) { 
             if (is_numeric($monthlyDates[$i])) {
-                $mday=intval($monthlyDates[$i]);
-                if ($mday<1 || $mday>31) $isValid=FALSE;
+                $mday = intval($monthlyDates[$i]);
+                if ($mday <1 || $mday > 31) $isValid = FALSE;
             }
-            else $isValid=FALSE;
+            else $isValid = FALSE;
         }
 
         return $isValid;
@@ -278,7 +278,7 @@ class AddressBookLocation extends Common
     {
         if (!is_numeric($scheduleNthN)) return FALSE;
         
-        $schedNthNs=array(1,2,3,4,5,-1);
+        $schedNthNs = array(1,2,3,4,5,-1);
         
         if (in_array($scheduleNthN, $schedNthNs))
             return TRUE;
@@ -290,7 +290,7 @@ class AddressBookLocation extends Common
     {
         if (!is_numeric($scheduleNthWhat)) return FALSE;
         
-        $schedNthWhats=array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        $schedNthWhats = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         
         if (in_array($scheduleNthWhat, $schedNthWhats))
             return TRUE;
@@ -305,40 +305,40 @@ class AddressBookLocation extends Common
     public function addLocationsFromCsvFile($csvFileHandle, $locationsFieldsMapping)
     {
         $max_line_length = 512;
-        $delemietr=',';
+        $delemietr = ',';
         
-        $results=array();
-        $results['fail']=array();
-        $results['success']=array();
+        $results = array();
+        $results['fail'] = array();
+        $results['success'] = array();
         
         $columns = fgetcsv($csvFileHandle, $max_line_length, $delemietr);
-        
-        if (!empty($columns)) {
+
+        if (empty($columns)) {
             array_push($results['fail'],'Empty CSV table');
             return ($results);
         }
-                 
-        $iRow=1;
+
+        $iRow = 1;
         
         while (($rows = fgetcsv($csvFileHandle, $max_line_length, $delemietr)) !== false) {
             if ($rows[$locationsFieldsMapping['cached_lat']] 
                   && $rows[$locationsFieldsMapping['cached_lng']] 
                   && $rows[$locationsFieldsMapping['address_1']] 
                   && array(null) !== $rows) {
-                $curSchedule="";
-                $mode="";
+                $curSchedule = "";
+                $mode = "";
                 
                 if (isset($rows[$locationsFieldsMapping['schedule_mode']])) {
                     if ($this->validateScheduleMode($rows[$locationsFieldsMapping['schedule_mode']])) {
-                        $curSchedule='"mode":"'.$rows[$locationsFieldsMapping['schedule_mode']].'",'; 
-                        $mode=$rows[$locationsFieldsMapping['schedule_mode']];
+                        $curSchedule = '"mode":"'.$rows[$locationsFieldsMapping['schedule_mode']].'",'; 
+                        $mode = $rows[$locationsFieldsMapping['schedule_mode']];
                     } else {
                         array_push($results['fail'],"$iRow --> Wrong schedule mode parameter"); 
-                        $curSchedule="";
+                        $curSchedule = "";
                     }
                 } else {
                     array_push($results['fail'],"$iRow --> The schedule mode parameter is not set"); 
-                    $curSchedule="";
+                    $curSchedule = "";
                 }
                 
                 if (isset($rows[$locationsFieldsMapping['schedule_enabled']])) {
@@ -346,20 +346,20 @@ class AddressBookLocation extends Common
                         $curSchedule.='"enabled":'.$rows[$locationsFieldsMapping['schedule_enabled']].',';
                     } else {
                         array_push($results['fail'],"$iRow --> The schedule enabled parameter is not set ");  
-                        $curSchedule="";
+                        $curSchedule = "";
                     }
                 }
                 
                 if (isset($rows[$locationsFieldsMapping['schedule_every']])) {
                     if ($this->validateScheduleEvery($rows[$locationsFieldsMapping['schedule_every']])) {
                         $curSchedule.='"'.$mode.'":{'.'"every":'.$rows[$locationsFieldsMapping['schedule_every']].','; 
-                        if ($mode=='daily') {
-                            $curSchedule=trim($curSchedule,',');
+                        if ($mode == 'daily') {
+                            $curSchedule = trim($curSchedule,',');
                             $curSchedule.='}';
                         }
                     } else {
                         array_push($results['fail'],"$iRow --> The parameter sched_every is not set"); 
-                        $curSchedule=""; 
+                        $curSchedule = ""; 
                     }
                 }
                 
@@ -371,29 +371,29 @@ class AddressBookLocation extends Common
                                      $curSchedule.='"weekdays":['.$rows[$locationsFieldsMapping['schedule_weekdays']].']}';
                                 } else {
                                     array_push($results['fail'],"$iRow --> Wrong weekdays"); 
-                                    $curSchedule="";
+                                    $curSchedule = "";
                                 }
                             } else {
                                 array_push($results['fail'],"$iRow --> The parameters sched_weekdays is not set"); 
-                                $curSchedule="";
+                                $curSchedule = "";
                             }
                             break;
                         case 'monthly':
-                            $monthlyMode="";
+                            $monthlyMode = "";
                             if (isset($rows[$locationsFieldsMapping['monthly_mode']])) {
                                 if ($this->validateScheduleMonthlyMode($rows[$locationsFieldsMapping['monthly_mode']])) {
-                                     $monthlyMode=$rows[$locationsFieldsMapping['monthly_mode']];
+                                     $monthlyMode = $rows[$locationsFieldsMapping['monthly_mode']];
                                      $curSchedule.='"mode": "'.$rows[$locationsFieldsMapping['monthly_mode']].'",';
                                 } else {
                                     array_push($results['fail'],"$iRow --> Wrong monthly mode"); 
-                                    $curSchedule="";
+                                    $curSchedule = "";
                                 }
                             } else {
                                 array_push($results['fail'],"$iRow --> The parameter sched_monthly_mode is not set"); 
-                                $curSchedule="";
+                                $curSchedule = "";
                             }
                             
-                            if ($monthlyMode!="") {
+                            if ($monthlyMode != "") {
                                 switch ($monthlyMode) {
                                     case 'dates':
                                         if (isset($rows[$locationsFieldsMapping['monthly_dates']])) {
@@ -401,7 +401,7 @@ class AddressBookLocation extends Common
                                                  $curSchedule.='"dates":['.$rows[$locationsFieldsMapping['monthly_dates']].']}';
                                             } else {
                                                 array_push($results['fail'],"$iRow --> Wrong monthly dates"); 
-                                                $curSchedule="";
+                                                $curSchedule = "";
                                             }
                                         }
                                         break;
@@ -411,24 +411,24 @@ class AddressBookLocation extends Common
                                                  $curSchedule.='"nth":{"n":'.$rows[$locationsFieldsMapping['monthly_nth_n']].',';
                                             } else {
                                                 array_push($results['fail'],"$iRow --> Wrong parameter sched_nth_n"); 
-                                                $curSchedule="";
+                                                $curSchedule = "";
                                             }
                                         } else {
                                             array_push($results['fail'],"$iRow --> The parameter sched_nth_n is not set"); 
-                                            $curSchedule="";
+                                            $curSchedule = "";
                                         }
                                         
-                                        if ($curSchedule!="") {
+                                        if ($curSchedule != "") {
                                             if (isset($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
                                                 if ($this->validateScheduleNthWhat($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
                                                      $curSchedule.='"what":'.$rows[$locationsFieldsMapping['monthly_nth_wwhat']].'}}';
                                                 } else {
                                                     array_push($results['fail'],"$iRow --> Wrong parameter sched_nth_what"); 
-                                                    $curSchedule="";
+                                                    $curSchedule = "";
                                                 }
                                             } else {
                                                 array_push($results['fail'],"$iRow --> The parameter sched_nth_what is not set"); 
-                                                $curSchedule="";
+                                                $curSchedule = "";
                                             }
                                         }
                                         break;
@@ -436,23 +436,23 @@ class AddressBookLocation extends Common
                             }
                             break;
                         default:
-                            $curSchedule=="";
+                            $curSchedule = "";
                             break;
                     }
                 }
 
-                if (($mode=='daily' || $mode=='weekly' || $mode=='monthy') && $curSchedule=="") {
+                if (($mode == 'daily' || $mode == 'weekly' || $mode == 'monthy') && $curSchedule == "") {
                     $iRow++; 
                     continue;
                 }
                 
-                $curSchedule=strtolower($curSchedule);
+                $curSchedule =strtolower($curSchedule);
                 
-                $curSchedule='[{'.$curSchedule.'}]';
+                $curSchedule = '[{'.$curSchedule.'}]';
 
-                $oSchedule= json_decode($curSchedule,TRUE);
+                $oSchedule = json_decode($curSchedule,TRUE);
                 
-                $AdressBookLocationParameters=AddressBookLocation::fromArray(array(
+                $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
                     "cached_lat"                 => $rows[$locationsFieldsMapping['cached_lat']],
                     "cached_lng"                 => $rows[$locationsFieldsMapping['cached_lng']],
                     "curbside_lat"               => isset($locationsFieldsMapping['curbside_lat'])
@@ -521,9 +521,9 @@ class AddressBookLocation extends Common
                                                       ? $rows[$locationsFieldsMapping['address_customer_po']] : null,
                 ));
                 
-                $abContacts=new AddressBookLocation();
+                $abContacts = new AddressBookLocation();
 
-                $abcResults=$abContacts->addAdressBookLocation($AdressBookLocationParameters); //temporarry
+                $abcResults = $abContacts->addAdressBookLocation($AdressBookLocationParameters); //temporarry
                 
                 array_push($results['success'],"The schedule location with address_id = ".strval($abcResults["address_id"])." added successfuly.");
             }

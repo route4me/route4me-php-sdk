@@ -110,10 +110,14 @@ class Member extends Common
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::VERIFY_DEVICE_LICENSE,
             'method' => 'POST',
-            'body'   => array(
-                'device_id'   => isset($body->device_id) ? $body->device_id : null,
+            'query'  => array(
+                'device_id'   => isset($body->device_id)   ? $body->device_id : null,
                 'device_type' => isset($body->device_type) ? $body->device_type : null,
-                'format'      => isset($body->format) ? $body->format : null
+            ),
+            'body'   => array(
+                'device_id'   => isset($body->device_id)   ? $body->device_id : null,
+                'device_type' => isset($body->device_type) ? $body->device_type : null,
+                'format'      => isset($body->format)      ? $body->format : null
             )
 
         ));
@@ -143,7 +147,6 @@ class Member extends Common
                 'SHOW_ALL_VEHICLES'      => isset($body->SHOW_ALL_VEHICLES) ? $body->SHOW_ALL_VEHICLES : null,
                 'SHOW_ALL_DRIVERS'       => isset($body->SHOW_ALL_DRIVERS) ? $body->SHOW_ALL_DRIVERS : null
             )
-
         ));
         
         return $response;
@@ -299,6 +302,9 @@ class Member extends Common
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::USER_LICENSE,
             'method' => 'POST',
+            'query'  => array(
+                'device_id'         => isset($body->device_id) ? $body->device_id : null
+            ),
             'body'   => array(
                 'member_id'         => isset($body->member_id) ? $body->member_id : null,
                 'session_guid'      => isset($body->session_guid) ? $body->session_guid : null,

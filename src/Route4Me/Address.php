@@ -267,7 +267,7 @@ class Address extends Common
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
             'method' => 'DELETE',
-            'body'  => array(
+            'body'   => array(
                 'id' => isset($params['id']) ? $params['id'] : null
             )
         ));

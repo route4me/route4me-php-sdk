@@ -17,78 +17,81 @@ use Route4Me\Route4Me;
 
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$source_file="addresses_1000.csv";
+$source_file = "addresses_1000.csv";
 $max_line_length = 512;
-$delemietr=',';
+$delemietr = ',';
 
+ini_set('max_execution_time', 180);
 
 /* Add Address Book Locations with schedules from a CSV file */
 
 /* Mapping of a CSV file with the address book locations - which of the CSV table column is corresponding to which of the Address Book's field*/
-$locationsFieldsMapping['cached_lat']=0;
-$locationsFieldsMapping['cached_lng']=1;
-$locationsFieldsMapping['address_alias']=2;
-$locationsFieldsMapping['address_1']=3;
-$locationsFieldsMapping['address_city']=4;
-$locationsFieldsMapping['address_state_id']=5;
-$locationsFieldsMapping['address_zip']=6;
-$locationsFieldsMapping['address_phone_number']=7;
-$locationsFieldsMapping['schedule_mode']=8;
-$locationsFieldsMapping['schedule_enabled']=9;
-$locationsFieldsMapping['schedule_every']=10;
-$locationsFieldsMapping['schedule_weekdays']=11;
-$locationsFieldsMapping['monthly_mode']=12;
-$locationsFieldsMapping['monthly_dates']=13;
-$locationsFieldsMapping['monthly_nth_n']=16;
-$locationsFieldsMapping['monthly_nth_wwhat']=17;
+$locationsFieldsMapping['cached_lat'] = 0;
+$locationsFieldsMapping['cached_lng'] = 1;
+$locationsFieldsMapping['address_alias'] = 2;
+$locationsFieldsMapping['address_1'] = 3;
+$locationsFieldsMapping['address_city'] = 4;
+$locationsFieldsMapping['address_state_id'] = 5;
+$locationsFieldsMapping['address_zip'] = 6;
+$locationsFieldsMapping['address_phone_number'] = 7;
+$locationsFieldsMapping['schedule_mode'] = 8;
+$locationsFieldsMapping['schedule_enabled'] = 9;
+$locationsFieldsMapping['schedule_every'] = 10;
+$locationsFieldsMapping['schedule_weekdays'] = 11;
+$locationsFieldsMapping['monthly_mode'] = 12;
+$locationsFieldsMapping['monthly_dates'] = 13;
+$locationsFieldsMapping['monthly_nth_n'] = 16;
+$locationsFieldsMapping['monthly_nth_wwhat'] = 17;
 
 if (($handle = fopen("$source_file", "r")) !== FALSE) {
         $oAbook = new AddressBookLocation();
 
-        $results=$oAbook->addLocationsFromCsvFile($handle, $locationsFieldsMapping); //Temporarry
+        $results = $oAbook->addLocationsFromCsvFile($handle, $locationsFieldsMapping);
         
         echo "Errors: <br><br>";
+        
         foreach ($results['fail'] as $evalue) {
             echo $evalue."<br>";
         }
         
         echo "Successes: <br><br>";
+        
         foreach ($results['success'] as $svalue) {
             echo $svalue."<br>";
         }
-
     }
 
 /* Add orders with schedules from a CSV file  */
 
-$orders_file="orders_baton.csv";
+$orders_file = "orders_baton.csv";
 
 /* Mapping of a CSV file with the orders - which of the CSV table column is corresponding to which of the Order's field */
 
-$ordersFieldsMapping['cached_lat']=1;
-$ordersFieldsMapping['cached_lng']=0;
-$ordersFieldsMapping['address_alias']=2;
-$ordersFieldsMapping['address_1']=3;
-$ordersFieldsMapping['order_city']=4;
-$ordersFieldsMapping['order_state_id']=5;
-$ordersFieldsMapping['order_zip_code']=6;
-$ordersFieldsMapping['EXT_FIELD_phone']=7;
-$ordersFieldsMapping['day_scheduled_for_YYMMDD']=8;
+$ordersFieldsMapping['cached_lat'] = 1;
+$ordersFieldsMapping['cached_lng'] = 0;
+$ordersFieldsMapping['address_alias'] = 2;
+$ordersFieldsMapping['address_1'] = 3;
+$ordersFieldsMapping['order_city'] = 4;
+$ordersFieldsMapping['order_state_id'] = 5;
+$ordersFieldsMapping['order_zip_code'] = 6;
+$ordersFieldsMapping['EXT_FIELD_phone'] = 7;
+$ordersFieldsMapping['day_scheduled_for_YYMMDD'] = 8;
 
 if (($handle = fopen("$orders_file", "r")) !== FALSE) {
     $order = new Order();
-    $results=$order->addOrdersFromCsvFile($handle, $ordersFieldsMapping);
+    $results = $order->addOrdersFromCsvFile($handle, $ordersFieldsMapping);
     
     echo "Errors: <br><br>";
+    
     foreach ($results['fail'] as $evalue) {
         echo $evalue."<br>";
     }
     
     echo "Successes: <br><br>";
+    
     foreach ($results['success'] as $svalue) {
         echo $svalue."<br>";
     }
-  
 }
 
 /* Get Hybrid Optimization */
@@ -109,7 +112,7 @@ if ($hybridOptimization!=null) {
     if (isset($hybridOptimization['optimization_problem_id'])) {
         $optid = $hybridOptimization['optimization_problem_id'];
         
-        echo "Hibrid optimization with optimization_problem_id=$optid <br><br>";
+        echo "Hibrid optimization with optimization_problem_id = $optid <br><br>";
         
         /* Add depots to the Hybrid Optimization */
         $depotfile = "depots.csv";
@@ -125,17 +128,17 @@ if ($hybridOptimization!=null) {
             
             $depotsParams = array(
                 'optimization_problem_id' => $optid,
-                'delete_old_depots'  => true,
+                'delete_old_depots'       => true,
             );
             
-            $iRow=1;
+            $iRow = 1;
             $depotAddresses = array();
             
             while (($rows = fgetcsv($handle, $max_line_length, $delemietr)) !== false) {
                 if ($rows[0] && $rows[1] && $rows[3] && array(null) !== $rows) {
-                    $depotAddress['lat']= $rows[0];
-                    $depotAddress['lng']= $rows[1];
-                    $depotAddress['address']= $rows[3];   
+                    $depotAddress['lat'] = $rows[0];
+                    $depotAddress['lng'] = $rows[1];
+                    $depotAddress['address'] = $rows[3];   
                     array_push($depotAddresses,$depotAddress);
                 }
             }
@@ -150,7 +153,7 @@ if ($hybridOptimization!=null) {
             
             /* Reoptimize hybrid optimization */
             
-            if ($resultDepots!=null) {
+            if ($resultDepots != null) {
                 $problemParams = array(
                     'optimization_problem_id'  =>  $optid
                 );
@@ -159,7 +162,5 @@ if ($hybridOptimization!=null) {
                 Route4Me::simplePrint($problem);
             }
         }
-            
     }
-
 }

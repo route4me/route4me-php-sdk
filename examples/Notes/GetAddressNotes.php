@@ -14,15 +14,15 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route from test routes
-$route=new Route();
+$route = new Route();
 
-$route_id=$route->getRandomRouteId(0, 10);
+$route_id = $route->getRandomRouteId(0, 10);
 
 assert(!is_null($route_id), "Can't retrieve random route_id");
 
 // Get random address's id from selected route above
-$addressRand=(array)$route->GetRandomAddressFromRoute($route_id);
-$route_destination_id=$addressRand['route_destination_id'];
+$addressRand = (array)$route->GetRandomAddressFromRoute($route_id);
+$route_destination_id = $addressRand['route_destination_id'];
 
 assert(!is_null($route_destination_id), "Can't retrieve random address");
 
@@ -44,16 +44,16 @@ $address1 = $address->AddAddressNote($noteParameters);
 assert(!is_null($address1), "Can't create an address note");
 
 // Get address notes
-$noteParameters=array(
+$noteParameters = array(
     "route_id"              => $route_id,
     "route_destination_id"  => $route_destination_id
 );
 
-$address=new Address();
+$address = new Address();
 
-$notes=$address->GetAddressesNotes($noteParameters);
+$notes = $address->GetAddressesNotes($noteParameters);
 
-echo "destination_note_count --> ".$notes['destination_note_count']."<br>";
+echo "Destination note count --> ".$notes['destination_note_count']."<br>";
 
 foreach ($notes['notes'] as $note) {
     echo "========== Notes ==================<br>";
@@ -61,4 +61,3 @@ foreach ($notes['notes'] as $note) {
     $content = isset($note['contents']) ? $note['contents'] : "";
     if (strlen($content)>0) echo "contents --> $content"."<br>";
 }
-

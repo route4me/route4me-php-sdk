@@ -33,7 +33,7 @@ class Geocoding extends Common
     public static function forwardGeocoding($params)
     {
         $query = array(
-                'format' => isset($params['format']) ? $params['format']: null,
+                'format'    => isset($params['format']) ? $params['format']: null,
                 'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
             );
 
