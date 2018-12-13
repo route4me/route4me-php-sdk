@@ -15,10 +15,10 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Example refers to the process of update parameters of a route
 
-$route=new Route();
+$route = new Route();
 
 // Get a random route ID
-$route_id=$route->getRandomRouteId(0, 10);
+$route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
 $randomRoute = $route->getRoutes($route_id, null);
@@ -38,6 +38,6 @@ $route->parameters = array(
 
 $route->httpheaders = 'Content-type: application/json';
 
-$result=$route->update();
+$result = $route->update();
 
-var_dump($result);
+Route4Me::simplePrint((array)$result->parameters);

@@ -34,6 +34,9 @@ $ablocation = new AddressBookLocation();
 
 $abcResult = $ablocation->getAddressBookLocationsByIDs($ids);
 
-$result = $ablocation->getValue($abcResult,"results");
+$results = $ablocation->getValue($abcResult,"results");
 
-Route4Me::simplePrint($result);
+foreach ($results as $result) {
+    Route4Me::simplePrint($result);
+    echo "<br>";
+}

@@ -14,20 +14,21 @@ assert_options(ASSERT_BAIL, 1);
 // This example not available for demo API key
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$route=new Route();
+$route = new Route();
 
 // Get 2 different random route IDs
-$route_id1=$route->getRandomRouteId(0, 20);
+$route_id1 = $route->getRandomRouteId(0, 20);
 assert(!is_null($route_id1), "Can't retrieve a random route ID");
 
-$route_id2=$route_id1;
+$route_id2 = $route_id1;
 
-$count=0; 
+$count = 0; 
 
-while ($route_id1==$route_id2) {
-    $route_id2=$route->getRandomRouteId(0, 20);
+while ($route_id1 == $route_id2) {
+    $route_id2 = $route->getRandomRouteId(0, 20);
     
     $count++;
+    
     if ($count>5) break; // prevent from the infinite cycle, if there are less than 2 routes.
 }
 
@@ -37,15 +38,15 @@ echo "Route ID 1 -> $route_id1 <br> Route ID 2 -> $route_id2 <br>";
 $addresses = $route->GetAddressesFromRoute($route_id1);
 assert(!is_null($addresses), "Can't retrieve the addresses from the route");
 
-$depot=null;
+$depot = null;
 
 foreach ($addresses as $address) {
-	if (isset($address->is_depot)) {
-	    if ($address->is_depot==true) {
-	        $depot = $address;
+    if (isset($address->is_depot)) {
+        if ($address->is_depot == true) {
+            $depot = $address;
             break;
-	    }
-	}
+        }
+    }
 }
 
 // Merge the selected routes
@@ -57,6 +58,6 @@ $params = array(
     "depot_lat"      =>  $depot->lng
 );
 
-$result=$route->mergeRoutes($params);
+$result = $route->mergeRoutes($params);
 
 var_dump($result); 

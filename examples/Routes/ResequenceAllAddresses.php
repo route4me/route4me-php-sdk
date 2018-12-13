@@ -13,10 +13,10 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$route=new Route();
+$route = new Route();
 
 // Get a random route ID
-$route_id=$route->getRandomRouteId(0, 10);
+$route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
 // Resequence all addresses
@@ -26,6 +26,6 @@ $params = array(
     "optimize"              => "Distance"
 );
 
-$resequence=$route->resequenceAllAddresses($params);
+$resequence = $route->resequenceAllAddresses($params);
 
 var_dump($resequence);

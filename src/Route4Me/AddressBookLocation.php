@@ -27,6 +27,28 @@ class AddressBookLocation extends Common
     public $address_custom_data;
     public $schedule;
     
+    public $created_timestamp;
+    public $member_id;
+    public $schedule_blacklist;
+    public $in_route_count;
+    public $last_visited_timestamp;
+    public $last_routed_timestamp;
+    public $local_time_window_start;
+    public $local_time_window_end;
+    public $local_time_window_start_2;
+    public $local_time_window_end_2;
+    public $service_time;
+    public $local_timezone_string;
+    public $address_icon;
+    public $address_stop_type;
+    public $address_cube;
+    public $address_pieces;
+    public $address_reference_no;
+    public $address_revenue;
+    public $address_weight;
+    public $address_priority;
+    public $address_customer_po;
+    
     public function __construct () 
     {  }
     

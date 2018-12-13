@@ -10,18 +10,18 @@ use Route4Me\Route;
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$RouteParameters=array(
+$RouteParameters = array(
     "limit"   => 30,
     "offset"  => 0
 );
 
-$route=new Route();
+$route = new Route();
 
-$routeResults=$route->getRoutes(null,$RouteParameters);
+$routeResults = $route->getRoutes(null,$RouteParameters);
 
 foreach ($routeResults as $routeResult)
 {
-    $results=(array)$routeResult;
+    $results = (array)$routeResult;
 
     Route4Me::simplePrint($results);
     

@@ -6,10 +6,6 @@ use Route4Me\Enum\Endpoint;
 
 class Order extends Common
 {
-    static public $apiUrl = Endpoint::ORDER_V4;
-    static public $apiUrlRoute = Endpoint::ROUTE_V4;
-    static public $apiUrlOpt = Endpoint::OPTIMIZATION_PROBLEM;
-    
     public $address_1;
     public $address_2;
     public $cached_lat;
@@ -47,6 +43,23 @@ class Order extends Common
     public $limit;
     public $query;
     
+    public $created_timestamp;
+    public $order_status_id;
+    public $member_id;
+    public $address_state_id;
+    public $address_country_id;
+    public $address_zip;
+    public $in_route_count;
+    public $last_visited_timestamp;
+    public $last_routed_timestamp;
+    public $local_timezone_string;
+    public $is_validated;
+    public $is_pending;
+    public $is_accepted;
+    public $is_started;
+    public $is_completed;
+    public $custom_user_fields;
+    
     public function __construct () {  }
     
     public static function fromArray(array $params) {
@@ -68,6 +81,7 @@ class Order extends Common
             'body'   => array(
                 'address_1'                 =>  isset($params->address_1) ? $params->address_1: null,
                 'address_2'                 =>  isset($params->address_2) ? $params->address_2: null,
+                'member_id'                 =>  isset($params->member_id) ? $params->member_id: null,
                 'cached_lat'                =>  isset($params->cached_lat) ? $params->cached_lat : null,
                 'cached_lng'                =>  isset($params->cached_lng) ? $params->cached_lng : null,
                 'curbside_lat'              =>  isset($params->curbside_lat) ? $params->curbside_lat : null,
@@ -77,16 +91,26 @@ class Order extends Common
                 'day_scheduled_for_YYMMDD'  =>  isset($params->day_scheduled_for_YYMMDD) ? $params->day_scheduled_for_YYMMDD : null,
                 'address_alias'             =>  isset($params->address_alias) ? $params->address_alias : null,
                 'address_city'              =>  isset($params->address_city) ? $params->address_city: null,
+                'address_state_id'          =>  isset($params->address_state_id) ? $params->address_state_id: null,
+                'address_country_id'        =>  isset($params->address_country_id) ? $params->address_country_id: null,
+                'address_zip'               =>  isset($params->address_zip) ? $params->address_zip: null,
                 'local_time_window_start'   =>  isset($params->local_time_window_start) ? $params->local_time_window_start: null,
                 'local_time_window_end'     =>  isset($params->local_time_window_end) ? $params->local_time_window_end: null,
                 'local_time_window_start_2' =>  isset($params->local_time_window_start_2) ? $params->local_time_window_start_2: null,
                 'local_time_window_end_2'   =>  isset($params->local_time_window_end_2) ? $params->local_time_window_end_2: null,
                 'service_time'              =>  isset($params->service_time) ? $params->service_time: null,
+                'local_timezone_string'     =>  isset($params->local_timezone_string) ? $params->local_timezone_string: null,
                 'EXT_FIELD_first_name'      =>  isset($params->EXT_FIELD_first_name) ? $params->EXT_FIELD_first_name: null,
                 'EXT_FIELD_last_name'       =>  isset($params->EXT_FIELD_last_name) ? $params->EXT_FIELD_last_name: null,
                 'EXT_FIELD_email'           =>  isset($params->EXT_FIELD_email) ? $params->EXT_FIELD_email: null,
                 'EXT_FIELD_phone'           =>  isset($params->EXT_FIELD_phone) ? $params->EXT_FIELD_phone: null,
                 'EXT_FIELD_custom_data'     =>  isset($params->EXT_FIELD_custom_data) ? $params->EXT_FIELD_custom_data: null,
+                'is_validated'              =>  isset($params->is_validated) ? $params->is_validated: null,
+                'is_pending'                =>  isset($params->is_pending) ? $params->is_pending: null,
+                'is_accepted'               =>  isset($params->is_accepted) ? $params->is_accepted: null,
+                'is_started'                =>  isset($params->is_started) ? $params->is_started: null,
+                'is_completed'              =>  isset($params->is_completed) ? $params->is_completed: null,
+                'custom_user_fields'        =>  isset($params->custom_user_fields) ? $params->custom_user_fields: null
             )
         ));
 
@@ -252,11 +276,11 @@ class Order extends Common
     public function addOrdersFromCsvFile($csvFileHandle, $ordersFieldsMapping)
     {
         $max_line_length = 512;
-        $delemietr=',';
+        $delemietr = ',';
         
-        $results=array();
-        $results['fail']=array();
-        $results['success']=array();
+        $results = array();
+        $results['fail'] = array();
+        $results['success'] = array();
         
         $columns = fgetcsv($csvFileHandle, $max_line_length, $delemietr);
         
@@ -270,23 +294,23 @@ class Order extends Common
         while (($rows = fgetcsv($csvFileHandle, $max_line_length, $delemietr)) !== false) {
             if ($rows[$ordersFieldsMapping['cached_lat']] && $rows[$ordersFieldsMapping['cached_lng']] && $rows[$ordersFieldsMapping['address_1']] && array(null) !== $rows) {
                 
-                $cached_lat=0.000;
+                $cached_lat = 0.000;
                 
                 if (!$this->validateLatitude($rows[$ordersFieldsMapping['cached_lat']])) {
                     array_push($results['fail'],"$iRow --> Wrong cached_lat"); 
                     $iRow++;
                     continue;
                 }
-                else $cached_lat=doubleval($rows[$ordersFieldsMapping['cached_lat']]);
+                else $cached_lat = doubleval($rows[$ordersFieldsMapping['cached_lat']]);
                 
-                $cached_lng=0.000;
+                $cached_lng = 0.000;
                 
                 if (!$this->validateLongitude($rows[$ordersFieldsMapping['cached_lng']])) {
                     array_push($results['fail'],"$iRow --> Wrong cached_lng"); 
                     $iRow++;
                     continue;
                 }
-                else $cached_lng=doubleval($rows[$ordersFieldsMapping['cached_lng']]);
+                else $cached_lng = doubleval($rows[$ordersFieldsMapping['cached_lng']]);
                 
                 if (isset($ordersFieldsMapping['curbside_lat'])) {
                     if (!$this->validateLatitude($rows[$ordersFieldsMapping['curbside_lat']])) {
@@ -304,7 +328,7 @@ class Order extends Common
                     }
                 }
                 
-                $address=$rows[$ordersFieldsMapping['address_1']];
+                $address = $rows[$ordersFieldsMapping['address_1']];
                 
                 if (isset($ordersFieldsMapping['order_city'])) $address.=', '.$rows[$ordersFieldsMapping['order_city']];
                 if (isset($ordersFieldsMapping['order_state_id'])) $address.=', '.$rows[$ordersFieldsMapping['order_state_id']];
@@ -360,6 +384,4 @@ class Order extends Common
             $iRow++;
         }
     }
-
 }
-    

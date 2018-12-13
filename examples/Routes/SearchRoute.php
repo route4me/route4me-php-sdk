@@ -12,17 +12,17 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 // The example refers to the process of searching for the specified text throughout all routes belonging to the user's account.
 
-$RouteParameters=array(
+$RouteParameters = array(
     "query"   => 'Automated'
 );
 
-$route=new Route();
+$route = new Route();
 
-$routeResults=$route->getRoutes(null,$RouteParameters);
+$routeResults = $route->getRoutes(null,$RouteParameters);
 
 foreach ($routeResults as $routeResult)
 {
-    $results=(array)$routeResult;
+    $results = (array)$routeResult;
     
     if (isset($results['route_id'])) echo "Route ID - > " . $results['route_id'] . "<br>";
     

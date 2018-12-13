@@ -16,10 +16,10 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $route=new Route();
 
 // Get a random route ID
-$route_id=$route->getRandomRouteId(0, 10);
+$route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
 // get a route by ID
-$routeResults=(array)$route->getRoutes($route_id,null);
+$routeResults = (array)$route->getRoutes($route_id,null);
 
 Route4Me::simplePrint($routeResults);

@@ -20,6 +20,6 @@ $randomRouteID = $route->getRandomRouteId(0, 25);
 assert(!is_null($randomRouteID), "Can't retrieve a random route ID");
 
 // Duplicate the selected route
-$routeDuplicate=$route->duplicateRoute($randomRouteID);
+$routeDuplicate = $route->duplicateRoute($randomRouteID);
 
 Route4Me::simplePrint($routeDuplicate);

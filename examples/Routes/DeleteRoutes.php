@@ -13,7 +13,7 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$route=new Route();
+$route = new Route();
 
 // Get 2 random route IDs
 $randomRouteID1 = $route->getRandomRouteId(0, 25);
@@ -25,8 +25,8 @@ assert(!is_null($randomRouteID2), "Can't retrieve 2nd random route ID");
 echo "Random route ID 1 -> $randomRouteID1 <br>  Random route ID 2 -> $randomRouteID2 <br>";
 
 // Remove selected routes
-$route_ids=join(',',array($randomRouteID1,$randomRouteID2));
+$route_ids = join(',',array($randomRouteID1,$randomRouteID2));
 
-$result=$route->delete($route_ids);
+$result = $route->delete($route_ids);
 
 Route4Me::simplePrint($result);

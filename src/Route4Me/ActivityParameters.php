@@ -17,6 +17,18 @@ class ActivityParameters extends Common
     public $activity_type;
     public $activity_message;
     
+    public $activity_id;
+    public $activity_timestamp;
+    public $route_destination_id;
+    public $note_id;
+    public $member;
+    public $note_type;
+    public $note_contents;
+    public $route_name;
+    public $note_file;
+    public $destination_name;
+    public $destination_alias;
+    
     public function __construct () 
     {
         
