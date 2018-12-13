@@ -11,7 +11,7 @@ use Route4Me\Route;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 #region // Add a location, scheduled daily with custom data.
-$AdressBookLocationParameters=AddressBookLocation::fromArray(array(
+$AdressBookLocationParameters = AddressBookLocation::fromArray(array(
     "address_1"            => "1604 PARKRIDGE PKWY, Louisville, KY, 40214",
     "address_alias"        => "1604 PARKRIDGE PKWY 40214",
     "address_group"        => "Scheduled daily",
@@ -39,6 +39,7 @@ $abcResults1 = $abContacts1->addAdressBookLocation($AdressBookLocationParameters
 echo "address_id = ".strval($abcResults1["address_id"])."<br>";
 
 Route4Me::simplePrint($abcResults1);
+echo "<br>";
 #endregion
 
 #region // Add a location, scheduled weekly.
@@ -73,6 +74,7 @@ $abcResults2 = $abContacts2->addAdressBookLocation($AdressBookLocationParameters
 echo "address_id = ".strval($abcResults2["address_id"])."<br>";
 
 Route4Me::simplePrint($abcResults2);
+echo "<br>";
 #endregion
 
 #region // Add a location, scheduled monthly (dates mode).
@@ -113,7 +115,7 @@ $abcResults3 = $abContacts3->addAdressBookLocation($AdressBookLocationParameters
 echo "address_id = ".strval($abcResults3["address_id"])."<br>";
 
 Route4Me::simplePrint($abcResults3);
-
+echo "<br>";
 #endregion
 
 #region // AAdd a location, scheduled monthly (nth mode).
@@ -157,6 +159,7 @@ $abcResults4 = $abContacts4->addAdressBookLocation($AdressBookLocationParameters
 echo "address_id = ".strval($abcResults4["address_id"])."<br>";
 
 Route4Me::simplePrint($abcResults4);
+echo "<br>";
 #endregion
 
 #region // Add a location with the daily scheduling and blacklist.

@@ -23,6 +23,7 @@ $order = new Order();
 
 $response = $order->getOrder($orderParameters);
 
-foreach ($response as $key => $order) {
+foreach ($response['results'] as $key => $order) {
     Route4Me::simplePrint($order);
+    echo "<br>";
 }

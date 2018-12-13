@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me;
 
 use Route4Me\Common;
@@ -36,6 +35,28 @@ class Route extends Common
     
     public $dev_lat;
     public $dev_lng;
+    
+    public $user_route_rating;
+    public $member_email;
+    public $member_first_name;
+    public $member_last_name;
+    public $channel_name;
+    public $route_cost;
+    public $route_revenue;
+    public $net_revenue_per_distance_unit;
+    public $created_timestamp;
+    public $planned_total_route_duration;
+    public $actual_travel_distance;
+    public $actual_travel_time;
+    public $actual_footsteps;
+    public $working_time;
+    public $driving_time;
+    public $idling_time;
+    public $paying_miles;
+    public $geofence_polygon_type;
+    public $geofence_polygon_size;
+    public $notes;
+    public $member_config_storage;
 
     public static function fromArray(array $params) 
     {
@@ -349,17 +370,15 @@ class Route extends Common
             'query'  => array( 'route_id' => $route_id )
         ));
         
-        // The code below doesn't work, altough this method is described as workable in REST API 
-        /*
-        $result = Route4Me::makeRequst(array(
+         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTES_DELETE,
-            'method' => 'GET',
+            'method' => 'DELETE',
             'query'  => array(
                 'api_key' => Route4Me::getApiKey(),
                 'route_id' => $route_id,
             )
         ));
-        */
+        
         return $result;
     }
     
@@ -375,12 +394,12 @@ class Route extends Common
     
     public function GetRandomAddressFromRoute($route_id)
     {
-        $route1=Route::getRoutes($route_id,null);
+        $route1 = Route::getRoutes($route_id,null);
         
         if (isset($route1)) {
-            $addresses=$route1->addresses;
+            $addresses = $route1->addresses;
             
-            $rnd=rand(0,sizeof($addresses)-1);
+            $rnd = rand(0,sizeof($addresses)-1);
             
             return $addresses[$rnd];
             
@@ -412,7 +431,6 @@ class Route extends Common
         ));
 
         return Route::fromArray($route);
-        
     }
     
     public function GetTrackingHistoryFromTimeRange(array $params)
@@ -431,7 +449,6 @@ class Route extends Common
         ));
 
         return $route;
-        
     }
     
     public function GetAssetTracking(array $params)
@@ -446,6 +463,5 @@ class Route extends Common
         ));
 
         return $route;
-        
     }
 }

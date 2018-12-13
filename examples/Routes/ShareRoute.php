@@ -16,7 +16,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $route=new Route();
 
 // Get a random route ID
-$route_id=$route->getRandomRouteId(0, 10);
+$route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
 // Share a route with an email
@@ -26,6 +26,6 @@ $params = array(
     "recipient_email"  => "regression.autotests+share1234@gmail.com"
 );
 
-$result=$route->shareRoute($params);
+$result = $route->shareRoute($params);
 
 var_dump($result); 

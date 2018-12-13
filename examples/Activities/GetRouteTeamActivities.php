@@ -14,18 +14,21 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route ID
-$route=new Route();
-$routeId=$route->getRandomRouteId(0, 10);
+$route = new Route();
+$routeId = $route->getRandomRouteId(0, 10);
 
 assert(!is_null($routeId), "can't retrieve random route_id");
 
-$activityParameters=ActivityParameters::fromArray(array(
+$activityParameters = ActivityParameters::fromArray(array(
     "route_id"    => $routeId,
     "team"        => "true"
 ));
 
-$activities=new ActivityParameters();
-$actresults=$activities->get($activityParameters);
-$results=$activities->getValue($actresults,"results");
+$activities = new ActivityParameters();
+$actresults = $activities->get($activityParameters);
+$results = $activities->getValue($actresults,"results");
 
-Route4Me::simplePrint($results);
+foreach ($results as $result) {
+	Route4Me::simplePrint($result);
+    echo "<br>";
+}

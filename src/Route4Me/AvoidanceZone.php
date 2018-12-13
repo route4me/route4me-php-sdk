@@ -10,6 +10,7 @@ class AvoidanceZone extends Common
     public $territory_id;  // Avoidance zone id
     public $territory_name; 
     public $territory_color;
+    public $orders;
     public $member_id;
     public $territory; // Territory parameters
     
@@ -110,4 +111,3 @@ class AvoidanceZone extends Common
         return $avoidanceZone;
     }
 }
-

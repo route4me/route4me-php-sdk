@@ -15,17 +15,14 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Example refers to the process of set custom data of an address
 
-$route=new Route();
+$route = new Route();
 
 // Get a random route ID
-$route_id=$route->getRandomRouteId(0, 10);
+$route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
 // Get random address's id from selected route above
-//--------------------------------------------------------
-$addressRand=(array)$route->GetRandomAddressFromRoute($route_id);
-
-echo "Route ID -> $route_id, Route destination ID -> " . $addressRand['route_destination_id'] . "<br><br>";
+$addressRand = (array)$route->GetRandomAddressFromRoute($route_id);
 
 $route->route_id = $route_id;
 $route->route_destination_id = $addressRand['route_destination_id'];
@@ -40,6 +37,6 @@ $route->parameters->custom_fields = array(
 
 $route->httpheaders = 'Content-type: application/json';
 
-$result=$route->updateAddress();
+$result = $route->updateAddress();
 
-var_dump($result);
+Route4Me::simplePrint($result);

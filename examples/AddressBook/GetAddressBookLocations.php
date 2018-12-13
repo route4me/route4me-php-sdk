@@ -23,4 +23,7 @@ $abcResults = $abContacts->getAddressBookLocations($AdressBookLocationParameters
 
 $results = $abContacts->getValue($abcResults,"results");
 
-Route4Me::simplePrint($results);
+foreach ($results as $result) {
+	Route4Me::simplePrint($result);
+    echo "<br>";
+}

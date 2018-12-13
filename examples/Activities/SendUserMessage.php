@@ -11,18 +11,18 @@ use Route4Me\AvtivityParameters;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get random route ID
-$route=new Route();
-$route_id=$route->getRandomRouteId(0, 10);
+$route = new Route();
+$route_id = $route->getRandomRouteId(0, 10);
 
-$postParameters=ActivityParameters::fromArray(array(
+$postParameters = ActivityParameters::fromArray(array(
     "activity_type"     => "user_message",
     "activity_message"  => "Hello - php!",
     "route_id"          => $route_id
 ));
 
-$activities=new ActivityParameters();
+$activities = new ActivityParameters();
 
-$results=$activities->sendUserMessage($postParameters);
+$results = $activities->sendUserMessage($postParameters);
 
 $msg = isset($results["status"]) != null
   ? ($results["status"]==1 ? "The user message was sent to the route " : "he user message could not sent to the route ")

@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me;
 
 use Route4Me\Common;
@@ -44,6 +43,24 @@ class RouteParameters extends Common
     public $truck_width_meters;
     public $truck_length_meters;
     public $truck_hazardous_goods;
+    
+    public $vehicle_max_cargo_weight;
+    public $vehicle_max_cargo_volume;
+    public $subtour_max_revenue;
+    public $avoidance_zones;
+    public $driver_id;
+    public $parts_min;
+    public $first_drive_then_wait_between_stops;
+    public $truck_height;
+    public $truck_width;
+    public $truck_length;
+    public $optimization_quality;
+    public $override_addresses;
+    public $max_tour_size;
+    public $min_tour_size;
+    public $uturn;
+    public $leftturn;
+    public $rightturn;
 
     public static function fromArray(array $params)
     {

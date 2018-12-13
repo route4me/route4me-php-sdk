@@ -17,14 +17,14 @@ $activityTypes = new ActivityTypes();
 
 // Itereate through all the existing activity types
 foreach ($activityTypes->getConstants() as $prop => $value) {
-    $activityParameters=ActivityParameters::fromArray(array(
+    $activityParameters = ActivityParameters::fromArray(array(
         "activity_type" => $value,
         "limit"         => 2,
         "offset"        => 0
     ));
     
-    $activities=new ActivityParameters();
-    $results=$activities->searcActivities($activityParameters);
+    $activities = new ActivityParameters();
+    $results = $activities->searcActivities($activityParameters);
     
     foreach ($results as $key => $activity) {
         Route4Me::simplePrint($activity);
