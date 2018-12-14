@@ -24,6 +24,7 @@ assert(!is_null($routeId), "Can't retrieve a random route ID");
 echo "routeId -> $routeId <br><br>"; 
 
 // Set GPS postion to the selected route
+// Set right member_id corresponding to the API key
 $params = TrackSetParams::fromArray(array(
     'format'           => Format::CSV,
     'route_id'         => $routeId,
@@ -43,5 +44,4 @@ assert(!is_null($status), "Can't send GPS position to the selected route");
 assert(isset($status['status']), "Can't send GPS position to the selected route");
 assert($status['status'], "Can't send GPS position to the selected route");
 
-var_dump($status);
-
+Route4Me::simplePrint($status);

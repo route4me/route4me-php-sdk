@@ -14,7 +14,6 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Add Territory and get territory_id
-//---------------------------------------------------------
 $territory = new Territory();
 $territory->type =  TerritoryTypes::CIRCLE;
 $territory->data = array (
@@ -22,13 +21,13 @@ $territory->data = array (
     "5000"
 );
 
-$TerritoryParameters=Territory::fromArray(array(
+$TerritoryParameters = Territory::fromArray(array(
     "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territory
 ));
 
-$territory=new Territory();
+$territory = new Territory();
 
 $result = (array)$territory->addTerritory($TerritoryParameters);
 
@@ -46,4 +45,4 @@ $params = array(
 
 $result1 = $territory->getTerritory($params);
 
-Route4Me::simplePrint($result1);
+Route4Me::simplePrint($result1, true);

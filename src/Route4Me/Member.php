@@ -53,6 +53,16 @@ class Member extends Common
     public $config_key;
     public $config_value;
     
+    public $preferred_units;
+    public $preferred_language;
+    public $timezone;
+    public $OWNER_MEMBER_ID;
+    public $user_reg_state_id;
+    public $user_reg_country_id;
+    public $member_picture;
+    public $api_key;
+    public $custom_data;
+    
     public function __construct () 
     {  }
     

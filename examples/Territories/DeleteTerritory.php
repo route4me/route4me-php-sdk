@@ -17,29 +17,27 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Create a territory and get territory_id
-//---------------------------------------------------------
 $territory = new Territory();
-$territory->type =  TerritoryTypes::CIRCLE;
+$territory->type = TerritoryTypes::CIRCLE;
 $territory->data = array (
     "37.569752822786455,-77.47833251953125",
     "5000"
 );
 
-$TerritoryParameters=Territory::fromArray(array(
+$TerritoryParameters = Territory::fromArray(array(
     "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territory
 ));
 
-$territory=new Territory();
+$territory = new Territory();
 
 $result = (array)$territory->addTerritory($TerritoryParameters);
 
 assert(!is_null($result), "Can't create a territory");
 assert(isset($result["territory_id"]), "Can't create a territory");
 
-
-$territory_id=$result["territory_id"];
+$territory_id = $result["territory_id"];
 
 echo "New Territory with territory_id = $territory_id created successfuly<br>";
 echo "------------------------------------------------------------------------<br><br>";

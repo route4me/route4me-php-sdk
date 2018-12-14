@@ -4,11 +4,10 @@ namespace Route4Me;
 
 use Route4Me\Route4Me;
 use Route4Me\TrackSetParams;
+use Route4Me\Enum\Endpoint;
 
 class Track extends Common
 {
-    public static $apiUrl = '/track/set.php';
-
     public static function set(TrackSetParams $param)
     {
         $query = array_merge($param->toArray(), array(
@@ -16,7 +15,7 @@ class Track extends Common
         ));
 
         $json = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'url'    => Endpoint::TRACK_SET,
             'method' => 'GET',
             'query'  => $query
         ));

@@ -44,7 +44,7 @@ $territoryParameters = array (
        )
    );
 
-$TerritoryParameters=Territory::fromArray(array(
+$TerritoryParameters = Territory::fromArray(array(
     "territory_id"     => $territory_id,
     "territory_name"   => "Test Territory Updated as rectangle",
     "territory_color"  => "ff5500",
@@ -54,4 +54,4 @@ $TerritoryParameters=Territory::fromArray(array(
 $result1 = $territory->updateTerritory($TerritoryParameters);
 assert(isset($result1), "Can't update the territory");
 
-Route4Me::simplePrint($result1);
+Route4Me::simplePrint($result1, true);

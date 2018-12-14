@@ -170,13 +170,14 @@ class Route4Me
         }
 
         $result = curl_exec($ch);
-
+        
         $isxml=FALSE;
         $jxml="";
         if (strpos($result, '<?xml')>-1)
         {
             $xml = simplexml_load_string($result);
-            $jxml = json_encode($xml);
+            //$jxml = json_encode($xml);
+            $jxml=self::object2array($xml);
             $isxml = TRUE;
         }
         
@@ -200,6 +201,11 @@ class Route4Me
         } else {
             throw new ApiError('Something wrong');
         }
+    }
+
+    public static function object2array($object)
+    {
+        return @json_decode(@json_encode($object),1);
     }
 
     public static function makeUrlRequst($url, $options) {
@@ -277,7 +283,6 @@ class Route4Me
             $json = $jxml;
         } else $json = json_decode($result, true);
         
-        
         if (200 == $code) {
             return $json;
         } elseif (isset($json['errors'])) {
@@ -291,7 +296,7 @@ class Route4Me
      * Prints on the screen main keys and values of the array 
      *
      */
-    public static function simplePrint($results)
+    public static function simplePrint($results, $deepPrinting=null)
     {
         if (isset($results)) {
             if (is_array($results)) {
@@ -299,33 +304,38 @@ class Route4Me
                     if (is_array($result)) {
                         foreach ($result as $key1=>$result1) {
                             if (is_array($result1)) {
-                                echo $key1." --> "."Array() <br>";
-                                /**
-                                 * for deep printing here should be recursive call:
-                                 * Route4Me::simplePrint($result1); 
-                                 */
+                                  if ($deepPrinting) {
+                                      echo "<br>$key1 ------><br>";
+                                      Route4Me::simplePrint($result1,true);
+                                      echo "------<br>";
+                                  } else {
+                                      echo $key1." --> "."Array() <br>";
+                                  } 
                             } else {
                                 if (is_object($result1)) {
-                                    echo $key." --> "."Object <br>";
-                                    /**
-                                     * for deep printing here should be recursive call:
-                                     * $oarray=(array)$result1;
-                                     * Route4Me::simplePrint($oarray);
-                                     */
+                                    if ($deepPrinting) {
+                                        echo "<br>$key1 ------><br>";
+                                        $oarray=(array)$result1;
+                                        Route4Me::simplePrint($oarray,true);
+                                        echo "------<br>";
+                                    } else {
+                                        echo $key1." --> "."Object <br>";
+                                    } 
                                 } else {
                                     if (!is_null($result1)) echo $key1." --> ".$result1."<br>";    
                                 }
-                                
                             }
                         }
                     } else {
                         if (is_object($result)) {
-                            echo $key." --> "."Object <br>";
-                            /**
-                             * for deep printing here should be recursive call:
-                             * $oarray=(array)$result;
-                             * Route4Me::simplePrint($oarray);
-                             */
+                            if ($deepPrinting) {
+                                echo "<br>$key ------><br>";
+                                $oarray=(array)$result;
+                                Route4Me::simplePrint($oarray,true);
+                                echo "------<br>";
+                            } else {
+                                echo $key." --> "."Object <br>";
+                            } 
                         } else {
                             if (!is_null($result)) echo $key." --> ".$result."<br>";
                         }

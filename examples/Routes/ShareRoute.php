@@ -23,7 +23,7 @@ assert(!is_null($route_id), "Can't retrieve a random route ID");
 $params = array(
     "route_id"         => $route_id,
     "response_format"  => "json",
-    "recipient_email"  => "regression.autotests+share1234@gmail.com"
+    "recipient_email"  => "rrrrrrrrrrrrrrrr+share1234@gmail.com"
 );
 
 $result = $route->shareRoute($params);

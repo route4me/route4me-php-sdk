@@ -25,6 +25,7 @@ assert(!is_null($routeId), "Can't retrieve a random route ID");
 echo "routeId -> $routeId <br><br>"; 
 
 // Set GPS postion to the selected route
+// Set right member_id corresponding to the API key
 $params = TrackSetParams::fromArray(array(
     'format'           => Format::SERIALIZED,
     'route_id'         => $routeId,

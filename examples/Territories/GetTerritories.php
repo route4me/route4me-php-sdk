@@ -12,11 +12,14 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $territory = new Territory();
 
-$queryparameters=array (
+$queryparameters = array (
     "offset" => 0,
     "limit"  => 20
 );
 
-$aterritory = $territory->getTerritories($queryparameters);
+$response = $territory->getTerritories($queryparameters);
 
-Route4Me::simplePrint($aterritory);
+foreach ($response as $terr1) {
+	Route4Me::simplePrint($terr1, true);
+    echo "<br>";
+}

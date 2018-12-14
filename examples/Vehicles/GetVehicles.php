@@ -14,7 +14,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $vehicle = new Vehicle();
 
-$vehicleParameters=array(
+$vehicleParameters = array(
         "with_pagination" => true,
         "page"            => 2,
         "perPage"         => 10
@@ -22,6 +22,8 @@ $vehicleParameters=array(
     
 $response = $vehicle->getVehicles($vehicleParameters);
 
-foreach ($response as $key => $vehicle) {
+foreach ($response['data'] as $key => $vehicle) {
+    //echo "Key -> $key <br>";
     Route4Me::simplePrint($vehicle);
+    echo "<br>";
 }

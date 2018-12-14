@@ -6,6 +6,7 @@ use Route4Me\Enum\Endpoint;
 
 class Geocoding extends Common
 {
+    public $strExportFormat;
     public $format;
     public $addresses;
     public $pk;
@@ -32,19 +33,37 @@ class Geocoding extends Common
     
     public static function forwardGeocoding($params)
     {
-        $query = array(
-                'format'    => isset($params['format']) ? $params['format']: null,
+        $body = array(
+                'strExportFormat'    => isset($params['strExportFormat']) ? $params['strExportFormat']: null,
                 'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
             );
 
         $fgCoding = Route4Me::makeRequst(array(
             'url'    => Endpoint::GEOCODER,
             'method' => 'POST',
-            'query'  => $query
+            'body'   => $body,
+            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
         return $fgCoding;
     }
+    
+    public static function reverseGeocoding($params)
+        {
+            $query = array(
+                    'format' => isset($params['format']) ? $params['format']: null,
+                    'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
+                    'detailed' => isset($params['detailed']) ? $params['detailed'] : null,
+                );
+
+            $fgcoding = Route4Me::makeRequst(array(
+                'url'    => Endpoint::GEOCODER,
+                'method' => 'POST',
+                'query'  => $query
+            ));
+            
+            return $fgcoding;
+        }
     
     public static function getStreetData($params)
     {

@@ -28,4 +28,4 @@ $params = array(
 
 $resequence = $route->resequenceAllAddresses($params);
 
-var_dump($resequence);
+Route4me::simplePrint($resequence);
