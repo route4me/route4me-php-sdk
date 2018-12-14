@@ -21,7 +21,7 @@ $route = new Route();
 $route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
-// Get random address's id from selected route above
+// Get a random address ID from selected route above
 $addressRand = (array)$route->GetRandomAddressFromRoute($route_id);
 
 $route->route_id = $route_id;

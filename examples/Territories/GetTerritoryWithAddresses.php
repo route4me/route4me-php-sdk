@@ -17,8 +17,8 @@ $territory=new Territory();
 
 // Select a terriotry with the addresses from the list
 $params = array(
-    "offset" => 0,
-    "limit"  => 50,
+    "offset"    => 0,
+    "limit"     => 50,
     "addresses" => 1
 );
 
@@ -29,11 +29,7 @@ $territory1 = null;
 
 foreach ($results as $terr) {
     if (isset($terr['addresses'])) {
-        
-        //var_dump($terr); echo "<br> ----------> <br>";
-        
         if (sizeof($terr['addresses'])>0) {
-            
             $territory1 = $terr;
             break;
         }
@@ -53,14 +49,4 @@ $params = array(
 
 $result1 = $territory->getTerritory($params);
 
-//var_dump($result1); die("");
-
-foreach ($result1 as $key => $value) {
-    if (is_array($value)) {
-        print $key.':<br>';
-        Route4Me::simplePrint($value);
-    } else {
-        print $key.' => '.$value.'<br>';
-    }
-}
-
+Route4Me::simplePrint($result1, true);

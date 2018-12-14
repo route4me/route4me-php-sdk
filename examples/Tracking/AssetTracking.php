@@ -48,7 +48,7 @@ $result = $route->GetAssetTracking($params);
 foreach ($result as $key => $value)
 {
     if (is_array($value)) {
-        Route4Me::simplePrint($value);
+        Route4Me::simplePrint($value, true);
     } else {
         echo "$key => $value <br>";
     }

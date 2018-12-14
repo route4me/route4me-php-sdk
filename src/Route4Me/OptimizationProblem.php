@@ -15,8 +15,12 @@ class OptimizationProblem extends Common
     public $optimization_problem_id;
     public $user_errors = array();
     public $state;
+    public $optimization_errors = array();
     public $parameters;
     public $sent_to_background;
+    public $created_timestamp;
+    public $scheduled_for;
+    public $optimization_completed_timestamp;
     public $addresses = array();
     public $routes = array();
     public $links = array();

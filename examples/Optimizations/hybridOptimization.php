@@ -15,6 +15,7 @@ use Route4Me\Route4Me;
  * http://support.route4me.com/route-planning-help.php?id=manual11:tutorial3:chapter12
  */ 
 
+// This example is not available for demo API key
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 $source_file = "addresses_1000.csv";
@@ -108,7 +109,6 @@ $optimization = new OptimizationProblem();
 $hybridOptimization = $optimization->getHybridOptimization($hybridParams);
 
 if ($hybridOptimization!=null) {
-    
     if (isset($hybridOptimization['optimization_problem_id'])) {
         $optid = $hybridOptimization['optimization_problem_id'];
         
@@ -118,7 +118,6 @@ if ($hybridOptimization!=null) {
         $depotfile = "depots.csv";
         
         if (($handle = fopen("$depotfile", "r")) !== FALSE) {
-            
             $columns = fgetcsv($handle, $max_line_length, $delemietr);
             
             if (!$columns) {

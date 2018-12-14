@@ -28,9 +28,5 @@ $params = array(
 
 $routeResults = (array)$route->getRoutePoints($route_id,$params);
 
-if (isset($routeResults['directions'])) {
-    foreach ($routeResults['directions'] as $direction) {
-        Route4Me::simplePrint($direction);
-        echo "<br>";
-    }
-}
+Route4Me::simplePrint($routeResults, true);
+
