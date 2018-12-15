@@ -54,7 +54,7 @@ foreach ((array)$problem as $key => $value) {
         echo $key." --> ".$value."<br>";
     } else {
         echo "************ $key ************* <br>";
-        Route4Me::simplePrint((array)$value);
+        Route4Me::simplePrint((array)$value, true);
         echo "******************************* <br>";
     }
 }

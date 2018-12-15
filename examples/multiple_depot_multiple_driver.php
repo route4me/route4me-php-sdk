@@ -46,4 +46,4 @@ $optimizationParams->setParameters($parameters);
 
 $problem = OptimizationProblem::optimize($optimizationParams);
 
-var_dump($problem);
+Route4Me::simplePrint((array)$problem, true);

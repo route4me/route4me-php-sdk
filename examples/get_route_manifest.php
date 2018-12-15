@@ -26,6 +26,6 @@ $params = array(
 $route = Route::getRoutes($route_id, $params);
 
 foreach ($route->addresses as $addr1) {
-	Route4Me::simplePrint((array)$addr1, true);
+    Route4Me::simplePrint((array)$addr1, true);
     echo "<br>";
 }
