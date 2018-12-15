@@ -17,7 +17,7 @@ use Route4Me\Route;
 
 // Set the api key in the Route4me class
 // This example is not available for demo API key
-Route4Me::setApiKey('51d0c0701ce83855c9f62d0440096e7c');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('./addresses.json'), true);
@@ -46,4 +46,4 @@ $optimizationParams->setParameters($parameters);
 
 $problem = OptimizationProblem::optimize($optimizationParams);
 
-var_dump($problem);
+Route4Me::simplePrint((array)$problem, true);
