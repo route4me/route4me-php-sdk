@@ -7,6 +7,8 @@ require $root.'/vendor/autoload.php';
 use Route4Me\Route4Me;
 use Route4Me\AvtivityParameters;
 
+// The example refers to logging of a specific message directly to Activity Feed
+
 // Set the api key in the Route4me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 

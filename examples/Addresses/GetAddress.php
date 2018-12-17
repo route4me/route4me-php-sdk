@@ -17,13 +17,13 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $route = new Route();
 $routeId = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeId), "can't retrieve random route_id");
+assert(!is_null($routeId), "Can't retrieve random route_id");
 
 // Get random address's id from selected route above
 $addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
 $route_destination_id = $addressRand['route_destination_id'];
 
-assert(!is_null($route_destination_id), "can't retrieve random address");
+assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Get the address by route_destination_id
 $address = new Address();

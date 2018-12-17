@@ -1,4 +1,6 @@
 <?php
+namespace Route4Me;
+
 $root=realpath(dirname(__FILE__).'/../');
 require $root.'/vendor/autoload.php';
 

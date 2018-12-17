@@ -57,6 +57,7 @@ class ActivityParameters extends Common
                 'team'     => isset($params->team) ? $params->team : null,
                 'limit'    => isset($params->limit) ? $params->limit : null,
                 'offset'   => isset($params->offset) ? $params->offset : null,
+                'start'   => isset($params->start) ? $params->start : null,
             )
         ));
 

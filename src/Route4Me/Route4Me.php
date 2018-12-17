@@ -1,5 +1,4 @@
 <?php
-
 namespace Route4Me;
 
 use Route4Me\Exception\ApiError;

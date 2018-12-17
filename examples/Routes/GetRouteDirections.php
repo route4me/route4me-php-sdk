@@ -29,4 +29,3 @@ $params = array(
 $routeResults = (array)$route->getRoutePoints($route_id,$params);
 
 Route4Me::simplePrint($routeResults, true);
-
