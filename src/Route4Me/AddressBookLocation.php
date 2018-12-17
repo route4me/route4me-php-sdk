@@ -49,9 +49,6 @@ class AddressBookLocation extends Common
     public $address_priority;
     public $address_customer_po;
     
-    public function __construct () 
-    {  }
-    
     public static function fromArray(array $params)
     {
         $addressbooklocation = new AddressBookLocation();

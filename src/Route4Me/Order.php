@@ -60,8 +60,6 @@ class Order extends Common
     public $is_completed;
     public $custom_user_fields;
     
-    public function __construct () {  }
-    
     public static function fromArray(array $params) {
         $order= new Order();
         foreach($params as $key => $value) {

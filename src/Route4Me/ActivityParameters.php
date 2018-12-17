@@ -29,11 +29,6 @@ class ActivityParameters extends Common
     public $destination_name;
     public $destination_alias;
     
-    public function __construct () 
-    {
-        
-    }
-    
     public static function fromArray(array $params) 
     {
         $activityparameters = new ActivityParameters();

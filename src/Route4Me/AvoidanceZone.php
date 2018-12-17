@@ -14,11 +14,6 @@ class AvoidanceZone extends Common
     public $member_id;
     public $territory; // Territory parameters
     
-    public function __construct () 
-    {
-        
-    }
-    
     public static function fromArray(array $params) 
     {
         if (!isset($params['territory_name'])) {
