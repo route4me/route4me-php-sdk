@@ -10,9 +10,6 @@ use Route4Me\Enum\TerritoryTypes;
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
-$root=realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
-
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 

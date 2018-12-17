@@ -10,7 +10,7 @@ use Route4Me\Member;
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
-// Example refers to updating of an user.
+// Example refers to removing of an user.
 
 // Set the api key in the Route4me class
 Route4Me::setApiKey('11111111111111111111111111111111');
@@ -24,7 +24,7 @@ assert(!is_null($randomMemberID), "There is no member of the type SUB_ACCOUNT_DR
 
 // Delete member from the user's account
 $params = Member::fromArray(array (
-    "member_id"=> $randomMemberID
+    "member_id"  => $randomMemberID
 ));
 
 $response = $member->deleteMember($params);

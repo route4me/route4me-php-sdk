@@ -16,9 +16,9 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 $activityParameters = ActivityParameters::fromArray(array(
-    "limit" => 10,
+    "limit"  => 10,
     "offset" => 0,
-    "start" => strtotime("-1 week")
+    "start"  => strtotime("-1 week")
 ));
 
 $activities = new ActivityParameters();

@@ -22,12 +22,12 @@ $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
 
 $abContacts = new AddressBookLocation();
 
-$createdCOntact = $abContacts->addAdressBookLocation($AdressBookLocationParameters);
+$createdContact = $abContacts->addAdressBookLocation($AdressBookLocationParameters);
 
 $address_id = -1;
 
-if (isset($createdCOntact['address_id'])) {
-    $address_id = $createdCOntact["address_id"];
+if (isset($createdContact['address_id'])) {
+    $address_id = $createdContact["address_id"];
 }
 
 assert($address_id != -1, "Creating of Address Book Location was failed. Try again!.. <br>");
