@@ -50,4 +50,3 @@ $result = $address->markAsVisited($params);
 assert($result==1, "Cannot marked the address as visited"); 
 
 echo "<br> The address " . $route_destination_id . " was marked as visited";
- 
