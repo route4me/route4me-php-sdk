@@ -25,7 +25,7 @@ $TerritoryParameters = Territory::fromArray(array(
     "territory"        => $territory
 ));
 
-$territory=new Territory();
+$territory = new Territory();
 
 $result = $territory->addTerritory($TerritoryParameters);
 

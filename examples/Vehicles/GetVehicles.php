@@ -23,7 +23,6 @@ $vehicleParameters = array(
 $response = $vehicle->getVehicles($vehicleParameters);
 
 foreach ($response['data'] as $key => $vehicle) {
-    //echo "Key -> $key <br>";
     Route4Me::simplePrint($vehicle);
     echo "<br>";
 }

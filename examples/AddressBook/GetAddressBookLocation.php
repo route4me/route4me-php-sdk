@@ -17,9 +17,9 @@ $AdressBookLocationParameters = array(
         "offset"    => 0
     );
 
- $randomLocation = $abLocation->getRandomAddressBookLocation($AdressBookLocationParameters);
- 
- if (assert($randomLocation!=null, "Cannot get a randoma address book location"));
+$randomLocation = $abLocation->getRandomAddressBookLocation($AdressBookLocationParameters);
+
+if (assert($randomLocation!=null, "Cannot get a randoma address book location"));
 
 // Get the address book location by address_id
 $addressID = $randomLocation["address_id"];

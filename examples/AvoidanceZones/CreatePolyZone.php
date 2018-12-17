@@ -32,7 +32,7 @@ $AvoidanceZoneParameters = AvoidanceZone::fromArray(array(
     "territory"        => $territory
 ));
 
-$avoidancezone =new AvoidanceZone();
+$avoidancezone = new AvoidanceZone();
 
 $result = $avoidancezone->addAvoidanceZone($AvoidanceZoneParameters);
 

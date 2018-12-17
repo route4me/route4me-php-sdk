@@ -17,7 +17,7 @@ $territory->data = array (
     "5000"
 );
 
-$TerritoryParameters= Territory::fromArray(array(
+$TerritoryParameters = Territory::fromArray(array(
     "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territory

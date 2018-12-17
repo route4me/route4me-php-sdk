@@ -14,16 +14,17 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $ablocation = new AddressBookLocation();
 
-// Example refers to the process of searching for the routed locations 
+// Example refers to the process of searching for text and specifing returned fields. 
 
 $params = array(
+    'query'  => 'David',
+    'fields' => 'first_name,address_email',
     'offset'  => 0,
-    'limit'   => 5,
-    'display' => 'routed'
+    'limit'   => 5
 );
 
 $abcResult = $ablocation->searchRoutedLocation($params);
 
 assert(isset($abcResult['results']) && isset($abcResult['total']), "Cannot done search for the locations");
 
-echo "Was found " . $abcResult['total'] . " routed locations";
+Route4Me::simplePrint($abcResult, true);
