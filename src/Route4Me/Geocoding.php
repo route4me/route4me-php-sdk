@@ -15,9 +15,6 @@ class Geocoding extends Common
     public $housenumber;
     public $zipcode;
     
-    public function __construct () 
-    {  }
-    
     public static function fromArray(array $params) 
     {
         $geocoding = new Geocoding();
@@ -49,21 +46,21 @@ class Geocoding extends Common
     }
     
     public static function reverseGeocoding($params)
-        {
-            $query = array(
-                    'format' => isset($params['format']) ? $params['format']: null,
-                    'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
-                    'detailed' => isset($params['detailed']) ? $params['detailed'] : null,
-                );
+    {
+        $query = array(
+                'format' => isset($params['format']) ? $params['format']: null,
+                'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
+                'detailed' => isset($params['detailed']) ? $params['detailed'] : null,
+            );
 
-            $fgcoding = Route4Me::makeRequst(array(
-                'url'    => Endpoint::GEOCODER,
-                'method' => 'POST',
-                'query'  => $query
-            ));
-            
-            return $fgcoding;
-        }
+        $fgcoding = Route4Me::makeRequst(array(
+            'url'    => Endpoint::GEOCODER,
+            'method' => 'POST',
+            'query'  => $query
+        ));
+        
+        return $fgcoding;
+    }
     
     public static function getStreetData($params)
     {

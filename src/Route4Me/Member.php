@@ -63,9 +63,6 @@ class Member extends Common
     public $api_key;
     public $custom_data;
     
-    public function __construct () 
-    {  }
-    
     public static function fromArray(array $params) 
     {
         $member= new Member();
