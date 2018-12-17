@@ -17,9 +17,16 @@ $geocodingParameters = array(
 
 $fGeoCoding = new Geocoding();
 
-$fgResult = $fGeoCoding->forwardGeocoding($geocodingParameters);
+$fgResult = $fGeoCoding->reverseGeocoding($geocodingParameters);
 
-foreach (json_decode($fgResult)->destination as $gcode) {
-    var_dump($gcode);
-    echo "<br> --- <br>";
-}
+if ($geocodingParameters['format'] == 'json') {
+    foreach ($fgResult as $dest) {
+        Route4Me::simplePrint($dest);
+        echo "<br>";
+    }
+}  else {
+    foreach ($fgResult['destination'] as $dest) {
+        Route4Me::simplePrint($dest);
+        echo "<br>";
+    }
+} 

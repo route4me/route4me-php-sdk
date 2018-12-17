@@ -61,6 +61,8 @@ class RouteParameters extends Common
     public $uturn;
     public $leftturn;
     public $rightturn;
+    
+    public $optimized_callback_url;
 
     public static function fromArray(array $params)
     {

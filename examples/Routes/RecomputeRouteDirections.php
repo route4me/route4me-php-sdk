@@ -13,7 +13,7 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-// Example refers to the process of updating the parameters of a route
+// Example refers to the process of recomputing the route directions.
 
 $route = new Route();
 
@@ -24,16 +24,13 @@ assert(!is_null($route_id), "Can't retrieve a random route ID");
 $randomRoute = $route->getRoutes($route_id, null);
 assert(!is_null($randomRoute), "Can't retrieve a random route ID");
 
-// Update the route parameters
+// Recompute the route directions
 $route->route_id = $route_id;
 
 $route->parameters = new \stdClass();
 
-$route->parameters = array(
-    "member_id"           => $randomRoute->member_id,
-    "optimize"            => "Distance",
-    "route_max_duration"  => "82400",
-    "route_name"          => "updated " . date('m-d-Y')
+$route->parameters = array( 
+    "recompute_directions" => 1
 );
 
 $route->httpheaders = 'Content-type: application/json';

@@ -32,7 +32,7 @@ $route_id0 = $routes[rand(0, sizeof($routes)-1)]->route_id;
 echo "<br> From the route -> " . $route_id0 ."<br>";
 
 if (is_null($route_id0)) {
-    echo "can't retrieve random route_id!.. Try again.";
+    echo "Can't retrieve random route_id!.. Try again.";
     return;
 }
 
@@ -42,7 +42,7 @@ $route_destination_id=$addressRand['route_destination_id'];
 
 assert(!is_null($route_destination_id), "Can't retrieve random address.");
 
-echo "move destination = $route_destination_id <br>";
+echo "Moved destination ID = $route_destination_id <br>";
 
 // Get random destination route from test routes
 $to_route_id = $route_id0;
@@ -54,7 +54,7 @@ while ($to_route_id == $route_id0) {
 echo "<br> to the route -> " . $to_route_id ."<br>";
 
 if (is_null($to_route_id)) {
-    echo "can't retrieve random route_id!.. Try again.";
+    echo "Can't retrieve random route_id!.. Try again.";
     return;
 }
 

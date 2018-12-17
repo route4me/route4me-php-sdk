@@ -51,6 +51,17 @@ class Address extends Common
     public $timestamp_last_visited;
     public $custom_fields = array();
     public $manifest = array();
+    
+    public $first_name;
+    public $last_name;
+    public $is_departed;
+    public $timestamp_last_departed;
+    public $order_id;
+    public $priority;
+    public $curbside_lat;
+    public $curbside_lng;
+    public $time_window_start_2;
+    public $time_window_end_2;
 
     public static function fromArray(array $params)
     {

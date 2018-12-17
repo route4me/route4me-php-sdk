@@ -19,12 +19,12 @@ $optimization = new OptimizationProblem();
 
 $optimization_problem_id = $optimization->getRandomOptimizationId(0, 10);
 
-assert(!is_null($optimization_problem_id), "can't retrieve random optimization_problem_id");
+assert(!is_null($optimization_problem_id), "Can't retrieve random optimization_problem_id");
 
 // Get random destination from selected optimization above
 $addressRand = (array)$optimization->getRandomAddressFromOptimization($optimization_problem_id);
 
-assert(!is_null($addressRand), "can't retrieve random address");
+assert(!is_null($addressRand), "Can't retrieve random address");
 
 if (isset($addressRand['is_depot'])) {
     if ($addressRand['is_depot']) {
@@ -35,7 +35,7 @@ if (isset($addressRand['is_depot'])) {
 
 $route_destination_id = $addressRand['route_destination_id'];
 
-assert(!is_null($route_destination_id), "can't retrieve random address");
+assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Remove the destination from the optimization
 $params = array (

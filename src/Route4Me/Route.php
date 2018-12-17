@@ -132,6 +132,7 @@ class Route extends Common
                 'api_key'           => Route4Me::getApiKey(),
                 'route_id'          => $routeId,
                 'route_path_output' => isset($params['route_path_output']) ? $params['route_path_output'] : null,
+                'compress_path_points' => isset($params['compress_path_points']) ? $params['compress_path_points'] : null,
                 'directions'        => isset($params['directions']) ? $params['directions'] : null,
             )
         ));
@@ -278,7 +279,26 @@ class Route extends Common
         return Route::fromArray($route);
     }
     
-    public function updateAddress()
+    public function updateAddress($address=null)
+    {
+        $body = sizeof($this->addresses)<1 ? get_object_vars($this->parameters) 
+            : (isset($this->addresses[0]) ? $this->addresses[0] : get_object_vars($this->parameters));
+
+        $result = Route4Me::makeRequst(array(
+            'url'    => Endpoint::ADDRESS_V4,
+            'method' => 'PUT',
+            'query'  => array(
+                'route_id'             => isset($this->route_id) ? $this->route_id : null,
+                'route_destination_id' => isset($this->route_destination_id) ? $this->route_destination_id : null,
+            ),
+            'body'        => $body,
+            'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
+        ));
+
+        return $result;
+    }
+
+    public function updateRouteAddress()
     {
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_V4,
@@ -287,7 +307,10 @@ class Route extends Common
                 'route_id'             => isset($this->route_id) ? $this->route_id : null,
                 'route_destination_id' => isset($this->route_destination_id) ? $this->route_destination_id : null,
             ),
-            'body'        => get_object_vars($this->parameters),
+            'body'        => array(
+                "parameters" => isset($this->parameters) ? get_object_vars($this->parameters) : null,
+                "addresses"  => isset($this->addresses) ? $this->addresses : null
+            ),
             'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
         ));
 
