@@ -232,8 +232,8 @@ class Route extends Common
     // Returns random route_id from existing routes between $offset and $offset+$limit
     public function getRandomRouteId($offset,$limit)
     {
-        $query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
-        $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
+        $query['limit'] = isset($limit) ? $limit : 30;
+        $query['offset'] = $offset ? $offset : 0;
             
         $json = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_V4,
