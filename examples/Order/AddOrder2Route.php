@@ -37,4 +37,4 @@ $order = new Order();
 
 $response = $order->addOrder2Route($orderParameters,$body);
 
-Route4Me::simplePrint($response);
+Route4Me::simplePrint($response, true);
