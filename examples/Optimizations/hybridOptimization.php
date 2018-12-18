@@ -5,7 +5,6 @@ $root = realpath(dirname(__FILE__) . '/../../');
 require $root . '/vendor/autoload.php';
 
 use Route4Me\OptimizationProblem;
-use Route4Me\Route;
 use Route4Me\Route4Me;
 
 /* The example demonstrates process of creating a Hybrid Optimization using scheduling addresses and orders.
