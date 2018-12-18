@@ -137,11 +137,6 @@ class Route4Me
         switch($method) {
         case 'DELETE':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
-
-            if (isset($body)) {
-                
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-            }
             break;
         case 'DELETEARRAY':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
@@ -149,10 +144,6 @@ class Route4Me
             break;
         case 'PUT':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-
-            if (isset($body)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-            }
             break;
         case 'POST':
            if (isset($body)) {
@@ -168,8 +159,14 @@ class Route4Me
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
 
+        if (is_numeric(array_search($method, array('DELETE', 'PUT')))) {
+            if (isset($body)) {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+            } 
+        }
+
         $result = curl_exec($ch);
-        
+
         $isxml=FALSE;
         $jxml="";
         if (strpos($result, '<?xml')>-1)
@@ -229,10 +226,6 @@ class Route4Me
         switch($method) {
         case 'DELETE':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
-
-            if (isset($body)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-            }
             break;
         case 'DELETEARRAY':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
@@ -240,26 +233,18 @@ class Route4Me
             break;
         case 'PUT':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-            if (isset($query)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
-            }
-
-            if (isset($body)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-            }
             break;
         case 'POST':
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); 
-            if (isset($query)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
-            }
-
-            if (isset($body)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-            } 
             break;
         case 'ADD':
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
+        }
+        
+        if (is_numeric(array_search($method, array('DELETE', 'PUT', 'POST')))) {
+            if (isset($body)) {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
+            } 
         }
 
         $result = curl_exec($ch);
