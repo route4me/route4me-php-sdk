@@ -3,10 +3,8 @@ namespace Route4Me;
 
 use Route4Me\Common;
 use Route4Me\Address;
-use Route4Me\Exception\BadParam;
 use Route4Me\RouteParameters;
 use Route4Me\Route4Me;
-use GuzzleHttp\Client;
 use Route4Me\Enum\Endpoint;
 
 class Route extends Common
@@ -95,14 +93,14 @@ class Route extends Common
         return $route;
     }
 
-    public static function getRoutes($routeId=null, $params=null)
+    public static function getRoutes($routeId = null, $params = null)
     {
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'GET',
             'query'  => array(
                 'api_key'                  => Route4Me::getApiKey(),
-                'route_id'                 => !is_null($routeId) ? implode(',', (array) $routeId) : null,
+                'route_id'                 => !is_null($routeId) ? implode(',', (array)$routeId) : null,
                 'route_path_output'        => isset($params['route_path_output']) ? $params['route_path_output'] : null,
                 'query'                    => isset($params['query']) ? $params['query'] : null,
                 'directions'               => isset($params['directions']) ? $params['directions'] : null,
@@ -116,7 +114,7 @@ class Route extends Common
             return Route::fromArray($result); die("");
         } else {
             $routes = array();
-            foreach($result as $route) {
+            foreach ($result as $route) {
                 $routes[] = Route::fromArray($route);
             }
             return $routes;
@@ -230,7 +228,7 @@ class Route extends Common
     }
     
     // Returns random route_id from existing routes between $offset and $offset+$limit
-    public function getRandomRouteId($offset,$limit)
+    public function getRandomRouteId($offset, $limit)
     {
         $query['limit'] = isset($limit) ? $limit : 30;
         $query['offset'] = $offset ? $offset : 0;
@@ -244,12 +242,12 @@ class Route extends Common
         if (sizeof($json)>0) {
             $routes = array();
             
-            foreach($json as $route) {
+            foreach ($json as $route) {
                 $routes[] = Route::fromArray($route);
             }
             
-            $num=rand(0,sizeof($routes)-1);
-            $rRoute=(array)$routes[$num];
+            $num = rand(0, sizeof($routes) - 1);
+            $rRoute = (array)$routes[$num];
             
             if (is_array($rRoute)) {
                 return $rRoute["route_id"];
@@ -270,7 +268,7 @@ class Route extends Common
             'query'  => array(
                 'route_id'  => isset($this->route_id) ? $this->route_id : null
             ),
-            'body' => array (
+            'body' => array(
                 'parameters' => $this->parameters,
                 ),
             'HTTPHEADER'  => isset($this->httpheaders) ? $this->httpheaders : null,
@@ -279,7 +277,7 @@ class Route extends Common
         return Route::fromArray($route);
     }
     
-    public function updateAddress($address=null)
+    public function updateAddress($address = null)
     {
         $body = sizeof($this->addresses)<1 ? get_object_vars($this->parameters) 
             : (isset($this->addresses[0]) ? $this->addresses[0] : get_object_vars($this->parameters));
@@ -358,7 +356,7 @@ class Route extends Common
         $fname = isset($params['strFilename']) ? $params['strFilename'] : null;
         $rpath = realpath($fname);
         
-        $result= Route4Me::makeRequst(array(
+        $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
             'query'  => array(
@@ -390,7 +388,7 @@ class Route extends Common
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'DELETE',
-            'query'  => array( 'route_id' => $route_id )
+            'query'  => array('route_id' => $route_id )
         ));
         
          $result = Route4Me::makeRequst(array(
@@ -407,7 +405,8 @@ class Route extends Common
     
     public function GetAddressesFromRoute($route_id)
     {
-        $route1=Route::getRoutes($route_id,null);
+        $route1 = Route::getRoutes($route_id,null);
+        
         if (isset($route1)) {
             return $route1->addresses;
         } else {
@@ -417,15 +416,14 @@ class Route extends Common
     
     public function GetRandomAddressFromRoute($route_id)
     {
-        $route1 = Route::getRoutes($route_id,null);
+        $route1 = Route::getRoutes($route_id, null);
         
         if (isset($route1)) {
             $addresses = $route1->addresses;
             
-            $rnd = rand(0,sizeof($addresses)-1);
+            $rnd = rand(0, sizeof($addresses) - 1);
             
             return $addresses[$rnd];
-            
         } else {
             return null;
         }
