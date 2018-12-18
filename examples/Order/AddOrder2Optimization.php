@@ -39,4 +39,4 @@ $order = new Order();
 
 $response = $order->addOrder2Optimization($orderParameters,$body);
 
-Route4Me::simplePrint($response);
+Route4Me::simplePrint($response, true);
