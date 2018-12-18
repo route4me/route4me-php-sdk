@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\OptimizationProblem;
 use Route4Me\Route4Me;
@@ -43,23 +43,23 @@ $locationsFieldsMapping['monthly_dates'] = 13;
 $locationsFieldsMapping['monthly_nth_n'] = 16;
 $locationsFieldsMapping['monthly_nth_wwhat'] = 17;
 
-if (($handle = fopen("$source_file", "r")) !== FALSE) {
-        $oAbook = new AddressBookLocation();
+if (($handle = fopen("$source_file", "r"))!==FALSE) {
+    $oAbook = new AddressBookLocation();
 
-        $results = $oAbook->addLocationsFromCsvFile($handle, $locationsFieldsMapping);
-        
-        echo "Errors: <br><br>";
-        
-        foreach ($results['fail'] as $evalue) {
-            echo $evalue."<br>";
-        }
-        
-        echo "Successes: <br><br>";
-        
-        foreach ($results['success'] as $svalue) {
-            echo $svalue."<br>";
-        }
+    $results = $oAbook->addLocationsFromCsvFile($handle, $locationsFieldsMapping);
+    
+    echo "Errors: <br><br>";
+    
+    foreach ($results['fail'] as $evalue) {
+        echo $evalue."<br>";
     }
+    
+    echo "Successes: <br><br>";
+    
+    foreach ($results['success'] as $svalue) {
+        echo $svalue."<br>";
+    }
+}
 
 /* Add orders with schedules from a CSV file  */
 
@@ -77,7 +77,7 @@ $ordersFieldsMapping['order_zip_code'] = 6;
 $ordersFieldsMapping['EXT_FIELD_phone'] = 7;
 $ordersFieldsMapping['day_scheduled_for_YYMMDD'] = 8;
 
-if (($handle = fopen("$orders_file", "r")) !== FALSE) {
+if (($handle = fopen("$orders_file", "r"))!==FALSE) {
     $order = new Order();
     $results = $order->addOrdersFromCsvFile($handle, $ordersFieldsMapping);
     
@@ -116,12 +116,12 @@ if ($hybridOptimization!=null) {
         /* Add depots to the Hybrid Optimization */
         $depotfile = "depots.csv";
         
-        if (($handle = fopen("$depotfile", "r")) !== FALSE) {
+        if (($handle = fopen("$depotfile", "r"))!==FALSE) {
             $columns = fgetcsv($handle, $max_line_length, $delemietr);
             
             if (!$columns) {
                 $error['message'] = 'Empty';
-                 return ($error);
+                return ($error);
             }
             
             $depotsParams = array(
@@ -132,12 +132,12 @@ if ($hybridOptimization!=null) {
             $iRow = 1;
             $depotAddresses = array();
             
-            while (($rows = fgetcsv($handle, $max_line_length, $delemietr)) !== false) {
-                if ($rows[0] && $rows[1] && $rows[3] && array(null) !== $rows) {
+            while (($rows = fgetcsv($handle, $max_line_length, $delemietr))!==false) {
+                if ($rows[0] && $rows[1] && $rows[3] && array(null)!==$rows) {
                     $depotAddress['lat'] = $rows[0];
                     $depotAddress['lng'] = $rows[1];
                     $depotAddress['address'] = $rows[3];   
-                    array_push($depotAddresses,$depotAddress);
+                    array_push($depotAddresses, $depotAddress);
                 }
             }
             
@@ -147,11 +147,9 @@ if ($hybridOptimization!=null) {
             
             $resultDepots = $optProblem->addDepotsToHybrid($depotsParams);
             
-            var_dump($resultDepots);
-            
             /* Reoptimize hybrid optimization */
             
-            if ($resultDepots != null) {
+            if ($resultDepots!=null) {
                 $problemParams = array(
                     'optimization_problem_id'  =>  $optid
                 );
