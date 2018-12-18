@@ -68,13 +68,18 @@ class AvoidanceZone extends Common
 
     public static function addAvoidanceZone($params)
     {
+        $terParams = array();
+
+        if (isset($params->territory['type'])) $terParams['type'] = $params->territory['type'];
+        if (isset($params->territory['data'])) $terParams['data'] = $params->territory['data'];
+
         $abContacts = Route4Me::makeRequst(array(
             'url'    => Endpoint::AVOIDANCE_ZONE,
-            'method' => 'ADD',
-            'query'  => array(
+            'method' => 'POST',
+            'body'  => array(
                 'territory_name'  => isset($params->territory_name) ? $params->territory_name : null,
                 'territory_color' => isset($params->territory_color) ? $params->territory_color : null,
-                'territory'       => isset($params->territory) ? $params->territory : null,
+                'territory'       => $terParams
             )
         ));
 
