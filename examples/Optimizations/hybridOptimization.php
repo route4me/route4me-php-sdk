@@ -15,7 +15,7 @@ use Route4Me\Route4Me;
  */ 
 
 // This example is not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey('51d0c0701ce83855c9f62d0440096e7c');
 
 $source_file = "addresses_1000.csv";
 $max_line_length = 512;
@@ -119,7 +119,7 @@ if ($hybridOptimization!=null) {
         if (($handle = fopen("$depotfile", "r"))!==FALSE) {
             $columns = fgetcsv($handle, $max_line_length, $delemietr);
             
-            if (!$columns) {
+            if (empty($columns)) {
                 $error['message'] = 'Empty';
                 return ($error);
             }
