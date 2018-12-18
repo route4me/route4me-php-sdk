@@ -11,8 +11,9 @@ use Route4Me\Enum\TerritoryTypes;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 $territory = new Territory();
-$territory->type =  TerritoryTypes::CIRCLE;
-$territory->data = array (
+
+$territoryParams['type'] = TerritoryTypes::CIRCLE;
+$territoryParams['data'] = array(
     "37.569752822786455,-77.47833251953125",
     "5000"
 );
@@ -20,11 +21,11 @@ $territory->data = array (
 $TerritoryParameters = Territory::fromArray(array(
     "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
     "territory_color"  => "ff7700",
-    "territory"        => $territory
+    "territory"        => $territoryParams
 ));
 
 $territory = new Territory();
 
 $result = $territory->addTerritory($TerritoryParameters);
 
-Route4Me::simplePrint($result);
+Route4Me::simplePrint($result, true);
