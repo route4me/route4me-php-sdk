@@ -3,7 +3,6 @@ namespace Route4Me;
 
 use Route4Me\Exception\BadParam;
 use Route4Me\Route4Me;
-use GuzzleHttp\Client;
 use Route4Me\Common;
 use Route4Me\Enum\Endpoint;
 
@@ -65,25 +64,13 @@ class Address extends Common
 
     public static function fromArray(array $params)
     {
-        /*if (!isset($params['address'])) {
-            throw new BadParam('address must be provided');
-        }
-
-        if (!isset($params['lat'])) {
-            throw new BadParam('lat must be provided');
-        }
-
-        if (!isset($params['lng'])) {
-            throw new BadParam('lng must be provided');
-        }*/
-
         $address = new Address();
-        foreach($params as $key => $value) {
+        foreach ($params as $key => $value) {
             if (property_exists($address, $key)) {
                 $address->{$key} = $value;
             }
         }
-
+        
         return $address;
     }
 
@@ -97,7 +84,7 @@ class Address extends Common
                 'route_destination_id' => $addressId,
             )
         ));
-
+    
         return Address::fromArray($address);
     }
     
@@ -116,7 +103,7 @@ class Address extends Common
                 'notes'                => 1,
             )
         ));
-
+    
         return $address;
     }
 
@@ -131,7 +118,7 @@ class Address extends Common
                 'route_destination_id' => $this->route_destination_id,
             ),
         ));
-
+    
         return Address::fromArray($addressUpdate);
     }
     
@@ -146,7 +133,7 @@ class Address extends Common
             ),
             'body'   => $body
         ));
-
+    
         return $result;
     }
     
@@ -156,13 +143,13 @@ class Address extends Common
             'url'    => Endpoint::MARK_ADDRESS_DEPARTED,
             'method' => 'GET',
             'query'  => array(
-                'route_id'     => isset($params['route_id']) ? $params['route_id']: null,
-                'address_id'   => isset($params['address_id']) ? $params['address_id']: null,
-                'is_departed'  => isset($params['is_departed']) ? $params['is_departed']: null,
-                'member_id'    => isset($params['member_id']) ? $params['member_id']: null,
+                'route_id'     => isset($params['route_id']) ? $params['route_id'] : null,
+                'address_id'   => isset($params['address_id']) ? $params['address_id'] : null,
+                'is_departed'  => isset($params['is_departed']) ? $params['is_departed'] : null,
+                'member_id'    => isset($params['member_id']) ? $params['member_id'] : null,
             ),
         ));
-
+    
         return $address;
     }
     
@@ -180,7 +167,7 @@ class Address extends Common
                 'is_visited' => isset($params['is_visited']) ? $params['is_visited'] : null
             )
         ));
-
+    
         return $address;
     }
 
@@ -194,7 +181,7 @@ class Address extends Common
                 'route_destination_id' => $this->route_destination_id,
             )
         ));
-
+    
         return (bool)$address['deleted'];
     }
     
@@ -212,7 +199,6 @@ class Address extends Common
         ));
 
         return $result;
-        
     }
     
     public function AddAddressNote($params)
@@ -303,8 +289,8 @@ class Address extends Common
         foreach ($params as $key => $value) {
             $kpos = strpos($key, "custom_note_type");
             
-            if ($kpos !== false) {
-                $customArray[$key]=$value;
+            if ($kpos!==false) {
+                $customArray[$key] = $value;
             }
         }
         
