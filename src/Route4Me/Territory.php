@@ -69,13 +69,18 @@ class Territory extends Common
 
 	public static function addTerritory($params)
 	{
+	    $terParams = array();
+
+        if (isset($params->territory['type'])) $terParams['type'] = $params->territory['type'];
+        if (isset($params->territory['data'])) $terParams['data'] = $params->territory['data'];
+        
 		$response = Route4Me::makeRequst(array(
 			'url'    => Endpoint::TERRITORY_V4,
 			'method' => 'ADD',
 			'query'  => array(
 				'territory_name'  => isset($params->territory_name) ? $params->territory_name : null,
 				'territory_color' => isset($params->territory_color) ? $params->territory_color : null,
-				'territory'       => isset($params->territory) ? $params->territory : null,
+				'territory'       => $terParams
 			)
 		));
 
