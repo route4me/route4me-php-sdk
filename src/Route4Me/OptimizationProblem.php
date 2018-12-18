@@ -150,10 +150,10 @@ class OptimizationProblem extends Common
         return $this->routes;
     }
     
-    public function getRandomOptimizationId($offset,$limit)
+    public function getRandomOptimizationId($offset, $limit)
     {
-        $query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
-        $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
+        $query['limit'] = !is_null($limit) ? $limit : 30;
+        $query['offset'] = !is_null($offset) ? $offset : 0;
             
         $json = Route4Me::makeRequst(array(
             'url'    => Endpoint::OPTIMIZATION_PROBLEM,
