@@ -7,7 +7,6 @@ use Route4Me\RouteParameters;
 use Route4Me\OptimizationProblemParams;
 use Route4Me\Route;
 use Route4Me\Route4Me;
-use GuzzleHttp\Client;
 use Route4Me\Enum\Endpoint;
 
 class OptimizationProblem extends Common
@@ -93,8 +92,8 @@ class OptimizationProblem extends Common
             'url'    => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'GET',
             'query'  => array(
-                'state'  => isset($params['state'])  ? $params['state'] : null,
-                'limit'  => isset($params['limit'])  ? $params['limit'] : null,
+                'state'  => isset($params['state']) ? $params['state'] : null,
+                'limit'  => isset($params['limit']) ? $params['limit'] : null,
                 'offset' => isset($params['offset']) ? $params['offset'] : null,
                 'optimization_problem_id' => isset($params['optimization_problem_id']) 
                     ? $params['optimization_problem_id'] : null,
@@ -106,7 +105,7 @@ class OptimizationProblem extends Common
         if (isset($optimize['optimizations'])) {
             $problems = array();
             
-            foreach($optimize['optimizations'] as $problem) {
+            foreach ($optimize['optimizations'] as $problem) {
                 $problems[] = OptimizationProblem::fromArray($problem);
             }
             
@@ -163,8 +162,10 @@ class OptimizationProblem extends Common
         ));
         
         $optimizations = array();
-            foreach($json as $optimization) {
-                if (gettype($optimization)!="array") continue;
+            foreach ($json as $optimization) {
+                if (gettype($optimization)!="array") {
+                   continue; 
+                }
                 
                 foreach ($optimization as $otp1) {
                     $optimizations[] = $otp1;
@@ -180,9 +181,11 @@ class OptimizationProblem extends Common
     
     public function getAddresses($opt_id)
     {
-        if ($opt_id == null) return null;
+        if ($opt_id==null) {
+            return null;
+        }
         
-        $params = array( "optimization_problem_id" => $opt_id );
+        $params = array("optimization_problem_id" => $opt_id );
         
         $optimization = (array)$this->get($params);
         
@@ -195,12 +198,12 @@ class OptimizationProblem extends Common
     {
         $addresses = (array)$this->getAddresses($opt_id);
         
-        if ($addresses == null) {
+        if ($addresses==null) {
             echo "There are no addresses in this optimization!.. Try again.";
             return null;
         }
         
-        $num = rand(0,sizeof($addresses)-1);
+        $num = rand(0, sizeof($addresses)-1);
         
         $rAddress = $addresses[$num];
         
