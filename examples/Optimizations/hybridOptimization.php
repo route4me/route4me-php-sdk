@@ -119,7 +119,7 @@ if ($hybridOptimization!=null) {
         if (($handle = fopen("$depotfile", "r"))!==FALSE) {
             $columns = fgetcsv($handle, $max_line_length, $delemietr);
             
-            if (!$columns) {
+            if (empty($columns)) {
                 $error['message'] = 'Empty';
                 return ($error);
             }
