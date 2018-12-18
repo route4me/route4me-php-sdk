@@ -331,6 +331,12 @@ class AddressBookLocation extends Common
         $results['success'] = array();
         
         $columns = fgetcsv($csvFileHandle, $max_line_length, $delemietr);
+        
+        $addressBookFields = array("cached_lat","cached_lng","curbside_lat","curbside_lng","address_alias","address_1","address_2","address_city",
+                "address_state_id","address_zip","address_phone_number","schedule","address_group","first_name","last_name","local_time_window_start",
+                "local_time_window_end","local_time_window_start_2","local_time_window_end_2","address_email","address_country_id","address_custom_data",
+                "schedule_blacklist","service_time","local_timezone_string","color","address_icon","address_stop_type","address_cube","address_pieces",
+                "address_reference_no","address_revenue","address_weight","address_priority","address_customer_po");
 
         if (empty($columns)) {
             array_push($results['fail'],'Empty CSV table');
@@ -471,74 +477,15 @@ class AddressBookLocation extends Common
 
                 $oSchedule = json_decode($curSchedule,TRUE);
                 
-                $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
-                    "cached_lat"                 => $rows[$locationsFieldsMapping['cached_lat']],
-                    "cached_lng"                 => $rows[$locationsFieldsMapping['cached_lng']],
-                    "curbside_lat"               => isset($locationsFieldsMapping['curbside_lat'])
-                                                     ? $rows[$locationsFieldsMapping['curbside_lat']] : null,
-                    "curbside_lng"               => isset($locationsFieldsMapping['curbside_lng'])
-                                                     ? $rows[$locationsFieldsMapping['curbside_lng']] : null,
-                    "address_alias"              => isset($locationsFieldsMapping['address_alias'])
-                                                     ? $rows[$locationsFieldsMapping['address_alias']] : null,
-                    "address_1"                  => $rows[$locationsFieldsMapping['address_1']],
-                    "address_2"                  => isset($locationsFieldsMapping['address_2'])
-                                                     ? $rows[$locationsFieldsMapping['address_2']] : null,
-                    "address_city"               => isset($locationsFieldsMapping['address_city'])
-                                                      ? $rows[$locationsFieldsMapping['address_city']] : null,
-                    "address_state_id"           => isset($locationsFieldsMapping['address_state_id'])
-                                                      ? $rows[$locationsFieldsMapping['address_state_id']] : null,
-                    "address_zip"                => isset($locationsFieldsMapping['address_zip'])
-                                                      ? $rows[$locationsFieldsMapping['address_zip']] : null,
-                    "address_phone_number"       => isset($locationsFieldsMapping['address_phone_number'])
-                                                      ? $rows[$locationsFieldsMapping['address_phone_number']] : null,
-                    "schedule"                   => isset($oSchedule) ? $oSchedule : null,
-                    "address_group"              => isset($locationsFieldsMapping['address_group']) 
-                                                      ? $rows[$locationsFieldsMapping['address_group']] : null,
-                    "first_name"                 => isset($locationsFieldsMapping['first_name']) 
-                                                      ? $rows[$locationsFieldsMapping['first_name']] : null,
-                    "last_name"                  => isset($locationsFieldsMapping['last_name']) 
-                                                      ? $rows[$locationsFieldsMapping['last_name']] : null,
-                    "local_time_window_start"    => isset($locationsFieldsMapping['local_time_window_start'])
-                                                      ? $rows[$locationsFieldsMapping['local_time_window_start']] : null,
-                    "local_time_window_end"      => isset($locationsFieldsMapping['local_time_window_end'])
-                                                      ? $rows[$locationsFieldsMapping['local_time_window_end']] : null,
-                    "local_time_window_start_2"  => isset($locationsFieldsMapping['local_time_window_start_2'])
-                                                      ? $rows[$locationsFieldsMapping['local_time_window_start_2']] : null,
-                    "local_time_window_end_2"    => isset($locationsFieldsMapping['local_time_window_end_2'])
-                                                      ? $rows[$locationsFieldsMapping['local_time_window_end_2']] : null,
-                    "address_email"              => isset($locationsFieldsMapping['address_email'])
-                                                      ? $rows[$locationsFieldsMapping['address_email']] : null,
-                    "address_country_id"         => isset($locationsFieldsMapping['address_country_id'])
-                                                      ? $rows[$locationsFieldsMapping['address_country_id']] : null,
-                    "address_custom_data"        => isset($locationsFieldsMapping['address_custom_data'])
-                                                      ? $rows[$locationsFieldsMapping['address_custom_data']] : null,
-                    "schedule_blacklist"         => isset($locationsFieldsMapping['schedule_blacklist'])
-                                                      ? $rows[$locationsFieldsMapping['schedule_blacklist']] : null,
-                    "service_time"               => isset($locationsFieldsMapping['service_time'])
-                                                      ? $rows[$locationsFieldsMapping['service_time']] : null,
-                    "local_timezone_string"      => isset($locationsFieldsMapping['local_timezone_string'])
-                                                      ? $rows[$locationsFieldsMapping['local_timezone_string']] : null,
-                    "color"                      => isset($locationsFieldsMapping['color'])
-                                                      ? $rows[$locationsFieldsMapping['color']] : null,
-                    "address_icon"               => isset($locationsFieldsMapping['address_icon'])
-                                                      ? $rows[$locationsFieldsMapping['address_icon']] : null,
-                    "address_stop_type"          => isset($locationsFieldsMapping['address_stop_type'])
-                                                      ? $rows[$locationsFieldsMapping['address_stop_type']] : null,
-                    "address_cube"               => isset($locationsFieldsMapping['address_cube'])
-                                                      ? $rows[$locationsFieldsMapping['address_cube']] : null,
-                    "address_pieces"             => isset($locationsFieldsMapping['address_pieces'])
-                                                      ? $rows[$locationsFieldsMapping['address_pieces']] : null,
-                    "address_reference_no"       => isset($locationsFieldsMapping['address_reference_no'])
-                                                      ? $rows[$locationsFieldsMapping['address_reference_no']] : null,
-                    "address_revenue"            => isset($locationsFieldsMapping['address_revenue'])
-                                                      ? $rows[$locationsFieldsMapping['address_revenue']] : null,
-                    "address_weight"             => isset($locationsFieldsMapping['address_weight'])
-                                                      ? $rows[$locationsFieldsMapping['address_weight']] : null,
-                    "address_priority"           => isset($locationsFieldsMapping['address_priority'])
-                                                      ? $rows[$locationsFieldsMapping['address_priority']] : null,
-                    "address_customer_po"        => isset($locationsFieldsMapping['address_customer_po'])
-                                                      ? $rows[$locationsFieldsMapping['address_customer_po']] : null,
-                ));
+                $parametersArray = array();
+                
+                foreach ($addressBookFields as $addressBookField) {
+                    if (isset($locationsFieldsMapping[$addressBookField])) {
+                        $parametersArray[$addressBookField] = $rows[$locationsFieldsMapping[$addressBookField]];
+                    }
+                }
+                
+                $AdressBookLocationParameters = AddressBookLocation::fromArray($parametersArray);
                 
                 $abContacts = new AddressBookLocation();
 
