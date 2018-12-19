@@ -23,7 +23,7 @@ $params = array(
     'limit'   => 5
 );
 
-$abcResult = $ablocation->searchRoutedLocation($params);
+$abcResult = $ablocation->searchAddressBookLocations($params);
 
 assert(isset($abcResult['results']) && isset($abcResult['total']), "Cannot done search for the locations");
 

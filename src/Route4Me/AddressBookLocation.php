@@ -76,18 +76,14 @@ class AddressBookLocation extends Common
         return $ablocations;
     }
     
-    public static function searchRoutedLocation($params)
+    public static function searchAddressBookLocations($params)
     {
+        $allQueryFields = array('display', 'query', 'fields', 'limit', 'offset');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query'  => array(
-                'display' => isset($params['display']) ? $params['display'] : null,
-                'query'   => isset($params['query']) ? $params['query'] : null,
-                'fields'  => isset($params['fields']) ? $params['fields'] : null,
-                'limit'   => isset($params['limit']) ? $params['limit'] : null,
-                'offset'  => isset($params['offset']) ? $params['offset'] : null,
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $result;
@@ -95,13 +91,12 @@ class AddressBookLocation extends Common
     
     public static function getAddressBookLocations($params)
     {
+        $allQueryFields = array('limit', 'offset');
+        
         $ablocations = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query'  => array(
-                'limit'  => isset($params['limit']) ? $params['limit'] : null,
-                'offset' => isset($params['offset']) ? $params['offset'] : null,
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $ablocations;
@@ -122,14 +117,7 @@ class AddressBookLocation extends Common
     
     public static function getRandomAddressBookLocation($params)
     {
-        $ablocations = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'GET',
-            'query'  => array(
-                'limit'  => isset($params['limit']) ? $params['limit'] : 0,
-                'offset' => isset($params['offset']) ? $params['offset'] : 10,
-            )
-        ));
+        $ablocations = self::getAddressBookLocations(array('offset' => 0, 'limit' => 20));
         
         if (isset($ablocations["results"])) {
             $locationsSize = sizeof($ablocations["results"]);
@@ -207,22 +195,6 @@ class AddressBookLocation extends Common
         return $response;
     }
         
-    public static function get($params)
-    {
-        $ablocations = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'ADD',
-            'query'  => array(
-                'first_name' => isset($params->first_name) ? $params->first_name : null,
-                'address_1'  => isset($params->address_1) ? $params->address_1 : null,
-                'cached_lat' => isset($params->cached_lat) ? $params->cached_lat : null,
-                'cached_lng' => isset($params->cached_lng) ? $params->cached_lng : null,
-            )
-        ));
-
-        return $ablocations;
-    }
-    
     public static function validateScheduleMode($scheduleMode)
     {
         $schedMmodes = array("daily", "weekly", "monthly", "annually");
@@ -331,7 +303,7 @@ class AddressBookLocation extends Common
         }
     }
     
-    /* Function adds the locations (with/without schedule) from the CSV file. 
+    /** Function adds the locations (with/without schedule) from the CSV file. 
      * $csvFileHandle - a file handler.
      * Returns array $results which contains two arrays: fail and succes.
      */
@@ -359,157 +331,151 @@ class AddressBookLocation extends Common
 
         $iRow = 1;
         
-        while (($rows = fgetcsv($csvFileHandle, $max_line_length, $delemietr)) !== false) {
-            if ($rows[$locationsFieldsMapping['cached_lat']] 
-                  && $rows[$locationsFieldsMapping['cached_lng']] 
-                  && $rows[$locationsFieldsMapping['address_1']] 
-                  && array(null)!==$rows) {
-                $curSchedule = "";
-                $mode = "";
-                
-                if (isset($rows[$locationsFieldsMapping['schedule_mode']])) {
-                    if ($this->validateScheduleMode($rows[$locationsFieldsMapping['schedule_mode']])) {
-                        $curSchedule = '"mode":"'.$rows[$locationsFieldsMapping['schedule_mode']].'",'; 
-                        $mode = $rows[$locationsFieldsMapping['schedule_mode']];
-                    } else {
-                        array_push($results['fail'], "$iRow --> Wrong schedule mode parameter"); 
-                        $curSchedule = "";
+        while (($rows = fgetcsv($csvFileHandle, $max_line_length, $delemietr))!==false) {
+            if (!isset($rows[$locationsFieldsMapping['cached_lat']]) || !isset($rows[$locationsFieldsMapping['cached_lng']]) 
+                  || !isset($rows[$locationsFieldsMapping['address_1']]) || array(null)==$rows) {
+                continue;
+            }
+                      
+            $curSchedule = "";
+            $mode = "";
+            
+            $failCount = sizeof($results['fail']); 
+            
+            if (isset($rows[$locationsFieldsMapping['schedule_mode']])) {
+                if ($this->validateScheduleMode($rows[$locationsFieldsMapping['schedule_mode']])) {
+                    $curSchedule = '"mode":"'.$rows[$locationsFieldsMapping['schedule_mode']].'",'; 
+                    $mode = $rows[$locationsFieldsMapping['schedule_mode']];
+                } else {
+                    array_push($results['fail'], "$iRow --> Wrong schedule mode parameter"); 
+                }
+            } else {
+                array_push($results['fail'], "$iRow --> The schedule mode parameter is not set"); 
+            }
+            
+            if (isset($rows[$locationsFieldsMapping['schedule_enabled']])) {
+                if ($this->validateScheduleEnable($rows[$locationsFieldsMapping['schedule_enabled']])) { 
+                    $curSchedule .= '"enabled":'.$rows[$locationsFieldsMapping['schedule_enabled']].',';
+                } else {
+                    array_push($results['fail'], "$iRow --> The schedule enabled parameter is not set ");  
+                }
+            }
+            
+            if (isset($rows[$locationsFieldsMapping['schedule_every']])) {
+                if ($this->validateScheduleEvery($rows[$locationsFieldsMapping['schedule_every']])) {
+                    $curSchedule.='"'.$mode.'":{'.'"every":'.$rows[$locationsFieldsMapping['schedule_every']].','; 
+                    if ($mode=='daily') {
+                        $curSchedule = trim($curSchedule,',');
+                        $curSchedule.='}';
                     }
                 } else {
-                    array_push($results['fail'], "$iRow --> The schedule mode parameter is not set"); 
-                    $curSchedule = "";
+                    array_push($results['fail'], "$iRow --> The parameter sched_every is not set"); 
                 }
-                
-                if (isset($rows[$locationsFieldsMapping['schedule_enabled']])) {
-                    if ($this->validateScheduleEnable($rows[$locationsFieldsMapping['schedule_enabled']])) { 
-                        $curSchedule .= '"enabled":'.$rows[$locationsFieldsMapping['schedule_enabled']].',';
-                    } else {
-                        array_push($results['fail'], "$iRow --> The schedule enabled parameter is not set ");  
-                        $curSchedule = "";
-                    }
-                }
-                
-                if (isset($rows[$locationsFieldsMapping['schedule_every']])) {
-                    if ($this->validateScheduleEvery($rows[$locationsFieldsMapping['schedule_every']])) {
-                        $curSchedule.='"'.$mode.'":{'.'"every":'.$rows[$locationsFieldsMapping['schedule_every']].','; 
-                        if ($mode == 'daily') {
-                            $curSchedule = trim($curSchedule,',');
-                            $curSchedule.='}';
+            }
+            
+            if ($mode!='daily') {
+                switch ($mode) {
+                    case 'weekly':
+                        if (isset($rows[$locationsFieldsMapping['schedule_weekdays']])) {
+                            if ($this->validateScheduleWeekDays($rows[$locationsFieldsMapping['schedule_weekdays']])) {
+                                 $curSchedule .= '"weekdays":['.$rows[$locationsFieldsMapping['schedule_weekdays']].']}';
+                            } else {
+                                array_push($results['fail'], "$iRow --> Wrong weekdays"); 
+                            }
+                        } else {
+                            array_push($results['fail'], "$iRow --> The parameters sched_weekdays is not set"); 
                         }
-                    } else {
-                        array_push($results['fail'], "$iRow --> The parameter sched_every is not set"); 
-                        $curSchedule = ""; 
-                    }
-                }
-                
-                if ($mode!='daily') {
-                    switch ($mode) {
-                        case 'weekly':
-                            if (isset($rows[$locationsFieldsMapping['schedule_weekdays']])) {
-                                if ($this->validateScheduleWeekDays($rows[$locationsFieldsMapping['schedule_weekdays']])) {
-                                     $curSchedule .= '"weekdays":['.$rows[$locationsFieldsMapping['schedule_weekdays']].']}';
-                                } else {
-                                    array_push($results['fail'], "$iRow --> Wrong weekdays"); 
-                                    $curSchedule = "";
-                                }
+                        break;
+                    case 'monthly':
+                        $monthlyMode = "";
+                        if (isset($rows[$locationsFieldsMapping['monthly_mode']])) {
+                            if ($this->validateScheduleMonthlyMode($rows[$locationsFieldsMapping['monthly_mode']])) {
+                                 $monthlyMode = $rows[$locationsFieldsMapping['monthly_mode']];
+                                 $curSchedule .= '"mode": "'.$rows[$locationsFieldsMapping['monthly_mode']].'",';
                             } else {
-                                array_push($results['fail'], "$iRow --> The parameters sched_weekdays is not set"); 
-                                $curSchedule = "";
+                                array_push($results['fail'], "$iRow --> Wrong monthly mode"); 
                             }
-                            break;
-                        case 'monthly':
-                            $monthlyMode = "";
-                            if (isset($rows[$locationsFieldsMapping['monthly_mode']])) {
-                                if ($this->validateScheduleMonthlyMode($rows[$locationsFieldsMapping['monthly_mode']])) {
-                                     $monthlyMode = $rows[$locationsFieldsMapping['monthly_mode']];
-                                     $curSchedule .= '"mode": "'.$rows[$locationsFieldsMapping['monthly_mode']].'",';
-                                } else {
-                                    array_push($results['fail'], "$iRow --> Wrong monthly mode"); 
-                                    $curSchedule = "";
-                                }
-                            } else {
-                                array_push($results['fail'], "$iRow --> The parameter sched_monthly_mode is not set"); 
-                                $curSchedule = "";
-                            }
-                            
-                            if ($monthlyMode != "") {
-                                switch ($monthlyMode) {
-                                    case 'dates':
-                                        if (isset($rows[$locationsFieldsMapping['monthly_dates']])) {
-                                            if ($this->validateScheduleMonthlyDates($rows[$locationsFieldsMapping['monthly_dates']])) {
-                                                 $curSchedule .= '"dates":['.$rows[$locationsFieldsMapping['monthly_dates']].']}';
-                                            } else {
-                                                array_push($results['fail'], "$iRow --> Wrong monthly dates"); 
-                                                $curSchedule = "";
-                                            }
+                        } else {
+                            array_push($results['fail'], "$iRow --> The parameter sched_monthly_mode is not set"); 
+                        }
+                        
+                        if ($monthlyMode!="") {
+                            switch ($monthlyMode) {
+                                case 'dates':
+                                    if (isset($rows[$locationsFieldsMapping['monthly_dates']])) {
+                                        if ($this->validateScheduleMonthlyDates($rows[$locationsFieldsMapping['monthly_dates']])) {
+                                             $curSchedule .= '"dates":['.$rows[$locationsFieldsMapping['monthly_dates']].']}';
+                                        } else {
+                                            array_push($results['fail'], "$iRow --> Wrong monthly dates"); 
                                         }
-                                        break;
-                                    case 'nth':
-                                        if (isset($rows[$locationsFieldsMapping['monthly_nth_n']])) {
-                                            if ($this->validateScheduleNthN($rows[$locationsFieldsMapping['monthly_nth_n']])) {
-                                                 $curSchedule .= '"nth":{"n":'.$rows[$locationsFieldsMapping['monthly_nth_n']].',';
+                                    }
+                                    break;
+                                case 'nth':
+                                    if (isset($rows[$locationsFieldsMapping['monthly_nth_n']])) {
+                                        if ($this->validateScheduleNthN($rows[$locationsFieldsMapping['monthly_nth_n']])) {
+                                             $curSchedule .= '"nth":{"n":'.$rows[$locationsFieldsMapping['monthly_nth_n']].',';
+                                        } else {
+                                            array_push($results['fail'], "$iRow --> Wrong parameter sched_nth_n"); 
+                                        }
+                                    } else {
+                                        array_push($results['fail'], "$iRow --> The parameter sched_nth_n is not set"); 
+                                    }
+                                    
+                                    if ($curSchedule!="") {
+                                        if (isset($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
+                                            if ($this->validateScheduleNthWhat($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
+                                                 $curSchedule .= '"what":'.$rows[$locationsFieldsMapping['monthly_nth_wwhat']].'}}';
                                             } else {
-                                                array_push($results['fail'], "$iRow --> Wrong parameter sched_nth_n"); 
-                                                $curSchedule = "";
+                                                array_push($results['fail'], "$iRow --> Wrong parameter sched_nth_what"); 
                                             }
                                         } else {
-                                            array_push($results['fail'], "$iRow --> The parameter sched_nth_n is not set"); 
-                                            $curSchedule = "";
+                                            array_push($results['fail'], "$iRow --> The parameter sched_nth_what is not set"); 
                                         }
-                                        
-                                        if ($curSchedule != "") {
-                                            if (isset($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
-                                                if ($this->validateScheduleNthWhat($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
-                                                     $curSchedule .= '"what":'.$rows[$locationsFieldsMapping['monthly_nth_wwhat']].'}}';
-                                                } else {
-                                                    array_push($results['fail'], "$iRow --> Wrong parameter sched_nth_what"); 
-                                                    $curSchedule = "";
-                                                }
-                                            } else {
-                                                array_push($results['fail'], "$iRow --> The parameter sched_nth_what is not set"); 
-                                                $curSchedule = "";
-                                            }
-                                        }
-                                        break;
-                                }
+                                    }
+                                    break;
                             }
-                            break;
-                        default:
-                            $curSchedule = "";
-                            break;
-                    }
+                        }
+                        break;
+                    default:
+                        $curSchedule = "";
+                        break;
                 }
-
-                if (($mode == 'daily' || $mode == 'weekly' || $mode == 'monthy') && $curSchedule == "") {
-                    $iRow++; 
-                    continue;
-                }
-                
-                $curSchedule = strtolower($curSchedule);
-                
-                $curSchedule = '[{'.$curSchedule.'}]';
-
-                $oSchedule = json_decode($curSchedule,TRUE);
-                
-                $parametersArray = array();
-                
-                foreach ($addressBookFields as $addressBookField) {
-                    if (isset($locationsFieldsMapping[$addressBookField])) {
-                        $parametersArray[$addressBookField] = $rows[$locationsFieldsMapping[$addressBookField]];
-                    }
-                }
-                
-                $AdressBookLocationParameters = AddressBookLocation::fromArray($parametersArray);
-                
-                $abContacts = new AddressBookLocation();
-
-                $abcResults = $abContacts->addAdressBookLocation($AdressBookLocationParameters); //temporarry
-                
-                array_push($results['success'], "The schedule location with address_id = ".strval($abcResults["address_id"])." added successfuly.");
             }
+
+            if (sizeof($results['fail'])>$failCount) {
+                $curSchedule = "";
+            }
+
+            if (($mode=='daily' || $mode=='weekly' || $mode=='monthy') && $curSchedule=="") {
+                $iRow++; 
+                continue;
+            }
+            
+            $curSchedule = strtolower($curSchedule);
+            
+            $curSchedule = '[{'.$curSchedule.'}]';
+
+            $oSchedule = json_decode($curSchedule,TRUE);
+            
+            $parametersArray = array();
+            
+            foreach ($addressBookFields as $addressBookField) {
+                if (isset($locationsFieldsMapping[$addressBookField])) {
+                    $parametersArray[$addressBookField] = $rows[$locationsFieldsMapping[$addressBookField]];
+                }
+            }
+            
+            $AdressBookLocationParameters = AddressBookLocation::fromArray($parametersArray);
+            
+            $abContacts = new AddressBookLocation();
+
+            $abcResults = $abContacts->addAdressBookLocation($AdressBookLocationParameters); //temporarry
+            
+            array_push($results['success'], "The schedule location with address_id = ".strval($abcResults["address_id"])." added successfuly.");
         }
 
         return $results;
     }
+
  }
-    
+ 
