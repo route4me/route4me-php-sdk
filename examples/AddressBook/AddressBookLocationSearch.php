@@ -20,7 +20,7 @@ $params = array(
     "limit"  => 20,
 );
 
-$abcResult = $ablocation->searchRoutedLocation($params);
+$abcResult = $ablocation->searchAddressBookLocations($params);
 
 $results = $ablocation->getValue($abcResult,"results");
 
