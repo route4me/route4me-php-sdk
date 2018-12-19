@@ -43,4 +43,4 @@ echo "route_destination_id = $route_destination_id <br><br>";
 
 $address1 = $address->AddAddressNote($noteParameters);
 
-Route4Me::simplePrint($address1);
+Route4Me::simplePrint((array)$address1, true);
