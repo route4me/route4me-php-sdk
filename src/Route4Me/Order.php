@@ -60,6 +60,8 @@ class Order extends Common
     public $is_completed;
     public $custom_user_fields;
     
+    public $addresses = array();
+    
     public static function fromArray(array $params) {
         $order = new Order();
         foreach ($params as $key => $value) {
@@ -76,54 +78,47 @@ class Order extends Common
      */
     public static function addOrder($params)
     {
-        $body = array();
-        
-        $allAddOrderParameters = array('address_1', 'address_2', 'member_id', 'cached_lat', 'cached_lng', 'curbside_lat', 
+        $allBodyFields = array('address_1', 'address_2', 'member_id', 'cached_lat', 'cached_lng', 'curbside_lat', 
         'curbside_lng', 'color', 'order_icon', 'day_scheduled_for_YYMMDD', 'address_alias', 'address_city', 'address_state_id', 
         'address_country_id', 'address_zip', 'local_time_window_start', 'local_time_window_end', 'local_time_window_start_2', 
         'local_time_window_end_2', 'service_time', 'local_timezone_string', 'EXT_FIELD_first_name', 'EXT_FIELD_last_name', 
         'EXT_FIELD_email', 'EXT_FIELD_phone', 'EXT_FIELD_custom_data', 'is_validated', 'is_pending', 'is_accepted', 'is_started', 
         'is_completed', 'custom_user_fields');
         
-        foreach ($allAddOrderParameters as $addOrderParameter) {
-            if (isset($params->{$addOrderParameter})) $body[$addOrderParameter] = $params->{$addOrderParameter};
-        }
-       
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'POST',
-            'body'   => $body
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $response;
     }
 
-    public static function addOrder2Route($params, $body)
+    public static function addOrder2Route($params)
     {
+        $allQueryFields = array('route_id', 'redirect');
+        $allBodyFields = array('addresses');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'PUT',
-            'query'  => array(
-                'route_id' => isset($params->route_id) ? $params->route_id : null,
-                'redirect' => isset($params->redirect) ? $params->redirect : null
-            ),
-            'body' => (array)$body
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $response;
     }
     
-    public static function addOrder2Optimization($params, $body)
+    public static function addOrder2Optimization($params)
     {
+        $allQueryFields = array('optimization_problem_id', 'redirect', 'device_type');
+        $allBodyFields = array('addresses');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'PUT',
-            'query'  => array(
-                'optimization_problem_id' =>  isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
-                'redirect'                => isset($params['redirect']) ? $params['redirect'] : null,
-                'device_type'             => isset($params['device_type']) ? $params['device_type'] : null
-            ),
-            'body'  => (array)$body
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $response;
@@ -131,17 +126,12 @@ class Order extends Common
     
     public static function getOrder($params)
     {
-        $query = array();
-        $allGetParameters = array('order_id', 'fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit' );
-        
-        foreach ($allGetParameters as $getParameter) {
-            if (isset($params->{$getParameter})) $query[$getParameter] = $params->{$getParameter};
-        }
+        $allQueryFields = array('order_id', 'fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit');
 
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'GET',
-            'query'  => $query
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $response;
@@ -149,13 +139,12 @@ class Order extends Common
     
     public static function getOrders($params)
     {
+        $allQueryFields = array('offset', 'limit');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'GET',
-            'query'  => array(
-                'offset' => isset($params->offset) ? $params->offset : null,
-                'limit'  => isset($params->limit) ? $params->limit : null
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $response;
@@ -199,23 +188,30 @@ class Order extends Common
     
     public static function removeOrder($params)
     {
+        $allBodyFields = array('order_ids');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'DELETE',
-            'body'   => array(
-                'order_ids' =>  isset($params->order_ids) ? $params->order_ids : null
-            )
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $response;
     }
     
-    public static function updateOrder($body)
+    public static function updateOrder($params)
     {
+        $allBodyFields = array('order_id', 'address_1', 'address_2', 'cached_lat', 'cached_lng', 'curbside_lat', 
+        'curbside_lng', 'color', 'order_icon', 'day_scheduled_for_YYMMDD', 'address_alias', 'address_city', 'address_state_id', 
+        'address_country_id', 'address_zip', 'local_time_window_start', 'local_time_window_end', 'local_time_window_start_2', 
+        'local_time_window_end_2', 'service_time', 'local_timezone_string', 'EXT_FIELD_first_name', 'EXT_FIELD_last_name', 
+        'EXT_FIELD_email', 'EXT_FIELD_phone', 'EXT_FIELD_custom_data', 'is_validated', 'is_pending', 'is_accepted', 'is_started', 
+        'is_completed', 'custom_user_fields');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'PUT',
-            'body'   => (array)$body
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $response;
@@ -223,43 +219,38 @@ class Order extends Common
     
     public static function searchOrder($params)
     {
-        $query = array();
-        $allSearchParameters = array('fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit' );
-        
-        foreach ($allSearchParameters as $searchParameter) {
-            if (isset($params->{$searchParameter})) $query[$searchParameter] = $params->{$searchParameter};
-        }
+        $allQueryFields = array('fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit' );
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
             'method' => 'GET',
-            'query'  => $query
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $response;
     }
     
-    public static function validateLatitude($lat)
+    public static function validateCoordinate($coord)
     {
-        if (!is_numeric($lat)) {
+        $key = key($coord);
+        
+        if (!is_numeric($coord[$key])) {
             return false;
         }
         
-        if ($lat>90 || $lat<-90) {
-            return false;
-        }
-        
-        return true;
-    }
-    
-    public static function validateLongitude($lng)
-    {
-        if (!is_numeric($lng)) {
-            return false;
-        }
-        
-        if ($lng>180 || $lng<-180) {
-            return false;
+        switch (variable) {
+            case 'cached_lat':
+            case 'curbside_lat':
+                if ($lat>90 || $lat<-90) {
+                    return false;
+                }
+                break;
+            case 'cached_lng':
+            case 'curbside_lng':
+                if ($lng>180 || $lng<-180) {
+                    return false;
+                }
+                break;
         }
         
         return true;
@@ -292,59 +283,33 @@ class Order extends Common
             if ($rows[$ordersFieldsMapping['cached_lat']] && $rows[$ordersFieldsMapping['cached_lng']] && $rows[$ordersFieldsMapping['address_1']] && array(null)!==$rows) {
                 
                 $cached_lat = 0.000;
-                
-                if (!$this->validateLatitude($rows[$ordersFieldsMapping['cached_lat']])) {
-                    array_push($results['fail'], "$iRow --> Wrong cached_lat"); 
-                    $iRow++;
-                    continue;
-                } else {
-                    $cached_lat = doubleval($rows[$ordersFieldsMapping['cached_lat']]);
-                }
-                
                 $cached_lng = 0.000;
                 
-                if (!$this->validateLongitude($rows[$ordersFieldsMapping['cached_lng']])) {
-                    array_push($results['fail'], "$iRow --> Wrong cached_lng"); 
-                    $iRow++;
-                    continue;
-                } else {
-                    $cached_lng = doubleval($rows[$ordersFieldsMapping['cached_lng']]);
-                }
-                
-                if (isset($ordersFieldsMapping['curbside_lat'])) {
-                    if (!$this->validateLatitude($rows[$ordersFieldsMapping['curbside_lat']])) {
-                        array_push($results['fail'], "$iRow --> Wrong curbside_lat"); 
+                foreach (array('cached_lat', 'cached_lng', 'curbside_lat', 'curbside_lng') as $coord) {
+                    if (!$this->validateCoordinate(array($coord => $rows[$ordersFieldsMapping[$coord]]))) {
+                        array_push($results['fail'], "$iRow --> Wrong "+$coord); 
                         $iRow++;
                         continue;
-                    }
-                }
-                
-                if (isset($ordersFieldsMapping['curbside_lng'])) {
-                    if (!$this->validateLongitude($rows[$ordersFieldsMapping['curbside_lng']])) {
-                        array_push($results['fail'], "$iRow --> Wrong curbside_lng"); 
-                        $iRow++;
-                        continue;
+                    } else {
+                        switch ($coord) {
+                            case 'cached_lat':
+                                $cached_lat = doubleval($rows[$ordersFieldsMapping[$coord]]);
+                                break;
+                            case 'cached_lng':
+                                $cached_lng = doubleval($rows[$ordersFieldsMapping[$coord]]);
+                                break;
+                        }
                     }
                 }
                 
                 $address = $rows[$ordersFieldsMapping['address_1']];
                 
-                if (isset($ordersFieldsMapping['order_city'])) {
-                    $address.=', '.$rows[$ordersFieldsMapping['order_city']];
+                foreach (array('order_city', 'order_state_id', 'order_zip_code', 'order_country_id') as $addressPart) {
+                    if (isset($ordersFieldsMapping[$addressPart])) {
+                        $address .= ', '.$rows[$ordersFieldsMapping[$addressPart]];
+                    }
                 }
-                
-                if (isset($ordersFieldsMapping['order_state_id'])) {
-                    $address.=', '.$rows[$ordersFieldsMapping['order_state_id']];
-                }
-                
-                if (isset($ordersFieldsMapping['order_zip_code'])) {
-                    $address.=', '.$rows[$ordersFieldsMapping['order_zip_code']];
-                }
-                
-                if (isset($ordersFieldsMapping['order_country_id'])) {
-                    $address.=', '.$rows[$ordersFieldsMapping['order_country_id']];
-                }
-                
+
                 echo "$iRow --> ".$ordersFieldsMapping['day_scheduled_for_YYMMDD'].", ".$rows[$ordersFieldsMapping['day_scheduled_for_YYMMDD']]."<br>";
                 
                 $parametersArray = array();
