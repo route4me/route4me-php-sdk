@@ -112,48 +112,31 @@ class Member extends Common
         return $response;
     }
     
-    public static function addDeviceRecord($body)
+    public static function addDeviceRecord($params)
     {
+        $allQueryFields = array('device_id', 'device_type');
+        $allBodyFields = array('device_id', 'device_type', 'format');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::VERIFY_DEVICE_LICENSE,
             'method' => 'POST',
-            'query'  => array(
-                'device_id'   => isset($body->device_id)   ? $body->device_id : null,
-                'device_type' => isset($body->device_type) ? $body->device_type : null,
-            ),
-            'body'   => array(
-                'device_id'   => isset($body->device_id)   ? $body->device_id : null,
-                'device_type' => isset($body->device_type) ? $body->device_type : null,
-                'format'      => isset($body->format)      ? $body->format : null
-            )
-
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $response;
     }
     
-    public static function createMember($body)
+    public static function createMember($params)
     {
+        $allBodyFields = array('HIDE_ROUTED_ADDRESSES', 'member_phone', 'member_zipcode', 'route_count', 'member_email', 
+        'HIDE_VISITED_ADDRESSES', 'READONLY_USER', 'member_type', 'date_of_birth', 'member_first_name', 'member_password', 
+        'HIDE_NONFUTURE_ROUTES', 'member_last_name', 'SHOW_ALL_VEHICLES', 'SHOW_ALL_DRIVERS');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::USER_V4,
             'method' => 'POST',
-            'body'   => array(
-                'HIDE_ROUTED_ADDRESSES'  => isset($body->HIDE_ROUTED_ADDRESSES) ? $body->HIDE_ROUTED_ADDRESSES : null,
-                'member_phone'           => isset($body->member_phone) ? $body->member_phone : null,
-                'member_zipcode'         => isset($body->member_zipcode) ? $body->member_zipcode : null,
-                'route_count'            => isset($body->route_count) ? $body->route_count : null,
-                'member_email'           => isset($body->member_email) ? $body->member_email : null,
-                'HIDE_VISITED_ADDRESSES' => isset($body->HIDE_VISITED_ADDRESSES) ? $body->HIDE_VISITED_ADDRESSES : null,
-                'READONLY_USER'          => isset($body->READONLY_USER) ? $body->READONLY_USER : null,
-                'member_type'            => isset($body->member_type) ? $body->member_type : null,
-                'date_of_birth'          => isset($body->date_of_birth) ? $body->date_of_birth : null,
-                'member_first_name'      => isset($body->member_first_name) ? $body->member_first_name : null,
-                'member_password'        => isset($body->member_password) ? $body->member_password : null,
-                'HIDE_NONFUTURE_ROUTES'  => isset($body->HIDE_NONFUTURE_ROUTES) ? $body->HIDE_NONFUTURE_ROUTES : null,
-                'member_last_name'       => isset($body->member_last_name) ? $body->member_last_name : null,
-                'SHOW_ALL_VEHICLES'      => isset($body->SHOW_ALL_VEHICLES) ? $body->SHOW_ALL_VEHICLES : null,
-                'SHOW_ALL_DRIVERS'       => isset($body->SHOW_ALL_DRIVERS) ? $body->SHOW_ALL_DRIVERS : null
-            )
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $response;
@@ -184,27 +167,14 @@ class Member extends Common
 
     public static function updateMember($body)
     {
+        $allBodyFields = array('member_id', 'member_phone', 'HIDE_ROUTED_ADDRESSES', 'member_zipcode', 'route_count', 
+        'member_email', 'HIDE_VISITED_ADDRESSES', 'READONLY_USER', 'date_of_birth', 'member_first_name', 
+        'member_password', 'HIDE_NONFUTURE_ROUTES', 'member_last_name', 'SHOW_ALL_VEHICLES', 'SHOW_ALL_DRIVERS');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::USER_V4,
             'method' => 'PUT',
-            'body'   => array(
-                'member_id'              => isset($body->member_id) ? $body->member_id : null,
-                'member_phone'           => isset($body->member_phone) ? $body->member_phone : null,
-                'HIDE_ROUTED_ADDRESSES'  => isset($body->HIDE_ROUTED_ADDRESSES) ? $body->HIDE_ROUTED_ADDRESSES : null,
-                'member_zipcode'         => isset($body->member_zipcode) ? $body->member_zipcode : null,
-                'route_count'            => isset($body->route_count) ? $body->route_count : null,
-                'member_email'           => isset($body->member_email) ? $body->member_email : null,
-                'HIDE_VISITED_ADDRESSES' => isset($body->HIDE_VISITED_ADDRESSES) ? $body->HIDE_VISITED_ADDRESSES : null,
-                'READONLY_USER'          => isset($body->READONLY_USER) ? $body->READONLY_USER : null,
-                'date_of_birth'          => isset($body->date_of_birth) ? $body->date_of_birth : null,
-                'member_first_name'      => isset($body->member_first_name) ? $body->member_first_name : null,
-                'member_password'        => isset($body->member_password) ? $body->member_password : null,
-                'HIDE_NONFUTURE_ROUTES'  => isset($body->HIDE_NONFUTURE_ROUTES) ? $body->HIDE_NONFUTURE_ROUTES : null,
-                'member_last_name'       => isset($body->member_last_name) ? $body->member_last_name : null,
-                'SHOW_ALL_VEHICLES'      => isset($body->SHOW_ALL_VEHICLES) ? $body->SHOW_ALL_VEHICLES : null,
-                'SHOW_ALL_DRIVERS'       => isset($body->SHOW_ALL_DRIVERS) ? $body->SHOW_ALL_DRIVERS : null
-            )
-
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $body)
         ));
         
         return $response;
@@ -224,29 +194,18 @@ class Member extends Common
         return $response;
     }
     
-    public static function newAccountRegistration($body)
+    public static function newAccountRegistration($params)
     {
+        $allQueryFields = array('plan');
+        $allBodyFields = array('strEmail', 'strPassword_1', 'strPassword_2', 'strFirstName', 
+        'strLastName', 'format', 'strIndustry', 'chkTerms', 
+        'device_type', 'strSubAccountType', 'blDisableMarketing', 'blDisableAccountActivationEmail');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::REGISTER_ACTION,
             'method' => 'POST',
-            'query'  => array(
-                'plan' => isset($body->plan) ? $body->plan : null
-            ),
-            'body'   => array(
-                'strEmail'                        => isset($body->strEmail) ? $body->strEmail : null,
-                'strPassword_1'                   => isset($body->strPassword_1) ? $body->strPassword_1 : null,
-                'strPassword_2'                   => isset($body->strPassword_2) ? $body->strPassword_2 : null,
-                'strFirstName'                    => isset($body->strFirstName) ? $body->strFirstName : null,
-                'strLastName'                     => isset($body->strLastName) ? $body->strLastName : null,
-                'format'                          => isset($body->format) ? $body->format : null,
-                'strIndustry'                     => isset($body->strIndustry) ? $body->strIndustry : null,
-                'chkTerms'                        => isset($body->chkTerms) ? $body->chkTerms : null,
-                'device_type'                     => isset($body->device_type) ? $body->device_type : null,
-                'strSubAccountType'               => isset($body->strSubAccountType) ? $body->strSubAccountType : null,
-                'blDisableMarketing'              => isset($body->blDisableMarketing) ? $body->blDisableMarketing : false,
-                'blDisableAccountActivationEmail' => isset($body->blDisableAccountActivationEmail) 
-                                                     ? $body->blDisableAccountActivationEmail : false
-            ),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
@@ -255,127 +214,108 @@ class Member extends Common
     
     public static function validateSession($params)
     {
+        $allQueryFields = array('session_guid', 'member_id', 'format');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::VALIDATE_SESSION,
             'method' => 'GET',
-            'query'  => array(
-                'session_guid' => isset($params->session_guid) ? $params->session_guid : null,
-                'member_id'    => isset($params->member_id) ? $params->member_id : null,
-                'format'       => isset($params->format) ? $params->format : null
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
         
         return $response;
     }
     
-    public static function memberAuthentication($body)
+    public static function memberAuthentication($params)
     {
+        $allBodyFields = array('strEmail', 'strPassword', 'format');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::AUTHENTICATE,
             'method' => 'POST',
-            'body'   => array(
-                'strEmail'    => isset($body->strEmail) ? $body->strEmail : null,
-                'strPassword' => isset($body->strPassword) ? $body->strPassword : null,
-                'format'      => isset($body->format) ? $body->format : null
-            ),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
         return $response;
     }
     
-    public static function webinarRegistration($body)
+    public static function webinarRegistration($params)
     {
+        $allBodyFields = array('email_address', 'first_name', 'last_name', 'phone_number', 
+        'company_name', 'member_id', 'webiinar_date');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::WEBINAR_REGISTER,
             'method' => 'POST',
-            'body'   => array(
-                'email_address'  => isset($body->email_address) ? $body->email_address : null,
-                'first_name'     => isset($body->first_name) ? $body->first_name : null,
-                'last_name'      => isset($body->last_name) ? $body->last_name : null,
-                'phone_number'   => isset($body->phone_number) ? $body->phone_number : null,
-                'phone_number'   => isset($body->phone_number) ? $body->phone_number : null,
-                'member_id'      => isset($body->member_id) ? $body->member_id : null,
-                'webiinar_date'  => isset($body->webiinar_date) ? $body->webiinar_date : null,
-            )
-
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $response;
     }
     
-    public static function purchaseUserLicense($body)
+    public static function purchaseUserLicense($params)
     {
+        $allQueryFields = array('device_id');
+        $allBodyFields = array('member_id', 'session_guid', 'device_id', 'device_type', 
+        'subscription_name', 'token', 'payload', 'format');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::USER_LICENSE,
             'method' => 'POST',
-            'query'  => array(
-                'device_id'         => isset($body->device_id) ? $body->device_id : null
-            ),
-            'body'   => array(
-                'member_id'         => isset($body->member_id) ? $body->member_id : null,
-                'session_guid'      => isset($body->session_guid) ? $body->session_guid : null,
-                'device_id'         => isset($body->device_id) ? $body->device_id : null,
-                'device_type'       => isset($body->device_type) ? $body->device_type : null,
-                'subscription_name' => isset($body->subscription_name) ? $body->subscription_name : null,
-                'token'             => isset($body->token) ? $body->token : null,
-                'payload'           => isset($body->payload) ? $body->payload : null,
-                'format'            => isset($body->format) ? $body->format : null,
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $response;
     }
     
-    public static function newMemberConfigKey($body)
+    public static function newMemberConfigKey($params)
     {
+        $allBodyFields = array('config_key', 'config_value');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::CONFIGURATION_SETTINGS,
             'method' => 'POST',
-            'body'   => array(
-                'config_key'   => isset($body->config_key) ? $body->config_key : null,
-                'config_value' => isset($body->config_value) ? $body->config_value : null
-            )
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $response;
     }
     
-    public static function removeMemberConfigKey($body)
+    public static function removeMemberConfigKey($params)
     {
+        $allBodyFields = array('config_key');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::CONFIGURATION_SETTINGS,
             'method' => 'DELETE',
-            'body'   => array(
-                'config_key' =>  isset($body->config_key) ? $body->config_key : null
-            )
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $response;
     }
     
-    public static function getMemberConfigData($body)
+    public static function getMemberConfigData($params)
     {
+        $allQueryFields = array('config_key');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::CONFIGURATION_SETTINGS,
             'method' => 'GET',
-            'query'  => array(
-                'config_key' =>  isset($body->config_key) ? $body->config_key : null
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
         
         return $response;
     }
 
-    public static function updateMemberConfigKey($body)
+    public static function updateMemberConfigKey($params)
     {
+        $allBodyFields = array('config_key', 'config_value');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::CONFIGURATION_SETTINGS,
             'method' => 'PUT',
-            'body'   => array(
-                'config_key'   => isset($body->config_key) ? $body->config_key : null,
-                'config_value' => isset($body->config_value) ? $body->config_value : null
-            )
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $response;
