@@ -44,16 +44,12 @@ class ActivityParameters extends Common
     
     public static function get($params)
     {
+        $allQueryFields = array('route_id', 'team', 'limit', 'offset', 'start');
+        
         $activity = Route4Me::makeRequst(array(
             'url'    => Endpoint::GET_ACTIVITIES,
             'method' => 'GET',
-            'query'  => array(
-                'route_id' => isset($params->route_id) ? $params->route_id : null,
-                'team'     => isset($params->team) ? $params->team : null,
-                'limit'    => isset($params->limit) ? $params->limit : null,
-                'offset'   => isset($params->offset) ? $params->offset : null,
-                'start'   => isset($params->start) ? $params->start : null,
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $activity;
@@ -61,30 +57,25 @@ class ActivityParameters extends Common
 
     public static function searcActivities($params)
     {
+        $allQueryFields = array('route_id', 'limit', 'offset', 'activity_type');
+        
         $activity = Route4Me::makeRequst(array(
             'url'    => Endpoint::GET_ACTIVITIES,
             'method' => 'GET',
-            'query'  => array(
-                'route_id'      => isset($params->route_id) ? $params->route_id : null,
-                'limit'         => isset($params->limit) ? $params->limit : null,
-                'offset'        => isset($params->offset) ? $params->offset : null,
-                'activity_type' => isset($params->activity_type) ? $params->activity_type : null,
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $activity;
     }
     
-    public static function sendUserMessage($postParameters)
+    public static function sendUserMessage($params)
     {
+        $allBodyFields = array('activity_type', 'activity_message', 'route_id');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ACTIVITY_FEED,
             'method' => 'POST',
-            'body'   => array(
-                'activity_type'    => isset($postParameters->activity_type) ? $postParameters->activity_type : null,
-                'activity_message' => isset($postParameters->activity_message) ? $postParameters->activity_message : null,
-                'route_id'         => isset($postParameters->route_id) ? $postParameters->route_id : null,
-            )
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $result;
