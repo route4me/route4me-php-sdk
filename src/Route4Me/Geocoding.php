@@ -47,16 +47,12 @@ class Geocoding extends Common
     
     public static function reverseGeocoding($params)
     {
-        $query = array(
-                'format' => isset($params['format']) ? $params['format']: null,
-                'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
-                'detailed' => isset($params['detailed']) ? $params['detailed'] : null,
-            );
+        $allQueryFields = array('format', 'addresses', 'detailed');
 
         $fgcoding = Route4Me::makeRequst(array(
             'url'    => Endpoint::GEOCODER,
             'method' => 'POST',
-            'query'  => $query
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
         
         return $fgcoding;
