@@ -1,7 +1,7 @@
 <?php
 namespace Route4Me;
 
-$root=realpath(dirname(__FILE__).'/../../');
+$root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
@@ -11,7 +11,7 @@ use Route4Me\Order;
 // This example not available for demo API key
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$orderParameters=Order::fromArray(array(
+$orderParameters = Order::fromArray(array(
     "address_1"                 => "318 S 39th St, Louisville, KY 40212, USA",
     "cached_lat"                => 38.259326,
     "cached_lng"                => -85.814979,

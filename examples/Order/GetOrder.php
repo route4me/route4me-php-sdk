@@ -1,7 +1,7 @@
 <?php
 namespace Route4Me;
 
-$root=realpath(dirname(__FILE__).'/../../');
+$root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
@@ -24,7 +24,7 @@ $orderID = $order->getRandomOrderId(0, 10);
 assert(!is_null($orderID), "Can't retrieve a random order ID");
 
 // Get an order
-$orderParameters=Order::fromArray(array(
+$orderParameters = Order::fromArray(array(
     "order_id"  => $orderID
 ));
 

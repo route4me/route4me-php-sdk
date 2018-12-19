@@ -26,7 +26,7 @@ assert(!is_null($randomOrder), "Can't retrieve a random order");
 // Update the order
 $randomOrder['address_2']="Lviv";
 $randomOrder['EXT_FIELD_phone']="032268593";
-$randomOrder['EXT_FIELD_custom_data']=array(
+$randomOrder['EXT_FIELD_custom_data'] = array(
             0 => array(
                "customer_no" => "11"
             )
@@ -34,4 +34,4 @@ $randomOrder['EXT_FIELD_custom_data']=array(
 
 $response = $order->updateOrder($randomOrder);
 
-Route4Me::simplePrint($response);
+Route4Me::simplePrint($response, true);
