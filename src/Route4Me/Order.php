@@ -163,23 +163,17 @@ class Order extends Common
     
     public function getRandomOrderId($offset, $limit)
     {
-        $params = array('offset' => $offset, 'limit' => $limit);
+        $randomOrder = $this->getRandomOrder($offset, $limit);
         
-        $orders = self::getOrders($params);
-        
-        if (is_null($orders)) {
+        if (is_null($randomOrder)) {
             return null;
         }
         
-        if (!isset($orders['results'])) {
+        if (!isset($randomOrder)) {
             return null;
         }
         
-        $randomIndex = rand(0, sizeof($orders['results']) - 1);
-        
-        $order = $orders['results'][$randomIndex];
-        
-        return $order['order_id'];
+        return $randomOrder['order_id'];
     }
     
     public function getRandomOrder($offset, $limit)
