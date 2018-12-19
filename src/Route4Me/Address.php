@@ -139,15 +139,12 @@ class Address extends Common
     
     public function markAsDeparted($params)
     {
+        $allQueryFields = array('route_id', 'address_id', 'is_departed', 'member_id');
+        
         $address = Route4Me::makeRequst(array(
             'url'    => Endpoint::MARK_ADDRESS_DEPARTED,
-            'method' => 'GET',
-            'query'  => array(
-                'route_id'     => isset($params['route_id']) ? $params['route_id'] : null,
-                'address_id'   => isset($params['address_id']) ? $params['address_id'] : null,
-                'is_departed'  => isset($params['is_departed']) ? $params['is_departed'] : null,
-                'member_id'    => isset($params['member_id']) ? $params['member_id'] : null,
-            ),
+            'method' => 'PUT',
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
     
         return $address;
@@ -155,17 +152,12 @@ class Address extends Common
     
     public function markAsVisited($params)
     {
+        $allQueryFields = array('route_id', 'address_id', 'is_visited', 'member_id');
+        
         $address = Route4Me::makeRequst(array(
             'url'    => Endpoint::UPDATE_ADDRESS_VISITED,
-            'method' => 'GET',
-            'query'  => array(
-                'route_id'   => isset($params['route_id']) ? $params['route_id'] : null,
-                'address_id' => isset($params['address_id']) ? $params['address_id'] : null,
-                'member_id'  => isset($params['member_id']) ? $params['member_id'] : null,
-            ),
-            'body'  =>  array(
-                'is_visited' => isset($params['is_visited']) ? $params['is_visited'] : null
-            )
+            'method' => 'PUT',
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
     
         return $address;
@@ -187,14 +179,12 @@ class Address extends Common
     
     public function moveDestinationToRoute($params)
     {
+        $allBodyFields = array('to_route_id', 'route_destination_id', 'after_destination_id');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::MOVE_ROUTE_DESTINATION,
             'method' => 'POST',
-            'body'  => array(
-                'to_route_id'          => isset($params['to_route_id']) ? $params['to_route_id'] : null,
-                'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
-                'after_destination_id' => isset($params['after_destination_id']) ? $params['after_destination_id'] : null
-            ),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
 
@@ -203,20 +193,14 @@ class Address extends Common
     
     public function AddAddressNote($params)
     {
+        $allQueryFields = array('route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type');
+        $allBodyFields = array('strNoteContents', 'strUpdateType');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
-            'query'  => array(
-                'route_id'     =>  isset($params['route_id']) ? $params['route_id'] : null,
-                'address_id'   =>  isset($params['address_id']) ? $params['address_id'] : null,
-                'dev_lat'      =>  isset($params['dev_lat']) ? $params['dev_lat'] : null,
-                'dev_lng'      =>  isset($params['dev_lng']) ? $params['dev_lng'] : null,
-                'device_type'  =>  isset($params['device_type']) ? $params['device_type'] : null
-            ),
-            'body'  => array(
-                'strNoteContents' => isset($params['strNoteContents']) ? $params['strNoteContents'] : null,
-                'strUpdateType'   => isset($params['strUpdateType']) ? $params['strUpdateType'] : null
-            ),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
 
@@ -225,20 +209,14 @@ class Address extends Common
 
     public function AddNoteFile($params)
     {
+        $allQueryFields = array('route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type', 'strUpdateType');
+        $allBodyFields = array('strFilename');
+        
         $result = Route4Me::fileUploadRequest(array(
             'url'    => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
-            'query'  => array(
-                'route_id'      =>  isset($params['route_id']) ? $params['route_id'] : null,
-                'address_id'    =>  isset($params['address_id']) ? $params['address_id'] : null,
-                'dev_lat'       =>  isset($params['dev_lat']) ? $params['dev_lat'] : null,
-                'dev_lng'       =>  isset($params['dev_lng']) ? $params['dev_lng'] : null,
-                'device_type'   =>  isset($params['device_type']) ? $params['device_type'] : null,
-                'strUpdateType' =>  isset($params['strUpdateType']) ? $params['strUpdateType'] : null
-            ),
-            'body'  => array(
-                'strFilename' => isset($params['strFilename']) ? $params['strFilename'] : null
-            ),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
 
@@ -247,13 +225,12 @@ class Address extends Common
 
     public function createCustomNoteType($params)
     {
+        $allBodyFields = array('type', 'values');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
             'method' => 'POST',
-            'body'   => array(
-                'type'   => isset($params['type']) ? $params['type'] : null,
-                'values' => isset($params['values']) ? $params['values'] : null
-            )
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $result;
@@ -287,28 +264,19 @@ class Address extends Common
         $customArray = array();
         
         foreach ($params as $key => $value) {
-            $kpos = strpos($key, "custom_note_type");
-            
-            if ($kpos!==false) {
+            if (strpos($key, "custom_note_type")!==false) {
                 $customArray[$key] = $value;
             }
         }
         
+        $allQueryFields = array('route_id', 'address_id', 'format', 'dev_lat', 'dev_lng');
+        $allBodyFields = array('strUpdateType', 'strUpdateType', 'strNoteContents');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
-            'query'  => array(
-                'route_id'      =>  isset($params['route_id']) ? $params['route_id'] : null,
-                'address_id'    =>  isset($params['address_id']) ? $params['address_id'] : null,
-                'format'        =>  isset($params['format']) ? $params['format'] : null,
-                'dev_lat'       =>  isset($params['dev_lat']) ? $params['dev_lat'] : null,
-                'dev_lng'       =>  isset($params['dev_lng']) ? $params['dev_lng'] : null
-            ),
-            'body'  => array_merge(array(
-                'strUpdateType'   =>  isset($params['strUpdateType']) ? $params['strUpdateType'] : null,
-                'strUpdateType'   =>  isset($params['strUpdateType']) ? $params['strUpdateType'] : null,
-                'strNoteContents' =>  isset($params['strNoteContents']) ? $params['strNoteContents'] : null
-            ), $customArray),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'  => array_merge(Route4Me::generateRequestParameters($allBodyFields, $params), $customArray),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
 
