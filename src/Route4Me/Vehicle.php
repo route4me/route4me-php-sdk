@@ -77,14 +77,12 @@ class Vehicle extends Common
     
     public static function getVehicles($params)
     {
+        $allQueryFields = array('with_pagination', 'page', 'perPage');
+        
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::VEHICLE_V4,
             'method' => 'GET',
-            'query'  => array(
-                'with_pagination'  => isset($params['with_pagination']) ? $params['with_pagination'] : null,
-                'page'             => isset($params['page']) ? $params['page'] : null,
-                'perPage'          => isset($params['perPage']) ? $params['perPage'] : null,
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $response;
@@ -92,11 +90,13 @@ class Vehicle extends Common
     
     public function getRandomVehicleId($page,$perPage)
     {
-        $query['page'] = isset($page) ? $page : 1;
-        $query['perPage'] = isset($perPage) ? $perPage : 10;
-        $query['with_pagination'] = true;
+        $params = array(
+            'page'             => isset($page) ? $page : 1,
+            'perPage'          => isset($perPage) ? $perPage : 10,
+            'with_pagination'  => true
+        );
         
-        $vehicles = $this->getVehicles($query);
+        $vehicles = $this->getVehicles($params);
 
         if (is_null($vehicles)) return null;
         if (!isset($vehicles['data'])) return null;
@@ -121,23 +121,12 @@ class Vehicle extends Common
     {
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
         
-        $body = array();
-        
-        $vehicle= new Vehicle();
-        
-        foreach($params as $key => $value) {
-            if ($key=="vehicle_id") continue; 
-            if (property_exists($vehicle, $key)) {
-                if (isset($params->{$key})) {
-                    $body[$key] = $params->{$key};
-                } 
-            }
-        }
+        $allBodyFields = Route4Me::getObjectProperties(new Vehicle(), array('vehicle_id'));
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
             'method' => 'PUT',
-            'body'   => $body,
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: application/json'
         ));
 
@@ -146,23 +135,12 @@ class Vehicle extends Common
     
     public function createVehicle($params)
     {
-        $body = array();
-        
-        $vehicle= new Vehicle();
-        
-        foreach($params as $key => $value) {
-            if ($key=="vehicle_id") continue; 
-            if (property_exists($vehicle, $key)) {
-                if (isset($params->{$key})) {
-                    $body[$key] = $params->{$key};
-                } 
-            }
-        }
+        $allBodyFields = Route4Me::getObjectProperties(new Vehicle(), array('vehicle_id'));
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::VEHICLE_V4,
             'method' => 'POST',
-            'body'   => $body,
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: application/json'
         ));
 
