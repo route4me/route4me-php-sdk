@@ -34,6 +34,6 @@ $address = new Address();
 
 $address->route_id = $route_id;
 $address->route_destination_id = $route_destination_id;
-$result = $address->delete();
+$result = $address->deleteAddress();
 
 var_dump($result);

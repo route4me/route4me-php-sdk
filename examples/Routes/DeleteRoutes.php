@@ -27,6 +27,6 @@ echo "Random route ID 1 -> $randomRouteID1 <br>  Random route ID 2 -> $randomRou
 // Remove selected routes
 $route_ids = join(',',array($randomRouteID1,$randomRouteID2));
 
-$result = $route->delete($route_ids);
+$result = $route->deleteRoutes($route_ids);
 
 Route4Me::simplePrint($result);

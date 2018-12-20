@@ -163,7 +163,7 @@ class Address extends Common
         return $address;
     }
 
-    public function delete()
+    public function deleteAddress()
     {
         $address = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_V4,
