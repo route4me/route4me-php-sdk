@@ -129,10 +129,11 @@ class Member extends Common
     
     public static function createMember($params)
     {
-        $allBodyFields = array('HIDE_ROUTED_ADDRESSES', 'member_phone', 'member_zipcode', 'route_count', 'member_email', 
-        'HIDE_VISITED_ADDRESSES', 'READONLY_USER', 'member_type', 'date_of_birth', 'member_first_name', 'member_password', 
-        'HIDE_NONFUTURE_ROUTES', 'member_last_name', 'SHOW_ALL_VEHICLES', 'SHOW_ALL_DRIVERS');
+        $excludeFields = array('session_guid', 'member_id', 'token', 'payload', 'webiinar_date', 
+        'company_name', 'config_key', 'config_value', 'api_key');
         
+        $allBodyFields = Route4Me::getObjectProperties(new Member(), $excludeFields);
+
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::USER_V4,
             'method' => 'POST',
@@ -167,9 +168,10 @@ class Member extends Common
 
     public static function updateMember($body)
     {
-        $allBodyFields = array('member_id', 'member_phone', 'HIDE_ROUTED_ADDRESSES', 'member_zipcode', 'route_count', 
-        'member_email', 'HIDE_VISITED_ADDRESSES', 'READONLY_USER', 'date_of_birth', 'member_first_name', 
-        'member_password', 'HIDE_NONFUTURE_ROUTES', 'member_last_name', 'SHOW_ALL_VEHICLES', 'SHOW_ALL_DRIVERS');
+        $excludeFields = array('session_guid', 'token', 'payload', 'webiinar_date', 
+        'company_name', 'config_key', 'config_value', 'api_key');
+        
+        $allBodyFields = Route4Me::getObjectProperties(new Member(), $excludeFields);
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::USER_V4,
