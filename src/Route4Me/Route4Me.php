@@ -391,5 +391,26 @@ class Route4Me
         }
         
         return $objectParameters;
-    } 
+    }
+    
+    public static function generateUrlPath($allFields, $params)
+    {
+        $generatedPath = "";
+
+        if (is_array($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params[$field])) {
+                    $generatedPath .= $params[$field].'/';
+                }
+            }
+        } elseif (is_object($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params->{$field})) {
+                    $generatedPath .= $params->{$field}.'/';
+                }
+            }
+        }
+        
+        return $generatedPath;
+    }
 }

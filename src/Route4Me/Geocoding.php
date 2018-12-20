@@ -30,15 +30,12 @@ class Geocoding extends Common
     
     public static function forwardGeocoding($params)
     {
-        $body = array(
-                'strExportFormat'    => isset($params['strExportFormat']) ? $params['strExportFormat']: null,
-                'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
-            );
+        $allBodyFields = array('strExportFormat', 'addresses');
 
         $fgCoding = Route4Me::makeRequst(array(
             'url'    => Endpoint::GEOCODER,
             'method' => 'POST',
-            'body'   => $body,
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
         
@@ -62,17 +59,9 @@ class Geocoding extends Common
     {
         $url_query = Endpoint::STREET_DATA;
         
-        if (isset($params['pk'])) {
-            $url_query.=$params['pk'].'/';
-        }
-        
-        if (isset($params['offset'])) {
-            $url_query.=$params['offset'].'/';
-        }
-        
-        if (isset($params['limit'])) {
-            $url_query.=$params['limit'].'/';
-        }
+        $allPathFields = array('pk', 'offset', 'limit');
+
+        $url_query .= Route4Me::generateUrlPath($allPathFields, $params);
 
         $query = array();
         
@@ -88,17 +77,9 @@ class Geocoding extends Common
     {
         $url_query = Endpoint::STREET_DATA_ZIPCODE;
         
-        if (isset($params['zipcode'])) {
-            $url_query.=$params['zipcode'].'/';
-        }
-        
-        if (isset($params['offset'])) {
-            $url_query.=$params['offset'].'/';
-        }
-        
-        if (isset($params['limit'])) {
-            $url_query.=$params['limit'].'/';
-        }
+        $allPathFields = array('zipcode', 'offset', 'limit');
+
+        $url_query .= Route4Me::generateUrlPath($allPathFields, $params);
 
         $query = array();
         
@@ -114,22 +95,10 @@ class Geocoding extends Common
     {
         $url_query = Endpoint::STREET_DATA_SERVICE;
         
-        if (isset($params['zipcode'])) {
-            $url_query.=$params['zipcode'].'/';
-        }
-        
-        if (isset($params['housenumber'])) {
-            $url_query.=$params['housenumber'].'/';
-        }
-        
-        if (isset($params['offset'])) {
-            $url_query.=$params['offset'].'/';
-        }
-        
-        if (isset($params['limit'])) {
-            $url_query.=$params['limit'].'/';
-        }
+        $allPathFields = array('zipcode', 'housenumber', 'offset', 'limit');
 
+        $url_query .= Route4Me::generateUrlPath($allPathFields, $params);
+        
         $query = array();
         
         $response = Route4Me::makeUrlRequst($url_query, array(
