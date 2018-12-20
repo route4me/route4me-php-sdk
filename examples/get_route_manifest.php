@@ -20,10 +20,11 @@ assert(!is_null($route_id), "Can't retrieve a random route ID");
 
 // Get route manifest 
 $params = array(
-    "directions" => 1
+    "directions" => 1,
+    "route_id"   => $route_id
 );
 
-$route = Route::getRoutes($route_id, $params);
+$route = Route::getRoutes($params);
 
 foreach ($route->addresses as $addr1) {
     Route4Me::simplePrint((array)$addr1, true);

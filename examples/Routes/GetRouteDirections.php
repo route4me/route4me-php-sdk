@@ -23,9 +23,10 @@ assert(!is_null($route_id), "Can't retrieve a random route ID");
   
 // Get a route with the directions
 $params = array(
-    "directions" => 1
+    "directions" => 1,
+    "route_id"   => $route_id
 );
 
-$routeResults = (array)$route->getRoutePoints($route_id,$params);
+$routeResults = (array)$route->getRoutePoints($params);
 
 Route4Me::simplePrint($routeResults, true);
