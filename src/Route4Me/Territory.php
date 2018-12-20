@@ -40,13 +40,12 @@ class Territory extends Common
 	
 	public static function getTerritory($params)
 	{
+	    $allQueryFields = array('territory_id', 'addresses');
+        
 		$territory = Route4Me::makeRequst(array(
 			'url'    => Endpoint::TERRITORY_V4,
 			'method' => 'GET',
-			'query'  => array(
-				'territory_id' => isset($params['territory_id']) ? $params['territory_id'] : null,
-				'addresses'    => isset($params['addresses']) ? $params['addresses'] : null,
-			)
+			'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
 		));
 
 		return $territory;
@@ -54,14 +53,12 @@ class Territory extends Common
 	
 	public static function getTerritories($params)
 	{
+	    $allQueryFields = array('offset', 'limit', 'addresses');
+        
 		$response = Route4Me::makeRequst(array(
 			'url'    => Endpoint::TERRITORY_V4,
 			'method' => 'GET',
-			'query'  => array(
-				'offset'  => isset($params->offset) ? $params->offset : null,
-				'limit'   => isset($params->limit) ? $params->limit : null,
-				'addresses'    => isset($params['addresses']) ? $params['addresses'] : null,
-			)
+			'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
 		));
 
 		return $response;
@@ -69,19 +66,12 @@ class Territory extends Common
 
 	public static function addTerritory($params)
 	{
-	    $terParams = array();
-
-        if (isset($params->territory['type'])) $terParams['type'] = $params->territory['type'];
-        if (isset($params->territory['data'])) $terParams['data'] = $params->territory['data'];
+	    $allBodyFields = array('territory_name', 'member_id', 'territory_color', 'territory');
         
 		$response = Route4Me::makeRequst(array(
 			'url'    => Endpoint::TERRITORY_V4,
-			'method' => 'ADD',
-			'query'  => array(
-				'territory_name'  => isset($params->territory_name) ? $params->territory_name : null,
-				'territory_color' => isset($params->territory_color) ? $params->territory_color : null,
-				'territory'       => $terParams
-			)
+			'method' => 'POST',
+			'body'  => Route4Me::generateRequestParameters($allBodyFields, $params)
 		));
 
 		return $response;
@@ -102,23 +92,16 @@ class Territory extends Common
 	
 	public function updateTerritory($params)
 	{
-	    //var_dump($params); die("");
+	    $allQueryFields = array('territory_id');
+        $allBodyFields = array('territory_name', 'member_id', 'territory_color', 'territory');
+        
 		$response = Route4Me::makeRequst(array(
 			'url'    => Endpoint::TERRITORY_V4,
 			'method' => 'PUT',
-			'query'  => array(
-                'territory_id'  => isset($params->territory_id) ? $params->territory_id : null
-            ),
-            'body'   => array(
-                'territory_name'   => isset($params->territory_name) ? $params->territory_name : null,
-                'member_id'        => isset($params->member_id) ? $params->member_id : null,
-                'territory_color'  => isset($params->territory_color) ? $params->territory_color : null,
-                'territory'        => isset($params->territory) ? $params->territory : null
-            ) 
-
+			'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
 		));
 
 		return $response;
 	}
 }
-
