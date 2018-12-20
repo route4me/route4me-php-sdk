@@ -36,17 +36,14 @@ $address_id = $addressRand['route_destination_id'];
 assert(!is_null($address_id), "can't retrieve random address");
 
 // Mark the address as detected as visited
-$addressParameters=(array)Address::fromArray(array(
+$addressParameters = (array)Address::fromArray(array(
     "route_id"              => $routeId,
     "route_destination_id"  => $address_id,
+    "is_visited"            => TRUE
 ));
-
-$body= array(
-    "is_visited"  => TRUE,
-);
 
 $address = new Address();
 
-$result = $address->markAddress($addressParameters, $body);
+$result = $address->markAddress($addressParameters);
 
 Route4Me::simplePrint($result);
