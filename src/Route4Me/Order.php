@@ -78,12 +78,10 @@ class Order extends Common
      */
     public static function addOrder($params)
     {
-        $allBodyFields = array('address_1', 'address_2', 'member_id', 'cached_lat', 'cached_lng', 'curbside_lat', 
-        'curbside_lng', 'color', 'order_icon', 'day_scheduled_for_YYMMDD', 'address_alias', 'address_city', 'address_state_id', 
-        'address_country_id', 'address_zip', 'local_time_window_start', 'local_time_window_end', 'local_time_window_start_2', 
-        'local_time_window_end_2', 'service_time', 'local_timezone_string', 'EXT_FIELD_first_name', 'EXT_FIELD_last_name', 
-        'EXT_FIELD_email', 'EXT_FIELD_phone', 'EXT_FIELD_custom_data', 'is_validated', 'is_pending', 'is_accepted', 'is_started', 
-        'is_completed', 'custom_user_fields');
+        $excludeFields = array('route_id', 'redirect', 'optimization_problem_id', 'order_id', 
+        'order_ids', 'fields', 'offset', 'limit', 'query', 'created_timestamp');
+        
+        $allBodyFields = Route4Me::getObjectProperties(new Order(), $excludeFields);
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
@@ -201,12 +199,10 @@ class Order extends Common
     
     public static function updateOrder($params)
     {
-        $allBodyFields = array('order_id', 'address_1', 'address_2', 'cached_lat', 'cached_lng', 'curbside_lat', 
-        'curbside_lng', 'color', 'order_icon', 'day_scheduled_for_YYMMDD', 'address_alias', 'address_city', 'address_state_id', 
-        'address_country_id', 'address_zip', 'local_time_window_start', 'local_time_window_end', 'local_time_window_start_2', 
-        'local_time_window_end_2', 'service_time', 'local_timezone_string', 'EXT_FIELD_first_name', 'EXT_FIELD_last_name', 
-        'EXT_FIELD_email', 'EXT_FIELD_phone', 'EXT_FIELD_custom_data', 'is_validated', 'is_pending', 'is_accepted', 'is_started', 
-        'is_completed', 'custom_user_fields');
+        $excludeFields = array('route_id', 'redirect', 'optimization_problem_id', 
+        'order_ids', 'fields', 'offset', 'limit', 'query', 'created_timestamp');
+        
+        $allBodyFields = Route4Me::getObjectProperties(new Order(), $excludeFields);
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ORDER_V4,
@@ -267,10 +263,10 @@ class Order extends Common
         
         $columns = fgetcsv($csvFileHandle, $max_line_length, $delemietr);
         
-        $allOrderFields = array("curbside_lat","curbside_lng","color","day_scheduled_for_YYMMDD",
-                "address_alias","address_1","address_2","local_time_window_start","local_time_window_end","local_time_window_start_2",
-                "local_time_window_end_2","service_time","EXT_FIELD_first_name","EXT_FIELD_last_name","EXT_FIELD_email","EXT_FIELD_phone",
-                "EXT_FIELD_custom_data","order_icon");
+        $excludeFields = array('route_id', 'redirect', 'optimization_problem_id', 'order_id', 
+        'order_ids', 'fields', 'offset', 'limit', 'query', 'created_timestamp');
+        
+        $allOrderFields = Route4Me::getObjectProperties(new Order(), $excludeFields);
         
         if (!empty($columns)) {
              array_push($results['fail'],'Empty CSV table');
