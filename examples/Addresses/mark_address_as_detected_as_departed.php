@@ -41,14 +41,11 @@ assert(!is_null($route_destination_id), "can't retrieve random address");
 $addressParameters = (array)Address::fromArray(array(
     "route_id"              => $routeId,
     "route_destination_id"  => $route_destination_id,
+    "is_departed"           => TRUE
 ));
-
-$body= array(
-    "is_departed"  => TRUE,
-);
 
 $address = new Address();
 
-$result = $address->markAddress($addressParameters, $body);
+$result = $address->markAddress($addressParameters);
 
 Route4Me::simplePrint($result);

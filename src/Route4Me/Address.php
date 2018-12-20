@@ -122,16 +122,16 @@ class Address extends Common
         return Address::fromArray($addressUpdate);
     }
     
-    public function markAddress($params, $body)
+    public function markAddress($params)
     {
+        $allQueryFields = array('route_id', 'route_destination_id');
+        $allBodyFields = array('is_visited', 'is_departed');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_V4,
             'method' => 'PUT',
-            'query'  => array(
-                'route_id'             => isset($params['route_id']) ? $params['route_id'] : null, 
-                'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
-            ),
-            'body'   => $body
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
     
         return $result;
