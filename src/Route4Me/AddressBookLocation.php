@@ -62,6 +62,8 @@ class AddressBookLocation extends Common
         return $addressbooklocation;
     }
     
+    
+    
     public static function getAddressBookLocation($addressId)
     {
         $ablocations = Route4Me::makeRequst(array(
@@ -136,25 +138,12 @@ class AddressBookLocation extends Common
     */
     public static function addAdressBookLocation($params)
     {
-        $body = array();
-        $abLocations = new AddressBookLocation();
-        
-        foreach ($params as $key => $value) {
-            if ($key=="address_id") {
-                continue;
-            }
-            
-            if (property_exists($abLocations, $key)) {
-                if (isset($params->{$key})) {
-                    $body[$key] = $params->{$key};
-                } 
-            }
-        }
+        $allBodyFields = Route4Me::getObjectProperties(new AddressBookLocation(), array('address_id', 'in_route_count'));
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'POST',
-            'body'   => $body
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $response;
@@ -175,21 +164,12 @@ class AddressBookLocation extends Common
     
     public function updateAdressBookLocation($params)
     {
-        $body = array();
-        $abLocations = new AddressBookLocation();
-        
-        foreach ($params as $key => $value) {
-            if (property_exists($abLocations, $key)) {
-                if (isset($params->{$key})) {
-                    $body[$key] = $params->{$key};
-                } 
-            }
-        }
+        $allBodyFields = Route4Me::getObjectProperties(new AddressBookLocation(), array('in_route_count'));
 
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'PUT',
-            'body'   => $body,
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
 
         return $response;
@@ -318,11 +298,7 @@ class AddressBookLocation extends Common
         
         $columns = fgetcsv($csvFileHandle, $max_line_length, $delemietr);
         
-        $addressBookFields = array("cached_lat","cached_lng","curbside_lat","curbside_lng","address_alias","address_1","address_2","address_city",
-                "address_state_id","address_zip","address_phone_number","schedule","address_group","first_name","last_name","local_time_window_start",
-                "local_time_window_end","local_time_window_start_2","local_time_window_end_2","address_email","address_country_id","address_custom_data",
-                "schedule_blacklist","service_time","local_timezone_string","color","address_icon","address_stop_type","address_cube","address_pieces",
-                "address_reference_no","address_revenue","address_weight","address_priority","address_customer_po");
+        $addressBookFields = Route4Me::getObjectProperties(new AddressBookLocation(), array('address_id', 'in_route_count'));
 
         if (empty($columns)) {
             array_push($results['fail'], 'Empty CSV table');

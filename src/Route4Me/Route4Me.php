@@ -346,4 +346,50 @@ class Route4Me
             } 
         }
     }
+
+    /**
+     * Generates query or body parameters.
+     * @param $allFields: all known fields could be used for parameters generation.
+     * @param $params: input parameters (array or object)
+     */
+    public static function generateRequestParameters($allFields, $params)
+    {
+        $generatedParams = array();
+        
+        if (is_array($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params[$field])) {
+                    $generatedParams[$field] = $params[$field];
+                }
+            }
+        } elseif (is_object($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params->{$field})) {
+                    $generatedParams[$field] = $params->{$field};
+                }
+            }
+        }
+
+        return $generatedParams;
+    }
+    
+    /**
+     * Returns an array of the object properties
+     * @param $object: An object.
+     * @param $exclude: array of the object parameters to be excluded from the returned array.
+     */
+    public static function getObjectProperties($object, $exclude)
+    {
+        $objectParameters = array();
+        
+        foreach (get_object_vars($object) as $key => $value) {
+            if (property_exists($object, $key)) {
+                if (!is_numeric(array_search($key, $exclude))) {
+                    array_push($objectParameters, $key);
+                }
+            }
+        }
+        
+        return $objectParameters;
+    } 
 }
