@@ -26,7 +26,7 @@ $route_destination_id = $addressRand['route_destination_id'];
 assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Add a file note
-$noteParameters=array(
+$noteParameters = array(
     "strFilename"     => "notes.csv",
     "route_id"        => $route_id,
     "address_id"      => $route_destination_id,
