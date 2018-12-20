@@ -393,6 +393,11 @@ class Route4Me
         return $objectParameters;
     }
     
+    /**
+     * Returns url path generated from the array of the fields and parameters.
+     * @param $allFields; array of the paossible fields (parameter names).
+     * @param $params: input parameters (array or object).
+     */
     public static function generateUrlPath($allFields, $params)
     {
         $generatedPath = "";
