@@ -20,7 +20,7 @@ $grParams = array(
     'limit'  => 10
 );
 
-$routes = $route->getRoutes(null, $grParams);
+$routes = $route->getRoutes($grParams);
 assert(!is_null($routes), "There are no routes in the account for this example. Please, create at last two routes first.");
 assert(sizeof($routes)>1, "This example requires at last 2 routes. Please, create them first.");
 

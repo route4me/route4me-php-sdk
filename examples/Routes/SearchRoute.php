@@ -18,7 +18,7 @@ $RouteParameters = array(
 
 $route = new Route();
 
-$routeResults = $route->getRoutes(null,$RouteParameters);
+$routeResults = $route->getRoutes($RouteParameters);
 
 foreach ($routeResults as $routeResult)
 {

@@ -22,14 +22,14 @@ $routesParams = array(
     "limit"   =>  20
 );
 
-$routes = $route->getRoutes(null,$routesParams);
+$routes = $route->getRoutes($routesParams);
 
 $selectedRoute = null;
 
 foreach ($routes as $route1) {
     if (isset($route1->destination_count)) {
         if ($route1->destination_count>4) {
-            $selectedRoute = $route->getRoutes($route1->route_id);
+            $selectedRoute = $route->getRoutes(array('route_id' => $route1->route_id));
             break;
         }
     }

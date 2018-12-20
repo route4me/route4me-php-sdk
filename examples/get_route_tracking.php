@@ -18,10 +18,12 @@ $route = new Route();
 $route_id=$route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
+$params = array(
+    'device_tracking_history' => true, 
+    'route_id' => $route_id
+);
+
 // Get route tracking
-$routeId = $route_id;
-$route = Route::getRoutes($routeId, array(
-    'device_tracking_history' => true
-));
+$route = Route::getRoutes($params);
 
 var_dump($route->tracking_history);

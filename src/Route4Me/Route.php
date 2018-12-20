@@ -93,24 +93,17 @@ class Route extends Common
         return $route;
     }
 
-    public static function getRoutes($routeId = null, $params = null)
+    public static function getRoutes($params = null)
     {
+        $allQueryFields = array('route_id', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'GET',
-            'query'  => array(
-                'api_key'                  => Route4Me::getApiKey(),
-                'route_id'                 => !is_null($routeId) ? implode(',', (array)$routeId) : null,
-                'route_path_output'        => isset($params['route_path_output']) ? $params['route_path_output'] : null,
-                'query'                    => isset($params['query']) ? $params['query'] : null,
-                'directions'               => isset($params['directions']) ? $params['directions'] : null,
-                'device_tracking_history'  => isset($params['device_tracking_history']) ? $params['device_tracking_history'] : null,
-                'limit'                    => isset($params['limit']) ? $params['limit'] : null,
-                'offset'                   => isset($params['offset']) ? $params['offset'] : null
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
-        
-        if ($routeId) {
+
+        if (isset($params['route_id'])) {
             return Route::fromArray($result); die("");
         } else {
             $routes = array();
@@ -121,18 +114,14 @@ class Route extends Common
         }
     }
 
-    public function getRoutePoints($routeId, $params)
+    public function getRoutePoints($params)
     {
+        $allQueryFields = array('route_id', 'route_path_output', 'compress_path_points', 'directions');
+        
         $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_V4,
             'method' => 'GET',
-            'query'  => array(
-                'api_key'           => Route4Me::getApiKey(),
-                'route_id'          => $routeId,
-                'route_path_output' => isset($params['route_path_output']) ? $params['route_path_output'] : null,
-                'compress_path_points' => isset($params['compress_path_points']) ? $params['compress_path_points'] : null,
-                'directions'        => isset($params['directions']) ? $params['directions'] : null,
-            )
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
         ));
 
         return $result;
@@ -399,7 +388,7 @@ class Route extends Common
     
     public function GetAddressesFromRoute($route_id)
     {
-        $route1 = Route::getRoutes($route_id,null);
+        $route1 = Route::getRoutes(array('route_id' => $route_id));
         
         if (isset($route1)) {
             return $route1->addresses;
@@ -410,7 +399,7 @@ class Route extends Common
     
     public function GetRandomAddressFromRoute($route_id)
     {
-        $route1 = Route::getRoutes($route_id, null);
+        $route1 = Route::getRoutes(array('route_id' => $route_id));
         
         if (isset($route1)) {
             $addresses = $route1->addresses;

@@ -20,6 +20,6 @@ $route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
 // get a route by ID
-$routeResults = (array)$route->getRoutes($route_id,null);
+$routeResults = (array)$route->getRoutes(array('route_id' => $route_id));
 
-Route4Me::simplePrint($routeResults);
+Route4Me::simplePrint($routeResults, true);

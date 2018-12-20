@@ -21,7 +21,7 @@ $route = new Route();
 $route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Can't retrieve a random route ID");
 
-$randomRoute = $route->getRoutes($route_id, null);
+$randomRoute = $route->getRoutes(array('route_id' => $route_id));
 assert(!is_null($randomRoute), "Can't retrieve a random route ID");
 
 // Update the route parameters
