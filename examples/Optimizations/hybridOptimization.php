@@ -15,7 +15,7 @@ use Route4Me\Route4Me;
  */ 
 
 // This example is not available for demo API key
-Route4Me::setApiKey('51d0c0701ce83855c9f62d0440096e7c');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 $source_file = "addresses_1000.csv";
 $max_line_length = 512;
