@@ -106,7 +106,7 @@ class AddressBookLocation extends Common
     
     public static function getRandomAddressBookLocation($params)
     {
-        $ablocations = self::getAddressBookLocations(array('offset' => 0, 'limit' => 20));
+        $ablocations = self::getAddressBookLocations($params);
         
         if (isset($ablocations["results"])) {
             $locationsSize = sizeof($ablocations["results"]);
