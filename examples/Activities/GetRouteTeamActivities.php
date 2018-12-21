@@ -26,7 +26,7 @@ $activityParameters = ActivityParameters::fromArray(array(
 
 $activities = new ActivityParameters();
 $actresults = $activities->getActivities($activityParameters);
-$results = $activities->getValue($actresults,"results");
+$results = $activities->getValue($actresults, "results");
 
 foreach ($results as $result) {
 	Route4Me::simplePrint($result);
