@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 
@@ -17,8 +17,8 @@ $ablocation = new AddressBookLocation();
 // Example refers to the process of searching for text and specifing returned fields. 
 
 $params = array(
-    'query'  => 'David',
-    'fields' => 'first_name,address_email',
+    'query'   => 'David',
+    'fields'  => 'first_name,address_email',
     'offset'  => 0,
     'limit'   => 5
 );

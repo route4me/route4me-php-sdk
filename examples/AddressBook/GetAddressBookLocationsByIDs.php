@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -11,6 +11,7 @@ use Route4Me\Route;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get two random locations IDs
+
 $adressBookLocationParameters = array(
     "limit"   => 30,
     "offset"  => 0
@@ -34,7 +35,7 @@ $ablocation = new AddressBookLocation();
 
 $abcResult = $ablocation->getAddressBookLocations($ids);
 
-$results = $ablocation->getValue($abcResult,"results");
+$results = $ablocation->getValue($abcResult, "results");
 
 foreach ($results as $result) {
     Route4Me::simplePrint($result);

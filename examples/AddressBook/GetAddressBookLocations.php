@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -21,7 +21,7 @@ $abContacts = new AddressBookLocation();
 
 $abcResults = $abContacts->getAddressBookLocations($AdressBookLocationParameters);
 
-$results = $abContacts->getValue($abcResults,"results");
+$results = $abContacts->getValue($abcResults, "results");
 
 foreach ($results as $result) {
 	Route4Me::simplePrint($result);
