@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -30,10 +30,10 @@ $address1 = (array)Address::fromArray(array(
 ));
 
 $address2 = (array)Address::fromArray(array(
-    'address'   =>   '222 Blake Cir Milledgeville GA 31061',
-    'lat'       =>   33.177852,
-    'lng'       =>   -83.263535,
-    'time'      =>   0
+    'address'   =>  '222 Blake Cir Milledgeville GA 31061',
+    'lat'       =>  33.177852,
+    'lng'       =>  -83.263535,
+    'time'      =>  0
 ));
 
 $addresses[] = $address1; 
