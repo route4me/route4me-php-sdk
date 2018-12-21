@@ -39,6 +39,6 @@ $orderParameters = array(
 
 $order = new Order();
 
-$response = $order->addOrder2Optimization($orderParameters, $body);
+$response = $order->addOrder2Optimization($orderParameters);
 
 Route4Me::simplePrint($response, true);
