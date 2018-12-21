@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -52,5 +52,5 @@ echo " Route ID -> $routeId <br><br>";
 assert(isset($result->addresses), "Can't insert a destination into the route");
 
 foreach ($result->addresses as $address) {
-	echo "Address -> " . $address->address , ", Sequence number -> " . $address->sequence_no . "<br>";
+	echo "Address -> ".$address->address , ", Sequence number -> ".$address->sequence_no."<br>";
 }
