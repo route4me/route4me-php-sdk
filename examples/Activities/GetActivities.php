@@ -19,7 +19,7 @@ $activityParameters = ActivityParameters::fromArray(array(
 ));
 
 $activities = new ActivityParameters();
-$actresults = $activities->get($activityParameters);
+$actresults = $activities->getActivities($activityParameters);
 $results = $activities->getValue($actresults, "results");
 
 foreach ($results as $result) {

@@ -42,7 +42,7 @@ class ActivityParameters extends Common
         return $activityparameters;
     }
     
-    public static function get($params)
+    public static function getActivities($params)
     {
         $allQueryFields = array('route_id', 'team', 'limit', 'offset', 'start');
         
