@@ -11,8 +11,8 @@ use Route4Me\Route;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
-    "first_name"  => "Test FirstName ".strval(rand(10000,99999)),
-    "address_1"   => "Test Address1 ".strval(rand(10000,99999)),
+    "first_name"  => "Test FirstName ".strval(rand(10000, 99999)),
+    "address_1"   => "Test Address1 ".strval(rand(10000, 99999)),
     "cached_lat"  => 38.024654,
     "cached_lng"  => -77.338814
 ));
