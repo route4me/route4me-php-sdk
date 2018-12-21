@@ -24,7 +24,7 @@ $route_id2 = $route_id1;
 
 $count = 0; 
 
-while ($route_id1 == $route_id2) {
+while ($route_id1==$route_id2) {
     $route_id2 = $route->getRandomRouteId(0, 20);
     
     $count++;
@@ -42,7 +42,7 @@ $depot = null;
 
 foreach ($addresses as $address) {
     if (isset($address->is_depot)) {
-        if ($address->is_depot == true) {
+        if ($address->is_depot==true) {
             $depot = $address;
             break;
         }
@@ -60,4 +60,4 @@ $params = array(
 
 $result = $route->mergeRoutes($params);
 
-var_dump($result); 
+var_dump($result);
