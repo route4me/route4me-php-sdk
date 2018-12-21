@@ -37,6 +37,6 @@ $orderParameters = Order::fromArray(array(
 
 $order = new Order();
 
-$response = $order->addOrder2Route($orderParameters, $body);
+$response = $order->addOrder2Route($orderParameters);
 
 Route4Me::simplePrint($response, true);
