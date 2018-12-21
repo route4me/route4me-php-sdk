@@ -21,7 +21,7 @@ $abContacts = new AddressBookLocation();
 
 $abcResults = $abContacts->getAddressBookLocations($adressBookLocationParameters);
 
-$results = $abContacts->getValue($abcResults,"results");
+$results = $abContacts->getValue($abcResults, "results");
 
 $contactsNumber = sizeof($results);
 $id1 = $results[rand(1, $contactsNumber) - 1]['address_id'];
