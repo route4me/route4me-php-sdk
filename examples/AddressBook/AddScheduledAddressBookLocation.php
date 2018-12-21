@@ -61,7 +61,7 @@ $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
         "mode"    => "weekly",
         "weekly"  => array(
             "every"    => 1,
-            "weekdays" => array(1,2,3,4,5)
+            "weekdays" => array(1, 2, 3, 4, 5)
         )
     )),
     "service_time" => 600
@@ -101,7 +101,7 @@ $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
         "monthly" => array(
             "every" => 1,
             "mode"  => "dates",
-            "dates" => array(20,22,23,24,25)
+            "dates" => array(20, 22, 23, 24, 25)
         )
     )),
     "service_time" => 750,
@@ -186,7 +186,7 @@ $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
         "mode"    => "daily",
         "daily"   => array("every" => 1)
     ),
-    "schedule_blacklist" => array("2017-02-24","2017-02-25"),
+    "schedule_blacklist" => array("2017-02-24", "2017-02-25"),
     "service_time"       => 300
 ));
 
