@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -29,7 +29,7 @@ $route = new Route();
 
 $route_id0 = $routes[rand(0, sizeof($routes)-1)]->route_id;
 
-echo "<br> From the route -> " . $route_id0 ."<br>";
+echo "<br> From the route -> ".$route_id0 ."<br>";
 
 if (is_null($route_id0)) {
     echo "Can't retrieve random route_id!.. Try again.";
@@ -37,8 +37,8 @@ if (is_null($route_id0)) {
 }
 
 // Get random source destination from selected source route above
-$addressRand=(array)$route->GetRandomAddressFromRoute($route_id0);
-$route_destination_id=$addressRand['route_destination_id'];
+$addressRand = (array)$route->GetRandomAddressFromRoute($route_id0);
+$route_destination_id = $addressRand['route_destination_id'];
 
 assert(!is_null($route_destination_id), "Can't retrieve random address.");
 
@@ -47,11 +47,11 @@ echo "Moved destination ID = $route_destination_id <br>";
 // Get random destination route from test routes
 $to_route_id = $route_id0;
 
-while ($to_route_id == $route_id0) {
-    $to_route_id = $routes[rand(0, sizeof($routes)-1)]->route_id;
+while ($to_route_id==$route_id0) {
+    $to_route_id = $routes[rand(0, sizeof($routes) - 1)]->route_id;
 }
 
-echo "<br> to the route -> " . $to_route_id ."<br>";
+echo "<br> to the route -> ".$to_route_id ."<br>";
 
 if (is_null($to_route_id)) {
     echo "Can't retrieve random route_id!.. Try again.";
