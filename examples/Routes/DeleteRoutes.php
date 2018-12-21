@@ -25,7 +25,7 @@ assert(!is_null($randomRouteID2), "Can't retrieve 2nd random route ID");
 echo "Random route ID 1 -> $randomRouteID1 <br>  Random route ID 2 -> $randomRouteID2 <br>";
 
 // Remove selected routes
-$route_ids = join(',',array($randomRouteID1,$randomRouteID2));
+$route_ids = join(',', array($randomRouteID1, $randomRouteID2));
 
 $result = $route->deleteRoutes($route_ids);
 
