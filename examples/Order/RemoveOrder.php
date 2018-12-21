@@ -1,9 +1,8 @@
 <?php
 namespace Route4Me;
 
-$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
-
-require $vdir.'/../vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Order;
