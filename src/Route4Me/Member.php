@@ -28,7 +28,7 @@ class Member extends Common
     public $last_name;
     public $phone_number;
     public $company_name;
-    public $webiinar_date;
+    public $webinar_date;
     
     public $subscription_name;
     public $token;
@@ -129,7 +129,7 @@ class Member extends Common
     
     public static function createMember($params)
     {
-        $excludeFields = array('session_guid', 'member_id', 'token', 'payload', 'webiinar_date', 
+        $excludeFields = array('session_guid', 'member_id', 'token', 'payload', 'webinar_date', 
         'company_name', 'config_key', 'config_value', 'api_key');
         
         $allBodyFields = Route4Me::getObjectProperties(new Member(), $excludeFields);
@@ -168,7 +168,7 @@ class Member extends Common
 
     public static function updateMember($body)
     {
-        $excludeFields = array('session_guid', 'token', 'payload', 'webiinar_date', 
+        $excludeFields = array('session_guid', 'token', 'payload', 'webinar_date', 
         'company_name', 'config_key', 'config_value', 'api_key');
         
         $allBodyFields = Route4Me::getObjectProperties(new Member(), $excludeFields);
@@ -244,7 +244,7 @@ class Member extends Common
     public static function webinarRegistration($params)
     {
         $allBodyFields = array('email_address', 'first_name', 'last_name', 'phone_number', 
-        'company_name', 'member_id', 'webiinar_date');
+        'company_name', 'member_id', 'webinar_date');
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::WEBINAR_REGISTER,
