@@ -14,7 +14,7 @@ use Route4Me\Order;
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 $orderParameters = Order::fromArray(array(
-    "day_added_YYMMDD"  => date("Y-m-d", strtotime( '-1 days' )),
+    "day_added_YYMMDD"  => date("Y-m-d", strtotime('-1 days')),
     "offset"            => 0,
     "limit"             => 5
 ));
