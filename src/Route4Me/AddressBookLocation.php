@@ -93,25 +93,12 @@ class AddressBookLocation extends Common
     
     public static function getAddressBookLocations($params)
     {
-        $allQueryFields = array('limit', 'offset');
+        $allQueryFields = array('limit', 'offset', 'address_id');
         
         $ablocations = Route4Me::makeRequst(array(
             'url'    => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
-        ));
-
-        return $ablocations;
-    }
-    
-    public static function getAddressBookLocationsByIDs($ids)
-    {
-        $ablocations = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'GET',
-            'query'  => array(
-                'address_id' => $ids
-            )
         ));
 
         return $ablocations;
