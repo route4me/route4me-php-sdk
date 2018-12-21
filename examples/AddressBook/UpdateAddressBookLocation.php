@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 
@@ -33,7 +33,7 @@ if (isset($abcResult["address_id"])) {
 
 assert($address_id != -1, "Cannot create an address book location. <br><br>");
 
-echo "Address Book Location with <b>address_id = ".strval($address_id)."</b> and <b>first_name = " . $abcResult['first_name'] . "</b> was successfully added<br>";
+echo "Address Book Location with <b>address_id = ".strval($address_id)."</b> and <b>first_name = ".$abcResult['first_name']."</b> was successfully added<br>";
  
 $abcResult["first_name"] = "Test Firstname Updated";
 
@@ -43,4 +43,4 @@ assert(isset($abcResult['first_name']), "Cannot update the address book location
 
 assert($abcResult['first_name'] == 'Test Firstname Updated', "Cannot update the address book location. <br><br>");
 
-echo "The field <b>first_name</b> in the address book location <b>" . $address_id . "</b> was update to <b>Test Firstname Updated</b> successfuly <br>"; 
+echo "The field <b>first_name</b> in the address book location <b>".$address_id."</b> was update to <b>Test Firstname Updated</b> successfuly <br>"; 

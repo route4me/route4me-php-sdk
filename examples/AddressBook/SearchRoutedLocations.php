@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 
@@ -26,4 +26,4 @@ $abcResult = $ablocation->searchAddressBookLocations($params);
 
 assert(isset($abcResult['results']) && isset($abcResult['total']), "Cannot done search for the locations");
 
-echo "Was found " . $abcResult['total'] . " routed locations";
+echo "Was found ".$abcResult['total']." routed locations";
