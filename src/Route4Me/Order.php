@@ -234,16 +234,16 @@ class Order extends Common
             return false;
         }
         
-        switch (variable) {
+        switch ($key) {
             case 'cached_lat':
             case 'curbside_lat':
-                if ($lat>90 || $lat<-90) {
+                if ($coord[$key]>90 || $coord[$key]<-90) {
                     return false;
                 }
                 break;
             case 'cached_lng':
             case 'curbside_lng':
-                if ($lng>180 || $lng<-180) {
+                if ($coord[$key]>180 || $coord[$key]<-180) {
                     return false;
                 }
                 break;
