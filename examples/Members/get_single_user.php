@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Member;
@@ -25,13 +25,13 @@ assert(sizeof($users)==2, "Cannot retrieve list of the users");
 assert(isset($users['results']), "Cannot retrieve list of the users");
 assert(isset($users['total']), "Cannot retrieve list of the users");
 
-$randIndex = rand(0, $users["total"]-1);
+$randIndex = rand(0, $users["total"] - 1);
 
 $randomUserID = $users['results'][$randIndex]["member_id"];
 
 echo "Random user ID -> $randomUserID <br><br>";
 
-// Get of a specified user with details
+// Get a specified user with details
 $param = array (
     "member_id" => $randomUserID
 );
