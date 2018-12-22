@@ -22,14 +22,14 @@ foreach ($activityTypes->getConstants() as $prop => $value) {
         "limit"         => 2,
         "offset"        => 0
     ));
-    
+
     $activities = new ActivityParameters();
     $results = $activities->searcActivities($activityParameters);
-    
+
     foreach ($results as $key => $activity) {
         Route4Me::simplePrint($activity);
         echo "<br>";
     }
-    
+
     echo "------------------- <br><br>";
 }
