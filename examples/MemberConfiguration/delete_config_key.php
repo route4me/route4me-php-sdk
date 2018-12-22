@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Member;
@@ -16,15 +16,15 @@ $member = new Member();
 
 // Create a config key
 $createParams = Member::fromArray(array (
-    "config_key"=> "My height",
-    "config_value"=> "182"
+    "config_key"   => "My height",
+    "config_value" => "182"
 ));
 
 $response = $member->newMemberConfigKey($createParams);
 
 // Delete a config key
 $removeParams = Member::fromArray(array (
-    "config_key"=> "My height"
+    "config_key" => "My height"
 ));
 
 $response = $member->removeMemberConfigKey($removeParams);
