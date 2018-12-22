@@ -1,7 +1,7 @@
 <?php
 namespace Route4Me;
 
-$root=realpath(dirname(__FILE__).'/../../');
+$root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
@@ -19,7 +19,7 @@ $territoryParams['data'] = array(
 );
 
 $TerritoryParameters = Territory::fromArray(array(
-    "territory_name"   => "Test Territory ".strval(rand(10000,99999)),
+    "territory_name"   => "Test Territory ".strval(rand(10000, 99999)),
     "territory_color"  => "ff7700",
     "territory"        => $territoryParams
 ));
