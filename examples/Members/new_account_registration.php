@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Member;
@@ -12,8 +12,8 @@ use Route4Me\Member;
 // Set the API key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$registrParameters=Member::fromArray(array(
-    'strEmail'      => 'aaaaaaaaaaaaa@gmail.com',
+$registrParameters = Member::fromArray(array(
+    'strEmail'      => 'aaaaaaaaaaaaaaa@gmail.com',
     'strPassword_1' => 'ooo111111',
     'strPassword_2' => 'ooo111111',
     'strFirstName'  => 'Driver',
