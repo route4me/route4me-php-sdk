@@ -13,9 +13,9 @@ $abLocation = new AddressBookLocation();
 
 // Get reandom address book location
 $AdressBookLocationParameters = array(
-        "limit"    => 30,
-        "offset"   => 0
-    );
+        "limit"   => 30,
+        "offset"  => 0
+);
 
 $randomLocation = $abLocation->getRandomAddressBookLocation($AdressBookLocationParameters);
 
