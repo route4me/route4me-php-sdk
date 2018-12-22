@@ -1,9 +1,8 @@
 <?php
 namespace Route4Me;
 
-$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
-
-require $vdir.'/../vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Member;
@@ -17,6 +16,7 @@ $member = new Member();
 
 $response = $member->getUsers();
 
-foreach ($response as $key => $member) {
+foreach ($response['results'] as $key => $member) {
     Route4Me::simplePrint($member);
+    echo "<br>";
 }
