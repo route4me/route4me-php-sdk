@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -19,7 +19,7 @@ $fGeoCoding = new Geocoding();
 
 $fgResult = $fGeoCoding->reverseGeocoding($geocodingParameters);
 
-if ($geocodingParameters['format'] == 'json') {
+if ($geocodingParameters['format']=='json') {
     foreach ($fgResult as $dest) {
         Route4Me::simplePrint($dest);
         echo "<br>";
@@ -29,4 +29,4 @@ if ($geocodingParameters['format'] == 'json') {
         Route4Me::simplePrint($dest);
         echo "<br>";
     }
-} 
+}
