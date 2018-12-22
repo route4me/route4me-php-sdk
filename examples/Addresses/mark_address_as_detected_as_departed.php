@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -35,7 +35,7 @@ if (isset($addressRand['is_depot']))
 $addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
 $route_destination_id = $addressRand['route_destination_id'];
 
-assert(!is_null($route_destination_id), "can't retrieve random address");
+assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Mark the address as detected as deoarted
 $addressParameters = (array)Address::fromArray(array(
