@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Member;
@@ -12,21 +12,20 @@ use Route4Me\Member;
 // Set the api key in the Route4me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$params = Member::fromArray(array (
-));
+$params = Member::fromArray(array ( ));
 
 $member = new Member();
 
 $response = $member->getMemberConfigData($params);
 
-foreach ($response as $key => $value)
-{
-    if (is_array($value))
-    {
-        Route4Me::simplePrint($value);
-    }
-    else 
-    {
+foreach ($response as $key => $value) {
+    if (is_array($value)) {
+        foreach ($value as $v1) {
+            Route4Me::simplePrint($v1);
+            echo "<br>";
+        }
+    } else {
         echo "$key => $value <br>";
     }
+    echo "<br>";
 }
