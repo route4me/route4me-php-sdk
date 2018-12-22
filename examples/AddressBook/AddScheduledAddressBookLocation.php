@@ -164,7 +164,6 @@ echo "<br>";
 
 #region // Add a location with the daily scheduling and blacklist.
 $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
-
     "address_1"            => "4629 HILLSIDE DRIVE, Louisville, KY, 40216",
     "address_alias"        => "4629 HILLSIDE DRIVE 40216",
     "address_group"        => "Scheduled daily",
