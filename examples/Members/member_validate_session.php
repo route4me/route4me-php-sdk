@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Member;
@@ -16,11 +16,12 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey('11111111111111111111111111111111');
 
 $member = new Member();
+
 // Authenticate a user and get session guid
-$recordParameters=Member::fromArray(array(
-    'strEmail' => 'avir1406@gmail.com',
-    'strPassword' => '!dinoZAVARI123!',
-    'format' => 'json',
+$recordParameters = Member::fromArray(array(
+    'strEmail'    => 'aaaaaaaaaaa@gmail.com',
+    'strPassword' => 'ddddddddddd',
+    'format'      => 'json',
 ));
 
 $response = $member->memberAuthentication($recordParameters);
@@ -43,4 +44,4 @@ $params = Member::fromArray(array(
 
 $response = $member->validateSession($params);
 
-var_dump($response); 
+var_dump($response);
