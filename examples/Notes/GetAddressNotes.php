@@ -59,5 +59,7 @@ foreach ($notes['notes'] as $note) {
     echo "========== Notes ==================<br>";
     echo "note_id --> ".$note['note_id']."<br>";
     $content = isset($note['contents']) ? $note['contents'] : "";
-    if (strlen($content)>0) echo "contents --> $content"."<br>";
+    if (strlen($content)>0) {
+        echo "contents --> $content"."<br>";
+    }
 }

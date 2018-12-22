@@ -57,12 +57,13 @@ $params = array(
 
 $result = $route->GetLastLocation($params);
 
-if (isset($result->tracking_history))
-foreach ($result->tracking_history as $history) {
-    echo "Speed --> ".$history['s']."<br>";
-    echo "course --> ".$history['d']."<br>";
-    echo "Timestamp --> ".$history['ts_friendly']."<br>";
-    echo "Latitude --> ".$history['lt']."<br>";
-    echo "Longitude --> ".$history['lg']."<br>";
-    echo "========================================<br><br>";
+if (isset($result->tracking_history)) {
+    foreach ($result->tracking_history as $history) {
+        echo "Speed --> ".$history['s']."<br>";
+        echo "course --> ".$history['d']."<br>";
+        echo "Timestamp --> ".$history['ts_friendly']."<br>";
+        echo "Latitude --> ".$history['lt']."<br>";
+        echo "Longitude --> ".$history['lg']."<br>";
+        echo "========================================<br><br>";
+    }
 }

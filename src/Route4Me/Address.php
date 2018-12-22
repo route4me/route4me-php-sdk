@@ -1,7 +1,6 @@
 <?php
 namespace Route4Me;
 
-use Route4Me\Exception\BadParam;
 use Route4Me\Route4Me;
 use Route4Me\Common;
 use Route4Me\Enum\Endpoint;

@@ -24,7 +24,7 @@ if ($geocodingParameters['format']=='json') {
         Route4Me::simplePrint($dest);
         echo "<br>";
     }
-}  else {
+} else {
     foreach ($fgResult['destination'] as $dest) {
         Route4Me::simplePrint($dest);
         echo "<br>";

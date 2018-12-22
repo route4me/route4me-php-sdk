@@ -51,16 +51,11 @@ $optimizationParams->setParameters($parameters);
 $problem = OptimizationProblem::optimize($optimizationParams);
 
 foreach ((array)$problem as $key => $value) {
-    if (is_string($value))
-    {
+    if (is_string($value)) {
         echo $key." --> ".$value."<br>";
-    }
-    else 
-    {
+    } else {
         echo "************ $key ************* <br>";
         Route4Me::simplePrint((array)$value, true);
         echo "******************************* <br>";
     }
 }
-
-
