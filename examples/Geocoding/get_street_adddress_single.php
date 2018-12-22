@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Geocoding;
@@ -21,5 +21,3 @@ $geocoding = new Geocoding();
 $response = $geocoding->getStreetData($gcParameters);
 
 Route4Me::simplePrint($response);
-
-    
