@@ -33,7 +33,7 @@ if (isset($addressRand['is_depot']))
 
 $address_id = $addressRand['route_destination_id'];
 
-assert(!is_null($address_id), "can't retrieve random address");
+assert(!is_null($address_id), "Can't retrieve random address");
 
 // Mark the address as detected as visited
 $addressParameters = (array)Address::fromArray(array(
