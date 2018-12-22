@@ -51,7 +51,7 @@ if (!$status) {
 }
 
 $params = array(
-    'route_id'  =>  $routeId,
+    'route_id'                 =>  $routeId,
     'device_tracking_history'  =>  '1'
 );
 
