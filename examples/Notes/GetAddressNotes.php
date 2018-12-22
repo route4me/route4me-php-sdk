@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -34,7 +34,7 @@ $noteParameters = array(
     "dev_lng"         => -83.244743347168,
     "device_type"     => "web",
     "strUpdateType"   => "dropoff",
-    "strNoteContents" => "Test ". time()
+    "strNoteContents" => "Test ".time()
 );
 
 $address = new Address();
