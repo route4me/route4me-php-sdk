@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Route;
@@ -12,12 +12,12 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Create a custom note type
 $noteParameters=array(
-    "type"        => 'To Do',
-    "values"      => array(
-                       'Pass a package',
-                       'Pickup package',
-                       'Do a service'
-                     )
+    "type"   => 'To Do',
+    "values" => array(
+                  'Pass a package',
+                  'Pickup package',
+                  'Do a service'
+                )
 );
 
 $address = new Address();
