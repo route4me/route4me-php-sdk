@@ -1,8 +1,8 @@
 <?php
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__) . '/../../');
-require $root . '/vendor/autoload.php';
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
 use Route4Me\Address;
@@ -20,7 +20,7 @@ $routeId = $route->getRandomRouteId(0, 10);
 assert(!is_null($routeId), "can't retrieve random route_id");
 
 // Get random address's id from selected route above
-$addressRand=(array)$route->GetRandomAddressFromRoute($routeId);
+$addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
 
 if (isset($addressRand['is_depot'])) {
     if ($addressRand['is_depot']) {
@@ -33,7 +33,7 @@ if (isset($addressRand['is_depot'])) {
 $addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
 $route_destination_id = $addressRand['route_destination_id'];
 
-assert(!is_null($route_destination_id), "can't retrieve random address");
+assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Mark the address as visited
 $address = new Address();
@@ -49,4 +49,4 @@ $result = $address->markAsVisited($params);
 
 assert($result==1, "Cannot marked the address as visited"); 
 
-echo "<br> The address " . $route_destination_id . " was marked as visited";
+echo "<br> The address ".$route_destination_id." was marked as visited";
