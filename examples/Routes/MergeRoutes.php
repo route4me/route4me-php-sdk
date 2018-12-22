@@ -29,7 +29,9 @@ while ($route_id1==$route_id2) {
     
     $count++;
     
-    if ($count>5) break; // prevent from the infinite cycle, if there are less than 2 routes.
+    if ($count>5) {
+        break;
+    }
 }
 
 echo "Route ID 1 -> $route_id1 <br> Route ID 2 -> $route_id2 <br>";

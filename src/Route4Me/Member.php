@@ -147,8 +147,13 @@ class Member extends Common
     {
         $members = self::getUsers();
         
-        if (is_null($members)) return null;
-        if (!isset($members['results'])) return null;
+        if (is_null($members)) {
+            return null;
+        }
+        
+        if (!isset($members['results'])) {
+            return null;
+        }
         
         $memberIDs = array();
         
@@ -158,9 +163,11 @@ class Member extends Common
             }
         }
         
-        if (sizeof($memberIDs)<1) return null;
+        if (sizeof($memberIDs)<1) {
+            return null;
+        }
         
-        $randomIndex = rand(0, sizeof($memberIDs)-1);
+        $randomIndex = rand(0, sizeof($memberIDs) - 1);
         
         return $memberIDs[$randomIndex];
     }

@@ -34,7 +34,9 @@ if (isset($routeResults['addresses'])) {
     foreach ($routeResults['addresses'] as $key => $address) {
         $araddress = (array)$address;
 
-        if (isset($araddress['route_destination_id'])) echo "route_destination_id=".$araddress['route_destination_id']."<br>";
+        if (isset($araddress['route_destination_id'])) {
+            echo "route_destination_id=".$araddress['route_destination_id']."<br>";
+        }
         
         if (isset($araddress['path_to_next'])) {
             echo "path_to_next:<br>";
