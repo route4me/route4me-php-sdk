@@ -23,7 +23,7 @@ $optimizationProblemId = $optimization->getRandomOptimizationId(0, 10);
 assert(!is_null($optimizationProblemId), "Can't retrieve a random optimization problem ID");
 
 // Remove an optimization
-$params = array (
+$params = array(
     "optimization_problem_ids"  => array(
         "0" => $optimizationProblemId
     ),

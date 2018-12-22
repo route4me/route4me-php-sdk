@@ -1,7 +1,7 @@
 <?php
 namespace Route4Me;
     
-$root=realpath(dirname(__FILE__).'/../../');
+$root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 use Route4Me\Enum\DeviceType;
@@ -46,8 +46,8 @@ assert(isset($status['status']), "Can't send GPS position to the selected route"
 assert($status['status'], "Can't send GPS position to the selected route");
 
 // Get the device tracking history from a time range
-$startDate = time() - 30*24*3600;
-$endDate = time() + 1*24*3600;
+$startDate = time() - 30 * 24 * 3600;
+$endDate = time() + 1 * 24 * 3600;
 
 $params = array(
     'route_id'     => $routeId,

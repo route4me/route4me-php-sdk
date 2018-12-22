@@ -29,7 +29,7 @@ echo "Random order ID 1 -> $randomOrderID1 <br> Random order ID 2 -> $randomOrde
 
 // Remove 2 random orders
 $orderParameters = Order::fromArray(array(
-    'order_ids' => array (
+    'order_ids' => array(
         0 => $randomOrderID1,
         1 => $randomOrderID2,
       )

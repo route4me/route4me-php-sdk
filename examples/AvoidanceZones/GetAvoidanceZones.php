@@ -12,7 +12,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $avoidancezone = new AvoidanceZone();
 
-$queryparameters = array ();
+$queryparameters = array();
 
 $azones = $avoidancezone->getAvoidanceZones($queryparameters);
 

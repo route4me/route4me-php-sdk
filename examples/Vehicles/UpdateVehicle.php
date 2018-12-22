@@ -22,7 +22,7 @@ $randomVehicleID = $vehicle->getRandomVehicleId(1, 20);
 assert(!is_null($randomVehicleID), "Can't retrieve a random vehilce ID");
 
 // Update the vehicle
-$vehicleParameters = Vehicle::fromArray(array (
+$vehicleParameters = Vehicle::fromArray(array(
     'vehicle_id'             => $randomVehicleID,
     'vehicle_model_year'     => 2013,
     'vehicle_year_acquired'  => 2016,
