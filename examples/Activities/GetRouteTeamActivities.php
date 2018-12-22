@@ -17,11 +17,11 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $route = new Route();
 $routeId = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeId), "can't retrieve random route_id");
+assert(!is_null($routeId), "Can't retrieve random route_id");
 
 $activityParameters = ActivityParameters::fromArray(array(
-    "route_id"    => $routeId,
-    "team"        => "true"
+    "route_id"   => $routeId,
+    "team"       => "true"
 ));
 
 $activities = new ActivityParameters();
