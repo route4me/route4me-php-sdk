@@ -28,8 +28,8 @@ $results = $activities->sendUserMessage($postParameters);
 
 $msg = isset($results["status"])!=null
   ? ($results["status"]==1 ? "The user message was sent to the route " : "he user message could not sent to the route ")
-   : "The user message could not sent to the route "; 
-   
+   : "The user message could not sent to the route ";
+
 $msg .= " with route_id=".$route_id;
-   
-echo "<br> $msg <br>";   
+
+echo "<br> $msg <br>";
