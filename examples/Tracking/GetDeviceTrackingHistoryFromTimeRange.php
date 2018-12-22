@@ -50,9 +50,9 @@ $startDate = time() - 30*24*3600;
 $endDate = time() + 1*24*3600;
 
 $params = array(
-    'route_id'     =>  $routeId,
+    'route_id'     => $routeId,
     'format'       => Format::JSON,
-    'time_period'  =>  'custom',
+    'time_period'  => 'custom',
     'start_date'   => $startDate,
     'end_date'     => $endDate
 );
