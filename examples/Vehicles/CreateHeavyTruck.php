@@ -17,7 +17,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $vehicle = new Vehicle();
 
-$vehicleParameters = Vehicle::fromArray(array (
+$vehicleParameters = Vehicle::fromArray(array(
     'vehicle_alias'                    => 'Peterbilt 579',
     'vehicle_vin'                      => '1NP5DB9X93N507873',
     'vehicle_license_plate'            => 'PPV7516',

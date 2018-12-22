@@ -27,9 +27,9 @@ assert(sizeof($routes)>1, "This example requires at last 2 routes. Please, creat
 // Get random source route from test routes
 $route = new Route();
 
-$route_id0 = $routes[rand(0, sizeof($routes)-1)]->route_id;
+$route_id0 = $routes[rand(0, sizeof($routes) - 1)]->route_id;
 
-echo "<br> From the route -> ".$route_id0 ."<br>";
+echo "<br> From the route -> ".$route_id0."<br>";
 
 if (is_null($route_id0)) {
     echo "Can't retrieve random route_id!.. Try again.";
@@ -51,7 +51,7 @@ while ($to_route_id==$route_id0) {
     $to_route_id = $routes[rand(0, sizeof($routes) - 1)]->route_id;
 }
 
-echo "<br> to the route -> ".$to_route_id ."<br>";
+echo "<br> to the route -> ".$to_route_id."<br>";
 
 if (is_null($to_route_id)) {
     echo "Can't retrieve random route_id!.. Try again.";

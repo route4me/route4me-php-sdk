@@ -38,7 +38,7 @@ $route_destination_id = $addressRand['route_destination_id'];
 assert(!is_null($route_destination_id), "Can't retrieve random address");
 
 // Remove the destination from the optimization
-$params = array (
+$params = array(
     "optimization_problem_id"  => $optimization_problem_id,
     "route_destination_id"     => $route_destination_id
 );
