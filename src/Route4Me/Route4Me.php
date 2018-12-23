@@ -35,7 +35,6 @@ class Route4Me
 
         if (sizeof($query)==0) {
             return null;
-            
         }
         
         $body = isset($options['body']) ? array_filter($options['body']) : null;
@@ -69,6 +68,7 @@ class Route4Me
             "Content-Type: multipart/form-data",
             'Content-Disposition: form-data; name="strFilename"'
         ));
+        
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, array('strFilename' => $rpath)); 
         
@@ -90,9 +90,9 @@ class Route4Me
 
     public static function makeRequst($options) {
         $errorHandler = new myErrorHandler();
-        
+
         $old_error_handler = set_error_handler(array($errorHandler, "proc_error"));
-        
+
         $method = isset($options['method']) ? $options['method'] : 'GET';
         $query = isset($options['query']) ? array_filter($options['query'], function($x) { return !is_null($x); } ) : array();
 
@@ -101,11 +101,11 @@ class Route4Me
         $headers = array(
             "User-Agent: Route4Me php-sdk"
         );
-        
+
         if (isset($options['HTTPHEADER'])) {
             $headers[] = $options['HTTPHEADER'];
         }
-         
+
         if (isset($options['HTTPHEADERS'])) {
             foreach ($options['HTTPHEADERS'] As $header) {
                 $headers[] = $header;
@@ -113,14 +113,14 @@ class Route4Me
         }
 
         $ch = curl_init();
-        
-        $url = $options['url'].'?'.http_build_query(array_merge(
+
+        $url = isset($options['url']) ? $options['url'].'?'.http_build_query(array_merge(
             $query, array('api_key' => self::getApiKey())
-        ));
+        )) : "";
 
         $baseUrl = self::getBaseUrl();
-
-        $curlOpts = arraY(
+ 
+        $curlOpts = array(
             CURLOPT_URL            => $baseUrl.$url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT        => 80,
@@ -213,79 +213,6 @@ class Route4Me
         return @json_decode(@json_encode($object), 1);
     }
 
-    public static function makeUrlRequst($url, $options) {
-        $method = isset($options['method']) ? $options['method'] : 'GET';
-        $query = isset($options['query']) ?
-            array_filter($options['query'], function($x) { return !is_null($x); } ) : array();
-        $body = isset($options['body']) ? $options['body'] : null;
-        $ch = curl_init();
-        
-        $curlOpts = arraY(
-            CURLOPT_URL            => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 60,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_HTTPHEADER     => array(
-                'User-Agent' => 'Route4Me php-sdk'
-            )
-        );
-        
-        curl_setopt_array($ch, $curlOpts);
-        
-        switch ($method) {
-        case 'DELETE':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
-            break;
-        case 'DELETEARRAY':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
-            break;
-        case 'PUT':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-            break;
-        case 'POST':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); 
-            break;
-        case 'ADD':
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
-        }
-        
-        if (is_numeric(array_search($method, array('DELETE', 'PUT', 'POST')))) {
-            if (isset($body)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-            } 
-        }
-
-        $result = curl_exec($ch);
-        
-        $isxml = FALSE;
-        $jxml = "";
-        
-        if (strpos($result, '<?xml')>-1) {
-            $xml = simplexml_load_string($result);
-            $jxml = json_encode($xml);
-            $isxml = TRUE;
-        }
-        
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        
-        if ($isxml) {
-            $json = $jxml;
-        } else {
-            $json = json_decode($result, true);
-        }
-        
-        if (200==$code) {
-            return $json;
-        } elseif (isset($json['errors'])) {
-            throw new ApiError(implode(', ', $json['errors']));
-        } else {
-            throw new ApiError('Something wrong');
-        }
-    }
     
     /**
      * Prints on the screen main keys and values of the array 
