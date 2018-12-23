@@ -1,7 +1,7 @@
 <?php
 namespace Route4Me;
 
-$root=realpath(dirname(__FILE__).'/../');
+$root = realpath(dirname(__FILE__).'/../');
 require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
@@ -25,14 +25,14 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $json = json_decode(file_get_contents('./addresses.json'), true);
 
 $addresses = array();
-foreach($json as $address) {
+foreach ($json as $address) {
     $addresses[] = Address::fromArray($address);
 }
 
 $parameters = RouteParameters::fromArray(array(
     "algorithm_type"          => Algorithmtype::CVRP_TW_SD,
     "route_name"              => "Single Depot, Multiple Driver, No Time Window",
-    "route_date"              => time() + 24*60*60,
+    "route_date"              => time() + 24 * 60 * 60,
     "route_time"              => 60 * 60 * 7,
     "rt"                      => TRUE,
     "distance_unit"           => DistanceUnit::MILES,
@@ -61,4 +61,3 @@ foreach ((array)$problem as $key => $value) {
         echo "******************************* <br>";
     }
 }
-
