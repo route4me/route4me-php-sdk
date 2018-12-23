@@ -1,7 +1,7 @@
 <?php
 namespace Route4Me;
 
-$root=realpath(dirname(__FILE__).'/../');
+$root = realpath(dirname(__FILE__).'/../');
 require $root.'/vendor/autoload.php';
 
 use Route4Me\Route4Me;
@@ -25,7 +25,7 @@ $json = json_decode(file_get_contents('./addresses.json'), true);
 $json = array_slice($json, 0, 10);
 
 $addresses = array();
-foreach($json as $address) {
+foreach ($json as $address) {
     $addresses[] = Address::fromArray($address);
 }
 
