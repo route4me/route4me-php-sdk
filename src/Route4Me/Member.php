@@ -147,11 +147,7 @@ class Member extends Common
     {
         $members = self::getUsers();
         
-        if (is_null($members)) {
-            return null;
-        }
-        
-        if (!isset($members['results'])) {
+        if (is_null($members) || !isset($members['results'])) {
             return null;
         }
         
@@ -159,7 +155,9 @@ class Member extends Common
         
         foreach ($members['results'] as $memb) {
             if (isset($memb['member_id']) && isset($memb['member_type'])) {
-                if ($memberType==$memb['member_type']) $memberIDs[]=$memb['member_id'];
+                if ($memberType==$memb['member_type']) {
+                    $memberIDs[]=$memb['member_id'];
+                }
             }
         }
         
@@ -207,8 +205,8 @@ class Member extends Common
     {
         $allQueryFields = array('plan');
         $allBodyFields = array('strEmail', 'strPassword_1', 'strPassword_2', 'strFirstName', 
-        'strLastName', 'format', 'strIndustry', 'chkTerms', 
-        'device_type', 'strSubAccountType', 'blDisableMarketing', 'blDisableAccountActivationEmail');
+        'strLastName', 'format', 'strIndustry', 'chkTerms', 'device_type', 'strSubAccountType', 
+        'blDisableMarketing', 'blDisableAccountActivationEmail');
         
         $response = Route4Me::makeRequst(array(
             'url'    => Endpoint::REGISTER_ACTION,
