@@ -25,7 +25,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $json = json_decode(file_get_contents('./addresses.json'), true);
 
 $addresses = array();
-foreach($json as $address) {
+foreach ($json as $address) {
     $addresses[] = Address::fromArray($address);
 }
 
