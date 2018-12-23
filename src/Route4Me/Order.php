@@ -327,8 +327,7 @@ class Order extends Common
                 $orderResults = $order->addOrder($orderParameters);
                 
                 array_push($results['success'], "The order with order_id = ".strval($orderResults["order_id"])." added successfuly.");
-            }
-            else {
+            } else {
                 array_push($results['fail'], "$iRow --> one of the parameters cached_lat, cached_lng, address_1 is not set"); 
             }
             
