@@ -33,7 +33,7 @@ class ActivityParameters extends Common
     {
         $activityparameters = new ActivityParameters();
         
-        foreach($params as $key => $value) {
+        foreach ($params as $key => $value) {
             if (property_exists($activityparameters, $key)) {
                 $activityparameters->{$key} = $value;
             }
@@ -80,5 +80,4 @@ class ActivityParameters extends Common
         
         return $result;
     }
-    
 }
