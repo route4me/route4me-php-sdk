@@ -12,7 +12,7 @@ class Common
     public function toArray()
     {
         $params = array_filter(get_object_vars($this), function($item) {
-            return ($item !== null) && !(is_array($item) && !count($item));
+            return ($item!==null) && !(is_array($item) && !count($item));
         });
 
         return $params;
