@@ -48,8 +48,7 @@ class OptimizationProblemParams extends Common
         $param->optimized_callback_url = self::getValue($params, 'optimized_callback_url');
         $param->optimization_problem_id = self::getValue($params, 'optimization_problem_id');
         $param->reoptimize = self::getValue($params, 'reoptimize');
-        $param->redirect = filter_var(
-            self::getValue($params, 'redirect', true), FILTER_VALIDATE_BOOLEAN);
+        $param->redirect = filter_var(self::getValue($params, 'redirect', true), FILTER_VALIDATE_BOOLEAN);
 
         return $param;
     }
