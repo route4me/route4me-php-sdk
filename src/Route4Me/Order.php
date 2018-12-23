@@ -152,11 +152,7 @@ class Order extends Common
     {
         $randomOrder = $this->getRandomOrder($offset, $limit);
         
-        if (is_null($randomOrder)) {
-            return null;
-        }
-        
-        if (!isset($randomOrder)) {
+        if (is_null($randomOrder) || !isset($randomOrder)) {
             return null;
         }
         
@@ -169,11 +165,7 @@ class Order extends Common
         
         $orders = self::getOrders($params);
         
-        if (is_null($orders)) {
-            return null;
-        }
-        
-        if (!isset($orders['results'])) {
+        if (is_null($orders) || !isset($orders['results'])) {
             return null;
         }
         
