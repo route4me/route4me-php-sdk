@@ -66,7 +66,7 @@ class Vehicle extends Common
     
     public static function fromArray(array $params) {
         $vehicle= new Vehicle();
-        foreach($params as $key => $value) {
+        foreach ($params as $key => $value) {
             if (property_exists($vehicle, $key)) {
                 $vehicle->{$key} = $value;
             }
@@ -98,11 +98,11 @@ class Vehicle extends Common
         
         $vehicles = $this->getVehicles($params);
 
-        if (is_null($vehicles)) return null;
-        if (!isset($vehicles['data'])) return null;
-        if (sizeof($vehicles['data'])<1) return null;
+        if (is_null($vehicles) || !isset($vehicles['data']) || sizeof($vehicles['data'])<1) {
+            return null;
+        }
         
-        $randomIndex = rand(0, sizeof($vehicles['data'])-1);
+        $randomIndex = rand(0, sizeof($vehicles['data']) - 1);
         
         return $vehicles['data'][$randomIndex]['vehicle_id'];
     }
@@ -110,7 +110,7 @@ class Vehicle extends Common
     public function getVehicleByID($vehicleID)
     {
         $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
+            'url'    => Endpoint::VEHICLE_V4.'/'.$vehicleID,
             'method' => 'GET'
         ));
 
@@ -124,7 +124,7 @@ class Vehicle extends Common
         $allBodyFields = Route4Me::getObjectProperties(new Vehicle(), array('vehicle_id'));
         
         $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
+            'url'    => Endpoint::VEHICLE_V4.'/'.$vehicleID,
             'method' => 'PUT',
             'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'  => 'Content-Type: application/json'
@@ -152,7 +152,7 @@ class Vehicle extends Common
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
         
         $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
+            'url'    => Endpoint::VEHICLE_V4.'/'.$vehicleID,
             'method' => 'DELETE',
             'HTTPHEADER'  => 'Content-Type: application/json'
         ));
