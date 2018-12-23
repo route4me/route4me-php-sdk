@@ -209,13 +209,14 @@ class Address extends Common
     public function AddNoteFile($params)
     {
         $allQueryFields = array('route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type', 'strUpdateType');
-        $allBodyFields = array('strFilename');
         
-        $result = Route4Me::fileUploadRequest(array(
+        $result = Route4Me::makeRequst(array(
             'url'    => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'body'   => array(
+                'strFilename'  => isset($params['strFilename']) ? Route4Me::getFileRealPath($params['strFilename']) : "" 
+            ),
             'HTTPHEADER'  => 'Content-Type: multipart/form-data'
         ));
 
