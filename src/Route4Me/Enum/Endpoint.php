@@ -44,18 +44,18 @@ class Endpoint
   const ORDER_V4 = '/api.v4/order.php';
   
   const ROUTE_V4 = '/api.v4/route.php';
-  const ROUTE_DUPLICATE ='/actions/duplicate_route.php';
-  const ROUTES_DELETE ='/actions/delete_routes.php';
-  const REOPTIMIZE_V3_2 ='/api.v3/route/reoptimize_2.php';
-  const ROUTES_MERGE ='/actions/merge_routes.php';
-  const ROUTE_SHARE ='/actions/route/share_route.php';
-  const ROUTE_NOTES_ADD ='/actions/addRouteNotes.php';
-  const STATUS_V4 ='/api.v4/status.php';
-  const GET_DEVICE_LOCATION ='/api/track/get_device_location.php';
+  const ROUTE_DUPLICATE = '/actions/duplicate_route.php';
+  const ROUTES_DELETE = '/actions/delete_routes.php';
+  const REOPTIMIZE_V3_2 = '/api.v3/route/reoptimize_2.php';
+  const ROUTES_MERGE = '/actions/merge_routes.php';
+  const ROUTE_SHARE = '/actions/route/share_route.php';
+  const ROUTE_NOTES_ADD = '/actions/addRouteNotes.php';
+  const STATUS_V4 = '/api.v4/status.php';
+  const GET_DEVICE_LOCATION = '/api/track/get_device_location.php';
   
-  const TRACK_SET ='/track/set.php';
+  const TRACK_SET = '/track/set.php';
   
-  const NOTE_CUSTOM_TYPES_V4 ='/api.v4/note_custom_types.php';
+  const NOTE_CUSTOM_TYPES_V4 = '/api.v4/note_custom_types.php';
   
   const VEHICLE_V4 = '/api/vehicles';
 }
