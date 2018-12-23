@@ -124,7 +124,7 @@ class OptimizationProblem extends Common
             'url'    => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'PUT',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'  => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
         ));
         
         return $optimize;
@@ -144,7 +144,7 @@ class OptimizationProblem extends Common
     {
         $optimizations = self::get(array('offset' => $offset, 'limit' => $limit));
             
-        $rOptimization = $optimizations[rand(0,sizeof($optimizations)-1)];
+        $rOptimization = $optimizations[rand(0, sizeof($optimizations) - 1)];
         
         if(!isset($rOptimization->optimization_problem_id)) {
             if (sizeof($optimizations)>9) {
@@ -163,7 +163,7 @@ class OptimizationProblem extends Common
             return null;
         }
         
-        $params = array("optimization_problem_id" => $opt_id );
+        $params = array("optimization_problem_id" => $opt_id);
         
         $optimization = (array)$this->get($params);
         
@@ -181,7 +181,7 @@ class OptimizationProblem extends Common
             return null;
         }
         
-        $num = rand(0, sizeof($addresses)-1);
+        $num = rand(0, sizeof($addresses) - 1);
         
         $rAddress = $addresses[$num];
         
