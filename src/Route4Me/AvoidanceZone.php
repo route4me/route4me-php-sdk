@@ -7,7 +7,7 @@ use Route4Me\Enum\Endpoint;
 
 class AvoidanceZone extends Common
 {
-    public $territory_id;  // Avoidance zone id
+    public $territory_id; // Avoidance zone id
     public $territory_name; 
     public $territory_color;
     public $orders;
@@ -30,7 +30,7 @@ class AvoidanceZone extends Common
         
         $avoidanceZoneParameters = new AvoidanceZone();
         
-        foreach($params as $key => $value) {
+        foreach ($params as $key => $value) {
             if (property_exists($avoidanceZoneParameters, $key)) {
                 $avoidanceZoneParameters->{$key} = $value;
             }
