@@ -67,7 +67,7 @@ class RouteParameters extends Common
     public static function fromArray(array $params)
     {
         $routeParams = new RouteParameters();
-        foreach($params as $key => $value) {
+        foreach ($params as $key => $value) {
             if (property_exists($routeParams, $key)) {
                 $routeParams->{$key} = $value;
             }
