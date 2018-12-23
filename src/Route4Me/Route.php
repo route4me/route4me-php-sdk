@@ -78,6 +78,7 @@ class Route extends Common
 
         if (isset($params['addresses'])) {
             $addresses = array();
+            
             foreach ($params['addresses'] as $address) {
                 $addresses[] = Address::fromArray($address);
             }
@@ -104,7 +105,7 @@ class Route extends Common
         ));
 
         if (isset($params['route_id'])) {
-            return Route::fromArray($result); die("");
+            return Route::fromArray($result);
         } else {
             $routes = array();
             foreach ($result as $route) {
