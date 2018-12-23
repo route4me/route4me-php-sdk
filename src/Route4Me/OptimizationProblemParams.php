@@ -34,7 +34,7 @@ class OptimizationProblemParams extends Common
             $param->setParameters(RouteParameters::fromArray($params['parameters']));
         }
 
-        foreach($params['addresses'] as $address) {
+        foreach ($params['addresses'] as $address) {
             if (!($address instanceof Address)) {
                 $address = Address::fromArray($address);
             }
@@ -76,7 +76,7 @@ class OptimizationProblemParams extends Common
     {
         $addresses = array();
         
-        foreach($this->addresses as $address) {
+        foreach ($this->addresses as $address) {
             $addresses[] = $address->toArray();
         }
         
