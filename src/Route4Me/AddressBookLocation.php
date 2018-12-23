@@ -243,7 +243,7 @@ class AddressBookLocation extends Common
         for ($i = 0; $i<$monthlyDatesSize; $i++) { 
             if (is_numeric($monthlyDates[$i])) {
                 $mday = intval($monthlyDates[$i]);
-                if ($mday <1 || $mday > 31) {
+                if ($mday<1 || $mday>31) {
                     $isValid = FALSE;
                 }
             } else {
