@@ -7,7 +7,7 @@ use Route4Me\Enum\Endpoint;
 
 class Territory extends Common
 {
-	public $territory_id;  // Territory id
+	public $territory_id; // Territory id
 	public $territory_name; 
 	public $territory_color;
 	public $addresses;
@@ -29,7 +29,7 @@ class Territory extends Common
 		
 		$territoryparameters = new Territory();
         
-		foreach($params as $key => $value) {
+		foreach ($params as $key => $value) {
 			if (property_exists($territoryparameters, $key)) {
 				$territoryparameters->{$key} = $value;
 			}
@@ -71,7 +71,7 @@ class Territory extends Common
 		$response = Route4Me::makeRequst(array(
 			'url'    => Endpoint::TERRITORY_V4,
 			'method' => 'POST',
-			'body'  => Route4Me::generateRequestParameters($allBodyFields, $params)
+			'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
 		));
 
 		return $response;
