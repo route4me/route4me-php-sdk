@@ -30,64 +30,6 @@ class Route4Me
         return self::$baseUrl;
     }
     
-    public static function fileUploadRequest($options) {
-        $query = isset($options['query']) ? array_filter($options['query']) : array();
-
-        if (sizeof($query)==0) {
-            return null;
-        }
-        
-        $body = isset($options['body']) ? array_filter($options['body']) : null;
-            
-        $fname = isset($body['strFilename']) ? $body['strFilename'] : '';
-        
-        if ($fname=='') {
-            return null;  
-        } 
-
-        $rpath = function_exists('curl_file_create') ? curl_file_create(realpath($fname)) : '@'.realpath($fname);
-        
-        $url = self::$baseUrl.$options['url'].'?'.http_build_query(array_merge(array('api_key' => self::getApiKey()), $query));
-        
-        $ch = curl_init($url);
-        
-        $curlOpts = array(
-            CURLOPT_POST => true,
-            CURLOPT_RETURNTRANSFER => false,
-            CURLOPT_TIMEOUT        => 60,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_SSL_VERIFYPEER => FALSE
-        );
-        
-        curl_setopt_array($ch, $curlOpts);
-        
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: multipart/form-data",
-            'Content-Disposition: form-data; name="strFilename"'
-        ));
-        
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, array('strFilename' => $rpath)); 
-        
-        $result = curl_exec($ch);
-
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        $json = json_decode($result, true);
-        
-        if (200==$code) {
-            return $json;
-        } elseif (isset($json['errors'])) {
-            throw new ApiError(implode(', ', $json['errors']));
-        } else {
-            throw new ApiError('Something wrong');
-        }
-    }
-
     public static function makeRequst($options) {
         $errorHandler = new myErrorHandler();
 
@@ -344,5 +286,12 @@ class Route4Me
         }
         
         return $generatedPath;
+    }
+    
+    public static function getFileRealPath($fileName)
+    {
+        $rpath = function_exists('curl_file_create') ? curl_file_create(realpath($fileName)) : '@'.realpath($fileName);
+        
+        return $rpath;
     }
 }
