@@ -76,7 +76,7 @@ class Route4Me
         
         if ($file!=null) {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
-            $fp=fopen($file, 'r');
+            $fp = fopen($file, 'r');
             curl_setopt($ch, CURLOPT_INFILE, $fp);
             curl_setopt($ch, CURLOPT_INFILESIZE, filesize($file));
         }
