@@ -96,7 +96,7 @@ if (($handle = fopen("$orders_file", "r"))!==FALSE) {
 
 /* Get Hybrid Optimization */
 
-$ep = time()+604800;
+$ep = time() + 604800;
 $sched_date = date("Y-m-d", $ep);
 
 $hybridParams = array(
