@@ -57,51 +57,54 @@ class Geocoding extends Common
     
     public static function getStreetData($params)
     {
-        $url_query = Endpoint::STREET_DATA;
-        
+        Route4Me::setBaseUrl(Endpoint::STREET_DATA);
+
         $allPathFields = array('pk', 'offset', 'limit');
 
-        $url_query .= Route4Me::generateUrlPath($allPathFields, $params);
+        $url_query = Route4Me::generateUrlPath($allPathFields, $params);
 
         $query = array();
-        
-        $response = Route4Me::makeUrlRequst($url_query, array(
+
+        $response = Route4Me::makeRequst(array(
+            'url'    => $url_query,
             'method' => 'GET',
             'query'  => $query
         ));
-        
+
         return $response;
     }
     
     public static function getZipCode($params)
     {
-        $url_query = Endpoint::STREET_DATA_ZIPCODE;
-        
+        Route4Me::setBaseUrl(Endpoint::STREET_DATA_ZIPCODE);
+
         $allPathFields = array('zipcode', 'offset', 'limit');
 
-        $url_query .= Route4Me::generateUrlPath($allPathFields, $params);
+        $url_query = Route4Me::generateUrlPath($allPathFields, $params);
 
         $query = array();
-        
-        $response = Route4Me::makeUrlRequst($url_query, array(
+
+        $response = Route4Me::makeRequst(array(
+            'url'    => $url_query,
             'method' => 'GET',
             'query'  => $query
         ));
-        
+
         return $response;
     }
     
     public static function getService($params)
     {
-        $url_query = Endpoint::STREET_DATA_SERVICE;
+        Route4Me::setBaseUrl(Endpoint::STREET_DATA_SERVICE);
         
         $allPathFields = array('zipcode', 'housenumber', 'offset', 'limit');
 
-        $url_query .= Route4Me::generateUrlPath($allPathFields, $params);
+        $url_query = Route4Me::generateUrlPath($allPathFields, $params);
         
         $query = array();
         
-        $response = Route4Me::makeUrlRequst($url_query, array(
+        $response = Route4Me::makeRequst(array(
+            'url'    => $url_query,
             'method' => 'GET',
             'query'  => $query
         ));
