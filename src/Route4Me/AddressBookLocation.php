@@ -204,7 +204,7 @@ class AddressBookLocation extends Common
         
         $isValid = TRUE;
         
-        for ($i=0; $i<$weekdaysSize; $i++) { 
+        for ($i = 0; $i<$weekdaysSize; $i++) { 
             if (is_numeric($weekdays[$i])) {
                 $wday = intval($weekdays[$i]);
                 if ($wday<1 || $wday>7) {
@@ -240,7 +240,7 @@ class AddressBookLocation extends Common
         
         $isValid = TRUE;
         
-        for ($i=0; $i<$monthlyDatesSize; $i++) { 
+        for ($i = 0; $i<$monthlyDatesSize; $i++) { 
             if (is_numeric($monthlyDates[$i])) {
                 $mday = intval($monthlyDates[$i]);
                 if ($mday <1 || $mday > 31) {
@@ -340,10 +340,10 @@ class AddressBookLocation extends Common
             
             if (isset($rows[$locationsFieldsMapping['schedule_every']])) {
                 if ($this->validateScheduleEvery($rows[$locationsFieldsMapping['schedule_every']])) {
-                    $curSchedule.='"'.$mode.'":{'.'"every":'.$rows[$locationsFieldsMapping['schedule_every']].','; 
+                    $curSchedule .= '"'.$mode.'":{'.'"every":'.$rows[$locationsFieldsMapping['schedule_every']].','; 
                     if ($mode=='daily') {
-                        $curSchedule = trim($curSchedule,',');
-                        $curSchedule.='}';
+                        $curSchedule = trim($curSchedule, ',');
+                        $curSchedule .= '}';
                     }
                 } else {
                     array_push($results['fail'], "$iRow --> The parameter sched_every is not set"); 
@@ -432,7 +432,7 @@ class AddressBookLocation extends Common
             
             $curSchedule = '[{'.$curSchedule.'}]';
 
-            $oSchedule = json_decode($curSchedule,TRUE);
+            $oSchedule = json_decode($curSchedule, TRUE);
             
             $parametersArray = array();
             
