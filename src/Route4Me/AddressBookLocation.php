@@ -197,14 +197,18 @@ class AddressBookLocation extends Common
     {
         $weekdays = explode(',', $scheduleWeekDays);
         
-        if (sizeof($weekdays)<1) return FALSE;
+        if (sizeof($weekdays)<1) {
+            return FALSE;
+        }
         
         $isValid = TRUE;
         
         for ($i=0; $i<sizeof($weekdays); $i++) { 
             if (is_numeric($weekdays[$i])) {
                 $wday = intval($weekdays[$i]);
-                if ($wday<1 || $wday>7) $isValid = FALSE;
+                if ($wday<1 || $wday>7) {
+                    $isValid = FALSE;
+                }
             } else {
                 $isValid = FALSE;
             }
@@ -228,13 +232,13 @@ class AddressBookLocation extends Common
     {
         $monthlyDates = explode(',', $scheduleMonthlyDates);
         
-        if (sizeof($monthlyDates) <1) {
+        if (sizeof($monthlyDates)<1) {
             return FALSE;
         }
         
         $isValid = TRUE;
         
-        for ($i=0; $i < sizeof($monthlyDates); $i++) { 
+        for ($i=0; $i<sizeof($monthlyDates); $i++) { 
             if (is_numeric($monthlyDates[$i])) {
                 $mday = intval($monthlyDates[$i]);
                 if ($mday <1 || $mday > 31) {
@@ -250,7 +254,9 @@ class AddressBookLocation extends Common
     
     public static function validateScheduleNthN($scheduleNthN)
     {
-        if (!is_numeric($scheduleNthN)) return FALSE;
+        if (!is_numeric($scheduleNthN)) {
+            return FALSE;
+        }
         
         $schedNthNs = array(1, 2, 3, 4, 5, -1);
         
@@ -445,6 +451,5 @@ class AddressBookLocation extends Common
 
         return $results;
     }
-
  }
  
