@@ -70,8 +70,13 @@ class AvoidanceZone extends Common
     {
         $terParams = array();
 
-        if (isset($params->territory['type'])) $terParams['type'] = $params->territory['type'];
-        if (isset($params->territory['data'])) $terParams['data'] = $params->territory['data'];
+        if (isset($params->territory['type'])) {
+            $terParams['type'] = $params->territory['type'];
+        }
+        
+        if (isset($params->territory['data'])) {
+            $terParams['data'] = $params->territory['data'];
+        }
 
         $abContacts = Route4Me::makeRequst(array(
             'url'    => Endpoint::AVOIDANCE_ZONE,
@@ -105,7 +110,6 @@ class AvoidanceZone extends Common
             'url'    => Endpoint::AVOIDANCE_ZONE,
             'method' => 'PUT',
             'body'   => $params,
-
         ));
 
         return $avoidanceZone;
