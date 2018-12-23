@@ -228,14 +228,18 @@ class AddressBookLocation extends Common
     {
         $monthlyDates = explode(',', $scheduleMonthlyDates);
         
-        if (sizeof($monthlyDates) <1) return FALSE;
+        if (sizeof($monthlyDates) <1) {
+            return FALSE;
+        }
         
         $isValid = TRUE;
         
         for ($i=0; $i < sizeof($monthlyDates); $i++) { 
             if (is_numeric($monthlyDates[$i])) {
                 $mday = intval($monthlyDates[$i]);
-                if ($mday <1 || $mday > 31) $isValid = FALSE;
+                if ($mday <1 || $mday > 31) {
+                    $isValid = FALSE;
+                }
             } else {
                 $isValid = FALSE;
             }
@@ -259,7 +263,9 @@ class AddressBookLocation extends Common
     
     public static function validateScheduleNthWhat($scheduleNthWhat)
     {
-        if (!is_numeric($scheduleNthWhat)) return FALSE;
+        if (!is_numeric($scheduleNthWhat)) {
+            return FALSE;
+        }
         
         $schedNthWhats = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         
