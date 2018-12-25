@@ -63,7 +63,6 @@ class AddressBookLocation extends Common
     }
     
     
-    
     public static function getAddressBookLocation($addressId)
     {
         $ablocations = Route4Me::makeRequst(array(
@@ -432,8 +431,6 @@ class AddressBookLocation extends Common
             
             $curSchedule = '[{'.$curSchedule.'}]';
 
-            $oSchedule = json_decode($curSchedule, TRUE);
-            
             $parametersArray = array();
             
             foreach ($addressBookFields as $addressBookField) {
