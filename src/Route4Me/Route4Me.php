@@ -33,8 +33,6 @@ class Route4Me
     public static function makeRequst($options) {
         $errorHandler = new myErrorHandler();
 
-        $old_error_handler = set_error_handler(array($errorHandler, "proc_error"));
-
         $method = isset($options['method']) ? $options['method'] : 'GET';
         $query = isset($options['query']) ? array_filter($options['query'], function($x) { return !is_null($x); } ) : array();
 
