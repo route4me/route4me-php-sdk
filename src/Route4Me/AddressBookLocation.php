@@ -148,7 +148,7 @@ class AddressBookLocation extends Common
         return $result;
     }
     
-    public function updateAdressBookLocation($params)
+    public function updateAddressBookLocation($params)
     {
         $allBodyFields = Route4Me::getObjectProperties(new AddressBookLocation(), array('in_route_count'));
 
