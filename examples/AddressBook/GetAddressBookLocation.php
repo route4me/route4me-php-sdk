@@ -12,12 +12,12 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $abLocation = new AddressBookLocation();
 
 // Get reandom address book location
-$AdressBookLocationParameters = array(
+$AddressBookLocationParameters = array(
         "limit"   => 30,
         "offset"  => 0
 );
 
-$randomLocation = $abLocation->getRandomAddressBookLocation($AdressBookLocationParameters);
+$randomLocation = $abLocation->getRandomAddressBookLocation($AddressBookLocationParameters);
 
 if (assert($randomLocation!=null, "Cannot get a randoma address book location"));
 

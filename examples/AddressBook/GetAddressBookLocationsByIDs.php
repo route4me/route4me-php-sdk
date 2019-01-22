@@ -12,14 +12,14 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Get two random locations IDs
 
-$adressBookLocationParameters = array(
+$addressBookLocationParameters = array(
     "limit"   => 30,
     "offset"  => 0
 ); 
 
 $abContacts = new AddressBookLocation();
 
-$abcResults = $abContacts->getAddressBookLocations($adressBookLocationParameters);
+$abcResults = $abContacts->getAddressBookLocations($addressBookLocationParameters);
 
 $results = $abContacts->getValue($abcResults, "results");
 
