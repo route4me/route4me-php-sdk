@@ -12,14 +12,14 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 // Example refers to getting the address book locations
 
-$AdressBookLocationParameters = array(
+$AddressBookLocationParameters = array(
     "limit"   => 30,
     "offset"  => 0
 );
 
 $abContacts = new AddressBookLocation();
 
-$abcResults = $abContacts->getAddressBookLocations($AdressBookLocationParameters);
+$abcResults = $abContacts->getAddressBookLocations($AddressBookLocationParameters);
 
 $results = $abContacts->getValue($abcResults, "results");
 

@@ -13,7 +13,7 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$AdressBookLocationParameters = AddressBookLocation::fromArray(array(
+$AddressBookLocationParameters = AddressBookLocation::fromArray(array(
     "first_name"  => "Test FirstName ".strval(rand(10000, 99999)),
     "address_1"   => "Test Address1 ".strval(rand(10000, 99999)),
     "cached_lat"  => 38.024654,
@@ -22,7 +22,7 @@ $AdressBookLocationParameters = AddressBookLocation::fromArray(array(
 
 $abContacts = new AddressBookLocation();
 
-$createdContact = $abContacts->addAdressBookLocation($AdressBookLocationParameters);
+$createdContact = $abContacts->addAdressBookLocation($AddressBookLocationParameters);
 
 $address_id = -1;
 

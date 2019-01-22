@@ -12,16 +12,16 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$AdressBookLocationParameters = AddressBookLocation::fromArray(array(
-    "first_name"  => "Test FirstName ".strval(rand(10000,99999)),
-    "address_1"   => "Test Address1 ".strval(rand(10000,99999)),
+$AddressBookLocationParameters = AddressBookLocation::fromArray(array(
+    "first_name"  => "Test FirstName ".strval(rand(10000, 99999)),
+    "address_1"   => "Test Address1 ".strval(rand(10000, 99999)),
     "cached_lat"  => 38.024654,
     "cached_lng"  => -77.338814
 ));
 
 $abLocation = new AddressBookLocation();
 
-$abcResult = $abLocation->addAdressBookLocation($AdressBookLocationParameters);
+$abcResult = $abLocation->addAdressBookLocation($AddressBookLocationParameters);
 
 $address_id = -1;
 
@@ -31,16 +31,16 @@ if (isset($abcResult["address_id"])) {
     $address_id = $abcResult["address_id"];
 }
 
-assert($address_id != -1, "Cannot create an address book location. <br><br>");
+assert($address_id!=-1, "Cannot create an address book location. <br><br>");
 
 echo "Address Book Location with <b>address_id = ".strval($address_id)."</b> and <b>first_name = ".$abcResult['first_name']."</b> was successfully added<br>";
  
 $abcResult["first_name"] = "Test Firstname Updated";
 
-$abcResult = $abLocation->updateAdressBookLocation(AddressBookLocation::fromArray($abcResult));
+$abcResult = $abLocation->updateAddressBookLocation(AddressBookLocation::fromArray($abcResult));
 
 assert(isset($abcResult['first_name']), "Cannot update the address book location. <br><br>");
 
-assert($abcResult['first_name'] == 'Test Firstname Updated', "Cannot update the address book location. <br><br>");
+assert($abcResult['first_name']=='Test Firstname Updated', "Cannot update the address book location. <br><br>");
 
 echo "The field <b>first_name</b> in the address book location <b>".$address_id."</b> was update to <b>Test Firstname Updated</b> successfuly <br>"; 
