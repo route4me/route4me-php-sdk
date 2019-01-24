@@ -31,7 +31,7 @@ foreach ($activityTypes->getConstants() as $prop => $value) {
     ));
     
     $activities = new ActivityParameters();
-    $results = $activities->searcActivities($activityParameters);
+    $results = $activities->searchActivities($activityParameters);
     
     if (!is_array($results) || !is_array($results['results']) || sizeof($results['results'])<1) {
         continue;
