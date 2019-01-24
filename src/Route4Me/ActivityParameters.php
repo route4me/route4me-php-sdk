@@ -55,7 +55,7 @@ class ActivityParameters extends Common
         return $activity;
     }
 
-    public static function searcActivities($params)
+    public static function searchActivities($params)
     {
         $allQueryFields = array('route_id', 'limit', 'offset', 'activity_type');
         
