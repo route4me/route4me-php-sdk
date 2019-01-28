@@ -41,7 +41,7 @@ $locationsFieldsMapping['schedule_weekdays'] = 11;
 $locationsFieldsMapping['monthly_mode'] = 12;
 $locationsFieldsMapping['monthly_dates'] = 13;
 $locationsFieldsMapping['monthly_nth_n'] = 16;
-$locationsFieldsMapping['monthly_nth_wwhat'] = 17;
+$locationsFieldsMapping['monthly_nth_what'] = 17;
 
 if (($handle = fopen("$source_file", "r"))!==FALSE) {
     $oAbook = new AddressBookLocation();
