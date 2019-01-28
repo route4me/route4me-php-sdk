@@ -398,9 +398,9 @@ class AddressBookLocation extends Common
                                     }
                                     
                                     if ($curSchedule!="") {
-                                        if (isset($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
-                                            if ($this->validateScheduleNthWhat($rows[$locationsFieldsMapping['monthly_nth_wwhat']])) {
-                                                 $curSchedule .= '"what":'.$rows[$locationsFieldsMapping['monthly_nth_wwhat']].'}}';
+                                        if (isset($rows[$locationsFieldsMapping['monthly_nth_what']])) {
+                                            if ($this->validateScheduleNthWhat($rows[$locationsFieldsMapping['monthly_nth_what']])) {
+                                                 $curSchedule .= '"what":'.$rows[$locationsFieldsMapping['monthly_nth_what']].'}}';
                                             } else {
                                                 array_push($results['fail'], "$iRow --> Wrong parameter sched_nth_what"); 
                                             }
