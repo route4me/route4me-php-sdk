@@ -19,7 +19,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $source_file = "addresses_1000.csv";
 $max_line_length = 512;
-$delemietr = ',';
+$delimiter = ',';
 
 ini_set('max_execution_time', 180);
 
@@ -117,7 +117,7 @@ if ($hybridOptimization!=null) {
         $depotfile = "depots.csv";
         
         if (($handle = fopen("$depotfile", "r"))!==FALSE) {
-            $columns = fgetcsv($handle, $max_line_length, $delemietr);
+            $columns = fgetcsv($handle, $max_line_length, $delimiter);
             
             if (empty($columns)) {
                 $error['message'] = 'Empty';
@@ -132,7 +132,7 @@ if ($hybridOptimization!=null) {
             $iRow = 1;
             $depotAddresses = array();
             
-            while (($rows = fgetcsv($handle, $max_line_length, $delemietr))!==false) {
+            while (($rows = fgetcsv($handle, $max_line_length, $delimiter))!==false) {
                 if ($rows[0] && $rows[1] && $rows[3] && array(null)!==$rows) {
                     $depotAddress['lat'] = $rows[0];
                     $depotAddress['lng'] = $rows[1];
