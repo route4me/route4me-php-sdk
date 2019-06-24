@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
-$root=realpath(dirname(__FILE__).'/../../');
+$root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Route;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -17,15 +15,15 @@ $route = new Route();
 
 // Get 2 random route IDs
 $randomRouteID1 = $route->getRandomRouteId(0, 25);
-assert(!is_null($randomRouteID1), "Can't retrieve 1st random route ID");
+assert(!is_null($randomRouteID1), "Cannot retrieve 1st random route ID");
 
 $randomRouteID2 = $route->getRandomRouteId(0, 25);
-assert(!is_null($randomRouteID2), "Can't retrieve 2nd random route ID");
+assert(!is_null($randomRouteID2), "Cannot retrieve 2nd random route ID");
 
 echo "Random route ID 1 -> $randomRouteID1 <br>  Random route ID 2 -> $randomRouteID2 <br>";
 
 // Remove selected routes
-$route_ids = join(',', array($randomRouteID1, $randomRouteID2));
+$route_ids = join(',', [$randomRouteID1, $randomRouteID2]);
 
 $result = $route->deleteRoutes($route_ids);
 

@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Order;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -21,16 +19,16 @@ $order = new Order();
 
 $randomOrder = $order->getRandomOrder(0, 30);
 
-assert(!is_null($randomOrder), "Can't retrieve a random order");
+assert(!is_null($randomOrder), "Cannot retrieve a random order");
 
 // Update the order
-$randomOrder['address_2'] = "Lviv";
-$randomOrder['EXT_FIELD_phone'] = "032268593";
-$randomOrder['EXT_FIELD_custom_data'] = array(
-            0 => array(
-               "customer_no" => "11"
-            )
-        );
+$randomOrder['address_2'] = 'Lviv';
+$randomOrder['EXT_FIELD_phone'] = '032268593';
+$randomOrder['EXT_FIELD_custom_data'] = [
+            0 => [
+               'customer_no' => '11',
+            ],
+        ];
 
 $response = $order->updateOrder($randomOrder);
 

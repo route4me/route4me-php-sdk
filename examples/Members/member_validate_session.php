@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Member;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -18,17 +16,17 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $member = new Member();
 
 // Authenticate a user and get session guid
-$recordParameters = Member::fromArray(array(
-    'strEmail'    => 'aaaaaaaaaaa@gmail.com',
+$recordParameters = Member::fromArray([
+    'strEmail' => 'aaaaaaaaaaa@gmail.com',
     'strPassword' => 'ddddddddddd',
-    'format'      => 'json',
-));
+    'format' => 'json',
+]);
 
 $response = $member->memberAuthentication($recordParameters);
 
-assert(!is_null($response), "Cannot authenticate a user");
-assert(isset($response['session_guid']), "Cannot authenticate a user");
-assert(isset($response['member_id']), "Cannot authenticate a user");
+assert(!is_null($response), 'Cannot authenticate a user');
+assert(isset($response['session_guid']), 'Cannot authenticate a user');
+assert(isset($response['member_id']), 'Cannot authenticate a user');
 
 $sessionGuid = $response['session_guid'];
 $memberID = $response['member_id'];
@@ -36,11 +34,11 @@ $memberID = $response['member_id'];
 echo "Member ID -> $memberID <br> Session GUID -> $sessionGuid <br>";
 
 // Validate the session
-$params = Member::fromArray(array(
+$params = Member::fromArray([
     'session_guid' => $sessionGuid,
-    'member_id'    => $memberID,
-    'format'       => 'json',
-));
+    'member_id' => $memberID,
+    'format' => 'json',
+]);
 
 $response = $member->validateSession($params);
 

@@ -1,7 +1,7 @@
 <?php
+
 namespace Route4Me;
 
-use Route4Me\Common;
 use Route4Me\Enum\Endpoint;
 
 class ActivityParameters extends Common
@@ -16,7 +16,7 @@ class ActivityParameters extends Common
     public $end;
     public $activity_type;
     public $activity_message;
-    
+
     public $activity_id;
     public $activity_timestamp;
     public $route_destination_id;
@@ -28,57 +28,56 @@ class ActivityParameters extends Common
     public $note_file;
     public $destination_name;
     public $destination_alias;
-    
-    public static function fromArray(array $params) 
+
+    public static function fromArray(array $params)
     {
-        $activityparameters = new ActivityParameters();
-        
-        foreach($params as $key => $value) {
+        $activityparameters = new self();
+
+        foreach ($params as $key => $value) {
             if (property_exists($activityparameters, $key)) {
                 $activityparameters->{$key} = $value;
             }
         }
-        
+
         return $activityparameters;
     }
-    
+
     public static function getActivities($params)
     {
-        $allQueryFields = array('route_id', 'team', 'limit', 'offset', 'start');
-        
-        $activity = Route4Me::makeRequst(array(
-            'url'    => Endpoint::GET_ACTIVITIES,
+        $allQueryFields = ['route_id', 'team', 'limit', 'offset', 'start'];
+
+        $activity = Route4Me::makeRequst([
+            'url' => Endpoint::GET_ACTIVITIES,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
 
         return $activity;
     }
 
-    public static function searcActivities($params)
+    public static function searchActivities($params)
     {
-        $allQueryFields = array('route_id', 'limit', 'offset', 'activity_type');
-        
-        $activity = Route4Me::makeRequst(array(
-            'url'    => Endpoint::GET_ACTIVITIES,
+        $allQueryFields = ['route_id', 'limit', 'offset', 'activity_type'];
+
+        $activity = Route4Me::makeRequst([
+            'url' => Endpoint::GET_ACTIVITIES,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
 
         return $activity;
     }
-    
+
     public static function sendUserMessage($params)
     {
-        $allBodyFields = array('activity_type', 'activity_message', 'route_id');
-        
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ACTIVITY_FEED,
+        $allBodyFields = ['activity_type', 'activity_message', 'route_id'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::ACTIVITY_FEED,
             'method' => 'POST',
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
-        ));
-        
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+        ]);
+
         return $result;
     }
-    
 }

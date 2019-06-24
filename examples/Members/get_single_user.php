@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Member;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -20,21 +18,21 @@ $member = new Member();
 // Get users list
 $users = $member->getUsers();
 
-assert(!is_null($users), "Cannot retrieve list of the users");
-assert(sizeof($users)==2, "Cannot retrieve list of the users");
-assert(isset($users['results']), "Cannot retrieve list of the users");
-assert(isset($users['total']), "Cannot retrieve list of the users");
+assert(!is_null($users), 'Cannot retrieve list of the users');
+assert(2 == sizeof($users), 'Cannot retrieve list of the users');
+assert(isset($users['results']), 'Cannot retrieve list of the users');
+assert(isset($users['total']), 'Cannot retrieve list of the users');
 
-$randIndex = rand(0, $users["total"] - 1);
+$randIndex = rand(0, $users['total'] - 1);
 
-$randomUserID = $users['results'][$randIndex]["member_id"];
+$randomUserID = $users['results'][$randIndex]['member_id'];
 
 echo "Random user ID -> $randomUserID <br><br>";
 
 // Get a specified user with details
-$param = array (
-    "member_id" => $randomUserID
-);
+$param = [
+    'member_id' => $randomUserID,
+];
 
 $response = $member->getUser($param);
 

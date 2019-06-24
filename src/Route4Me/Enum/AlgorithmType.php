@@ -1,4 +1,5 @@
 <?php
+
 namespace Route4Me\Enum;
 
 class AlgorithmType
@@ -10,6 +11,6 @@ class AlgorithmType
     const TSP_TW = 5;
     const TSP_TW_CR = 6;
     const BBCVRP = 7;
-    const ALG_NONE  =  100;
+    const ALG_NONE = 100;
     const ALG_LEGACY_DISTRIBUTED = 101;
 }

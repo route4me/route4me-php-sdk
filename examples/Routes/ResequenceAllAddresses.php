@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
-$root=realpath(dirname(__FILE__).'/../../');
+$root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Route;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -17,15 +15,15 @@ $route = new Route();
 
 // Get a random route ID
 $route_id = $route->getRandomRouteId(0, 10);
-assert(!is_null($route_id), "Can't retrieve a random route ID");
+assert(!is_null($route_id), "Cannot retrieve a random route ID");
 
-// Resequence all addresses
-$params = array(
-    "route_id"              => $route_id,
-    "disable_optimization"  => 0,
-    "optimize"              => "Distance"
-);
+// Re-sequence all addresses
+$params = [
+    'route_id' => $route_id,
+    'disable_optimization' => 0,
+    'optimize' => 'Distance',
+];
 
-$resequence = $route->resequenceAllAddresses($params);
+$reSequence = $route->resequenceAllAddresses($params);
 
-Route4me::simplePrint($resequence);
+Route4me::simplePrint($reSequence);
