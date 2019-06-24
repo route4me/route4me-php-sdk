@@ -1,10 +1,10 @@
 <?php
+
 namespace Route4Me;
 
 use Route4Me\Exception\BadParam;
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\Format;
-use Route4Me\Common;
 
 class TrackSetParams extends Common
 {
@@ -25,67 +25,67 @@ class TrackSetParams extends Common
 
     public static function fromArray(array $params)
     {
-        $param = new TrackSetParams;
+        $param = new self();
 
         if (!isset($params['format'])) {
-            throw new BadParam("format must be provided.");
+            throw new BadParam('format must be provided.');
         }
 
-        $types = array(
+        $types = [
             Format::SERIALIZED,
             Format::CSV,
-            Format::XML
-        );
+            Format::XML,
+        ];
         if (!in_array($params['format'], $types)) {
-            throw new BadParam("format is invalid.");
+            throw new BadParam('format is invalid.');
         }
 
         if (!isset($params['route_id'])) {
-            throw new BadParam("route_id must be provided.");
+            throw new BadParam('route_id must be provided.');
         }
 
         if (!isset($params['member_id'])) {
-            throw new BadParam("member_id must be provided.");
+            throw new BadParam('member_id must be provided.');
         }
 
         if (!isset($params['course'])) {
-            throw new BadParam("course must be provided.");
+            throw new BadParam('course must be provided.');
         }
 
         if (!isset($params['speed'])) {
-            throw new BadParam("speed must be provided.");
+            throw new BadParam('speed must be provided.');
         }
 
         if (!isset($params['lat'])) {
-            throw new BadParam("lat must be provided.");
+            throw new BadParam('lat must be provided.');
         }
 
         if (!isset($params['lng'])) {
-            throw new BadParam("lng must be provided.");
+            throw new BadParam('lng must be provided.');
         }
 
         if (!isset($params['device_type'])) {
-            throw new BadParam("device_type must be provided.");
+            throw new BadParam('device_type must be provided.');
         }
 
-        $deviceTypes = array(
+        $deviceTypes = [
             DeviceType::IPHONE,
             DeviceType::IPAD,
             DeviceType::ANDROID_PHONE,
-            DeviceType::ANDROID_TABLET
-        );
+            DeviceType::ANDROID_TABLET,
+        ];
         if (!in_array($params['device_type'], $deviceTypes)) {
-            throw new BadParam("device_type is invalid.");
+            throw new BadParam('device_type is invalid.');
         }
 
         if (!isset($params['device_guid'])) {
-            throw new BadParam("device_guid must be provided.");
+            throw new BadParam('device_guid must be provided.');
         }
 
         if (isset($params['device_timestamp'])) {
             $template = '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/i';
             if (!preg_match($template, $params['device_timestamp'])) {
-                throw new BadParam("device_timestamp is invalid.");
+                throw new BadParam('device_timestamp is invalid.');
             }
         }
 

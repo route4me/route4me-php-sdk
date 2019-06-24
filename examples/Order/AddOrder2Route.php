@@ -1,12 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Route;
-use Route4Me\Order;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -21,19 +18,19 @@ $route = new  Route();
 
 $routeID = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeID), "Can't retrieve a random route ID");
+assert(!is_null($routeID), "Cannot retrieve a random route ID");
 
 // Add an order to a route
 
-$jfile = file_get_contents("add_order_to_route_data.json");
+$jFile = file_get_contents('add_order_to_route_data.json');
 
-$body = json_decode($jfile);
+$body = json_decode($jFile);
 
-$orderParameters = Order::fromArray(array(
-    "route_id"    => $routeID,
-    "redirect"    => 0,
-    "addresses"   => $body->addresses
-));
+$orderParameters = Order::fromArray([
+    'route_id' => $routeID,
+    'redirect' => 0,
+    'addresses' => $body->addresses,
+]);
 
 $order = new Order();
 

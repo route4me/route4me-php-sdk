@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Member;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -18,22 +16,22 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $member = new Member();
 
 // Get a random member config key
-$randomParams = Member::fromArray(array ( ));
+$randomParams = Member::fromArray([]);
 
 $response = $member->getMemberConfigData($randomParams);
 
-assert(!is_null($response), "Cannot retrieve all config data");
-assert(sizeof($response)==2, "Cannot retrieve all config data");
-assert(isset($response['data']), "Cannot retrieve all config data");
+assert(!is_null($response), 'Cannot retrieve all config data');
+assert(2 == sizeof($response), 'Cannot retrieve all config data');
+assert(isset($response['data']), 'Cannot retrieve all config data');
 
 $randomKey = $response['data'][rand(0, sizeof($response['data']) - 1)]['config_key'];
 
 // Get a specified single configuration key data
 echo "randomKey -> $randomKey <br><br>";
 
-$params = Member::fromArray(array (
-    "config_key"  => $randomKey
-));
+$params = Member::fromArray([
+    'config_key' => $randomKey,
+]);
 
 $response = $member->getMemberConfigData($params);
 

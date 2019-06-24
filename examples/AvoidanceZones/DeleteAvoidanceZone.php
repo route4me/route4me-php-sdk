@@ -1,10 +1,10 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
-use Route4Me\Route4Me;
 use Route4Me\Enum\TerritoryTypes;
 
 assert_options(ASSERT_ACTIVE, 1);
@@ -17,30 +17,30 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $territory = new Territory();
 
 $territoryParams['type'] = TerritoryTypes::CIRCLE;
-$territoryParams['data'] = array(
-    "37.569752822786455,-77.47833251953125",
-    "5000"
-);
+$territoryParams['data'] = [
+    '37.569752822786455,-77.47833251953125',
+    '5000',
+];
 
-$AvoisanceZoneParameters = AvoidanceZone::fromArray(array(
-    "territory_name"   => "Test Territory ".strval(rand(10000, 99999)),
-    "territory_color"  => "ff7700",
-    "territory"        => $territoryParams
-));
+$avoidanceZoneParameters = AvoidanceZone::fromArray([
+    'territory_name' => 'Test Territory '.strval(rand(10000, 99999)),
+    'territory_color' => 'ff7700',
+    'territory' => $territoryParams,
+]);
 
-$avoidancezone = new AvoidanceZone();
+$avoidanceZone = new AvoidanceZone();
 
-$result = (array)$avoidancezone->addAvoidanceZone($AvoisanceZoneParameters);
+$result = (array) $avoidanceZone->addAvoidanceZone($avoidanceZoneParameters);
 
-assert(isset($result), "Failed to create new Avoidance Zone");
+assert(isset($result), 'Failed to create new Avoidance Zone');
 
-$territory_id = $result["territory_id"];
+$territory_id = $result['territory_id'];
 
 echo "New Avoidance Zone with territory_id = $territory_id created successfuly<br>";
 
-$result1 = $avoidancezone->deleteAvoidanceZone($territory_id);
+$result1 = $avoidanceZone->deleteAvoidanceZone($territory_id);
 
-assert(isset($result), "Failed to delete the avoidance zone with territory_id = ".$territory_id);
+assert(isset($result), 'Failed to delete the avoidance zone with territory_id = '.$territory_id);
 
 echo "Avoidance Zone with territory_id = $territory_id was deleted successfuly<br>";
 

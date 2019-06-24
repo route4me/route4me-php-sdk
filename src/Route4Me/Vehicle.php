@@ -1,7 +1,7 @@
 <?php
+
 namespace Route4Me;
 
-use Route4Me\Common;
 use Route4Me\Enum\Endpoint;
 
 class Vehicle extends Common
@@ -58,104 +58,105 @@ class Vehicle extends Common
     public $width_metric;
     public $weight_metric;
     public $max_weight_per_axle_group_metric;
-    
-    public function __construct () 
+
+    public function __construct()
     {
         Route4Me::setBaseUrl(Endpoint::WH_BASE_URL);
     }
-    
-    public static function fromArray(array $params) {
-        $vehicle= new Vehicle();
+
+    public static function fromArray(array $params)
+    {
+        $vehicle = new self();
         foreach ($params as $key => $value) {
             if (property_exists($vehicle, $key)) {
                 $vehicle->{$key} = $value;
             }
         }
-        
+
         return $vehicle;
     }
-    
+
     public static function getVehicles($params)
     {
-        $allQueryFields = array('with_pagination', 'page', 'perPage');
-        
-        $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4,
+        $allQueryFields = ['with_pagination', 'page', 'perPage'];
+
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::VEHICLE_V4,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
 
         return $response;
     }
-    
-    public function getRandomVehicleId($page,$perPage)
+
+    public function getRandomVehicleId($page, $perPage)
     {
-        $params = array(
-            'page'             => isset($page) ? $page : 1,
-            'perPage'          => isset($perPage) ? $perPage : 10,
-            'with_pagination'  => true
-        );
-        
+        $params = [
+            'page' => isset($page) ? $page : 1,
+            'perPage' => isset($perPage) ? $perPage : 10,
+            'with_pagination' => true,
+        ];
+
         $vehicles = $this->getVehicles($params);
 
-        if (is_null($vehicles) || !isset($vehicles['data']) || sizeof($vehicles['data'])<1) {
+        if (is_null($vehicles) || !isset($vehicles['data']) || sizeof($vehicles['data']) < 1) {
             return null;
         }
-        
+
         $randomIndex = rand(0, sizeof($vehicles['data']) - 1);
-        
+
         return $vehicles['data'][$randomIndex]['vehicle_id'];
     }
-    
+
     public function getVehicleByID($vehicleID)
     {
-        $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4.'/'.$vehicleID,
-            'method' => 'GET'
-        ));
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::VEHICLE_V4.'/'.$vehicleID,
+            'method' => 'GET',
+        ]);
 
         return $response;
     }
-    
+
     public function updateVehicle($params)
     {
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
-        
-        $allBodyFields = Route4Me::getObjectProperties(new Vehicle(), array('vehicle_id'));
-        
-        $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4.'/'.$vehicleID,
+
+        $allBodyFields = Route4Me::getObjectProperties(new self(), ['vehicle_id']);
+
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::VEHICLE_V4.'/'.$vehicleID,
             'method' => 'PUT',
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'  => 'Content-Type: application/json'
-        ));
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: application/json',
+        ]);
 
         return $response;
     }
-    
+
     public function createVehicle($params)
     {
-        $allBodyFields = Route4Me::getObjectProperties(new Vehicle(), array('vehicle_id'));
-        
-        $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4,
+        $allBodyFields = Route4Me::getObjectProperties(new self(), ['vehicle_id']);
+
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::VEHICLE_V4,
             'method' => 'POST',
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'  => 'Content-Type: application/json'
-        ));
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: application/json',
+        ]);
 
         return $response;
     }
-    
+
     public function removeVehicle($params)
     {
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
-        
-        $response = Route4Me::makeRequst(array(
-            'url'    => Endpoint::VEHICLE_V4.'/'.$vehicleID,
+
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::VEHICLE_V4.'/'.$vehicleID,
             'method' => 'DELETE',
-            'HTTPHEADER'  => 'Content-Type: application/json'
-        ));
+            'HTTPHEADER' => 'Content-Type: application/json',
+        ]);
 
         return $response;
     }
