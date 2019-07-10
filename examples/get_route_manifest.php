@@ -1,12 +1,30 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';;
 
-use Route4Me\Route4Me;
-use Route4Me\Route;
+namespace Route4Me;
+
+$root = realpath(dirname(__FILE__).'/../');
+require $root.'/vendor/autoload.php';
+
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
 
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$routeId = 'AC16E7D338B551013FF34266FE81A5EE';
-$route = Route::getRoutes($routeId);
+$route = new Route();
 
-var_dump($route->addresses);
+// Get a random route ID
+$route_id = $route->getRandomRouteId(0, 10);
+assert(!is_null($route_id), "Cannot retrieve a random route ID");
+
+// Get route manifest
+$params = [
+    'directions' => 1,
+    'route_id' => $route_id,
+];
+
+$route = Route::getRoutes($params);
+
+foreach ($route->addresses as $addr1) {
+    Route4Me::simplePrint((array) $addr1, true);
+    echo '<br>';
+}

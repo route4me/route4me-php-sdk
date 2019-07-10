@@ -3,11 +3,12 @@
 namespace Route4Me;
 
 use Route4Me\Exception\ApiError;
+use Route4Me\Enum\Endpoint;
 
 class Route4Me
 {
-    static public $apiKey;
-    static public $baseUrl = 'https://route4me.com';
+    public static $apiKey;
+    public static $baseUrl = Endpoint::BASE_URL;
 
     public static function setApiKey($apiKey)
     {
@@ -29,234 +30,267 @@ class Route4Me
         return self::$baseUrl;
     }
 
-    public static function makeRequst($options) {
+    public static function makeRequst($options)
+    {
         $method = isset($options['method']) ? $options['method'] : 'GET';
-        $query = isset($options['query']) ?
-            array_filter($options['query']) : array();
-        $body = isset($options['body']) ?
-            array_filter($options['body']) : null;
-		$httpHeader = isset($options['HTTPHEADER']) ? $options['HTTPHEADER'] : null;
-			
-        $ch = curl_init();
-        $url = $options['url'] . '?' . http_build_query(array_merge(
-            $query, array( 'api_key' => self::getApiKey())
-        ));
-		
-		//$jfile=json_encode($body); echo $jfile; die("");
-		$baseUrl=self::getBaseUrl();
-		
-		if (strpos($url,'move_route_destination')>0) $baseUrl='https://www.route4me.com';
-        $curlOpts = arraY(
-            CURLOPT_URL            => $baseUrl. $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 60,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_HTTPHEADER     => array(
-                'User-Agent' => 'Route4Me php-sdk'
-            )
-        );
-		//echo "url=".$baseUrl.$url."<br>";die("");
-        curl_setopt_array($ch, $curlOpts);
-        switch($method) {
-        case 'DELETE':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+        $query = isset($options['query']) ? array_filter($options['query'], function ($x) { return !is_null($x); }) : [];
 
-			if (isset($body)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-			}
+        $body = isset($options['body']) ? $options['body'] : null;
+        $file = isset($options['FILE']) ? $options['FILE'] : null;
+        $headers = [
+            'User-Agent: Route4Me php-sdk',
+        ];
+
+        if (isset($options['HTTPHEADER'])) {
+            $headers[] = $options['HTTPHEADER'];
+        }
+
+        if (isset($options['HTTPHEADERS'])) {
+            foreach ($options['HTTPHEADERS'] as $header) {
+                $headers[] = $header;
+            }
+        }
+
+        $ch = curl_init();
+
+        $url = isset($options['url']) ? $options['url'].'?'.http_build_query(array_merge(
+            $query, ['api_key' => self::getApiKey()]
+        )) : '';
+
+        $baseUrl = self::getBaseUrl();
+
+        $curlOpts = [
+            CURLOPT_URL => $baseUrl.$url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 120,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_HTTPHEADER => $headers,
+        ];
+
+        curl_setopt_array($ch, $curlOpts);
+
+        if (null != $file) {
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+            $fp = fopen($file, 'r');
+            curl_setopt($ch, CURLOPT_INFILE, $fp);
+            curl_setopt($ch, CURLOPT_INFILESIZE, filesize($file));
+        }
+
+        switch ($method) {
+        case 'DELETE':
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
             break;
-		case 'DELETEARRAY':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+        case 'DELETEARRAY':
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
             break;
         case 'PUT':
-			//$jfile=json_encode($body); echo $jfile; die("");
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-			if (isset($query)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
-			}
-
-			if (isset($body)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-			}
-			break;
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+            break;
         case 'POST':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-			if (isset($query)) {
-            	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
-			}
+           if (isset($body)) {
+               $bodyData = json_encode($body);
+               if (isset($options['HTTPHEADER'])) {
+                   if (strpos($options['HTTPHEADER'], 'multipart/form-data') > 0) {
+                       $bodyData = $body;
+                   }
+               }
 
-			if (isset($body)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-			} 
-			break;
-		case 'ADD':
+               curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData);
+           }
+            break;
+        case 'ADD':
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
         }
 
-		if ($httpHeader!=null) curl_setopt($ch, CURLOPT_HTTPHEADER, $httpHeader);
-		
+        if (is_numeric(array_search($method, ['DELETE', 'PUT']))) {
+            if (isset($body)) {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+            }
+        }
+
         $result = curl_exec($ch);
-		//var_dump($result); die("");
-		$isxml=FALSE;
-		$jxml="";
-		if (strpos($result, '<?xml')>-1)
-		{
-			$xml = simplexml_load_string($result);
-			$jxml = json_encode($xml);
-			$isxml = TRUE;
-		}
-		
+
+        $isxml = false;
+        $jxml = '';
+        if (strpos($result, '<?xml') > -1) {
+            $xml = simplexml_load_string($result);
+            //$jxml = json_encode($xml);
+            $jxml = self::object2array($xml);
+            $isxml = true;
+        }
+
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-		
-		if ($isxml) {
-			$json = $jxml;
-		} else $json = json_decode($result, true);
-		//var_dump($json); die("");
+
         if (200 == $code) {
-            return $json;
-        } elseif (isset($json['errors'])) {
-            throw new ApiError(implode(', ', $json['errors']));
+            if ($isxml) {
+                $json = $jxml;
+            } else {
+                $json = json_decode($result, true);
+            }
+
+            if (isset($json['errors'])) {
+                throw new ApiError(implode(', ', $json['errors']));
+            } else {
+                return $json;
+            }
+        } elseif (409 == $code) {
+            throw new ApiError('Wrong API key');
         } else {
             throw new ApiError('Something wrong');
         }
     }
 
-	public static function makeUrlRequst($url, $options) {
-		$method = isset($options['method']) ? $options['method'] : 'GET';
-        $query = isset($options['query']) ?
-            array_filter($options['query']) : array();
-        $body = isset($options['body']) ?
-            array_filter($options['body']) : null;
-        $ch = curl_init();
-		
-		$curlOpts = arraY(
-            CURLOPT_URL            => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 60,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_HTTPHEADER     => array(
-                'User-Agent' => 'Route4Me php-sdk'
-            )
-        );
-		
-		curl_setopt_array($ch, $curlOpts);
-		
-        switch($method) {
-        case 'DELETE':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
+    /**
+     * @param $object: JSON object
+     */
+    public static function object2array($object)
+    {
+        return @json_decode(@json_encode($object), 1);
+    }
 
-			if (isset($body)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-			}
-            break;
-		case 'DELETEARRAY':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE"); 
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
-            break;
-        case 'PUT':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-			if (isset($query)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
-			}
+    /**
+     * Prints on the screen main keys and values of the array.
+     *
+     * @param $results: object to be printed on the screen
+     * @param $deepPrinting: if true, object will be printed recursively
+     */
+    public static function simplePrint($results, $deepPrinting = null)
+    {
+        if (isset($results)) {
+            if (is_array($results)) {
+                foreach ($results as $key => $result) {
+                    if (is_array($result)) {
+                        foreach ($result as $key1 => $result1) {
+                            if (is_array($result1)) {
+                                if ($deepPrinting) {
+                                    echo "<br>$key1 ------><br>";
+                                    self::simplePrint($result1, true);
+                                    echo '------<br>';
+                                } else {
+                                    echo $key1.' --> '.'Array() <br>';
+                                }
+                            } else {
+                                if (is_object($result1)) {
+                                    if ($deepPrinting) {
+                                        echo "<br>$key1 ------><br>";
+                                        $oarray = (array) $result1;
+                                        self::simplePrint($oarray, true);
+                                        echo '------<br>';
+                                    } else {
+                                        echo $key1.' --> '.'Object <br>';
+                                    }
+                                } else {
+                                    if (!is_null($result1)) {
+                                        echo $key1.' --> '.$result1.'<br>';
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (is_object($result)) {
+                            if ($deepPrinting) {
+                                echo "<br>$key ------><br>";
+                                $oarray = (array) $result;
+                                self::simplePrint($oarray, true);
+                                echo '------<br>';
+                            } else {
+                                echo $key.' --> '.'Object <br>';
+                            }
+                        } else {
+                            if (!is_null($result)) {
+                                echo $key.' --> '.$result.'<br>';
+                            }
+                        }
+                    }
+                    //echo "<br>";
+                }
+            }
+        }
+    }
 
-			if (isset($body)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-			}
-			break;
-        case 'POST':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); 
-			if (isset($query)) {
-            	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); 
-			}
+    /**
+     * Generates query or body parameters.
+     *
+     * @param $allFields: all known fields could be used for parameters generation
+     * @param $params: input parameters (array or object)
+     */
+    public static function generateRequestParameters($allFields, $params)
+    {
+        $generatedParams = [];
 
-			if (isset($body)) {
-				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body)); 
-			} 
-			break;
-		case 'ADD':
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
+        if (is_array($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params[$field])) {
+                    $generatedParams[$field] = $params[$field];
+                }
+            }
+        } elseif (is_object($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params->{$field})) {
+                    $generatedParams[$field] = $params->{$field};
+                }
+            }
         }
 
-		$result = curl_exec($ch);
-		$isxml=FALSE;
-		$jxml="";
-		if (strpos($result, '<?xml')>-1)
-		{
-			$xml = simplexml_load_string($result);
-			$jxml = json_encode($xml);
-			$isxml = TRUE;
-		}
-		
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-		
-		if ($isxml) {
-			$json = $jxml;
-		} else $json = json_decode($result, true);
-		
-        if (200 == $code) {
-            return $json;
-        } elseif (isset($json['errors'])) {
-            throw new ApiError(implode(', ', $json['errors']));
-        } else {
-            throw new ApiError('Something wrong');
-        }
-	}
-	
-	/**
-	 * Prints on the screen main keys and values of the array 
-	 *
-	 */
-	public static function simplePrint($results)
-	{
-		if (isset($results)) {
-			if (is_array($results)) {
-				foreach ($results as $key=>$result) {
-					if (is_array($result)) {
-						foreach ($result as $key1=>$result1) {
-							if (is_array($result1)) {
-								echo $key1." --> "."Array() <br>";
-								/**
-								 * for deep printing here should be recursive call:
-								 * Route4Me::simplePrint($result1); 
-								 */
-							} else {
-								if (is_object($result1)) {
-									echo $key." --> "."Object <br>";
-									/**
-									 * for deep printing here should be recursive call:
-									 * $oarray=(array)$result1;
-									 * Route4Me::simplePrint($oarray);
-									 */
-								} else {
-									echo $key1." --> ".$result1."<br>";	
-								}
-								
-							}
-						}
-					} else {
-						if (is_object($result)) {
-							echo $key." --> "."Object <br>";
-							/**
-							 * for deep printing here should be recursive call:
-							 * $oarray=(array)$result;
-							 * Route4Me::simplePrint($oarray);
-							 */
-						} else {
-							echo $key." --> ".$result."<br>";
-						}
-						
-					}
-					echo "<br>";
-				}
-			} 
-		}
-	}
+        return $generatedParams;
+    }
 
+    /**
+     * Returns an array of the object properties.
+     *
+     * @param $object: An object
+     * @param $exclude: array of the object parameters to be excluded from the returned array
+     */
+    public static function getObjectProperties($object, $exclude)
+    {
+        $objectParameters = [];
+
+        foreach (get_object_vars($object) as $key => $value) {
+            if (property_exists($object, $key)) {
+                if (!is_numeric(array_search($key, $exclude))) {
+                    array_push($objectParameters, $key);
+                }
+            }
+        }
+
+        return $objectParameters;
+    }
+
+    /**
+     * Returns url path generated from the array of the fields and parameters.
+     *
+     * @param $allFields; array of the paossible fields (parameter names)
+     * @param $params: input parameters (array or object)
+     */
+    public static function generateUrlPath($allFields, $params)
+    {
+        $generatedPath = '';
+
+        if (is_array($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params[$field])) {
+                    $generatedPath .= $params[$field].'/';
+                }
+            }
+        } elseif (is_object($params)) {
+            foreach ($allFields as $field) {
+                if (isset($params->{$field})) {
+                    $generatedPath .= $params->{$field}.'/';
+                }
+            }
+        }
+
+        return $generatedPath;
+    }
+
+    public static function getFileRealPath($fileName)
+    {
+        $rpath = function_exists('curl_file_create') ? curl_file_create(realpath($fileName)) : '@'.realpath($fileName);
+
+        return $rpath;
+    }
 }

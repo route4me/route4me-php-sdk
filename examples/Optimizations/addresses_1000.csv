@@ -1,0 +1,18 @@
+lat,lng,alias,address,city,state,zip,phone,sched_mode,sched_enabled,sched_every,sched_weekdays,sched_monthly_mode,sched_monthly_dates,sched_annually_usenth,sched_annually_months,sched_nth_n,sched_nth_what
+32.930977,-85.948343,"Dollar General-Alexander City,AL",1235 Cherokee Rd,Alexander City,AL,35010-3920,(256) 234-9012,daily,TRUE,1,,,,,,,
+32.936296,-85.972485,"Dollar General-Alexander City,AL",1538 Mill Sq,Alexander City,AL,35010-2674,(256) 215-5511,weekly,TRUE,1,4,,,,,,
+33.0229598,-85.9426244,"Dollar General-Alexander City,AL",6278 Alabama 63,Alexander City,AL,35771-7175,(256) 414-3086,weekly,TRUE,1,"1,4,5",,,,,,
+32.955069,-85.945398,"Dollar General-Alexander City,AL",819 K St,Alexander City,AL,35010-1325,(256) 409-1495,weekly,TRUE,1,"4,7",,,,,,
+31.3196846,-86.4617237,"Dollar General-Andalusia,AL",118 Shelby Street,Andalusia,AL,36420-2403,(334) 222-5456,weekly,TRUE,1,2,,,,,,
+31.308227,-86.484979,"Dollar General-Andalusia,AL",225 Church St,Andalusia,AL,36420-3701,(334) 222-4642,weekly,TRUE,1,2,,,,,,
+31.3993549,-86.4794552,"Dollar General-Andalusia,AL",28513 US Hwy 29,Andalusia,AL,36421-1315,(334) 388-2771,weekly,TRUE,1,2,,,,,,
+31.31455,-86.495167,"Dollar General-Andalusia,AL",925 River Fall St,Andalusia,AL,36420-2557,(334) 222-1762,weekly,TRUE,1,2,,,,,,
+33.627918,-85.78598,"Dollar General-Anniston,AL",1421 Golden Springs Rd,Anniston,AL,36207-6923,(256) 831-8356,monthly,TRUE,1,,dates,"8,30",,,,
+33.649725,-85.72774,"Dollar General-Anniston,AL",3440 Choccolocco Rd,Anniston,AL,36207-1640,(256) 238-6112,monthly,TRUE,1,,dates,"1,8,15",,,,
+33.638181,-85.825559,"Dollar General-Anniston,AL",704 S Quintard Ave,Anniston,AL,36201-6677,(256) 238-6802,monthly,TRUE,1,,dates,"2,8",,,,
+32.6199874,-85.458874,"Dollar General-Auburn,AL",1106 Opelika Rd,Auburn,AL,36830-3312,(334) 246-5254,monthly,TRUE,1,,nth,,,,2,4
+32.5793457,-85.4893036,"Dollar General-Auburn,AL",196 East University Dr,Auburn,AL,36832-6726,(334) 501-1319,monthly,TRUE,1,,nth,,,,2,4
+32.5816083,-85.520149,"Dollar General-Auburn,AL",1961 Wire Rd,Auburn,AL,36832,(334) 246-0839,monthly,TRUE,1,,nth,,,,2,4
+32.600422,-85.5807904,"Dollar General-Auburn,AL",5334 AL Hwy 14 W,Auburn,AL,36832-1861,(334) 521-3301,monthly,TRUE,1,,nth,,,,2,4
+33.580622,-86.776885,"Dollar General-Birmingham,AL",1200 Pinson Valley Pkwy,Birmingham,AL,35217-2327,(205) 841-0903,monthly,TRUE,1,,dates,9,,,,
+33.567022,-86.8976,"Dollar General-Birmingham,AL",1552 Forestdale Blvd,Birmingham,AL,35214-3018,(205) 791-6795,monthly,TRUE,1,,dates,9,,,,

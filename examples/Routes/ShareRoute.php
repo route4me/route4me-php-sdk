@@ -1,25 +1,29 @@
 <?php
-	namespace Route4Me;
-	
-	$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
 
-    require $vdir.'/../vendor/autoload.php';
-	
-	use Route4Me\Route4Me;
-	use Route4Me\Route;
-	
-	// Set the api key in the Route4Me class
-	Route4Me::setApiKey('11111111111111111111111111111111');
-	
-	$route=new Route();
-	
-	$params = array(
-		"route_id"  => "3A2DD89E6E1A044B2098AD1313E3138C",
-		"recipient_email"  => "oleg.guchi@gmail.com"
-	);
-	
-	$result=$route->shareRoute($params);
-	
-	var_dump($result); die("");
-	
-?>
+namespace Route4Me;
+
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
+
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
+
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
+
+$route = new Route();
+
+// Get a random route ID
+$route_id = $route->getRandomRouteId(0, 10);
+assert(!is_null($route_id), "Cannot retrieve a random route ID");
+
+// Share a route with an email
+$params = [
+    'route_id' => $route_id,
+    'response_format' => 'json',
+    'recipient_email' => 'rrrrrrrrrrrrrrrr+share1234@gmail.com',
+];
+
+$result = $route->shareRoute($params);
+
+var_dump($result);
