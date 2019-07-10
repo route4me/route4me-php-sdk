@@ -1,36 +1,50 @@
 <?php
-	namespace Route4Me;
-	
-	$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
 
-    require $vdir.'/../vendor/autoload.php';
-	
-	use Route4Me\Route4Me;
-	use Route4Me\Enum\TerritoryTypes;
-	// Set the api key in the Route4Me class
-	Route4Me::setApiKey('11111111111111111111111111111111');
-	
-	$territory=new Territory();
-	
-	$territory_id="596A2A44FE9FB19EEB9C3C072BF2D0BE";
-	
-	$params = array(
-		"territory_id" => $territory_id,
-		"addresses" => 1
-	);
-	
-	$result1 = $territory->getTerritory($params);
-	
-	foreach ($result1 as $key => $value) {
-		if (is_array($value)) {
-			print $key.':<br>';
-			Route4Me::simplePrint($value);
-		} else {
-			print $key.' => '.$value.'<br>';
-		}
-		
-		
-		//Route4Me::simplePrint($result1);
-	}
-	
-?>
+namespace Route4Me;
+
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
+
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
+
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
+
+$territory = new Territory();
+
+// Select a terriotry with the addresses from the list
+$params = [
+    'offset' => 0,
+    'limit' => 50,
+    'addresses' => 1,
+];
+
+$results = $territory->getTerritories($params);
+assert(!is_null($results), "Cannot retrieve the territories with addresses");
+
+$territory1 = null;
+
+foreach ($results as $terr) {
+    if (isset($terr['addresses'])) {
+        if (sizeof($terr['addresses']) > 0) {
+            $territory1 = $terr;
+            break;
+        }
+    }
+}
+
+assert(isset($territory1['territory_id']), "Cannot retrieve a random territory ID");
+$territory_id = $territory1['territory_id'];
+
+echo "Territory ID -> $territory_id <br><br>";
+
+// Get a territory with the addresses
+$params = [
+    'territory_id' => $territory_id,
+    'addresses' => 1,
+];
+
+$result1 = $territory->getTerritory($params);
+
+Route4Me::simplePrint($result1, true);

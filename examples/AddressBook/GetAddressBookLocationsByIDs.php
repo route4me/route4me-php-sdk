@@ -1,24 +1,41 @@
 <?php
-    namespace Route4Me;
 
-    $vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
-    require $vdir.'/../vendor/autoload.php';
+namespace Route4Me;
 
-    use Route4Me\Route4Me;
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
-    // Set the api key in the Route4Me class
-    Route4Me::setApiKey('11111111111111111111111111111111');
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
 
-    $ablocation=new AddressBookLocation();
+// Get two random locations IDs
 
-    //Example for retrieving Address Book Locations by address_ids
-    //--------------------------------------------------------- 
-    $ids="4623361,6281217";
-	//$ablocation->address_id = $ids;
-    $abcResult=$ablocation->getAddressBookLocationsByIds($ids);
+$addressBookLocationParameters = [
+    'limit' => 30,
+    'offset' => 0,
+];
 
-    $results=$ablocation->getValue($abcResult,"results");
+$abContacts = new AddressBookLocation();
 
-    Route4Me::simplePrint($results);
-    //--------------------------------------------------------- 
-?>
+$abcResults = $abContacts->getAddressBookLocations($addressBookLocationParameters);
+
+$results = $abContacts->getValue($abcResults, 'results');
+
+$contactsNumber = sizeof($results);
+$id1 = $results[rand(1, $contactsNumber) - 1]['address_id'];
+$id2 = $results[rand(1, $contactsNumber) - 1]['address_id'];
+
+$ids = [];
+$ids['address_id'] = $id1.','.$id2;
+
+// Retrieve address book locations by address_ids
+$abLocation = new AddressBookLocation();
+
+$abcResult = $abLocation->getAddressBookLocations($ids);
+
+$results = $abLocation->getValue($abcResult, 'results');
+
+foreach ($results as $result) {
+    Route4Me::simplePrint($result);
+    echo '<br>';
+}

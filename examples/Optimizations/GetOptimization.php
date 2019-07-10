@@ -1,45 +1,30 @@
 <?php
-	namespace Route4Me;
-	
-	$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
 
-    require $vdir.'/../vendor/autoload.php';
-	
-	use Route4Me\Route4Me;
-	use Route4me\Route;
-	
-	// Set the api key in the Route4Me class
-	Route4Me::setApiKey('11111111111111111111111111111111');
-	
-	// Get random route from test routes
-	//--------------------------------------------------------
-	$route=new Route();
-	
-	$route_id=$route->getRandomRouteId(10, 20);
-	
-	if (is_null($route_id)) {
-		echo "can't retrieve random route_id!.. Try again.";
-		return;
-	}
-	
-	$route=$route->getRoutes($route_id,null);
-	
-	$optimizationProblemId=$route->getOptimizationId();
-	
-	echo "route_id = $route_id<br>";
-	echo "optimization_problem_id = $optimizationProblemId <br><br>";
-	
-	$optimizationProblemParams = array(
-		"optimization_problem_id"  =>  $optimizationProblemId
-	);
-	
-	$optimizationProblem = new OptimizationProblem();
-	
-	$optimizationProblem = $optimizationProblem->get($optimizationProblemParams);
-	
-	foreach ((array)$optimizationProblem as $probParts)
-	{
-		Route4Me::simplePrint((array)$probParts);	
-	}
-	
-?>
+namespace Route4Me;
+
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
+
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
+
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
+
+// Get random optimization problem ID
+$optimization = new OptimizationProblem();
+
+$optimizationProblemId = $optimization->getRandomOptimizationId(0, 10);
+
+assert(!is_null($optimizationProblemId), "Cannot retrieve a random optimization problem ID");
+
+// Get an optimization problem
+$optimizationProblemParams = [
+    'optimization_problem_id' => $optimizationProblemId,
+];
+
+$optimizationProblem = $optimization->get($optimizationProblemParams);
+
+foreach ((array) $optimizationProblem as $probParts) {
+    Route4Me::simplePrint((array) $probParts);
+}

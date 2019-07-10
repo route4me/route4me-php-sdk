@@ -1,27 +1,44 @@
 <?php
-	namespace Route4Me;
-	
-	$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
 
-    require $vdir.'/../vendor/autoload.php';
-	
-	use Route4Me\Route4Me;
-	use Route4Me\Member;
-	
-	// Example refers to the process of updating existing configuration key data.
-	
-	// Set the api key in the Route4me class
-	Route4Me::setApiKey('11111111111111111111111111111111');
-	
-	$params = Member::fromArray(array (
-		"config_key"=> "destination_icon_uri",
-		"config_value"=> "555"
-	));
-	
-	$member = new Member();
-	
-	$response = $member->updateMemberConfigKey($params);
+namespace Route4Me;
 
-	Route4Me::simplePrint($response);
-	
-?>
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
+
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
+
+// Example refers to the process of updating existing configuration key data.
+
+// Set the api key in the Route4me class
+Route4Me::setApiKey('11111111111111111111111111111111');
+
+$member = new Member();
+
+// Get a random member config key
+$randomParams = Member::fromArray([]);
+
+$response = $member->getMemberConfigData($randomParams);
+
+assert(!is_null($response), 'Cannot retrieve all config data');
+assert(2 == sizeof($response), 'Cannot retrieve all config data');
+assert(isset($response['data']), 'Cannot retrieve all config data');
+
+$randIndex = rand(0, sizeof($response['data']) - 1);
+
+$randomKey = $response['data'][$randIndex]['config_key'];
+$randomValue = $response['data'][$randIndex]['config_value'];
+echo "Random key -> $randomKey,  random value -> $randomValue <br><br>";
+
+// Update existing configuration key data
+$params = Member::fromArray([
+    'config_key' => $randomKey,
+    'config_value' => $randomValue.' Updated',
+]);
+
+$response = $member->updateMemberConfigKey($params);
+
+assert(isset($response['affected']), 'Cannot update a config data');
+assert('1' == isset($response['affected']), 'Cannot update a config data');
+
+Route4Me::simplePrint($response);

@@ -57,20 +57,5 @@
 		},
 		"time": 0,
 		"order_id": 7205703
-	}],
-	"parameters": {
-		"route_name": "Wednesday 15th of June 2016 07:01 PM (+03:00)",
-		"route_date": 1465948800,
-		"route_time": 14400,
-		"override_addresses": {},
-		"optimize": "Time",
-		"routeType": "single",
-		"algorithm_type": 1,
-		"rt": false,
-		"lock_last": false,
-		"member_id": "1",
-		"vehicle_id": "",
-		"disable_optimization": false,
-		"uploads": []
-	}
+	}]
 }

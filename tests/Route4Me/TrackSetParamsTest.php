@@ -2,129 +2,112 @@
 
 namespace Route4Me;
 
-use Route4Me\Exception\BadParam;
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\Format;
-use Route4Me\TrackSetParams;
 
 class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
 {
     protected $test_route_id = '196cf29ed924523e198009cd96deada3';
+
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutParams()
+    public function testTrackWithoutParams()
     {
-        TrackSetParams::fromArray(array());
+        TrackSetParams::fromArray([]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithBadFormat()
+    public function testTrackWithBadFormat()
     {
-        TrackSetParams::fromArray(array(
-            'format' => 'test format'
-        ));
+        TrackSetParams::fromArray([
+            'format' => 'test format',
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutRouteId()
+    public function testTrackWithoutRouteId()
     {
-        TrackSetParams::fromArray(array(
-            'format' => Format::CSV
-        ));
+        TrackSetParams::fromArray([
+            'format' => Format::CSV,
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutMemberId()
+    public function testTrackWithoutMemberId()
     {
-        TrackSetParams::fromArray(array(
-            'format'   => Format::CSV,
-            'route_id' => $this->test_route_id,
-        ));
-    }
-
-    /**
-     *  @expectedException Route4Me\Exception\BadParam
-     **/
-    function testTrackWithoutCourse()
-    {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
-            'member_id' => '1'
-        ));
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutSpeed()
+    public function testTrackWithoutCourse()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
-            'course' => '1'
-        ));
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutLat()
+    public function testTrackWithoutSpeed()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
             'course' => '1',
-            'speed' => 120
-        ));
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutLng()
+    public function testTrackWithoutLat()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
             'course' => '1',
             'speed' => 120,
-            'lat' => '33.33'
-        ));
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutDeviceType()
+    public function testTrackWithoutLng()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
             'course' => '1',
             'speed' => 120,
-            'lat' => '41.8927521',
-            'lng' => '-109.0803888'
-        ));
+            'lat' => '33.33',
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithInvalidDeviceType()
+    public function testTrackWithoutDeviceType()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
@@ -132,16 +115,15 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
             'speed' => 120,
             'lat' => '41.8927521',
             'lng' => '-109.0803888',
-            'device_type' => 'mega iphone'
-        ));
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithoutDeviceGuid()
+    public function testTrackWithInvalidDeviceType()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
@@ -149,16 +131,16 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
             'speed' => 120,
             'lat' => '41.8927521',
             'lng' => '-109.0803888',
-            'device_type' => DeviceType::IPHONE,
-        ));
+            'device_type' => 'mega iphone',
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testTrackWithBadDeviceTimestamp()
+    public function testTrackWithoutDeviceGuid()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
@@ -167,17 +149,15 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
             'lat' => '41.8927521',
             'lng' => '-109.0803888',
             'device_type' => DeviceType::IPHONE,
-            'device_guid' => 'qweqweqwe',
-            'device_timestamp' => 'asdasdasd asdaa'
-        ));
+        ]);
     }
 
     /**
-     *  @expectedException Route4Me\Exception\BadParam
+     *  @expectedException \Route4Me\Exception\BadParam
      **/
-    function testBadDeviceTimestamp() 
+    public function testTrackWithBadDeviceTimestamp()
     {
-        TrackSetParams::fromArray(array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
@@ -187,13 +167,16 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
             'lng' => '-109.0803888',
             'device_type' => DeviceType::IPHONE,
             'device_guid' => 'qweqweqwe',
-            'device_timestamp' => date('Y-m-d 0:0:0')
-        ));
+            'device_timestamp' => 'asdasdasd asdaa',
+        ]);
     }
 
-    function testTrackSetParams()
+    /**
+     *  @expectedException \Route4Me\Exception\BadParam
+     **/
+    public function testBadDeviceTimestamp()
     {
-        $paramArray = array(
+        TrackSetParams::fromArray([
             'format' => Format::CSV,
             'route_id' => $this->test_route_id,
             'member_id' => '1',
@@ -203,8 +186,24 @@ class TrackSetParamsTest extends \PHPUnit_Framework_TestCase
             'lng' => '-109.0803888',
             'device_type' => DeviceType::IPHONE,
             'device_guid' => 'qweqweqwe',
-            'device_timestamp' => date('Y-m-d H:i:s')
-        );
+            'device_timestamp' => date('Y-m-d 0:0:0'),
+        ]);
+    }
+
+    public function testTrackSetParams()
+    {
+        $paramArray = [
+            'format' => Format::CSV,
+            'route_id' => $this->test_route_id,
+            'member_id' => '1',
+            'course' => '1',
+            'speed' => 120,
+            'lat' => '41.8927521',
+            'lng' => '-109.0803888',
+            'device_type' => DeviceType::IPHONE,
+            'device_guid' => 'qweqweqwe',
+            'device_timestamp' => date('Y-m-d H:i:s'),
+        ];
         $param = TrackSetParams::fromArray($paramArray);
         $this->assertEquals($param->toArray(), $paramArray);
     }

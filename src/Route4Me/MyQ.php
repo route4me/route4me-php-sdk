@@ -1,16 +1,18 @@
 <?php
+
 namespace Route4Me;
 
-use Route4Me\Common;
 /**
- * class MyQ
+ * class MyQ.
  *
  * Offers authentication to MyQ API, and access to garage door open/close/status functions
- *
  */
-class MyQException extends \Exception {}
-class MyQ {
-    
+class MyQException extends \Exception
+{
+}
+
+class MyQ
+{
     /** @var string|null $username contains the username used to authenticate with the MyQ API */
     protected $username = null;
     /** @var string|null $password contains the password used to authenticate with the MyQ API */
@@ -27,7 +29,7 @@ class MyQ {
     /** @var string|null $contentType is the content type used for all cURL requests */
     protected $contentType = 'application/json';
     /** @var array $headers contain HTTP headers for cURL requests */
-    protected $_headers = array();
+    protected $_headers = [];
     protected $_deviceId = null;
     protected $_locationName = null;
     protected $_doorName = null;
@@ -36,81 +38,98 @@ class MyQ {
     protected $_putDeviceStateUrl = '/api/v4/DeviceAttribute/PutDeviceAttribute';
     /** @var resource|null $_conn is the web connection to the MyQ API */
     protected $_conn = null;
+
     /**
-     * Initializes class. Optionally allows user to override variables
+     * Initializes class. Optionally allows user to override variables.
      *
      * @param array $params A associative array for overwriting class variables
      *
      * @return MyQ
      */
-    public function __construct ($params = array()) {
+    public function __construct($params = [])
+    {
         // Overwrite class variables
         foreach ($params as $k => $v) {
             $this->$k = $v;
         }
+
         // Initialize cURL request headers
-        if (sizeof($this->_headers) == 0) {
-            $this->_headers = array (
+        if (0 == sizeof($this->_headers)) {
+            $this->_headers = [
                 'MyQApplicationId' => $this->appId,
                 'Culture' => $this->culture,
                 'Content-Type' => $this->contentType,
                 'User-Agent' => $this->userAgent,
-            );
+            ];
         }
+
         // Initialize cURL connection
         $this->_init();
+
         return $this;
     }
+
     /**
-     * Perform a login request
+     * Perform a login request.
      *
      * @param string|null $username Username to use when logging in
      * @param string|null $password Password to use for logging in
      *
      * @return MyQ
      */
-    public function login ($username = null, $password = null) {
+    public function login($username = null, $password = null)
+    {
         // Set username/password if not null
         if (!is_null($username)) {
             $this->username = $username;
         }
+
         if (!is_null($password)) {
             $this->password = $password;
         }
+
         // confirm that we have a valid username/password
-        $error = array();
+        $error = [];
         if (is_null($this->username)) {
             $error[] = 'username';
         }
+
         if (is_null($this->password)) {
             $error[] = 'password';
         }
+
         if (sizeof($error) > 0) {
-            throw new MyQException('Missing required auth credential: ' . implode(',', $error));
+            throw new MyQException('Missing required auth credential: '.implode(',', $error));
         }
+
         $this->_login();
     }
-    public function getState () {
+
+    public function getState()
+    {
         $this->_getDetails();
         $timeInState = time() - $this->_doorStateTime;
-        echo implode(',', array (
+        echo implode(',', [
             $this->_locationName,
             $this->_doorName,
             $this->_doorState,
-            (int)$timeInState,
-        ));
+            (int) $timeInState,
+        ]);
     }
-	
-	public function getDetails() {
-		return $this->_getDetails();
-	}
-	
-    private function _init () {
+
+    public function getDetails()
+    {
+        return $this->_getDetails();
+    }
+
+    private function _init()
+    {
         if (!isset($this->_conn)) {
             $this->_conn = curl_init();
-            curl_setopt_array($this->_conn, array (
+
+            curl_setopt_array($this->_conn, [
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
+                CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -119,52 +138,75 @@ class MyQ {
                 CURLOPT_FRESH_CONNECT => true,
                 CURLOPT_FORBID_REUSE => true,
                 CURLOPT_USERAGENT => $this->userAgent,
-            ));
+            ]);
         }
+
         $this->_setHeaders();
     }
-    private function _setHeaders () {
-        $headers = array();
+
+    private function _setHeaders()
+    {
+        $headers = [];
+
         foreach ($this->_headers as $k => $v) {
             $headers[] = "$k: $v";
         }
+
         curl_setopt($this->_conn, CURLOPT_HTTPHEADER, $headers);
     }
-    private function _login () {
+
+    private function _login()
+    {
         $this->_init();
+
         curl_setopt($this->_conn, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($this->_conn, CURLOPT_URL, $this->_loginUrl);
-        $post = json_encode(array('username' => $this->username, 'password' => $this->password));
+
+        $post = json_encode(['username' => $this->username, 'password' => $this->password]);
+
         curl_setopt($this->_conn, CURLOPT_POSTFIELDS, $post);
+
         $output = curl_exec($this->_conn);
+
         $data = json_decode($output);
-        if ($data == false || !isset($data->SecurityToken)) {
+
+        if (false == $data || !isset($data->SecurityToken)) {
             throw new MyQException("Error processing login request: $output");
         }
+
         $this->_headers['SecurityToken'] = $data->SecurityToken;
+
         return $this;
     }
-    private function _getDetails () {
+
+    private function _getDetails()
+    {
         $this->_init();
+
         curl_setopt($this->_conn, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($this->_conn, CURLOPT_URL, $this->_getDeviceDetailUrl);
+
         $output = curl_exec($this->_conn);
+
         $data = json_decode($output);
-        if ($data == false || !isset($data->Devices)) {
+
+        if (false == $data || !isset($data->Devices)) {
             throw new MyQException("Error fetching device details: $output");
         }
+
         // Find our door device ID
         foreach ($data->Devices as $device) {
-            if (stripos($device->MyQDeviceTypeName, "Gateway") !== false) {
+            if (false !== stripos($device->MyQDeviceTypeName, 'Gateway')) {
                 // Find location name
                 foreach ($device->Attributes as $attr) {
-                    if ($attr->AttributeDisplayName == 'desc') {
+                    if ('desc' == $attr->AttributeDisplayName) {
                         $this->_locationName = $attr->Value;
                     }
                 }
             }
-            
+
             $this->_deviceId = $device->MyQDeviceId;
+
             foreach ($device->Attributes as $attr) {
                 switch ($attr->AttributeDisplayName) {
                     case 'desc':
@@ -173,7 +215,7 @@ class MyQ {
                     case 'doorstate':
                         $this->_doorState = $attr->Value;
                         // UpdatedTime is a timestamp in ms, so we truncate
-                        $this->_doorStateTime = (int)$attr->UpdatedTime / 1000;
+                        $this->_doorStateTime = (int) $attr->UpdatedTime / 1000;
                         break;
                     default:
                         continue;

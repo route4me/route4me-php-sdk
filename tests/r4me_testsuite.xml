@@ -1,0 +1,10 @@
+<testsuites>
+	<testsuite name="addresses">
+		<directory>Route4Me</directory>
+		<file>AddressTest.php</file>
+	</testsuite>
+	<testsuite name="optimizations">
+		<directory>Route4Me</directory>
+		<file>OptimizationProblemTest.php</file>
+	</testsuite>
+</testsuites>

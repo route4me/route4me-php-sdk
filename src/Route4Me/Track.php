@@ -2,25 +2,20 @@
 
 namespace Route4Me;
 
-use Route4Me\Route4Me;
-use Route4Me\TrackSetParams;
+use Route4Me\Enum\Endpoint;
 
 class Track extends Common
 {
-    public static $apiUrl = '/track/set.php';
-
-    public static function set(TrackSetParams $param)
+    public static function set(TrackSetParams $params)
     {
-        $query = array_merge($param->toArray(), array(
-            'api_key' => Route4Me::getApiKey()
-        ));
+        $allQueryFields = Route4Me::getObjectProperties(new TrackSetParams(), ['tx_id']);
 
-        $json = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+        $json = Route4Me::makeRequst([
+            'url' => Endpoint::TRACK_SET,
             'method' => 'GET',
-            'query'  => $query
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
 
-        return $json['status'];
+        return $json;
     }
 }

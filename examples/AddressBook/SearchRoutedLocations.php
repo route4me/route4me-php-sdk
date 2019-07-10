@@ -1,26 +1,28 @@
 <?php
-    namespace Route4Me;
 
-    $vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
-    require $vdir.'/../vendor/autoload.php';
+namespace Route4Me;
 
-    use Route4Me\Route4Me;
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
 
-    // Set the api key in the Route4Me class
-    Route4Me::setApiKey('11111111111111111111111111111111');
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
 
-    $ablocation=new AddressBookLocation();
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
 
-    //Example refers to the process of search for routed addresses 
-    //--------------------------------------------------------- 
-    $params= array(
-		'display'=> 'routed'
-	);
-	
-    $abcResult=$ablocation->getAddressBookLocation($params);
+$abLocation = new AddressBookLocation();
 
-    $results=$ablocation->getValue($abcResult,"results");
+// Example refers to the process of searching for the routed locations
 
-    Route4Me::simplePrint($results);
-    //--------------------------------------------------------- 
-?>
+$params = [
+    'offset' => 0,
+    'limit' => 5,
+    'display' => 'routed',
+];
+
+$abcResult = $abLocation->searchAddressBookLocations($params);
+
+assert(isset($abcResult['results']) && isset($abcResult['total']), 'Cannot done search for the locations');
+
+echo 'Was found '.$abcResult['total'].' routed locations';

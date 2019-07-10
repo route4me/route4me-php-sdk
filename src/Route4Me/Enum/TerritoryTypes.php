@@ -8,5 +8,3 @@ class TerritoryTypes
     const POLY = 'poly';
     const RECT = 'rect';
 }
-
-?>

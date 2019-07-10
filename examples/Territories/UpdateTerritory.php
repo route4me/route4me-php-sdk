@@ -1,67 +1,58 @@
 <?php
-	namespace Route4Me;
-	
-	$vdir=$_SERVER['DOCUMENT_ROOT'].'/route4me/examples/';
 
-    require $vdir.'/../vendor/autoload.php';
-	
-	use Route4Me\Route4Me;
-	use Route4Me\Enum\TerritoryTypes;
-	
-	// Set the api key in the Route4Me class
-	Route4Me::setApiKey('11111111111111111111111111111111');
-	
-	// Add Avoidance Zone and get territory_id
-	//---------------------------------------------------------
-	$territory = new Territory();
-	$territory->type =  TerritoryTypes::CIRCLE;
-	$territory->data = array (
-		"37.569752822786455,-77.47833251953125",
-		"5000"
-	);
-	
-	$TerritoryParameters=Territory::fromArray(array(
-		"territory_name"	=> "Test Territory ".strval(rand(10000,99999)),
-		"territory_color"	=> "ff7700",
-		"territory"	=> $territory
-	));
-	
-	$territory=new Territory();
-	
-	$result = (array)$territory->addTerritory($TerritoryParameters);
-	
-	$territory_id="";
-	if (isset($result)) {
-		$territory_id = $result["territory_id"];
-	} else {
-		 	echo "Failed to create new Territory. Try again";
-		 return;
-	}
-	
-	echo "New Territory with territory_id = $territory_id created successfuly<br>";
-	echo "------------------------------------------------------------------------<br><br>";
-	//-----------------------------------------------------------
-	
-	$territory = new Territory();
-	$territory->type =  TerritoryTypes::RECT;
-	$territory->data = array (
-		"37.869752822786455,-77.49833251953125",
-		"5000"
-	);
-	
-	$TerritoryParameters=Territory::fromArray(array(
-		"territory_id" => $territory_id,
-		"territory_name"	=> "Test Territory Updated",
-		"territory_color"	=> "ff5500",
-		"territory"	=> $territory
-	));
-	
-	$result1 = $territory->updateTerritory($TerritoryParameters);
-	
-	if (isset($result1)) 
-	{
-			echo "Territory with territory_id = $territory_id was updated successfuly<br>";
-	}
-	
-	Route4Me::simplePrint($result1);
-?>
+namespace Route4Me;
+
+$root = realpath(dirname(__FILE__).'/../../');
+require $root.'/vendor/autoload.php';
+
+use Route4Me\Enum\TerritoryTypes;
+
+assert_options(ASSERT_ACTIVE, 1);
+assert_options(ASSERT_BAIL, 1);
+
+// Set the api key in the Route4Me class
+Route4Me::setApiKey('11111111111111111111111111111111');
+
+// Add Avoidance Zone and get territory_id
+$territory = new Territory();
+
+$territoryParams['type'] = TerritoryTypes::CIRCLE;
+$territoryParams['data'] = [
+    '37.569752822786455,-77.47833251953125',
+    '5000',
+];
+
+$TerritoryParameters = Territory::fromArray([
+    'territory_name' => 'Test Territory '.strval(rand(10000, 99999)),
+    'territory_color' => 'ff7700',
+    'territory' => $territoryParams,
+]);
+
+$result = (array) $territory->addTerritory($TerritoryParameters);
+assert(!is_null($result), "Cannot create a territory");
+
+$territory_id = $result['territory_id'];
+
+echo "New Territory with territory_id = $territory_id created successfuly<br>";
+echo '---------------------------------------------------------------<br><br>';
+
+// Update territory
+$territoryParameters = [
+    'type' => TerritoryTypes::RECT,
+    'data' => [
+        '29.6600127358956,-95.6593322753906',
+        '29.8966150753098,-95.3146362304688',
+       ],
+   ];
+
+$TerritoryParameters = Territory::fromArray([
+    'territory_id' => $territory_id,
+    'territory_name' => 'Test Territory Updated as rectangle',
+    'territory_color' => 'ff5500',
+    'territory' => $territoryParameters,
+]);
+
+$result1 = $territory->updateTerritory($TerritoryParameters);
+assert(isset($result1), "Cannot update the territory");
+
+Route4Me::simplePrint($result1, true);

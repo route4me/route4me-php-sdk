@@ -2,59 +2,58 @@
 
 namespace Route4Me;
 
-use Route4Me\Address;
-use Route4Me\Common;
-use Route4Me\RouteParameters;
-use Route4Me\OptimizationProblemParams;
-use Route4Me\Route;
-use Route4Me\Route4Me;
-use GuzzleHttp\Client;
+use Route4Me\Enum\Endpoint;
 
 class OptimizationProblem extends Common
 {
-    static public $apiUrl = '/api.v4/optimization_problem.php';
-	static public $apiUrl_addr = '/api.v4/address.php';
-
     public $optimization_problem_id;
-    public $user_errors = array();
+    public $user_errors = [];
     public $state;
+    public $optimization_errors = [];
     public $parameters;
     public $sent_to_background;
-    public $addresses = array();
-    public $routes = array();
-    public $links = array();
+    public $created_timestamp;
+    public $scheduled_for;
+    public $optimization_completed_timestamp;
+    public $addresses = [];
+    public $routes = [];
+    public $links = [];
 
-    function __construct()
+    public function __construct()
     {
-        $this->parameters = new RouteParameters;
+        $this->parameters = new RouteParameters();
     }
 
     public static function fromArray(array $params)
     {
-        $problem = new OptimizationProblem;
+        $problem = new self();
         $problem->optimization_problem_id = Common::getValue($params, 'optimization_problem_id');
-        $problem->user_errors = Common::getValue($params, 'user_errors', array());
-        $problem->state = Common::getValue($params, 'state', array());
-        $problem->sent_to_background = Common::getValue($params, 'sent_to_background', array());
-        $problem->links = Common::getValue($params, 'links', array());
+        $problem->user_errors = Common::getValue($params, 'user_errors', []);
+        $problem->state = Common::getValue($params, 'state', []);
+        $problem->sent_to_background = Common::getValue($params, 'sent_to_background', []);
+        $problem->links = Common::getValue($params, 'links', []);
 
         if (isset($params['parameters'])) {
             $problem->parameters = RouteParameters::fromArray($params['parameters']);
         }
 
         if (isset($params['addresses'])) {
-            $addresses = array();
+            $addresses = [];
+
             foreach ($params['addresses'] as $address) {
                 $addresses[] = Address::fromArray($address);
             }
+
             $problem->addresses = $addresses;
         }
 
         if (isset($params['routes'])) {
-            $routes = array();
+            $routes = [];
+
             foreach ($params['routes'] as $route) {
-                $routes[] = Route::fromArray($address);
+                $routes[] = Route::fromArray($route);
             }
+
             $problem->routes = $routes;
         }
 
@@ -63,73 +62,67 @@ class OptimizationProblem extends Common
 
     public static function optimize(OptimizationProblemParams $params)
     {
-        $optimize = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
-            'method' => 'POST',
-            'query'  => array(
-                'directions'             => $params->directions,
-                'format'                 => $params->format,
-                'route_path_output'      => $params->route_path_output,
-                'optimized_callback_url' => $params->optimized_callback_url
-            ),
-            'body'   => array(
-                'addresses'  => $params->getAddressesArray(),
-                'parameters' => $params->getParametersArray()
-            )
-        ));
+        $allQueryFields = ['redirect', 'directions', 'format', 'route_path_output', 'optimized_callback_url'];
 
-        return OptimizationProblem::fromArray($optimize);
+        $optimize = Route4Me::makeRequst([
+            'url' => Endpoint::OPTIMIZATION_PROBLEM,
+            'method' => 'POST',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => [
+                'addresses' => $params->getAddressesArray(),
+                'parameters' => $params->getParametersArray(),
+            ],
+        ]);
+
+        return self::fromArray($optimize);
     }
 
     public static function get($params)
     {
-        $optimize = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+        $allQueryFields = ['state', 'limit', 'format', 'offset',
+        'optimization_problem_id', 'wait_for_final_state', ];
+
+        $optimize = Route4Me::makeRequst([
+            'url' => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'GET',
-            'query'  => array(
-                'state' => isset($params['state']) ? $params['state'] : null,
-                'limit' => isset($params['limit']) ? $params['limit'] : null,
-                'offset' => isset($params['offset']) ? $params['offset'] : null,
-                'optimization_problem_id' => isset($params['optimization_problem_id']) 
-                    ? $params['optimization_problem_id'] : null,
-                'wait_for_final_state' => isset($params['wait_for_final_state']) 
-                    ? $params['wait_for_final_state'] : null,
-            )
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
 
         if (isset($optimize['optimizations'])) {
-            $problems = array();
-            foreach($optimize['optimizations'] as $problem) {
-                $problems[] = OptimizationProblem::fromArray($problem);
+            $problems = [];
+
+            foreach ($optimize['optimizations'] as $problem) {
+                $problems[] = self::fromArray($problem);
             }
+
             return $problems;
         } else {
-            return OptimizationProblem::fromArray($optimize);
+            return self::fromArray($optimize);
         }
     }
 
     public static function reoptimize($params)
     {
-        $param = new OptimizationProblemParams;
+        $param = new OptimizationProblemParams();
         $param->optimization_problem_id = isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null;
         $param->reoptimize = 1;
 
-        return self::update((array)$param);
+        return self::update((array) $param);
     }
 
     public static function update($params)
     {
-		$optimize = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+        $allQueryFields = ['optimization_problem_id', 'reoptimize'];
+        $allBodyFields = ['addresses'];
+
+        $optimize = Route4Me::makeRequst([
+            'url' => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'PUT',
-            'query'  => array(
-                'optimization_problem_id' => isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
-                'addresses' => isset($params['addresses']) ? $params['addresses'] : null,
-                'reoptimize' => isset($params['reoptimize']) ? $params['reoptimize'] : null,
-            )
-        ));
-		
-		return $optimize;
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+        ]);
+
+        return $optimize;
     }
 
     public function getOptimizationId()
@@ -141,88 +134,109 @@ class OptimizationProblem extends Common
     {
         return $this->routes;
     }
-	
-	public function getRandomOptimizationId($offset,$limit)
-	{
-		$query['limit'] = isset($params['limit']) ? $params['limit'] : 30;
-        $query['offset'] = isset($params['offset']) ? $params['offset'] : 0;
-			
-		$json = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
-            'method' => 'GET',
-            'query'  => $query
-        ));
-		
-		$optimizations = array();
-            foreach($json as $optimization) {
-				if (gettype($optimization)!="array") continue;
-				foreach ($optimization as $otp1) {
-					$optimizations[] = $otp1;
-				}
+
+    public function getRandomOptimizationId($offset, $limit)
+    {
+        $optimizations = self::get(['offset' => $offset, 'limit' => $limit]);
+
+        $rOptimization = $optimizations[rand(0, sizeof($optimizations) - 1)];
+
+        if (!isset($rOptimization->optimization_problem_id)) {
+            if (sizeof($optimizations) > 9) {
+                $this->getRandomOptimizationId($offset, $limit);
+            } else {
+                return null;
             }
-			
-			$num=rand(0,sizeof($optimizations)-1);
-			//echo "num=$num.<br>".sizeof($optimizations)."<br>";
-			$rOptimization=$optimizations[$num];
-			return $rOptimization;
-	}
-	
-	public function getAddresses($opt_id)
-	{
-		if ($opt_id==null) return null;
-		
-		$params = array( "optimization_problem_id" => $opt_id );
-		
-		$optimization = (array)$this->get($params);
-		
-		$addresses = $optimization["addresses"];
-		
-		return $addresses;
-		
-	}
-	
-	public function getRandomAddressFromOptimization($opt_id)
-	{
-		$addresses = (array)$this->getAddresses($opt_id);
-		
-		if ($addresses == null) {
-			echo "There are no addresses in this optimization!.. Try again.";
-			return null;
-		}
-		
-		$num=rand(0,sizeof($addresses)-1);
-		$rAddress=$addresses[$num];
-		
-		return $rAddress;
-	}
-	
-	public function removeAddress($params)
-	{
-		$response = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl_addr,
+        }
+
+        return $rOptimization->optimization_problem_id;
+    }
+
+    public function getAddresses($opt_id)
+    {
+        if (null == $opt_id) {
+            return null;
+        }
+
+        $params = ['optimization_problem_id' => $opt_id];
+
+        $optimization = (array) $this->get($params);
+
+        $addresses = $optimization['addresses'];
+
+        return $addresses;
+    }
+
+    public function getRandomAddressFromOptimization($opt_id)
+    {
+        $addresses = (array) $this->getAddresses($opt_id);
+
+        if (null == $addresses) {
+            echo 'There are no addresses in this optimization!.. Try again.';
+
+            return null;
+        }
+
+        $num = rand(0, sizeof($addresses) - 1);
+
+        $rAddress = $addresses[$num];
+
+        return $rAddress;
+    }
+
+    public function removeAddress($params)
+    {
+        $allQueryFields = ['optimization_problem_id', 'route_destination_id'];
+
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'DELETE',
-            'query'  => array(
-                'optimization_problem_id' => isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null,
-                'route_destination_id' => isset($params['route_destination_id']) ? $params['route_destination_id'] : null,
-            )
-        ));
-		
-		return $response;
-	}
-	
-	public function removeOptimization($params)
-	{
-		$response = Route4Me::makeRequst(array(
-            'url'    => self::$apiUrl,
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
+
+        return $response;
+    }
+
+    public function removeOptimization($params)
+    {
+        $allQueryFields = ['redirect'];
+        $allBodyFields = ['optimization_problem_ids'];
+
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'DELETE',
-            'query'  => array(
-                'redirect' => isset($params['redirect']) ? $params['redirect'] : null,
-            ),
-            'body'  => array(
-				'optimization_problem_ids' => isset($params['optimization_problem_ids']) ? $params['optimization_problem_ids'] : null,
-			)
-        ));
-		
-		return $response;
-	}
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+        ]);
+
+        return $response;
+    }
+
+    public function getHybridOptimization($params)
+    {
+        $allQueryFields = ['target_date_string', 'timezone_offset_minutes'];
+
+        $optimize = Route4Me::makeRequst([
+            'url' => Endpoint::HYBRID_DATE_OPTIMIZATION,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
+
+        return $optimize;
+    }
+
+    public function addDepotsToHybrid($params)
+    {
+        $allQueryFields = ['optimization_problem_id'];
+        $allBodyFields = ['optimization_problem_id', 'delete_old_depots', 'new_depots'];
+
+        $depots = Route4Me::makeRequst([
+            'url' => Endpoint::CHANGE_HYBRID_OPTIMIZATION_DEPOT,
+            'method' => 'POST',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+        ]);
+
+        return $depots;
+    }
 }
