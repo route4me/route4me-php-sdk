@@ -1,12 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\OptimizationProblem;
-use Route4Me\Order;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -22,20 +19,20 @@ $optimization = new OptimizationProblem();
 
 $optimizationProblemId = $optimization->getRandomOptimizationId(0, 10);
 
-assert(!is_null($optimizationProblemId), "Can't retrieve a random optimization problem ID");
+assert(!is_null($optimizationProblemId), "Cannot retrieve a random optimization problem ID");
 
 // Add an order to an optimization
 
-$jfile = file_get_contents("add_order_to_optimization_data.json");
+$jFile = file_get_contents('add_order_to_optimization_data.json');
 
-$body = json_decode($jfile);
+$body = json_decode($jFile);
 
-$orderParameters = array(
-    "optimization_problem_id" => $optimizationProblemId,
-    "redirect"                => 0,
-    "device_type"             => "web",
-    "addresses"               => $body->addresses
-);
+$orderParameters = [
+    'optimization_problem_id' => $optimizationProblemId,
+    'redirect' => 0,
+    'device_type' => 'web',
+    'addresses' => $body->addresses,
+];
 
 $order = new Order();
 

@@ -1,22 +1,20 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
-use Route4Me\Route4Me;
-use Route4Me\Enum\TerritoryTypes;
-
 // Set the api key in the Route4Me class
 Route4Me::setApiKey('11111111111111111111111111111111');
 
-$avoidancezone = new AvoidanceZone();
+$avoidanceZone = new AvoidanceZone();
 
-$queryparameters = array();
+$queryParameters = [];
 
-$azones = $avoidancezone->getAvoidanceZones($queryparameters);
+$avZones = $avoidanceZone->getAvoidanceZones($queryParameters);
 
-foreach ($azones as $azone) {
-    Route4Me::simplePrint($azone);
-    echo "<br>";
+foreach ($avZones as $avZone) {
+    Route4Me::simplePrint($avZone);
+    echo '<br>';
 }

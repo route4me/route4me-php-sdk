@@ -1,7 +1,6 @@
 <?php
-namespace Route4Me;
 
-use Route4Me\Common;
+namespace Route4Me;
 
 class RouteParameters extends Common
 {
@@ -24,7 +23,7 @@ class RouteParameters extends Common
     public $dev_lng;
     public $route_max_duration;
     public $route_email;
-    public $route_type = "api";
+    public $route_type = 'api';
     public $store_route = true;
     public $metric;
     public $algorithm_type;
@@ -43,7 +42,7 @@ class RouteParameters extends Common
     public $truck_width_meters;
     public $truck_length_meters;
     public $truck_hazardous_goods;
-    
+
     public $vehicle_max_cargo_weight;
     public $vehicle_max_cargo_volume;
     public $subtour_max_revenue;
@@ -61,12 +60,12 @@ class RouteParameters extends Common
     public $uturn;
     public $leftturn;
     public $rightturn;
-    
+
     public $optimized_callback_url;
 
     public static function fromArray(array $params)
     {
-        $routeParams = new RouteParameters();
+        $routeParams = new self();
         foreach ($params as $key => $value) {
             if (property_exists($routeParams, $key)) {
                 $routeParams->{$key} = $value;
