@@ -93,7 +93,7 @@ class Route extends Common
 
     public static function getRoutes($params = null)
     {
-        $allQueryFields = ['route_id', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset'];
+        $allQueryFields = ['route_id', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset','start_date','end_date'];
 
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ROUTE_V4,
