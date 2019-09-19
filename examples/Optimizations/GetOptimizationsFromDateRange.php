@@ -6,7 +6,7 @@ $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('51d0c0701ce83855c9f62d0440096e7c');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 $optimizationParameters = [
     'start_date' => '2019-10-15',
