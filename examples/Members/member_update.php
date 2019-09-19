@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Member;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -23,10 +21,10 @@ $randomMemberID = $member->getRandomMemberByType('SUB_ACCOUNT_DRIVER');
 assert(!is_null($randomMemberID), "There is no member of the type SUB_ACCOUNT_DRIVER in the user's account");
 
 // Update member
-$params = Member::fromArray(array (
-    "member_id"    => $randomMemberID,
-    "member_phone" => "555-777-888"
-));
+$params = Member::fromArray([
+    'member_id' => $randomMemberID,
+    'member_phone' => '555-777-888',
+]);
 
 $response = $member->updateMember($params);
 

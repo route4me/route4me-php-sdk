@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Member;
 
 // Example refers to getting of users with details.
 
@@ -18,5 +16,5 @@ $response = $member->getUsers();
 
 foreach ($response['results'] as $key => $member) {
     Route4Me::simplePrint($member);
-    echo "<br>";
+    echo '<br>';
 }

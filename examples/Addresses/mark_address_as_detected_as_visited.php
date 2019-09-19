@@ -1,12 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Route;
-use Route4Me\Address;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -18,29 +15,29 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $route = new Route();
 $routeId = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeId), "Can't retrieve random route_id");
+assert(!is_null($routeId), "Cannot retrieve random route_id");
 
 // Get random address's id from selected route above
-$addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
+$addressRand = (array) $route->GetRandomAddressFromRoute($routeId);
 
-if (isset($addressRand['is_depot']))
-{
+if (isset($addressRand['is_depot'])) {
     if ($addressRand['is_depot']) {
-        echo "Random choosed address is depot, it can't be marked!.. Try again.";
+        echo "Random chosen address is depot, it cannot be marked!.. Try again.";
+
         return;
     }
 }
 
 $address_id = $addressRand['route_destination_id'];
 
-assert(!is_null($address_id), "Can't retrieve random address");
+assert(!is_null($address_id), "Cannot retrieve random address");
 
 // Mark the address as detected as visited
-$addressParameters = (array)Address::fromArray(array(
-    "route_id"              => $routeId,
-    "route_destination_id"  => $address_id,
-    "is_visited"            => TRUE
-));
+$addressParameters = (array) Address::fromArray([
+    'route_id' => $routeId,
+    'route_destination_id' => $address_id,
+    'is_visited' => true,
+]);
 
 $address = new Address();
 

@@ -1,12 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\Route;
-use Route4Me\OptimizationProblem;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -18,35 +15,35 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $route = new Route();
 $routeId = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeId), "can't retrieve random route_id");
+assert(!is_null($routeId), "Cannot retrieve random route_id");
 
 // Get random address's id from selected route above
-$addressRand = (array)$route->GetRandomAddressFromRoute($routeId);
+$addressRand = (array) $route->GetRandomAddressFromRoute($routeId);
 $optimization_problem_id = $addressRand['optimization_problem_id'];
 
-assert(!is_null($optimization_problem_id), "can't retrieve random address");
+assert(!is_null($optimization_problem_id), "Cannot retrieve random address");
 
 // Add an address to the optimization
-$addresses = array();
+$addresses = [];
 
-$address1 = (array)Address::fromArray(array(
-    'address'  =>  '717 5th Ave New York, NY 10021',
-    'alias'    =>  'Giorgio Armani',
-    'lat'      =>  40.7669692,
-    'lng'      =>  73.9693864,
-    'time'     =>  0
-));
+$address1 = (array) Address::fromArray([
+    'address' => '717 5th Ave New York, NY 10021',
+    'alias' => 'Giorgio Armani',
+    'lat' => 40.7669692,
+    'lng' => 73.9693864,
+    'time' => 0,
+]);
 
 $addresses[0] = $address1;
 
-$OptimizationParameters = (array)OptimizationProblem::fromArray(array(
-    "optimization_problem_id"  => $optimization_problem_id,
-    "addresses"                => $addresses,
-    "reoptimize"               => 1,
-));
+$OptimizationParameters = (array) OptimizationProblem::fromArray([
+    'optimization_problem_id' => $optimization_problem_id,
+    'addresses' => $addresses,
+    'reoptimize' => 1,
+]);
 
-$optimizationproblem = new OptimizationProblem();
+$optimizationProblem = new OptimizationProblem();
 
-$result = $optimizationproblem->update($OptimizationParameters);
+$result = $optimizationProblem->update($OptimizationParameters);
 
 Route4Me::simplePrint($result);

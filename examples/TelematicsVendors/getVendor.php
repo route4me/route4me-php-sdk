@@ -1,11 +1,9 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
-
-use Route4Me\Route4Me;
-use Route4Me\TelematicsVendor;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -17,13 +15,12 @@ $vendors = new TelematicsVendor();
 
 $randomVendorID = $vendors->GetRandomVendorID(0, 5);
 
-$vendorParameters = TelematicsVendor::fromArray(array(
-    "vendor_id" => $randomVendorID
-));
+$vendorParameters = TelematicsVendor::fromArray([
+    'vendor_id' => $randomVendorID,
+]);
 
 $vendor = new TelematicsVendor();
 $vendorResult = $vendor->GetTelematicsVendors($vendorParameters);
 
 Route4Me::simplePrint($vendorResult);
-    echo "<br>";
-
+    echo '<br>';

@@ -6,45 +6,45 @@ use Route4Me\RouteParameters;
 
 class RouteParametersTest extends \PHPUnit_Framework_TestCase
 {
-    function testFromArray()
+    public function testFromArray()
     {
-        $params = RouteParameters::fromArray(array(
-            'is_upload'  => false,
-            'rt'         => true,
-            'route_name' => 'php sdk test name'
-        ));
+        $params = RouteParameters::fromArray([
+            'is_upload' => false,
+            'rt' => true,
+            'route_name' => 'php sdk test name',
+        ]);
 
         $this->assertFalse($params->is_upload);
         $this->assertTrue($params->rt);
         $this->assertEquals($params->route_name, 'php sdk test name');
     }
 
-    function testFromArrayBadParams()
+    public function testFromArrayBadParams()
     {
-        $params = RouteParameters::fromArray(array(
-            'demoaddress' => 'php sdk test name'
-        ));
+        $params = RouteParameters::fromArray([
+            'demoaddress' => 'php sdk test name',
+        ]);
 
         $this->assertFalse(property_exists($params, 'demoaddress'));
     }
 
-    function testToArray()
+    public function testToArray()
     {
-        $params = RouteParameters::fromArray(array(
+        $params = RouteParameters::fromArray([
             'demoaddress' => 'php sdk test name',
-            'route_type'  => 'api',
+            'route_type' => 'api',
             'store_route' => true,
-            'is_upload'   => false,
-            'rt'          => true,
-            'route_name'  => 'php sdk test name'
-        ));
+            'is_upload' => false,
+            'rt' => true,
+            'route_name' => 'php sdk test name',
+        ]);
 
-        $this->assertEquals($params->toArray(), array(
-            'route_type'  => 'api',
+        $this->assertEquals($params->toArray(), [
+            'route_type' => 'api',
             'store_route' => true,
-            'is_upload'   => false,
-            'rt'          => true,
-            'route_name'  => 'php sdk test name'
-        ));
+            'is_upload' => false,
+            'rt' => true,
+            'route_name' => 'php sdk test name',
+        ]);
     }
 }

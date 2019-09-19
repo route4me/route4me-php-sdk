@@ -1,11 +1,10 @@
 <?php
+
 namespace Route4Me;
 
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
-use Route4Me\Route4Me;
-use Route4Me\Route;
 use Route4Me\Enum\ActivityTypes;
 
 // Example refers to get activities by activity_type parameter.
@@ -15,21 +14,21 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $activityTypes = new ActivityTypes();
 
-// Itereate through all the existing activity types
+// Iterate through all the existing activity types
 foreach ($activityTypes->getConstants() as $prop => $value) {
-    $activityParameters = ActivityParameters::fromArray(array(
-        "activity_type" => $value,
-        "limit"         => 2,
-        "offset"        => 0
-    ));
+    $activityParameters = ActivityParameters::fromArray([
+        'activity_type' => $value,
+        'limit' => 2,
+        'offset' => 0,
+    ]);
 
     $activities = new ActivityParameters();
-    $results = $activities->searcActivities($activityParameters);
+    $results = $activities->searchActivities($activityParameters);
 
     foreach ($results as $key => $activity) {
         Route4Me::simplePrint($activity);
-        echo "<br>";
+        echo '<br>';
     }
 
-    echo "------------------- <br><br>";
+    echo '------------------- <br><br>';
 }

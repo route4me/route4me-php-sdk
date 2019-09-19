@@ -1,15 +1,14 @@
 <?php
+
 namespace Route4Me;
 
 use Route4Me\Exception\BadParam;
-use Route4Me\RouteParameters;
-use Route4Me\Common;
 
 class OptimizationProblemParams extends Common
 {
     public $optimization_problem_id;
     public $reoptimize;
-    public $addresses = array();
+    public $addresses = [];
     public $parameters;
     public $directions;
     public $format;
@@ -19,7 +18,7 @@ class OptimizationProblemParams extends Common
 
     public static function fromArray($params)
     {
-        $param = new OptimizationProblemParams;
+        $param = new self();
         if (!isset($params['addresses'])) {
             throw new BadParam('addresses must be provided.');
         }
@@ -38,7 +37,7 @@ class OptimizationProblemParams extends Common
             if (!($address instanceof Address)) {
                 $address = Address::fromArray($address);
             }
-            
+
             $param->addAddress($address);
         }
 
@@ -55,31 +54,31 @@ class OptimizationProblemParams extends Common
 
     public function __construct()
     {
-        $this->parameters = new RouteParameters;
+        $this->parameters = new RouteParameters();
     }
 
     public function setParameters(RouteParameters $params)
     {
         $this->parameters = $params;
-        
+
         return $this;
     }
 
     public function addAddress(Address $address)
     {
         $this->addresses[] = $address;
-        
+
         return $this;
     }
-    
+
     public function getAddressesArray()
     {
-        $addresses = array();
-        
+        $addresses = [];
+
         foreach ($this->addresses as $address) {
             $addresses[] = $address->toArray();
         }
-        
+
         return $addresses;
     }
 
@@ -93,7 +92,7 @@ class OptimizationProblemParams extends Common
         foreach ($addresses as $address) {
             $this->addAddress($address);
         }
-        
+
         return $this;
     }
 }

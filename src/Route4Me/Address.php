@@ -1,8 +1,7 @@
 <?php
+
 namespace Route4Me;
 
-use Route4Me\Route4Me;
-use Route4Me\Common;
 use Route4Me\Enum\Endpoint;
 
 class Address extends Common
@@ -22,7 +21,7 @@ class Address extends Common
     public $geocoded;
     public $preferred_geocoding;
     public $failed_geocoding;
-    public $geocodings = array();
+    public $geocodings = [];
     public $contact_id;
     public $is_visited;
     public $customer_po;
@@ -47,9 +46,9 @@ class Address extends Common
     public $time;
     public $notes;
     public $timestamp_last_visited;
-    public $custom_fields = array();
-    public $manifest = array();
-    
+    public $custom_fields = [];
+    public $manifest = [];
+
     public $first_name;
     public $last_name;
     public $is_departed;
@@ -63,227 +62,227 @@ class Address extends Common
 
     public static function fromArray(array $params)
     {
-        $address = new Address();
+        $address = new self();
         foreach ($params as $key => $value) {
             if (property_exists($address, $key)) {
                 $address->{$key} = $value;
             }
         }
-        
+
         return $address;
     }
 
     public static function getAddress($routeId, $addressId)
     {
-        $address = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_V4,
+        $address = Route4Me::makeRequst([
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'GET',
-            'query'  => array(
-                'route_id'             => $routeId,
+            'query' => [
+                'route_id' => $routeId,
                 'route_destination_id' => $addressId,
-            )
-        ));
-    
-        return Address::fromArray($address);
+            ],
+        ]);
+
+        return self::fromArray($address);
     }
-    
+
     /*Get notes from the specified route destination
      * Returns an address object with notes, if an address exists, otherwise - return null.
      */
     public static function GetAddressesNotes($noteParams)
     {
-        $address = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_V4,
+        $address = Route4Me::makeRequst([
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'GET',
-            'query'  => array(
-                'route_id'             => isset($noteParams['route_id']) ? $noteParams['route_id'] : null, 
-                'route_destination_id' => isset($noteParams['route_destination_id']) 
+            'query' => [
+                'route_id' => isset($noteParams['route_id']) ? $noteParams['route_id'] : null,
+                'route_destination_id' => isset($noteParams['route_destination_id'])
                                              ? $noteParams['route_destination_id'] : null,
-                'notes'                => 1,
-            )
-        ));
-    
+                'notes' => 1,
+            ],
+        ]);
+
         return $address;
     }
 
     public function update()
     {
-        $addressUpdate = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_V4,
+        $addressUpdate = Route4Me::makeRequst([
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'PUT',
-            'body'   => $this->toArray(),
-            'query'  => array(
-                'route_id'             => $this->route_id,
+            'body' => $this->toArray(),
+            'query' => [
+                'route_id' => $this->route_id,
                 'route_destination_id' => $this->route_destination_id,
-            ),
-        ));
-    
-        return Address::fromArray($addressUpdate);
+            ],
+        ]);
+
+        return self::fromArray($addressUpdate);
     }
-    
+
     public function markAddress($params)
     {
-        $allQueryFields = array('route_id', 'route_destination_id');
-        $allBodyFields = array('is_visited', 'is_departed');
-        
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_V4,
+        $allQueryFields = ['route_id', 'route_destination_id'];
+        $allBodyFields = ['is_visited', 'is_departed'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'PUT',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
-        ));
-    
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+        ]);
+
         return $result;
     }
-    
+
     public function markAsDeparted($params)
     {
-        $allQueryFields = array('route_id', 'address_id', 'is_departed', 'member_id');
-        
-        $address = Route4Me::makeRequst(array(
-            'url'    => Endpoint::MARK_ADDRESS_DEPARTED,
+        $allQueryFields = ['route_id', 'address_id', 'is_departed', 'member_id'];
+
+        $address = Route4Me::makeRequst([
+            'url' => Endpoint::MARK_ADDRESS_DEPARTED,
             'method' => 'PUT',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
-        ));
-    
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
+
         return $address;
     }
-    
+
     public function markAsVisited($params)
     {
-        $allQueryFields = array('route_id', 'address_id', 'is_visited', 'member_id');
-        
-        $address = Route4Me::makeRequst(array(
-            'url'    => Endpoint::UPDATE_ADDRESS_VISITED,
+        $allQueryFields = ['route_id', 'address_id', 'is_visited', 'member_id'];
+
+        $address = Route4Me::makeRequst([
+            'url' => Endpoint::UPDATE_ADDRESS_VISITED,
             'method' => 'PUT',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params)
-        ));
-    
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
+
         return $address;
     }
 
     public function deleteAddress()
     {
-        $address = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ADDRESS_V4,
+        $address = Route4Me::makeRequst([
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'DELETE',
-            'query'  => array(
-                'route_id'             => $this->route_id,
+            'query' => [
+                'route_id' => $this->route_id,
                 'route_destination_id' => $this->route_destination_id,
-            )
-        ));
-    
-        return (bool)$address['deleted'];
+            ],
+        ]);
+
+        return (bool) $address['deleted'];
     }
-    
+
     public function moveDestinationToRoute($params)
     {
-        $allBodyFields = array('to_route_id', 'route_destination_id', 'after_destination_id');
-        
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::MOVE_ROUTE_DESTINATION,
+        $allBodyFields = ['to_route_id', 'route_destination_id', 'after_destination_id'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::MOVE_ROUTE_DESTINATION,
             'method' => 'POST',
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
-        ));
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
+        ]);
 
         return $result;
     }
-    
+
     public function AddAddressNote($params)
     {
-        $allQueryFields = array('route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type');
-        $allBodyFields = array('strNoteContents', 'strUpdateType');
-        
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ROUTE_NOTES_ADD,
+        $allQueryFields = ['route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type'];
+        $allBodyFields = ['strNoteContents', 'strUpdateType'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
+        ]);
 
         return $result;
     }
 
     public function AddNoteFile($params)
     {
-        $allQueryFields = array('route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type', 'strUpdateType');
-        
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ROUTE_NOTES_ADD,
+        $allQueryFields = ['route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type', 'strUpdateType'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'   => array(
-                'strFilename'  => isset($params['strFilename']) ? Route4Me::getFileRealPath($params['strFilename']) : "" 
-            ),
-            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => [
+                'strFilename' => isset($params['strFilename']) ? Route4Me::getFileRealPath($params['strFilename']) : '',
+            ],
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
+        ]);
 
         return $result;
     }
 
     public function createCustomNoteType($params)
     {
-        $allBodyFields = array('type', 'values');
-        
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
+        $allBodyFields = ['type', 'values'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::NOTE_CUSTOM_TYPES_V4,
             'method' => 'POST',
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params)
-        ));
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+        ]);
 
         return $result;
     }
-    
+
     public function removeCustomNoteType($params)
     {
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::NOTE_CUSTOM_TYPES_V4,
             'method' => 'DELETE',
-            'body'   => array(
-                'id' => isset($params['id']) ? $params['id'] : null
-            )
-        ));
+            'body' => [
+                'id' => isset($params['id']) ? $params['id'] : null,
+            ],
+        ]);
 
         return $result;
     }
-    
+
     public function getAllCustomNoteTypes()
     {
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::NOTE_CUSTOM_TYPES_V4,
-            'method' => 'GET'
-        ));
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'GET',
+        ]);
 
         return $result;
     }
-    
+
     public function addCustomNoteToRoute($params)
     {
-        $customArray = array();
-        
+        $customArray = [];
+
         foreach ($params as $key => $value) {
-            if (strpos($key, "custom_note_type")!==false) {
+            if (false !== strpos($key, 'custom_note_type')) {
                 $customArray[$key] = $value;
             }
         }
-        
-        $allQueryFields = array('route_id', 'address_id', 'format', 'dev_lat', 'dev_lng');
-        $allBodyFields = array('strUpdateType', 'strUpdateType', 'strNoteContents');
-        
-        $result = Route4Me::makeRequst(array(
-            'url'    => Endpoint::ROUTE_NOTES_ADD,
+
+        $allQueryFields = ['route_id', 'address_id', 'format', 'dev_lat', 'dev_lng'];
+        $allBodyFields = ['strUpdateType', 'strUpdateType', 'strNoteContents'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'  => array_merge(Route4Me::generateRequestParameters($allBodyFields, $params), $customArray),
-            'HTTPHEADER'  => 'Content-Type: multipart/form-data'
-        ));
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => array_merge(Route4Me::generateRequestParameters($allBodyFields, $params), $customArray),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
+        ]);
 
         return $result;
     }
 
-    function getAddressId()
+    public function getAddressId()
     {
         return $this->route_destination_id;
     }
