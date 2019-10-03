@@ -11,7 +11,7 @@ assert_options(ASSERT_BAIL, 1);
 // The example demonstrates process of updating an order with a custom user field by sending HTPP PUT data.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('51d0c0701ce83855c9f62d0440096e7c');
+Route4Me::setApiKey('11111111111111111111111111111111');
 
 $orderParameters = Order::fromArray([
     'order_id'  => 65936,
