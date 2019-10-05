@@ -1,6 +1,5 @@
 Access Route4Me's logistics-as-a-service API using our PHP SDK
 
-[![Build Status](https://travis-ci.org/route4me/route4me-php-sdk.svg?branch=master)](https://travis-ci.org/route4me/route4me-php-sdk)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/route4me/route4me-php-sdk/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/route4me/route4me-php-sdk/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/route4me/route4me-php-sdk/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/route4me/route4me-php-sdk/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/route4me/route4me-php-sdk/badges/build.png?b=master)](https://scrutinizer-ci.com/g/route4me/route4me-php-sdk/build-status/master)

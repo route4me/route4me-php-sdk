@@ -13,11 +13,12 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 
 $territory = new Territory();
 
-// Select a terriotry with the addresses from the list
+// Select a terriotry with the enclosed addresses and orders from the list
 $params = [
-    'offset' => 0,
-    'limit' => 50,
+    'offset'    => 0,
+    'limit'     => 50,
     'addresses' => 1,
+    'orders'    => 1
 ];
 
 $results = $territory->getTerritories($params);

@@ -44,7 +44,7 @@ class ActivityParameters extends Common
 
     public static function getActivities($params)
     {
-        $allQueryFields = ['route_id', 'team', 'limit', 'offset', 'start'];
+        $allQueryFields = ['route_id', 'team', 'limit', 'offset', 'start', 'member_id'];
 
         $activity = Route4Me::makeRequst([
             'url' => Endpoint::GET_ACTIVITIES,
