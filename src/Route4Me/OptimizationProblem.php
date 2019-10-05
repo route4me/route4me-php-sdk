@@ -80,24 +80,24 @@ class OptimizationProblem extends Common
     public static function get($params)
     {
         $allQueryFields = ['state', 'limit', 'format', 'offset',
-        'optimization_problem_id', 'wait_for_final_state', ];
+        'optimization_problem_id', 'wait_for_final_state','start_date','end_date', ];
 
-        $optimize = Route4Me::makeRequst([
+        $result = Route4Me::makeRequst([
             'url' => Endpoint::OPTIMIZATION_PROBLEM,
             'method' => 'GET',
             'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
-        if (isset($optimize['optimizations'])) {
+        if (isset($result['optimizations'])) {
             $problems = [];
 
-            foreach ($optimize['optimizations'] as $problem) {
+            foreach ($result['optimizations'] as $problem) {
                 $problems[] = self::fromArray($problem);
             }
 
             return $problems;
         } else {
-            return self::fromArray($optimize);
+            return self::fromArray($result);
         }
     }
 
