@@ -18,4 +18,15 @@ class Track extends Common
 
         return $json;
     }
+
+    public static function getUserLocations($query=null)
+    {
+        $json = Route4Me::makeRequst([
+            'url' => Endpoint::USER_LOCATION,
+            'method' => 'GET',
+            'query' => isset($query) ? ['query' => $query] : null
+        ]);
+
+        return $json;
+    }
 }
