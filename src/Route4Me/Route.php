@@ -52,6 +52,7 @@ class Route extends Common
     public $geofence_polygon_size;
     public $notes;
     public $member_config_storage;
+    public $original_route;
 
     public static function fromArray(array $params)
     {
@@ -93,7 +94,7 @@ class Route extends Common
 
     public static function getRoutes($params = null)
     {
-        $allQueryFields = ['route_id', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset','start_date','end_date'];
+        $allQueryFields = ['route_id', 'original', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset','start_date','end_date'];
 
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ROUTE_V4,
@@ -406,12 +407,12 @@ class Route extends Common
     {
         $allQueryFields = ['tracking'];
 
-        $route = Route4Me::makeRequst([
+        $assetResponse = Route4Me::makeRequst([
             'url' => Endpoint::STATUS_V4,
             'method' => 'GET',
             'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
-        return $route;
+        return $assetResponse;
     }
 }
