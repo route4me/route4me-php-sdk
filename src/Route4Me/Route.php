@@ -3,36 +3,38 @@
 namespace Route4Me;
 
 use Route4Me\Enum\Endpoint;
+use Route4Me\Vehicle;
+use Route4Me\RouteParameters;
 
 class Route extends Common
 {
     public $route_id;
     public $member_id;
-    public $route_destination_id;
     public $optimization_problem_id;
     public $vehicle_alias;
     public $driver_alias;
     public $trip_distance;
+    public $udu_distance_unit;
+    public $udu_trip_distance;
     public $mpg;
     public $gas_price;
     public $route_duration_sec;
     public $destination_count;
+    public $notes_count;
     public $parameters;
     public $addresses = [];
     public $links = [];
     public $directions = [];
     public $path = [];
     public $tracking_history = [];
-    public $recipient_email;
     public $httpheaders;
     public $is_unrouted;
-    public $time;
-
-    public $dev_lat;
-    public $dev_lng;
-
     public $user_route_rating;
     public $member_email;
+    public $member_picture;
+    public $member_tracking_subheadline;
+    public $approved_for_execution;
+    public $approved_revisions_counter;
     public $member_first_name;
     public $member_last_name;
     public $channel_name;
@@ -41,6 +43,8 @@ class Route extends Common
     public $net_revenue_per_distance_unit;
     public $created_timestamp;
     public $planned_total_route_duration;
+    public $total_wait_time;
+    public $udu_actual_travel_distance;
     public $actual_travel_distance;
     public $actual_travel_time;
     public $actual_footsteps;
@@ -51,26 +55,71 @@ class Route extends Common
     public $geofence_polygon_type;
     public $geofence_polygon_size;
     public $notes;
+    public $vehicle;
     public $member_config_storage;
+    public $original_route;
+
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
 
     public static function fromArray(array $params)
     {
         $route = new self();
         $route->route_id = Common::getValue($params, 'route_id');
         $route->member_id = Common::getValue($params, 'member_id');
+        $route->member_email = Common::getValue($params, 'member_email');
+        $route->member_picture = Common::getValue($params, 'member_picture');
+        $route->member_tracking_subheadline = Common::getValue($params, 'member_tracking_subheadline');
+        $route->approved_for_execution = Common::getValue($params, 'approved_for_execution');
+        $route->approved_revisions_counter = Common::getValue($params, 'approved_revisions_counter');
+        $route->member_first_name = Common::getValue($params, 'member_first_name');
+        $route->member_last_name = Common::getValue($params, 'member_last_name');
+        $route->channel_name = Common::getValue($params, 'channel_name');
         $route->optimization_problem_id = Common::getValue($params, 'optimization_problem_id');
+        $route->user_route_rating = Common::getValue($params, 'user_route_rating');
         $route->vehicle_alias = Common::getValue($params, 'vehicle_alias');
         $route->driver_alias = Common::getValue($params, 'driver_alias');
         $route->trip_distance = Common::getValue($params, 'trip_distance');
+        $route->udu_distance_unit = Common::getValue($params, 'udu_distance_unit');
+        $route->udu_trip_distance = Common::getValue($params, 'udu_trip_distance');
         $route->mpg = Common::getValue($params, 'mpg');
         $route->gas_price = Common::getValue($params, 'gas_price');
         $route->route_duration_sec = Common::getvalue($params, 'route_duration_sec');
+        $route->planned_total_route_duration = Common::getvalue($params, 'planned_total_route_duration');
+        $route->total_wait_time = Common::getvalue($params, 'total_wait_time');
+        $route->udu_actual_travel_distance = Common::getvalue($params, 'udu_actual_travel_distance');
+        $route->actual_travel_distance = Common::getvalue($params, 'actual_travel_distance');
+        $route->actual_travel_time = Common::getvalue($params, 'actual_travel_time');
+        $route->actual_footsteps = Common::getvalue($params, 'actual_footsteps');
+        $route->working_time = Common::getvalue($params, 'working_time');
+        $route->driving_time = Common::getvalue($params, 'driving_time');
+        $route->idling_time = Common::getvalue($params, 'idling_time');
+        $route->paying_miles = Common::getvalue($params, 'paying_miles');
+        $route->geofence_polygon_type = Common::getvalue($params, 'geofence_polygon_type');
+        $route->geofence_polygon_size = Common::getvalue($params, 'geofence_polygon_size');
         $route->destination_count = Common::getvalue($params, 'destination_count');
+        $route->notes_count = Common::getvalue($params, 'notes_count');
         $route->is_unrouted = Common::getvalue($params, 'is_unrouted');
+        $route->route_cost = Common::getvalue($params, 'route_cost');
+        $route->route_revenue = Common::getvalue($params, 'route_revenue');
+        $route->net_revenue_per_distance_unit = Common::getvalue($params, 'net_revenue_per_distance_unit');
+        $route->created_timestamp = Common::getvalue($params, 'created_timestamp');
+
+        if (isset($params['vehicle'])) {
+            $route->vehicle = new Vehicle();
+            $route->vehicle = Vehicle::fromArray($params['vehicle']);
+            Route4Me::setBaseUrl(Endpoint::BASE_URL);
+        };
+
+        $route->member_config_storage = Common::getvalue($params, 'member_config_storage');
 
         // Make RouteParameters
         if (isset($params['parameters'])) {
+            $route->parameters = new RouteParameters();
             $route->parameters = RouteParameters::fromArray($params['parameters']);
+            Route4Me::setBaseUrl(Endpoint::BASE_URL);
         }
 
         if (isset($params['addresses'])) {
@@ -84,16 +133,21 @@ class Route extends Common
         }
 
         $route->links = Common::getValue($params, 'links', []);
+        $route->notes = Common::getValue($params, 'notes', []);
         $route->directions = Common::getValue($params, 'directions', []);
         $route->path = Common::getValue($params, 'path', []);
         $route->tracking_history = Common::getValue($params, 'tracking_history', []);
+
+        if (isset($params['original_route'])) {
+            $route->original_route = Route::fromArray($params['original_route']);
+        };
 
         return $route;
     }
 
     public static function getRoutes($params = null)
     {
-        $allQueryFields = ['route_id', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset','start_date','end_date'];
+        $allQueryFields = ['route_id', 'original', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset','start_date','end_date'];
 
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ROUTE_V4,
@@ -206,7 +260,8 @@ class Route extends Common
             'limit' => !is_null($limit) ? $limit : 30,
         ];
 
-        $routes = $this->getRoutes($params);
+        $route = new self();
+        $routes = $route->getRoutes($params);
 
         if (is_null($routes) || sizeof($routes) < 1) {
             echo '<br> There are no routes in the account. Please, create the routes first. <br>';
@@ -406,12 +461,12 @@ class Route extends Common
     {
         $allQueryFields = ['tracking'];
 
-        $route = Route4Me::makeRequst([
+        $assetResponse = Route4Me::makeRequst([
             'url' => Endpoint::STATUS_V4,
             'method' => 'GET',
             'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
-        return $route;
+        return $assetResponse;
     }
 }

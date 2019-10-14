@@ -16,6 +16,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $vehicle = new Vehicle();
 
 $vehicleParameters = Vehicle::fromArray([
+    'vehicle_name' => 'Peterbilt 579',
     'vehicle_alias' => 'Peterbilt 579',
     'vehicle_vin' => '1NP5DB9X93N507873',
     'vehicle_license_plate' => 'PPV7516',
@@ -28,7 +29,7 @@ $vehicleParameters = Vehicle::fromArray([
     'vehicle_make' => 'Peterbilt',
     'vehicle_type_id' => 'tractor_trailer',
     'has_trailer' => true,
-    'vehicle_axle_count' => 5,
+    'vehicle_axle_count' => 4,
     'mpg_city' => 6,
     'mpg_highway' => 12,
     'fuel_type' => 'diesel',

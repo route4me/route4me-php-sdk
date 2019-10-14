@@ -9,12 +9,15 @@ class Vehicle extends Common
     public $vehicle_id;
     public $member_id;
     public $is_deleted;
+    public $vehicle_name;
     public $vehicle_alias;
     public $vehicle_vin;
+    //public $created_time;
     public $vehicle_reg_state_id;
     public $vehicle_reg_country_id;
     public $vehicle_license_plate;
     public $vehicle_type_id;
+    public $timestamp_added;
     public $vehicle_make;
     public $vehicle_model_year;
     public $vehicle_model;
@@ -24,13 +27,16 @@ class Vehicle extends Common
     public $license_start_date;
     public $license_end_date;
     public $vehicle_axle_count;
-    public $is_operational;
     public $mpg_city;
     public $mpg_highway;
     public $fuel_type;
     public $height_inches;
     public $weight_lb;
+    public $route4me_telematics_internal_api_key;
+    public $is_operational;
     public $external_telematics_vehicle_id;
+    public $r4m_telematics_gateway_connection_id;
+    public $r4m_telematics_gateway_vehicle_id;
     public $has_trailer;
     public $heightInInches;
     public $lengthInInches;
@@ -58,6 +64,7 @@ class Vehicle extends Common
     public $width_metric;
     public $weight_metric;
     public $max_weight_per_axle_group_metric;
+    public $timestamp_removed;
 
     public function __construct()
     {
@@ -67,9 +74,11 @@ class Vehicle extends Common
     public static function fromArray(array $params)
     {
         $vehicle = new self();
+
         foreach ($params as $key => $value) {
+            if (is_null(Common::getValue($params, $key))) continue;
             if (property_exists($vehicle, $key)) {
-                $vehicle->{$key} = $value;
+                $vehicle->$key = $value;
             }
         }
 
@@ -136,10 +145,13 @@ class Vehicle extends Common
 
     public function createVehicle($params)
     {
-        $allBodyFields = Route4Me::getObjectProperties(new self(), ['vehicle_id']);
+        $excludeFields = ['vehicle_id','is_deleted','created_time','timestamp_added','timestamp_removed'];
+        $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
+
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::VEHICLE_V4,
+            'url' => Endpoint::VEHICLE_V4_API,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER' => 'Content-Type: application/json',

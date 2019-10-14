@@ -62,6 +62,12 @@ class Member extends Common
     public $member_picture;
     public $api_key;
     public $custom_data;
+    public $level;
+
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
 
     public static function fromArray(array $params)
     {

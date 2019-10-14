@@ -16,6 +16,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $vehicle = new Vehicle();
 
 $vehicleParameters = Vehicle::fromArray([
+    'vehicle_name' => 'GMC TopKick C5500 Medium',
     'vehicle_alias' => 'GMC TopKick C5500 Medium',
     'vehicle_vin' => 'SAJXA01A06FN08012',
     'vehicle_license_plate' => 'CVH4561',

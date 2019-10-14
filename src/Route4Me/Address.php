@@ -60,6 +60,11 @@ class Address extends Common
     public $time_window_start_2;
     public $time_window_end_2;
 
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function fromArray(array $params)
     {
         $address = new self();

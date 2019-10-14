@@ -13,6 +13,11 @@ class OrderCustomField extends Common
     public $root_owner_member_id;
     public $order_custom_field_type_info;
 
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function fromArray(array $params)
     {
         $orderCustomField = new self();

@@ -19,6 +19,8 @@ class Endpoint
     const UPDATE_ADDRESS_VISITED = '/actions/address/update_address_visited.php';
 
     const ADDRESS_BOOK_V4 = '/api.v4/address_book.php';
+    const ADDRESS_BOOK_GROUP = '/api.v4/address_book_group.php';
+    const ADDRESS_BOOK_SEARCH = '/api/address_book/get_search_group_addresses.php';
     const MODIFY_CONTACT = '/api/address_book/modify_contact.php';
 
     const GEOCODER = '/api/geocoder.php';
@@ -43,6 +45,7 @@ class Endpoint
     const CHANGE_HYBRID_OPTIMIZATION_DEPOT = '/api/change_hybrid_optimization_depot.php';
 
     const ORDER_V4 = '/api.v4/order.php';
+    const ORDER_CUSTOM_FIELDS_V4 = '/api.v4/order_custom_user_fields.php';
 
     const ROUTE_V4 = '/api.v4/route.php';
     const ROUTE_DUPLICATE = '/actions/duplicate_route.php';
@@ -52,13 +55,16 @@ class Endpoint
     const ROUTE_SHARE = '/actions/route/share_route.php';
     const ROUTE_NOTES_ADD = '/actions/addRouteNotes.php';
     const STATUS_V4 = '/api.v4/status.php';
-    const GET_DEVICE_LOCATION = '/api/track/get_device_location.php';
 
+    const GET_DEVICE_LOCATION = '/api/track/get_device_location.php';
     const TRACK_SET = '/track/set.php';
+    const USER_LOCATION = '/api/track/view_user_locations.php';
 
     const NOTE_CUSTOM_TYPES_V4 = '/api.v4/note_custom_types.php';
 
+    const ViewVehicles = '/api/vehicles/view_vehicles.php';
     const VEHICLE_V4 = '/api/vehicles';
-
+    const VEHICLE_V4_API = '/api.v4/vehicle.php';
+    
     const TELEMATICS_VENDORS = "http://telematics.route4me.com/api/vendors.php";
 }
