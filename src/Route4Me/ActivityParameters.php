@@ -29,6 +29,11 @@ class ActivityParameters extends Common
     public $destination_name;
     public $destination_alias;
 
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function fromArray(array $params)
     {
         $activityparameters = new self();

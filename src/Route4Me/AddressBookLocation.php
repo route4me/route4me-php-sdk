@@ -49,6 +49,11 @@ class AddressBookLocation extends Common
     public $address_priority;
     public $address_customer_po;
 
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function fromArray(array $params)
     {
         $addressbooklocation = new self();
@@ -163,9 +168,9 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleMode($scheduleMode)
     {
-        $schedMmodes = ['daily', 'weekly', 'monthly', 'annually'];
+        $schedModes = ['daily', 'weekly', 'monthly', 'annually'];
 
-        if (in_array($scheduleMode, $schedMmodes)) {
+        if (in_array($scheduleMode, $schedModes)) {
             return true;
         } else {
             return false;

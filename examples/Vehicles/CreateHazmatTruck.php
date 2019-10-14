@@ -16,6 +16,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $vehicle = new Vehicle();
 
 $vehicleParameters = Vehicle::fromArray([
+    'vehicle_name' => 'ISUZU FTR',
     'vehicle_alias' => 'ISUZU FTR',
     'vehicle_vin' => '1NP5DB9X93N507873',
     'vehicle_license_plate' => 'IFT6253',

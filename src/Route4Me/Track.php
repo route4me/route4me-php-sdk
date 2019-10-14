@@ -6,6 +6,11 @@ use Route4Me\Enum\Endpoint;
 
 class Track extends Common
 {
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function set(TrackSetParams $params)
     {
         $allQueryFields = Route4Me::getObjectProperties(new TrackSetParams(), ['tx_id']);
