@@ -22,8 +22,12 @@ class RouteParameters extends Common
     public $dev_lat;
     public $dev_lng;
     public $route_max_duration;
-    public $route_email;
 
+    public $target_duration;
+    public $target_distance;
+    public $target_wait_by_tail_size;
+
+    public $route_email;
     public $store_route = true;
     public $metric;
     public $algorithm_type;
@@ -62,7 +66,6 @@ class RouteParameters extends Common
     public $truck_width;
     public $truck_length;
     public $optimization_quality;
-    public $override_addresses;
     public $max_tour_size;
     public $min_tour_size;
     public $uturn;
@@ -71,6 +74,7 @@ class RouteParameters extends Common
     public $route_time_multiplier;
     public $route_service_time_multiplier;
     public $optimization_engine;
+    public $override_addresses;
     public $time;
 
     public static function fromArray(array $params)
