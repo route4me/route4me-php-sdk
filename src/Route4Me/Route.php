@@ -180,14 +180,13 @@ class Route extends Common
         return $result;
     }
 
-    public function duplicateRoute($route_id)
+    public function duplicateRoute($routeIDs)
     {
         $result = Route4Me::makeRequst([
-            'url' => Endpoint::ROUTE_DUPLICATE,
-            'method' => 'GET',
-            'query' => [
-                'route_id' => $route_id,
-                'to' => 'none',
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'POST',
+            'body' => [
+                'duplicate_routes_id' => $routeIDs
             ],
         ]);
 
