@@ -23,7 +23,7 @@ class RouteParameters extends Common
     public $dev_lng;
     public $route_max_duration;
     public $route_email;
-    public $route_type = 'api';
+
     public $store_route = true;
     public $metric;
     public $algorithm_type;
@@ -38,11 +38,19 @@ class RouteParameters extends Common
     public $trailer_weight_t;
     public $limited_weight_t;
     public $weight_per_axle_t;
-    public $truck_height_meters;
-    public $truck_width_meters;
-    public $truck_length_meters;
-    public $truck_hazardous_goods;
 
+    public $truck_hazardous_goods;
+    public $truck_axles;
+    public $truck_toll_road_usage;
+    public $truck_avoid_ferries;
+    public $truck_hwy_only;
+    public $truck_lcv;
+    public $truck_borders;
+    public $truck_side_street_adherence;
+    public $truck_config;
+    public $truck_dim_unit;
+    public $truck_type;
+    public $truck_weight;
     public $vehicle_max_cargo_weight;
     public $vehicle_max_cargo_volume;
     public $subtour_max_revenue;
@@ -60,8 +68,10 @@ class RouteParameters extends Common
     public $uturn;
     public $leftturn;
     public $rightturn;
-
-    public $optimized_callback_url;
+    public $route_time_multiplier;
+    public $route_service_time_multiplier;
+    public $optimization_engine;
+    public $time;
 
     public static function fromArray(array $params)
     {

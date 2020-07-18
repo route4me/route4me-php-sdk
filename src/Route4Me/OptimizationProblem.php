@@ -21,6 +21,7 @@ class OptimizationProblem extends Common
 
     public function __construct()
     {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
         $this->parameters = new RouteParameters();
     }
 

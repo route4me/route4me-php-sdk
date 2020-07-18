@@ -16,6 +16,7 @@ Route4Me::setApiKey('11111111111111111111111111111111');
 $vehicle = new Vehicle();
 
 $vehicleParameters = Vehicle::fromArray([
+    'vehicle_name' => 'Liebherr T 282B mining truck',
     'vehicle_alias' => 'Liebherr T 282B mining truck',
     'vehicle_vin' => '1NP5DB9X93N507873',
     'vehicle_license_plate' => 'LMT8765',

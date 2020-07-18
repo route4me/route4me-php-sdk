@@ -23,6 +23,11 @@ class TrackSetParams extends Common
     public $device_timestamp;
     public $app_version;
 
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function fromArray(array $params)
     {
         $param = new self();

@@ -14,6 +14,11 @@ class Territory extends Common
     public $member_id;
     public $territory; // Territory parameters
 
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function fromArray(array $params)
     {
         if (!isset($params['territory_name'])) {
