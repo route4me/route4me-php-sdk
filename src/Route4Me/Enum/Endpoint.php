@@ -59,6 +59,6 @@ class Endpoint
     const NOTE_CUSTOM_TYPES_V4 = '/api.v4/note_custom_types.php';
 
     const VEHICLE_V4 = '/api/vehicles';
-    
+
     const TELEMATICS_VENDORS = "http://telematics.route4me.com/api/vendors.php";
 }
