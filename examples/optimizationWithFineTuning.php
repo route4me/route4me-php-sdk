@@ -13,7 +13,7 @@ use Route4Me\Enum\TravelMode;
 use Route4Me\Enum\Metric;
 use Route4Me\Route;
 
-// The example refers to the process of creating new optimization with callback url.
+// The example refers to the process of creating new optimization with fine-tuning.
 
 // Set the api key in the Route4me class
 Route4Me::setApiKey('11111111111111111111111111111111');
