@@ -62,6 +62,11 @@ class Order extends Common
 
     public $addresses = [];
 
+    public function __construct()
+    {
+        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+    }
+
     public static function fromArray(array $params)
     {
         $order = new self();

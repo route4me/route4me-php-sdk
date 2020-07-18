@@ -17,7 +17,17 @@ $route = new Route();
 $route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Cannot retrieve a random route ID");
 
-// get a route by ID
-$routeResults = $route->getRoutes(['route_id' => $route_id]);
+$params = [
+    'route_id' => $route_id,
+];
 
-Route4Me::simplePrint((array)$routeResults, true);
+$status = $route->resequenceAllAddresses($params);
+
+$params = [
+    'route_id' => $route_id,
+    'original' =>  1
+];
+
+$routeWithOriginRoute = $route->getRoutes($params);
+
+Route4Me::simplePrint($routeWithOriginRoute->original_route, true);
