@@ -3,6 +3,7 @@
 namespace Route4Me;
 
 use Route4Me\Enum\Endpoint;
+use Route4Me\Exception\BadParam;
 
 class Address extends Common
 {
@@ -44,7 +45,7 @@ class Address extends Common
     public $time_window_start;
     public $time_window_end;
     public $time;
-    public $notes;
+    public $notes  = [];
     public $timestamp_last_visited;
     public $custom_fields = [];
     public $manifest = [];
@@ -60,6 +61,40 @@ class Address extends Common
     public $time_window_start_2;
     public $time_window_end_2;
 
+    public $timeframe_violation_state;
+    public $timeframe_violation_time;
+    public $timeframe_violation_rate;
+    public $route_name;
+    public $address_stop_type;
+    public $visited_lat;
+    public $visited_lng;
+    public $departed_lat;
+    public $departed_lng;
+    public $group;
+    public $abnormal_traffic_time_to_next_destination;
+    public $uncongested_time_to_next_destination;
+    public $traffic_time_to_next_destination;
+    public $channel_name;
+    public $pickup;
+    public $dropoff;
+    public $joint;
+    public $geofence_detected_visited_timestamp;
+    public $geofence_detected_departed_timestamp;
+    public $geofence_detected_service_time;
+    public $geofence_detected_visited_lat;
+    public $geofence_detected_visited_lng;
+    public $geofence_detected_departed_lat;
+    public $geofence_detected_departed_lng;
+    public $custom_fields_str_json;
+    public $custom_fields_config;
+    public $custom_fields_config_str_json;
+    public $bundle_count;
+    public $bundle_items;
+    public $order_inventory;
+    public $udu_distance_to_next_destination;
+    public $wait_time_to_next_destination;
+    public $path_to_next;
+
     public function __construct()
     {
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
@@ -71,6 +106,8 @@ class Address extends Common
         foreach ($params as $key => $value) {
             if (property_exists($address, $key)) {
                 $address->{$key} = $value;
+            } else {
+                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
             }
         }
 
@@ -153,7 +190,7 @@ class Address extends Common
         return $address;
     }
 
-    public function markAsVisited($params)
+    public function  markAsVisited($params)
     {
         $allQueryFields = ['route_id', 'address_id', 'is_visited', 'member_id'];
 
@@ -261,6 +298,19 @@ class Address extends Common
         ]);
 
         return $result;
+    }
+
+    public function getCustomNoteTypeByKey($key)
+    {
+        $customNoteTypes = $this->getAllCustomNoteTypes();
+
+        foreach ($customNoteTypes as $custNote) {
+            if ($custNote['note_custom_type'] == $key) {
+                return CustomNoteTypeResponse::fromArray($custNote);
+            }
+        }
+
+        return null;
     }
 
     public function addCustomNoteToRoute($params)

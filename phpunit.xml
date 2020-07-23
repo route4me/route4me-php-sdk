@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./tests/bootstrap.php" colors="true">
-    <php>
-        <var name="TEST_APIKEY" value="11111111111111111111111111111111" />
-    </php>
-    <testsuites>
-        <testsuite name="Route4me Api Test Suite">
-            <directory>./tests/Route4me/</directory>
-        </testsuite>
-    </testsuites>
+<phpunit
+         verbose="false"
+         colors="false"
+         cacheResult="false">
+<testsuites>
+    <testsuite name="Route4me PHP SDK Test Suite">
+        <directory>UnitTestFiles/Test</directory>
+        <file>UnitTestFiles/Test/AvoidanceZoneUnitTests.php</file>
+        <file>UnitTestFiles/Test/AddressUnitTests.php</file>
+        <!-- <file>UnitTestFiles/Test/Route4MeUnitTests.php</file> -->
+    </testsuite>
+</testsuites>
+
+<filter>
+    <whitelist>
+        <directory suffix=".php">src/</directory>
+    </whitelist>
+</filter>
+
 </phpunit>
+
