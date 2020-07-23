@@ -13,7 +13,7 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
     {
         $this->avoidanceZone = new AvoidanceZone();
 
-        Route4Me::setApiKey('BD48828717021141485A701453273458');
+        Route4Me::setApiKey('11111111111111111111111111111111');
 
         $createdAvoidanceZones = [];
 

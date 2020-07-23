@@ -40,7 +40,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
 
     public static function setUpBeforeClass()
     {
-        Route4Me::setApiKey('BD48828717021141485A701453273458');
+        Route4Me::setApiKey('11111111111111111111111111111111');
 
         $addresses = [];
         $addresses[] = Address::fromArray([

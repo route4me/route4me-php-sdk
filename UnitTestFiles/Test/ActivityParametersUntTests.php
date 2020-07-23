@@ -18,7 +18,7 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
 
     public static function setUpBeforeClass()
     {
-        Route4Me::setApiKey('bd48828717021141485a701453273458');
+        Route4Me::setApiKey('11111111111111111111111111111111');
 
         $addresses = [];
         $addresses[] = Address::fromArray([
