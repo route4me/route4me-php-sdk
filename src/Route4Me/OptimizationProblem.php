@@ -198,7 +198,7 @@ class OptimizationProblem extends Common
         return $response;
     }
 
-    public function removeOptimization($params)
+    public static function removeOptimization($params)
     {
         $allQueryFields = ['redirect'];
         $allBodyFields = ['optimization_problem_ids'];

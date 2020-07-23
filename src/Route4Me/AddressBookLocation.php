@@ -179,9 +179,9 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleEnable($scheduleEnabled)
     {
-        $schedEnables = [true, false];
+        $schedEnables = [true, false,'TRUE', 'FALSE'];
 
-        if (in_array($scheduleEnabled, $schedEnables)) {
+        if (in_array($scheduleEnabled, $schedEnables,true)) {
             return true;
         } else {
             return false;
@@ -191,7 +191,12 @@ class AddressBookLocation extends Common
     public static function validateScheduleEvery($scheduleEvery)
     {
         if (is_numeric($scheduleEvery)) {
-            return true;
+            $every= (int)$scheduleEvery;
+            if ($every>0 && $every<367) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
@@ -199,6 +204,8 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleWeekDays($scheduleWeekDays)
     {
+        if (gettype($scheduleWeekDays)!='string') return false;
+
         $weekdays = explode(',', $scheduleWeekDays);
         $weekdaysSize = sizeof($weekdays);
 
@@ -226,7 +233,7 @@ class AddressBookLocation extends Common
     {
         $schedMonthlyMmodes = ['dates', 'nth'];
 
-        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes)) {
+        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes, true)) {
             return true;
         } else {
             return false;
@@ -235,6 +242,8 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleMonthlyDates($scheduleMonthlyDates)
     {
+        if (gettype($scheduleMonthlyDates)!='string') return false;
+
         $monthlyDates = explode(',', $scheduleMonthlyDates);
         $monthlyDatesSize = sizeof($monthlyDates);
 
@@ -266,7 +275,7 @@ class AddressBookLocation extends Common
 
         $schedNthNs = [1, 2, 3, 4, 5, -1];
 
-        if (in_array($scheduleNthN, $schedNthNs)) {
+        if (in_array($scheduleNthN, $schedNthNs, true)) {
             return true;
         } else {
             return false;
@@ -281,7 +290,7 @@ class AddressBookLocation extends Common
 
         $schedNthWhats = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-        if (in_array($scheduleNthWhat, $schedNthWhats)) {
+        if (in_array($scheduleNthWhat, $schedNthWhats, true)) {
             return true;
         } else {
             return false;
