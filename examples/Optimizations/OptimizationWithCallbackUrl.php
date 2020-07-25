@@ -11,7 +11,7 @@ use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\DeviceType;
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('../addresses.json'), true);

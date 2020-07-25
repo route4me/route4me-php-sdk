@@ -10,7 +10,7 @@ use Route4Me\Enum\ActivityTypes;
 // Example refers to get activities by activity_type parameter.
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $activityTypes = new ActivityTypes();
 

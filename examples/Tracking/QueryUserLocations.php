@@ -9,11 +9,13 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $track = new Track();
 
-$userLocation = reset($track->getUserLocations());
+$userLocations = $track->getUserLocations();
+
+$userLocation = reset($userLocations);
 
 $email = $userLocation['member_data']['member_email'];
 $queriedUserLocations = $track->getUserLocations($email);

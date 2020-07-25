@@ -42,17 +42,30 @@ class Geocoding extends Common
         return $fgCoding;
     }
 
+    /*
+     * Reverse geocoding by the GET Http method is obsolete.
+     * Use Batch geocoding instead.
+     */
     public static function reverseGeocoding($params)
     {
-        $allQueryFields = ['format', 'addresses', 'detailed'];
+        //$allQueryFields = ['format', 'addresses', 'detailed'];
+        $allBodyFields = ['strExportFormat', 'addresses'];
 
+        $rgCoding = Route4Me::makeRequst([
+            'url' => Endpoint::GEOCODER,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
+        ]);
+
+        /*
         $fgcoding = Route4Me::makeRequst([
             'url' => Endpoint::GEOCODER,
             'method' => 'POST',
             'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
-
-        return $fgcoding;
+*/
+        return $rgCoding;
     }
 
     public static function getStreetData($params)

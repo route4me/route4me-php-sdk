@@ -12,7 +12,7 @@ assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4me class
 // This example not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get a random route ID
 $route = new Route();

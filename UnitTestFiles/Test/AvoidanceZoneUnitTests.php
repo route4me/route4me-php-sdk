@@ -2,6 +2,7 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\AvoidanceZone;
+use Route4Me\Constants;
 use Route4Me\Enum\TerritoryTypes;
 use Route4Me\Route4Me;
 
@@ -13,7 +14,7 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
     {
         $this->avoidanceZone = new AvoidanceZone();
 
-        Route4Me::setApiKey('11111111111111111111111111111111');
+        Route4Me::setApiKey(Constants::API_KEY);
 
         $createdAvoidanceZones = [];
 
@@ -24,8 +25,8 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         ];
 
         $AvoidanceZoneParameters = AvoidanceZone::fromArray([
-            'territory_name' => 'Test Rectangular Avoidance Zone '.strval(rand(10000, 99999)),
-            'territory_color' => 'ff7700',
+            'territory_name'    => 'Test Rectangular Avoidance Zone '.strval(rand(10000, 99999)),
+            'territory_color'   => 'ff7700',
             'territory' => $rectTerritoryParams,
         ]);
 
@@ -42,8 +43,8 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         ];
 
         $AvoidanceZoneParameters = AvoidanceZone::fromArray([
-            'territory_name' => 'Test Rectangular Avoidance Zone '.strval(rand(10000, 99999)),
-            'territory_color' => 'ff7700',
+            'territory_name'    => 'Test Rectangular Avoidance Zone '.strval(rand(10000, 99999)),
+            'territory_color'   => 'ff7700',
             'territory' => $circleTerritoryParams,
         ]);
 
@@ -63,8 +64,8 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         ];
 
         $avoidanceZone = AvoidanceZone::fromArray([
-            'territory_name' => "Rect Territory Name",
-            'territory_color' => "ff0000",
+            'territory_name'    => "Rect Territory Name",
+            'territory_color'   => "ff0000",
             'territory' => $circleTerritoryParams
         ]);
 
@@ -86,16 +87,16 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         ];
 
         $avoidanceZone = AvoidanceZone::fromArray([
-            'territory_name' => "Rect Territory Name",
-            'territory_color' => "ff0000",
-            'territory' => $rectTerritoryParams
+            'territory_name'    => "Rect Territory Name",
+            'territory_color'   => "ff0000",
+            'territory'         => $rectTerritoryParams
         ]);
 
         $this->assertEquals($avoidanceZone->toArray(),
             [
-                'territory_name' => "Rect Territory Name",
-                'territory_color' => "ff0000",
-                'territory' => $rectTerritoryParams
+                'territory_name'    => "Rect Territory Name",
+                'territory_color'   => "ff0000",
+                'territory'         => $rectTerritoryParams
             ]
         );
     }
@@ -139,9 +140,9 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         ];
 
         $AvoidanceZoneParameters = AvoidanceZone::fromArray([
-            'territory_name' => 'Test Rectangular Avoidance Zone '.strval(rand(10000, 99999)),
-            'territory_color' => 'ff7700',
-            'territory' => $polyTerritoryParams,
+            'territory_name'    => 'Test Rectangular Avoidance Zone '.strval(rand(10000, 99999)),
+            'territory_color'   => 'ff7700',
+            'territory'         => $polyTerritoryParams,
         ]);
 
         $polyAvoidanceZone = AvoidanceZone::fromArray(
@@ -170,9 +171,9 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         $territoryId = $this->createdAvoidanceZones[0]->territory_id;
 
         $avoidanceZoneParameters = [
-            'territory_id' => $territoryId,
-            'territory_name' => 'Test Territory Updated',
-            'territory_color' => 'ff5500'
+            'territory_id'      => $territoryId,
+            'territory_name'    => 'Test Territory Updated',
+            'territory_color'   => 'ff5500'
         ];
 
         $updatedRoute = AvoidanceZone::fromArray(

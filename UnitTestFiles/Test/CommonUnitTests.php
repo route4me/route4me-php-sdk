@@ -12,11 +12,11 @@ class CommonUnitTests extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         $this->address = [
-            'address' => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
-            'lat' => 38.2513427734,
-            'lng' => -77.5993652344,
-            'time' => 300,
-            'time_window_end' => 75600,
+            'address'           => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
+            'lat'               => 38.2513427734,
+            'lng'               => -77.5993652344,
+            'time'              => 300,
+            'time_window_end'   => 75600,
             'time_window_start' => 28800,
         ];
     }

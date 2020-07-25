@@ -3,6 +3,7 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\Address;
+use Route4Me\Constants;
 use Route4Me\Enum\ActivityTypes;
 use Route4Me\Enum\DeviceType;
 use Route4Me\OptimizationProblem;
@@ -18,7 +19,7 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
 
     public static function setUpBeforeClass()
     {
-        Route4Me::setApiKey('11111111111111111111111111111111');
+        Route4Me::setApiKey(Constants::API_KEY);
 
         $addresses = [];
         $addresses[] = Address::fromArray([
@@ -151,8 +152,8 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
         foreach ($activityTypes->getConstants() as $prop => $value) {
             $activityParameters = ActivityParameters::fromArray([
                 'activity_type' => $value,
-                'limit' => 2,
-                'offset' => 0,
+                'limit'         => 2,
+                'offset'        => 0,
             ]);
 
             $activities = new ActivityParameters();
@@ -176,9 +177,9 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
         $activities = new ActivityParameters();
 
         $postParameters = ActivityParameters::fromArray([
-            'activity_type' => 'user_message',
-            'activity_message' => 'Hello - php!',
-            'route_id' => self::$route_id,
+            'activity_type'     => 'user_message',
+            'activity_message'  => 'Hello - php!',
+            'route_id'          => self::$route_id,
         ]);
 
         $result = $activities->sendUserMessage($postParameters);

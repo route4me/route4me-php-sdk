@@ -7,7 +7,7 @@ require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4me class
 // This example not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
     'address_1' => '318 S 39th St, Louisville, KY 40212, USA',
