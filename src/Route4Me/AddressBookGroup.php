@@ -63,6 +63,7 @@ class AddressBookGroup extends Common
 
         $abGroup = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_GROUP,
+            'method' => 'DELETE',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 

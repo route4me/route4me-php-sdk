@@ -11,7 +11,7 @@ assert_options(ASSERT_BAIL, 1);
 // Example refers to the process of removing the optimization problems
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random optimization problem ID
 $optimization = new OptimizationProblem();

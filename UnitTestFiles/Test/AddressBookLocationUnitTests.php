@@ -2,9 +2,10 @@
 
 namespace UnitTestFiles\Test;
 
-use Route4Me\AddressBookLocationSearchResponse;
+use Route4Me\SearchResponse;
 use Route4Me\Route4Me;
 use Route4Me\AddressBookLocation;
+use Route4Me\Constants;
 
 class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 {
@@ -14,28 +15,28 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
     public static function setUpBeforeClass()
     {
-        Route4Me::setApiKey('11111111111111111111111111111111');
+        Route4Me::setApiKey(Constants::API_KEY);
 
         $abl = new AddressBookLocation();
 
         $AddressBookLocationParameters = AddressBookLocation::fromArray([
-            'address_1' => '1407 MCCOY, Louisville, KY, 40215',
-            'address_alias' => '1407 MCCOY 40215',
-            'address_group' => 'Scheduled weekly',
-            'first_name' => 'Bart',
-            'last_name' => 'Douglas',
-            'address_email' => 'bdouglas9514@yahoo.com',
-            'address_phone_number' => '95487454',
-            'cached_lat' => 38.202496,
-            'cached_lng' => -85.786514,
-            'curbside_lat' => 38.202496,
-            'curbside_lng' => -85.786514,
-            'address_city' => 'Louisville',
+            'address_1'             => '1407 MCCOY, Louisville, KY, 40215',
+            'address_alias'         => '1407 MCCOY 40215',
+            'address_group'         => 'Scheduled weekly',
+            'first_name'            => 'Bart',
+            'last_name'             => 'Douglas',
+            'address_email'         => 'bdouglas9514@yahoo.com',
+            'address_phone_number'  => '95487454',
+            'cached_lat'            => 38.202496,
+            'cached_lng'            => -85.786514,
+            'curbside_lat'          => 38.202496,
+            'curbside_lng'          => -85.786514,
+            'address_city'          => 'Louisville',
             'schedule' => [[
-                'enabled' => true,
-                'mode' => 'weekly',
-                'weekly' => [
-                    'every' => 1,
+                'enabled'   => true,
+                'mode'      => 'weekly',
+                'weekly'    => [
+                    'every'    => 1,
                     'weekdays' => [1, 2, 3, 4, 5],
                 ],
             ]],
@@ -47,39 +48,38 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
          );
 
         $AddressBookLocationParameters = AddressBookLocation::fromArray([
-            'address_1' => '4805 BELLEVUE AVE, Louisville, KY, 40215',
-            'address_2' => '4806 BELLEVUE AVE, Louisville, KY, 40215',
-            'address_alias' => '4805 BELLEVUE AVE 40215',
-            'address_group' => 'Scheduled monthly',
-            'first_name' => 'Bart',
-            'last_name' => 'Douglas',
-            'address_email' => 'bdouglas9514@yahoo.com',
-            'address_phone_number' => '95487454',
-            'cached_lat' => 38.178844,
-            'cached_lng' => -85.774864,
-            'curbside_lat' => 38.178844,
-            'curbside_lng' => -85.774864,
-            'address_city' => 'Louisville',
-            'address_country_id' => 'US',
-            'address_state_id' => 'KY',
-            'address_zip' => '40215',
+            'address_1'             => '4805 BELLEVUE AVE, Louisville, KY, 40215',
+            'address_2'             => '4806 BELLEVUE AVE, Louisville, KY, 40215',
+            'address_alias'         => '4805 BELLEVUE AVE 40215',
+            'address_group'         => 'Scheduled monthly',
+            'first_name'            => 'Bart',
+            'last_name'             => 'Douglas',
+            'address_email'         => 'bdouglas9514@yahoo.com',
+            'address_phone_number'  => '95487454',
+            'cached_lat'            => 38.178844,
+            'cached_lng'            => -85.774864,
+            'curbside_lat'          => 38.178844,
+            'curbside_lng'          => -85.774864,
+            'address_city'          => 'Louisville',
+            'address_country_id'    => 'US',
+            'address_state_id'      => 'KY',
+            'address_zip'           => '40215',
             'schedule' => [[
-                'enabled' => true,
-                'mode' => 'monthly',
-                'monthly' => [
+                'enabled'   => true,
+                'mode'      => 'monthly',
+                'monthly'   => [
                     'every' => 1,
-                    'mode' => 'dates',
+                    'mode'  => 'dates',
                     'dates' => [20, 22, 23, 24, 25],
                 ],
             ]],
             'service_time' => 750,
-            'color' => 'red',
+            'color'        => 'red',
         ]);
 
         self::$createdContacts[] = AddressBookLocation::fromArray(
             $abl->addAdressBookLocation($AddressBookLocationParameters)
         );
-
     }
 
     public function testAddressBookLocationFromArray()
@@ -184,13 +184,13 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $abl = new AddressBookLocation();
 
         $params = [
-            'query' => 'Douglas',
+            'query'  => 'Douglas',
             'fields' => 'first_name,address_email',
             'offset' => 0,
-            'limit' => 5,                    
+            'limit'  => 5,
         ];
                                                                                                                                 
-        $result =  AddressBookLocationSearchResponse::fromArray(
+        $result =  SearchResponse::fromArray(
             $abl->searchAddressBookLocations($params)
         );
 
@@ -208,11 +208,11 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $abl = new AddressBookLocation();
 
         $AddressBookLocationParameters = [
-            'limit' => 5,
+            'limit'  => 5,
             'offset' => 0,
         ];
 
-        $result = AddressBookLocationSearchResponse::fromArray(
+        $result = SearchResponse::fromArray(
             $abl->getAddressBookLocations($AddressBookLocationParameters)
         );
 
@@ -228,7 +228,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
     public function testGetRandomAddressBookLocation()
     {
         $AddressBookLocationParameters = [
-            'limit' => 30,
+            'limit'  => 30,
             'offset' => 0,
         ];
 
@@ -265,7 +265,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
     {
         $abl = new AddressBookLocation();
 
-        $lastContact =   end(self::$createdContacts);
+        $lastContact = end(self::$createdContacts);
 
         $deleteResult = $abl->deleteAdressBookLocation([$lastContact->address_id]);
 

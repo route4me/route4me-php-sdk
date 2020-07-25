@@ -8,7 +8,7 @@ require $root.'/vendor/autoload.php';
 // Example refers to the process of creating a new account configuration key.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $params = Member::fromArray([
     'config_key' => 'destination_icon_uri',

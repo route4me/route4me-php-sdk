@@ -11,7 +11,7 @@ assert_options(ASSERT_BAIL, 1);
 // Example refers to the process of an address inserting into specified route's optimal position
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random route ID
 $route = new Route();

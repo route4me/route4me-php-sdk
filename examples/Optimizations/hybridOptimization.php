@@ -13,7 +13,7 @@ require $root.'/vendor/autoload.php';
  */
 
 // This example is not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $source_file = 'addresses_1000.csv';
 $max_line_length = 512;

@@ -4,6 +4,7 @@ namespace UnitTestFiles\Test;
 use Route4Me\Address;
 use Route4Me\AddressNote;
 use Route4Me\AddressNoteResponse;
+use Route4Me\Constants;
 use Route4Me\CustomNoteType;
 use Route4Me\CustomNoteTypeResponse;
 use Route4Me\Enum\DeviceType;
@@ -40,7 +41,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
 
     public static function setUpBeforeClass()
     {
-        Route4Me::setApiKey('11111111111111111111111111111111');
+        Route4Me::setApiKey(Constants::API_KEY);
 
         $addresses = [];
         $addresses[] = Address::fromArray([
@@ -156,7 +157,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
 
         if (sizeof(self::$createdCustomNotes)<1) {
             $customNoteTypeParameters = [
-                'type' => 'Unit Test To Do',
+                'type'   => 'Unit Test To Do',
                 'values' => [
                     'Pass a package',
                     'Pickup package',
@@ -200,7 +201,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
     public function testToArray()
     {
         $address = Address::fromArray([
-            'address'            => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
+            'address'           => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
             'lat'               => 38.2513427734,
             'lng'               => -77.5993652344,
             'time'              => 300,
@@ -273,8 +274,8 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
     public function testGetAddressesNotes()
     {
         $noteParameters = [
-            'route_id' => self::$route_id,
-            'route_destination_id' => self::$address_id,
+            'route_id'              => self::$route_id,
+            'route_destination_id'  => self::$address_id,
         ];
 
         $address = new Address();
@@ -327,7 +328,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $address = new Address();
 
         $params = [
-            'route_id' =>  self::$route_id,
+            'route_id'   =>  self::$route_id,
             'address_id' =>  self::$address_id,
             'is_visited' => 1
         ];
@@ -404,16 +405,15 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
 
     public function testAddNoteFile()
     {
-        //TO DO: this test is permanently failed - find the cause.
         $this->markTestSkipped('must be revisited.');
 
         $noteParameters = [
-            'strFilename' => 'notes.csv',
-            'route_id' => self::$route_id,
-            'address_id' => self::$noteFileAddressId,
-            'dev_lat' => 33.132675170898,
-            'dev_lng' => -83.244743347168,
-            'device_type' => 'web',
+            'strFilename'   => 'notes.csv',
+            'route_id'      => self::$route_id,
+            'address_id'    => self::$noteFileAddressId,
+            'dev_lat'       => 33.132675170898,
+            'dev_lng'       => -83.244743347168,
+            'device_type'   => 'web',
             'strUpdateType' => 'ANY_FILE',
         ];
 
@@ -467,7 +467,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $customNoteTypeKey = 'cnt'.date('yMdHi');
 
         $noteParameters = [
-            'type' => $customNoteTypeKey,
+            'type'   => $customNoteTypeKey,
             'values' => [
                 'First value',
                 'Second value',
@@ -495,14 +495,14 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $customNoteType = $address->getCustomNoteTypeByKey(self::$createdCustomNotes[0]);
 
         $noteParameters = [
-            'route_id' => self::$route_id,
-            'address_id' => self::$address_id,
-            'format' => 'json',
-            'dev_lat' => 33.132675170898,
-            'dev_lng' => -83.244743347168,
+            'route_id'          => self::$route_id,
+            'address_id'        => self::$address_id,
+            'format'            => 'json',
+            'dev_lat'           => 33.132675170898,
+            'dev_lng'           => -83.244743347168,
             'custom_note_type['.$customNoteType->note_custom_type_id.']' => 'Pickup package',
-            'strUpdateType' => 'dropoff',
-            'strNoteContents' => 'php test 1111',
+            'strUpdateType'     => 'dropoff',
+            'strNoteContents'   => 'php test 1111',
         ];
 
         $response = AddressNoteResponse::fromArray(

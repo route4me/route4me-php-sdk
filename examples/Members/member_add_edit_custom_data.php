@@ -11,7 +11,7 @@ assert_options(ASSERT_BAIL, 1);
 // Example refers to adding/editing custom data to a user.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $member = new Member();
 

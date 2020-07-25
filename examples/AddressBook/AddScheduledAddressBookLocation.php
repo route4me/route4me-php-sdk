@@ -6,7 +6,7 @@ $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 //region // Add a location, scheduled daily with custom data.
 $AddressBookLocationParameters = AddressBookLocation::fromArray([

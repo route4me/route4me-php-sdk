@@ -8,7 +8,7 @@ require $root.'/vendor/autoload.php';
 // Example refers to purchasing of a user license.
 
 // Set the API key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $recordParameters = Member::fromArray([
     'member_id' => 77777,

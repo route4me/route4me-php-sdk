@@ -9,7 +9,7 @@ require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4me class
 // This example not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
     'day_added_YYMMDD' => date('Y-m-d', strtotime('-1 days')),

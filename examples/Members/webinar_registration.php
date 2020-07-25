@@ -8,7 +8,7 @@ require $root.'/vendor/autoload.php';
 // Example refers to a member registration on a webinar.
 
 // Set the API key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $recordParameters = Member::fromArray([
     'email_address' => 'oooooo@yahoo.com',
