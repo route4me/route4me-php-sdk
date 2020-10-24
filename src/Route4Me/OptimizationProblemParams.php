@@ -9,6 +9,7 @@ class OptimizationProblemParams extends Common
     public $optimization_problem_id;
     public $reoptimize;
     public $addresses = [];
+    public $depots = [];
     public $parameters;
     public $directions;
     public $format;
@@ -36,6 +37,14 @@ class OptimizationProblemParams extends Common
         foreach ($params['addresses'] as $address) {
             if (!($address instanceof Address)) {
                 $address = Address::fromArray($address);
+            }
+
+            $param->addAddress($address);
+        }
+
+        foreach ($params['depots'] as $depot) {
+            if (!($depot instanceof Address)) {
+                $depot = Address::fromArray($depot);
             }
 
             $param->addAddress($address);
@@ -71,6 +80,13 @@ class OptimizationProblemParams extends Common
         return $this;
     }
 
+    public function addDepot(Address $depot)
+    {
+        $this->depots[] = $depot;
+
+        return $this;
+    }
+
     public function getAddressesArray()
     {
         $addresses = [];
@@ -82,6 +98,17 @@ class OptimizationProblemParams extends Common
         return $addresses;
     }
 
+    public function getDepotsArray()
+    {
+        $depots = [];
+
+        foreach ($this->depots as $depot) {
+            $depots[] = $depot->toArray();
+        }
+
+        return $depots;
+    }
+
     public function getParametersArray()
     {
         return $this->parameters->toArray();
@@ -91,6 +118,15 @@ class OptimizationProblemParams extends Common
     {
         foreach ($addresses as $address) {
             $this->addAddress($address);
+        }
+
+        return $this;
+    }
+
+    public function setDepots(array $depots)
+    {
+        foreach ($depots as $depot) {
+            $this->addDepot($depot);
         }
 
         return $this;
