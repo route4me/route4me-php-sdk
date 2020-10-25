@@ -58,6 +58,7 @@ class Route extends Common
     public $vehicle;
     public $member_config_storage;
     public $original_route;
+    public $unlink_from_master_optimization;
 
     public function __construct()
     {
