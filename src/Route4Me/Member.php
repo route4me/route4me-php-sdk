@@ -331,4 +331,15 @@ class Member extends Common
 
         return $response;
     }
+
+    public static function getMemberCapabilities()
+    {
+        $response = Route4Me::makeRequst([
+            'url' => Endpoint::MEMBER_CAPABILITIES,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters([], null),
+        ]);
+
+        return $response;
+    }
 }
