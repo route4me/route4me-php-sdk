@@ -5,7 +5,6 @@ namespace Route4Me;
 $root = realpath(dirname(__FILE__).'/../');
 require $root.'/vendor/autoload.php';
 
-use Route4Me\Enum\AddressBundlingModes\AdditionalItemsMode;
 use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\DistanceUnit;
