@@ -179,7 +179,12 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleEnable($scheduleEnabled)
     {
-        $schedEnables = [true, false,'TRUE', 'FALSE'];
+        if (is_string($scheduleEnabled)) {
+            if (strtolower($scheduleEnabled)=="true") $scheduleEnabled = true;
+            if (strtolower($scheduleEnabled)=="false") $scheduleEnabled = false;
+        }
+
+        $schedEnables = [true, false,];
 
         if (in_array($scheduleEnabled, $schedEnables,true)) {
             return true;
@@ -191,8 +196,7 @@ class AddressBookLocation extends Common
     public static function validateScheduleEvery($scheduleEvery)
     {
         if (is_numeric($scheduleEvery)) {
-            $every= (int)$scheduleEvery;
-            if ($every>0 && $every<367) {
+            if ($scheduleEvery>0) {
                 return true;
             } else {
                 return false;
@@ -204,7 +208,7 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleWeekDays($scheduleWeekDays)
     {
-        if (gettype($scheduleWeekDays)!='string') return false;
+        if (is_bool($scheduleWeekDays)) return false;
 
         $weekdays = explode(',', $scheduleWeekDays);
         $weekdaysSize = sizeof($weekdays);
@@ -216,7 +220,9 @@ class AddressBookLocation extends Common
         $isValid = true;
 
         for ($i = 0; $i < $weekdaysSize; ++$i) {
-            if (is_numeric($weekdays[$i])) {
+            if (is_bool($weekdays[$i])) {
+                $isValid = false;
+            } elseif (is_numeric($weekdays[$i])) {
                 $wday = intval($weekdays[$i]);
                 if ($wday < 1 || $wday > 7) {
                     $isValid = false;
@@ -233,7 +239,7 @@ class AddressBookLocation extends Common
     {
         $schedMonthlyMmodes = ['dates', 'nth'];
 
-        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes, true)) {
+        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes,true)) {
             return true;
         } else {
             return false;
@@ -242,7 +248,7 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleMonthlyDates($scheduleMonthlyDates)
     {
-        if (gettype($scheduleMonthlyDates)!='string') return false;
+        if (is_bool($scheduleMonthlyDates)) return false;
 
         $monthlyDates = explode(',', $scheduleMonthlyDates);
         $monthlyDatesSize = sizeof($monthlyDates);
@@ -275,7 +281,7 @@ class AddressBookLocation extends Common
 
         $schedNthNs = [1, 2, 3, 4, 5, -1];
 
-        if (in_array($scheduleNthN, $schedNthNs, true)) {
+        if (in_array($scheduleNthN, $schedNthNs)) {
             return true;
         } else {
             return false;
@@ -290,7 +296,7 @@ class AddressBookLocation extends Common
 
         $schedNthWhats = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-        if (in_array($scheduleNthWhat, $schedNthWhats, true)) {
+        if (in_array($scheduleNthWhat, $schedNthWhats)) {
             return true;
         } else {
             return false;
@@ -460,7 +466,10 @@ class AddressBookLocation extends Common
 
             $abcResults = $abContacts->addAdressBookLocation($AdressBookLocationParameters); //temporarry
 
-            array_push($results['success'], 'The schedule location with address_id = '.strval($abcResults['address_id']).' added successfuly.');
+            array_push(
+                $results['success'],
+                'The schedule location with address_id = '.strval($abcResults['address_id']).' added successfuly.'
+            );
         }
 
         return $results;

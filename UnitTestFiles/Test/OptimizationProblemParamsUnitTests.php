@@ -115,9 +115,10 @@ class OptimizationProblemParamsUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testFromArray()
     {
+        $routeParams = self::$routeParameters;
         $optParams = OptimizationProblemParams::fromArray([
             'addresses'     => self::$addresses,
-            'parameters'    => self::$routeParameters
+            'parameters'    => $routeParams
         ]);
 
         $this->assertNotNull($optParams);

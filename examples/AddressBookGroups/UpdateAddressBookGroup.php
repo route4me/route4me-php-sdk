@@ -14,15 +14,15 @@ $abGroup = new AddressBookGroup();
 // Note: you can find the allowed colors for the address book group at this link:
 // https://github.com/route4me/route4me-json-schemas/blob/master/ColorSamples/AddressBookGroupAvailableColors.png
 
-$groupId=$abGroup->getAddressBookGroupIdByName('Louisville Group Temp');
+$groupIds=$abGroup->getAddressBookGroupIdByName('Louisville Group Temp');
 
-if ($groupId==null) {
+if ($groupIds==null) {
     include('CreateAddressBookGroup.php');
-    $groupId=$abGroup->getAddressBookGroupIdByName('Louisville Group Temp');
+    $groupIds=$abGroup->getAddressBookGroupIdByName('Louisville Group Temp');
 }
 
 $updateParameters= [
-    'group_id' => $groupId,
+    'group_id' => $groupIds[0],
     'group_color'  => '7bd148'
 ];
 

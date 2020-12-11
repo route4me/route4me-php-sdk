@@ -9,8 +9,8 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 // Get all custom note types
-$address = new Address();
+$addressNote = new AddressNote();
 
-$response = $address->getAllCustomNoteTypes();
+$response = $addressNote->getAllCustomNoteTypes();
 
 Route4Me::simplePrint($response);

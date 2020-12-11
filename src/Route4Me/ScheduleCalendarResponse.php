@@ -23,4 +23,16 @@ class ScheduleCalendarResponse extends Common
      * The order quantity by dates (dates are in the string format, e.g. 2020-10-18).
      */
     public $routes_count = [];
+
+    public static function fromArray(array $params)
+    {
+        $order = new self();
+        foreach ($params as $key => $value) {
+            if (property_exists($order, $key)) {
+                $order->{$key} = $value;
+            }
+        }
+
+        return $order;
+    }
 }

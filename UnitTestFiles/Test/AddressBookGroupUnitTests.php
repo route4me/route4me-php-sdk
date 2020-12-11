@@ -18,15 +18,15 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $abg = new AddressBookGroup();
 
         $createParameters= [
-            'group_name'    => 'Louisville Group Temp',
+            'group_name'    => 'All Group',
             'group_color'   => '92e1c0',
             'filter'        => [
                 'condition' => 'AND',
                 'rules'     => [[
                     'id'       => 'address_1',
                     'field'    => 'address_1',
-                    'operator' => 'contains',
-                    'value'    => 'Luisville'
+                    'operator' => 'not_equal',
+                    'value'    => 'qwerty123456'
                 ]]
             ]
         ];
@@ -199,7 +199,7 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testGetAddressBookContactsByGroup()
     {
-        $this->markTestSkipped('must be revisited.');
+        //$this->markTestSkipped('must be revisited.');
 
         $groupId = self::$createdGroups[0]->group_id;
 
@@ -211,8 +211,9 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $result = AddressBookGroup::getAddressBookContactsByGroup($searchParameters);
 
         $this->assertNotNull($result);
-        $this->assertTrue(isset($result['status']));
-        $this->assertTrue($result['status']);
+        $this->assertTrue(isset($result['total']));
+        $this->assertTrue(isset($result['results']));
+        $this->assertTrue(is_array($result['results']));
     }
 
     public function testGetAddressBookGroups()
@@ -253,10 +254,10 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
     {
         $firstGroup = self::$createdGroups[0];
 
-        $groupId = AddressBookGroup::getAddressBookGroupIdByName($firstGroup->group_name);
+        $groupIds = AddressBookGroup::getAddressBookGroupIdByName($firstGroup->group_name);
 
-        $this->assertNotNull($groupId);
-        $this->assertEquals($firstGroup->group_id,$groupId);
+        $this->assertNotNull($groupIds);
+        $this->assertTrue(in_array($firstGroup->group_id,$groupIds ));
     }
 
     public static function tearDownAfterClass()

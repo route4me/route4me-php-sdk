@@ -112,10 +112,18 @@ class OptimizationProblem extends Common
         return self::update((array) $param);
     }
 
+    /*
+     * Updates an existing optimization problem.
+     * @param array $params with items:
+     *        optimization_problem_id   : query parameter. ID of an updated optimization;
+     *        reoptimize                : query parameter. If true, the optimization re-optimized;
+     *        addresses                 : body parameter. An array of the addresses to add;
+     *        parameters                : body parameter. Modified route parameters;
+     */
     public static function update($params)
     {
         $allQueryFields = ['optimization_problem_id', 'reoptimize'];
-        $allBodyFields = ['addresses'];
+        $allBodyFields = ['addresses', 'parameters'];
 
         $optimize = Route4Me::makeRequst([
             'url' => Endpoint::OPTIMIZATION_PROBLEM,
@@ -199,7 +207,7 @@ class OptimizationProblem extends Common
         return $response;
     }
 
-    public static function removeOptimization($params)
+    public function removeOptimization($params)
     {
         $allQueryFields = ['redirect'];
         $allBodyFields = ['optimization_problem_ids'];

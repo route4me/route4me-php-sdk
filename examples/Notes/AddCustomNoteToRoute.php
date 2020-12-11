@@ -28,16 +28,16 @@ $noteParameters = [
     'route_id' => $routeId,
     'address_id' => $route_destination_id,
     'format' => 'json',
-    'dev_lat' => 33.132675170898,
-    'dev_lng' => -83.244743347168,
+    'dev_lat' => $addressRand['lat'],
+    'dev_lng' => $addressRand['lng'],
     'custom_note_type[11]' => 'slippery',
     'custom_note_type[10]' => 'Backdoor',
     'strUpdateType' => 'dropoff',
     'strNoteContents' => 'test1111',
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
-$response = $address->addCustomNoteToRoute($noteParameters);
+$response = $addressNote->addCustomNoteToRoute($noteParameters);
 
 Route4Me::simplePrint($response);

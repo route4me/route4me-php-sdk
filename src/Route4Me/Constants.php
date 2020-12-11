@@ -6,5 +6,5 @@ namespace Route4Me;
 
 class Constants
 {
-    const API_KEY = 'bd48828717021141485a701453273458';
+    const API_KEY = '11111111111111111111111111111111';
 }

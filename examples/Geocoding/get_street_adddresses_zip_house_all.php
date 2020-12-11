@@ -5,7 +5,7 @@ namespace Route4Me;
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
-// Example refers to getting all geocodings with specified zipcode and house number.
+// Example refers to getting all geocodings wirh specified zipcode and house number.
 
 // Set the api key in the Route4me class
 Route4Me::setApiKey(Constants::API_KEY);

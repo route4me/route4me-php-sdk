@@ -385,7 +385,7 @@ class Route extends Common
     public function deleteRoutes($route_id)
     {
         $result = Route4Me::makeRequst([
-            'url' => Endpoint::ROUTES_DELETE,
+            'url' => Endpoint::ROUTE_V4,
             'method' => 'DELETE',
             'query' => [
                 'route_id' => $route_id,

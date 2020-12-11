@@ -34,7 +34,7 @@ $parameters = RouteParameters::fromArray([
     'travel_mode' => TravelMode::DRIVING,
     'vehicle_capacity' => 50,
     'vehicle_max_distance_mi' => 10000,
-    'parts' => 50
+    'parts' => 50,
 ]);
 
 $optimizationParams = new OptimizationProblemParams();
@@ -42,7 +42,5 @@ $optimizationParams->setAddresses($addresses);
 $optimizationParams->setParameters($parameters);
 
 $problem = OptimizationProblem::optimize($optimizationParams);
-
-
 
 Route4Me::simplePrint((array) $problem, true);
