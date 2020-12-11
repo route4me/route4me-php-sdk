@@ -71,6 +71,7 @@ class OptimizationProblem extends Common
             'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body' => [
                 'addresses' => $params->getAddressesArray(),
+                'depots' => $params->getDepotsArray(),
                 'parameters' => $params->getParametersArray(),
             ],
         ]);
