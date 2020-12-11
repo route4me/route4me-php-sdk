@@ -1,0 +1,14 @@
+[
+  {
+    "lng": -85.757308,
+    "lat": 38.251698,
+	"is_depot": true,
+    "address": "455 S 4th St, Louisville, KY 40202"
+  },
+  {
+    "lng": -85.795059,
+    "lat": 38.241405,
+	"is_depot": true,
+    "address": "2512 GREENWOOD AVE, Louisville, KY, 40210"
+  }
+]

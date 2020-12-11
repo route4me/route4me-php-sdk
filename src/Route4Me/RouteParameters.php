@@ -76,6 +76,7 @@ class RouteParameters extends Common
     public $optimization_engine;
     public $override_addresses;
     public $time;
+    public $bundling;
 
     public static function fromArray(array $params)
     {
@@ -87,5 +88,15 @@ class RouteParameters extends Common
         }
 
         return $routeParams;
+    }
+
+    public function setAddressBundle($addressBundle)
+    {
+        $this->bundling = $addressBundle;
+    }
+
+    public function getAddressBundle()
+    {
+        return $this->bundling;
     }
 }
