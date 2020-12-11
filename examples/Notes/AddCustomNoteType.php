@@ -18,8 +18,8 @@ $noteParameters = [
                 ],
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
-$response = $address->createCustomNoteType($noteParameters);
+$response = $addressNote->createCustomNoteType($noteParameters);
 
 Route4Me::simplePrint($response);

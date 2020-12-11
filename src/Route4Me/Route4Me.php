@@ -72,42 +72,43 @@ class Route4Me
         curl_setopt_array($ch, $curlOpts);
 
         if (null != $file) {
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
-            $fp = fopen($file, 'r');
-            curl_setopt($ch, CURLOPT_INFILE, $fp);
-            curl_setopt($ch, CURLOPT_INFILESIZE, filesize($file));
-        }
+            $cfile = new \CURLFile($file,'','');
+            $body['strFilename']=$cfile;
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_POST,true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+        } else {
+            switch ($method) {
+                case 'DELETE':
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                    break;
+                case 'DELETEARRAY':
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+                    break;
+                case 'PUT':
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+                    break;
+                case 'POST':
+                    if (isset($body)) {
+                        $bodyData = json_encode($body);
+                        if (isset($options['HTTPHEADER'])) {
+                            if (strpos($options['HTTPHEADER'], 'multipart/form-data') > 0) {
+                                $bodyData = $body;
+                            }
+                        }
 
-        switch ($method) {
-        case 'DELETE':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            break;
-        case 'DELETEARRAY':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
-            break;
-        case 'PUT':
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-            break;
-        case 'POST':
-           if (isset($body)) {
-               $bodyData = json_encode($body);
-               if (isset($options['HTTPHEADER'])) {
-                   if (strpos($options['HTTPHEADER'], 'multipart/form-data') > 0) {
-                       $bodyData = $body;
-                   }
-               }
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData);
+                    }
+                    break;
+                case 'ADD':
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
+            }
 
-               curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData);
-           }
-            break;
-        case 'ADD':
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
-        }
-
-        if (is_numeric(array_search($method, ['DELETE', 'PUT']))) {
-            if (isset($body)) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+            if (is_numeric(array_search($method, ['DELETE', 'PUT']))) {
+                if (isset($body)) {
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+                }
             }
         }
 

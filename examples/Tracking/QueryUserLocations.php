@@ -12,9 +12,7 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey(Constants::API_KEY);
 
 $track = new Track();
-
 $userLocations = $track->getUserLocations();
-
 $userLocation = reset($userLocations);
 
 $email = $userLocation['member_data']['member_email'];

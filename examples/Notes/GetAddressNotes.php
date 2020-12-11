@@ -28,16 +28,16 @@ assert(!is_null($route_destination_id), "Cannot retrieve random address");
 $noteParameters = [
     'route_id' => $route_id,
     'address_id' => $route_destination_id,
-    'dev_lat' => 33.132675170898,
-    'dev_lng' => -83.244743347168,
+    'dev_lat' => $addressRand['lat'],
+    'dev_lng' => $addressRand['lng'],
     'device_type' => 'web',
     'strUpdateType' => 'dropoff',
     'strNoteContents' => 'Test '.time(),
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
-$address1 = $address->AddAddressNote($noteParameters);
+$address1 = $addressNote->AddAddressNote($noteParameters);
 
 assert(!is_null($address1), "Cannot create an address note");
 
@@ -47,9 +47,9 @@ $noteParameters = [
     'route_destination_id' => $route_destination_id,
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
-$notes = $address->GetAddressesNotes($noteParameters);
+$notes = $addressNote->GetAddressesNotes($noteParameters);
 
 echo 'Destination note count --> '.$notes['destination_note_count'].'<br>';
 

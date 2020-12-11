@@ -39,5 +39,5 @@ $territory_id = $result['territory_id'];
 echo "New Avoidance Zone with territory_id = $territory_id created successfuly<br>";
 
 $result1 = $avoidanceZone->getAvoidanceZone($territory_id);
-var_dump($result1);die("<br>STOP<br>");
+
 Route4Me::simplePrint($result1, true);

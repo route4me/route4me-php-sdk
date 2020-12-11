@@ -55,7 +55,7 @@ $params = [
     'depot_address' => $depot->address,
     'remove_origin' => false,
     'depot_lat' => $depot->lat,
-    'depot_lat' => $depot->lng,
+    'depot_lng' => $depot->lng,
 ];
 
 $result = $route->mergeRoutes($params);

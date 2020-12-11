@@ -138,17 +138,21 @@ class AddressBookGroup extends Common
         return null;
     }
 
+    /*
+     * Gets an array of the address book contact groups with a specified name.
+     * @param string $name
+     *        Address book contact group name
+     */
     public static function getAddressBookGroupIdByName($name)
     {
         $abGroups = self::getAddressBookGroups(['offset'=>0,'limit'=>100]);
 
-        $abGroupId = null;
+        $abGroupId = [];
 
         foreach ($abGroups as $abg) {
             if (isset($abg['group_name'])) {
                 if ($abg['group_name']==$name) {
-                    $abGroupId = $abg['group_id'];
-                    break;
+                    $abGroupId[] = $abg['group_id'];
                 }
             }
         }

@@ -62,7 +62,7 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue(sizeof($result)>0);
 
         $firstGeocoding = GeocodingResponse::fromArray(
-            $result[0]
+            $result["destination"]
         );
 
         $this->assertContainsOnlyInstancesOf(GeocodingResponse::class, [$firstGeocoding]);

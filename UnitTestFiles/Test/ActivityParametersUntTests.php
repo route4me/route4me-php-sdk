@@ -200,7 +200,9 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
             'redirect' => 0,
         ];
 
-        $result = OptimizationProblem::removeOptimization($params);
+        $optimizationProblem = new OptimizationProblem();
+
+        $result = $optimizationProblem->removeOptimization($params);
 
         if ($result!=null && $result['status']==true) {
             echo "The test optimization was removed <br>";

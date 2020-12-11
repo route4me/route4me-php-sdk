@@ -47,6 +47,9 @@ class ActivityParameters extends Common
         return $activityparameters;
     }
 
+    /*
+     * Get all the activities limited by query parameters.
+     */
     public static function getActivities($params)
     {
         $allQueryFields = ['route_id', 'team', 'limit', 'offset', 'start', 'member_id'];
@@ -60,6 +63,9 @@ class ActivityParameters extends Common
         return $activity;
     }
 
+    /*
+     * Returns the activity feed.
+     */
     public static function searchActivities($params)
     {
         $allQueryFields = ['route_id', 'limit', 'offset', 'activity_type'];
@@ -73,6 +79,9 @@ class ActivityParameters extends Common
         return $activity;
     }
 
+    /*
+     * Creates a user's activity by sending a custom message to the activity stream.
+     */
     public static function sendUserMessage($params)
     {
         $allBodyFields = ['activity_type', 'activity_message', 'route_id'];

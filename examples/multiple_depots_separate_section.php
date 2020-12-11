@@ -14,7 +14,7 @@ use Route4Me\Enum\Metric;
 
 // Set the api key in the Route4me class
 // This example is not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // List of addresses
 $jsonAddresses = json_decode(file_get_contents('./addresses_only.json'), true);

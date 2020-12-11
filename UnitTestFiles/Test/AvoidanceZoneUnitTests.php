@@ -159,8 +159,8 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
     public function testDeleteAvoidanceZone()
     {
         $territoryId = $this->createdAvoidanceZones[0]->territory_id;
-
-        $result = AvoidanceZone::deleteAvoidanceZone($territoryId);
+        $result = $this->avoidanceZone->deleteAvoidanceZone($territoryId);
+        //$result = AvoidanceZone::deleteAvoidanceZone($territoryId);
 
         $this->assertNotNull($result);
         $this->assertTrue($result['status']);
@@ -177,7 +177,7 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         ];
 
         $updatedRoute = AvoidanceZone::fromArray(
-            AvoidanceZone::updateAvoidanceZone($avoidanceZoneParameters)
+            $this->avoidanceZone->updateAvoidanceZone($avoidanceZoneParameters)
         );
 
         $this->assertNotNull($updatedRoute);
@@ -192,7 +192,7 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         {
             $territoryId = $avZone->territory_id;
 
-            $result = AvoidanceZone::deleteAvoidanceZone($territoryId);
+            $result = $this->avoidanceZone->deleteAvoidanceZone($territoryId);
 
             if ($result==true) {
                 echo "The test avoidance zone with territory_id=".$territoryId." removed. <br>";

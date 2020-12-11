@@ -330,7 +330,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertFalse(AddressBookLocation::validateScheduleWeekDays('1,2,3,4,5,6,7,8'));
         $this->assertFalse(AddressBookLocation::validateScheduleWeekDays('1,-2,3,4,5,6,7'));
         $this->assertFalse(AddressBookLocation::validateScheduleWeekDays(true));
-        $this->assertFalse(AddressBookLocation::validateScheduleWeekDays(4));
+        $this->assertTrue(AddressBookLocation::validateScheduleWeekDays(4));
         $this->assertFalse(AddressBookLocation::validateScheduleWeekDays('dds'));
     }
 

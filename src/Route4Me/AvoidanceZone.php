@@ -96,7 +96,7 @@ class AvoidanceZone extends Common
         return $abContacts;
     }
 
-    public static function deleteAvoidanceZone($territory_id)
+    public function deleteAvoidanceZone($territory_id)
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::AVOIDANCE_ZONE,
@@ -109,7 +109,7 @@ class AvoidanceZone extends Common
         return $result;
     }
 
-    public static function updateAvoidanceZone($params)
+    public function updateAvoidanceZone($params)
     {
         $avoidanceZone = Route4Me::makeRequst([
             'url' => Endpoint::AVOIDANCE_ZONE,
