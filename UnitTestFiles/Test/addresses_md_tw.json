@@ -42,6 +42,7 @@
 	},
 	{ 
 		"address": "650 SOUTH 29TH ST UNIT 315, Louisville, KY, 40211",
+		"is_depot": true,
 		"lat": 38.251923,
 		"lng": -85.800034,
 		"time": 300,

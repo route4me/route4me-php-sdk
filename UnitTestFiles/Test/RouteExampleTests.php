@@ -20,6 +20,7 @@ use Route4Me\OptimizationProblem;
 use Route4Me\RouteParameters;
 use Route4Me\ScheduleCalendarParameters;
 use Route4Me\ScheduleCalendarResponse;
+use Route4Me\Vehicle;
 
 class RouteExampleTests extends \PHPUnit\Framework\TestCase
 {
@@ -31,6 +32,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
 
     public static $removedOptimizationIDs = [];
     public static $removedRouteIDs = [];
+    public static $removedVehicle;
 
     public static function setUpBeforeClass()
     {
@@ -151,15 +153,15 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
         $bundling->service_time_rules->additional_items_mode = AddressBundlingModes\AdditionalItemsMode::KEEP_ORIGINAL;
 
         $parameters = RouteParameters::fromArray([
-            'algorithm_type' => Algorithmtype::TSP,
-            'route_name' => 'Single Driver Multiple TimeWindows 50 Stops',
-            'route_date' => time() + 24 * 60 * 60,
-            'route_time' => 5 * 3600 + 30 * 60,
-            'distance_unit' => DistanceUnit::MILES,
-            'device_type' => DeviceType::WEB,
-            'optimize' => OptimizationType::DISTANCE,
-            'metric' => Metric::GEODESIC,
-            'bundling' => $bundling,
+            'algorithm_type'    => Algorithmtype::TSP,
+            'route_name'        => 'Single Driver Multiple TimeWindows 50 Stops',
+            'route_date'        => time() + 24 * 60 * 60,
+            'route_time'        => 5 * 3600 + 30 * 60,
+            'distance_unit'     => DistanceUnit::MILES,
+            'device_type'       => DeviceType::WEB,
+            'optimize'          => OptimizationType::DISTANCE,
+            'metric'            => Metric::GEODESIC,
+            'bundling'          => $bundling,
         ]);
 
         $optimizationParams = new OptimizationProblemParams();
@@ -219,11 +221,11 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
 
         // Merge the selected routes
         $params = [
-            'route_ids' => $routeIDs[0].','.$duplicatedRouteId,
+            'route_ids'     => $routeIDs[0].','.$duplicatedRouteId,
             'depot_address' => $depot->address,
             'remove_origin' => false,
-            'depot_lat' => $depot->lat,
-            'depot_lng' => $depot->lng,
+            'depot_lat'     => $depot->lat,
+            'depot_lng'     => $depot->lng,
         ];
 
         $result = $route->mergeRoutes($params);
@@ -240,7 +242,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testMultipleDepotMultipleDriverFineTuning()
     {
         // Huge list of addresses
-        $json = $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses_md_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses_md_tw.json'), true);
         $json = array_slice($json, 0, 19);
 
         $addresses = [];
@@ -252,7 +254,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
         //region Optimization With Duration Priority FineTuning
         $parameters = RouteParameters::fromArray([
             'route_name'        => 'Optimization With Duration Priority FineTuning. '.date('Y-m-d H:i'),
-            'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
+            'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
             'route_time'                => 23200,
             'optimize'                  => OptimizationType::TIME,
             'device_type'               => DeviceType::WEB,
@@ -330,6 +332,474 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue($totalTripWaitingTimeByDistance>0);
     }
 
+    public function testMultipleDepotMultipleDriver()
+    {
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses_md_tw.json'), true);
+
+        $addresses = [];
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::DISTANCE,
+            'metric'                    => Metric::GEODESIC,
+            'route_max_duration'        => 86400 * 2,
+            'travel_mode'               => TravelMode::DRIVING,
+            'vehicle_capacity'          => 50,
+            'vehicle_max_distance_mi'   => 10000,
+            'parts'                     => 50,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+        $this->assertTrue(sizeof($problem->getRoutes())>1);
+    }
+
+    public function testMultipleDepotMultipleDriverTimeWindow()
+    {
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses_md_tw.json'), true);
+
+        $addresses = [];
+
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => Algorithmtype::CVRP_TW_MD,
+            'route_name'                => 'Multiple Depot, Multiple Driver, Time Window',
+            'route_date'                => time() + 24 * 60 * 60,
+            'route_time'                => 60 * 60 * 7,
+            'rt'                        => true,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::TIME,
+            'metric'                    => Metric::GEODESIC,
+            'route_max_duration'        => 86400 * 3,
+            'travel_mode'               => TravelMode::DRIVING,
+            'vehicle_capacity'          => 99,
+            'vehicle_max_distance_mi'   => 99999,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+    }
+
+    public function testMultipleDepotMultipleDriverWith24StopsTimeWindow()
+    {
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\mdp_mdr_24stops_tw.json'), true);
+
+        $addresses = [];
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $addresses[7]->is_depot = true;
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => Algorithmtype::CVRP_TW_MD,
+            'route_name'                => 'Multiple Depot, Multiple Driver with 24 Stops, Time Window',
+            'route_date'                => time() + 24 * 60 * 60,
+            'route_time'                => 60 * 60 * 7,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::TIME,
+            'metric'                    => Metric::MATRIX,
+            'route_max_duration'        => 86400,
+            'travel_mode'               => TravelMode::DRIVING,
+            'vehicle_capacity'          => 5,
+            'vehicle_max_distance_mi'   => 10000,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+        $this->assertTrue(sizeof($problem->getRoutes())>1);
+    }
+
+    public function testMultipleSeparateDepostMultipleDriver()
+    {
+        // List of addresses
+        $jsonAddresses = json_decode(file_get_contents(dirname(__FILE__).'\addresses_only.json'), true);
+
+        $addresses = [];
+        foreach ($jsonAddresses as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $jsonDepots = json_decode(file_get_contents(dirname(__FILE__).'\depots.json'), true);
+
+        // List of depots
+        $depots = [];
+        foreach ($jsonDepots as $depot) {
+            $depots[] = Address::fromArray($depot);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'route_name'                => 'Multiple Depots Seprate Section '.date('Y-m-d H:i'),
+            'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::TIME,
+            'metric'                    => Metric::GEODESIC,
+            'route_max_duration'        => 86400 * 2,
+            'travel_mode'               => TravelMode::DRIVING,
+            'vehicle_capacity'          => 50,
+            'vehicle_max_distance_mi'   => 10000,
+            'parts'                     => 50,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setDepots($depots);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+    }
+
+    public function  testOptimizationSingleDriverRoute10Stops()
+    {
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = array_slice($json, 0, 10);
+
+        $addresses = [];
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => AlgorithmType::TSP,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::DISTANCE,
+            'travel_mode'               => TravelMode::DRIVING,
+            'route_max_duration'        => 86400,
+            'vehicle_capacity'          => 1,
+            'vehicle_max_distance_mi'   => 10000,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+    }
+
+    public function testRouteSlowDown()
+    {
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = array_slice($json, 0, 10);
+
+        $addresses = [];
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => AlgorithmType::TSP,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::DISTANCE,
+            'travel_mode'               => TravelMode::DRIVING,
+            'route_name'                => 'SD 10 stops slowdown route '.date('Y-m-d H:i'),
+            'route_max_duration'        => 86400,
+            'vehicle_capacity'          => 1,
+            'vehicle_max_distance_mi'   => 10000,
+            'slowdowns' =>  [
+                'service_time'  => 15,
+                'travel_time'   => 20
+            ],
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->parameters);
+
+        $this->assertNotNull($problem->parameters->route_time_multiplier);
+        $this->assertNotNull($problem->parameters->route_service_time_multiplier);
+        $this->assertEquals(15, $problem->parameters->route_service_time_multiplier);
+        $this->assertEquals(20, $problem->parameters->route_time_multiplier);
+    }
+
+    public function testSingleDriverRoundTrip()
+    {
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = array_slice($json, 0, 16);
+
+        $addresses = [];
+
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => AlgorithmType::TSP,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::DISTANCE,
+            'travel_mode'               => TravelMode::DRIVING,
+            'route_max_duration'        => 86400,
+            'vehicle_capacity'          => 1,
+            'vehicle_max_distance_mi'   => 10000,
+            'rt' => true,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+        $this->assertNotNull($problem->addresses);
+
+        $firstAddress = $problem->routes[0]->addresses[0];
+        $lastAddress = $problem->routes[0]->addresses[sizeof($problem->routes[0]->addresses)-1];
+
+        $this->assertEquals($firstAddress->route_destination_id, $lastAddress->route_destination_id);
+    }
+
+    public function testSingleDepotMultipleDriverNoTimeWindow()
+    {
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+
+        $addresses = [];
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => Algorithmtype::CVRP_TW_SD,
+            'route_name'                => 'Single Depot, Multiple Driver, No Time Window',
+            'route_date'                => time() + 24 * 60 * 60,
+            'route_time'                => 60 * 60 * 7,
+            'rt'                        => true,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::TIME,
+            'metric'                    => Metric::GEODESIC,
+            'route_max_duration'        => 86400,
+            'travel_mode'               => TravelMode::DRIVING,
+            'vehicle_capacity'          => 20,
+            'vehicle_max_distance_mi'   => 99999,
+            'parts'                     => 4,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+
+        $this->assertNotNull(sizeof($problem->routes)>1);
+    }
+
+    public function testSingleDriverMultipleTimeWindows()
+    {
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\mdp_mdr_24stops_tw.json'), true);
+        $json = array_slice($json, 0, 20);
+
+        $addresses = [];
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'    => Algorithmtype::TSP,
+            'route_name'        => 'Single Driver Multiple TimeWindows 20 Stops '.date('Y-m-d H:i'),
+            'route_date'        => time() + 24 * 60 * 60,
+            'route_time'        => 5 * 3600 + 30 * 60,
+            'distance_unit'     => DistanceUnit::MILES,
+            'device_type'       => DeviceType::WEB,
+            'optimize'          => OptimizationType::TIME,
+            'metric'            => Metric::MATRIX,
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+
+        $this->assertNotNull(sizeof($problem->routes)>1);
+    }
+
+    public function testTruckingSingleDriverMultipleTimeWindows()
+    {
+        #region Create Medium Truck
+
+        $vehicle = new Vehicle();
+
+        $vehicleParameters = Vehicle::fromArray([
+            'vehicle_name'                      => 'GMC TopKick C5500 Medium',
+            'vehicle_alias'                     => 'GMC TopKick C5500 Medium',
+            'vehicle_vin'                       => 'SAJXA01A06FN08012',
+            'vehicle_license_plate'             => 'CVH4561',
+            'vehicle_model'                     => 'TopKick C5500',
+            'vehicle_model_year'                => 1995,
+            'vehicle_year_acquired'             => 2008,
+            'vehicle_reg_country_id'            => '223',
+            'vehicle_make'                      => 'GMC',
+            'vehicle_type_id'                   => 'pickup_truck',
+            'vehicle_axle_count'                => 2,
+            'mpg_city'                          => 7,
+            'mpg_highway'                       => 14,
+            'fuel_type'                         => 'diesel',
+            'height_inches'                     => 97,
+            'height_metric'                     => 243,
+            'weight_lb'                         => 19000,
+            'maxWeightPerAxleGroupInPounds'     => 9500,
+            'max_weight_per_axle_group_metric'  => 4300,
+            'widthInInches'                     => 96,
+            'width_metric'                      => 240,
+            'lengthInInches'                    => 244,
+            'length_metric'                     => 610,
+            'Use53FootTrailerRouting'           => 'YES',
+            'UseTruckRestrictions'              => 'YES',
+            'DividedHighwayAvoidPreference'     => 'NEUTRAL',
+            'FreewayAvoidPreference'            => 'NEUTRAL',
+            'truck_config'                      => 'FULLSIZEVAN',
+        ]);
+
+        $result = $vehicle->createVehicle($vehicleParameters);
+
+        $this->assertNotNull($result);
+        $this->assertTrue(isset($result['status']));
+        $this->assertTrue($result['status']);
+        $this->assertTrue(isset($result['vehicle_guid']));
+        $vehicleId = $result['vehicle_guid'];
+
+        self::$removedVehicle = $vehicleId;
+
+        #endregion
+        // Huge list of addresses
+        $json = json_decode(file_get_contents(dirname(__FILE__).'\mdp_mdr_24stops_tw.json'), true);
+        $json = array_slice($json, 0, 18);
+
+        $addresses = [];
+        foreach ($json as $address) {
+            $addresses[] = Address::fromArray($address);
+        }
+
+        $parameters = RouteParameters::fromArray([
+            'algorithm_type'            => Algorithmtype::CVRP_TW_SD,
+            'route_name'                => 'Trucking SD Multiple TW 18 Stops '.date('Y-m-d H:i'),
+            'route_date'                => time() + 24 * 60 * 60,
+            'route_time'                => 5 * 3600 + 30 * 60,
+            'distance_unit'             => DistanceUnit::MILES,
+            'device_type'               => DeviceType::WEB,
+            'optimize'                  => OptimizationType::TIME_WITH_TRAFFIC,
+            'metric'                    => Metric::MATRIX,
+            'route_max_duration'        => 8 * 3600 + 30 * 60,
+            'vehicle_id'                => $vehicleId,
+            'travel_mode'               => TravelMode::DRIVING,
+            'vehicle_max_cargo_weight'  => 30,
+            'vehicle_capacity'          => 10,
+            'vehicle_max_distance_mi'   => 10000,
+            'trailer_weight_t'          => 10,
+            'weight_per_axle_t'         => 10,
+            'limited_weight_t'          => 20,
+            'rt'                        => true
+        ]);
+
+        $optimizationParams = new OptimizationProblemParams();
+        $optimizationParams->setAddresses($addresses);
+        $optimizationParams->setParameters($parameters);
+
+        $problem = OptimizationProblem::optimize($optimizationParams);
+
+        self::$createdProblems[] = $problem;
+
+        $this->assertNotNull($problem);
+        $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
+        $this->assertNotNull($problem->getOptimizationId());
+        $this->assertNotNull($problem->getRoutes());
+
+        $this->assertNotNull(sizeof($problem->routes)>1);
+    }
+
     public static function tearDownAfterClass()
     {
         if (sizeof(self::$createdProblems)>0) {
@@ -372,6 +842,24 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
             } else {
                 echo "Cannot remove the test routes <br>";
             }
+        }
+
+        if (!is_null(self::$removedVehicle!=null) && strlen(self::$removedVehicle)==32) {
+
+            $vehicle = new Vehicle();
+
+            $vehicleParameters = Vehicle::fromArray([
+                'vehicle_id' => self::$removedVehicle,
+            ]);
+
+             $result = $vehicle->removeVehicle($vehicleParameters);
+
+            if (!is_null($result)) {
+                echo "The vehicle ".$result['vehicle_id']." removed <br>";
+            } else {
+                echo "Cannot remove the vehicle ".$vehicle['vehicle_id']."<br>";
+            }
+
         }
     }
 }
