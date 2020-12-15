@@ -16,7 +16,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 $route = new Route();
 
 // Get a random route ID
-$route_id = $route->getRandomRouteId(0, 10);
+$route_id = $route->getRandomRouteId(10, 10);
 assert(!is_null($route_id), "Cannot retrieve a random route ID");
 
 // Unlink a route from master destination.
@@ -24,11 +24,12 @@ $route->route_id = $route_id;
 $route->parameters = new \stdClass();
 
 $route->parameters = [
+    'route_id' => $route_id,
     'unlink_from_master_optimization' => true,
 ];
 
 $route->httpheaders = 'Content-type: application/json';
 
-$result = $route->update();
+$result = $route->updateRoute($route->parameters);
 
 Route4Me::simplePrint($result);
