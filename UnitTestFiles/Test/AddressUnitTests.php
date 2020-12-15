@@ -219,6 +219,8 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $address = Address::getAddress(self::$route_id, self::$address_id);
         $this->assertNotNull($address);
 
+        $address->route_id = self::$route_id;
+
         $address->address = 'Updated address';
         $newAddress = $address->update();
 
@@ -289,6 +291,33 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $this->assertNotNull($result);
         $this->assertNotNull($result['success']);
         $this->assertEquals(true,$result['success']);
+    }
+
+    public function testChangeRouteDepote()
+    {
+        $address1 = Address::getAddress(
+            self::$route_id,
+            self::$createdAddresses[0]->route_destination_id);
+
+        $address1->route_id = self::$route_id;
+
+        $address2 = Address::getAddress(
+            self::$route_id,
+            self::$createdAddresses[1]->route_destination_id);
+
+        $address2->route_id = self::$route_id;
+
+        $this->assertEquals(true, $address1->is_depot);
+        $this->assertEquals(false, $address2->is_depot);
+
+        $address1->is_depot = false;
+        $updatedAddress1 = $address1->update();
+
+        $address2->is_depot = true;
+        $updatedAddress2 = $address2->update();
+
+        $this->assertEquals(false, $updatedAddress1->is_depot);
+        $this->assertEquals(true, $updatedAddress2->is_depot);
     }
 
     public static function tearDownAfterClass()

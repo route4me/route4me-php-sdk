@@ -138,7 +138,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testOptimizationWithBundledAddresses()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses.json'), true);
 
         $addresses = [];
         foreach ($json as $address) {
@@ -242,7 +242,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testMultipleDepotMultipleDriverFineTuning()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses_md_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_md_tw.json'), true);
         $json = array_slice($json, 0, 19);
 
         $addresses = [];
@@ -335,7 +335,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testMultipleDepotMultipleDriver()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses_md_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_md_tw.json'), true);
 
         $addresses = [];
         foreach ($json as $address) {
@@ -372,7 +372,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
 
     public function testMultipleDepotMultipleDriverTimeWindow()
     {
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses_md_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_md_tw.json'), true);
 
         $addresses = [];
 
@@ -413,7 +413,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testMultipleDepotMultipleDriverWith24StopsTimeWindow()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\mdp_mdr_24stops_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/mdp_mdr_24stops_tw.json'), true);
 
         $addresses = [];
         foreach ($json as $address) {
@@ -455,14 +455,14 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testMultipleSeparateDepostMultipleDriver()
     {
         // List of addresses
-        $jsonAddresses = json_decode(file_get_contents(dirname(__FILE__).'\addresses_only.json'), true);
+        $jsonAddresses = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_only.json'), true);
 
         $addresses = [];
         foreach ($jsonAddresses as $address) {
             $addresses[] = Address::fromArray($address);
         }
 
-        $jsonDepots = json_decode(file_get_contents(dirname(__FILE__).'\depots.json'), true);
+        $jsonDepots = json_decode(file_get_contents(dirname(__FILE__).'/data/depots.json'), true);
 
         // List of depots
         $depots = [];
@@ -502,7 +502,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function  testOptimizationSingleDriverRoute10Stops()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses.json'), true);
         $json = array_slice($json, 0, 10);
 
         $addresses = [];
@@ -538,7 +538,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testRouteSlowDown()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses.json'), true);
         $json = array_slice($json, 0, 10);
 
         $addresses = [];
@@ -584,7 +584,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testSingleDriverRoundTrip()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses.json'), true);
         $json = array_slice($json, 0, 16);
 
         $addresses = [];
@@ -628,7 +628,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testSingleDepotMultipleDriverNoTimeWindow()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\addresses.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses.json'), true);
 
         $addresses = [];
         foreach ($json as $address) {
@@ -671,7 +671,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public function testSingleDriverMultipleTimeWindows()
     {
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\mdp_mdr_24stops_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/mdp_mdr_24stops_tw.json'), true);
         $json = array_slice($json, 0, 20);
 
         $addresses = [];
@@ -755,7 +755,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
 
         #endregion
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'\mdp_mdr_24stops_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/mdp_mdr_24stops_tw.json'), true);
         $json = array_slice($json, 0, 18);
 
         $addresses = [];

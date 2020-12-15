@@ -157,7 +157,11 @@ class Route extends Common
         ]);
 
         if (isset($params['route_id'])) {
-            return self::fromArray($result);
+            if (strlen($params['route_id'])==32) {
+                return self::fromArray($result);
+            } else {
+                return $result;
+            }
         } else {
             $routes = [];
             foreach ($result as $route) {
@@ -272,6 +276,23 @@ class Route extends Common
         $randomIndex = rand(0, sizeof($routes) - 1);
 
         return $routes[$randomIndex]->route_id;
+    }
+
+    public function updateRoute($params)
+    {
+        $allQueryFields = ['route_id', 'reoptimize','route_destination_id'];
+        $allBodyFields = ['addresses', 'parameters', 'unlink_from_master_optimization'];
+
+        $result = Route4Me::makeRequst([
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => (isset($params['addresses']) || isset($params['parameters']) || isset($params['unlink_from_master_optimization']))
+                        ? Route4Me::generateRequestParameters($allBodyFields, $params)
+                        : null,
+        ]);
+
+        return $result;
     }
 
     public function update()
