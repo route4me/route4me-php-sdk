@@ -271,6 +271,8 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(isset($deleteResult['status']), 'Address Book Location delete operation failed!.. <br>');
         $this->assertTrue($deleteResult['status'], 'Address Book Location delete operation failed!.. <br>');
+
+        self::$createdContacts[] = array_pop(self::$createdContacts);
     }
 
     public function testUpdateAddressBookLocation()
@@ -388,7 +390,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
     public function testAddLocationsFromCsvFile()
     {
         $root = realpath(dirname(__FILE__).'/../../');
-        $source_file = $root.'/UnitTestFiles/Test/addresses_10.csv';
+        $source_file = $root.'/UnitTestFiles/Test/data/addresses_10.csv';
 
         $locationsFieldsMapping['cached_lat'] = 0;
         $locationsFieldsMapping['cached_lng'] = 1;

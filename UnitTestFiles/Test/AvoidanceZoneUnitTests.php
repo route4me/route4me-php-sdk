@@ -158,12 +158,14 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
 
     public function testDeleteAvoidanceZone()
     {
-        $territoryId = $this->createdAvoidanceZones[0]->territory_id;
+        $territoryId = $this->createdAvoidanceZones[sizeof($this->createdAvoidanceZones)-1]->territory_id;
         $result = $this->avoidanceZone->deleteAvoidanceZone($territoryId);
         //$result = AvoidanceZone::deleteAvoidanceZone($territoryId);
 
         $this->assertNotNull($result);
         $this->assertTrue($result['status']);
+
+        $this->createdAvoidanceZones[] = array_pop($this->createdAvoidanceZones);
     }
 
     public function testUpdateAvoidanceZone()

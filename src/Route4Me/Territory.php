@@ -87,7 +87,7 @@ class Territory extends Common
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::TERRITORY_V4,
-            'method' => 'DELETEARRAY',
+            'method' => 'DELETE',
             'query' => [
                 'territory_id' => $territory_id,
             ],
