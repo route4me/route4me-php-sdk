@@ -705,8 +705,6 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Route::class, $result);
     }
 
-    
-
     public function testDeleteRoutes()
     {
         $route = new Route();

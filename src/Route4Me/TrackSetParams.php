@@ -5,6 +5,7 @@ namespace Route4Me;
 use Route4Me\Exception\BadParam;
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\Format;
+use Route4Me\Enum\Endpoint;
 
 class TrackSetParams extends Common
 {
