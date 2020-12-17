@@ -7,6 +7,8 @@ require $root.'/vendor/autoload.php';
 
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\Format;
+use Route4Me\Tracking\Track;
+use Route4Me\Tracking\TrackSetParams;
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
