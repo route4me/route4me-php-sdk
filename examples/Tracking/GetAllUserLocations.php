@@ -2,6 +2,8 @@
 
 namespace Route4Me;
 
+use Route4Me\Tracking\Track;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
