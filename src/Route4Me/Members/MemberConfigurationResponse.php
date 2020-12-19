@@ -1,11 +1,11 @@
 <?php
 
-namespace Route4Me;
+namespace Route4Me\Members;
 
 /*
  * Response structure for the member's configuration data request.
  */
-class MemberConfigurationResponse extends Common
+class MemberConfigurationResponse extends \Route4Me\Common
 {
     /*
      * Configuration result
