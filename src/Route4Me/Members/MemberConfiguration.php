@@ -1,16 +1,17 @@
 <?php
 
-namespace Route4Me;
+namespace Route4Me\Members;
 
 /*
  * The member's configuration data structure
  */
 
+use Route4Me\Route4Me;
 use Route4Me\Enum\Endpoint;
 use Route4Me\Exception\BadParam;
 use Unirest\Exception;
 
-class MemberConfiguration extends Common
+class MemberConfiguration extends \Route4Me\Common
 {
     /*
      * The member ID

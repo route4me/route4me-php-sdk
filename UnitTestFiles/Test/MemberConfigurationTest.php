@@ -2,10 +2,10 @@
 
 namespace UnitTestFiles\Test;
 
-use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 use Route4Me\Constants;
 use Route4Me\Exception\BadParam;
-use Route4Me\MemberConfiguration;
+use Route4Me\Members\MemberConfiguration;
+use Route4Me\Members\Member;
 use Route4Me\Route4Me;
 
 class MemberConfigurationTest extends \PHPUnit\Framework\TestCase

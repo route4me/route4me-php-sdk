@@ -2,6 +2,8 @@
 
 namespace Route4Me;
 
+use Route4Me\Members\Member;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
@@ -24,7 +26,8 @@ $registrParameters = Member::fromArray([
 ]);
 
 $member = new Member();
+$errorText = "";
 
-$response = $member->newAccountRegistration($registrParameters);
+$response = $member->newAccountRegistration($registrParameters, $errorText);
 
 Route4Me::simplePrint($response);

@@ -194,7 +194,10 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertContains('address_group',$addressBookGroups->fields);
 
         $this->assertNotNull($addressBookGroups->results);
-        $this->assertStringContainsStringIgnoringCase('Louisville',implode (", ", $addressBookGroups->results[0]));
+
+        if (sizeof($addressBookGroups->results)>0) {
+            $this->assertStringContainsStringIgnoringCase('Louisville',implode (", ", $addressBookGroups->results[0]));
+        }
     }
 
     public function testGetAddressBookContactsByGroup()

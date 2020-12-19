@@ -1,10 +1,12 @@
 <?php
 
-namespace Route4Me;
+namespace Route4Me\Members;
 
 use Route4Me\Enum\Endpoint;
+use Route4Me\Route4Me;
+use Unirest\Exception;
 
-class Member extends Common
+class Member extends \Route4Me\Common
 {
     public $device_id;
     public $device_type;
@@ -192,35 +194,49 @@ class Member extends Common
         return $response;
     }
 
-    public static function deleteMember($body)
+    public static function deleteMember($body, &$errorText)
     {
-        $response = Route4Me::makeRequst([
-            'url' => Endpoint::USER_V4,
-            'method' => 'DELETE',
-            'body' => [
-                'member_id' => isset($body->member_id) ? $body->member_id : null,
-            ],
-        ]);
+        $response = null;
 
-        return $response;
+        try {
+            $response = Route4Me::makeRequst([
+                'url' => Endpoint::USER_V4,
+                'method' => 'DELETE',
+                'body' => [
+                    'member_id' => isset($body->member_id) ? $body->member_id : null,
+                ],
+            ]);
+        } catch (Exception $ex) {
+            $errorText = $ex->getMessage();
+            $response = null;
+        } finally {
+            return $response;
+        }
     }
 
-    public static function newAccountRegistration($params)
+    public static function newAccountRegistration($params, &$errorText)
     {
         $allQueryFields = ['plan'];
         $allBodyFields = ['strEmail', 'strPassword_1', 'strPassword_2', 'strFirstName',
         'strLastName', 'format', 'strIndustry', 'chkTerms', 'device_type', 'strSubAccountType',
         'blDisableMarketing', 'blDisableAccountActivationEmail', ];
 
-        $response = Route4Me::makeRequst([
-            'url' => Endpoint::REGISTER_ACTION,
-            'method' => 'POST',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER' => 'Content-Type: multipart/form-data',
-        ]);
+        $response = null;
 
-        return $response;
+        try {
+            $response = Route4Me::makeRequst([
+                'url' => Endpoint::REGISTER_ACTION,
+                'method' => 'POST',
+                'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+                'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+                'HTTPHEADER' => 'Content-Type: multipart/form-data',
+            ]);
+        } catch (Exception $ex) {
+            $response = null;
+            $errorText = "Cannot registrate new account <br> ".$ex->getMessage();
+        } finally {
+            return $response;
+        }
     }
 
     public static function validateSession($params)
@@ -255,13 +271,19 @@ class Member extends Common
         $allBodyFields = ['email_address', 'first_name', 'last_name', 'phone_number',
         'company_name', 'member_id', 'webinar_date', ];
 
-        $response = Route4Me::makeRequst([
-            'url' => Endpoint::WEBINAR_REGISTER,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
-        ]);
+        $response = null;
 
-        return $response;
+        try {
+            $response = Route4Me::makeRequst([
+                'url' => Endpoint::WEBINAR_REGISTER,
+                'method' => 'POST',
+                'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            ]);
+        } catch (Exception $ex) {
+            $response = null;
+        } finally {
+            return $response;
+        }
     }
 
     public static function purchaseUserLicense($params)

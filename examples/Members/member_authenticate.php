@@ -2,6 +2,8 @@
 
 namespace Route4Me;
 
+use Route4Me\Members\Member;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 

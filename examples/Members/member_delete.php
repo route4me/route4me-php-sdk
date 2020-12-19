@@ -2,6 +2,8 @@
 
 namespace Route4Me;
 
+use Route4Me\Members\Member;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
@@ -25,6 +27,11 @@ $params = Member::fromArray([
     'member_id' => $randomMemberID,
 ]);
 
-$response = $member->deleteMember($params);
+$errorText = "";
+$response = $member->deleteMember($params, $errorText);
 
-Route4Me::simplePrint($response);
+if (!is_null($response)) {
+    Route4Me::simplePrint($response);
+} else {
+    echo $errorText."<br>";
+}
