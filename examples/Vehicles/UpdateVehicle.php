@@ -2,6 +2,8 @@
 
 namespace Route4Me;
 
+use Route4Me\Vehicles\Vehicle;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
@@ -13,7 +15,7 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4me class
 Route4Me::setApiKey(Constants::API_KEY);
 
-$vehicle = new Vehicle();
+$vehicle = new VehicleV4();
 
 // Get a random vehicle ID
 $randomVehicleID = $vehicle->getRandomVehicleId(1, 20);
