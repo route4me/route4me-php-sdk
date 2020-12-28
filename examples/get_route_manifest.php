@@ -19,7 +19,7 @@ assert(!is_null($route_id), "Cannot retrieve a random route ID");
 // Get route manifest
 $params = [
     'directions' => 1,
-    'route_id' => $route_id,
+    'route_id'   => $route_id,
 ];
 
 $route = Route::getRoutes($params);

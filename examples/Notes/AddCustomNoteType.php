@@ -10,7 +10,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 
 // Create a custom note type
 $noteParameters = [
-    'type' => 'To Do',
+    'type'   => 'To Do',
     'values' => [
                   'Pass a package',
                   'Pickup package',

@@ -14,8 +14,8 @@ Route4Me::setApiKey(Constants::API_KEY);
 $route = new Route();
 
 $grParams = [
-    'offset' => 0,
-    'limit' => 10,
+    'offset'    => 0,
+    'limit'     => 10,
 ];
 
 $routes = $route->getRoutes($grParams);
@@ -73,9 +73,9 @@ echo "after_destination_id = $after_destination_id <br>";
 
 // Move the destination to the route
 $routeParams = [
-    'to_route_id' => $to_route_id,
-    'route_destination_id' => strval($route_destination_id),
-    'after_destination_id' => strval($after_destination_id),
+    'to_route_id'           => $to_route_id,
+    'route_destination_id'  => strval($route_destination_id),
+    'after_destination_id'  => strval($after_destination_id),
 ];
 
 $address = new Address();

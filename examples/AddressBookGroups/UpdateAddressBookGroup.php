@@ -22,8 +22,8 @@ if ($groupIds==null) {
 }
 
 $updateParameters= [
-    'group_id' => $groupIds[0],
-    'group_color'  => '7bd148'
+    'group_id'      => $groupIds[0],
+    'group_color'   => '7bd148'
 ];
 
 $results = $abGroup->updateAddressBookGroup($updateParameters);

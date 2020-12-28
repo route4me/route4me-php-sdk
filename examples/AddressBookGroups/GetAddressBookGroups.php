@@ -13,8 +13,8 @@ $abGroup = new AddressBookGroup();
 // The example refers to the process of getting limited number of the address book groups.
 
 $addressBookGroupParameters = [
-    'limit' => 20,
-    'offset' => 0,
+    'limit'     => 20,
+    'offset'    => 0,
 ];
 
 $addressBookGroups = $abGroup->getAddressBookGroups($addressBookGroupParameters);

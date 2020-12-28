@@ -72,7 +72,7 @@ class AddressBookLocation extends Common
         $ablocations = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query' => [
+            'query'  => [
                 'query' => $addressId,
                 'limit' => 30,
             ],
@@ -88,7 +88,7 @@ class AddressBookLocation extends Common
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $result;
@@ -101,7 +101,7 @@ class AddressBookLocation extends Common
         $ablocations = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $ablocations;
@@ -132,9 +132,9 @@ class AddressBookLocation extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['address_id', 'in_route_count']);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_V4,
+            'method'    => 'POST',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -143,9 +143,9 @@ class AddressBookLocation extends Common
     public function deleteAdressBookLocation($address_ids)
     {
         $result = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'DELETEARRAY',
-            'query' => [
+            'url'       => Endpoint::ADDRESS_BOOK_V4,
+            'method'    => 'DELETEARRAY',
+            'query'     => [
                 'address_ids' => $address_ids,
             ],
         ]);
@@ -158,9 +158,9 @@ class AddressBookLocation extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['in_route_count']);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'PUT',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_V4,
+            'method'    => 'PUT',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;

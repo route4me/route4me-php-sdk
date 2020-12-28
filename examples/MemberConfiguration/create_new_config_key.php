@@ -11,8 +11,8 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $params = Member::fromArray([
-    'config_key' => 'destination_icon_uri',
-    'config_value' => 'value',
+    'config_key'    => 'destination_icon_uri',
+    'config_value'  => 'value',
 ]);
 
 $member = new Member();

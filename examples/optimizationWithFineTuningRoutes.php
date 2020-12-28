@@ -29,17 +29,17 @@ foreach ($json as $address) {
 }
 
 $parameters = RouteParameters::fromArray([
-    'route_name' => 'Oprimization Without FineTuning. '.date('Y-m-d H:i'),
-    'algorithm_type' => AlgorithmType::CVRP_TW_SD,
-    'distance_unit' => DistanceUnit::MILES,
-    'device_type' => DeviceType::WEB,
-    'optimize' => OptimizationType::DISTANCE,
-    'metric' => Metric::GEODESIC,
-    'route_max_duration' => 86400 * 2,
-    'travel_mode' => TravelMode::DRIVING,
-    'vehicle_capacity' => 50,
-    'vehicle_max_distance_mi' => 10000,
-    'parts' => 50,
+    'route_name'                => 'Oprimization Without FineTuning. '.date('Y-m-d H:i'),
+    'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
+    'distance_unit'             => DistanceUnit::MILES,
+    'device_type'               => DeviceType::WEB,
+    'optimize'                  => OptimizationType::DISTANCE,
+    'metric'                    => Metric::GEODESIC,
+    'route_max_duration'        => 86400 * 2,
+    'travel_mode'               => TravelMode::DRIVING,
+    'vehicle_capacity'          => 50,
+    'vehicle_max_distance_mi'   => 10000,
+    'parts'                     => 50,
 
 ]);
 
@@ -69,10 +69,10 @@ assert($duplicatedRoute instanceof Route,'Cannot get the duplicated route.');
 $duplicatedRoute->parameters = new \stdClass();
 
 $duplicatedRoute->parameters = [
-    'target_duration' => 100,
-    'target_distance' => 1,
-    'target_wait_by_tail_size' => 1,
-    'route_name' => 'Oprimization With Duration Priority FineTuning. '.date('m-d-Y')
+    'target_duration'           => 100,
+    'target_distance'           => 1,
+    'target_wait_by_tail_size'  => 1,
+    'route_name'                => 'Oprimization With Duration Priority FineTuning. '.date('m-d-Y')
 ];
 
 $duplicatedRoute->httpheaders = 'Content-type: application/json';
@@ -105,10 +105,10 @@ assert($duplicatedRoute2 instanceof Route,'Cannot get the duplicated route.');
 $duplicatedRoute2->parameters = new \stdClass();
 
 $duplicatedRoute2->parameters = [
-    'target_duration' => 1,
-    'target_distance' => 100,
-    'target_wait_by_tail_size' => 1,
-    'route_name' => 'Oprimization With Distance Priority FineTuning. '.date('m-d-Y')
+    'target_duration'           => 1,
+    'target_distance'           => 100,
+    'target_wait_by_tail_size'  => 1,
+    'route_name'                => 'Oprimization With Distance Priority FineTuning. '.date('m-d-Y')
 ];
 
 $duplicatedRoute2->httpheaders = 'Content-type: application/json';

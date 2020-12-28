@@ -15,7 +15,7 @@ $order = new Order();
 
 $orderParameters = Order::fromArray([
     'offset' => 0,
-    'limit' => 5,
+    'limit'  => 5,
 ]);
 
 $response = $order->getOrders($orderParameters);

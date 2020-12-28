@@ -26,19 +26,19 @@ foreach ($json as $address) {
 }
 
 $parameters = RouteParameters::fromArray([
-    'algorithm_type' => Algorithmtype::CVRP_TW_SD,
-    'route_name' => 'Multiple Depot, Multiple Driver, Time Window',
-    'route_date' => time() + 24 * 60 * 60,
-    'route_time' => 60 * 60 * 7,
-    'rt' => true,
-    'distance_unit' => DistanceUnit::MILES,
-    'device_type' => DeviceType::WEB,
-    'optimize' => OptimizationType::TIME,
-    'metric' => Metric::GEODESIC,
-    'route_max_duration' => 86400 * 3,
-    'travel_mode' => TravelMode::DRIVING,
-    'vehicle_capacity' => 99,
-    'vehicle_max_distance_mi' => 99999,
+    'algorithm_type'            => Algorithmtype::CVRP_TW_SD,
+    'route_name'                => 'Multiple Depot, Multiple Driver, Time Window',
+    'route_date'                => time() + 24 * 60 * 60,
+    'route_time'                => 60 * 60 * 7,
+    'rt'                        => true,
+    'distance_unit'             => DistanceUnit::MILES,
+    'device_type'               => DeviceType::WEB,
+    'optimize'                  => OptimizationType::TIME,
+    'metric'                    => Metric::GEODESIC,
+    'route_max_duration'        => 86400 * 3,
+    'travel_mode'               => TravelMode::DRIVING,
+    'vehicle_capacity'          => 99,
+    'vehicle_max_distance_mi'   => 99999,
 ]);
 
 $optimizationParams = new OptimizationProblemParams();

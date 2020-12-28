@@ -51,11 +51,11 @@ foreach ($addresses as $address) {
 
 // Merge the selected routes
 $params = [
-    'route_ids' => $route_id1.','.$route_id2,
+    'route_ids'     => $route_id1.','.$route_id2,
     'depot_address' => $depot->address,
     'remove_origin' => false,
-    'depot_lat' => $depot->lat,
-    'depot_lng' => $depot->lng,
+    'depot_lat'     => $depot->lat,
+    'depot_lng'     => $depot->lng,
 ];
 
 $result = $route->mergeRoutes($params);

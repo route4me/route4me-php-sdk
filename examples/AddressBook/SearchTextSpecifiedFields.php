@@ -16,10 +16,10 @@ $abLocation = new AddressBookLocation();
 // Example refers to the process of searching for text and specifing returned fields.
 
 $params = [
-    'query' => 'David',
-    'fields' => 'first_name,address_email',
-    'offset' => 0,
-    'limit' => 5,
+    'query'     => 'David',
+    'fields'    => 'first_name,address_email',
+    'offset'    => 0,
+    'limit'     => 5,
 ];
 
 $abcResult = $abLocation->searchAddressBookLocations($params);

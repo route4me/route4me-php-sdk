@@ -23,9 +23,9 @@ $territoryParams['data'] = [
 ];
 
 $avoidanceZoneParameters = AvoidanceZone::fromArray([
-    'territory_name' => 'Test Territory '.strval(rand(10000, 99999)),
-    'territory_color' => 'ff7700',
-    'territory' => $territoryParams,
+    'territory_name'    => 'Test Territory '.strval(rand(10000, 99999)),
+    'territory_color'   => 'ff7700',
+    'territory'         => $territoryParams,
 ]);
 
 $avoidanceZone = new AvoidanceZone();

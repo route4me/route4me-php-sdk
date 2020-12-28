@@ -23,15 +23,15 @@ assert(!is_null($randomVehicleID), "Cannot retrieve a random vehicle ID");
 
 // Update the vehicle
 $vehicleParameters = Vehicle::fromArray([
-    'vehicle_id' => $randomVehicleID,
-    'vehicle_model_year' => 2013,
-    'vehicle_year_acquired' => 2016,
-    'vehicle_reg_country_id' => '223',
-    'vehicle_make' => 'Ford',
-    'vehicle_axle_count' => 3,
-    'fuel_type' => 'unleaded 93',
-    'height_inches' => 74,
-    'weight_lb' => 2098,
+    'vehicle_id'                => $randomVehicleID,
+    'vehicle_model_year'        => 2013,
+    'vehicle_year_acquired'     => 2016,
+    'vehicle_reg_country_id'    => '223',
+    'vehicle_make'              => 'Ford',
+    'vehicle_axle_count'        => 3,
+    'fuel_type'                 => 'unleaded 93',
+    'height_inches'             => 74,
+    'weight_lb'                 => 2098,
 ]);
 
 $result = $vehicle->updateVehicle($vehicleParameters);

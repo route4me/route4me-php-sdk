@@ -251,7 +251,7 @@ class AddressNoteUnitTests extends \PHPUnit\Framework\TestCase
         //$this->markTestSkipped('must be revisited.');
 
         $noteParameters = [
-            'strFilename'   => dirname(__FILE__).'\notes.csv',
+            'strFilename'   => dirname(__FILE__).'\data\notes.csv',
             'route_id'      => self::$route_id,
             'address_id'    => self::$noteFileAddressId,
             'dev_lat'       => 33.132675170898,

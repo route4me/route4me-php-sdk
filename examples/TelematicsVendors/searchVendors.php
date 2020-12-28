@@ -15,9 +15,9 @@ $vendorsParameters = TelematicsVendor::fromArray([
     //"country"       => "GB",  // uncomment this line for searching by Country
     'is_integrated' => 1,
     //"feature"       => "satellite",  // uncomment this line for searching by Feature
-    'search' => 'Fleet',
-    'page' => 1,
-    'per_page' => 5,
+    'search'        => 'Fleet',
+    'page'          => 1,
+    'per_page'      => 5,
 ]);
 
 $vendors = new TelematicsVendor();

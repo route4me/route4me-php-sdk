@@ -19,9 +19,9 @@ assert(!is_null($route_id), "Cannot retrieve a random route ID");
 
 // Re-sequence all addresses
 $params = [
-    'route_id' => $route_id,
-    'disable_optimization' => 0,
-    'optimize' => 'Distance',
+    'route_id'              => $route_id,
+    'disable_optimization'  => 0,
+    'optimize'              => 'Distance',
 ];
 
 $reSequence = $route->resequenceAllAddresses($params);

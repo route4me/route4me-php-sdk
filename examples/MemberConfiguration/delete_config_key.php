@@ -14,8 +14,8 @@ $member = new Member();
 
 // Create a config key
 $createParams = Member::fromArray([
-    'config_key' => 'My height',
-    'config_value' => '182',
+    'config_key'    => 'My height',
+    'config_value'  => '182',
 ]);
 
 $response = $member->newMemberConfigKey($createParams);

@@ -63,16 +63,16 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         self::$testRoutes = self::$createdProblems[0]->routes;
 
         $params = TrackSetParams::fromArray([
-            'format' => Format::SERIALIZED,
-            'route_id' => self::$testRoutes[0]->route_id,
-            'member_id' => self::$testRoutes[0]->parameters->member_id,
-            'course' => 1,
-            'speed' => 120,
-            'lat' => 41.8927521,
-            'lng' => -109.0803888,
-            'device_type' => 'android_phone',
-            'device_guid' => 'qweqweqwe',
-            'device_timestamp' => date('Y-m-d H:i:s', strtotime('-2 day')),
+            'format'            => Format::SERIALIZED,
+            'route_id'          => self::$testRoutes[0]->route_id,
+            'member_id'         => self::$testRoutes[0]->parameters->member_id,
+            'course'            => 1,
+            'speed'             => 120,
+            'lat'               => 41.8927521,
+            'lng'               => -109.0803888,
+            'device_type'       => 'android_phone',
+            'device_guid'       => 'qweqweqwe',
+            'device_timestamp'  => date('Y-m-d H:i:s', strtotime('-2 day')),
         ]);
 
         $status = Track ::set($params);
@@ -193,11 +193,11 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         $endDate = time() + 1 * 24 * 3600;
 
         $params = [
-            'route_id' => self::$testRoutes[0]->route_id,
-            'format' => Format::JSON,
-            'time_period' => 'custom',
-            'start_date' => $startDate,
-            'end_date' => $endDate,
+            'route_id'      => self::$testRoutes[0]->route_id,
+            'format'        => Format::JSON,
+            'time_period'   => 'custom',
+            'start_date'    => $startDate,
+            'end_date'      => $endDate,
         ];
 
         $route = new Route();
@@ -216,16 +216,16 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         // Set GPS postion to the selected route
         // Set right member_id corresponding to the API key
         $params = TrackSetParams::fromArray([
-            'format' => Format::CSV,
-            'route_id' => $routeId,
-            'member_id' => self::$testRoutes[0]->parameters->member_id,
-            'course' => 1,
-            'speed' => 120,
-            'lat' => 41.8927521,
-            'lng' => -109.0803888,
-            'device_type' => 'android_phone',
-            'device_guid' => 'qweqweqwe',
-            'device_timestamp' => date('Y-m-d H:i:s', strtotime('-1 day')),
+            'format'            => Format::CSV,
+            'route_id'          => $routeId,
+            'member_id'         => self::$testRoutes[0]->parameters->member_id,
+            'course'            => 1,
+            'speed'             => 120,
+            'lat'               => 41.8927521,
+            'lng'               => -109.0803888,
+            'device_type'       => 'android_phone',
+            'device_guid'       => 'qweqweqwe',
+            'device_timestamp'  => date('Y-m-d H:i:s', strtotime('-1 day')),
         ]);
 
         $status = Track::set($params);
@@ -245,8 +245,8 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         $routeId = self::$testRoutes[0]->route_id;
 
         $params = [
-            'route_id' => $routeId,
-            'device_tracking_history' => '1',
+            'route_id'                  => $routeId,
+            'device_tracking_history'   => '1',
         ];
 
         $result = $route->GetLastLocation($params);

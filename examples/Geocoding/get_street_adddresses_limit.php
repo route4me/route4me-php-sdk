@@ -12,7 +12,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 
 $gcParameters = (array) Geocoding::fromArray([
     'offset' => 0,
-    'limit' => 5,
+    'limit'  => 5,
 ]);
 
 $geoCoding = new Geocoding();

@@ -350,9 +350,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrderByInsertedDate()
     {
         $orderParameters = Order::fromArray([
-            'day_added_YYMMDD' => date('Y-m-d', strtotime('0 days')),
-            'offset' => 0,
-            'limit' => 5,
+            'day_added_YYMMDD'  => date('Y-m-d', strtotime('0 days')),
+            'offset'            => 0,
+            'limit'             => 5,
         ]);
 
         $order = new Order();
@@ -372,9 +372,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrderByScheduledDate()
     {
         $orderParameters = Order::fromArray([
-            'day_scheduled_for_YYMMDD' => date('Y-m-d', strtotime('0 days')),
-            'offset' => 0,
-            'limit' => 5,
+            'day_scheduled_for_YYMMDD'  => date('Y-m-d', strtotime('0 days')),
+            'offset'                    => 0,
+            'limit'                     => 5,
         ]);
 
         $order = new Order();
@@ -394,9 +394,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrdersByCustomFields()
     {
         $orderParameters = Order::fromArray([
-            'fields' => 'order_id,member_id',
-            'offset' => 0,
-            'limit' => 5,
+            'fields'    => 'order_id,member_id',
+            'offset'    => 0,
+            'limit'     => 5,
         ]);
 
         $order = new Order();
@@ -419,10 +419,10 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrdersByScheduleFilter()
     {
         $orderParameters = Order::fromArray([
-            'limit' => 5,
+            'limit'  => 5,
             'filter' => [
-                'display' => 'all',
-                'scheduled_for_YYMMDD' => [
+                'display'               => 'all',
+                'scheduled_for_YYMMDD'  => [
                     date('Y-m-d', strtotime('-1 days')),
                     date('Y-m-d', strtotime('1 days'))
                 ]
@@ -446,9 +446,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrdersBySpecifiedText()
     {
         $orderParameters = Order::fromArray([
-            'query' => 'Auto test',
-            'offset' => 0,
-            'limit' => 5,
+            'query'     => 'Auto test',
+            'offset'    => 0,
+            'limit'     => 5,
         ]);
 
         $order = new Order();
@@ -495,8 +495,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testUpdateOrderWithCustomFiel()
     {
         $orderParameters = Order::fromArray([
-            'order_id'  => self::$createdOrders[0]['order_id'],
-            'custom_user_fields' => [
+            'order_id'              => self::$createdOrders[0]['order_id'],
+            'custom_user_fields'    => [
                 OrderCustomField::fromArray([
                     'order_custom_field_id'    => 93,
                     'order_custom_field_value' => 'true'

@@ -13,12 +13,12 @@ $abGroup = new AddressBookGroup();
 // The example refers to the process of searching for the locations by sending JSON payload.
 
 $searchParameters = [
-    'fields' => ['address_id', 'address_1', 'address_group'],
-    'limit' => 10,
-    'offset' => 0,
-    'filter' => [
-        'query' => "Louisville",
-        "display" => "all"
+    'fields'    => ['address_id', 'address_1', 'address_group'],
+    'limit'     => 10,
+    'offset'    => 0,
+    'filter'    => [
+        'query'     => "Louisville",
+        "display"   => "all"
     ]
 ];
 

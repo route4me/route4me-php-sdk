@@ -18,8 +18,8 @@ $routeId = $route->getRandomRouteId(0, 10);
 assert(!is_null($routeId), "Can't retrieve random route_id");
 
 $activityParameters = ActivityParameters::fromArray([
-    'route_id' => $routeId,
-    'team' => 'true',
+    'route_id'  => $routeId,
+    'team'      => 'true',
 ]);
 
 $activities = new ActivityParameters();

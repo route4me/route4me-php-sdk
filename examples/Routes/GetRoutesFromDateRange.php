@@ -10,7 +10,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 
 $RouteParameters = [
     'start_date' => '2019-08-01',
-    'end_date' => '2019-08-05'
+    'end_date'   => '2019-08-05'
 ];
 
 $route = new Route();

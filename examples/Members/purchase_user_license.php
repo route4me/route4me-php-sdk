@@ -13,14 +13,14 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $recordParameters = Member::fromArray([
-    'member_id' => 77777,
-    'session_guid' => '454563',
-    'device_id' => '54564',
-    'device_type' => 'ipad',
+    'member_id'         => 77777,
+    'session_guid'      => '454563',
+    'device_id'         => '54564',
+    'device_type'       => 'ipad',
     'subscription_name' => 'IPAD_MONTHLY',
-    'token' => '4/P7q7W91a-oMsCeLvIaQm6bTrgtp7',
-    'payload' => 'APA91bHun4MxP5egoKMwt2KZFBaFUH-1RYqx',
-    'format' => 'json',
+    'token'             => '4/P7q7W91a-oMsCeLvIaQm6bTrgtp7',
+    'payload'           => 'APA91bHun4MxP5egoKMwt2KZFBaFUH-1RYqx',
+    'format'            => 'json',
 ]);
 
 $member = new Member();

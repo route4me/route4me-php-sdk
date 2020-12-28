@@ -34,9 +34,9 @@ assert(!is_null($address_id), "Cannot retrieve random address");
 
 // Mark the address as detected as visited
 $addressParameters = (array) Address::fromArray([
-    'route_id' => $routeId,
-    'route_destination_id' => $address_id,
-    'is_visited' => true,
+    'route_id'              => $routeId,
+    'route_destination_id'  => $address_id,
+    'is_visited'            => true,
 ]);
 
 $address = new Address();

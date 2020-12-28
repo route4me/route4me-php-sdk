@@ -27,19 +27,19 @@ assert(!is_null($optimization_problem_id), "Cannot retrieve random address");
 $addresses = [];
 
 $address1 = (array) Address::fromArray([
-    'address' => '717 5th Ave New York, NY 10021',
-    'alias' => 'Giorgio Armani',
-    'lat' => 40.7669692,
-    'lng' => 73.9693864,
-    'time' => 0,
+    'address'   => '717 5th Ave New York, NY 10021',
+    'alias'     => 'Giorgio Armani',
+    'lat'       => 40.7669692,
+    'lng'       => 73.9693864,
+    'time'      => 0,
 ]);
 
 $addresses[0] = $address1;
 
 $OptimizationParameters = (array) OptimizationProblem::fromArray([
-    'optimization_problem_id' => $optimization_problem_id,
-    'addresses' => $addresses,
-    'reoptimize' => 1,
+    'optimization_problem_id'   => $optimization_problem_id,
+    'addresses'                 => $addresses,
+    'reoptimize'                => 1,
 ]);
 
 $optimizationProblem = new OptimizationProblem();

@@ -60,13 +60,13 @@ class Route4Me
         $baseUrl = self::getBaseUrl();
 
         $curlOpts = [
-            CURLOPT_URL => $baseUrl.$url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 120,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_URL             => $baseUrl.$url,
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_TIMEOUT         => 120,
+            CURLOPT_FOLLOWLOCATION  => true,
+            CURLOPT_SSL_VERIFYHOST  => false,
+            CURLOPT_SSL_VERIFYPEER  => false,
+            CURLOPT_HTTPHEADER      => $headers,
         ];
 
         curl_setopt_array($ch, $curlOpts);

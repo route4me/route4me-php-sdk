@@ -18,8 +18,8 @@ $activityTypes = new ActivityTypes();
 foreach ($activityTypes->getConstants() as $prop => $value) {
     $activityParameters = ActivityParameters::fromArray([
         'activity_type' => $value,
-        'limit' => 2,
-        'offset' => 0,
+        'limit'         => 2,
+        'offset'        => 0,
     ]);
 
     $activities = new ActivityParameters();

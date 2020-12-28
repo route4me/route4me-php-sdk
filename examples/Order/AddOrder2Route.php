@@ -27,8 +27,8 @@ $jFile = file_get_contents('add_order_to_route_data.json');
 $body = json_decode($jFile);
 
 $orderParameters = Order::fromArray([
-    'route_id' => $routeID,
-    'redirect' => 0,
+    'route_id'  => $routeID,
+    'redirect'  => 0,
     'addresses' => $body->addresses,
 ]);
 

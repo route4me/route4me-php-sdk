@@ -19,9 +19,9 @@ assert(!is_null($route_id), "Cannot retrieve a random route ID");
 
 // Share a route with an email
 $params = [
-    'route_id' => $route_id,
-    'response_format' => 'json',
-    'recipient_email' => 'rrrrrrrrrrrrrrrr+share1234@gmail.com',
+    'route_id'          => $route_id,
+    'response_format'   => 'json',
+    'recipient_email'   => 'rrrrrrrrrrrrrrrr+share1234@gmail.com',
 ];
 
 $result = $route->shareRoute($params);

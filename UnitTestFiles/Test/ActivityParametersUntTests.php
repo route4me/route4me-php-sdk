@@ -127,7 +127,7 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
         $activities = new ActivityParameters();
 
         $activityParameters = ActivityParameters::fromArray([
-            'limit' => 10,
+            'limit'  => 10,
             'offset' => 0,
         ]);
 

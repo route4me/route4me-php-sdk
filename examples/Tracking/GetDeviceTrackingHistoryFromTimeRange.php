@@ -27,16 +27,16 @@ echo "routeId -> $routeId <br><br>";
 // Set GPS postion to the selected route
 // Set right member_id corresponding to the API key
 $params = TrackSetParams::fromArray([
-    'format' => Format::SERIALIZED,
-    'route_id' => $routeId,
-    'member_id' => 1,
-    'course' => 1,
-    'speed' => 120,
-    'lat' => 41.8927521,
-    'lng' => -109.0803888,
-    'device_type' => 'android_phone',
-    'device_guid' => 'qweqweqwe',
-    'device_timestamp' => date('Y-m-d H:i:s', strtotime('-2 day')),
+    'format'            => Format::SERIALIZED,
+    'route_id'          => $routeId,
+    'member_id'         => 1,
+    'course'            => 1,
+    'speed'             => 120,
+    'lat'               => 41.8927521,
+    'lng'               => -109.0803888,
+    'device_type'       => 'android_phone',
+    'device_guid'       => 'qweqweqwe',
+    'device_timestamp'  => date('Y-m-d H:i:s', strtotime('-2 day')),
 ]);
 
 $status = Track::set($params);
@@ -50,11 +50,11 @@ $startDate = time() - 30 * 24 * 3600;
 $endDate = time() + 1 * 24 * 3600;
 
 $params = [
-    'route_id' => $routeId,
-    'format' => Format::JSON,
-    'time_period' => 'custom',
-    'start_date' => $startDate,
-    'end_date' => $endDate,
+    'route_id'      => $routeId,
+    'format'        => Format::JSON,
+    'time_period'   => 'custom',
+    'start_date'    => $startDate,
+    'end_date'      => $endDate,
 ];
 
 $result = $route->GetTrackingHistoryFromTimeRange($params);

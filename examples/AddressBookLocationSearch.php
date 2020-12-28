@@ -13,10 +13,10 @@ Route4Me::setApiKey(Constants::API_KEY);
 $abLocation = new AddressBookLocation();
 
 $params = [
-    'query' => 'Test',
-    'fields' => 'address_1,address_group,first_name,last_name',
-    'offset' => 0,
-    'limit' => 20,
+    'query'     => 'Test',
+    'fields'    => 'address_1,address_group,first_name,last_name',
+    'offset'    => 0,
+    'limit'     => 20,
 ];
 
 $abcResult = $abLocation->searchAddressBookLocations($params);

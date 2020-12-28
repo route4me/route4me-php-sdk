@@ -30,7 +30,7 @@ foreach ($json as $address) {
 
 //region Optimization With Duration Priority FineTuning
 $parameters = RouteParameters::fromArray([
-    'route_name'        => 'Optimization With Duration Priority FineTuning. '.date('Y-m-d H:i'),
+    'route_name'                => 'Optimization With Duration Priority FineTuning. '.date('Y-m-d H:i'),
     'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
     'route_time'                => 23200,
     'optimize'                  => OptimizationType::TIME,
@@ -71,7 +71,7 @@ echo "   Total Trip Waiting Time: $totalTripWaitingTimeByDuration <br><br><br>";
 
 //region Optimization With Distance Priority FineTuning
 $parameters = RouteParameters::fromArray([
-    'route_name'        => 'Optimization With Distance Priority FineTuning. '.date('Y-m-d H:i'),
+    'route_name'                => 'Optimization With Distance Priority FineTuning. '.date('Y-m-d H:i'),
     'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
     'route_time'                => 23200,
     'optimize'                  => OptimizationType::TIME,
@@ -112,7 +112,7 @@ echo "   Total Trip Waiting Time: $totalTripDurationByDistance <br><br><br>";
 
 //region Optimization With TimeWaiting Priority FineTuning
 $parameters = RouteParameters::fromArray([
-    'route_name'        => 'Optimization With WaitingTime Priority FineTuning. '.date('Y-m-d H:i'),
+    'route_name'                => 'Optimization With WaitingTime Priority FineTuning. '.date('Y-m-d H:i'),
     'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
     'route_time'                => 23200,
     'optimize'                  => OptimizationType::TIME,

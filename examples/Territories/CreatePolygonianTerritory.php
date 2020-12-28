@@ -28,9 +28,9 @@ $territoryParams['data'] = [
 ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_name' => 'Test Polygonal Territory '.strval(rand(10000, 99999)),
-    'territory_color' => 'ff7700',
-    'territory' => $territoryParams,
+    'territory_name'    => 'Test Polygonal Territory '.strval(rand(10000, 99999)),
+    'territory_color'   => 'ff7700',
+    'territory'         => $territoryParams,
 ]);
 
 $territory = new Territory();

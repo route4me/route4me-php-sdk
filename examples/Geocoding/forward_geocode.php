@@ -10,7 +10,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 
 $geoCodingParameters = [
     'strExportFormat' => 'json',
-    'addresses' => 'Los20%Angeles20%International20%Airport,20%CA',
+    'addresses'       => 'Los20%Angeles20%International20%Airport,20%CA',
 ];
 
 $fGeoCoding = new Geocoding();
