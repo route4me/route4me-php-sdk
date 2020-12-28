@@ -30,7 +30,7 @@ $route->parameters = new \stdClass();
 
 $route->parameters->custom_fields = [
         'animal' => 'tiger',
-        'bird' => 'canary',
+        'bird'   => 'canary',
 ];
 
 $route->httpheaders = 'Content-type: application/json';

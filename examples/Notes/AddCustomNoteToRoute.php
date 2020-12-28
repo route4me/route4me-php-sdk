@@ -25,15 +25,15 @@ assert(!is_null($route_destination_id), "Cannot retrieve random address");
 
 // Add a custom note to a route
 $noteParameters = [
-    'route_id' => $routeId,
-    'address_id' => $route_destination_id,
-    'format' => 'json',
-    'dev_lat' => $addressRand['lat'],
-    'dev_lng' => $addressRand['lng'],
-    'custom_note_type[11]' => 'slippery',
-    'custom_note_type[10]' => 'Backdoor',
-    'strUpdateType' => 'dropoff',
-    'strNoteContents' => 'test1111',
+    'route_id'              => $routeId,
+    'address_id'            => $route_destination_id,
+    'format'                => 'json',
+    'dev_lat'               => $addressRand['lat'],
+    'dev_lng'               => $addressRand['lng'],
+    'custom_note_type[11]'  => 'slippery',
+    'custom_note_type[10]'  => 'Backdoor',
+    'strUpdateType'         => 'dropoff',
+    'strNoteContents'       => 'test1111',
 ];
 
 $addressNote = new AddressNote();

@@ -15,9 +15,9 @@ $route = new Route();
 $route_id = $route->getRandomRouteId(0, 10);
 
 $postParameters = ActivityParameters::fromArray([
-    'activity_type' => 'user_message',
-    'activity_message' => 'Hello - php!',
-    'route_id' => $route_id,
+    'activity_type'     => 'user_message',
+    'activity_message'  => 'Hello - php!',
+    'route_id'          => $route_id,
 ]);
 
 $activities = new ActivityParameters();

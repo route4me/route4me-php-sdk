@@ -69,7 +69,7 @@ class MemberConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->expectException(BadParam::class);
 
         $memberConfiguration = MemberConfiguration::fromArray([
-            'memberID' => 44444444,
+            'memberID'   => 44444444,
             'config_kkk' => 'test_key'
         ]);
 

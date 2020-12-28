@@ -13,9 +13,9 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $Parameters = Member::fromArray([
-    'strEmail' => 'rrrrrrrrrrrrr@gmail.com',
-    'strPassword' => 'dddddddd',
-    'format' => 'json',
+    'strEmail'      => 'rrrrrrrrrrrrr@gmail.com',
+    'strPassword'   => 'dddddddd',
+    'format'        => 'json',
 ]);
 
 $member = new Member();

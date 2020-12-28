@@ -6,17 +6,79 @@ use Route4Me\Enum\Endpoint;
 
 class OptimizationProblem extends Common
 {
+    /** @var string $optimization_problem_id
+     * Optimization problem ID
+     */
     public $optimization_problem_id;
+
+    /** @var string $smart_optimization_id
+     * Smart Optimization Problem ID
+     */
+    public $smart_optimization_id;
+
+    /** @var string[] $user_errors
+     * An array of the user errors.
+     */
     public $user_errors = [];
+
+    /** @var int $state
+     * An optimization problem state.
+     * Available values:
+     * OptimizationStateNew = 0,
+     * Initial = 1,
+     * MatrixProcessing = 2,
+     * Optimizing = 3,
+     * Optimized = 4,
+     * Error = 5,
+     * ComputingDirections = 6,
+     * OptimizationStateInQueue = 7
+     */
     public $state;
+
+    /** @var string[] $optimization_errors
+     * An array of the optimization errors.
+     */
     public $optimization_errors = [];
+
+    /** @var RouteParameters $parameters
+     * Route Parameters.
+     */
     public $parameters;
+
+    /** @var boolean $sent_to_background
+     * If true it means the solution was not returned (it is being computed in the background).
+     */
     public $sent_to_background;
+
+    /** @var long $created_timestamp
+     * When the optimization problem was created.
+     */
     public $created_timestamp;
+
+    /** @var long $scheduled_for
+     * An Unix Timestamp the Optimization Problem was scheduled for.
+     */
     public $scheduled_for;
+
+    /** @var long $optimization_completed_timestamp
+     * When the optimization completed.
+     */
     public $optimization_completed_timestamp;
+
+    /** @var Address[] $addresses
+     * An array ot the Address type objects.
+     */
     public $addresses = [];
+
+    /** @var Route[] $routes
+     * An array ot the DataObjectRoute type objects.
+     * The routes included in the optimization problem.
+     */
     public $routes = [];
+
+    /** @var string[] $links
+     * The links to the GET operations for the optimization problem.
+     */
     public $links = [];
 
     public function __construct()
@@ -66,13 +128,13 @@ class OptimizationProblem extends Common
         $allQueryFields = ['redirect', 'directions', 'format', 'route_path_output', 'optimized_callback_url'];
 
         $optimize = Route4Me::makeRequst([
-            'url' => Endpoint::OPTIMIZATION_PROBLEM,
-            'method' => 'POST',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body' => [
-                'addresses' => $params->getAddressesArray(),
-                'depots' => $params->getDepotsArray(),
-                'parameters' => $params->getParametersArray(),
+            'url'       => Endpoint::OPTIMIZATION_PROBLEM,
+            'method'    => 'POST',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'      => [
+                'addresses'     => $params->getAddressesArray(),
+                'depots'        => $params->getDepotsArray(),
+                'parameters'    => $params->getParametersArray(),
             ],
         ]);
 
@@ -85,9 +147,9 @@ class OptimizationProblem extends Common
         'optimization_problem_id', 'wait_for_final_state','start_date','end_date', ];
 
         $result = Route4Me::makeRequst([
-            'url' => Endpoint::OPTIMIZATION_PROBLEM,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::OPTIMIZATION_PROBLEM,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         if (isset($result['optimizations'])) {
@@ -126,10 +188,10 @@ class OptimizationProblem extends Common
         $allBodyFields = ['addresses', 'parameters'];
 
         $optimize = Route4Me::makeRequst([
-            'url' => Endpoint::OPTIMIZATION_PROBLEM,
-            'method' => 'PUT',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::OPTIMIZATION_PROBLEM,
+            'method'    => 'PUT',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $optimize;
@@ -199,9 +261,9 @@ class OptimizationProblem extends Common
         $allQueryFields = ['optimization_problem_id', 'route_destination_id'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_V4,
-            'method' => 'DELETE',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::ADDRESS_V4,
+            'method'    => 'DELETE',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;
@@ -213,10 +275,10 @@ class OptimizationProblem extends Common
         $allBodyFields = ['optimization_problem_ids'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::OPTIMIZATION_PROBLEM,
-            'method' => 'DELETE',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::OPTIMIZATION_PROBLEM,
+            'method'    => 'DELETE',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -227,9 +289,9 @@ class OptimizationProblem extends Common
         $allQueryFields = ['target_date_string', 'timezone_offset_minutes'];
 
         $optimize = Route4Me::makeRequst([
-            'url' => Endpoint::HYBRID_DATE_OPTIMIZATION,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::HYBRID_DATE_OPTIMIZATION,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $optimize;
@@ -241,10 +303,10 @@ class OptimizationProblem extends Common
         $allBodyFields = ['optimization_problem_id', 'delete_old_depots', 'new_depots'];
 
         $depots = Route4Me::makeRequst([
-            'url' => Endpoint::CHANGE_HYBRID_OPTIMIZATION_DEPOT,
-            'method' => 'POST',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::CHANGE_HYBRID_OPTIMIZATION_DEPOT,
+            'method'    => 'POST',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $depots;

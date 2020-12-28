@@ -25,12 +25,12 @@ assert(!is_null($route_destination_id), "Cannot retrieve random address");
 
 // Add a file note
 $noteParameters = [
-    'strFilename' => 'notes.csv',
-    'route_id' => $route_id,
-    'address_id' => $route_destination_id,
-    'dev_lat' => $addressRand['lat'],
-    'dev_lng' => $addressRand['lng'],
-    'device_type' => 'web',
+    'strFilename'   => 'notes.csv',
+    'route_id'      => $route_id,
+    'address_id'    => $route_destination_id,
+    'dev_lat'       => $addressRand['lat'],
+    'dev_lng'       => $addressRand['lng'],
+    'device_type'   => 'web',
     'strUpdateType' => 'ANY_FILE',
 ];
 

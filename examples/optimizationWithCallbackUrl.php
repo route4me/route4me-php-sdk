@@ -27,16 +27,16 @@ foreach ($json as $address) {
 }
 
 $parameters = RouteParameters::fromArray([
-    'algorithm_type' => AlgorithmType::TSP,
-    'distance_unit' => DistanceUnit::MILES,
-    'device_type' => DeviceType::WEB,
-    'optimize' => OptimizationType::DISTANCE,
-    'travel_mode' => TravelMode::DRIVING,
-    'route_max_duration' => 86400,
-    'vehicle_capacity' => 1,
-    'vehicle_max_distance_mi' => 10000,
-    'rt' => true,
-    'optimized_callback_url' => 'https://requestb.in/1o6cgge1',
+    'algorithm_type'            => AlgorithmType::TSP,
+    'distance_unit'             => DistanceUnit::MILES,
+    'device_type'               => DeviceType::WEB,
+    'optimize'                  => OptimizationType::DISTANCE,
+    'travel_mode'               => TravelMode::DRIVING,
+    'route_max_duration'        => 86400,
+    'vehicle_capacity'          => 1,
+    'vehicle_max_distance_mi'   => 10000,
+    'rt'                        => true,
+    'optimized_callback_url'    => 'https://requestb.in/1o6cgge1',
 ]);
 
 $optimizationParams = new OptimizationProblemParams();

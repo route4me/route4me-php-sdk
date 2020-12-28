@@ -16,9 +16,9 @@ Route4Me::setApiKey(Constants::API_KEY);
 $vehicle = new Vehicle();
 
 $vehicleParameters = [
-    'with_pagination' => true,
-    'page' => 1,
-    'perPage' => 10,
+    'with_pagination'   => true,
+    'page'              => 1,
+    'perPage'           => 10,
 ];
 
 $response = $vehicle->getVehicles($vehicleParameters);

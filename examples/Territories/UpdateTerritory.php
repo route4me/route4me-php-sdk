@@ -23,9 +23,9 @@ $territoryParams['data'] = [
 ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_name' => 'Test Territory '.strval(rand(10000, 99999)),
-    'territory_color' => 'ff7700',
-    'territory' => $territoryParams,
+    'territory_name'    => 'Test Territory '.strval(rand(10000, 99999)),
+    'territory_color'   => 'ff7700',
+    'territory'         => $territoryParams,
 ]);
 
 $result = (array) $territory->addTerritory($TerritoryParameters);
@@ -46,10 +46,10 @@ $territoryParameters = [
    ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_id' => $territory_id,
-    'territory_name' => 'Test Territory Updated as rectangle',
-    'territory_color' => 'ff5500',
-    'territory' => $territoryParameters,
+    'territory_id'      => $territory_id,
+    'territory_name'    => 'Test Territory Updated as rectangle',
+    'territory_color'   => 'ff5500',
+    'territory'         => $territoryParameters,
 ]);
 
 $result1 = $territory->updateTerritory($TerritoryParameters);

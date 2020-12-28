@@ -11,9 +11,9 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $gcParameters = (array) Geocoding::fromArray([
-    'zipcode' => '00601',
-    'offset' => 0,
-    'limit' => 20,
+    'zipcode'   => '00601',
+    'offset'    => 0,
+    'limit'     => 20,
 ]);
 
 $geoCoding = new Geocoding();

@@ -24,8 +24,8 @@ $route->route_id = $route_id;
 $route->parameters = new \stdClass();
 
 $route->parameters = [
-    'route_id' => $route_id,
-    'unlink_from_master_optimization' => true,
+    'route_id'                          => $route_id,
+    'unlink_from_master_optimization'   => true,
 ];
 
 $route->httpheaders = 'Content-type: application/json';

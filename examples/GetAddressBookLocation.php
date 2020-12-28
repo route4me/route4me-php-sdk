@@ -12,7 +12,7 @@ $abLocation = new AddressBookLocation();
 
 // Get reandom address book location
 $AddressBookLocationParameters = [
-        'limit' => 30,
+        'limit'  => 30,
         'offset' => 0,
 ];
 

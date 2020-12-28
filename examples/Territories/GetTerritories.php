@@ -12,7 +12,7 @@ $territory = new Territory();
 
 $queryParameters = [
     'offset' => 0,
-    'limit' => 20,
+    'limit'  => 20,
 ];
 
 $response = $territory->getTerritories($queryParameters);

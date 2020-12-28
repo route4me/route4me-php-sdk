@@ -19,8 +19,8 @@ $addressList = [
 $addressesString = implode('\n', $addressList);
 
 $geoCodingParameters = [
-    'strExportFormat' => 'json',
-    'addresses' => $addressesString,
+    'strExportFormat'   => 'json',
+    'addresses'         => $addressesString,
 ];
 
 $fGeoCoding = new Geocoding();

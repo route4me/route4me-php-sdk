@@ -16,39 +16,39 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $vendorParameters = TelematicsVendor::fromArray([
-            'id' => 14,
-            'name' => 'Borea',
-            'slug' => 'borea',
-            'description' => 'Borea is a leading connected vehicle platform, helping our customers turn data about vehicles and their use into intelligence',
-            'logo_url' => 'https:\/\/storage.googleapis.com\/telematics-directory-production\/silent-passanger555555.png',
-            'website_url' => 'https:\/\/www.borea.com\/',
-            'api_docs_url' => 'https:\/\/www.borea.com\/docs\/',
+            'id'            => 14,
+            'name'          => 'Borea',
+            'slug'          => 'borea',
+            'description'   => 'Borea is a leading connected vehicle platform, helping our customers turn data about vehicles and their use into intelligence',
+            'logo_url'      => 'https:\/\/storage.googleapis.com\/telematics-directory-production\/silent-passanger555555.png',
+            'website_url'   => 'https:\/\/www.borea.com\/',
+            'api_docs_url'  => 'https:\/\/www.borea.com\/docs\/',
             'is_integrated' => true,
-            'size' => 'regional',
-            'features' => [
+            'size'          => 'regional',
+            'features'      => [
                 0 => [
-                    'id' => '1',
-                    'name' => 'Customizable Reports',
-                    'slug' => 'customizable-reports',
+                    'id'    => '1',
+                    'name'  => 'Customizable Reports',
+                    'slug'  => 'customizable-reports',
                     'feature_group' => 'Analytics & Reporting'
                 ],
                 1 => [
-                    'id' => '2',
-                    'name' => 'Publicly Accessible API Documention',
-                    'slug' => 'publicly-accessible-api-doc',
+                    'id'            => '2',
+                    'name'          => 'Publicly Accessible API Documention',
+                    'slug'          => 'publicly-accessible-api-doc',
                     'feature_group' => 'API & SDK'
                 ]
             ],
             'countries' => [
                 0 => [
-                    'id' => '38',
-                    'country_code' => 'CA',
-                    'country_name' => 'Canada'
+                    'id'            => '38',
+                    'country_code'  => 'CA',
+                    'country_name'  => 'Canada'
                 ],
                 1 => [
-                    'id' => '230',
-                    'country_code' => 'USA',
-                    'country_name' => 'United States'
+                    'id'            => '230',
+                    'country_code'  => 'USA',
+                    'country_name'  => 'United States'
                 ]
             ]
         ]);
@@ -71,15 +71,15 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             [
                 0 => [
-                    'id' => '1',
-                    'name' => 'Customizable Reports',
-                    'slug' => 'customizable-reports',
+                    'id'            => '1',
+                    'name'          => 'Customizable Reports',
+                    'slug'          => 'customizable-reports',
                     'feature_group' => 'Analytics & Reporting'
                 ],
                 1 => [
-                    'id' => '2',
-                    'name' => 'Publicly Accessible API Documention',
-                    'slug' => 'publicly-accessible-api-doc',
+                    'id'            => '2',
+                    'name'          => 'Publicly Accessible API Documention',
+                    'slug'          => 'publicly-accessible-api-doc',
                     'feature_group' => 'API & SDK'
                 ]
             ],
@@ -88,14 +88,14 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             [
                 0 => [
-                    'id' => '38',
-                    'country_code' => 'CA',
-                    'country_name' => 'Canada'
+                    'id'            => '38',
+                    'country_code'  => 'CA',
+                    'country_name'  => 'Canada'
                 ],
                 1 => [
-                    'id' => '230',
-                    'country_code' => 'USA',
-                    'country_name' => 'United States'
+                    'id'            => '230',
+                    'country_code'  => 'USA',
+                    'country_name'  => 'United States'
                 ]
             ],
             $vendorParameters->countries
@@ -105,39 +105,39 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
     public function testToArray()
     {
         $vendorParameters = TelematicsVendor::fromArray([
-            'id' => 14,
-            'name' => 'Borea',
-            'slug' => 'borea',
-            'description' => 'Borea is a leading connected vehicle platform, helping our customers turn data about vehicles and their use into intelligence',
-            'logo_url' => 'https:\/\/storage.googleapis.com\/telematics-directory-production\/silent-passanger555555.png',
-            'website_url' => 'https:\/\/www.borea.com\/',
-            'api_docs_url' => 'https:\/\/www.borea.com\/docs\/',
+            'id'            => 14,
+            'name'          => 'Borea',
+            'slug'          => 'borea',
+            'description'   => 'Borea is a leading connected vehicle platform, helping our customers turn data about vehicles and their use into intelligence',
+            'logo_url'      => 'https:\/\/storage.googleapis.com\/telematics-directory-production\/silent-passanger555555.png',
+            'website_url'   => 'https:\/\/www.borea.com\/',
+            'api_docs_url'  => 'https:\/\/www.borea.com\/docs\/',
             'is_integrated' => true,
-            'size' => 'regional',
-            'features' => [
+            'size'          => 'regional',
+            'features'      => [
                 0 => [
-                    'id' => '1',
-                    'name' => 'Customizable Reports',
-                    'slug' => 'customizable-reports',
+                    'id'            => '1',
+                    'name'          => 'Customizable Reports',
+                    'slug'          => 'customizable-reports',
                     'feature_group' => 'Analytics & Reporting'
                 ],
                 1 => [
-                    'id' => '2',
-                    'name' => 'Publicly Accessible API Documention',
-                    'slug' => 'publicly-accessible-api-doc',
+                    'id'            => '2',
+                    'name'          => 'Publicly Accessible API Documention',
+                    'slug'          => 'publicly-accessible-api-doc',
                     'feature_group' => 'API & SDK'
                 ]
             ],
             'countries' => [
                 0 => [
-                    'id' => '38',
-                    'country_code' => 'CA',
-                    'country_name' => 'Canada'
+                    'id'            => '38',
+                    'country_code'  => 'CA',
+                    'country_name'  => 'Canada'
                 ],
                 1 => [
-                    'id' => '230',
-                    'country_code' => 'USA',
-                    'country_name' => 'United States'
+                    'id'            => '230',
+                    'country_code'  => 'USA',
+                    'country_name'  => 'United States'
                 ]
             ]
         ]);
@@ -160,15 +160,15 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             [
                 0 => [
-                    'id' => '1',
-                    'name' => 'Customizable Reports',
-                    'slug' => 'customizable-reports',
+                    'id'            => '1',
+                    'name'          => 'Customizable Reports',
+                    'slug'          => 'customizable-reports',
                     'feature_group' => 'Analytics & Reporting'
                 ],
                 1 => [
-                    'id' => '2',
-                    'name' => 'Publicly Accessible API Documention',
-                    'slug' => 'publicly-accessible-api-doc',
+                    'id'            => '2',
+                    'name'          => 'Publicly Accessible API Documention',
+                    'slug'          => 'publicly-accessible-api-doc',
                     'feature_group' => 'API & SDK'
                 ]
             ],
@@ -177,14 +177,14 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             [
                 0 => [
-                    'id' => '38',
-                    'country_code' => 'CA',
-                    'country_name' => 'Canada'
+                    'id'            => '38',
+                    'country_code'  => 'CA',
+                    'country_name'  => 'Canada'
                 ],
                 1 => [
-                    'id' => '230',
-                    'country_code' => 'USA',
-                    'country_name' => 'United States'
+                    'id'            => '230',
+                    'country_code'  => 'USA',
+                    'country_name'  => 'United States'
                 ]
             ],
             $vendorParameters->countries
@@ -192,39 +192,39 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals($vendorParameters->toArray(),
             [
-                'id' => 14,
-                'name' => 'Borea',
-                'slug' => 'borea',
-                'description' => 'Borea is a leading connected vehicle platform, helping our customers turn data about vehicles and their use into intelligence',
-                'logo_url' => 'https:\/\/storage.googleapis.com\/telematics-directory-production\/silent-passanger555555.png',
-                'website_url' => 'https:\/\/www.borea.com\/',
-                'api_docs_url' => 'https:\/\/www.borea.com\/docs\/',
+                'id'            => 14,
+                'name'          => 'Borea',
+                'slug'          => 'borea',
+                'description'   => 'Borea is a leading connected vehicle platform, helping our customers turn data about vehicles and their use into intelligence',
+                'logo_url'      => 'https:\/\/storage.googleapis.com\/telematics-directory-production\/silent-passanger555555.png',
+                'website_url'   => 'https:\/\/www.borea.com\/',
+                'api_docs_url'  => 'https:\/\/www.borea.com\/docs\/',
                 'is_integrated' => true,
-                'size' => 'regional',
-                'features' => [
+                'size'          => 'regional',
+                'features'      => [
                     0 => [
-                        'id' => '1',
-                        'name' => 'Customizable Reports',
-                        'slug' => 'customizable-reports',
+                        'id'            => '1',
+                        'name'          => 'Customizable Reports',
+                        'slug'          => 'customizable-reports',
                         'feature_group' => 'Analytics & Reporting'
                     ],
                     1 => [
-                        'id' => '2',
-                        'name' => 'Publicly Accessible API Documention',
-                        'slug' => 'publicly-accessible-api-doc',
+                        'id'            => '2',
+                        'name'          => 'Publicly Accessible API Documention',
+                        'slug'          => 'publicly-accessible-api-doc',
                         'feature_group' => 'API & SDK'
                     ]
                 ],
                 'countries' => [
                     0 => [
-                        'id' => '38',
-                        'country_code' => 'CA',
-                        'country_name' => 'Canada'
+                        'id'            => '38',
+                        'country_code'  => 'CA',
+                        'country_name'  => 'Canada'
                     ],
                     1 => [
-                        'id' => '230',
-                        'country_code' => 'USA',
-                        'country_name' => 'United States'
+                        'id'            => '230',
+                        'country_code'  => 'USA',
+                        'country_name'  => 'United States'
                     ]
                 ]
             ]
@@ -271,12 +271,12 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
     public function testSearchVendors()
     {
         $vendorsParameters = TelematicsVendor::fromArray([
-            //"country"       => "GB",  // uncomment this line for searching by Country
+            //"country"     => "GB",  // uncomment this line for searching by Country
             'is_integrated' => 1,
-            //"feature"       => "satellite",  // uncomment this line for searching by Feature
-            'search' => 'Fleet',
-            'page' => 1,
-            'per_page' => 5,
+            //"feature"     => "satellite",  // uncomment this line for searching by Feature
+            'search'        => 'Fleet',
+            'page'          => 1,
+            'per_page'      => 5,
         ]);
 
         $vendors = new TelematicsVendor();

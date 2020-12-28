@@ -19,9 +19,9 @@ $member = new Member();
 
 // Authenticate a user and get session guid
 $recordParameters = Member::fromArray([
-    'strEmail' => 'aaaaaaaaaaa@gmail.com',
-    'strPassword' => 'ddddddddddd',
-    'format' => 'json',
+    'strEmail'      => 'aaaaaaaaaaa@gmail.com',
+    'strPassword'   => 'ddddddddddd',
+    'format'        => 'json',
 ]);
 
 $response = $member->memberAuthentication($recordParameters);
@@ -37,9 +37,9 @@ echo "Member ID -> $memberID <br> Session GUID -> $sessionGuid <br>";
 
 // Validate the session
 $params = Member::fromArray([
-    'session_guid' => $sessionGuid,
-    'member_id' => $memberID,
-    'format' => 'json',
+    'session_guid'  => $sessionGuid,
+    'member_id'     => $memberID,
+    'format'        => 'json',
 ]);
 
 $response = $member->validateSession($params);

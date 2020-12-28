@@ -98,7 +98,7 @@ $ep = time() + 604800;
 $scheduleDate = date('Y-m-d', $ep);
 
 $hybridParams = [
-    'target_date_string' => $scheduleDate,
+    'target_date_string'      => $scheduleDate,
     'timezone_offset_minutes' => 480,
 ];
 

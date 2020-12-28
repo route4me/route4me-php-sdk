@@ -9,10 +9,10 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $AddressBookLocationParameters = AddressBookLocation::fromArray([
-    'first_name' => 'Test FirstName '.strval(rand(10000, 99999)),
-    'address_1' => 'Test Address1 '.strval(rand(10000, 99999)),
-    'cached_lat' => 38.024654,
-    'cached_lng' => -77.338814,
+    'first_name'    => 'Test FirstName '.strval(rand(10000, 99999)),
+    'address_1'     => 'Test Address1 '.strval(rand(10000, 99999)),
+    'cached_lat'    => 38.024654,
+    'cached_lng'    => -77.338814,
 ]);
 
 $abContacts = new AddressBookLocation();

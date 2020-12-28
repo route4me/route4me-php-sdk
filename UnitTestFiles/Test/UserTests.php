@@ -22,20 +22,20 @@ class UserTests extends \PHPUnit\Framework\TestCase
 
         $params = Member::fromArray([
             'HIDE_ROUTED_ADDRESSES' => 'FALSE',
-            'member_phone' => '571-259-5939',
-            'member_zipcode' => '22102',
-            'route_count' => null,
-            'member_email' => 'regression.autotests+'.$date->getTimestamp().'@gmail.com',
+            'member_phone'          => '571-259-5939',
+            'member_zipcode'        => '22102',
+            'route_count'           => null,
+            'member_email'          => 'regression.autotests+'.$date->getTimestamp().'@gmail.com',
             'HIDE_VISITED_ADDRESSES' => 'FALSE',
-            'READONLY_USER' => 'FALSE',
-            'member_type' => 'SUB_ACCOUNT_DRIVER',
-            'date_of_birth' => '1994-10-01',
-            'member_first_name' => 'Clay',
-            'member_password' => '123456',
+            'READONLY_USER'         => 'FALSE',
+            'member_type'           => 'SUB_ACCOUNT_DRIVER',
+            'date_of_birth'         => '1994-10-01',
+            'member_first_name'     => 'Clay',
+            'member_password'       => '123456',
             'HIDE_NONFUTURE_ROUTES' => 'FALSE',
-            'member_last_name' => 'Abraham',
-            'SHOW_ALL_VEHICLES' => 'FALSE',
-            'SHOW_ALL_DRIVERS' => 'FALSE',
+            'member_last_name'      => 'Abraham',
+            'SHOW_ALL_VEHICLES'     => 'FALSE',
+            'SHOW_ALL_DRIVERS'      => 'FALSE',
         ]);
 
         $member = new Member();
@@ -54,14 +54,14 @@ class UserTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $memberResponseV4 = MemberResponseV4::fromArray([
-            'member_id' => '18154',
-            'OWNER_MEMBER_ID' => '0',
-            'member_type' => 'PRIMARY_ACCOUNT',
-            'member_first_name' => 'Routeme',
-            'member_last_name' => 'QA',
-            'member_email' => 'aaaaaa@route4me.com',
-            'preferred_units' => 'MI',
-            'preferred_language' => 'en',
+            'member_id'                 => '18154',
+            'OWNER_MEMBER_ID'           => '0',
+            'member_type'               => 'PRIMARY_ACCOUNT',
+            'member_first_name'         => 'Routeme',
+            'member_last_name'          => 'QA',
+            'member_email'              => 'aaaaaa@route4me.com',
+            'preferred_units'           => 'MI',
+            'preferred_language'        => 'en',
             'HIDE_ROUTED_ADDRESSES'     => 'FALSE',
             'HIDE_VISITED_ADDRESSES'    => 'FALSE',
             'HIDE_NONFUTURE_ROUTES'     => 'FALSE',
@@ -122,14 +122,14 @@ class UserTests extends \PHPUnit\Framework\TestCase
     public function testToArray()
     {
         $memberResponseV4 = MemberResponseV4::fromArray([
-            'member_id' => '18154',
-            'OWNER_MEMBER_ID' => '0',
-            'member_type' => 'PRIMARY_ACCOUNT',
-            'member_first_name' => 'Routeme',
-            'member_last_name' => 'QA',
-            'member_email' => 'aaaaaa@route4me.com',
-            'preferred_units' => 'MI',
-            'preferred_language' => 'en',
+            'member_id'                 => '18154',
+            'OWNER_MEMBER_ID'           => '0',
+            'member_type'               => 'PRIMARY_ACCOUNT',
+            'member_first_name'         => 'Routeme',
+            'member_last_name'          => 'QA',
+            'member_email'              => 'aaaaaa@route4me.com',
+            'preferred_units'           => 'MI',
+            'preferred_language'        => 'en',
             'HIDE_ROUTED_ADDRESSES'     => 'FALSE',
             'HIDE_VISITED_ADDRESSES'    => 'FALSE',
             'HIDE_NONFUTURE_ROUTES'     => 'FALSE',
@@ -152,19 +152,19 @@ class UserTests extends \PHPUnit\Framework\TestCase
                 'HIDE_NONFUTURE_ROUTES'     => 'FALSE',
                 'HIDE_ROUTED_ADDRESSES'     => 'FALSE',
                 'HIDE_VISITED_ADDRESSES'    => 'FALSE',
-                'member_id' => '18154',
-                'OWNER_MEMBER_ID' => '0',
+                'member_id'                 => '18154',
+                'OWNER_MEMBER_ID'           => '0',
                 'READONLY_USER'             => 'FALSE',
                 'SHOW_ALL_DRIVERS'          => 'FALSE',
                 'SHOW_ALL_VEHICLES'         => '0',
-                'member_email' => 'aaaaaa@route4me.com',
-                'member_first_name' => 'Routeme',
-                'member_last_name' => 'QA',
+                'member_email'              => 'aaaaaa@route4me.com',
+                'member_first_name'         => 'Routeme',
+                'member_last_name'          => 'QA',
                 'member_picture'            => 'https => \/\/apps-static.borea.com\/uploads\/44444444444444444444444444444444\/profile_77777777777777777777777777777777.png',
-                'member_type' => 'PRIMARY_ACCOUNT',
+                'member_type'               => 'PRIMARY_ACCOUNT',
                 'member_zipcode'            => '18002',
-                'preferred_language' => 'en',
-                'preferred_units' => 'MI',
+                'preferred_language'        => 'en',
+                'preferred_units'           => 'MI',
                 'timezone'                  => 'US\/Arizona',
                 'level'                     => 0,
                 'custom_data'               => [
@@ -220,8 +220,8 @@ class UserTests extends \PHPUnit\Framework\TestCase
         $member = new Member();
 
         $params = Member::fromArray([
-            'member_id' => self::$createdMembers[0]->member_id,
-            'member_phone' => '555-777-888',
+            'member_id'     => self::$createdMembers[0]->member_id,
+            'member_phone'  => '555-777-888',
         ]);
 
         $response = $member->updateMember($params);
@@ -242,8 +242,8 @@ class UserTests extends \PHPUnit\Framework\TestCase
         $member = new Member();
 
         $params = Member::fromArray([
-            'member_id' => self::$createdMembers[0]->member_id,
-            'custom_data' => ['Custom Key 2' => 'Custom Value 2'],
+            'member_id'     => self::$createdMembers[0]->member_id,
+            'custom_data'   => ['Custom Key 2' => 'Custom Value 2'],
         ]);
 
         $response = $member->updateMember($params);
@@ -262,9 +262,9 @@ class UserTests extends \PHPUnit\Framework\TestCase
     public function testUserAuthentication()
     {
         $Parameters = Member::fromArray([
-            'strEmail' => self::$createdMembers[0]->member_email,
-            'strPassword' => '123456',
-            'format' => 'json',
+            'strEmail'      => self::$createdMembers[0]->member_email,
+            'strPassword'   => '123456',
+            'format'        => 'json',
         ]);
 
         $member = new Member();
@@ -285,9 +285,9 @@ class UserTests extends \PHPUnit\Framework\TestCase
         //region -- Authenticate a user and get session guid --
 
         $recordParameters = Member::fromArray([
-            'strEmail' => self::$createdMembers[0]->member_email,
-            'strPassword' => '123456',
-            'format' => 'json',
+            'strEmail'      => self::$createdMembers[0]->member_email,
+            'strPassword'   => '123456',
+            'format'        => 'json',
         ]);
 
         $response = $member->memberAuthentication($recordParameters);
@@ -305,9 +305,9 @@ class UserTests extends \PHPUnit\Framework\TestCase
 
         // Validate the session
         $params = Member::fromArray([
-            'session_guid' => $sessionGuid,
-            'format' => 'json',
-            'user_key' => 1,
+            'session_guid'  => $sessionGuid,
+            'format'        => 'json',
+            'user_key'      => 1,
         ]);
 
         $result = $member->validateSession($params);
@@ -323,16 +323,16 @@ class UserTests extends \PHPUnit\Framework\TestCase
     {
         $this->markTestSkipped('must be revisited.'); // This test requires valid user email
         $registrParameters = Member::fromArray([
-            'strEmail' => 'aaaaaaaaaaaaaaa@gmail.com',
+            'strEmail'      => 'aaaaaaaaaaaaaaa@gmail.com',
             'strPassword_1' => 'ooo111111',
             'strPassword_2' => 'ooo111111',
-            'strFirstName' => 'Driver',
-            'strLastName' => 'Driverson',
-            'format' => 'json',
-            'strIndustry' => 'Gifting',
-            'chkTerms' => 1,
-            'device_type' => 'web',
-            'plan' => 'free',
+            'strFirstName'  => 'Driver',
+            'strLastName'   => 'Driverson',
+            'format'        => 'json',
+            'strIndustry'   => 'Gifting',
+            'chkTerms'      => 1,
+            'device_type'   => 'web',
+            'plan'          => 'free',
         ]);
 
         $member = new Member();
@@ -349,21 +349,21 @@ class UserTests extends \PHPUnit\Framework\TestCase
         $date = new \DateTime();
 
         $params = Member::fromArray([
-            'HIDE_ROUTED_ADDRESSES' => 'FALSE',
-            'member_phone' => '571-259-5939',
-            'member_zipcode' => '22102',
-            'route_count' => null,
-            'member_email' => 'regression.autotests+'.$date->getTimestamp().'@gmail.com',
-            'HIDE_VISITED_ADDRESSES' => 'FALSE',
-            'READONLY_USER' => 'FALSE',
-            'member_type' => 'SUB_ACCOUNT_DRIVER',
-            'date_of_birth' => '1994-10-01',
-            'member_first_name' => 'John',
-            'member_password' => '123456',
-            'HIDE_NONFUTURE_ROUTES' => 'FALSE',
-            'member_last_name' => 'Doe',
-            'SHOW_ALL_VEHICLES' => 'FALSE',
-            'SHOW_ALL_DRIVERS' => 'FALSE',
+            'HIDE_ROUTED_ADDRESSES'     => 'FALSE',
+            'member_phone'              => '571-259-5939',
+            'member_zipcode'            => '22102',
+            'route_count'               => null,
+            'member_email'              => 'regression.autotests+'.$date->getTimestamp().'@gmail.com',
+            'HIDE_VISITED_ADDRESSES'    => 'FALSE',
+            'READONLY_USER'             => 'FALSE',
+            'member_type'               => 'SUB_ACCOUNT_DRIVER',
+            'date_of_birth'             => '1994-10-01',
+            'member_first_name'         => 'John',
+            'member_password'           => '123456',
+            'HIDE_NONFUTURE_ROUTES'     => 'FALSE',
+            'member_last_name'          => 'Doe',
+            'SHOW_ALL_VEHICLES'         => 'FALSE',
+            'SHOW_ALL_DRIVERS'          => 'FALSE',
         ]);
 
         $member = new Member();

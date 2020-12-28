@@ -10,7 +10,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 
 $optimizationParameters = [
     'start_date' => '2019-10-15',
-    'end_date' => '2019-10-20'
+    'end_date'   => '2019-10-20'
 ];
 
 $optimizationProblem = new OptimizationProblem();

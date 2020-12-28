@@ -46,9 +46,9 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $terrName = 'Test Territory '.strval(rand(10000, 99999));
 
         $territory = Territory::fromArray([
-            'territory_name' => $terrName,
-            'territory_color' => 'ff7700',
-            'territory' => [
+            'territory_name'    => $terrName,
+            'territory_color'   => 'ff7700',
+            'territory'         => [
                 'type' => TerritoryTypes::CIRCLE,
                 'data' => [
                     '37.569752822786455,-77.47833251953125',
@@ -75,9 +75,9 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $terrName = 'Test Territory '.strval(rand(10000, 99999));
 
         $territory = Territory::fromArray([
-            'territory_name' => $terrName,
-            'territory_color' => 'ff7700',
-            'territory' => [
+            'territory_name'    => $terrName,
+            'territory_color'   => 'ff7700',
+            'territory'         => [
                 'type' => TerritoryTypes::CIRCLE,
                 'data' => [
                     '37.569752822786455,-77.47833251953125',
@@ -89,9 +89,9 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             $territory->toArray(),
             [
-                'territory_name' => $terrName,
-                'territory_color' => 'ff7700',
-                'territory' => [
+                'territory_name'    => $terrName,
+                'territory_color'   => 'ff7700',
+                'territory'         => [
                     'type' => TerritoryTypes::CIRCLE,
                     'data' => [
                         '37.569752822786455,-77.47833251953125',
@@ -108,7 +108,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
 
         $queryParameters = [
             'offset' => 0,
-            'limit' => 20,
+            'limit'  => 20,
         ];
 
         $response = $territory->getTerritories($queryParameters);
@@ -144,8 +144,8 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_name' => 'Test Circle Territory '.strval(rand(10000, 99999)),
-            'territory_color' => 'ff7700',
+            'territory_name'    => 'Test Circle Territory '.strval(rand(10000, 99999)),
+            'territory_color'   => 'ff7700',
             'territory' => $territoryParams,
         ]);
 
@@ -176,8 +176,8 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_name' => 'Test Rectangular Territory '.strval(rand(10000, 99999)),
-            'territory_color' => 'ff7705',
+            'territory_name'    => 'Test Rectangular Territory '.strval(rand(10000, 99999)),
+            'territory_color'   => 'ff7705',
             'territory' => $territoryParams,
         ]);
 
@@ -215,8 +215,8 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_name' => 'Test Polygon Territory '.strval(rand(10000, 99999)),
-            'territory_color' => 'ff7707',
+            'territory_name'    => 'Test Polygon Territory '.strval(rand(10000, 99999)),
+            'territory_color'   => 'ff7707',
             'territory' => $territoryParams,
         ]);
 
@@ -252,10 +252,10 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_id' => self::$createdTerritories[0],
-            'territory_name' => 'Test Territory Updated as rectangle',
-            'territory_color' => 'ff5500',
-            'territory' => $territoryParameters,
+            'territory_id'      => self::$createdTerritories[0],
+            'territory_name'    => 'Test Territory Updated as rectangle',
+            'territory_color'   => 'ff5500',
+            'territory'         => $territoryParameters,
         ]);
 
         $response = $territory->updateTerritory($TerritoryParameters);

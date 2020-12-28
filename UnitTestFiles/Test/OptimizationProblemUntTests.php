@@ -8,6 +8,7 @@ use Route4Me\Constants;
 use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\DistanceUnit;
+use Route4Me\Enum\OptimizationStates;
 use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\TravelMode;
 use Route4Me\OptimizationProblemParams;
@@ -15,8 +16,7 @@ use Route4Me\Route;
 use Route4Me\Route4Me;
 use Route4Me\OptimizationProblem;
 use Route4Me\RouteParameters;
-use function Sodium\add;
-
+//use function Sodium\add;
 
 class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
 {
@@ -183,7 +183,41 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         ]);
 
         $this->assertNotNull($problem);
+        $this->assertInstanceOf(OptimizationProblem::class, $problem);
         $this->assertNotNull($problem->getRoutes());
+    }
+
+    public function testGetOptizationsByState()
+    {
+        $problems = OptimizationProblem::get([
+            'state'     => OptimizationStates::OPTIMIZED,
+            'limit'     => 5,
+            'offset'    => 0,
+        ]);
+
+        $this->assertNotNull($problems);
+        $this->assertTrue(is_array($problems));
+        $this->assertTrue(sizeof($problems)>0);
+        $this->assertInstanceOf(OptimizationProblem::class, $problems[0]);
+
+        foreach ($problems as $problem) {
+            $this->assertEquals(OptimizationStates::OPTIMIZED, $problem->state);
+        }
+    }
+
+    public function testGetOptimizationIDsOnly()
+    {
+        $this->markTestSkipped('must be revisited.');
+
+        $problems = OptimizationProblem::get([
+            'id_only'   => 1,
+            'limit'     => 5,
+            'offset'    => 0,
+        ]);
+
+        $this->assertNotNull($problems);
+        $this->assertTrue(is_array($problems));
+        $this->assertTrue(sizeof($problems)>0);
     }
 
     public function testReoptimize()

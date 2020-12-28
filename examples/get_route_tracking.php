@@ -17,8 +17,8 @@ $route_id = $route->getRandomRouteId(0, 10);
 assert(!is_null($route_id), "Cannot retrieve a random route ID");
 
 $params = [
-    'device_tracking_history' => true,
-    'route_id' => $route_id,
+    'device_tracking_history'   => true,
+    'route_id'                  => $route_id,
 ];
 
 // Get route tracking

@@ -24,8 +24,8 @@ assert(!is_null($randomMemberID), "There is no member of the type SUB_ACCOUNT_DR
 
 // Update member
 $params = Member::fromArray([
-    'member_id' => $randomMemberID,
-    'custom_data' => ['Custom Key 2' => 'Custom Value 2'],
+    'member_id'     => $randomMemberID,
+    'custom_data'   => ['Custom Key 2' => 'Custom Value 2'],
 ]);
 
 $response = $member->updateMember($params);

@@ -22,7 +22,7 @@ assert(!is_null($route_id), "Cannot retrieve a random route ID");
 // Get a route with the path points
 $params = [
     'route_path_output' => 'Points',
-    'route_id' => $route_id,
+    'route_id'          => $route_id,
 ];
 
 $routeResults = (array) $route->getRoutePoints($params);

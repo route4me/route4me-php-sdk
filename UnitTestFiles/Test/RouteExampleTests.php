@@ -20,7 +20,7 @@ use Route4Me\OptimizationProblem;
 use Route4Me\RouteParameters;
 use Route4Me\ScheduleCalendarParameters;
 use Route4Me\ScheduleCalendarResponse;
-use Route4Me\Vehicle;
+use Route4Me\Vehicles\Vehicle;
 
 class RouteExampleTests extends \PHPUnit\Framework\TestCase
 {

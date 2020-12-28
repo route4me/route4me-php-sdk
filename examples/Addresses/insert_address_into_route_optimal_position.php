@@ -23,17 +23,17 @@ assert(!is_null($routeId), "Cannot retrieve random route_id");
 $addresses = [];
 
 $params = [
-    'route_id' => $routeId,
+    'route_id'  => $routeId,
     'addresses' => [
         '0' => [
-            'address' => 'Cabo Rojo, Cabo Rojo 00623, Puerto Rico',
-            'alias' => '',
-            'lat' => 18.086627,
-            'lng' => -67.145735,
-            'curbside_lat' => 18.086627,
-            'curbside_lng' => -67.145735,
-            'is_departed' => false,
-            'is_visited' => false,
+            'address'       => 'Cabo Rojo, Cabo Rojo 00623, Puerto Rico',
+            'alias'         => '',
+            'lat'           => 18.086627,
+            'lng'           => -67.145735,
+            'curbside_lat'  => 18.086627,
+            'curbside_lng'  => -67.145735,
+            'is_departed'   => false,
+            'is_visited'    => false,
         ],
     ],
     'optimal_position' => true,

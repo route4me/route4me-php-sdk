@@ -33,17 +33,17 @@ foreach ($jsonDepots as $depot) {
 }
 
 $parameters = RouteParameters::fromArray([
-    'route_name' => 'Multiple Depots Seprate Section '.date('Y-m-d H:i'),
-    'algorithm_type' => AlgorithmType::CVRP_TW_MD,
-    'distance_unit' => DistanceUnit::MILES,
-    'device_type' => DeviceType::WEB,
-    'optimize' => OptimizationType::TIME,
-    'metric' => Metric::GEODESIC,
-    'route_max_duration' => 86400 * 2,
-    'travel_mode' => TravelMode::DRIVING,
-    'vehicle_capacity' => 50,
-    'vehicle_max_distance_mi' => 10000,
-    'parts' => 50,
+    'route_name'                => 'Multiple Depots Seprate Section '.date('Y-m-d H:i'),
+    'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
+    'distance_unit'             => DistanceUnit::MILES,
+    'device_type'               => DeviceType::WEB,
+    'optimize'                  => OptimizationType::TIME,
+    'metric'                    => Metric::GEODESIC,
+    'route_max_duration'        => 86400 * 2,
+    'travel_mode'               => TravelMode::DRIVING,
+    'vehicle_capacity'          => 50,
+    'vehicle_max_distance_mi'   => 10000,
+    'parts'                     => 50,
 ]);
 
 $optimizationParams = new OptimizationProblemParams();

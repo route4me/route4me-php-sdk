@@ -11,8 +11,8 @@ Route4Me::setApiKey(Constants::API_KEY);
 // Get two random locations IDs
 
 $addressBookLocationParameters = [
-    'limit' => 30,
-    'offset' => 0,
+    'limit'     => 30,
+    'offset'    => 0,
 ];
 
 $abContacts = new AddressBookLocation();

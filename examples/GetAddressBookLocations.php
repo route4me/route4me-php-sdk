@@ -11,8 +11,8 @@ Route4Me::setApiKey(Constants::API_KEY);
 // Example refers to getting the address book locations
 
 $AddressBookLocationParameters = [
-    'limit' => 30,
-    'offset' => 0,
+    'limit'     => 30,
+    'offset'    => 0,
 ];
 
 $abContacts = new AddressBookLocation();

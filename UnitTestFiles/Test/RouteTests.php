@@ -10,13 +10,14 @@ use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\Metric;
 use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\TravelMode;
-use Route4Me\Member;
+use Route4Me\Members\Member;
 use Route4Me\OptimizationProblem;
 use Route4Me\OptimizationProblemParams;
 use Route4Me\Route;
 use Route4Me\Route4Me;
 use Route4Me\RouteParameters;
-use Route4Me\Vehicle;
+use Route4Me\RouteParametersQuery;
+use Route4Me\Vehicles\Vehicle;
 
 class RouteTests extends \PHPUnit\Framework\TestCase
 {
@@ -232,9 +233,9 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $vehicle = new Vehicle();
 
         $vehicleParameters = [
-            'with_pagination' => true,
-            'page' => 1,
-            'perPage' => 10,
+            'with_pagination'   => true,
+            'page'              => 1,
+            'perPage'           => 10,
         ];
 
         $response = $vehicle->getVehicles($vehicleParameters);
@@ -308,12 +309,12 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         // only thus, which was generated with the parameter directions = 1
 
         // Get a route with the directions
-        $params = [
-            'directions' => 1,
-            'route_id' => $route_id,
-        ];
+        $params = new RouteParametersQuery();
 
-        $routeResult = (array)$route->getRoutePoints($params);
+        $params->route_id = $route_id;
+        $params->directions = true;
+
+        $routeResult = (array)$route->getRoutePoints($params->toArray());
 
         $this->assertNotNull($routeResult);
         $this->assertTrue(is_array($routeResult));
@@ -333,12 +334,13 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         // which was generated with the parameter route_path_output = "Points"
 
         // Get a route with the path points
-        $params = [
-            'route_path_output' => 'Points',
-            'route_id' => $route_id,
-        ];
 
-        $routeResult = (array) $route->getRoutePoints($params);
+        $params = new RouteParametersQuery();
+
+        $params->route_id           = $route_id;
+        $params->route_path_output  = 'Points';
+
+        $routeResult = (array) $route->getRoutePoints($params->toArray());
 
         $this->assertNotNull($routeResult);
         $this->assertTrue(is_array($routeResult));
@@ -364,14 +366,14 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
     public function testGetRoutesByIDs()
     {
-        $RouteParameters = [
-            'limit' => 5,
-            'offset' => 0,
-        ];
+        $params = new RouteParametersQuery();
+
+        $params->limit = 5;
+        $params->offset = 0;
 
         $route = new Route();
 
-        $routeResults = $route->getRoutes($RouteParameters);
+        $routeResults = $route->getRoutes($params->toArray());
 
         $routeId1 = $routeResults[0]->route_id;
         $routeId2 = $routeResults[1]->route_id;
@@ -389,22 +391,22 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
     public function testGetRoutesFromDateRange()
     {
-        $RouteParameters = [
-            'start_date' => date('Y-m-d', strtotime('-1 days')),
-            'end_date' => date('Y-m-d', strtotime('+1 days'))
-        ];
+        $params = new RouteParametersQuery();
+
+        $params->start_date = date('Y-m-d', strtotime('-1 days'));
+        $params->end_date   = date('Y-m-d', strtotime('+1 days'));
 
         $route = new Route();
 
-        $routeResults = $route->getRoutes($RouteParameters);
+        $routeResults = $route->getRoutes($params->toArray());
 
         $this->assertNotNull($routeResults);
         $this->assertTrue(is_array($routeResults));
         $this->assertTrue(sizeof($routeResults)>0);
         $this->assertInstanceOf(Route::class, Route::fromArray($routeResults));
 
-        $startDateUnix = date_create($RouteParameters['start_date'])->format('U');
-        $endtDateUnix = date_create($RouteParameters['end_date'])->format('U');
+        $startDateUnix = date_create($params->start_date)->format('U');
+        $endtDateUnix = date_create($params->end_date)->format('U');
 
         foreach ($routeResults as $routeResult) {
 
@@ -417,14 +419,14 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
     public function testGetRoutes()
     {
-        $RouteParameters = [
-            'limit' => 10,
-            'offset' => 0,
-        ];
+        $params = new RouteParametersQuery();
+
+        $params->limit = 10;
+        $params->offset = 0;
 
         $route = new Route();
 
-        $routeResults = $route->getRoutes($RouteParameters);
+        $routeResults = $route->getRoutes($params->toArray());
 
         $this->assertNotNull($routeResults);
         $this->assertTrue(is_array($routeResults));
@@ -439,12 +441,12 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route_id = self::$testRoutes[0]->route_id;
 
         // Re-sequence all addresses
-        $params = [
-            'route_id' => $route_id,
-            'reoptimize' => true,
-        ];
+        $params = new RouteParametersQuery();
 
-        $routeResult = $route->updateRoute($params);
+        $params->route_id   = $route_id;
+        $params->reoptimize = true;
+
+        $routeResult = $route->updateRoute($params->toArray());
 
         $this->assertNotNull($routeResult);
         $this->assertTrue(is_array($routeResult));
@@ -478,12 +480,12 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         echo "Route ID-> $routeID, Route destination ID -> $routeDestinationID <br>";
 
         $params = [
-            'route_id' => $routeID,
-            'route_destination_id' => $routeDestinationID,
-            'addresses' => [
+            'route_id'              => $routeID,
+            'route_destination_id'  => $routeDestinationID,
+            'addresses'             => [
                 '0' => [
-                    'route_destination_id' => $routeDestinationID,
-                    'sequence_no' => 3,
+                    'route_destination_id'  => $routeDestinationID,
+                    'sequence_no'           => 3,
                 ],
             ],
         ];
@@ -510,12 +512,12 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         //region -- Re-sequence a route destination --
 
         $params = [
-            'route_id' => $routeID,
-            'route_destination_id' => $routeDestinationID,
+            'route_id'              => $routeID,
+            'route_destination_id'  => $routeDestinationID,
             'addresses' => [
                 '0' => [
-                    'route_destination_id' => $routeDestinationID,
-                    'sequence_no' => 3,
+                    'route_destination_id'  => $routeDestinationID,
+                    'sequence_no'           => 3,
                 ],
             ],
         ];
@@ -552,12 +554,12 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $status = $route->resequenceAllAddresses($params);
 
-        $params = [
-            'route_id' => $routeID,
-            'original' =>  1
-        ];
+        $params = new RouteParametersQuery();
 
-        $routeWithOriginRoute = $route->getRoutes($params);
+        $params->route_id = $routeID;
+        $params->original = true;
+
+        $routeWithOriginRoute = $route->getRoutes($params->toArray());
 
         //endregion
 
@@ -576,9 +578,9 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         // Share a route with an email
         $params = [
-            'route_id' => $routeID,
-            'response_format' => 'json',
-            'recipient_email' => 'rrrrrrrrrrrrrrrr+share1234@gmail.com',
+            'route_id'          => $routeID,
+            'response_format'   => 'json',
+            'recipient_email'   => 'rrrrrrrrrrrrrrrr+share1234@gmail.com',
         ];
 
         $result = $route->shareRoute($params);
@@ -600,8 +602,8 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->parameters = new \stdClass();
 
         $parameters = [
-            'route_id' => $routeID,
-            'unlink_from_master_optimization' => true,
+            'route_id'                          => $routeID,
+            'unlink_from_master_optimization'   => true,
         ];
 
         $route->httpheaders = 'Content-type: application/json';
@@ -624,7 +626,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $routeID = self::$testRoutes[0]->route_id;
 
         $parameters = [
-            'route_id' => $routeID,
+            'route_id'   => $routeID,
             'parameters' => [
                 'avoidance_zones' => [
                     'FAA49711A0F1144CE4E203DC18ABDFFB',
@@ -661,8 +663,8 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->parameters = new \stdClass();
 
         $route->parameters->custom_fields = [
-            'animal' => 'tiger',
-            'bird' => 'canary',
+            'animal'    => 'tiger',
+            'bird'      => 'canary',
         ];
 
         $route->httpheaders = 'Content-type: application/json';
@@ -692,10 +694,10 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->parameters = new \stdClass();
 
         $route->parameters = [
-            'member_id' => $initialRoute->member_id,
-            'optimize' => 'Distance',
-            'route_max_duration' => '82400',
-            'route_name' => 'updated '.date('m-d-Y'),
+            'member_id'             => $initialRoute->member_id,
+            'optimize'              => 'Distance',
+            'route_max_duration'    => '82400',
+            'route_name'            => 'updated '.date('m-d-Y'),
         ];
 
         $route->httpheaders = 'Content-type: application/json';

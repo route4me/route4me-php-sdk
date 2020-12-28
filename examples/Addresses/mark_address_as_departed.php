@@ -27,10 +27,10 @@ assert(!is_null($route_destination_id), "Cannot retrieve random address");
 $address = new Address();
 
 $params = [
-    'route_id' => $routeId,
-    'address_id' => $route_destination_id,
-    'is_departed' => 1,
-    'member_id' => 1,
+    'route_id'      => $routeId,
+    'address_id'    => $route_destination_id,
+    'is_departed'   => 1,
+    'member_id'     => 1,
 ];
 
 $result = $address->markAsDeparted($params);

@@ -14,8 +14,8 @@ $abGroup = new AddressBookGroup();
 
 // Get reandom address book group
 $addressBookGroupParameters = [
-    'limit' => 20,
-    'offset' => 0,
+    'limit'     => 20,
+    'offset'    => 0,
 ];
 
 $randomGroup = $abGroup->getRandomAddressBookGroup($addressBookGroupParameters);

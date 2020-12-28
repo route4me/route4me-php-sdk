@@ -28,10 +28,10 @@ $jFile = file_get_contents('add_order_to_optimization_data.json');
 $body = json_decode($jFile);
 
 $orderParameters = [
-    'optimization_problem_id' => $optimizationProblemId,
-    'redirect' => 0,
-    'device_type' => 'web',
-    'addresses' => $body->addresses,
+    'optimization_problem_id'   => $optimizationProblemId,
+    'redirect'                  => 0,
+    'device_type'               => 'web',
+    'addresses'                 => $body->addresses,
 ];
 
 $order = new Order();

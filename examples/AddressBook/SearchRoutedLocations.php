@@ -16,9 +16,9 @@ $abLocation = new AddressBookLocation();
 // Example refers to the process of searching for the routed locations
 
 $params = [
-    'offset' => 0,
-    'limit' => 5,
-    'display' => 'routed',
+    'offset'    => 0,
+    'limit'     => 5,
+    'display'   => 'routed',
 ];
 
 $abcResult = $abLocation->searchAddressBookLocations($params);

@@ -20,8 +20,8 @@ if ($groupIds==null) {
 }
 
 $searchParameters = [
-    'fields' => ['address_id'],
-    'group_id' => $groupIds[0],
+    'fields'    => ['address_id'],
+    'group_id'  => $groupIds[0],
 ];
 
 $addressBookContacts = $abGroup->getAddressBookContactsByGroup($searchParameters);

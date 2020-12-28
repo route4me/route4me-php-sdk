@@ -9,7 +9,7 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $geoCodingParameters = [
-    'format' => 'xml',
+    'format'    => 'xml',
     'addresses' => '42.35863,-71.05670',
 ];
 

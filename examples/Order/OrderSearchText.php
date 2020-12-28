@@ -12,9 +12,9 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
-    'query' => 'Auto',
-    'offset' => 0,
-    'limit' => 5,
+    'query'     => 'Auto',
+    'offset'    => 0,
+    'limit'     => 5,
 ]);
 
 $order = new Order();
