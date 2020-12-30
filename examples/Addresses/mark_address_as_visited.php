@@ -9,7 +9,7 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random route ID
 $route = new Route();
@@ -38,10 +38,10 @@ assert(!is_null($route_destination_id), "Cannot retrieve random address");
 $address = new Address();
 
 $params = [
-    'route_id' => $routeId,
-    'address_id' => $route_destination_id,
-    'is_visited' => 1,
-    'member_id' => 1,
+    'route_id'      => $routeId,
+    'address_id'    => $route_destination_id,
+    'is_visited'    => 1,
+    'member_id'     => 1,
 ];
 
 $result = $address->markAsVisited($params);

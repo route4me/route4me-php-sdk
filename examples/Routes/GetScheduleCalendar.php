@@ -8,7 +8,7 @@ require $root.'/vendor/autoload.php';
 // The example requires an API key with the enterprise subscription.
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('E60AA4276C4A321FE4AF62D0705D346E');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $now            = new \DateTime();
 

@@ -1,12 +1,14 @@
 <?php
 
-namespace Route4Me;
+namespace Route4Me\Tracking;
 
+use Route4Me;
 use Route4Me\Exception\BadParam;
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\Format;
+use Route4Me\Enum\Endpoint;
 
-class TrackSetParams extends Common
+class TrackSetParams extends \Route4Me\Common
 {
     public $format;
     public $member_id;
@@ -25,7 +27,7 @@ class TrackSetParams extends Common
 
     public function __construct()
     {
-        Route4Me::setBaseUrl(Endpoint::BASE_URL);
+        Route4Me\Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
     public static function fromArray(array $params)
@@ -37,6 +39,7 @@ class TrackSetParams extends Common
         }
 
         $types = [
+            Format::JSON,
             Format::SERIALIZED,
             Format::CSV,
             Format::XML,

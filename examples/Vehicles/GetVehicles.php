@@ -2,20 +2,22 @@
 
 namespace Route4Me;
 
+use Route4Me\Vehicles\Vehicle;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 // Example refers to getting all vehicles.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $vehicle = new Vehicle();
 
 $vehicleParameters = [
-        'with_pagination' => true,
-        'page' => 2,
-        'perPage' => 10,
+        'with_pagination'   => true,
+        'page'              => 2,
+        'perPage'           => 10,
     ];
 
 $response = $vehicle->getVehicles($vehicleParameters);

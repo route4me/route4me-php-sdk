@@ -11,7 +11,7 @@ assert_options(ASSERT_BAIL, 1);
 // Example refers to the process of getting all activities recorded after specified time.
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $activityParameters = ActivityParameters::fromArray([
     'limit' => 10,

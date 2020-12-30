@@ -6,7 +6,7 @@ $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $abGroup = new AddressBookGroup();
 
@@ -14,8 +14,8 @@ $abGroup = new AddressBookGroup();
 
 // Get reandom address book group
 $addressBookGroupParameters = [
-    'limit' => 20,
-    'offset' => 0,
+    'limit'     => 20,
+    'offset'    => 0,
 ];
 
 $randomGroup = $abGroup->getRandomAddressBookGroup($addressBookGroupParameters);

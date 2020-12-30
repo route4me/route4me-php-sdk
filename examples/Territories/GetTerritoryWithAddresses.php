@@ -9,7 +9,7 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $territory = new Territory();
 
@@ -42,8 +42,8 @@ echo "Territory ID -> $territory_id <br><br>";
 
 // Get a territory with the addresses
 $params = [
-    'territory_id' => $territory_id,
-    'addresses' => 1,
+    'territory_id'  => $territory_id,
+    'addresses'     => 1,
 ];
 
 $result1 = $territory->getTerritory($params);

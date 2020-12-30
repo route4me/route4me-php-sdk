@@ -42,12 +42,14 @@ class OptimizationProblemParams extends Common
             $param->addAddress($address);
         }
 
-        foreach ($params['depots'] as $depot) {
-            if (!($depot instanceof Address)) {
-                $depot = Address::fromArray($depot);
-            }
+        if (isset($params['depots'] )) {
+            foreach ($params['depots'] as $depot) {
+                if (!($depot instanceof Address)) {
+                    $depot = Address::fromArray($depot);
+                }
 
-            $param->addAddress($address);
+                $param->addAddress($address);
+            }
         }
 
         $param->directions = self::getValue($params, 'directions');
