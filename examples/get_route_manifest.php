@@ -8,7 +8,7 @@ require $root.'/vendor/autoload.php';
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $route = new Route();
 
@@ -19,7 +19,7 @@ assert(!is_null($route_id), "Cannot retrieve a random route ID");
 // Get route manifest
 $params = [
     'directions' => 1,
-    'route_id' => $route_id,
+    'route_id'   => $route_id,
 ];
 
 $route = Route::getRoutes($params);

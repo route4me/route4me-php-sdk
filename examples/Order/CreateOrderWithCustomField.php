@@ -11,7 +11,7 @@ assert_options(ASSERT_BAIL, 1);
 // The example demonstrates process of creating an order with a custom user field by sending HTPP POST data.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
     'address_1'                => '1358 E Luzerne St, Philadelphia, PA 19124, US',

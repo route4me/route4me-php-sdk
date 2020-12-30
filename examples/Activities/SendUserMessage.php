@@ -8,16 +8,16 @@ require $root.'/vendor/autoload.php';
 // The example refers to logging of a specific message directly to Activity Feed
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random route ID
 $route = new Route();
 $route_id = $route->getRandomRouteId(0, 10);
 
 $postParameters = ActivityParameters::fromArray([
-    'activity_type' => 'user_message',
-    'activity_message' => 'Hello - php!',
-    'route_id' => $route_id,
+    'activity_type'     => 'user_message',
+    'activity_message'  => 'Hello - php!',
+    'route_id'          => $route_id,
 ]);
 
 $activities = new ActivityParameters();

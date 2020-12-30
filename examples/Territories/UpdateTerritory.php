@@ -11,7 +11,7 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Add Avoidance Zone and get territory_id
 $territory = new Territory();
@@ -23,9 +23,9 @@ $territoryParams['data'] = [
 ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_name' => 'Test Territory '.strval(rand(10000, 99999)),
-    'territory_color' => 'ff7700',
-    'territory' => $territoryParams,
+    'territory_name'    => 'Test Territory '.strval(rand(10000, 99999)),
+    'territory_color'   => 'ff7700',
+    'territory'         => $territoryParams,
 ]);
 
 $result = (array) $territory->addTerritory($TerritoryParameters);
@@ -46,10 +46,10 @@ $territoryParameters = [
    ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_id' => $territory_id,
-    'territory_name' => 'Test Territory Updated as rectangle',
-    'territory_color' => 'ff5500',
-    'territory' => $territoryParameters,
+    'territory_id'      => $territory_id,
+    'territory_name'    => 'Test Territory Updated as rectangle',
+    'territory_color'   => 'ff5500',
+    'territory'         => $territoryParameters,
 ]);
 
 $result1 = $territory->updateTerritory($TerritoryParameters);

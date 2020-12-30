@@ -9,12 +9,12 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random custom note type
-$address = new Address();
+$addressNote = new AddressNote();
 
-$customNotes = $address->getAllCustomNoteTypes();
+$customNotes = $addressNote->getAllCustomNoteTypes();
 
 assert(!is_null($customNotes), "Cannot retrieve all custom note types");
 assert(sizeof($customNotes) > 0, "There is no custom note type in the user's account");
@@ -26,8 +26,8 @@ $noteParameters = [
     'id' => $randomCustomNoteID,
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
-$response = $address->removeCustomNoteType($noteParameters);
+$response = $addressNote->removeCustomNoteType($noteParameters);
 
 Route4Me::simplePrint($response);

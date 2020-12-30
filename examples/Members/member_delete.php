@@ -2,6 +2,8 @@
 
 namespace Route4Me;
 
+use Route4Me\Members\Member;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
@@ -11,7 +13,7 @@ assert_options(ASSERT_BAIL, 1);
 // Example refers to removing of an user.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $member = new Member();
 
@@ -25,6 +27,11 @@ $params = Member::fromArray([
     'member_id' => $randomMemberID,
 ]);
 
-$response = $member->deleteMember($params);
+$errorText = "";
+$response = $member->deleteMember($params, $errorText);
 
-Route4Me::simplePrint($response);
+if (!is_null($response)) {
+    Route4Me::simplePrint($response);
+} else {
+    echo $errorText."<br>";
+}

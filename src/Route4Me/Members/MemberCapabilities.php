@@ -1,11 +1,11 @@
 <?php
 
-namespace Route4Me;
+namespace Route4Me\Members;
 
 /*
  * Member capabilities data structure
  */
-class MemberCapabilities extends Common
+class MemberCapabilities extends \Route4Me\Common
 {
     /*
      * Array of the avoidance zone IDs.
@@ -41,4 +41,17 @@ class MemberCapabilities extends Common
      * If true, the member subscription is commercial.
      */
     public $commercial;
+
+    public static function fromArray(array $params)
+    {
+        $memberCapabilities = new self();
+
+        foreach ($params as $key => $value) {
+            if (property_exists($memberCapabilities, $key)) {
+                $memberCapabilities->{$key} = $value;
+            }
+        }
+
+        return $memberCapabilities;
+    }
 }

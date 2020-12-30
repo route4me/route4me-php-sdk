@@ -9,7 +9,7 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random route ID
 $route = new Route();
@@ -25,20 +25,20 @@ assert(!is_null($route_destination_id), "Cannot retrieve random address");
 
 // Add a file note
 $noteParameters = [
-    'strFilename' => 'notes.csv',
-    'route_id' => $route_id,
-    'address_id' => $route_destination_id,
-    'dev_lat' => 33.132675170898,
-    'dev_lng' => -83.244743347168,
-    'device_type' => 'web',
+    'strFilename'   => 'notes.csv',
+    'route_id'      => $route_id,
+    'address_id'    => $route_destination_id,
+    'dev_lat'       => $addressRand['lat'],
+    'dev_lng'       => $addressRand['lng'],
+    'device_type'   => 'web',
     'strUpdateType' => 'ANY_FILE',
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
 echo "route_id = $route_id <br>";
 echo "route_destination_id = $route_destination_id <br><br>";
 
-$address1 = $address->AddNoteFile($noteParameters);
+$address1 = $addressNote->AddNoteFile($noteParameters);
 
 Route4Me::simplePrint($address1);

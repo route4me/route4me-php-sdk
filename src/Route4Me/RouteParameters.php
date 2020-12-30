@@ -75,8 +75,14 @@ class RouteParameters extends Common
     public $route_service_time_multiplier;
     public $optimization_engine;
     public $override_addresses;
-    public $time;
+    //public $time;
     public $bundling;
+
+    public $advanced_constraints=[];
+    public $ignore_tw;
+    public $is_dynamic_start_time;
+    public $route_type;
+    public $slowdowns;
 
     public static function fromArray(array $params)
     {

@@ -8,7 +8,7 @@ require $root.'/vendor/autoload.php';
 // Example refers to the process of batch geocoding of the addresses
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $addressList = [
     'Los Angeles International Airport, CA',
@@ -19,8 +19,8 @@ $addressList = [
 $addressesString = implode('\n', $addressList);
 
 $geoCodingParameters = [
-    'strExportFormat' => 'json',
-    'addresses' => $addressesString,
+    'strExportFormat'   => 'json',
+    'addresses'         => $addressesString,
 ];
 
 $fGeoCoding = new Geocoding();

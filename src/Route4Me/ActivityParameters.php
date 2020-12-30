@@ -47,40 +47,49 @@ class ActivityParameters extends Common
         return $activityparameters;
     }
 
+    /*
+     * Get all the activities limited by query parameters.
+     */
     public static function getActivities($params)
     {
         $allQueryFields = ['route_id', 'team', 'limit', 'offset', 'start', 'member_id'];
 
         $activity = Route4Me::makeRequst([
-            'url' => Endpoint::GET_ACTIVITIES,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::GET_ACTIVITIES,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $activity;
     }
 
+    /*
+     * Returns the activity feed.
+     */
     public static function searchActivities($params)
     {
         $allQueryFields = ['route_id', 'limit', 'offset', 'activity_type'];
 
         $activity = Route4Me::makeRequst([
-            'url' => Endpoint::GET_ACTIVITIES,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::GET_ACTIVITIES,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $activity;
     }
 
+    /*
+     * Creates a user's activity by sending a custom message to the activity stream.
+     */
     public static function sendUserMessage($params)
     {
         $allBodyFields = ['activity_type', 'activity_message', 'route_id'];
 
         $result = Route4Me::makeRequst([
-            'url' => Endpoint::ACTIVITY_FEED,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ACTIVITY_FEED,
+            'method'    => 'POST',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $result;
