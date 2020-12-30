@@ -16,7 +16,7 @@ use Route4Me\Route;
 // The example refers to the process of creating new optimization with fine-tuning.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('./addresses_md_tw.json'), true);
@@ -30,7 +30,7 @@ foreach ($json as $address) {
 
 //region Optimization With Duration Priority FineTuning
 $parameters = RouteParameters::fromArray([
-    'route_name'        => 'Optimization With Duration Priority FineTuning. '.date('Y-m-d H:i'),
+    'route_name'                => 'Optimization With Duration Priority FineTuning. '.date('Y-m-d H:i'),
     'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
     'route_time'                => 23200,
     'optimize'                  => OptimizationType::TIME,
@@ -66,12 +66,12 @@ echo "   Total Trip Distance:     $totalTripDistanceByDuration <br>";
 echo "   Total Trip Duration:     $totalTripDurationByDuration <br>";
 echo "   Total Trip Waiting Time: $totalTripWaitingTimeByDuration <br><br><br>";
 
-#endregion
+//endregion
 
 
 //region Optimization With Distance Priority FineTuning
 $parameters = RouteParameters::fromArray([
-    'route_name'        => 'Optimization With Distance Priority FineTuning. '.date('Y-m-d H:i'),
+    'route_name'                => 'Optimization With Distance Priority FineTuning. '.date('Y-m-d H:i'),
     'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
     'route_time'                => 23200,
     'optimize'                  => OptimizationType::TIME,
@@ -107,12 +107,12 @@ echo "   Total Trip Distance:     $totalTripDistanceByDistance <br>";
 echo "   Total Trip Duration:     $totalTripDurationByDistance <br>";
 echo "   Total Trip Waiting Time: $totalTripDurationByDistance <br><br><br>";
 
-#endregion
+//endregion
 
 
 //region Optimization With TimeWaiting Priority FineTuning
 $parameters = RouteParameters::fromArray([
-    'route_name'        => 'Optimization With WaitingTime Priority FineTuning. '.date('Y-m-d H:i'),
+    'route_name'                => 'Optimization With WaitingTime Priority FineTuning. '.date('Y-m-d H:i'),
     'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
     'route_time'                => 23200,
     'optimize'                  => OptimizationType::TIME,
@@ -148,4 +148,4 @@ echo "   Total Trip Distance:     $totalTripDistanceByTimeWaiting <br>";
 echo "   Total Trip Duration:     $totalTripDurationByTimeWaiting <br>";
 echo "   Total Trip Waiting Time: $totalTripWaitingTimeByTimeWaiting <br><br><br>";
 
-#endregion
+//endregion

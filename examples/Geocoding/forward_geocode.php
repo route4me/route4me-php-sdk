@@ -6,11 +6,11 @@ $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $geoCodingParameters = [
     'strExportFormat' => 'json',
-    'addresses' => 'Los20%Angeles20%International20%Airport,20%CA',
+    'addresses'       => 'Los20%Angeles20%International20%Airport,20%CA',
 ];
 
 $fGeoCoding = new Geocoding();

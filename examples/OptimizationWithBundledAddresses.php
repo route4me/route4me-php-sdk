@@ -14,7 +14,7 @@ use Route4Me\Enum\Metric;
 // The example requires an API key with the enterprise subscription.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('./addresses.json'), true);
@@ -32,15 +32,15 @@ $bundling->service_time_rules->first_item_mode = Enum\AddressBundlingModes\First
 $bundling->service_time_rules->additional_items_mode = Enum\AddressBundlingModes\AdditionalItemsMode::KEEP_ORIGINAL;
 
 $parameters = RouteParameters::fromArray([
-    'algorithm_type' => Algorithmtype::TSP,
-    'route_name' => 'Single Driver Multiple TimeWindows 12 Stops',
-    'route_date' => time() + 24 * 60 * 60,
-    'route_time' => 5 * 3600 + 30 * 60,
-    'distance_unit' => DistanceUnit::MILES,
-    'device_type' => DeviceType::WEB,
-    'optimize' => OptimizationType::DISTANCE,
-    'metric' => Metric::GEODESIC,
-    'bundling' => $bundling,
+    'algorithm_type'    => Algorithmtype::TSP,
+    'route_name'        => 'Single Driver Multiple TimeWindows 12 Stops',
+    'route_date'        => time() + 24 * 60 * 60,
+    'route_time'        => 5 * 3600 + 30 * 60,
+    'distance_unit'     => DistanceUnit::MILES,
+    'device_type'       => DeviceType::WEB,
+    'optimize'          => OptimizationType::DISTANCE,
+    'metric'            => Metric::GEODESIC,
+    'bundling'          => $bundling,
 ]);
 
 $optimizationParams = new OptimizationProblemParams();

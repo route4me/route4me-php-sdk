@@ -11,7 +11,7 @@ assert_options(ASSERT_BAIL, 1);
 // Example refers to adding of an order to a route.
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random route ID
 $route = new  Route();
@@ -27,8 +27,8 @@ $jFile = file_get_contents('add_order_to_route_data.json');
 $body = json_decode($jFile);
 
 $orderParameters = Order::fromArray([
-    'route_id' => $routeID,
-    'redirect' => 0,
+    'route_id'  => $routeID,
+    'redirect'  => 0,
     'addresses' => $body->addresses,
 ]);
 

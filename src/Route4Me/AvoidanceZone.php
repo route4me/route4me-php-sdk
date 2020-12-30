@@ -47,9 +47,9 @@ class AvoidanceZone extends Common
     public static function getAvoidanceZone($territory_id)
     {
         $avoidanceZone = Route4Me::makeRequst([
-            'url' => Endpoint::AVOIDANCE_ZONE,
-            'method' => 'GET',
-            'query' => [
+            'url'       => Endpoint::AVOIDANCE_ZONE,
+            'method'    => 'GET',
+            'query'     => [
                 'territory_id' => $territory_id,
             ],
         ]);
@@ -60,11 +60,11 @@ class AvoidanceZone extends Common
     public static function getAvoidanceZones($params)
     {
         $avoidanceZones = Route4Me::makeRequst([
-            'url' => Endpoint::AVOIDANCE_ZONE,
-            'method' => 'GET',
-            'query' => [
+            'url'       => Endpoint::AVOIDANCE_ZONE,
+            'method'    => 'GET',
+            'query'     => [
                 'offset' => isset($params->offset) ? $params->offset : null,
-                'limit' => isset($params->limit) ? $params->limit : null,
+                'limit'  => isset($params->limit) ? $params->limit : null,
             ],
         ]);
 
@@ -84,12 +84,12 @@ class AvoidanceZone extends Common
         }
 
         $abContacts = Route4Me::makeRequst([
-            'url' => Endpoint::AVOIDANCE_ZONE,
-            'method' => 'POST',
-            'body' => [
-                'territory_name' => isset($params->territory_name) ? $params->territory_name : null,
-                'territory_color' => isset($params->territory_color) ? $params->territory_color : null,
-                'territory' => $terParams,
+            'url'       => Endpoint::AVOIDANCE_ZONE,
+            'method'    => 'POST',
+            'body'      => [
+                'territory_name'    => isset($params->territory_name) ? $params->territory_name : null,
+                'territory_color'   => isset($params->territory_color) ? $params->territory_color : null,
+                'territory'         => $terParams,
             ],
         ]);
 
@@ -99,9 +99,9 @@ class AvoidanceZone extends Common
     public function deleteAvoidanceZone($territory_id)
     {
         $result = Route4Me::makeRequst([
-            'url' => Endpoint::AVOIDANCE_ZONE,
-            'method' => 'DELETEARRAY',
-            'query' => [
+            'url'       => Endpoint::AVOIDANCE_ZONE,
+            'method'    => 'DELETEARRAY',
+            'query'     => [
                 'territory_id' => $territory_id,
             ],
         ]);
@@ -112,9 +112,9 @@ class AvoidanceZone extends Common
     public function updateAvoidanceZone($params)
     {
         $avoidanceZone = Route4Me::makeRequst([
-            'url' => Endpoint::AVOIDANCE_ZONE,
-            'method' => 'PUT',
-            'body' => $params,
+            'url'       => Endpoint::AVOIDANCE_ZONE,
+            'method'    => 'PUT',
+            'body'      => $params,
         ]);
 
         return $avoidanceZone;

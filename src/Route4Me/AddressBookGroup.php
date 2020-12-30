@@ -34,9 +34,9 @@ class AddressBookGroup extends Common
     public static function getAddressBookGroup(array $params)
     {
         $abGroup = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_GROUP,
-            'method' => 'GET',
-            'query' => [
+            'url'       => Endpoint::ADDRESS_BOOK_GROUP,
+            'method'    => 'GET',
+            'query'     => [
                 'group_id' => isset($params['group_id']) ?  $params['group_id'] : null,
             ],
         ]);
@@ -49,9 +49,9 @@ class AddressBookGroup extends Common
         $allBodyFields = ['group_id', 'group_color', 'group_icon', 'filter'];
 
         $abGroup = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_GROUP,
-            'method' => 'PUT',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_GROUP,
+            'method'    => 'PUT',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $abGroup;
@@ -62,8 +62,9 @@ class AddressBookGroup extends Common
         $allBodyFields = ['group_id'];
 
         $abGroup = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_GROUP,
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_GROUP,
+            'method'    => 'DELETE',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $abGroup;
@@ -74,9 +75,9 @@ class AddressBookGroup extends Common
         $allBodyFields = ['group_name', 'group_color', 'group_icon', 'filter'];
 
         $abGroup = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_GROUP,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_GROUP,
+            'method'    => 'POST',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $abGroup;
@@ -87,9 +88,9 @@ class AddressBookGroup extends Common
         $allBodyFields = ['fields', 'offset', 'limit', 'filter'];
 
         $abGroups = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_V4,
+            'method'    => 'POST',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $abGroups;
@@ -100,9 +101,9 @@ class AddressBookGroup extends Common
         $allBodyFields = ['fields', 'group_id'];
 
         $abGroups = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_SEARCH,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_SEARCH,
+            'method'    => 'POST',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $abGroups;
@@ -111,11 +112,11 @@ class AddressBookGroup extends Common
     public static function getAddressBookGroups(array $params)
     {
         $abGroup = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_GROUP,
-            'method' => 'GET',
-            'query' => [
-                'offset' => isset($params['offset']) ?  $params['offset'] : null,
-                'limit' => isset($params['limit']) ?  $params['limit'] : null,
+            'url'       => Endpoint::ADDRESS_BOOK_GROUP,
+            'method'    => 'GET',
+            'query'     => [
+                'offset'    => isset($params['offset']) ? $params['offset'] : null,
+                'limit'     => isset($params['limit']) ?  $params['limit'] : null,
             ],
         ]);
 
@@ -137,17 +138,21 @@ class AddressBookGroup extends Common
         return null;
     }
 
+    /*
+     * Gets an array of the address book contact groups with a specified name.
+     * @param string $name
+     *        Address book contact group name
+     */
     public static function getAddressBookGroupIdByName($name)
     {
         $abGroups = self::getAddressBookGroups(['offset'=>0,'limit'=>100]);
 
-        $abGroupId = null;
+        $abGroupId = [];
 
         foreach ($abGroups as $abg) {
             if (isset($abg['group_name'])) {
                 if ($abg['group_name']==$name) {
-                    $abGroupId = $abg['group_id'];
-                    break;
+                    $abGroupId[] = $abg['group_id'];
                 }
             }
         }

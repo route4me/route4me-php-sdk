@@ -10,7 +10,7 @@ assert_options(ASSERT_BAIL, 1);
 
 // The example refers to the process of an asset tracking by sending HTTP parameters.
 
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $trackingNumber = null;
 

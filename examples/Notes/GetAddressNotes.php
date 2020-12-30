@@ -9,7 +9,7 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random route from test routes
 $route = new Route();
@@ -26,30 +26,30 @@ assert(!is_null($route_destination_id), "Cannot retrieve random address");
 
 // Add an address note
 $noteParameters = [
-    'route_id' => $route_id,
-    'address_id' => $route_destination_id,
-    'dev_lat' => 33.132675170898,
-    'dev_lng' => -83.244743347168,
-    'device_type' => 'web',
-    'strUpdateType' => 'dropoff',
-    'strNoteContents' => 'Test '.time(),
+    'route_id'          => $route_id,
+    'address_id'        => $route_destination_id,
+    'dev_lat'           => $addressRand['lat'],
+    'dev_lng'           => $addressRand['lng'],
+    'device_type'       => 'web',
+    'strUpdateType'     => 'dropoff',
+    'strNoteContents'   => 'Test '.time(),
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
-$address1 = $address->AddAddressNote($noteParameters);
+$address1 = $addressNote->AddAddressNote($noteParameters);
 
 assert(!is_null($address1), "Cannot create an address note");
 
 // Get address notes
 $noteParameters = [
-    'route_id' => $route_id,
-    'route_destination_id' => $route_destination_id,
+    'route_id'              => $route_id,
+    'route_destination_id'  => $route_destination_id,
 ];
 
-$address = new Address();
+$addressNote = new AddressNote();
 
-$notes = $address->GetAddressesNotes($noteParameters);
+$notes = $addressNote->GetAddressesNotes($noteParameters);
 
 echo 'Destination note count --> '.$notes['destination_note_count'].'<br>';
 

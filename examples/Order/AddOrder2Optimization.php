@@ -12,7 +12,7 @@ assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4me class
 // This example not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Get random optimization problem ID
 $optimization = new OptimizationProblem();
@@ -28,10 +28,10 @@ $jFile = file_get_contents('add_order_to_optimization_data.json');
 $body = json_decode($jFile);
 
 $orderParameters = [
-    'optimization_problem_id' => $optimizationProblemId,
-    'redirect' => 0,
-    'device_type' => 'web',
-    'addresses' => $body->addresses,
+    'optimization_problem_id'   => $optimizationProblemId,
+    'redirect'                  => 0,
+    'device_type'               => 'web',
+    'addresses'                 => $body->addresses,
 ];
 
 $order = new Order();

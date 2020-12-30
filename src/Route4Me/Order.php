@@ -90,9 +90,9 @@ class Order extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ORDER_V4,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ORDER_V4,
+            'method'    => 'POST',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -104,10 +104,10 @@ class Order extends Common
         $allBodyFields = ['addresses'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ROUTE_V4,
-            'method' => 'PUT',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ROUTE_V4,
+            'method'    => 'PUT',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -116,13 +116,13 @@ class Order extends Common
     public static function addOrder2Optimization($params)
     {
         $allQueryFields = ['optimization_problem_id', 'redirect', 'device_type'];
-        $allBodyFields = ['addresses'];
+        $allBodyFields  = ['addresses'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::OPTIMIZATION_PROBLEM,
-            'method' => 'PUT',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::OPTIMIZATION_PROBLEM,
+            'method'    => 'PUT',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -133,9 +133,9 @@ class Order extends Common
         $allQueryFields = ['order_id', 'fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ORDER_V4,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::ORDER_V4,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;
@@ -146,9 +146,9 @@ class Order extends Common
         $allQueryFields = ['offset', 'limit'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ORDER_V4,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::ORDER_V4,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;
@@ -187,9 +187,9 @@ class Order extends Common
         $allBodyFields = ['order_ids'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ORDER_V4,
-            'method' => 'DELETE',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ORDER_V4,
+            'method'    => 'DELETE',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -203,9 +203,9 @@ class Order extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ORDER_V4,
-            'method' => 'PUT',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ORDER_V4,
+            'method'    => 'PUT',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -216,9 +216,9 @@ class Order extends Common
         $allQueryFields = ['fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ORDER_V4,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::ORDER_V4,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;

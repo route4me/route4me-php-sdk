@@ -72,7 +72,7 @@ class AddressBookLocation extends Common
         $ablocations = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query' => [
+            'query'  => [
                 'query' => $addressId,
                 'limit' => 30,
             ],
@@ -88,7 +88,7 @@ class AddressBookLocation extends Common
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $result;
@@ -101,7 +101,7 @@ class AddressBookLocation extends Common
         $ablocations = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $ablocations;
@@ -132,9 +132,9 @@ class AddressBookLocation extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['address_id', 'in_route_count']);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'POST',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_V4,
+            'method'    => 'POST',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -143,9 +143,9 @@ class AddressBookLocation extends Common
     public function deleteAdressBookLocation($address_ids)
     {
         $result = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'DELETEARRAY',
-            'query' => [
+            'url'       => Endpoint::ADDRESS_BOOK_V4,
+            'method'    => 'DELETEARRAY',
+            'query'     => [
                 'address_ids' => $address_ids,
             ],
         ]);
@@ -158,9 +158,9 @@ class AddressBookLocation extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['in_route_count']);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::ADDRESS_BOOK_V4,
-            'method' => 'PUT',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url'       => Endpoint::ADDRESS_BOOK_V4,
+            'method'    => 'PUT',
+            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -179,9 +179,14 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleEnable($scheduleEnabled)
     {
-        $schedEnables = [true, false];
+        if (is_string($scheduleEnabled)) {
+            if (strtolower($scheduleEnabled)=="true") $scheduleEnabled = true;
+            if (strtolower($scheduleEnabled)=="false") $scheduleEnabled = false;
+        }
 
-        if (in_array($scheduleEnabled, $schedEnables)) {
+        $schedEnables = [true, false,];
+
+        if (in_array($scheduleEnabled, $schedEnables,true)) {
             return true;
         } else {
             return false;
@@ -191,7 +196,11 @@ class AddressBookLocation extends Common
     public static function validateScheduleEvery($scheduleEvery)
     {
         if (is_numeric($scheduleEvery)) {
-            return true;
+            if ($scheduleEvery>0) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
@@ -199,6 +208,8 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleWeekDays($scheduleWeekDays)
     {
+        if (is_bool($scheduleWeekDays)) return false;
+
         $weekdays = explode(',', $scheduleWeekDays);
         $weekdaysSize = sizeof($weekdays);
 
@@ -209,7 +220,9 @@ class AddressBookLocation extends Common
         $isValid = true;
 
         for ($i = 0; $i < $weekdaysSize; ++$i) {
-            if (is_numeric($weekdays[$i])) {
+            if (is_bool($weekdays[$i])) {
+                $isValid = false;
+            } elseif (is_numeric($weekdays[$i])) {
                 $wday = intval($weekdays[$i]);
                 if ($wday < 1 || $wday > 7) {
                     $isValid = false;
@@ -226,7 +239,7 @@ class AddressBookLocation extends Common
     {
         $schedMonthlyMmodes = ['dates', 'nth'];
 
-        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes)) {
+        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes,true)) {
             return true;
         } else {
             return false;
@@ -235,6 +248,8 @@ class AddressBookLocation extends Common
 
     public static function validateScheduleMonthlyDates($scheduleMonthlyDates)
     {
+        if (is_bool($scheduleMonthlyDates)) return false;
+
         $monthlyDates = explode(',', $scheduleMonthlyDates);
         $monthlyDatesSize = sizeof($monthlyDates);
 
@@ -451,7 +466,10 @@ class AddressBookLocation extends Common
 
             $abcResults = $abContacts->addAdressBookLocation($AdressBookLocationParameters); //temporarry
 
-            array_push($results['success'], 'The schedule location with address_id = '.strval($abcResults['address_id']).' added successfuly.');
+            array_push(
+                $results['success'],
+                'The schedule location with address_id = '.strval($abcResults['address_id']).' added successfuly.'
+            );
         }
 
         return $results;

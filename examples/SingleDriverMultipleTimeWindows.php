@@ -12,7 +12,7 @@ use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\Metric;
 
 // Set the api key in the Route4me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Huge list of addresses
 $json = json_decode(file_get_contents('./addresses.json'), true);
@@ -23,14 +23,14 @@ foreach ($json as $address) {
 }
 
 $parameters = RouteParameters::fromArray([
-    'algorithm_type' => Algorithmtype::TSP,
-    'route_name' => 'Single Driver Multiple TimeWindows 12 Stops',
-    'route_date' => time() + 24 * 60 * 60,
-    'route_time' => 5 * 3600 + 30 * 60,
-    'distance_unit' => DistanceUnit::MILES,
-    'device_type' => DeviceType::WEB,
-    'optimize' => OptimizationType::DISTANCE,
-    'metric' => Metric::GEODESIC,
+    'algorithm_type'    => Algorithmtype::TSP,
+    'route_name'        => 'Single Driver Multiple TimeWindows 12 Stops',
+    'route_date'        => time() + 24 * 60 * 60,
+    'route_time'        => 5 * 3600 + 30 * 60,
+    'distance_unit'     => DistanceUnit::MILES,
+    'device_type'       => DeviceType::WEB,
+    'optimize'          => OptimizationType::DISTANCE,
+    'metric'            => Metric::GEODESIC,
 ]);
 
 $optimizationParams = new OptimizationProblemParams();

@@ -6,11 +6,11 @@ $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $RouteParameters = [
     'start_date' => '2019-08-01',
-    'end_date' => '2019-08-05'
+    'end_date'   => '2019-08-05'
 ];
 
 $route = new Route();
