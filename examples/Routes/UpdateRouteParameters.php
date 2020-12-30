@@ -9,7 +9,7 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // Example refers to the process of updating the parameters of a route
 
@@ -28,10 +28,10 @@ $route->route_id = $route_id;
 $route->parameters = new \stdClass();
 
 $route->parameters = [
-    'member_id' => $randomRoute->member_id,
-    'optimize' => 'Distance',
-    'route_max_duration' => '82400',
-    'route_name' => 'updated '.date('m-d-Y'),
+    'member_id'             => $randomRoute->member_id,
+    'optimize'              => 'Distance',
+    'route_max_duration'    => '82400',
+    'route_name'            => 'updated '.date('m-d-Y'),
 ];
 
 $route->httpheaders = 'Content-type: application/json';

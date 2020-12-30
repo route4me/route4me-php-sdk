@@ -1,0 +1,151 @@
+[
+	{ 
+		"address": "455 S 4th St, Louisville, KY 40202",
+		"is_depot": true,
+		"lat": 38.251698,
+		"lng": -85.757308,
+		"time": 300,
+		"time_window_start": 28800,
+		"time_window_end": 30477
+	},
+	{ 
+		"address": "1604 PARKRIDGE PKWY, Louisville, KY, 40214",
+		"lat": 38.141598,
+		"lng": -85.793846,
+		"time": 300,
+		"time_window_start": 30477,
+		"time_window_end": 33406
+	},
+	{ 
+		"address": "1407 א53MCCOY, Louisville, KY, 40215",
+		"lat": 38.202496,
+		"lng": -85.786514,
+		"time": 300,
+		"time_window_start": 33406,
+		"time_window_end": 36228
+	},
+	{ 
+		"address": "4805 BELLEVUE AVE, Louisville, KY, 40215",
+		"lat": 38.178844,
+		"lng": -85.774864,
+		"time": 300,
+		"time_window_start": 36228,
+		"time_window_end": 37518
+	},
+	{ 
+		"address": "730 CECIL AVENUE, Louisville, KY, 40211",
+		"lat": 38.248684,
+		"lng": -85.821121,
+		"time": 300,
+		"time_window_start": 37518,
+		"time_window_end": 39550
+	},
+	{ 
+		"address": "650 SOUTH 29TH ST UNIT 315, Louisville, KY, 40211",
+		"is_depot": true,
+		"lat": 38.251923,
+		"lng": -85.800034,
+		"time": 300,
+		"time_window_start": 39550,
+		"time_window_end": 41348
+	},
+	{ 
+		"address": "4629 HILLSIDE DRIVE, Louisville, KY, 40216",
+		"lat": 38.176067,
+		"lng": -85.824638,
+		"time": 300,
+		"time_window_start": 41348,
+		"time_window_end": 42261
+	},
+	{ 
+		"address": "4738 BELLEVUE AVE, Louisville, KY, 40215",
+		"lat": 38.179806,
+		"lng": -85.775558,
+		"time": 300,
+		"time_window_start": 42261,
+		"time_window_end": 45195
+	},
+	{ 
+		"address": "318 SO. 39TH STREET, Louisville, KY, 40212",
+		"lat": 38.259335,
+		"lng": -85.815094,
+		"time": 300,
+		"time_window_start": 45195,
+		"time_window_end": 46549
+	},
+	{ 
+		"address": "1324 BLUEGRASS AVE, Louisville, KY, 40215",
+		"lat": 38.179253,
+		"lng": -85.785118,
+		"time": 300,
+		"time_window_start": 46549,
+		"time_window_end": 47353
+	},
+	{ 
+		"address": "7305 ROYAL WOODS DR, Louisville, KY, 40214",
+		"lat": 38.162472,
+		"lng": -85.792854,
+		"time": 300,
+		"time_window_start": 47353,
+		"time_window_end": 50924
+	},
+	{ 
+		"address": "1661 W HILL ST, Louisville, KY, 40210",
+		"lat": 38.229584,
+		"lng": -85.783966,
+		"time": 300,
+		"time_window_start": 50924,
+		"time_window_end": 51392
+	},
+	{ 
+		"address": "3222 KINGSWOOD WAY, Louisville, KY, 40216",
+		"lat": 38.210606,
+		"lng": -85.822594,
+		"time": 300,
+		"time_window_start": 51392,
+		"time_window_end": 52451
+	},
+	{ 
+		"address": "1922 PALATKA RD, Louisville, KY, 40214",
+		"lat": 38.153767,
+		"lng": -85.796783,
+		"time": 100,
+		"time_window_start": 52451,
+		"time_window_end": 55631
+	},
+	{ 
+		"address": "1314 SOUTH 26TH STREET, Louisville, KY, 40210",
+		"lat": 38.235847,
+		"lng": -85.796852,
+		"time": 300,
+		"time_window_start": 55631,
+		"time_window_end": 58516
+	},
+	{ "address":"2135 MCCLOSKEY AVENUE, Louisville, KY, 40210",
+					"lat": 38.218662,
+					"lng":  -85.789032,
+					"time": 300,
+					"time_window_start": 58516,
+					"time_window_end": 61080 },
+
+	{ "address": "1409 PHYLLIS AVE, Louisville, KY, 40215",
+					"lat": 38.206154,
+					"lng": -85.781387,
+					"time": 100,
+					"time_window_start": 61080,
+					"time_window_end": 61504 },
+
+	{ "address":"4504 SUNFLOWER AVE, Louisville, KY, 40216",
+					"lat": 38.187511,
+					"lng": -85.839149,
+					"time": 300,
+					"time_window_start": 61504,
+					"time_window_end": 62061 },
+
+	{ "address":"2512 GREENWOOD AVE, Louisville, KY, 40210",
+					"lat": 38.241405,
+					"lng": -85.795059,
+					"time": 300,
+					"time_window_start": 62061,
+					"time_window_end": 65012 }
+]

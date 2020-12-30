@@ -1,10 +1,12 @@
 <?php
 
-namespace Route4Me;
+namespace Route4Me\Vehicles;
 
+use Route4Me\Common;
+use Route4Me\Route4Me;
 use Route4Me\Enum\Endpoint;
 
-class Vehicle extends Common
+class Vehicle extends \Route4Me\Common
 {
     public $vehicle_id;
     public $member_id;
@@ -120,7 +122,7 @@ class Vehicle extends Common
     public function getVehicleByID($vehicleID)
     {
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::VEHICLE_V4.'/'.$vehicleID,
+            'url' => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
             'method' => 'GET',
         ]);
 
@@ -134,7 +136,7 @@ class Vehicle extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['vehicle_id']);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::VEHICLE_V4.'/'.$vehicleID,
+            'url' => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
             'method' => 'PUT',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER' => 'Content-Type: application/json',
@@ -145,7 +147,7 @@ class Vehicle extends Common
 
     public function createVehicle($params)
     {
-        $excludeFields = ['vehicle_id','is_deleted','created_time','timestamp_added','timestamp_removed'];
+        $excludeFields = ['vehicle_id', 'is_deleted', 'created_time', 'timestamp_added', 'timestamp_removed'];
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
@@ -165,7 +167,7 @@ class Vehicle extends Common
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::VEHICLE_V4.'/'.$vehicleID,
+            'url' => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
             'method' => 'DELETE',
             'HTTPHEADER' => 'Content-Type: application/json',
         ]);

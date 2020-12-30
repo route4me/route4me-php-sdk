@@ -14,7 +14,7 @@ use Route4Me\Enum\Metric;
 
 // Set the api key in the Route4me class
 // This example is not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 // List of addresses
 $jsonAddresses = json_decode(file_get_contents('./addresses_only.json'), true);
@@ -33,17 +33,17 @@ foreach ($jsonDepots as $depot) {
 }
 
 $parameters = RouteParameters::fromArray([
-    'route_name' => 'Multiple Depots Seprate Section '.date('Y-m-d H:i'),
-    'algorithm_type' => AlgorithmType::CVRP_TW_MD,
-    'distance_unit' => DistanceUnit::MILES,
-    'device_type' => DeviceType::WEB,
-    'optimize' => OptimizationType::TIME,
-    'metric' => Metric::GEODESIC,
-    'route_max_duration' => 86400 * 2,
-    'travel_mode' => TravelMode::DRIVING,
-    'vehicle_capacity' => 50,
-    'vehicle_max_distance_mi' => 10000,
-    'parts' => 50,
+    'route_name'                => 'Multiple Depots Seprate Section '.date('Y-m-d H:i'),
+    'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
+    'distance_unit'             => DistanceUnit::MILES,
+    'device_type'               => DeviceType::WEB,
+    'optimize'                  => OptimizationType::TIME,
+    'metric'                    => Metric::GEODESIC,
+    'route_max_duration'        => 86400 * 2,
+    'travel_mode'               => TravelMode::DRIVING,
+    'vehicle_capacity'          => 50,
+    'vehicle_max_distance_mi'   => 10000,
+    'parts'                     => 50,
 ]);
 
 $optimizationParams = new OptimizationProblemParams();

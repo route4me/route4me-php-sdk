@@ -9,12 +9,12 @@ require $root.'/vendor/autoload.php';
 
 // Set the api key in the Route4me class
 // This example not available for demo API key
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
-    'fields' => 'order_id,member_id',
-    'offset' => 0,
-    'limit' => 5,
+    'fields'    => 'order_id,member_id',
+    'offset'    => 0,
+    'limit'     => 5,
 ]);
 
 $order = new Order();

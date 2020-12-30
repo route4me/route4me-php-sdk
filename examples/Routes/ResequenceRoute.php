@@ -9,14 +9,14 @@ assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
 
 // Set the api key in the Route4Me class
-Route4Me::setApiKey('11111111111111111111111111111111');
+Route4Me::setApiKey(Constants::API_KEY);
 
 $route = new Route();
 
 // Select a route with more than 4 addresses.
 $routesParams = [
     'offset' => 0,
-    'limit' => 20,
+    'limit'  => 20,
 ];
 
 $routes = $route->getRoutes($routesParams);
@@ -41,12 +41,12 @@ $routeDestinationID = $selectedRoute->addresses[2]->route_destination_id;
 echo "Route ID-> $routeID, Route destination ID -> $routeDestinationID <br>";
 
 $params = [
-    'route_id' => $routeID,
-    'route_destination_id' => $routeDestinationID,
+    'route_id'              => $routeID,
+    'route_destination_id'  => $routeDestinationID,
     'addresses' => [
         '0' => [
-            'route_destination_id' => $routeDestinationID,
-            'sequence_no' => 3,
+            'route_destination_id'  => $routeDestinationID,
+            'sequence_no'           => 3,
         ],
     ],
 ];

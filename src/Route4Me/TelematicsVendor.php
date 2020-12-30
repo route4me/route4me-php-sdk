@@ -6,12 +6,19 @@ use Route4Me\Enum\Endpoint;
 
 class TelematicsVendor extends Common
 {
-    public $vendor_id; // Telematics Vendor id
+    public $id; // Telematics Vendor id
+    public $name; // Vendor name
+    public $slug; // Vendor slug
+    public $description; // Vendor description
+    public $logo_url; // Vendor's logo URL
+    public $website_url; // Vendor's website URL
+    public $api_docs_url; // API documentation URL
     public $is_integrated; // If 1, the vendor is integrated in Route4Me
+    public $size; // Vendor size
     public $page; // starting page
     public $per_page; // Vendors per page in a response
-    public $country; // Country Alpha 2 code
-    public $feature; // Vendor's feature
+    public $countries = []; // Country Alpha 2 code
+    public $features = []; // Vendor's feature
     public $search; // Searched text
     public $vendors; // Comma-delimited list of the vendors IDs.
 
@@ -35,9 +42,9 @@ class TelematicsVendor extends Common
         $allQueryFields = ['vendor_id', 'is_integrated', 'page', 'per_page', 'country', 'feature', 'search', 'vendors'];
 
         $vendors = Route4Me::makeRequst([
-            'url' => '',
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => '',
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $vendors;

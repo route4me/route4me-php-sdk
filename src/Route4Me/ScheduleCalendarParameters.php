@@ -67,9 +67,9 @@ class ScheduleCalendarParameters extends Common
         $allQueryFields = ['date_from_string', 'date_to_string', 'member_id', 'timezone_offset_minutes', 'orders', 'ab', 'routes_count'];
 
         $schedCalendar = Route4Me::makeRequst([
-            'url' => Endpoint::SCHEDULE_CALENDAR,
-            'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url'       => Endpoint::SCHEDULE_CALENDAR,
+            'method'    => 'GET',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $schedCalendar;
