@@ -36,6 +36,11 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
 
     public static function setUpBeforeClass()
     {
+        if (Constants::API_KEY == Constants::DEMO_API_KEY) {
+            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
+            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+        }
+
         Route4Me::setApiKey(Constants::API_KEY);
 
         //region Prepae Addresses
