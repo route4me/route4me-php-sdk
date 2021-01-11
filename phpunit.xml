@@ -5,23 +5,34 @@
          cacheResult="false">
 <testsuites>
     <testsuite name="Route4me PHP SDK Test Suite">
-        <directory>UnitTestFiles/Test</directory>
-        <file>UnitTestFiles/Test/AvoidanceZoneUnitTests.php</file>
-        <file>UnitTestFiles/Test/AddressUnitTests.php</file>
+        <!--directory>UnitTestFiles/Test</directory -->
         <file>UnitTestFiles/Test/ActivityParametersUntTests.php</file>
         <file>UnitTestFiles/Test/AddressBookGroupUnitTests.php</file>
         <file>UnitTestFiles/Test/AddressBookLocationUnitTests.php</file>
         <file>UnitTestFiles/Test/AddressNoteResponseUnitTests.php</file>
         <file>UnitTestFiles/Test/AddressNoteUnitTests.php</file>
+        <file>UnitTestFiles/Test/AddressUnitTests.php</file>
+        <file>UnitTestFiles/Test/AvoidanceZoneUnitTests.php</file>
         <file>UnitTestFiles/Test/CommonUnitTests.php</file>
         <file>UnitTestFiles/Test/CustomNoteTypeResponseUnitTests.php</file>
         <file>UnitTestFiles/Test/CustomNoteTypeUnitTests.php</file>
         <file>UnitTestFiles/Test/GeocodingResponseUnitTests.php</file>
         <file>UnitTestFiles/Test/GeocodingUnitTests.php</file>
+        <file>UnitTestFiles/Test/MemberConfigurationTest.php</file>
         <file>UnitTestFiles/Test/OptimizationProblemParamsUnitTests.php</file>
         <file>UnitTestFiles/Test/OptimizationProblemUntTests.php</file>
+        <file>UnitTestFiles/Test/OrderCustomUserFieldsTests.php</file>
+        <file>UnitTestFiles/Test/OrderTests.php</file>
         <file>UnitTestFiles/Test/RapidAddressSearchResponseUnitTests.php</file>
         <file>UnitTestFiles/Test/Route4MeUnitTests.php</file>
+        <file>UnitTestFiles/Test/RouteExampleTests.php</file>
+        <file>UnitTestFiles/Test/RouteTests.php</file>
+        <file>UnitTestFiles/Test/TelematicsGateWayApiTests.php</file>
+        <file>UnitTestFiles/Test/TerritoryTests.php</file>
+        <file>UnitTestFiles/Test/TrackingTests.php</file>
+        <file>UnitTestFiles/Test/UserTests.php</file>
+        <file>UnitTestFiles/Test/VehicleTests.php</file>
+
     </testsuite>
 </testsuites>
 

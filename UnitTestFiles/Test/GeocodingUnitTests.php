@@ -70,6 +70,11 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testGetStreetData()
     {
+        if (Constants::API_KEY == Constants::DEMO_API_KEY) {
+            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
+            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+        }
+
         //region Get Single Street Address
         $result = RapidAddressSearchResponse::fromArray(
             Geocoding::getStreetData(['pk' => 4])
@@ -111,6 +116,11 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testGetZipCode()
     {
+        if (Constants::API_KEY == Constants::DEMO_API_KEY) {
+            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
+            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+        }
+
         //region Get All Geocodings With Specified Zipcode
         $resultZipAll = Geocoding::getZipCode(['zipcode' => '00601']);
 
@@ -144,6 +154,11 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testGetService()
     {
+        if (Constants::API_KEY == Constants::DEMO_API_KEY) {
+            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
+            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+        }
+
         //region Get All Geocodings With Specified Zipcode And House Number
         $resultZipHouseAll = Geocoding::getService([
             'zipcode'     => '00601',
