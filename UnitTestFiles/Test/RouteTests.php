@@ -408,11 +408,13 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $startDateUnix = date_create($params->start_date)->format('U');
         $endtDateUnix = date_create($params->end_date)->format('U');
 
+        $tz = date('Z');
+
         foreach ($routeResults as $routeResult) {
 
             $this->assertTrue(
-                $routeResult->parameters->route_date>=$startDateUnix &&
-                $routeResult->parameters->route_date<=$endtDateUnix
+                $routeResult->parameters->route_date - $tz >= $startDateUnix &&
+                $routeResult->parameters->route_date - $tz <= $endtDateUnix
             );
         }
     }
