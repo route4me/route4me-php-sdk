@@ -185,7 +185,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
         $params = [
             'query'  => 'Douglas',
-            'fields' => 'first_name,address_email',
+            'fields' => 'first_name,address_email,schedule_blacklist,schedule,address_custom_data,address_1',
             'offset' => 0,
             'limit'  => 5,
         ];
@@ -195,12 +195,13 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         );
 
         $this->assertNotNull($result);
-        $this->assertTrue(sizeof($result->fields)==2);
+        $this->assertTrue(sizeof($result->fields)==6);
         $this->assertContains('first_name',$result->fields);
         $this->assertContains('address_email',$result->fields);
 
         $this->assertNotNull($result->results);
-        $this->assertStringContainsStringIgnoringCase('Douglas',implode (", ", $result->results[0]));
+        $firstRecord = json_encode($result->results[0]);
+        $this->assertStringContainsStringIgnoringCase('Douglas',$firstRecord);
     }
 
     public function testGetAddressBookLocations()
