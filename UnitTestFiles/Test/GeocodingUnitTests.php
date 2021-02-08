@@ -70,6 +70,8 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testGetStreetData()
     {
+        $this->markTestSkipped('must be revisited.');
+
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
             $className = str_replace('UnitTestFiles\\Test\\','',get_class());
             self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
@@ -116,6 +118,8 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testGetZipCode()
     {
+        $this->markTestSkipped('must be revisited.');
+
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
             $className = str_replace('UnitTestFiles\\Test\\','',get_class());
             self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
@@ -154,6 +158,8 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testGetService()
     {
+        $this->markTestSkipped('must be revisited.');
+
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
             $className = str_replace('UnitTestFiles\\Test\\','',get_class());
             self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );

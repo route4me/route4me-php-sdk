@@ -95,6 +95,7 @@ class Address extends Common
     public $udu_distance_to_next_destination;
     public $wait_time_to_next_destination;
     public $path_to_next = [];
+    public $additional_status;
 
     public function __construct()
     {
