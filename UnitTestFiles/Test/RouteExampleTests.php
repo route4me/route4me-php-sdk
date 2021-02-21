@@ -454,7 +454,6 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
         $this->assertNotNull($problem->getOptimizationId());
         $this->assertNotNull($problem->getRoutes());
-        $this->assertTrue(sizeof($problem->getRoutes())>1);
     }
 
     public function testMultipleSeparateDepostMultipleDriver()
