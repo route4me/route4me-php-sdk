@@ -34,7 +34,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $response = $territory->addTerritory($TerritoryParameters);
 
         self::assertNotNull($response);
-        self::assertIsArray($response);
+        self::assertTrue(is_array($response));
         self::assertInstanceOf(Territory::class, Territory::fromArray($response));
         self::assertTrue(isset($response['territory_id']));
 
@@ -114,7 +114,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $response = $territory->getTerritories($queryParameters);
 
         $this->assertNotNull($response);
-        $this->assertIsArray($response);
+        $this->assertTrue(is_array($response));
         $this->assertTrue(sizeof($response)>0);
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response[0]));
     }
@@ -129,7 +129,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $response = $territory->getTerritory($params);
 
         $this->assertNotNull($response);
-        $this->assertIsArray($response);
+        $this->assertTrue(is_array($response));
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response));
         $this->assertTrue(isset($response['territory_id']));
         $this->assertEquals(self::$createdTerritories[0],$response['territory_id']);
@@ -154,7 +154,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $response = $territory->addTerritory($TerritoryParameters);
 
         $this->assertNotNull($response);
-        $this->assertIsArray($response);
+        $this->assertTrue(is_array($response));
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response));
         $this->assertTrue(isset($response['territory']));
         $this->assertTrue(isset($response['territory']['type']));
@@ -186,7 +186,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $response = $territory->addTerritory($TerritoryParameters);
 
         $this->assertNotNull($response);
-        $this->assertIsArray($response);
+        $this->assertTrue(is_array($response));
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response));
         $this->assertTrue(isset($response['territory']));
         $this->assertTrue(isset($response['territory']['type']));
@@ -225,7 +225,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $response = $territory->addTerritory($TerritoryParameters);
 
         $this->assertNotNull($response);
-        $this->assertIsArray($response);
+        $this->assertTrue(is_array($response));
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response));
         $this->assertTrue(isset($response['territory']));
         $this->assertTrue(isset($response['territory']['type']));
@@ -261,7 +261,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $response = $territory->updateTerritory($TerritoryParameters);
 
         $this->assertNotNull($response);
-        $this->assertIsArray($response);
+        $this->assertTrue(is_array($response));
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response));
         $this->assertTrue(isset($response['territory']));
         $this->assertTrue(isset($response['territory']['type']));

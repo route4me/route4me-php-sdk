@@ -107,7 +107,7 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         $avoidanceZones = AvoidanceZone::getAvoidanceZones([]);
 
         $this->assertNotNull($avoidanceZones);
-        $this->assertIsArray($avoidanceZones);
+        $this->assertTrue(is_array($avoidanceZones));
         $first=AvoidanceZone::fromArray($avoidanceZones[0]);
         $this->assertContainsOnlyInstancesOf('Route4Me\AvoidanceZone', [$first]);
     }

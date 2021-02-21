@@ -2,10 +2,10 @@
 
 namespace UnitTestFiles\Test;
 
-use Route4Me\SearchResponse;
-use Route4Me\Route4Me;
-use Route4Me\AddressBookLocation;
-use Route4Me\Constants;
+use Route4Me\SearchResponse as SearchResponse;
+use Route4Me\Route4Me as Route4Me;
+use Route4Me\AddressBookLocation as AddressBookLocation;
+use Route4Me\Constants as Constants;
 
 class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 {
@@ -201,7 +201,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($result->results);
         $firstRecord = json_encode($result->results[0]);
-        $this->assertStringContainsStringIgnoringCase('Douglas',$firstRecord);
+        $this->assertTrue(strpos($firstRecord, 'Douglas')>-1);
     }
 
     public function testGetAddressBookLocations()

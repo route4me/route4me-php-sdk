@@ -2,6 +2,7 @@
 
 namespace UnitTestFiles\Test;
 
+use phpDocumentor\Reflection\Types\Boolean;
 use Route4Me\Address;
 use Route4Me\Constants;
 use Route4Me\Enum\DeviceType;
@@ -246,7 +247,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $result = $address->markAsDeparted($params);
 
         $this->assertNotNull($result);
-        $this->assertIsBool($result['status']);
+        $this->assertTrue(is_bool($result['status']));
         $this->assertTrue($result['status']);
     }
 
@@ -263,7 +264,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $result = $address->markAsVisited($params);
 
         $this->assertNotNull($result);
-        $this->assertIsInt($result);
+        $this->assertTrue(is_int($result));
         $this->assertEquals(1,$result);
     }
 

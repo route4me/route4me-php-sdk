@@ -196,7 +196,7 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($addressBookGroups->results);
 
         if (sizeof($addressBookGroups->results)>0) {
-            $this->assertStringContainsStringIgnoringCase('Louisville',implode (", ", $addressBookGroups->results[0]));
+            $this->assertContains('Louisville',implode (", ", $addressBookGroups->results[0]));
         }
     }
 
