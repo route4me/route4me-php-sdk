@@ -7,6 +7,9 @@ use Route4Me\Enum\Endpoint;
 
 class Territory extends Common
 {
+    /**
+     * @var
+     */
     public $territory_id; // Territory id
     public $territory_name;
     public $territory_color;

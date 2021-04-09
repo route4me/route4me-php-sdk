@@ -3,14 +3,106 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\Constants;
+use Route4Me\Enum\TelematicsVendorsTypes;
 use Route4Me\Route4Me;
-use Route4Me\TelematicsVendor;
+use Route4Me\Members\Member;
+use Route4Me\TelematicsGateway\TelematicsConnection;
+use Route4Me\TelematicsGateway\TelematicsConnectionParameters;
+use Route4Me\TelematicsGateway\TelematicsVendor;
+use Route4Me\TelematicsGateway\TelematicsVendorParameters;
+use Route4Me\TelematicsGateway\TelematicsRegisterMemberResponse;
+use Route4Me\TelematicsGateway\CreateConnectionResponse;
 
 class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
 {
+    static $createdConnections = [];
+    static $firstMemberId;
+
+    static $api_token;
+    static $tomtom_vendor;
+    
     public static function setUpBeforeClass()
     {
         Route4Me::setApiKey(Constants::API_KEY);
+        
+        $member = new Member();
+        
+        $results = $member->getUsers();
+
+        self::$firstMemberId = Member::fromArray($results['results'][0])->member_id;
+        
+        print_r("\n member_id = ".self::$firstMemberId."\n");
+
+        //region Get API token
+
+        $vendorParameters = new TelematicsVendorParameters();
+        $vendorParameters->member_id = self::$firstMemberId;
+        $vendorParameters->api_key = Constants::API_KEY;
+
+        $vendors = new TelematicsVendor();
+        $result = $vendors->RegisterTelematicsMember($vendorParameters);
+
+        self::assertNotNull($result);
+        self::assertInstanceOf(
+            TelematicsRegisterMemberResponse::class,
+            TelematicsRegisterMemberResponse::fromArray($result)
+        );
+
+        self::$api_token = TelematicsRegisterMemberResponse::fromArray(
+            $result
+        )->api_token;
+
+        //endregion
+
+        //region Get TomTom vendor
+
+        $vendorsParameters = TelematicsVendorParameters::fromArray([
+            //"country"     => "GB",  // uncomment this line for searching by Country
+            'is_integrated' => 1,
+            //"feature"     => "satellite",  // uncomment this line for searching by Feature
+            'search'        => 'tomtom',
+            'page'          => 1,
+            'per_page'      => 5,
+        ]);
+
+        $vendors = new TelematicsVendor();
+        $vendorsResults = $vendors->GetTelematicsVendors($vendorsParameters);
+
+        self::assertNotNull($vendorsResults);
+        self::assertTrue(is_array($vendorsResults));
+        self::assertTrue(sizeof($vendorsResults)>0);
+        self::assertTrue(
+            TelematicsVendor::fromArray($vendorsResults['vendors'][0])
+                instanceof
+                TelematicsVendor);
+
+        self::$tomtom_vendor = TelematicsVendor::fromArray($vendorsResults['vendors'][0]);
+        //endregion
+
+        //region Create Test Connection
+
+        $vendParams = new TelematicsConnectionParameters();
+
+        $vendParams->vendor       = TelematicsVendorsTypes::GEOTAB;
+        $vendParams->account_id   = '54321';
+        $vendParams->username     = 'John Doe 0';
+        $vendParams->password     = 'password0';
+        $vendParams->vehicle_position_refresh_rate    = 60;
+        $vendParams->name         = 'Test Geotab Connection from php SDK';
+        $vendParams->validate_remote_credentials      = 0;
+
+        $teleConnection = new TelematicsConnection();
+
+        $result2 = $teleConnection->createTelematicsConnection(
+            self::$api_token,
+            $vendParams->toArray()
+        );
+
+        self::assertNotNull($result2);
+        self::assertTrue( CreateConnectionResponse::fromArray($result2) instanceof CreateConnectionResponse);
+
+        self::$createdConnections[] = TelematicsConnection::fromArray($result2);
+        //endregion
     }
 
     public function testFromArray()
@@ -249,16 +341,7 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
 
     public function testGetVendor()
     {
-        $vendors = new TelematicsVendor();
-
-        $randomVendorID = $vendors->GetRandomVendorID(0, 5);
-
-        $vendorParameters = TelematicsVendor::fromArray([
-            'vendor_id' => $randomVendorID,
-        ]);
-
-        $vendor = new TelematicsVendor();
-        $vendorResult = $vendor->GetTelematicsVendors($vendorParameters);
+        $vendorResult = TelematicsVendor::getVendorById(self::$tomtom_vendor->id);
 
         $this->assertNotNull($vendorResult);
         $this->assertTrue(is_array($vendorResult));
@@ -270,7 +353,7 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
 
     public function testSearchVendors()
     {
-        $vendorsParameters = TelematicsVendor::fromArray([
+        $vendorsParameters = TelematicsVendorParameters::fromArray([
             //"country"     => "GB",  // uncomment this line for searching by Country
             'is_integrated' => 1,
             //"feature"     => "satellite",  // uncomment this line for searching by Feature
@@ -293,7 +376,7 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
 
     public function testVendorsComparison()
     {
-        $vendorsParameters = TelematicsVendor::fromArray([
+        $vendorsParameters = TelematicsVendorParameters::fromArray([
             'vendors' => '55,56,57',
         ]);
 
@@ -308,4 +391,114 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
             TelematicsVendor::fromArray($comparisonResults['vendors'][0])
         );
     }
+    
+    public function testRegisterTelematicsVendor() 
+    {
+        $vendorParameters = new TelematicsVendorParameters();
+        $vendorParameters->member_id = self::$firstMemberId;
+        $vendorParameters->api_key = Constants::API_KEY;
+        
+        $vendors = new TelematicsVendor();
+        $result = $vendors->RegisterTelematicsMember($vendorParameters);
+        
+        $this->assertNotNull($result);
+        $this->assertInstanceOf(
+            TelematicsRegisterMemberResponse::class,
+            TelematicsRegisterMemberResponse::fromArray($result)
+        );
+    }
+
+    public function testGetTelematicsConnections()
+    {
+        $teleConnection = new TelematicsConnection();
+
+        $connections = $teleConnection->getTelematicsConnections(self::$api_token);
+
+        $this->assertNotNull($connections);
+        $this->assertTrue(
+            TelematicsConnection::fromArray($connections[0])
+            instanceof
+            TelematicsConnection);
+    }
+
+    public function testGetTelematicsConnection()
+    {
+        $teleConnection = new TelematicsConnection();
+
+        $connection = $teleConnection->getTelematicsConnection(
+            self::$api_token,
+            self::$createdConnections[sizeof(self::$createdConnections)-1]->connection_token
+        );
+
+        $this->assertNotNull($connection);
+        $this->assertTrue(
+            TelematicsConnection::fromArray($connection)
+            instanceof
+            TelematicsConnection);
+    }
+
+    public function testCreateTelematicsConnection()
+    {
+        $vendorParameters = new TelematicsConnectionParameters();
+
+        $vendorParameters->vendor_id    = self::$tomtom_vendor->id;
+        $vendorParameters->vendor       = self::$tomtom_vendor->slug;
+        $vendorParameters->account_id   = '12345';
+        $vendorParameters->username     = 'John Doe';
+        $vendorParameters->password     = 'password';
+        $vendorParameters->vehicle_position_refresh_rate    = 60;
+        $vendorParameters->name         = 'Test Telematics Connection from php SDK';
+        $vendorParameters->validate_remote_credentials      = 0;
+
+        $teleConnection = new TelematicsConnection();
+
+       $result = $teleConnection->createTelematicsConnection(
+           self::$api_token,
+           $vendorParameters->toArray()
+       );
+
+        $this->assertNotNull($result);
+        $this->assertTrue( CreateConnectionResponse::fromArray($result) instanceof CreateConnectionResponse);
+
+        self::$createdConnections[] = TelematicsConnection::fromArray($result);
+    }
+
+    public function testUpdateTelematicsConnection()
+    {
+        $teleConParams = new TelematicsConnectionParameters();
+
+        $teleConParams->vehicle_position_refresh_rate    = 50;
+        $teleConParams->name         = 'Test Telematics Connection from php SDK Updated';
+        $teleConParams->validate_remote_credentials      = 0;
+
+        $teleConnection = new TelematicsConnection();
+
+        $result = $teleConnection->updateTelematicsConnection(
+            self::$api_token,
+            self::$createdConnections[0]->connection_token,
+            $teleConParams->toArray()
+        );
+
+        $this->assertNotNull($result);
+        $this->assertTrue(
+            TelematicsConnection::fromArray($result)
+            instanceof
+            TelematicsConnection);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        if (sizeof(self::$createdConnections)>0) {
+
+            $teleConn = new TelematicsConnection();
+
+            foreach (self::$createdConnections as $createdConn) {
+                $deleted = $teleConn->deleteTelematicsConnection(
+                    self::$api_token,
+                    $createdConn->connection_token
+                );
+            }
+        }
+    }
+
 }

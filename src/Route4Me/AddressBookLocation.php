@@ -3,50 +3,260 @@
 namespace Route4Me;
 
 use Route4Me\Enum\Endpoint;
+use Route4Me\Common as Common;
 
+/**
+ * Address book contact class.
+ * @package Route4Me
+ */
 class AddressBookLocation extends Common
 {
+    /**
+     * A territory shape name the contact belongs.
+     * @var string
+     */
     public $address_id;
+
+    /**
+     * A group the contact belongs.
+     * @var string
+     */
     public $address_group;
+
+    /**
+     * The contact's alias.
+     * @var string
+     */
     public $address_alias;
+
+    /**
+     * The geographic address of the contact.
+     * @var string
+     */
     public $address_1;
+
+    /**
+     * Second geographic address of the contact.
+     * @var string
+     */
     public $address_2;
+
+    /**
+     * The first name of the contact person.
+     * @var string
+     */
     public $first_name;
+
+    /**
+     * The last name of the contact person.
+     * @var string
+     */
     public $last_name;
+
+    /**
+     * The contact's email.
+     * @var string
+     */
     public $address_email;
+
+    /**
+     * The contact's phone number.
+     * @var string
+     */
     public $address_phone_number;
+
+    /**
+     * A city the contact belongs.
+     * @var string
+     */
     public $address_city;
+
+    /**
+     * The ID of the state the contact belongs.
+     * @var string
+     */
     public $address_state_id;
+
+    /**
+     * The ID of the country the contact belongs.
+     * @var string
+     */
     public $address_country_id;
+
+    /**
+     * The contact's ZIP code.
+     * @var string
+     */
     public $address_zip;
+
+    /**
+     * A latitude of the contact's cached position.
+     * @var double
+     */
     public $cached_lat;
+
+    /**
+     * A longitude of the contact's cached position.
+     * @var double
+     */
     public $cached_lng;
+
+    /**
+     * A latitude of the contact's curbside.
+     * @var double
+     */
     public $curbside_lat;
+
+    /**
+     * A longitude of the contact's curbside.
+     * @var double
+     */
     public $curbside_lng;
+
+    /**
+     * The contact's color on the map.
+     * @var string
+     */
     public $color;
+
+    /**
+     * An array of the contact's custom field-value pairs.
+     * @var array
+     */
     public $address_custom_data;
+
+    /**
+     * An array of the contact's schedules.
+     * @var Schedule[]
+     */
     public $schedule;
 
+    /**
+     * Time when the contact was created.
+     * @var long
+     */
     public $created_timestamp;
+
+    /**
+     * Unique ID of the member.
+     * @var integer
+     */
     public $member_id;
+
+    /**
+     * The list of dates that should be omitted from the schedules.
+     * @var string[]
+     */
     public $schedule_blacklist;
+
+    /**
+     * Number of the routes containing the contact.
+     * @var integer
+     */
     public $in_route_count;
+
+    /**
+     * When the contact was last visited.
+     * @var long
+     */
     public $last_visited_timestamp;
+
+    /**
+     * When the contact was last routed.
+     * @var long
+     */
     public $last_routed_timestamp;
+
+    /**
+     * Start of the contact's local time window.
+     * @var long
+     */
     public $local_time_window_start;
+
+    /**
+     * End of the contact's local time window.
+     * @var long
+     */
     public $local_time_window_end;
+
+    /**
+     * Start of the contact's second local time window.
+     * @var long
+     */
     public $local_time_window_start_2;
+
+    /**
+     * End of the contact's second local time window.
+     * @var long
+     */
     public $local_time_window_end_2;
+
+    /**
+     * The service time at the contact's address.
+     * @var integer
+     */
     public $service_time;
+
+    /**
+     * The contact's local timezone.
+     * @var string
+     */
     public $local_timezone_string;
+
+    /**
+     * The contact's icon on the map.
+     * @var string
+     */
     public $address_icon;
+
+    /**
+     * The contact's stop type.
+     * @var string
+     */
     public $address_stop_type;
+
+    /**
+     * The cubic volume of the contact's cargo.
+     * @var double
+     */
     public $address_cube;
+
+    /**
+     * The number of pieces/pallets that this destination/order/line-item consumes/contains on a vehicle.
+     * @var integer
+     */
     public $address_pieces;
+
+    /**
+     * The reference number of the address.
+     * @var string
+     */
     public $address_reference_no;
+
+    /**
+     * The revenue from the contact.
+     * @var double
+     */
     public $address_revenue;
+
+    /**
+     * The weight of the contact's cargo.
+     * @var double
+     */
     public $address_weight;
+
+    /**
+     * If present, the priority will sequence addresses in all the optimal routes so that
+     * higher priority addresses are general at the beginning of the route sequence.<br>
+     * 1 is the highest priority, 100000 is the lowest.
+     * @var integer
+     */
     public $address_priority;
+
+    /**
+     * The customer purchase order of the contact.
+     * @var string
+     */
     public $address_customer_po;
 
     public function __construct()

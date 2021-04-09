@@ -2,6 +2,8 @@
 
 namespace Route4Me;
 
+use Route4Me\TelematicsGateway\TelematicsVendor As TelematicsVendor;
+
 $root = realpath(dirname(__FILE__).'/../../');
 require $root.'/vendor/autoload.php';
 

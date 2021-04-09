@@ -67,6 +67,9 @@ class Endpoint
     const VEHICLE_V4_API = '/api.v4/vehicle.php';
     
     const TELEMATICS_VENDORS = "http://telematics.route4me.com/api/vendors.php";
+    const TELEMATICS_REGISTER_MEMBER =  "/api.v4/telematics/register.php";
+    const TELEMATICS_CONNECTION =  "/api.v4/telematics/connections.php";
+    const TELEMATICS_VENDORS_INFO =  "/api.v4/telematics/vendors.php";
 
     const MEMBER_CAPABILITIES = "/api/member/capabilities.php";
 

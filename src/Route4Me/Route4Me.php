@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-use Route4Me\Exception\ApiError as ApiError;
-use Route4Me\Enum\Endpoint as Endpoint;
+use Route4Me\Exception\ApiError;
+use Route4Me\Enum\Endpoint;
 
 class Route4Me
 {
@@ -126,7 +126,7 @@ class Route4Me
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        if ( in_array($code, [200,201,202])) {
+        if (200 == $code) {
             if ($isxml) {
                 $json = $jxml;
             } else {
