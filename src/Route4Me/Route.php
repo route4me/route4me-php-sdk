@@ -6,58 +6,318 @@ use Route4Me\Enum\Endpoint;
 use Route4Me\Vehicles\Vehicle;
 use Route4Me\RouteParameters;
 
+/**
+ * The route data structure
+ * @package Route4Me
+ */
 class Route extends Common
 {
+    /**
+     * The route ID
+     * @var string
+     */
     public $route_id;
+
+    /**
+     * Member ID of a route owner
+     * @var integer
+     */
     public $member_id;
+
+    /**
+     * Optimization problem ID
+     * @var string
+     */
     public $optimization_problem_id;
+
+    /**
+     * Vehicle alias
+     * @var string
+     */
     public $vehicle_alias;
+
+    /**
+     * Driver alias
+     * @var string
+     */
     public $driver_alias;
+
+    /**
+     * Total route's trip distance
+     * @var double
+     */
     public $trip_distance;
+
+    /**
+     * The UDU distance measurement unit for the route.<br>
+     * @note km or mi, the route4me api will convert all distance measurements into these units.
+     * @var string
+     */
     public $udu_distance_unit;
+
+    /**
+     * Total route's UDU trip distance
+     * @var double
+     */
     public $udu_trip_distance;
+
+    /** Miles per gallon
+     * @var double
+     */
     public $mpg;
+
+    /**
+     * Gas price
+     * @var double
+     */
     public $gas_price;
+
+    /**
+     * Total route duration (seconds)
+     * @var integer
+     */
     public $route_duration_sec;
+
+    /**
+     * Number of the destinations in the route.
+     * @var integer
+     */
     public $destination_count;
+
+    /**
+     * Notes count in the route.
+     * @var integer
+     */
     public $notes_count;
+
+    /**
+     * Route parameters
+     * @var RouteParameters
+     */
     public $parameters;
+
+    /**
+     * An array of the route addresses
+     * @var Address[]
+     */
     public $addresses = [];
+
+    /**
+     * An array of the links
+     * @var string[]
+     */
     public $links = [];
+
+    /**
+     * Edge by edge turn-by-turn directions.
+     * @var Direction[]
+     */
     public $directions = [];
+
+    /**
+     * Edge-wise path to be drawn on the map.
+     * @var GeoPoint[]
+     */
     public $path = [];
+
+    /**
+     * A collection of device tracking data with coordinates, speed, and timestamps.
+     * @var Tracking\TrackingHistory[]
+     */
     public $tracking_history = [];
+
+    /**
+     * HTTP headers
+     * @var string
+     */
     public $httpheaders;
+
+    /**
+     * If true, the route is unrouted.
+     * @var Boolean
+     */
     public $is_unrouted;
+
+    /**
+     * User route rating [0, 5]. A null value means no rating was given.<br>
+     * Users can rate routes so that future optimizations take these ratings into account.
+     * @var integer
+     */
     public $user_route_rating;
+
+    /**
+     * The member's email
+     * @var string
+     */
     public $member_email;
+
+    /**
+     * URL to a member picture
+     * @var string
+     */
     public $member_picture;
+
+    /**
+     * Member tracking subheadline.
+     * @var string
+     */
     public $member_tracking_subheadline;
+
+    /**
+     * If true, the order is approved for execution.
+     * @var Boolean
+     */
     public $approved_for_execution;
+
+    /**
+     * Counter of the approved revisions.
+     * @var integer
+     */
     public $approved_revisions_counter;
+
+    /**
+     * The member's first name.
+     * @var string
+     */
     public $member_first_name;
+
+    /**
+     * The member's last name.
+     * @var string
+     */
     public $member_last_name;
+
+    /**
+     * Channel name
+     * @var string
+     */
     public $channel_name;
+
+    /**
+     * Total cost of the route.
+     * @var double
+     */
     public $route_cost;
+
+    /**
+     * Total route revenue
+     * @var double
+     */
     public $route_revenue;
+
+    /**
+     * Net revenue per distance unit.
+     * @var double
+     */
     public $net_revenue_per_distance_unit;
+
+    /**
+     * When route created (UNIX format timestamp).
+     * @var integer
+     */
     public $created_timestamp;
+
+    /**
+     * Planned total route duration (seconds).
+     * @var integer
+     */
     public $planned_total_route_duration;
+
+    /**
+     * Total wait time (seconds).
+     * @var integer
+     */
     public $total_wait_time;
+
+    /**
+     * UDU Actual travel distance.
+     * @var double
+     */
     public $udu_actual_travel_distance;
+
+    /**
+     * Actual travel distance.
+     * @var double
+     */
     public $actual_travel_distance;
+
+    /**
+     * Actual travel time (seconds).
+     * @var integer
+     */
     public $actual_travel_time;
+
+    /**
+     * Actual footsteps.
+     * @var integer
+     */
     public $actual_footsteps;
+
+    /**
+     * Working time.
+     * @var integer
+     */
     public $working_time;
+
+    /**
+     * Driving time.
+     * @var integer
+     */
     public $driving_time;
+
+    /**
+     * Idling time.
+     * @var integer
+     */
     public $idling_time;
+
+    /**
+     * Paying miles
+     * @var double
+     */
     public $paying_miles;
+
+    /**
+     * Geofence polygon type.<br>
+     * enum: ["circle", "poly", "rect"]
+     * @var string
+     */
     public $geofence_polygon_type;
+
+    /**
+     * Geofence polygon size.
+     * @var integer
+     */
     public $geofence_polygon_size;
+
+    /**
+     * Route notes
+     * @var AddressNote[]
+     */
     public $notes=[];
+
+    /**
+     * A vehicle assigned to the route.
+     * @var Vehicles\VehicleResponseV4
+     */
     public $vehicle=[];
+
+    /**
+     * Member config key-value pairs.
+     * @var array
+     */
     public $member_config_storage;
+
+    /**
+     * Original route
+     * @var Route
+     */
     public $original_route;
+
+    /**
+     * If true, the route will be unlinked from the master optimization.
+     * @var Boolean
+     */
     public $unlink_from_master_optimization;
 
     public function __construct()
@@ -146,6 +406,11 @@ class Route extends Common
         return $route;
     }
 
+    /**
+     * @param RouteParametersQuery $params
+     * @return An array of the routes
+     * @throws Exception\ApiError
+     */
     public static function getRoutes($params = null)
     {
         $allQueryFields = ['route_id', 'original', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset','start_date','end_date'];
@@ -213,6 +478,11 @@ class Route extends Common
         return $result;
     }
 
+    /**
+     * @deprecated 'The method is obsolete, use the method ReoptimizeRoute instead.'
+     * @param $params
+     * @return mixed|string
+     */
     public function resequenceAllAddresses($params)
     {
         $allQueryFields = ['route_id', 'disable_optimization', 'optimize'];
@@ -226,6 +496,36 @@ class Route extends Common
         return $result;
     }
 
+    /**
+     * Reoptimize a route
+     * @param $params type Route
+     * @return mixed|string
+     * @throws Exception\ApiError
+     */
+    public function reoptimizeRoute($params)
+    {
+        $allQueryFields = ['route_id', 'reoptimize', 'remaining', 'device_type'];
+
+        $result = Route4Me::makeRequst([
+            'url'       => Endpoint::ROUTE_V4,
+            'method'    => 'PUT',
+            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+        ]);
+
+        return $result;
+    }
+
+    /**
+     * Merges the routes
+     * @param $params array contains:
+     * @param route_ids IDs of the routes to be merged.
+     * @param depot_address a depot address of the merged route.
+     * @param remove_origin if true, the origin routes will be removed.
+     * @param depot_lat the depot's latitude
+     * @param depot_lng the depot's longitude
+     * @return Status response
+     * @throws Exception\ApiError
+     */
     public function mergeRoutes($params)
     {
         $allBodyFields = ['route_ids', 'depot_address', 'remove_origin', 'depot_lat',  'depot_lng'];
@@ -240,6 +540,15 @@ class Route extends Common
         return $result;
     }
 
+    /**
+     * Share a route by an email
+     * @param $params RouteParametersQuery contains:
+     * @param route_id a route ID to be shared.
+     * @param response_format the response format.
+     * @param recipient_email Recipient email.
+     * @return Status response
+     * @throws Exception\ApiError
+     */
     public function shareRoute($params)
     {
         $allQueryFields = ['route_id', 'response_format'];
@@ -256,7 +565,13 @@ class Route extends Common
         return $result;
     }
 
-    // Returns random route_id from existing routes between $offset and $offset+$limit
+    /**
+     * Returns random route_id from existing routes between $offset and $offset+$limit
+     * @param $offset integer The page number for route listing pagination.
+     * @param $limit integer The maximum number of the returned routes.
+     * @return string random route ID
+     * @throws Exception\ApiError
+     */
     public function getRandomRouteId($offset, $limit)
     {
         $params = [
@@ -278,6 +593,18 @@ class Route extends Common
         return $routes[$randomIndex]->route_id;
     }
 
+    /**
+     * Update a route
+     * @param $params array contains:
+     * @param route_id string : route ID
+     * @param reoptimize int : if equal to 1 the route re-optimized.
+     * @param route_destination_id int : route destination ID
+     * @param addresses Address[] : an array of a route addresses.
+     * @param parameters RouteParameters : route parameters.
+     * @param unlink_from_master_optimization  Boolean : if true, the route will be unlinked from optimization.
+     * @return Route updated route
+     * @throws Exception\ApiError
+     */
     public function updateRoute($params)
     {
         $allQueryFields = ['route_id', 'reoptimize','route_destination_id'];

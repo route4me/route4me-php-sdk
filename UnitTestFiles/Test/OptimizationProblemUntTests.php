@@ -229,12 +229,15 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
     {
         $optimizationProblemId = self::$createdProblems[0]->getOptimizationId();
 
-        $problem = OptimizationProblem::fromArray(
-            OptimizationProblem::reoptimize(['optimization_problem_id' => $optimizationProblemId])
-        );
+        $optimizationProblem = new OptimizationProblem();
+
+        $problem = $optimizationProblem->reoptimize(['optimization_problem_id' => $optimizationProblemId]);
 
         $this->assertNotNull($problem);
-        $this->assertContainsOnlyInstancesOf(OptimizationProblem::class, [$problem]);
+
+        $this->assertInstanceOf(
+            OptimizationProblem::class,
+            OptimizationProblem::fromArray($problem));
     }
 
     public function testUpdate()
@@ -258,8 +261,8 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
             OptimizationProblem::update($OptimizationParameters)
         );
 
-        $this->assertNotNull($problem);
-        $this->assertContainsOnlyInstancesOf(OptimizationProblem::class, [$problem]);
+        $this->assertNotNull($result);
+        $this->assertTrue($result instanceof OptimizationProblem);
         $this->assertTrue(sizeof($result->addresses)==$initialAddresses+2);
     }
 
@@ -429,7 +432,9 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
             'redirect'                 => 0,
         ];
 
-        $result = OptimizationProblem::removeOptimization($params);
+        $optProblem = new OptimizationProblem();
+
+        $result = $optProblem->removeOptimization($params);
 
         if ($result!=null && $result['status']==true) {
             echo "The test optimization was removed <br>";

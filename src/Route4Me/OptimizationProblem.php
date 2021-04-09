@@ -6,73 +6,85 @@ use Route4Me\Enum\Endpoint;
 
 class OptimizationProblem extends Common
 {
-    /** @var string $optimization_problem_id
+    /**
      * Optimization problem ID
+     * @var string
      */
     public $optimization_problem_id;
 
-    /** @var string $smart_optimization_id
+    /**
      * Smart Optimization Problem ID
+     * @var string
      */
     public $smart_optimization_id;
 
-    /** @var string[] $user_errors
+    /**
      * An array of the user errors.
+     * @var string[]
      */
     public $user_errors = [];
 
-    /** @var int $state
-     * An optimization problem state.
+    /**
+     * An optimization problem state.<br>
      * Available values:
-     * OptimizationStateNew = 0,
-     * Initial = 1,
-     * MatrixProcessing = 2,
-     * Optimizing = 3,
-     * Optimized = 4,
-     * Error = 5,
-     * ComputingDirections = 6,
-     * OptimizationStateInQueue = 7
+     * - OptimizationStateNew = 0,
+     * - Initial = 1,
+     * - MatrixProcessing = 2,
+     * - Optimizing = 3,
+     * - Optimized = 4,
+     * - Error = 5,
+     * - ComputingDirections = 6,
+     * - OptimizationStateInQueue = 7
+     * @var int
      */
     public $state;
 
-    /** @var string[] $optimization_errors
+    /**
      * An array of the optimization errors.
+     * @var string[]
      */
     public $optimization_errors = [];
 
-    /** @var RouteParameters $parameters
+    /**
      * Route Parameters.
+     * @var RouteParameters
      */
     public $parameters;
 
-    /** @var boolean $sent_to_background
+    /**
      * If true it means the solution was not returned (it is being computed in the background).
+     * @var boolean
      */
     public $sent_to_background;
 
-    /** @var long $created_timestamp
+    /**
      * When the optimization problem was created.
+     * @var long
      */
     public $created_timestamp;
 
-    /** @var long $scheduled_for
+    /**
      * An Unix Timestamp the Optimization Problem was scheduled for.
+     * @var long
      */
     public $scheduled_for;
 
-    /** @var long $optimization_completed_timestamp
+    /**
      * When the optimization completed.
+     * @var long
      */
     public $optimization_completed_timestamp;
 
-    /** @var Address[] $addresses
+    /**
      * An array ot the Address type objects.
+     * @var Address[]
      */
     public $addresses = [];
 
-    /** @var Route[] $routes
-     * An array ot the DataObjectRoute type objects.
+    /**
+     * An array ot the DataObjectRoute type objects.<br>
      * The routes included in the optimization problem.
+     * @var Route[]
      */
     public $routes = [];
 
@@ -165,33 +177,50 @@ class OptimizationProblem extends Common
         }
     }
 
-    public static function reoptimize($params)
+    public function reoptimize($params)
     {
-        $param = new OptimizationProblemParams();
-        $param->optimization_problem_id = isset($params['optimization_problem_id']) ? $params['optimization_problem_id'] : null;
-        $param->reoptimize = 1;
+        $param['reoptimize'] = 1;
 
-        return self::update((array) $param);
+        return self::update($params);
     }
 
     /*
-     * Updates an existing optimization problem.
+     * Updates an existing optimization problem.<br>
      * @param array $params with items:
-     *        optimization_problem_id   : query parameter. ID of an updated optimization;
-     *        reoptimize                : query parameter. If true, the optimization re-optimized;
-     *        addresses                 : body parameter. An array of the addresses to add;
-     *        parameters                : body parameter. Modified route parameters;
+     * - optimization_problem_id   : query parameter. ID of an updated optimization;
+     * - reoptimize                : query parameter. If true, the optimization re-optimized;
+     * - addresses                 : body parameter. An array of the addresses to add;
+     * - parameters                : body parameter. Modified route parameters;
+     * @return Optimization problem
      */
     public static function update($params)
     {
         $allQueryFields = ['optimization_problem_id', 'reoptimize'];
         $allBodyFields = ['addresses', 'parameters'];
 
+        $query = is_array($params)
+                    ? (isset($params['optimization_problem_id']) || isset($params['parameters']))
+                        ? Route4Me::generateRequestParameters($allQueryFields, $params)
+                        : null
+                    : (isset($params->optimization_problem_id) || isset($params->parameters))
+                        ? Route4Me::generateRequestParameters($allQueryFields, $params)
+                        : null;
+
+        $body = is_array($params)
+            ? (isset($params['addresses']) && sizeof($params['addresses'])>0) ||
+            (isset($params['parameters']) && sizeof($params['parameters'])>0)
+                ? Route4Me::generateRequestParameters($allBodyFields, $params)
+                : null
+            : (isset($params->addresses) && sizeof($params->addresses)>0) ||
+                (isset($params->parameters) && sizeof($params->parameters)>0)
+                    ? Route4Me::generateRequestParameters($allBodyFields, $params)
+                    : null;
+
         $optimize = Route4Me::makeRequst([
             'url'       => Endpoint::OPTIMIZATION_PROBLEM,
             'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'query'     => $query,
+            'body'      => $body,
         ]);
 
         return $optimize;

@@ -14,443 +14,532 @@ use Route4Me\Route4Me;
  */
 class Address extends \Route4Me\Common
 {
-    /** Route destination ID
-     * @var int $route_destination_id
+    /**
+     * Route destination ID
+     * @var integer
      */
     public $route_destination_id;
 
-    /** Route alias
-     * @var string $alias
+    /**
+     * Route alias
+     * @var string
      */
     public $alias;
 
-    /** The ID of the member inside the Route4Me system.
-     * @var int $member_id
+    /**
+     * The ID of the member inside the Route4Me system.
+     * @var integer
      */
     public $member_id;
 
-    /** Route destination address
-     * @var string $address
+    /**
+     * Route destination address
+     * @var string
      */
     public $address;
 
-    /** Designate this stop as a depot.
+    /**
+     * Designate this stop as a depot.
      * A route may have multiple depots/points of origin.
-     * @var boolean $is_depot
+     * @var boolean
      */
     public $is_depot;
 
-    /** Timeframe violation state
-     * @var integer $timeframe_violation_state
+    /**
+     * Timeframe violation state
+     * @var integer
      */
     public $timeframe_violation_state;
 
-    /** Timeframe violation time
-     * @var integer $timeframe_violation_time
+    /**
+     * Timeframe violation time
+     * @var integer
      */
     public $timeframe_violation_time;
 
-    /** Timeframe violation rate
-     * @var double $timeframe_violation_rate
+    /**
+     * Timeframe violation rate
+     * @var double
      */
     public $timeframe_violation_rate;
 
-    /** The latitude of this address
-     * @var double $lat
+    /**
+     * The latitude of this address
+     * @var double
      */
     public $lat;
 
-    /** The longitude of this address
-     * @var double $lng
+    /**
+     * The longitude of this address
+     * @var double
      */
     public $lng;
 
-    /** Curbside latitude.
+    /**
+     * Curbside latitude.
      * Generate optimal routes and driving directions to this curbside latitude.
-     * @var double $curbside_lat
+     * @var double
      */
     public $curbside_lat;
 
-    /** Curbside longitude.
+    /**
+     * Curbside longitude.
      * Generate optimal routes and driving directions to the curbside longitude.
-     * @var double $curbside_lng
+     * @var double
      */
     public $curbside_lng;
 
-    /** If present, the priority will sequence addresses in all the optimal routes so that
+    /**
+     * If present, the priority will sequence addresses in all the optimal routes so that
      * higher priority addresses are general at the beginning of the route sequence.
      * 1 is the highest priority, 100000 is the lowest.
-     * @var integer $priority
+     * @var integer
      */
     public $priority;
 
-    /** The ID of the route being viewed, modified, or erased.
-     * @var string $route_id
+    /**
+     * The ID of the route being viewed, modified, or erased.
+     * @var string
      */
     public $route_id;
 
-    /** If this route was duplicated from an existing route, this value would have the original route's ID.
-     * @var string $original_route_id
+    /**
+     * If this route was duplicated from an existing route,
+     * this value would have the original route's ID.
+     * @var string
      */
     public $original_route_id;
 
-    /** Route name of a depot address.
-     * @var string route_name
+    /**
+     * Route name of a depot address.
+     * @var string
      */
     public $route_name;
 
-    /** The ID of the optimization request that was used to initially instantiate this route.
-     * @var string $optimization_problem_id
+    /**
+     * The ID of the optimization request that was used to initially instantiate this route.
+     * @var string
      */
     public $optimization_problem_id;
 
-    /** The destination's sequence number in the route.
-     * @var integer $sequence_no
+    /**
+     * The destination's sequence number in the route.
+     * @var integer
      */
     public $sequence_no;
 
-    /** True if the address is geocoded.
-     * @var boolean $geocoded
+    /**
+     * True if the address is geocoded.
+     * @var boolean
      */
     public $geocoded;
 
-    /** The preferred geocoding number.
-     * @var integer $preferred_geocoding
+    /**
+     * The preferred geocoding number.
+     * @var integer
      */
     public $preferred_geocoding;
 
-    /** True if geocoding failed.
-     * @var boolean $failed_geocoding
+    /**
+     * True if geocoding failed.
+     * @var boolean
      */
     public $failed_geocoding;
 
-    /** An array containing Geocoding objects.
-     * @var Geocoding[] $geocodings = []
+    /**
+     * An array containing Geocoding objects.
+     * @var Geocoding[]
      */
     public $geocodings = [];
 
-    /** When planning a route from the address book or using existing address book IDs,
+    /**
+     * When planning a route from the address book or using existing address book IDs,
      * pass the address book ID (contact_id) for an address so that Route4Me can run
      * analytics on the address book addresses that were used to plan routes, and to find previous visits to
      * favorite addresses.
-     * @var integer $contact_id
+     * @var integer
      */
     public $contact_id;
 
-    /** The address order ID
-     * @var integer $order_id
+    /**
+     * The address order ID
+     * @var integer
      */
     public $order_id;
 
-    /** Route address stop type
-     * @var string $address_stop_type
+    /**
+     * Route address stop type
+     * @var string
      */
     public $address_stop_type;
 
-    /** The status flag to mark an address as visited (aka check in).
-     * @var boolean $is_visited
+    /**
+     * The status flag to mark an address as visited (aka check in).
+     * @var boolean
      */
     public $is_visited;
 
-    /** The last known visited timestamp of this address.
-     * @var integer $timestamp_last_visited
+    /**
+     * The last known visited timestamp of this address.
+     * @var integer
      */
     public $timestamp_last_visited;
 
-    /** Latitude of the visited address
-     * @var double $visited_lat
+    /**
+     * Latitude of the visited address
+     * @var double
      */
     public $visited_lat;
 
-    /** Longitude of the visited address
-     * @var double $visited_lng
+    /**
+     * Longitude of the visited address
+     * @var double
      */
     public $visited_lng;
 
-    /** The status flag to mark an address as departed (aka check out).
-     * @var boolean $is_departed
+    /**
+     * The status flag to mark an address as departed (aka check out).
+     * @var boolean
      */
     public $is_departed;
 
-    /** Departed address latitude
-     * @var double $departed_lat
+    /**
+     * Departed address latitude
+     * @var double
      */
     public $departed_lat;
 
     /** Departed address longitude
-     * @var double $departed_lng
+     * @var double
      */
     public $departed_lng;
 
-    /** The last known departed timestamp of this address.
-     * @var integer $timestamp_last_departed
+    /**
+     * he last known departed timestamp of this address.
+     * @var integer
      */
     public $timestamp_last_departed;
 
-    /** The address group
-     * @var string $group
+    /**
+     * The address group
+     * @var string
      */
     public $group;
 
-    /** Pass-through data about this route destination.
+    /**
+     * Pass-through data about this route destination.<br>
      * The data will be visible on the manifest, website, and mobile apps.
-     * @var string $customer_po
+     * @var string
      */
     public $customer_po;
 
-    /** Pass-through data about this route destination.
+    /**
+     * Pass-through data about this route destination.<br>
      * The data will be visible on the manifest, website, and mobile apps.
-     * @var string $invoice_no
+     * @var string
      */
     public $invoice_no;
 
-    /** Pass-through data about this route destination.
+    /**
+     * Pass-through data about this route destination.<br>
      * The data will be visible on the manifest, website, and mobile apps.
-     * @var string $reference_no
+     * @var string
      */
     public $reference_no;
 
-    /** Pass-through data about this route destination.
+    /**
+     * Pass-through data about this route destination.<br>
      * The data will be visible on the manifest, website, and mobile apps.
-     * @var string $order_no
+     * @var string
      */
     public $order_no;
 
-    /** The address cargo weight
-     * @var double $weight
+    /**
+     * The address cargo weight
+     * @var double
      */
     public $weight;
 
-    /** The address cost
-     * @var double $cost
+    /**
+     * The address cost
+     * @var double
      */
     public $cost;
 
-    /** The address revenue
-     * @var double $revenue
+    /**
+     * The address revenue
+     * @var double
      */
     public $revenue;
 
-    /** The cubic volume that this destination/order/line-item consumes/contains.
+    /**
+     * The cubic volume that this destination/order/line-item consumes/contains.<br>
      * This is how much space it will take up on a vehicle.
-     * @var double $cube
+     * @var double
      */
     public $cube;
 
-    /** The number of pieces/palllets that this destination/order/line-item consumes/contains on a vehicle.
-     * @var integer $pieces
+    /**
+     * The number of pieces/palllets that this destination/order/line-item consumes/contains on a vehicle.
+     * @var integer
      */
     public $pieces;
 
-    /** First name
-     * @var string $first_name
+    /**
+     * First name
+     * @var string
      */
     public $first_name;
 
-    /** Last name
-     * @var string $last_name
+    /**
+     * Last name
+     * @var string
      */
     public $last_name;
 
-    /** Pass-through data about this route destination.
+    /**
+     * Pass-through data about this route destination.
      * The data will be visible on the manifest, website, and mobile apps.
      * Also used to email clients when vehicles are approaching (future capability).
-     * @var string $email
+     * @var string
      */
     public $email;
 
-    /** Pass-through data about this route destination.
+    /**
+     * Pass-through data about this route destination.
      * The data will be visible on the manifest, website, and mobile apps.
      * Also used to send SMS messages to clients when vehicles are approaching (future capability).
-     * @var string $phone
+     * @var string
      */
     public $phone;
 
-    /** The number of notes that are already associated with this address on the route.
-     * @var integer $destination_note_count
+    /**
+     * The number of notes that are already associated with this address on the route.
+     * @var integer
      */
     public $destination_note_count;
 
-    /** Server-side generated amount of km/miles that it will take to get to the next location on the route.
-     * @var integer $drive_time_to_next_destination
+    /**
+     * Server-side generated amount of km/miles that
+     * it will take to get to the next location on the route.
+     * @var integer
      */
     public $drive_time_to_next_destination;
 
-    /** Abnormal traffic time to next destination.
-     * @var integer $abnormal_traffic_time_to_next_destination
+    /**
+     * Abnormal traffic time to next destination.
+     * @var integer
      */
     public $abnormal_traffic_time_to_next_destination;
 
-    /** Uncongested time to next destination.
-     * @var integer $uncongested_time_to_next_destination
+    /**
+     * Uncongested time to next destination.
+     * @var integer
      */
     public $uncongested_time_to_next_destination;
 
-    /** Traffic time to next destination.
-     * @var integer $traffic_time_to_next_destination
+    /**
+     * Traffic time to next destination.
+     * @var integer
      */
     public $traffic_time_to_next_destination;
 
-    /** Server-side generated amount of seconds that it will take to get to the next location.
-     * @var double $distance_to_next_destination
+    /**
+     * Server-side generated amount of seconds
+     * that it will take to get to the next location.
+     * @var double
      */
     public $distance_to_next_destination;
 
-    /** The unique socket channel name which should be used to get real time alerts.
-     * @var string $channel_name
+    /**
+     * The unique socket channel name which
+     * should be used to get real time alerts.
+     * @var string
      */
     public $channel_name;
 
-    /** Alias of a pickup point.
-     * @var string $pickup
+    /**
+     * Alias of a pickup point.
+     * @var string
      */
     public $pickup;
 
-    /** Alias of the paired pickup point.
-     * @var string $dropoff
+    /**
+     * Alias of the paired pickup point.
+     * @var string
      */
     public $dropoff;
 
-    /** If equal to 1, the pickup and dropoff addresses are joint
+    /**
+     * If equal to 1, the pickup and dropoff addresses are joint
      * (one by one despite the regular pickup-dropoff addresses
      * when it's possible to have multiple pickup addresses with one dropoff address).
-     * @var integer $joint
+     * @var integer
      */
     public $joint;
 
-    /** Generated time window start.
-     * @var integer $generated_time_window_start
+    /**
+     * Generated time window start.
+     * @var integer
      */
     public $generated_time_window_start;
 
-    /** Estimated time window end based on the optimization engine,
+    /**
+     * Estimated time window end based on the optimization engine,
      * after all the sequencing has been completed.
-     * @var integer $generated_time_window_end
+     * @var integer
      */
     public $generated_time_window_end;
 
-    /** The address time window start.
-     * @var integer $time_window_start
+    /**
+     * The address time window start.
+     * @var integer
      */
     public $time_window_start;
 
-    /** The address time window end.
-     * @var integer $time_window_end
+    /**
+     * The address time window end.
+     * @var integer
      */
     public $time_window_end;
 
-    /** The address time window start 2.
-     * @var integer $time_window_start_2
+    /**
+     * The address time window start 2.
+     * @var integer
      */
     public $time_window_start_2;
 
-    /** The address time window end 2.
-     * @var integer $time_window_end_2
+    /**
+     * The address time window end 2.
+     * @var integer
      */
     public $time_window_end_2;
 
-    /** Geofence detected visited timestamp
-     * @var integer $geofence_detected_visited_timestamp
+    /**
+     * Geofence detected visited timestamp
+     * @var integer
      */
     public $geofence_detected_visited_timestamp;
 
-    /** Geofence detected departed timestamp
-     * @var integer $geofence_detected_departed_timestamp
+    /**
+     * Geofence detected departed timestamp
+     * @var integer
      */
     public $geofence_detected_departed_timestamp;
 
-    /** Geofence detected service time
-     * @var integer $geofence_detected_service_time
+    /**
+     * Geofence detected service time
+     * @var integer
      */
     public $geofence_detected_service_time;
 
-    /** Geofence detected visited latitude
-     * @var double $geofence_detected_visited_lat
+    /**
+     * Geofence detected visited latitude
+     * @var double
      */
     public $geofence_detected_visited_lat;
 
-    /** Geofence detected visited longitude
-     * @var double Geofence detected visited longitude
+    /**
+     * Geofence detected visited longitude
+     * @var double
      */
     public $geofence_detected_visited_lng;
 
-    /** Geofence detected departed latitude
-     * @var double $geofence_detected_departed_lat
+    /**
+     * Geofence detected departed latitude
+     * @var double
      */
     public $geofence_detected_departed_lat;
 
-    /** Geofence detected departed longitude
-     * @var double $geofence_detected_departed_lng
+    /**
+     * Geofence detected departed longitude
+     * @var double
      */
     public $geofence_detected_departed_lng;
 
-    /** The expected amount of time that will be spent at this address by the driver/user.
-     * @var integer $time
+    /**
+     * The expected amount of time that will be spent
+     * at this address by the driver/user.
+     * @var integer
      */
     public $time;
 
-    /** System-wide unique code, which permits end-users (recipients) to track the status of their order.
-     * @var string $tracking_number
+    /**
+     * System-wide unique code, which permits end-users (recipients)
+     * to track the status of their order.
+     * @var string
      */
     public $tracking_number;
 
-    /** The address custom fields.
-     * @var array $custom_fields
+    /**
+     * The address custom fields.
+     * @var array
      */
     public $custom_fields = [];
 
-    /** The custom fields configuration in JSON format.
-     * @var string $custom_fields_str_json
+    /**
+     * The custom fields configuration in JSON format.
+     * @var string
      */
     public $custom_fields_str_json;
 
-    /** The custom fields configuration.
-     * @var string[] $custom_fields_config
+    /**
+     * The custom fields configuration.
+     * @var string[]
      */
     public $custom_fields_config = [];
 
-    /** The custom fields configuration in JSON format.
-     * @var string $custom_fields_config_str_json
+    /**
+     * The custom fields configuration in JSON format.
+     * @var string
      */
     public $custom_fields_config_str_json;
 
-    /** The address notes
-     * @var AddressNote[] $notes
+    /**
+     * The address notes
+     * @var AddressNote[]
      */
     public $notes = [];
 
-    /** Bundle count
-     * @var integer $bundle_count
+    /**
+     * Bundle count
+     * @var integer
      */
     public $bundle_count;
 
-    /** Bundle items
-     * @var BundledItemResponse[] $bundle_items
+    /**
+     * Bundle items
+     * @var BundledItemResponse[]
      */
     public $bundle_items;
 
-    /** List of the order inventories
-     * @var OrderInventory[] $order_inventory
+    /**
+     * List of the order inventories
+     * @var OrderInventory[]
      */
     public $order_inventory;
 
-    /** UDU distance to next destination.
-     * @var double $udu_distance_to_next_destination
+    /**
+     * UDU distance to next destination.
+     * @var double
      */
     public $udu_distance_to_next_destination;
 
-    /** Wait time to next destination.
-     * @var integer $wait_time_to_next_destination
+    /**
+     * Wait time to next destination.
+     * @var integer
      */
     public $wait_time_to_next_destination;
 
-    /** Manifest of a route address.
-     * @var AddressManifest $manifest
+    /**
+     * Manifest of a route address.
+     * @var AddressManifest
      */
     public $manifest;
 
-    /** An array of the required driver skills for the address.
-     * @var array $required_skills
+    /**
+     * An array of the required driver skills for the address.
+     * @var array
      */
     public $required_skills = [];
 
@@ -506,7 +595,7 @@ class Address extends \Route4Me\Common
         return self::fromArray($addressUpdate);
     }
 
-    /*
+    /**
      * Marks an address as marked as visited/as departed
      * depending on which parameter is specified: 'is_visited' or 'is_departed'.
      */
@@ -525,7 +614,7 @@ class Address extends \Route4Me\Common
         return $result;
     }
 
-    /*
+    /**
      * Marks an address as departed.
      */
     public function markAsDeparted($params)
@@ -541,7 +630,7 @@ class Address extends \Route4Me\Common
         return $address;
     }
 
-    /*
+    /**
      * Marks an address as visited.
      */
     public function markAsVisited($params)

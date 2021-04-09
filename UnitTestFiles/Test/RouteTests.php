@@ -18,6 +18,7 @@ use Route4Me\Route4Me;
 use Route4Me\RouteParameters;
 use Route4Me\RouteParametersQuery;
 use Route4Me\Vehicles\Vehicle;
+use Route4Me\Vehicles\VehicleV4;
 
 class RouteTests extends \PHPUnit\Framework\TestCase
 {
@@ -27,6 +28,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
     public static $removedOptimizationIDs = [];
     public static $removedRouteIDs = [];
+    public static $removedVehicleIDs = [];
 
     public static function setUpBeforeClass()
     {
@@ -240,7 +242,41 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $response = $vehicle->getVehicles($vehicleParameters);
 
-        $randomIndex = rand(0, 9);
+        $this->assertNotNull($response);
+        $this->assertTrue(isset($response['data']));
+
+        if (sizeof($response['data'])<1) {
+            $vehicle = new VehicleV4();
+
+            $vehicleParameters = Vehicle::fromArray([
+                'vehicle_name'              => 'Ford Transit Test 5',
+                'vehicle_alias'             => 'Ford Transit Test 5',
+                'vehicle_vin'               => 'JS3TD62V1Y4107898',
+                'vehicle_reg_country_id'    => '223',
+                'vehicle_make'              => 'Ford',
+                'vehicle_model_year'        => 2013,
+                'vehicle_axle_count'        => 2,
+                'mpg_city'                  => 8,
+                'mpg_highway'               => 14,
+                'fuel_type'                 => 'unleaded 93',
+                'height_inches'             => 72,
+                'weight_lb'                 => 2000,
+            ]);
+
+            $result = $vehicle->createVehicle($vehicleParameters);
+
+            self::assertNotNull($result);
+            self::assertInstanceOf(
+                VehicleV4::class,
+                VehicleV4::fromArray($result)
+            );
+
+            $response['data'][] = $result;
+
+            $removedVehicleIDs[] = $result['vehicle_id'];
+        }
+
+        $randomIndex = rand(0, sizeof($response['data'])-1);
         $vehicleId = $response['data'][$randomIndex]['vehicle_id'];
 
         //endregion
@@ -550,11 +586,13 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         //region -- Re-sequence the route --
 
-        $params = [
-            'route_id' => $routeID,
-        ];
+        $params = new RouteParametersQuery();
+        $params->route_id = $routeID;
 
-        $status = $route->resequenceAllAddresses($params);
+        $result = $route->reoptimizeRoute($params);
+
+        $this->assertNotNull($result);
+        $this->assertInstanceOf(Route::class, Route::fromArray($result));
 
         $params = new RouteParametersQuery();
 
@@ -764,6 +802,18 @@ class RouteTests extends \PHPUnit\Framework\TestCase
                 echo "The test routes were removed <br>";
             } else {
                 echo "Cannot remove the test routes <br>";
+            }
+        }
+
+        if (sizeof(self::$removedVehicleIDs)>0) {
+            $vehicle = new VehicleV4();
+
+            foreach (self::$removedVehicleIDs as $vehicleID) {
+                $vehicleParameters = VehicleV4::fromArray([
+                    'vehicle_id' => $vehicleID,
+                ]);
+
+                $result = $vehicle->removeVehicle($vehicleParameters);
             }
         }
     }

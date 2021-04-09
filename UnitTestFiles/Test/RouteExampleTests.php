@@ -142,6 +142,8 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
 
     public function testOptimizationWithBundledAddresses()
     {
+        $this->markTestSkipped('The test requires special permission to use the address bundling feature.');
+
         // Huge list of addresses
         $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses.json'), true);
 
@@ -454,6 +456,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Route4Me\OptimizationProblem', $problem);
         $this->assertNotNull($problem->getOptimizationId());
         $this->assertNotNull($problem->getRoutes());
+        $this->assertTrue(sizeof($problem->getRoutes())>1);
     }
 
     public function testMultipleSeparateDepostMultipleDriver()

@@ -5,21 +5,94 @@ namespace Route4Me;
 use Route4Me\Enum\Endpoint;
 use Route4Me\Exception\BadParam;
 
+/**
+ * The address note object structure.
+ * @package Route4Me
+ */
 class AddressNote extends Common
 {
+    /**
+     * An unique ID of a note
+     * @var integer
+     */
     public $note_id;
+
+    /**
+     * The route ID
+     * @var string
+     */
     public $route_id;
+
+    /**
+     * The route destination ID
+     * @var integer
+     */
     public $route_destination_id;
+
+    /**
+     * An unique ID of an uploaded file
+     * @var string
+     */
     public $upload_id;
+
+    /**
+     * When the note was added
+     * @var integer
+     */
     public $ts_added;
+
+    /**
+     * The position latitude where the address note was added
+     * @var double
+     */
     public $lat;
+
+    /**
+     * The position longitude where the address note was added
+     * @var double
+     */
     public $lng;
+
+    /**
+     * The activity type
+     * @var string
+     */
     public $activity_type;
+
+    /**
+     * The note text contents
+     * @var string
+     */
     public $contents;
+
+    /**
+     * An upload type of the note
+     * @var string
+     */
     public $upload_type;
+
+    /**
+     * An upload url - where a file-note was uploaded.
+     * @var string
+     */
     public $upload_url;
+
+    /**
+     * An extension of the uploaded file.
+     * @var string
+     */
     public $upload_extension;
+
+    /**
+     * The device a note was uploaded from.
+     * @var string
+     */
     public $device_type;
+
+    /**
+     * Array of the custom type notes.
+     * @var CustomNoteType[]
+     */
     public $custom_types;
 
     public function __construct()
@@ -42,7 +115,8 @@ class AddressNote extends Common
         return $addressNote;
     }
 
-    /*Get notes from the specified route destination
+    /**
+     * Get notes from the specified route destination.<br>
      * Returns an address object with notes, if an address exists, otherwise - return null.
      */
     public static function GetAddressesNotes($noteParams)
