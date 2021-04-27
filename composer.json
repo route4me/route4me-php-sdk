@@ -1,5 +1,5 @@
 {
-  "name": "route4me/route4me-php",
+  "name": "ytauber/route4me-php",
   "description": "Access Route4Me's logistics-as-a-service API using our PHP SDK",
   "minimum-stability": "stable",
   "version": "1.2.2",
