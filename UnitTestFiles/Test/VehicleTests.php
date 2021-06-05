@@ -5,6 +5,7 @@ namespace UnitTestFiles\Test;
 use Route4Me\Constants;
 use Route4Me\Route4Me;
 use Route4Me\Vehicles\Vehicle;
+use Route4Me\V5\Vehicles\DataTypes\DataVehicle;
 use Route4Me\Vehicles\VehicleCreateResponseV4;
 use Route4Me\Vehicles\VehiclesResponseV4;
 use Route4Me\Vehicles\VehicleV4;
@@ -180,13 +181,16 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
         $result = $vehicle->getVehicles($vehicleParameters);
 
         $this->assertNotNull($result);
+        $this->assertTrue(is_array($result));
         $this->assertInstanceOf(
-            VehiclesResponseV4::class,
-            VehiclesResponseV4::fromArray($result)
+            DataVehicle::class,
+            DataVehicle::fromArray($result)
         );
-        $this->assertTrue(isset($result['current_page']));
-        $this->assertTrue(isset($result['data']));
-        $this->assertTrue(is_array($result['data']));
+
+
+//        $this->assertTrue(isset($result['current_page']));
+//        $this->assertTrue(isset($result['data']));
+//        $this->assertTrue(is_array($result['data']));
     }
 
     public function testGetVehicle()

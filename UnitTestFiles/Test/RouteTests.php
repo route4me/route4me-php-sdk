@@ -243,9 +243,9 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $response = $vehicle->getVehicles($vehicleParameters);
 
         $this->assertNotNull($response);
-        $this->assertTrue(isset($response['data']));
+        $this->assertTrue(is_array($response));
 
-        if (sizeof($response['data'])<1) {
+        if (sizeof($response)<1) {
             $vehicle = new VehicleV4();
 
             $vehicleParameters = Vehicle::fromArray([
@@ -271,13 +271,13 @@ class RouteTests extends \PHPUnit\Framework\TestCase
                 VehicleV4::fromArray($result)
             );
 
-            $response['data'][] = $result;
+            $response[] = $result;
 
             $removedVehicleIDs[] = $result['vehicle_id'];
         }
 
-        $randomIndex = rand(0, sizeof($response['data'])-1);
-        $vehicleId = $response['data'][$randomIndex]['vehicle_id'];
+        $randomIndex = rand(0, sizeof($response)-1);
+        $vehicleId = $response[$randomIndex]['vehicle_id'];
 
         //endregion
 
