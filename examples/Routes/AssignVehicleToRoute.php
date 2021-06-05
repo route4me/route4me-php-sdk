@@ -13,7 +13,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 
 // Example refers to the process of assigning a vehicle to a route.
 
-$vehicle = new Vehicle();
+$vehicle = new Vehicles\Vehicle();
 
 $vehicleParameters = [
     'with_pagination'   => true,
@@ -25,7 +25,7 @@ $response = $vehicle->getVehicles($vehicleParameters);
 
 $randomIndex = rand(0, 9);
 
-$vehicleId = $response['data'][$randomIndex]['vehicle_id'];
+$vehicleId = $response[$randomIndex]['vehicle_id'];
 
 $route = new Route();
 
