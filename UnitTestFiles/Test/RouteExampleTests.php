@@ -353,13 +353,12 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
             'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
             'distance_unit'             => DistanceUnit::MILES,
             'device_type'               => DeviceType::WEB,
-            'optimize'                  => OptimizationType::DISTANCE,
-            'metric'                    => Metric::GEODESIC,
-            'route_max_duration'        => 86400 * 2,
+            'optimize'                  => OptimizationType::TIME,
+            'metric'                    => Metric::MATRIX,
+            'route_max_duration'        => 86400 ,
             'travel_mode'               => TravelMode::DRIVING,
             'vehicle_capacity'          => 50,
             'vehicle_max_distance_mi'   => 10000,
-            'parts'                     => 50,
         ]);
 
         $optimizationParams = new OptimizationProblemParams();
