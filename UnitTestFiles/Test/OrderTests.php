@@ -73,10 +73,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             'EXT_FIELD_email'           => 'progman@gmail.com',
             'EXT_FIELD_phone'           => '380380380380',
             'EXT_FIELD_custom_data'     => [
-                0 => [
-                    'order_id'  => '10',
-                    'name'      => 'Bill Soul',
-                ],
+				'order_id'  => '10',
+				'name'      => 'Bill Soul'
             ],
         ]);
 
@@ -106,10 +104,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             'EXT_FIELD_email'           => 'progman@gmail.com',
             'EXT_FIELD_phone'           => '380380380380',
             'EXT_FIELD_custom_data'     => [
-                0 => [
-                    'order_id'  => '10',
-                    'name'      => 'Bill Soul',
-                ],
+				'order_id'  => '10',
+				'name'      => 'Bill Soul'
             ],
         ]);
 
@@ -124,11 +120,10 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals('progman@gmail.com', $orderParameters->EXT_FIELD_email);
         $this->assertEquals('380380380380', $orderParameters->EXT_FIELD_phone);
         $this->assertEquals([
-            0 => [
-                'order_id'  => '10',
-                'name'      => 'Bill Soul',
-            ],
-        ], $orderParameters->EXT_FIELD_custom_data);
+			'order_id'  => '10',
+			'name'      => 'Bill Soul'
+        ], 
+		$orderParameters->EXT_FIELD_custom_data);
     }
 
     public function testToArray()
@@ -145,10 +140,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             'EXT_FIELD_email'           => 'progman@gmail.com',
             'EXT_FIELD_phone'           => '380380380380',
             'EXT_FIELD_custom_data'     => [
-                0 => [
-                    'order_id'  => '10',
-                    'name'      => 'Bill Soul',
-                ],
+				'order_id'  => '10',
+				'name'      => 'Bill Soul'
             ],
         ]);
 
@@ -165,10 +158,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
                 'EXT_FIELD_email'           => 'progman@gmail.com',
                 'EXT_FIELD_phone'           => '380380380380',
                 'EXT_FIELD_custom_data'     => [
-                    0 => [
-                        'order_id'  => '10',
-                        'name'      => 'Bill Soul',
-                    ],
+					'order_id'  => '10',
+					'name'      => 'Bill Soul'
                 ],
             ]
         );
@@ -473,9 +464,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         self::$createdOrders[0]['address_2'] = 'Lviv';
         self::$createdOrders[0]['EXT_FIELD_phone'] = '032268593';
         self::$createdOrders[0]['EXT_FIELD_custom_data'] = [
-            0 => [
-                'customer_no' => '11',
-            ],
+			'customer_no' => '11'
         ];
 
         $response = $order->updateOrder(self::$createdOrders[0]);
@@ -485,9 +474,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Lviv', $response['address_2']);
         $this->assertEquals('032268593', $response['EXT_FIELD_phone']);
         $this->assertEquals(
-            [
-                0 => [ 'customer_no' => '11' ],
-            ],
+            [ 'customer_no' => '11' ],
             $response['EXT_FIELD_custom_data']
         );
     }
