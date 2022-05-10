@@ -2,7 +2,6 @@
 
 namespace Route4Me;
 
-use phpDocumentor\Reflection\Types\Boolean;
 use Route4Me\V5\Addresses\RouteAdvancedConstraints;
 
 /**
@@ -54,7 +53,7 @@ class RouteParameters extends Common
     /**
      * By disabling optimization, the route optimization engine
      * will not resequence the stops in your.
-     * @var disable_optimization
+     * @var Boolean disable_optimization
      */
     public $disable_optimization;
 
@@ -139,7 +138,7 @@ class RouteParameters extends Common
      * When using a multiple driver algorithm, this is the maximum permissible duration of a generated route.<br>
      * The optimization system will automatically create more routes when the route_max_duration is exceeded for a route.<br>
      * However it will create an 'unrouted' list of addresses if the maximum number of drivers is exceeded.
-     * @var long
+     * @var integer
      */
     public $route_max_duration;
 
@@ -198,7 +197,7 @@ class RouteParameters extends Common
 
     /**
      * Specify the ip address of the remote user making this optimization request.
-     * @var long
+     * @var integer
      */
     public $ip;
 
@@ -476,7 +475,7 @@ class RouteParameters extends Common
 
     /**
      * Override addresses
-     * @var OverrideAddresses
+     * @var object of type OverrideAddresses
      */
     public $override_addresses;
 
@@ -514,7 +513,7 @@ class RouteParameters extends Common
      * Slowdown of the optimization parameters.
      * @note This is only query parameter.
      * @note This parameter is used in the optimization creation/generation process.
-     * @var SlowdownParams
+     * @var object of type SlowdownParams
      */
     public $slowdowns;
 

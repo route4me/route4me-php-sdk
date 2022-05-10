@@ -42,7 +42,7 @@ class OptimizationProblem extends Common
      */
     public $sent_to_background;
 
-    /** @var long $scheduled_for
+    /** @var integer $scheduled_for
      * An Unix Timestamp the Optimization Problem was scheduled for.
      */
     public $scheduled_for;

@@ -11,25 +11,25 @@ class TelematicsVendorFeature extends Common
 {
     /**
      * Feature ID
-     * @var type string
+     * @var string
      */
    public $id;
    
    /**
     * Feature name
-    * @var type string
+    * @var string
     */
    public $name;
    
    /**
     * Feature slug
-    * @var type string
+    * @var string
     */
    public $slug;
    
    /**
     * Feature group
-    * @var type string
+    * @var string
     */
    public $feature_group;
 

@@ -16,17 +16,17 @@ class DataObjectBase extends \Route4Me\Common
      */
     public $smart_optimization_id;
 
-    /** @var long $created_timestamp
+    /** @var integer $created_timestamp
      * When the optimization problem was created.
      */
     public $created_timestamp;
 
-    /** @var RouteParameters $parameters
+    /** @var object of type RouteParameters
      * Route Parameters.
      */
     public $parameters = [];
 
-    /** @var Address[] $addresses
+    /** @var array of Address
      * An array ot the Address type objects.
      */
     public $addresses = [];

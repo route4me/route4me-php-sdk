@@ -12,7 +12,7 @@ class UserTracking extends \Route4Me\Common
     /** @var string $device_id */
     public $device_id;
 
-    /** @var long $activity_timestamp */
+    /** @var integer $activity_timestamp */
     public $activity_timestamp;
 
     /** @var string $activity_timestamp */
@@ -84,7 +84,7 @@ class UserTracking extends \Route4Me\Common
     /** @var string $activity_timestamp_friendly */
     public $activity_timestamp_friendly;
 
-    /** @var long $LAST_KNOWN */
+    /** @var integer $LAST_KNOWN */
     public $LAST_KNOWN;
 
     public static function fromArray(array $params)

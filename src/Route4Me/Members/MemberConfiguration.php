@@ -9,7 +9,7 @@ namespace Route4Me\Members;
 use Route4Me\Route4Me;
 use Route4Me\Enum\Endpoint;
 use Route4Me\Exception\BadParam;
-use Unirest\Exception;
+use Exception;
 
 class MemberConfiguration extends \Route4Me\Common
 {

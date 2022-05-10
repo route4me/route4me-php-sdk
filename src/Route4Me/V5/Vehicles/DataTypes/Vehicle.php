@@ -205,7 +205,7 @@ class Vehicle extends Common
 
     /** Creates a vehicle
      * @param $vehicleParams
-     * Returns a vehicle object or failure info.
+     * @return Vehicle object
      */
     public function createVehicle($vehicleParams)
     {
@@ -242,7 +242,7 @@ class Vehicle extends Common
 
     /** Returns the VehiclesPaginated type object containing an array of the vehicles.
      * @param array $params - an array from the VehicleParameters object.
-     * @return an array of the Vehicle objects.
+     * @return array of the Vehicle objects.
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehiclesPaginatedList($params)
@@ -260,7 +260,7 @@ class Vehicle extends Common
 
     /** Creates temporary vehicle in the database.
      * @param $vehicleParams - an array from the VehicleTemporary object.
-     * @return an object of the type VehicleTemporary.
+     * @return object of the type VehicleTemporary.
      * @throws \Route4Me\Exception\ApiError
      */
     public function createTemporaryVehicle($vehicleParams)
@@ -280,7 +280,7 @@ class Vehicle extends Common
 
     /** Execute a vehicle order.
      * @param $vehicleParams - Vehicle order parameters.
-     * @return an object of the type VehicleOrderResponse
+     * @return object of the type VehicleOrderResponse
      * @throws \Route4Me\Exception\ApiError
      */
     public function executeVehicleOrder($vehicleParams)
@@ -300,7 +300,7 @@ class Vehicle extends Common
 
     /** Get latest vehicle locations by specified vehicle IDs.
      * @param $vehicleParams - Vehicle query parameters containing vehicle IDs
-     * @return Data with vehicles
+     * @return object with vehicles
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehicleLocations($vehicleParams)
@@ -318,7 +318,7 @@ class Vehicle extends Common
 
     /** Get the Vehicle by specifying vehicle ID.
      * @param $vehicleParams - Vehicle query parameters containing vehicle ID.
-     * @return an object of the type Vehicle
+     * @return object of the type Vehicle
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehicleById($vehicleParams)

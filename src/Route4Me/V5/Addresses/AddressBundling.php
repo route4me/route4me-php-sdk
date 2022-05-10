@@ -4,6 +4,7 @@
 namespace Route4Me\V5\Addresses;
 
 use Route4Me\Common as Common;
+use Route4Me\Route4Me;
 
 /**
  * Class for the address bundling query
@@ -13,7 +14,7 @@ class AddressBundling extends Common
 {
     /**
      * Address bundling mode
-     * @see Enum\AddressBundlingModes\Mode
+     * @see Route4Me\Enum\AddressBundlingModes\Mode
      * @var integer
      */
     public $mode;
@@ -28,7 +29,7 @@ class AddressBundling extends Common
 
     /**
      * Address bundling merge mode
-     * @see Enum\AddressBundlingModes\MergeMode
+     * @see Route4Me\Enum\AddressBundlingModes\MergeMode
      * @var integer
      */
     public $merge_mode;

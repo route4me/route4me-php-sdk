@@ -12,81 +12,81 @@ class ConnectionParameters extends Common
 {
     /**
      * Telemetics connection type
-     * @var type string
+     * @var string
      */
     public $vendor;
     
     /**
      * Telemetics connection type ID
-     * @var type integer
+     * @var integer
      */
     public $vendor_id;
     
     /**
      * Telemetics connection name
      * Required for telematics connection registration.
-     * @var type string
+     * @var string
      */
     public $name;
     
     /**
      * Telematics connection access host.
-     * @var type string
+     * @var string
      */
     public $host;
     
     /**
      * Telematics connection access api_key.
-     * @var type string
+     * @var string
      */
     public $api_key;
     
     /**
      * Telematics connection access account_id.
-     * @var type string
+     * @var string
      */
     public $account_id;
     
     /**
      * Telematics connection access username
-     * @var type string
+     * @var string
      */
     public $username;
     
     /**
      * Telematics connection access password.
-     * @var type string
+     * @var string
      */
     public $password;
     
     /**
      * Vehicle tracking interval in seconds (default value 60).
-     * @var type integer
+     * @var integer
      */
     public $vehicle_position_refresh_rate;
     
     /**
      * Validate connections credentials.
-     * @var type Boolean
+     * @var Boolean
      */
     public $validate_remote_credentials;
     
     /**
      * Disable/enable vehicle tracking.
-     * @var type Boolean
+     * @var Boolean
      */
     public $is_enabled;
     
     /**
      * Metadata
-     * @var type string
+     * @var string
      */
     public $metadata;
     
     /**
      * Telematics connection access token.
      * Required to show specified connection.
-     * @var type string
+     * @var string
      */
     public $connection_token;
 

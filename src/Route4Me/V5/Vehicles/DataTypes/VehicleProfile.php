@@ -203,7 +203,7 @@ class VehicleProfile extends Common
 
     /**
      * @param $profileParams - an array from the VehicleParameters object.
-     * @return The data including list of the vehicle profiles.
+     * @return object including list of the vehicle profiles.
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehicleProfiles($profileParams)
@@ -221,7 +221,7 @@ class VehicleProfile extends Common
 
     /**
      * @param $profileParams - Vehicle profile body parameters
-     * @return Created vehicle profile
+     * @return object vehicle profile
      * @throws \Route4Me\Exception\ApiError
      */
     public function createVehicleProfile($profileParams)

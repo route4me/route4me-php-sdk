@@ -14,7 +14,7 @@ class CustomNoteTypeResponse extends Common
 
     /**
      * Note custom type
-     * @var CustomNoteType
+     * @var object of type CustomNoteType
      */
     public $note_custom_type;
 

@@ -19,7 +19,7 @@ class DirectionStep extends Common
 
     /**
      * Name (brief)
-     * @var strng
+     * @var string
      */
     public $directions;
 

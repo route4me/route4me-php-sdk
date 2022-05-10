@@ -127,13 +127,13 @@ class AddressBookLocation extends Common
 
     /**
      * An array of the contact's schedules.
-     * @var Schedule[]
+     * @var array of Schedule
      */
     public $schedule;
 
     /**
      * Time when the contact was created.
-     * @var long
+     * @var integer
      */
     public $created_timestamp;
 
@@ -157,37 +157,37 @@ class AddressBookLocation extends Common
 
     /**
      * When the contact was last visited.
-     * @var long
+     * @var integer
      */
     public $last_visited_timestamp;
 
     /**
      * When the contact was last routed.
-     * @var long
+     * @var integer
      */
     public $last_routed_timestamp;
 
     /**
      * Start of the contact's local time window.
-     * @var long
+     * @var integer
      */
     public $local_time_window_start;
 
     /**
      * End of the contact's local time window.
-     * @var long
+     * @var integer
      */
     public $local_time_window_end;
 
     /**
      * Start of the contact's second local time window.
-     * @var long
+     * @var integer
      */
     public $local_time_window_start_2;
 
     /**
      * End of the contact's second local time window.
-     * @var long
+     * @var integer
      */
     public $local_time_window_end_2;
 

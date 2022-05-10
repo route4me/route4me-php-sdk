@@ -13,7 +13,7 @@ use Route4Me\Common as Common;
 class VehicleResponse extends Common
 {
     /** Vehicle data
-     * @var DataVehicle $data
+     * @var object of type DataVehicle
      */
     public $data = [];
 

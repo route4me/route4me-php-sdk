@@ -4,6 +4,8 @@ namespace Route4Me\V5\Addresses;
 
 use Route4Me\Enum\Endpoint;
 use Route4Me\Exception\BadParam;
+use Route4Me\Common;
+use Route4Me\Route4Me;
 
 /**
  * Class AddressNote
