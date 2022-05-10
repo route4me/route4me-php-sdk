@@ -1,0 +1,352 @@
+[
+    {
+        "address": "Albow Ctr, Hatfield St, Cape Town City Centre, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9294",
+        "lng": "18.416649",
+        "order_id": 0
+    },
+    {
+        "address": "28 Bay View, Tamboerskloof, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9297095",
+        "lng": "18.3991118",
+        "order_id": 1
+    },
+    {
+        "address": "De Roos St, Zonnebloem, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.928036",
+        "lng": "18.428898",
+        "order_id": 2
+    },
+    {
+        "address": "10 Ave protea, Fresnaye, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9236307",
+        "lng": "18.3880934",
+        "order_id": 3
+    },
+    {
+        "address": "160 Sir Lowry Rd, Zonnebloem, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.9277289",
+        "lng": "18.4371343",
+        "order_id": 4
+    },
+    {
+        "address": "179 Buitengracht St, Gardens, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.926305",
+        "lng": "18.4116006",
+        "order_id": 5
+    },
+    {
+        "address": "16 Kimberley Rd, Observatory, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.9400943",
+        "lng": "18.4714619",
+        "order_id": 6
+    },
+    {
+        "address": "19 Rosmead Ave, Gardens, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9389815",
+        "lng": "18.4080165",
+        "order_id": 7
+    },
+    {
+        "address": "Beach Rd, Three Anchor Bay, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9081432",
+        "lng": "18.3954149",
+        "order_id": 8
+    },
+    {
+        "address": "5th Floor, 22 Long St, Cape Town City Centre, Cape Town, 8000, South Africa",
+        "is_depot": false,
+        "lat": "-33.9201966",
+        "lng": "18.4213882",
+        "order_id": 9
+    },
+    {
+        "address": "160 Sir Lowry Rd, Zonnebloem, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.9277289",
+        "lng": "18.4371343",
+        "order_id": 10
+    },
+    {
+        "address": "Wembley Square, Roodehek St, Gardens, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9327695",
+        "lng": "18.4230611",
+        "order_id": 11
+    },
+    {
+        "address": "323 Beach Rd, Bantry Bay, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.923209",
+        "lng": "18.3778997",
+        "order_id": 12
+    },
+    {
+        "address": "239 Beach Rd, Sea Point, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9130286",
+        "lng": "18.3885208",
+        "order_id": 13
+    },
+    {
+        "address": "Bantry Bay 1, Bantry Bay, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9265221",
+        "lng": "18.3789738",
+        "order_id": 14
+    },
+    {
+        "address": "8 Briar Rd, Salt River, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.9319045",
+        "lng": "18.4589113",
+        "order_id": 15
+    },
+    {
+        "address": "Albow Ctr, Hatfield St, Cape Town City Centre, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9294",
+        "lng": "18.416649",
+        "order_id": 16
+    },
+    {
+        "address": "23 Derry St, Vredehoek, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9385199",
+        "lng": "18.42734",
+        "order_id": 17
+    },
+    {
+        "address": "125 Longmarket St, Cape Town City Centre, Cape Town, 8000, South Africa",
+        "is_depot": false,
+        "lat": "-33.9237964",
+        "lng": "18.421624",
+        "order_id": 18
+    },
+    {
+        "address": "13 Devonshire St, Woodstock, Cape Town, 7915, South Africa",
+        "is_depot": false,
+        "lat": "-33.9360033",
+        "lng": "18.4523871",
+        "order_id": 19
+    },
+    {
+        "address": "26 Rhodes Ave, University Estate, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.93821",
+        "lng": "18.4513399",
+        "order_id": 20
+    },
+    {
+        "address": "2nd Floor, 66 Plein St, Cape Town City Centre, Cape Town, 8000, South Africa",
+        "is_depot": false,
+        "lat": "-33.9258763",
+        "lng": "18.4212556",
+        "order_id": 21
+    },
+    {
+        "address": "24 Richmond Rd, Mowbray, Cape Town, 7700, South Africa",
+        "is_depot": false,
+        "lat": "-33.9462844",
+        "lng": "18.4813678",
+        "order_id": 22
+    },
+    {
+        "address": "35 Beach Rd, Mouille Point, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.8999958",
+        "lng": "18.4078875",
+        "order_id": 23
+    },
+    {
+        "address": "25 Merriman Rd, Signal Hill, Cape Town, 8051, South Africa",
+        "is_depot": false,
+        "lat": "-33.9131687",
+        "lng": "18.4095001",
+        "order_id": 24
+    },
+    {
+        "address": "18 Upper Pepper St, Schotsche Kloof, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.92283",
+        "lng": "18.41365",
+        "order_id": 25
+    },
+    {
+        "address": "7 Beatty Rd, University Estate, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.938175",
+        "lng": "18.451614",
+        "order_id": 26
+    },
+    {
+        "address": "10th Floor, 35 Lower Long St, Cape Town City Centre, Cape Town, 8000, South Africa",
+        "is_depot": false,
+        "lat": "-33.9178987",
+        "lng": "18.4245626",
+        "order_id": 27
+    },
+    {
+        "address": "4 Loop St, Cape Town City Centre, Cape Town, 8000, South Africa",
+        "is_depot": false,
+        "lat": "-33.9179479",
+        "lng": "18.4225973",
+        "order_id": 28
+    },
+    {
+        "address": "14 Kei Apple Rd, Sea Point, Cape Town, 8060, South Africa",
+        "is_depot": false,
+        "lat": "-33.9215342",
+        "lng": "18.3836797",
+        "order_id": 29
+    },
+    {
+        "address": "9 Davenport Rd, Vredehoek, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9406358",
+        "lng": "18.4197181",
+        "order_id": 30
+    },
+    {
+        "address": "31 Burnside Rd, Tamboerskloof, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9282",
+        "lng": "18.4050958",
+        "order_id": 31
+    },
+    {
+        "address": "011, Jocyn Court, 19 Rochester Rd, Bantry Bay, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9255484",
+        "lng": "18.3800261",
+        "order_id": 32
+    },
+    {
+        "address": "14 Tuin Plein, Cape Town City Centre, Cape Town, 8000, South Africa",
+        "is_depot": false,
+        "lat": "-33.9297236",
+        "lng": "18.4185608",
+        "order_id": 33
+    },
+    {
+        "address": "299 Beach Rd, Sea Point, Cape Town, 8060, South Africa",
+        "is_depot": false,
+        "lat": "-33.9203532",
+        "lng": "18.3818329",
+        "order_id": 34
+    },
+    {
+        "address": "3 Ella St, Schotsche Kloof, Cape Town, 8051, South Africa",
+        "is_depot": false,
+        "lat": "-33.9165727",
+        "lng": "18.4136263",
+        "order_id": 35
+    },
+    {
+        "address": "Sea Point, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9206032",
+        "lng": "18.3930108",
+        "order_id": 36
+    },
+    {
+        "address": "33 Ludlow Rd, Vredehoek, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9388796",
+        "lng": "18.4241053",
+        "order_id": 37
+    },
+    {
+        "address": "59 Victoria Rd, Clifton, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9371518",
+        "lng": "18.3783157",
+        "order_id": 38
+    },
+    {
+        "address": "V&A Waterfront Shop 7223, Victoria Wharf Shopping Centre, Victoria & Alfred Waterfront, Cape Town, 8002, South Africa",
+        "is_depot": false,
+        "lat": "-33.9024366",
+        "lng": "18.421185",
+        "order_id": 39
+    },
+    {
+        "address": "7 Campground Rd, Mowbray, Cape Town, 7700, South Africa",
+        "is_depot": false,
+        "lat": "-33.950007",
+        "lng": "18.4812287",
+        "order_id": 40
+    },
+    {
+        "address": "19 Upper Orange St, Oranjezicht, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9354079",
+        "lng": "18.4142753",
+        "order_id": 41
+    },
+    {
+        "address": "42 Earl St, Woodstock, Cape Town, 7915, South Africa",
+        "is_depot": false,
+        "lat": "-33.9306316",
+        "lng": "18.4472121",
+        "order_id": 42
+    },
+    {
+        "address": "Highlands Estate, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-34.0129346",
+        "lng": "18.5455744",
+        "order_id": 43
+    },
+    {
+        "address": "Beach Rd, Woodstock, Cape Town, 7915, South Africa",
+        "is_depot": false,
+        "lat": "-33.9247362",
+        "lng": "18.4466721",
+        "order_id": 44
+    },
+    {
+        "address": "297 High Level Rd, Fresnaye, Cape Town, 8005, South Africa",
+        "is_depot": false,
+        "lat": "-33.9215721",
+        "lng": "18.3894228",
+        "order_id": 45
+    },
+    {
+        "address": "0B Prestwich St, De Waterkant, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.912734",
+        "lng": "18.4177486",
+        "order_id": 46
+    },
+    {
+        "address": "7 Campground Rd, Mowbray, Cape Town, 7700, South Africa",
+        "is_depot": false,
+        "lat": "-33.950007",
+        "lng": "18.4812287",
+        "order_id": 47
+    },
+    {
+        "address": "1 Seymour St, Observatory, Cape Town, 7925, South Africa",
+        "is_depot": false,
+        "lat": "-33.93522",
+        "lng": "18.47028",
+        "order_id": 48
+    },
+    {
+        "address": "4 Stirling St, Zonnebloem, Cape Town, 8001, South Africa",
+        "is_depot": false,
+        "lat": "-33.9319567",
+        "lng": "18.4261389",
+        "order_id": 49
+    }
+]

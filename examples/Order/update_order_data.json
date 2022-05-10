@@ -1,10 +1,8 @@
 {
 	"order_id": "7205711",
 	"address_2": "Lviv",
-	"EXT_FIELD_custom_data" : [
-		{
+	"EXT_FIELD_custom_data" : {
 			"customer_no" : 11
-		}
-	],
+	},
 	"EXT_FIELD_phone": "032268593"
 }
