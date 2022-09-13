@@ -42,4 +42,33 @@ class RouteAdvancedConstraints extends \Route4Me\Common
      */
     public $route4me_members_id;
 
+    /**
+     * An array containing Address objects.
+     * @var Address
+     */
+    public $depot_address;
+
+    /**
+     * An array of locations.
+     * @var object[]
+     */
+    public $location_sequence_pattern;
+
+    /**
+     * Group.
+     * @var string
+     */
+    public $group;
+
+    public static function fromArray(array $params)
+    {
+        $routeParams = new self();
+        foreach ($params as $key => $value) {
+            if (property_exists($routeParams, $key)) {
+                $routeParams->{$key} = $value;
+            }
+        }
+
+        return $routeParams;
+    }
 }
