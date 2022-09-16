@@ -25,9 +25,7 @@ assert(!is_null($randomOrder), "Cannot retrieve a random order");
 $randomOrder['address_2'] = 'Lviv';
 $randomOrder['EXT_FIELD_phone'] = '032268593';
 $randomOrder['EXT_FIELD_custom_data'] = [
-            0 => [
-               'customer_no' => '11',
-            ],
+               'customer_no' => '11'
         ];
 
 $response = $order->updateOrder($randomOrder);
