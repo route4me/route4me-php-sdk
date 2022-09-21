@@ -59,7 +59,7 @@ class MemberResponseV4 extends \Route4Me\Common
      */
     public $member_email;
 
-    /** @var stringn $member_first_name
+    /** @var string $member_first_name
      * User's first name.
      */
     public $member_first_name;

@@ -51,7 +51,7 @@ class Geocoding extends \Route4Me\Common
     public $countryRegion;
 
     /** The address curbside coordinates
-     * @var GeoPoint $curbside_coordinates
+     * @var object $curbside_coordinates
      */
     public $curbside_coordinates = [];
 

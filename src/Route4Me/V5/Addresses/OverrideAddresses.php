@@ -13,7 +13,7 @@ class OverrideAddresses
 {
     /**
      * The service time specified or all the addresses in the route.
-     * @var long
+     * @var integer
      */
     public $time;
 

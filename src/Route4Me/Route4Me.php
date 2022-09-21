@@ -146,18 +146,20 @@ class Route4Me
     }
 
     /**
-     * @param $object: JSON object
+     * @param $object object JSON
      */
     public static function object2array($object)
     {
         return @json_decode(@json_encode($object), 1);
     }
+    
+    //public static function object2json
 
     /**
      * Prints on the screen main keys and values of the array.
      *
      * @param $results: object to be printed on the screen
-     * @param $deepPrinting: if true, object will be printed recursively
+     * @param $deepPrinting Boolean: if true, object will be printed recursively
      */
     public static function simplePrint($results, $deepPrinting = null)
     {
@@ -214,10 +216,21 @@ class Route4Me
     }
 
     /**
+     * Converts an object to a JSON string.  
+     * @param $obj: object, the object to convert.  
+     * @param $prettify: integer, the option parameter.  
+     *  Default value JSON_PRETTY_PRINT is for getting prettified JSON string.  
+     *  If $prettify=NULL, minified JSON string is returned.
+     */
+    public static function object2json($obj, $prettify=JSON_PRETTY_PRINT) {
+        return json_encode($obj, $prettify);
+    }
+
+    /**
      * Generates query or body parameters.
      *
-     * @param $allFields: all known fields could be used for parameters generation
-     * @param $params: input parameters (array or object)
+     * @param $allFields array: all known fields could be used for parameters generation
+     * @param $params object: input parameters (array or object)
      */
     public static function generateRequestParameters($allFields, $params)
     {
@@ -243,7 +256,7 @@ class Route4Me
     /**
      * Returns an array of the object properties.
      *
-     * @param $object: An object
+     * @param $object object
      * @param $exclude: array of the object parameters to be excluded from the returned array
      */
     public static function getObjectProperties($object, $exclude)
@@ -265,7 +278,7 @@ class Route4Me
      * Returns url path generated from the array of the fields and parameters.
      *
      * @param $allFields; array of the paossible fields (parameter names)
-     * @param $params: input parameters (array or object)
+     * @param $params array: input parameters
      */
     public static function generateUrlPath($allFields, $params)
     {

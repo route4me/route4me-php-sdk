@@ -13,7 +13,7 @@ class ServiceTimeRulesClass extends Common
 {
     /**
      * Mode of a first item of the bundled addresses.
-     * @see Enum\AddressBundlingModes\FirstItemMode
+     * @see 'Route4Me\Enum\AddressBundlingModes\FirstItemMode'
      * @var integer
      */
     public $first_item_mode;
@@ -27,7 +27,7 @@ class ServiceTimeRulesClass extends Common
 
     /**
      * Mode of the non-first items of the bundled addresses.
-     * @see Enum\AddressBundlingModes\AddtionalItemsMode
+     * @see 'Route4Me\Enum\AddressBundlingModes\AddtionalItemsMode'
      * @var integer
      */
     public $additional_items_mode;

@@ -11,19 +11,19 @@ class Country extends Common
 {
     /**
      * Country ID
-     * @var type string
+     * @var string
      */
     public $id;
     
     /**
      * Country code
-     * @var type string
+     * @var string
      */
     public $country_code;
     
     /**
      * Country name
-     * @var type string
+     * @var string
      */
     public $country_name;
     

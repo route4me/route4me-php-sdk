@@ -11,73 +11,73 @@ class TelematicsConnectionParameters extends Common
 {
     /**
      * Account ID
-     * @var type string
+     * @var string
      */
     public $account_id;
     
     /**
      * User name
-     * @var type string
+     * @var string
      */
     public $username;
     
     /**
      * Password
-     * @var type string
+     * @var string
      */
     public $password;
     
     /**
      * Connection host
-     * @var type string
+     * @var string
      */
     public $host;
     
     /**
      * An unique ID of a telematics vendor.
-     * @var type integer
+     * @var integer
      */
     public $vendor_id;
     
     /**
      * Telematics connection name
-     * @var type string
+     * @var string
      */
     public $name;
     
     /**
      * Vehicle tracking interval in seconds
-     * @var type integer
+     * @var integer
      */
     public $vehicle_position_refresh_rate;
     
     /**
      * Connection token
-     * @var type string
+     * @var string
      */
     public $connection_token;
     
     /**
      * Connection user ID
-     * @var type integer
+     * @var integer
      */
     public $user_id;
     
     /**
      * Connection ID
-     * @var type integer
+     * @var integer
      */
     public $id;
     
     /**
      * Telemetics connection type
-     * @var type string
+     * @var string
      */
     public $vendor;
     
     /**
      * Validate connections credentials.
-     * @var type Boolean
+     * @var Boolean
      */
     public $validate_remote_credentials;
 

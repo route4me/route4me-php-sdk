@@ -23,11 +23,9 @@ $orderParameters = Order::fromArray([
     'EXT_FIELD_email'           => 'progman@gmail.com',
     'EXT_FIELD_phone'           => '380380380380',
     'EXT_FIELD_custom_data'     => [
-          0 => [
              'order_id' => '10',
-             'name'     => 'Bill Soul',
-          ],
-    ],
+             'name'     => 'Bill Soul'
+    ]
 ]);
 
 $order = new Order();

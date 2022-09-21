@@ -13,49 +13,49 @@ class TelematicsVendors extends Common
 {
     /**
      * Unique ID of a telematics vendor.
-     * @var type string
+     * @var string
      */
     public $id;
     
     /**
      * Vendor name
-     * @var type string
+     * @var string
      */
     public $name;
     
     /**
      * Vendor slug 
-     * @var type string
+     * @var string
      */
     public $slug;
     
     /**
      * Vendor description
-     * @var type string
+     * @var string
      */
     public $description;
     
     /**
      * URL to the telematics vendor's logo.
-     * @var type string
+     * @var string
      */
     public $logo_url;
     
     /**
      * Website URL of a telematics vendor.
-     * @var type string
+     * @var string
      */
     public $website_url;
     
     /**
      * API URL of a telematics vendor.
-     * @var type string
+     * @var string
      */
     public $api_docs_url;
     
     /**
      * If 1, the vendor is integrated in Route4Me
-     * @var type string
+     * @var string
      */
     public $is_integrated;
     
@@ -63,7 +63,7 @@ class TelematicsVendors extends Common
      * Vendors size.
      * <para>Accepted values:</para>
      * <para>global, regional, local. </para>
-     * @var type string
+     * @var string
      */
     public $size;
     

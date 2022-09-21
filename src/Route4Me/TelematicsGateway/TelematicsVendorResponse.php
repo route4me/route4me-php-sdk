@@ -10,7 +10,7 @@ class TelematicsVendorResponse extends Common
 {
     /**
      * Telematics Vendor
-     * @var type TelematicsVendor
+     * @var TelematicsVendor
      */
     public $vendor;
 }

@@ -11,115 +11,115 @@ class Connection extends Common
 {
     /**
      * Telemetics connection name
-     * @var type string
+     * @var string
      */
     public $name;
     
     /**
      * Telemetics connection type
-     * @var type string
+     * @var string
      */
     public $vendor;
    
     /**
      * Telematics connection access host
-     * @var type string
+     * @var string
      */
     public $host;
     
     /**
      * Telematics connection access api_key
-     * @var type string
+     * @var string
      */
     public $api_key;
     
     /**
      * Telematics connection access account ID.
-     * @var type string
+     * @var string
      */
     public $account_id;
     
     /**
      * Telematics connection access username
-     * @var type string
+     * @var string
      */
     public $username;
     
     /**
      * Telematics connection access password
-     * @var type string
+     * @var string
      */
     public $password;
     
     /**
      * Telematics connection access token
-     * @var type string
+     * @var string
      */
     public $connection_token;
     
     /**
      * Telemetics connection type ID
-     * @var type integer
+     * @var integer
      */
     public $vendor_id;
     
     /**
      * Disable/enable vehicle tracking
-     * @var type Boolean
+     * @var Boolean
      */
     public $is_enabled;
     
     /**
      * Vehicle tracking interval in seconds
-     * @var type integer
+     * @var integer
      */
     public $vehicle_position_refresh_rate;
     
     /**
      * Maximum idle time
-     * @var type integer
+     * @var integer
      */
     public $max_idle_time;
     
     /**
      * Syncronized vehicles count
-     * @var type integer
+     * @var integer
      */
     public $synced_vehicles_count;
     
     /**
      * Total vehicles count
-     * @var type integer
+     * @var integer
      */
     public $total_vehicles_count;
     
     /**
      * Total addresses count
-     * @var type integer
+     * @var integer
      */
     public $total_addresses_count;
     
     /**
      * The last timestamp the vehicles reloaded
-     * @var type string
+     * @var string
      */
     public $last_vehicles_reload;
     
     /**
      * The last timestamp the addresses reloaded
-     * @var type string
+     * @var string
      */
     public $last_addresses_reload;
     
     /**
      * The last timestamp the postions reloaded
-     * @var type string
+     * @var string
      */
     public $last_position_reload;
     
     /**
      * Metadata, custom key-value storage.
-     * @var type array
+     * @var array
      */
     public $metadata = [];
     

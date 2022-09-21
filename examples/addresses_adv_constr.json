@@ -1,0 +1,415 @@
+[
+	{
+		"alias": "Stop 01",
+		"address": "1016 W Flagler St, Miami,FL, (305) 545-7788",
+		"time": 60,
+		"lat": 25.77346,
+		"lng": -80.21184
+	},
+	{
+		"alias": "Stop 02",
+		"address": "10775 NW 27th Ave, Miami,FL, (305) 681-5444",
+		"time": 60,
+		"lat": 25.872631,
+		"lng": -80.242546
+	},
+	{
+		"alias": "Stop 03",
+		"address": "10855 Caribbean Blvd, Miami,FL, (305) 254-3487",
+		"time": 60,
+		"lat": 25.57937,
+		"lng": -80.36775
+	},
+	{
+		"alias": "Stop 04",
+		"address": "11207 SW 152nd St, Miami,FL, (305) 255-3594",
+		"time": 60,
+		"lat": 25.627888,
+		"lng": -80.374825
+	},
+	{
+		"alias": "Stop 05",
+		"address": "11301 SW 40th St, Miami,FL, (305) 223-0179",
+		"time": 60,
+		"lat": 25.73233,
+		"lng": -80.37771
+	},
+	{
+		"alias": "Stop 06",
+		"address": "11390 NW 41st St, Miami,FL, (305) 471-6809",
+		"time": 60,
+		"lat": 25.8114,
+		"lng": -80.38101
+	},
+	{
+		"alias": "Stop 07",
+		"address": "11500 SW 88th St, Miami,FL 33156, (305) 595-2347",
+		"time": 60,
+		"lat": 25.686363,
+		"lng": -80.382386
+	},
+	{
+		"alias": "Stop 08",
+		"address": "11990 SW 8th St, Miami,FL, (305) 221-8542",
+		"time": 60,
+		"lat": 25.76071,
+		"lng": -80.3905
+	},
+	{
+		"alias": "Stop 09",
+		"address": "12185 SW 26th St, Miami,FL, (305) 229-6854",
+		"time": 60,
+		"lat": 25.74454,
+		"lng": -80.39194
+	},
+	{
+		"alias": "Stop 10",
+		"address": "12198 SW 117th Ave, Miami,FL, (305) 232-4665",
+		"time": 60,
+		"lat": 25.65576,
+		"lng": -80.38363
+	},
+	{
+		"alias": "Stop 11",
+		"address": "13000 Biscayne Blvd, Miami,FL, (305) 899-9578",
+		"time": 60,
+		"lat": 25.89554,
+		"lng": -80.16196
+	},
+	{
+		"alias": "Stop 12",
+		"address": "13101 N Kendall Dr, Miami,FL, (305) 386-3998",
+		"time": 60,
+		"lat": 25.685873,
+		"lng": -80.403082
+	},
+	{
+		"alias": "Stop 13",
+		"address": "13702 SW 56th St, Miami,FL, (305) 387-1356",
+		"time": 60,
+		"lat": 25.71425,
+		"lng": -80.41537
+	},
+	{
+		"alias": "Stop 14",
+		"address": "13708 SW 152nd St, Miami,FL, (305) 232-2860",
+		"time": 60,
+		"lat": 25.62612,
+		"lng": -80.41472
+	},
+	{
+		"alias": "Stop 15",
+		"address": "1400 SW 8th St, Miami,FL, (305) 285-0974",
+		"time": 60,
+		"lat": 25.76564,
+		"lng": -80.21863
+	},
+	{
+		"alias": "Stop 16",
+		"address": "14401 S Dixie Hwy, Miami,FL, (305) 238-2615",
+		"time": 60,
+		"lat": 25.636156,
+		"lng": -80.33744
+	},
+	{
+		"alias": "Stop 17",
+		"address": "14670 SW 8th St, Miami,FL, (305) 228-4343",
+		"time": 60,
+		"lat": 25.760715,
+		"lng": -80.431091
+	},
+	{
+		"alias": "Stop 18",
+		"address": "14699 SW 42th St, Miami,FL, (305) 226-2422",
+		"time": 60,
+		"lat": 25.72883,
+		"lng": -80.42994
+	},
+	{
+		"alias": "Stop 19",
+		"address": "15096 N 7th, Miami,FL, (305) 681-5719",
+		"time": 60,
+		"lat": 25.913763,
+		"lng": -80.185277
+	},
+	{
+		"alias": "Stop 20",
+		"address": "15295 SW 104th St, Miami,FL, (305) 388-0560",
+		"time": 60,
+		"lat": 25.67014,
+		"lng": -80.4436
+	},
+	{
+		"alias": "Stop 21",
+		"address": "15710 SW 56th St, Miami,FL 33193, (305) 383-1447",
+		"time": 60,
+		"lat": 25.713488,
+		"lng": -80.447262
+	},
+	{
+		"alias": "Stop 22",
+		"address": "15715 SW 88th St, Miami,FL, (305) 387-4249",
+		"time": 60,
+		"lat": 25.68451,
+		"lng": -80.44645
+	},
+	{
+		"alias": "Stop 23",
+		"address": "16701 NW 67th Ave, Miami,FL, (305) 822-6232",
+		"time": 60,
+		"lat": 25.92534,
+		"lng": -80.30914
+	},
+	{
+		"alias": "Stop 24",
+		"address": "18340 SW 137th Ave, Miami,FL, (305) 235-5573",
+		"time": 60,
+		"lat": 25.597383,
+		"lng": -80.413682
+	},
+	{
+		"alias": "Stop 25",
+		"address": "18350 NE 18th Rd, Miami,FL, (305) 940-0454",
+		"time": 60,
+		"lat": 25.760338,
+		"lng": -80.201042
+	},
+	{
+		"alias": "Stop 26",
+		"address": "1930 Opa Locks Blvd, Miami,FL, (305) 685-8855",
+		"time": 60,
+		"lat": 25.89911,
+		"lng": -80.227429
+	},
+	{
+		"alias": "Stop 27",
+		"address": "20101 NW 2nd Ave, Miami,FL, (305) 652-5933",
+		"time": 60,
+		"lat": 25.95929,
+		"lng": -80.20552
+	},
+	{
+		"alias": "Stop 28",
+		"address": "20315 Old Cutler Dr, Miami,FL, (305) 235-5600",
+		"time": 60,
+		"lat": 25.57872,
+		"lng": -80.33552
+	},
+	{
+		"alias": "Stop 29",
+		"address": "2200 NW 36th St, Miami,FL, (305) 633-1385",
+		"time": 60,
+		"lat": 25.80926,
+		"lng": -80.23225
+	},
+	{
+		"alias": "Stop 30",
+		"address": "2300 SW 87 Ave, Miami,FL, (305) 220-0024",
+		"time": 60,
+		"lat": 25.728979,
+		"lng": -80.237442
+	},
+	{
+		"alias": "Stop 31",
+		"address": "2405 NW 87th Ave, Miami,FL, (305) 468-1822",
+		"time": 60,
+		"lat": 25.795971,
+		"lng": -80.336746
+	},
+	{
+		"alias": "Stop 32",
+		"address": "2940 SW 8th St, Miami,FL, (305) 541-4768",
+		"time": 60,
+		"lat": 25.76496,
+		"lng": -80.24175
+	},
+	{
+		"alias": "Stop 33",
+		"address": "299 SW 8th St, Miami,FL, (305) 856-6770",
+		"time": 60,
+		"lat": 25.76634,
+		"lng": -80.19895
+	},
+	{
+		"alias": "Stop 34",
+		"address": "3200 S Dixie Hwy, Miami,FL, (305) 448-0531",
+		"time": 60,
+		"lat": 25.73672,
+		"lng": -80.24598
+	},
+	{
+		"alias": "Stop 35",
+		"address": "3280 Coral Way, Miami,FL, (305) 444-5466",
+		"time": 60,
+		"lat": 25.749842,
+		"lng": -80.248146
+	},
+	{
+		"alias": "Stop 36",
+		"address": "345 NE Second Ave, Miami,FL, (305) 371-8161",
+		"time": 60,
+		"lat": 25.777982,
+		"lng": -80.190265
+	},
+	{
+		"alias": "Stop 37",
+		"address": "3501 Biscayne Blvd, Miami,FL, (305) 573-6064",
+		"time": 60,
+		"lat": 25.809969,
+		"lng": -80.189212
+	},
+	{
+		"alias": "Stop 38",
+		"address": "3747 NW 7th St, Miami,FL, (305) 646-0423",
+		"time": 60,
+		"lat": 25.779057,
+		"lng": -80.256599
+	},
+	{
+		"alias": "Stop 39",
+		"address": "4180 SW 9th St, Miami,FL, (305) 443-9366",
+		"time": 60,
+		"lat": 25.763493,
+		"lng": -80.263054
+	},
+	{
+		"alias": "Stop 40",
+		"address": "5650 NW 7th St, Miami,FL, (305) 262-3961",
+		"time": 60,
+		"lat": 25.777905,
+		"lng": -80.287376
+	},
+	{
+		"alias": "Stop 41",
+		"address": "5700 NW 79th Ave, Miami,FL, (305) 599-2660",
+		"time": 60,
+		"lat": 25.825348,
+		"lng": -80.325882
+	},
+	{
+		"alias": "Stop 42",
+		"address": "5851 NW 177th St [WM], Miami,FL, (305) 362-5633",
+		"time": 60,
+		"lat": 25.935284,
+		"lng": -80.295874
+	},
+	{
+		"alias": "Stop 43",
+		"address": "599 NW 62nd St, Miami,FL, (305) 751-5636",
+		"time": 60,
+		"lat": 25.832267,
+		"lng": -80.206914
+	},
+	{
+		"alias": "Stop 44",
+		"address": "610 NE 125th St, Miami,FL, (305) 899-2882",
+		"time": 60,
+		"lat": 25.89006,
+		"lng": -80.1861
+	},
+	{
+		"alias": "Stop 45",
+		"address": "6150 S Dixie Hwy, Miami,FL, (305) 661-7131",
+		"time": 60,
+		"lat": 25.70162,
+		"lng": -80.29261
+	},
+	{
+		"alias": "Stop 46",
+		"address": "6700 Bird Rd, Miami,FL, (305) 667-3551",
+		"time": 60,
+		"lat": 25.733185,
+		"lng": -80.302994
+	},
+	{
+		"alias": "Stop 47",
+		"address": "7281 SW 8th St, Miami,FL, (305) 261-3441",
+		"time": 60,
+		"lat": 25.76285,
+		"lng": -80.3134
+	},
+	{
+		"alias": "Stop 48",
+		"address": "7405 NW 36th St, Miami,FL, (305) 593-0376",
+		"time": 60,
+		"lat": 25.80958,
+		"lng": -80.31534
+	},
+	{
+		"alias": "Stop 49",
+		"address": "7901 Bird Rd, Miami,FL, (305) 264-1244",
+		"time": 60,
+		"lat": 25.73344,
+		"lng": -80.32354
+	},
+	{
+		"alias": "Stop 50",
+		"address": "7995 W Flagler St, Miami,FL, (305) 265-0177",
+		"time": 60,
+		"lat": 25.76994,
+		"lng": -80.32561
+	},
+	{
+		"alias": "Stop 51",
+		"address": "8050 NW 27th Ave, Miami,FL, (305) 836-4792",
+		"time": 60,
+		"lat": 25.847599,
+		"lng": -80.242125
+	},
+	{
+		"alias": "Stop 52",
+		"address": "8116 Biscayne Blvd, Miami,FL, (305) 756-0400",
+		"time": 60,
+		"lat": 25.849853,
+		"lng": -80.185022
+	},
+	{
+		"alias": "Stop 53",
+		"address": "8403 NW 12th St, Miami,FL, (305) 477-3163",
+		"time": 60,
+		"lat": 25.78306,
+		"lng": -80.33235
+	},
+	{
+		"alias": "Stop 54",
+		"address": "8505 NW 186th St, Miami,FL, (305) 829-5113",
+		"time": 60,
+		"lat": 25.594749,
+		"lng": -80.33017
+	},
+	{
+		"alias": "Stop 55",
+		"address": "8651 NW 13th Terrace [WM], Miami,FL, (305) 592-8220",
+		"time": 60,
+		"lat": 25.785265,
+		"lng": -80.335815
+	},
+	{
+		"alias": "Stop 56",
+		"address": "901 NW 17 St Ste A, Miami,FL, (305) 326-0044",
+		"time": 60,
+		"lat": 25.79146,
+		"lng": -80.210311
+	},
+	{
+		"alias": "Stop 57",
+		"address": "9250 NW 7th Ave, Miami,FL, (305) 759-1042",
+		"time": 60,
+		"lat": 25.860037,
+		"lng": -80.209764
+	},
+	{
+		"alias": "Stop 58",
+		"address": "9341 SW 56th St, Miami,FL, (305) 270-1943",
+		"time": 60,
+		"lat": 25.71652,
+		"lng": -80.34581
+	},
+	{
+		"alias": "Stop 59",
+		"address": "9501 NW 41st St, Miami,FL, (305) 594-7530",
+		"time": 60,
+		"lat": 25.818621,
+		"lng": -80.355331
+	}
+]

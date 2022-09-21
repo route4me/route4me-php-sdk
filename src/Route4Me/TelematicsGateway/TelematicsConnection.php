@@ -2,7 +2,6 @@
 
 namespace Route4Me\TelematicsGateway;
 
-use phpDocumentor\Reflection\Types\Boolean;
 use Route4Me\Enum\Endpoint;
 use Route4Me\Route4Me;
 

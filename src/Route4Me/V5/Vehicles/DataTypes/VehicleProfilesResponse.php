@@ -18,7 +18,7 @@ class VehicleProfilesResponse extends Common
     public $current_page;
 
     /** An array of the vehicle profiles
-     * @var VehileProfile[] $data
+     * @var array of VehileProfile
      */
     public $data = [];
 

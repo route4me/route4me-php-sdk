@@ -14,55 +14,55 @@ class TrackingHistory extends Common
 {
     /**
      * Speed at the time of the location transaction event.
-     * @var type string
+     * @var string
      */
     public $s;
 
     /**
      * Speed unit ('mph', 'kph')
-     * @var type string
+     * @var string
      */
     public $su;
 
     /**
      *  Latitude at the time of the location transaction event.
-     * @var type string
+     * @var string
      */
     public $lt;
 
     /**
      * Member ID
-     * @var type integer
+     * @var integer
      */
     public $m;
 
     /**
      * Longitude at the time of the location transaction event.
-     * @var type string
+     * @var string
      */
     public $lg;
 
     /**
      * Direction/heading at the time of the location transaction event.
-     * @var type integer
+     * @var integer
      */
     public $d;
 
     /**
      * The original timestamp in unix timestamp format at the moment location transaction event.
-     * @var type string
+     * @var string
      */
     public $ts;
 
     /**
      * The original timestamp in a human readable timestamp format at the moment location transaction event.
-     * @var type string
+     * @var string
      */
     public $ts_friendly;
 
     /**
      * GPS package src (e.g. 'R4M').
-     * @var type string
+     * @var string
      */
     public $src;
 

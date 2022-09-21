@@ -4,7 +4,7 @@ namespace Route4Me\Members;
 
 use Route4Me\Enum\Endpoint;
 use Route4Me\Route4Me;
-use Unirest\Exception;
+use Exception;
 
 class Member extends \Route4Me\Common
 {

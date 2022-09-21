@@ -298,7 +298,7 @@ class Route extends Common
 
     /**
      * A vehicle assigned to the route.
-     * @var Vehicles\VehicleResponseV4
+     * @var object of type VehicleResponseV4
      */
     public $vehicle=[];
 
@@ -408,7 +408,7 @@ class Route extends Common
 
     /**
      * @param RouteParametersQuery $params
-     * @return An array of the routes
+     * @return array of the routes
      * @throws Exception\ApiError
      */
     public static function getRoutes($params = null)
@@ -498,7 +498,7 @@ class Route extends Common
 
     /**
      * Reoptimize a route
-     * @param $params type Route
+     * @param $params object of type Route
      * @return mixed|string
      * @throws Exception\ApiError
      */
@@ -523,7 +523,7 @@ class Route extends Common
      * @param remove_origin if true, the origin routes will be removed.
      * @param depot_lat the depot's latitude
      * @param depot_lng the depot's longitude
-     * @return Status response
+     * @return object of type Status
      * @throws Exception\ApiError
      */
     public function mergeRoutes($params)
@@ -546,7 +546,7 @@ class Route extends Common
      * @param route_id a route ID to be shared.
      * @param response_format the response format.
      * @param recipient_email Recipient email.
-     * @return Status response
+     * @return object of type Status
      * @throws Exception\ApiError
      */
     public function shareRoute($params)

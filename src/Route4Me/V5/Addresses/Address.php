@@ -515,7 +515,7 @@ class Address extends \Route4Me\Common
 
     /**
      * List of the order inventories
-     * @var OrderInventory[]
+     * @var array
      */
     public $order_inventory;
 

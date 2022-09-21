@@ -69,13 +69,13 @@ class TelematicsVendor extends Common
     
     /**
      * An array of the countries, the vendor is operating.
-     * @var Country[]
+     * @var array
      */
     public $countries = [];
     
     /**
      * An array the vendor features
-     * @var TelematicsVendorFeature[]
+     * @var array
      */
     public $features = [];
     
@@ -116,7 +116,7 @@ class TelematicsVendor extends Common
      * Returns a random telematics vendor (for tests).
      * @param $offset integer
      * @param $limit integer
-     * @return Telematics vendor
+     * @return object vendor
      */
     public static function GetRandomVendorID($offset, $limit)
     {

@@ -3,7 +3,6 @@
 
 namespace Route4Me\Schedule;
 
-use phpDocumentor\Reflection\Types\Boolean;
 use Route4Me\Common as Common;
 
 /**

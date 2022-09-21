@@ -11,7 +11,7 @@ class TelematicsVendorsResponse
 {
     /**
      * An array of the telematics vendors.
-     * @var type TelematicsVendors[]
+     * @var TelematicsVendors[]
      */
     public $vendors = [];
 }
