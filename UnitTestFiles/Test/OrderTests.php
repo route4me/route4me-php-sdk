@@ -325,7 +325,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         self::assertNotNull($response);
         self::assertInstanceOf(Order::class, Order::fromArray($response));
         $this->assertEquals(93,$response['custom_user_fields'][0]['order_custom_field_id']);
-        $this->assertEquals('false',$response['custom_user_fields'][0]['order_custom_field_value']);
+        $this->assertEquals(false,$response['custom_user_fields'][0]['order_custom_field_value']);
 
         self::$createdOrders[] = $response;
     }
@@ -484,9 +484,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Order::class, Order::fromArray($response));
         $this->assertEquals('Lviv', $response['address_2']);
         $this->assertEquals('032268593', $response['EXT_FIELD_phone']);
-        $this->assertEquals(
-            [
-                0 => [ 'customer_no' => '11' ],
+        $this->assertEquals([
+                0 => '{"order_id":"10","name":"Bill Soul"}'
             ],
             $response['EXT_FIELD_custom_data']
         );
@@ -511,7 +510,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($response);
         $this->assertInstanceOf(Order::class, Order::fromArray($response));
         $this->assertEquals(93, $response['custom_user_fields'][0]['order_custom_field_id']);
-        $this->assertEquals('true', $response['custom_user_fields'][0]['order_custom_field_value']);
+        $this->assertEquals(true, $response['custom_user_fields'][0]['order_custom_field_value']);
     }
 
     public static function tearDownAfterClass()

@@ -19,7 +19,6 @@ class StatusUpdateType
     const LEFT_INFORMATION = 'left_information';
     const SPOKE_WITH_DECISION_MAKER = 'spoke_with_decision_maker';
     const SPOKE_WITH_DECISION_INFLUENCER = 'spoke_with_decision_influencer';
-    const SPOKE_WITH_DECISION_INFLUENCER = 'spoke_with_decision_influencer';
     const COMPETITIVE_ACCOUNT = 'competitive_account';
     const SCHEDULED_FOLLOW_UP_MEETING = 'scheduled_follow_up_meeting';
     const SCHEDULED_LUNCH = 'scheduled_lunch';

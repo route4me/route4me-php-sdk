@@ -96,6 +96,7 @@ class Address extends Common
     public $wait_time_to_next_destination;
     public $path_to_next = [];
     public $additional_status;
+    public $tags = [];
 
     public function __construct()
     {
