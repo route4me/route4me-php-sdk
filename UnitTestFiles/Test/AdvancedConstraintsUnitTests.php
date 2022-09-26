@@ -80,9 +80,9 @@ class AdvancedConstraintsUnitTests extends \PHPUnit\Framework\TestCase {
                 'redirect' => 0,
             ];
 
-            $result = self:: $problem->removeOptimization($params);
+            $result = self::$problem->removeOptimization($params);
 
-            if ($result!=null && $result['status']==true) {
+            if ($result != null && $result['status'] == true) {
                 echo "The test optimization was removed <br>";
             } else {
                 echo "Cannot remove the test optimization <br>";
