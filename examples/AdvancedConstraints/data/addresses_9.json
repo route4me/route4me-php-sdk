@@ -1,0 +1,74 @@
+[
+	{ 
+		"address": "1407 MCCOY, Louisville, KY, 40215",
+		"lat": 38.202496,
+		"lng": -85.786514,
+		"time": 300,
+		"time_window_start": 33406,
+		"time_window_end": 36228
+	},
+	{ 
+		"address": "730 CECIL AVENUE, Louisville, KY, 40211",
+		"lat": 38.248684,
+		"lng": -85.821121,
+		"time": 300,
+		"time_window_start": 37518,
+		"time_window_end": 39550
+	},
+	{ 
+		"address": "4629 HILLSIDE DRIVE, Louisville, KY, 40216",
+		"lat": 38.176067,
+		"lng": -85.824638,
+		"time": 300,
+		"time_window_start": 41348,
+		"time_window_end": 42261
+	},
+	{ 
+		"address": "318 SO. 39TH STREET, Louisville, KY, 40212",
+		"lat": 38.259335,
+		"lng": -85.815094,
+		"time": 300,
+		"time_window_start": 45195,
+		"time_window_end": 46549
+	},
+	{ 
+		"address": "1324 BLUEGRASS AVE, Louisville, KY, 40215",
+		"lat": 38.179253,
+		"lng": -85.785118,
+		"time": 300,
+		"time_window_start": 46549,
+		"time_window_end": 47353
+	},
+	{ 
+		"address": "7305 ROYAL WOODS DR, Louisville, KY, 40214",
+		"lat": 38.162472,
+		"lng": -85.792854,
+		"time": 300,
+		"time_window_start": 47353,
+		"time_window_end": 50924
+	},
+	{ 
+		"address": "4738 BELLEVUE AVE, Louisville, KY, 40215",
+		"lat": 38.179806,
+		"lng": -85.775558,
+		"time": 300,
+		"time_window_start": 42261,
+		"time_window_end": 45195
+	},
+	{ 
+		"address": "4805 BELLEVUE AVE, Louisville, KY, 40215",
+		"lat": 38.178844,
+		"lng": -85.774864,
+		"time": 300,
+		"time_window_start": 36228,
+		"time_window_end": 37518
+	},
+	{ 
+		"address": "650 SOUTH 29TH ST UNIT 315, Louisville, KY, 40211",
+		"lat": 38.251923,
+		"lng": -85.800034,
+		"time": 300,
+		"time_window_start": 39550,
+		"time_window_end": 41348
+	}
+]
