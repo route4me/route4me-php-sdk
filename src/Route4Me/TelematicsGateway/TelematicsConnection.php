@@ -252,7 +252,7 @@ class TelematicsConnection extends \Route4Me\Common
 
         $result = Route4Me::makeRequst([
             'url'    => Endpoint::TELEMATICS_CONNECTION,
-            'method' => 'GE',
+            'method' => 'GET',
             'query'  => [
                 'api_token'         => $apiToken,
                 'connection_token'  => $connectionToken
