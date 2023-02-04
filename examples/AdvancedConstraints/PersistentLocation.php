@@ -53,8 +53,7 @@ $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
     'max_cargo_volume' => 0.0,
     'max_capacity' => 200,
     'members_count' => 10,
-    'available_time_windows' => [[25200, 75000]
-    ],
+    'available_time_windows' => [[25200, 75000]],
     'location_sequence_pattern' => ['', $persistent_location]
 ]);
 
