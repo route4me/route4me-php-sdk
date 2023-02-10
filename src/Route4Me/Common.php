@@ -17,4 +17,13 @@ class Common
 
         return $params;
     }
+
+    protected function fillFromArray(array $params)
+    {
+        foreach ($this as $key => $value) {
+            if (isset($params[$key])) {
+                $this->{$key} = $params[$key];
+            }
+        }
+    }
 }
