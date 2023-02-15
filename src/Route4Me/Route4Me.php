@@ -33,7 +33,10 @@ class Route4Me
     public static function makeRequst($options)
     {
         $method = isset($options['method']) ? $options['method'] : 'GET';
-        $query = isset($options['query']) ? array_filter($options['query'], function ($x) { return !is_null($x); }) : [];
+        $query = isset($options['query'])
+            ? array_filter($options['query'], function ($x) {
+                return !is_null($x);
+            }) : [];
 
         $body = isset($options['body']) ? $options['body'] : null;
         $file = isset($options['FILE']) ? $options['FILE'] : null;
@@ -53,9 +56,11 @@ class Route4Me
 
         $ch = curl_init();
 
-        $url = isset($options['url']) ? $options['url'].'?'.http_build_query(array_merge(
-            $query, ['api_key' => self::getApiKey()]
-        )) : '';
+        $url = isset($options['url'])
+            ? $options['url'] . '?' . http_build_query(array_merge(
+                $query,
+                ['api_key' => self::getApiKey()]
+            )) : '';
 
         $baseUrl = self::getBaseUrl();
 
@@ -72,10 +77,10 @@ class Route4Me
         curl_setopt_array($ch, $curlOpts);
 
         if (null != $file) {
-            $cfile = new \CURLFile($file,'','');
+            $cfile = new \CURLFile($file, '', '');
             $body['strFilename']=$cfile;
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($ch, CURLOPT_POST,true);
+            curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         } else {
             switch ($method) {
@@ -102,7 +107,8 @@ class Route4Me
                     }
                     break;
                 case 'ADD':
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query)); break;
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+                    break;
             }
 
             if (is_numeric(array_search($method, ['DELETE', 'PUT']))) {
@@ -113,35 +119,47 @@ class Route4Me
         }
 
         $result = curl_exec($ch);
-
-        $isxml = false;
-        $jxml = '';
-        if (strpos($result, '<?xml') > -1) {
-            $xml = simplexml_load_string($result);
-            //$jxml = json_encode($xml);
-            $jxml = self::object2array($xml);
-            $isxml = true;
-        }
-
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        if (200 == $code) {
-            if ($isxml) {
-                $json = $jxml;
-            } else {
-                $json = json_decode($result, true);
-            }
+        $json = null;
+        if (strpos($result, '<?xml') > -1) {
+            $xml = simplexml_load_string($result);
+            $json = self::object2array($xml);
+        } else {
+            $json = json_decode($result, true);
+        }
 
+        if (200 == $code) {
             if (isset($json['errors'])) {
-                throw new ApiError(implode(', ', $json['errors']));
+                throw new ApiError(implode(', ', $json['errors']), $code, $result);
             } else {
                 return $json;
             }
-        } elseif (409 == $code) {
-            throw new ApiError('Wrong API key');
+        } elseif (isset($code) && (!isset($result) || !$result)) {
+            throw new ApiError('', $code, $result);
         } else {
-            throw new ApiError('Something wrong');
+            if (isset($json['messages'])) {
+                $msg = '';
+                foreach ($json['messages'] as $key => $value) {
+                    if ($msg !== '') {
+                        $msg .= PHP_EOL;
+                    }
+                    $msg .= $key . ': ' . implode(', ', $value);
+                }
+                throw new ApiError($msg, $code, $result);
+            } elseif (isset($json['errors'])) {
+                $msg = '';
+                foreach ($json['errors'] as $key => $value) {
+                    if ($msg !== '') {
+                        $msg .= PHP_EOL;
+                    }
+                    $msg .= $value;
+                }
+                throw new ApiError($msg, $code, $result);
+            } else {
+                throw new ApiError($result, $code, $result);
+            }
         }
     }
 
