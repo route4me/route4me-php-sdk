@@ -48,6 +48,18 @@ class Endpoint
     const VehicleLicense = self::MAIN_HOST . "/vehicles/license";
     const VehicleSearch = self::MAIN_HOST . "/vehicles/search";
 
+    const RECURRING_ROUTES = self::MAIN_HOST . "/recurring-routes";
+    const RECURRING_ROUTES_SCHEDULES = self::MAIN_HOST . "/recurring-routes/schedules";
+    const RECURRING_ROUTES_SCHEDULES_PAGINATION = self::MAIN_HOST . "/recurring-routes/schedules/pagination";
+    const RECURRING_ROUTES_ROUTE_SCHEDULES = self::MAIN_HOST . "/recurring-routes/route-schedules";
+    const RECURRING_ROUTES_ROUTE_SCHEDULES_PAGINATION =
+        self::MAIN_HOST . "/recurring-routes/route-schedules/pagination";
+    const RECURRING_ROUTES_ROUTE_SCHEDULES_REPLACE = self::MAIN_HOST . "/recurring-routes/route-schedules/replace";
+    const RECURRING_ROUTES_SCHEDULED_ROUTES_IS_COPY = self::MAIN_HOST . "/recurring-routes/scheduled-routes/is-copy";
+    const RECURRING_ROUTES_SCHEDULED_ROUTES_GET_COPIES =
+        self::MAIN_HOST . "/recurring-routes/scheduled-routes/get-copies";
+    const RECURRING_ROUTES_MASTER_ROUTES = self::MAIN_HOST . "/recurring-routes/master-routes";
+
     // </editor-fold>
  
     // <editor-fold defaultstate="collapsed" desc="Telematicx Platform">
