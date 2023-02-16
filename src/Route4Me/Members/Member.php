@@ -206,7 +206,7 @@ class Member extends \Route4Me\Common
                     'member_id' => isset($body->member_id) ? $body->member_id : null,
                 ],
             ]);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $errorText = $ex->getMessage();
             $response = null;
         } finally {
@@ -231,7 +231,7 @@ class Member extends \Route4Me\Common
                 'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
                 'HTTPHEADER' => 'Content-Type: multipart/form-data',
             ]);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $response = null;
             $errorText = "Cannot registrate new account <br> ".$ex->getMessage();
         } finally {
@@ -279,7 +279,7 @@ class Member extends \Route4Me\Common
                 'method' => 'POST',
                 'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
             ]);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $response = null;
         } finally {
             return $response;

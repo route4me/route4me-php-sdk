@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./vendor/autoload.php"
          verbose="false"
-         colors="false"
+         colors="true"
          cacheResult="false">
 <testsuites>
     <testsuite name="Route4me PHP SDK Test Suite">
@@ -32,7 +32,9 @@
         <file>UnitTestFiles/Test/TrackingTests.php</file>
         <file>UnitTestFiles/Test/UserTests.php</file>
         <file>UnitTestFiles/Test/VehicleTests.php</file>
-
+    </testsuite>
+    <testsuite name="All">
+        <directory suffix="Tests.php">UnitTestFiles/Test</directory>
     </testsuite>
 </testsuites>
 

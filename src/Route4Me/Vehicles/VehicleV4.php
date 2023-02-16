@@ -189,7 +189,9 @@ class VehicleV4 extends \Route4Me\Common
         $vehicle = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($vehicle, $key)) {
                 $vehicle->$key = $value;
             }
@@ -242,8 +244,6 @@ class VehicleV4 extends \Route4Me\Common
         $excludeFields = ['vehicle_id','is_deleted','created_time','timestamp_added','timestamp_removed'];
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
-        //Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $response = Route4Me::makeRequst([
             'url' => Endpoint::VEHICLE_V4,
             'method' => 'POST',
@@ -266,5 +266,4 @@ class VehicleV4 extends \Route4Me\Common
 
         return $response;
     }
-
 }
