@@ -45,7 +45,7 @@ class MemberConfiguration extends \Route4Me\Common
 
     public static function fromArray(array $params)
     {
-        $memberConfiguration = new Self();
+        $memberConfiguration = new self();
 
         foreach ($params as $key => $value) {
             if (property_exists($memberConfiguration, $key)) {
@@ -77,7 +77,7 @@ class MemberConfiguration extends \Route4Me\Common
                 'method' => 'POST',
                 'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
             ]);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $errorText = $ex->getMessage();
         } finally {
             return $response;
@@ -103,7 +103,7 @@ class MemberConfiguration extends \Route4Me\Common
                 'method' => 'PUT',
                 'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
             ]);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $errorText = $ex->getMessage();
         } finally {
             return $response;
@@ -134,7 +134,7 @@ class MemberConfiguration extends \Route4Me\Common
                     'config_key' => isset($params['config_key']) ? $params['config_key'] : null
                 ],
             ]);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $errorText = $ex->getMessage();
         } finally {
             return $response;
@@ -147,7 +147,7 @@ class MemberConfiguration extends \Route4Me\Common
      *       If specified, it contains the key 'config_key' and retrieved only corresponding configuration data,
      *       if not, all member configuration data retrieved.
      */
-    public function GetConfigurationData($params=null)
+    public function GetConfigurationData($params = null)
     {
         $allQueryFields = ['config_key'];
 

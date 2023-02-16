@@ -3,8 +3,8 @@
 namespace Route4Me\TelematicsGateway;
 
 use Route4Me\Enum\Endpoint;
-use Route4Me\Common As Common;
-use Route4Me\Route4Me As Route4Me;
+use Route4Me\Common as Common;
+use Route4Me\Route4Me as Route4Me;
 
 /**
  * Telematics vendor's data structure.
@@ -24,7 +24,7 @@ class TelematicsVendor extends Common
     public $name;
     
     /**
-     * Vendor slug 
+     * Vendor slug
      * @var string
      */
     public $slug;
@@ -99,12 +99,10 @@ class TelematicsVendor extends Common
      */
     public static function GetTelematicsVendors($params)
     {
-        Route4Me::setBaseUrl(Endpoint::TELEMATICS_VENDORS);
-
         $allQueryFields = ['vendor_id', 'is_integrated', 'page', 'per_page', 'country', 'feature', 'search', 'vendors'];
 
         $vendors = Route4Me::makeRequst([
-            'url'       => '',
+            'url'       => Endpoint::TELEMATICS_VENDORS,
             'method'    => 'GET',
             'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
@@ -152,8 +150,6 @@ class TelematicsVendor extends Common
      */
     public static function RegisterTelematicsMember($params)
     {
-        Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $allQueryFields = ['member_id', 'api_key'];
 
         $vendors = Route4Me::makeRequst([
@@ -178,5 +174,4 @@ class TelematicsVendor extends Common
             return null;
         }
     }
-
 }
