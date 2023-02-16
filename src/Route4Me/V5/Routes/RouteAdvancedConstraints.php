@@ -43,7 +43,7 @@ class RouteAdvancedConstraints extends \Route4Me\Common
     public $route4me_members_id;
 
     /**
-     * An array containing Address objects.
+     * A depot address.
      * @var Address
      */
     public $depot_address;
@@ -55,7 +55,7 @@ class RouteAdvancedConstraints extends \Route4Me\Common
     public $location_sequence_pattern;
 
     /**
-     * Group.
+     * Group name of the advanced constraints.
      * @var string
      */
     public $group;
