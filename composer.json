@@ -3,7 +3,6 @@
   "description": "Access Route4Me's logistics-as-a-service API using our PHP SDK",
   "minimum-stability": "stable",
   "version": "1.2.4",
-
   "authors": [
     {
     "name": "Igor Route4Me",
@@ -17,7 +16,7 @@
 
   "require": {
     "php": ">=7",
-	"ext-json": "*",
+    "ext-json": "*",
     "ext-sockets": "*",
     "symfony/process": "*"
   },
