@@ -475,6 +475,7 @@ class Schedules extends Common
      *   int      advance_schedule_interval_days,
      *   string   schedule - Schedule as JSON string e.g. '{"enabled":true,"mode":"daily",
      *                           "daily":{"every":2}, "from":"2019-06-05","timestamp":1558538737}',
+     *   bool     sync - Type of result, synchronous or not
      *   string   timezone - Timezone as 'America/New_York'
      * @return bool
      * @throws Exception\ApiError
@@ -482,7 +483,7 @@ class Schedules extends Common
     public function createMasterRoute(array $params) : bool
     {
         $allBodyFields = ['route_id', 'route_name', 'member_id', 'schedule_uid', 'vehicle_id', 'name',
-            'schedule_blacklist', 'advance_schedule_interval_days', 'schedule', 'timezone'];
+            'schedule_blacklist', 'advance_schedule_interval_days', 'schedule', 'timezone', 'sync'];
 
         return Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_MASTER_ROUTES,
