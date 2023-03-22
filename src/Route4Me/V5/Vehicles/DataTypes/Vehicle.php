@@ -13,8 +13,9 @@ use Route4Me\V5\Vehicles\QueryTypes\VehicleSearchParameters;
 
 /**
  * Class Vehicle
+ * (Vehicle response from the endpoint https://wh.route4me.com/modules/api/v5.0/vehicles)
+ *
  * @package Route4Me\V5\Vehicles
- * Response from the vehicle request
  */
 class Vehicle extends Common
 {
@@ -189,7 +190,9 @@ class Vehicle extends Common
         $vehicle = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($vehicle, $key)) {
                 $vehicle->$key = $value;
             }
@@ -216,7 +219,7 @@ class Vehicle extends Common
             'url' => Endpoint::Vehicles,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
@@ -233,8 +236,7 @@ class Vehicle extends Common
 
         $response = Route4Me::makeRequst([
             'url' => Endpoint::Vehicles . '/' . $vehicleId,
-            'method' => 'DELETE',
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'method' => 'DELETE'
         ]);
 
         return $response;
@@ -272,7 +274,7 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleTemporary,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
@@ -292,7 +294,7 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleExecuteOrder,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
@@ -372,7 +374,7 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleSearch,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $searchParams),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
@@ -387,7 +389,7 @@ class Vehicle extends Common
             'url' => Endpoint::Vehicles.'/'.$vehicleParams['vehicle_id'],
             'method' => 'PATCH',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
