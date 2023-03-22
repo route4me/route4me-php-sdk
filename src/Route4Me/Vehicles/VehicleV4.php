@@ -8,8 +8,11 @@ use Route4Me\Route4Me;
 
 /**
  * Class VehicleV4
+ * (Vehicle response from the endpoint https://wh.route4me.com/modules/api.v4/vehicle.php)
+ *
+ * @deprecated 1.2.6
+ * @see \Route4Me\V5\Vehicles\DataTypes\Vehicle
  * @package Route4Me\Vehicles
- * Vehicle response from the endpoint https://wh.route4me.com/modules/api.v4/vehicle.php
  */
 class VehicleV4 extends \Route4Me\Common
 {
@@ -189,7 +192,9 @@ class VehicleV4 extends \Route4Me\Common
         $vehicle = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($vehicle, $key)) {
                 $vehicle->$key = $value;
             }
@@ -198,6 +203,10 @@ class VehicleV4 extends \Route4Me\Common
         return $vehicle;
     }
 
+    /**
+     * @deprecated 1.2.6
+     * @see \Route4Me\V5\Vehicles\DataTypes\Vehicle::getVehiclesPaginatedList()
+     */
     public static function getVehicles($params)
     {
         $allQueryFields = ['with_pagination', 'page', 'perPage'];
@@ -211,6 +220,10 @@ class VehicleV4 extends \Route4Me\Common
         return $response;
     }
 
+    /**
+     * @deprecated 1.2.6
+     * @see \Route4Me\V5\Vehicles\DataTypes\Vehicle::getVehicleById()
+     */
     public function getVehicleByID($vehicleID)
     {
         $response = Route4Me::makeRequst([
@@ -221,6 +234,10 @@ class VehicleV4 extends \Route4Me\Common
         return $response;
     }
 
+    /**
+     * @deprecated 1.2.6
+     * @see \Route4Me\V5\Vehicles\DataTypes\Vehicle::updateVehicle()
+     */
     public function updateVehicle($params)
     {
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
@@ -237,6 +254,10 @@ class VehicleV4 extends \Route4Me\Common
         return $response;
     }
 
+    /**
+     * @deprecated 1.2.6
+     * @see \Route4Me\V5\Vehicles\DataTypes\Vehicle::createVehicle()
+     */
     public function createVehicle($params)
     {
         $excludeFields = ['vehicle_id','is_deleted','created_time','timestamp_added','timestamp_removed'];
@@ -254,6 +275,10 @@ class VehicleV4 extends \Route4Me\Common
         return $response;
     }
 
+    /**
+     * @deprecated 1.2.6
+     * @see \Route4Me\V5\Vehicles\DataTypes\Vehicle::removeVehicle()
+     */
     public function removeVehicle($params)
     {
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
@@ -266,5 +291,4 @@ class VehicleV4 extends \Route4Me\Common
 
         return $response;
     }
-
 }
