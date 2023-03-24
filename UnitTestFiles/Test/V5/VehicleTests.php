@@ -188,25 +188,23 @@ class VehicleTests extends TestCase
             'license_end_date'          => '2031-01-01',
         ]);
 
-        $this->assertEquals($class6TruckParams->vehicle_alias , 'GMC TopKick C5500 TST 6');
-        $this->assertEquals($class6TruckParams->vehicle_vin , 'SAJXA01A06FN08012');
-        $this->assertEquals($class6TruckParams->vehicle_license_plate , 'CVH4561');
-        $this->assertEquals($class6TruckParams->vehicle_model , 'TopKick C5500');
-        $this->assertEquals($class6TruckParams->vehicle_model_year , 1995);
-        $this->assertEquals($class6TruckParams->vehicle_year_acquired , 2008);
-        $this->assertEquals($class6TruckParams->vehicle_reg_country_id , 223);
-        $this->assertEquals($class6TruckParams->vehicle_reg_state_id , 12);
-        $this->assertEquals($class6TruckParams->vehicle_make , 'GMC');
-        $this->assertEquals($class6TruckParams->vehicle_type_id , 'pickup_truck');
-        $this->assertEquals($class6TruckParams->vehicle_cost_new , 60000);
-        $this->assertEquals($class6TruckParams->purchased_new ,true);
-        $this->assertEquals($class6TruckParams->mpg_city , 8);
-        $this->assertEquals($class6TruckParams->mpg_highway , 14);
-        $this->assertEquals($class6TruckParams->fuel_type , 'diesel');
-        $this->assertEquals($class6TruckParams->license_start_date , '2021-01-01');
-        $this->assertEquals($class6TruckParams->license_end_date , '2031-01-01');
-
-
+        $this->assertEquals($class6TruckParams->vehicle_alias, 'GMC TopKick C5500 TST 6');
+        $this->assertEquals($class6TruckParams->vehicle_vin, 'SAJXA01A06FN08012');
+        $this->assertEquals($class6TruckParams->vehicle_license_plate, 'CVH4561');
+        $this->assertEquals($class6TruckParams->vehicle_model, 'TopKick C5500');
+        $this->assertEquals($class6TruckParams->vehicle_model_year, 1995);
+        $this->assertEquals($class6TruckParams->vehicle_year_acquired, 2008);
+        $this->assertEquals($class6TruckParams->vehicle_reg_country_id, 223);
+        $this->assertEquals($class6TruckParams->vehicle_reg_state_id, 12);
+        $this->assertEquals($class6TruckParams->vehicle_make, 'GMC');
+        $this->assertEquals($class6TruckParams->vehicle_type_id, 'pickup_truck');
+        $this->assertEquals($class6TruckParams->vehicle_cost_new, 60000);
+        $this->assertEquals($class6TruckParams->purchased_new, true);
+        $this->assertEquals($class6TruckParams->mpg_city, 8);
+        $this->assertEquals($class6TruckParams->mpg_highway, 14);
+        $this->assertEquals($class6TruckParams->fuel_type, 'diesel');
+        $this->assertEquals($class6TruckParams->license_start_date, '2021-01-01');
+        $this->assertEquals($class6TruckParams->license_end_date, '2031-01-01');
     }
 
     public function testGetVehiclesPaginatedList()
@@ -465,7 +463,7 @@ class VehicleTests extends TestCase
             VehicleProfile::class,
             VehicleProfile::fromArray($result)
         );
-        self::assertEquals($vehProfileId,$result['vehicle_profile_id']);
+        self::assertEquals($vehProfileId, $result['vehicle_profile_id']);
     }
 
     public function testGetVehicleByLicensePlate()
