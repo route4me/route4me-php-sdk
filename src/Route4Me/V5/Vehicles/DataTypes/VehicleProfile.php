@@ -179,13 +179,20 @@ class VehicleProfile extends Common
         $vehicleProfile = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($vehicleProfile, $key)) {
                 $vehicleProfile->$key = $value;
             }
         }
 
         return $vehicleProfile;
+    }
+
+    public function __construct()
+    {
+        Route4Me::setBaseUrl("");
     }
 
     public function removeVehicleProfile($vehicleProfileId)
@@ -233,7 +240,7 @@ class VehicleProfile extends Common
             'url' => Endpoint::VehicleProfiles,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $profileParams),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
@@ -258,10 +265,9 @@ class VehicleProfile extends Common
             'url' => Endpoint::VehicleProfiles.'/'.$vehicleProfile['vehicle_profile_id'],
             'method' => 'PATCH',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleProfile),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
     }
-
 }
