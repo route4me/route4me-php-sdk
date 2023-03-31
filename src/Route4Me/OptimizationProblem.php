@@ -197,24 +197,30 @@ class OptimizationProblem extends Common
     {
         $allQueryFields = ['optimization_problem_id', 'reoptimize'];
         $allBodyFields = ['addresses', 'parameters'];
+        $query = null;
+        $body = null;
 
-        $query = (is_array($params)
-            ? ((isset($params['optimization_problem_id']) || isset($params['parameters']))
-                ? Route4Me::generateRequestParameters($allQueryFields, $params)
-                : null)
-            : ((isset($params->optimization_problem_id) || isset($params->parameters))
-                ? Route4Me::generateRequestParameters($allQueryFields, $params)
-                : null));
+        if (is_array($params)) {
+            if (isset($params['optimization_problem_id']) || isset($params['parameters'])) {
+                $query = Route4Me::generateRequestParameters($allQueryFields, $params);
+            }
 
-        $body = (is_array($params)
-            ? ((isset($params['addresses']) && sizeof($params['addresses']) > 0)
+            if ((isset($params['addresses']) && sizeof($params['addresses']) > 0)
                 || (isset($params['parameters']) && sizeof($params['parameters']) > 0)
-                    ? Route4Me::generateRequestParameters($allBodyFields, $params)
-                    : null)
-            : ((isset($params->addresses) && sizeof($params->addresses) > 0)
+            ) {
+                $body = Route4Me::generateRequestParameters($allBodyFields, $params);
+            }
+        } else {
+            if (isset($params->optimization_problem_id) || isset($params->parameters)) {
+                $query = Route4Me::generateRequestParameters($allQueryFields, $params);
+            }
+
+            if ((isset($params->addresses) && sizeof($params->addresses) > 0)
                 || (isset($params->parameters) && sizeof($params->parameters) > 0)
-                    ? Route4Me::generateRequestParameters($allBodyFields, $params)
-                    : null));
+            ) {
+                $body = Route4Me::generateRequestParameters($allBodyFields, $params);
+            }
+        }
 
         $optimize = Route4Me::makeRequst([
             'url'       => Endpoint::OPTIMIZATION_PROBLEM,
