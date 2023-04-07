@@ -109,6 +109,18 @@ class Route4Me
                 case 'ADD':
                     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
                     break;
+                case 'PATCH':
+                    if (isset($body)) {
+                        $bodyData = json_encode($body);
+                        if (isset($options['HTTPHEADER'])) {
+                            if (strpos($options['HTTPHEADER'], 'multipart/form-data') > 0) {
+                                $bodyData = $body;
+                            }
+                        }
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData);
+                    }
+                    break;
             }
 
             if (is_numeric(array_search($method, ['DELETE', 'PUT']))) {
@@ -130,7 +142,7 @@ class Route4Me
             $json = json_decode($result, true);
         }
 
-        if (200 == $code) {
+        if (200 == $code || 202 == $code) {
             if (isset($json['errors'])) {
                 throw new ApiError(implode(', ', $json['errors']), $code, $result);
             } else {
