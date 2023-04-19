@@ -3,6 +3,7 @@
 namespace Route4Me\V5\TeamManagement;
 
 use Route4Me\Common as Common;
+use Route4Me\V5\TeamManagement\Permission;
 
 /**
  * Team Management API ResponseTeam structure
