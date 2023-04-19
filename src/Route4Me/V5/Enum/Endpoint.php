@@ -28,8 +28,8 @@ class Endpoint
 
     // <editor-fold defaultstate="collapsed" desc="Team Users">
 
-    const TeamUsers = self::MAIN_HOST . "/team/users";
-    const TeamUsersBulkCreate = self::MAIN_HOST . "/team/bulk-insert";
+    const TEAM_USERS = self::MAIN_HOST . "/team/users";
+    const TEAM_USERS_BULK_INSERT = self::MAIN_HOST . "/team/bulk-insert";
     const DriverReview = self::MAIN_HOST . "/driver-reviews";
 
     // </editor-fold>
