@@ -34,6 +34,7 @@
         <file>UnitTestFiles/Test/VehicleTests.php</file>
         <file>UnitTestFiles/Test/V5/VehicleTests.php</file>
         <file>UnitTestFiles/Test/V5/TeamManagementUnitTests.php</file>
+        <file>UnitTestFiles/Test/V5/AddressBookUnitTests.php</file>
     </testsuite>
 </testsuites>
 

@@ -30,6 +30,26 @@ class Route4Me
         return self::$baseUrl;
     }
 
+    /**
+     * Make request with CURL
+     *
+     * @since 1.2.3 changed error handling
+     * @since 1.2.8 added $options['return_headers']
+     *
+     * @param array  $options
+     *   string url                        - HTTP URL.
+     *   string method                     - HTTP method.
+     *   string api_key                    - API key to access to route4me server.
+     *   array  query                      - Array of query parameters.
+     *   array  body                       - Array of body parameters.
+     *   string HTTPHEADER                 - Content type of body e.g.
+     *                                       'Content-Type: application/json'
+     *                                       'Content-Type: multipart/form-data'
+     *   array  HTTPHEADERS                - Array of headers.
+     *   string FILE                       - Path to uploading file.
+     *   array  return_headers             - Array of response headers to return as a result.
+     * @throws Exception\ApiError
+     */
     public static function makeRequst($options)
     {
         $method = isset($options['method']) ? $options['method'] : 'GET';
@@ -43,6 +63,8 @@ class Route4Me
         $headers = [
             'User-Agent: Route4Me php-sdk',
         ];
+
+        $return_headers = (isset($options['return_headers']) ? $options['return_headers'] : null);
 
         if (isset($options['HTTPHEADER'])) {
             $headers[] = $options['HTTPHEADER'];
@@ -76,6 +98,19 @@ class Route4Me
 
         curl_setopt_array($ch, $curlOpts);
 
+        // read response headers if need
+        $response_headers = [];
+        if ($return_headers) {
+            curl_setopt($ch, CURLOPT_HEADERFUNCTION, function ($curl, $header) use (&$response_headers) {
+                $len = strlen($header);
+                $header = explode(':', $header, 2);
+                if (count($header) >= 2) {
+                    $response_headers[strtolower(trim($header[0]))] = trim($header[1]);
+                }
+                return $len;
+            });
+        }
+
         if (null != $file) {
             $cfile = new \CURLFile($file, '', '');
             $body['strFilename']=$cfile;
@@ -102,7 +137,6 @@ class Route4Me
                                 $bodyData = $body;
                             }
                         }
-
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData);
                     }
                     break;
@@ -141,11 +175,23 @@ class Route4Me
         } else {
             $json = json_decode($result, true);
         }
-
-        if (200 == $code || 202 == $code) {
+        if (200 == $code || 201 == $code || 202 == $code) {
             if (isset($json['errors'])) {
                 throw new ApiError(implode(', ', $json['errors']), $code, $result);
             } else {
+                // return response headers if they were asked for
+                if (count($response_headers) !== 0) {
+                    $res = [
+                        'code' => $code,
+                        'data' => $json
+                    ];
+                    foreach ($return_headers as $key => $value) {
+                        // most headers has char '-' but it is forbidden in PHP names replace it with '_'
+                        $res[strtolower(str_replace('-', '_', $value))] =
+                            (isset($response_headers[$value]) ? $response_headers[$value] : null);
+                    }
+                    return $res;
+                }
                 return $json;
             }
         } elseif (isset($code) && (!isset($result) || !$result)) {
