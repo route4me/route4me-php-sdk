@@ -18,7 +18,7 @@ use Route4Me\V5\AddressBook\StatusChecker;
 use Route4Me\V5\AddressBook\UpdateAddress;
 use Route4Me\V5\AddressBook\AddressBook;
 
-final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
+final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
 {
     public static $createdAdddressIds = [];
 
