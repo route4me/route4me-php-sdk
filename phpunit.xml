@@ -32,9 +32,18 @@
         <file>UnitTestFiles/Test/TrackingTests.php</file>
         <file>UnitTestFiles/Test/UserTests.php</file>
         <file>UnitTestFiles/Test/VehicleTests.php</file>
-        <file>UnitTestFiles/Test/V5/VehicleTests.php</file>
-        <file>UnitTestFiles/Test/V5/TeamManagementUnitTests.php</file>
         <file>UnitTestFiles/Test/V5/AddressBookUnitTests.php</file>
+        <file>UnitTestFiles/Test/V5/RecurringRoutesUnitTests.php</file>
+        <file>UnitTestFiles/Test/V5/RouteTests.php</file>
+        <file>UnitTestFiles/Test/V5/TeamManagementUnitTests.php</file>
+        <file>UnitTestFiles/Test/V5/VehicleTests.php</file>
+    </testsuite>
+    <testsuite name="Route4me PHP SDK Test Suite Small">
+        <file>UnitTestFiles/Test/V5/AddressBookUnitTests.php</file>
+        <file>UnitTestFiles/Test/V5/RecurringRoutesUnitTests.php</file>
+        <file>UnitTestFiles/Test/V5/RouteTests.php</file>
+        <file>UnitTestFiles/Test/V5/TeamManagementUnitTests.php</file>
+        <file>UnitTestFiles/Test/V5/VehicleTests.php</file>
     </testsuite>
 </testsuites>
 

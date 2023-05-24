@@ -395,7 +395,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'per_page' => 10
         ];
             $addr_book = new AddressBook();
-        $result = $addr_book->getAddressesPaginated($options);
+        $result = $addr_book->getAddressesPaginatedByBodyPayload($options);
 
         $this->assertInstanceOf(ResponsePagination::class, $result);
         $this->assertNotNull($result->current_page);

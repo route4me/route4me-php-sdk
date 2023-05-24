@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 use Route4Me\Common as Common;
@@ -22,14 +21,13 @@ class VehicleTrackResponse extends Common
         $vehicleTrack = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($vehicleTrack, $key)) {
                 $vehicleTrack->$key = $value;
             }
         }
-
         return $vehicleTrack;
     }
-
-
 }
