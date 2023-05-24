@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 use Route4Me\Common as Common;
@@ -77,12 +76,13 @@ class VehicleProfilesResponse extends Common
         $profResp = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($profResp, $key)) {
                 $profResp->$key = $value;
             }
         }
-
         return $profResp;
     }
 }
