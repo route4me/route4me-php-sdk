@@ -35,16 +35,7 @@ class Territory extends Common
         if (!isset($params['territory'])) {
             throw new BadParam('Territory must be provided');
         }
-
-        $territoryparameters = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($territoryparameters, $key)) {
-                $territoryparameters->{$key} = $value;
-            }
-        }
-
-        return $territoryparameters;
+        return parent::fromArray($params);
     }
 
     public static function getTerritory($params)

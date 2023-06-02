@@ -22,19 +22,6 @@ class TelematicsVendor extends Common
     public $search; // Searched text
     public $vendors; // Comma-delimited list of the vendors IDs.
 
-    public static function fromArray(array $params)
-    {
-        $vendorsParameters = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($vendorsParameters, $key)) {
-                $vendorsParameters->{$key} = $value;
-            }
-        }
-
-        return $vendorsParameters;
-    }
-
     public static function GetTelematicsVendors($params)
     {
         Route4Me::setBaseUrl(Endpoint::TELEMATICS_VENDORS);

@@ -59,16 +59,4 @@ class RouteAdvancedConstraints extends \Route4Me\Common
      * @var string
      */
     public $group;
-
-    public static function fromArray(array $params)
-    {
-        $routeParams = new self();
-        foreach ($params as $key => $value) {
-            if (property_exists($routeParams, $key)) {
-                $routeParams->{$key} = $value;
-            }
-        }
-
-        return $routeParams;
-    }
 }

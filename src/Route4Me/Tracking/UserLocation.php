@@ -17,17 +17,4 @@ class UserLocation extends \Route4Me\Common
 
     /** @var boolean $from_cache*/
     public $from_cache;
-
-    public static function fromArray(array $params)
-    {
-        $userLocation = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($userLocation, $key)) {
-                $userLocation->{$key} = $value;
-            }
-        }
-
-        return $userLocation;
-    }
 }

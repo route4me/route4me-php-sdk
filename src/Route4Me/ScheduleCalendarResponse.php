@@ -30,16 +30,4 @@ class ScheduleCalendarResponse extends Common
      * @var array
      */
     public $routes_count = [];
-
-    public static function fromArray(array $params)
-    {
-        $order = new self();
-        foreach ($params as $key => $value) {
-            if (property_exists($order, $key)) {
-                $order->{$key} = $value;
-            }
-        }
-
-        return $order;
-    }
 }

@@ -22,17 +22,4 @@ class Direction extends Common
      * @var DirectionStep[]
      */
     public $steps = [];
-
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

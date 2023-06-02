@@ -154,17 +154,4 @@ class RouteParametersQuery extends Common
     public $bundling_items;
 
     public $device_type;
-
-    public static function fromArray(array $params)
-    {
-        $routeQueryParams = new self();
-        foreach ($params as $key => $value) {
-            if (property_exists($routeQueryParams, $key)) {
-                $routeQueryParams->{$key} = $value;
-            }
-        }
-
-        return $routeQueryParams;
-    }
-
 }

@@ -103,21 +103,6 @@ class Address extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $address = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($address, $key)) {
-                $address->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $address;
-    }
-
     public static function getAddress($routeId, $addressId)
     {
         $address = Route4Me::makeRequst([

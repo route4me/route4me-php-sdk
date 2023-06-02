@@ -3,8 +3,8 @@
 namespace Route4Me\TelematicsGateway;
 
 use Route4Me\Enum\Endpoint;
-use Route4Me\Common As Common;
-use Route4Me\Route4Me As Route4Me;
+use Route4Me\Common as Common;
+use Route4Me\Route4Me as Route4Me;
 
 /**
  * Telematics vendors' list item data structure.
@@ -24,7 +24,7 @@ class TelematicsVendors extends Common
     public $name;
     
     /**
-     * Vendor slug 
+     * Vendor slug
      * @var type string
      */
     public $slug;
@@ -66,17 +66,4 @@ class TelematicsVendors extends Common
      * @var type string
      */
     public $size;
-    
-    public static function fromArray(array $params)
-    {
-        $vendorsParameters = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($vendorsParameters, $key)) {
-                $vendorsParameters->{$key} = $value;
-            }
-        }
-
-        return $vendorsParameters;
-    }
 }
