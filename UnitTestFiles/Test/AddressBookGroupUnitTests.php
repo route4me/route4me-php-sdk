@@ -189,14 +189,14 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($addressBookGroups);
         $this->assertTrue(sizeof($addressBookGroups->fields)==3);
-        $this->assertContains('address_id',$addressBookGroups->fields);
-        $this->assertContains('address_1',$addressBookGroups->fields);
-        $this->assertContains('address_group',$addressBookGroups->fields);
+        $this->assertContains('address_id', $addressBookGroups->fields);
+        $this->assertContains('address_1', $addressBookGroups->fields);
+        $this->assertContains('address_group', $addressBookGroups->fields);
 
         $this->assertNotNull($addressBookGroups->results);
 
         if (sizeof($addressBookGroups->results)>0) {
-            $this->assertContains('Louisville', implode (", ", $addressBookGroups->results[0]));
+            $this->assertContains('Louisville', implode(", ", $addressBookGroups->results[0]));
         }
     }
 
@@ -260,7 +260,7 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $groupIds = AddressBookGroup::getAddressBookGroupIdByName($firstGroup->group_name);
 
         $this->assertNotNull($groupIds);
-        $this->assertTrue(in_array($firstGroup->group_id,$groupIds ));
+        $this->assertTrue(in_array($firstGroup->group_id, $groupIds));
     }
 
     public static function tearDownAfterClass()
