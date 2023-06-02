@@ -9,7 +9,7 @@ class TelematicsRegisterMemberResponse extends \Route4Me\Common
 {
     /**
      * API token
-     * Use for the operations: 
+     * Use for the operations:
      * Get Telematics Connections, Register Telematics Connection
      * @var type string
      */
@@ -32,17 +32,4 @@ class TelematicsRegisterMemberResponse extends \Route4Me\Common
      * @var type
      */
     public $id;
-
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

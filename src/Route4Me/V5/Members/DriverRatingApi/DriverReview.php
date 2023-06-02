@@ -34,18 +34,4 @@ class DriverReview extends \Route4Me\Common
      * @var string $added_at
      */
     public $added_at;
-
-    public static function fromArray(array $params)
-    {
-        $driverReview = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($driverReview, $key)) {
-                $driverReview->{$key} = $value;
-            }
-        }
-
-        return $driverReview;
-    }
-
 }

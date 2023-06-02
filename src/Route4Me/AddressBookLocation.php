@@ -267,19 +267,6 @@ class AddressBookLocation extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $addressbooklocation = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($addressbooklocation, $key)) {
-                $addressbooklocation->{$key} = $value;
-            }
-        }
-
-        return $addressbooklocation;
-    }
-
     /**
      * @deprecated 1.2.8
      * @see \Route4Me\V5\AddressBook\AddressBook::getAddressById()

@@ -29,19 +29,4 @@ class CustomNoteTypeResponse extends Common
      * @var array
      */
     public $note_custom_type_values=[];
-
-    public static function fromArray(array $params)
-    {
-        $customNoteTypeResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($customNoteTypeResponse, $key)) {
-                $customNoteTypeResponse->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $customNoteTypeResponse;
-    }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Route4Me\Tracking;
-
 
 class UserTracking extends \Route4Me\Common
 {
@@ -86,17 +84,4 @@ class UserTracking extends \Route4Me\Common
 
     /** @var long $LAST_KNOWN */
     public $LAST_KNOWN;
-
-    public static function fromArray(array $params)
-    {
-        $userTracking = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($userTracking, $key)) {
-                $userTracking->{$key} = $value;
-            }
-        }
-
-        return $userTracking;
-    }
 }

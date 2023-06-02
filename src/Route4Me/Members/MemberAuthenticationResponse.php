@@ -187,17 +187,4 @@ class MemberAuthenticationResponse extends \Route4Me\Common
      * Last active timestamp
      */
     public $last_active_timestamp;
-
-    public static function fromArray(array $params)
-    {
-        $memberAurhenticateResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($memberAurhenticateResponse, $key)) {
-                $memberAurhenticateResponse->{$key} = $value;
-            }
-        }
-
-        return $memberAurhenticateResponse;
-    }
 }

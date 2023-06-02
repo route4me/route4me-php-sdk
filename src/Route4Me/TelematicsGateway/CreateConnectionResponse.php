@@ -102,17 +102,4 @@ class CreateConnectionResponse extends Common
      * @var integer
      */
     public $vendor_id ;
-
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

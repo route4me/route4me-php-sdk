@@ -41,17 +41,4 @@ class MemberCapabilities extends \Route4Me\Common
      * If true, the member subscription is commercial.
      */
     public $commercial;
-
-    public static function fromArray(array $params)
-    {
-        $memberCapabilities = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($memberCapabilities, $key)) {
-                $memberCapabilities->{$key} = $value;
-            }
-        }
-
-        return $memberCapabilities;
-    }
 }
