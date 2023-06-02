@@ -908,7 +908,7 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_JOB_TRACKER_RESULT . '/' . $jobId,
             'method' => 'GET'
         ]);
-        return (is_array($result) && isset($result['status']) ? $result['status'] : false);
+        return (is_array($result) && isset($result['status']) && $result['status'] ? $result['status'] : false);
     }
 
     private function toResponseAddress($result) : ResponseAddress
