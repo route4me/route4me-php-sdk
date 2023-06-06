@@ -239,7 +239,7 @@ class VehicleProfile extends Common
             'url' => Endpoint::VehicleProfiles,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $profileParams),
-            'HTTPHEADER' => 'Content-Type: application/json'
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
         ]);
 
         return $response;

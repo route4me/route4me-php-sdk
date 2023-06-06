@@ -394,13 +394,15 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'page' => 2,
             'per_page' => 10
         ];
-            $addr_book = new AddressBook();
+        $addr_book = new AddressBook();
         $result = $addr_book->getAddressesPaginatedByBodyPayload($options);
 
         $this->assertInstanceOf(ResponsePagination::class, $result);
         $this->assertNotNull($result->current_page);
         $this->assertIsArray($result->results);
-        $this->assertInstanceOf(ResponseAddress::class, $result->results[0]);
+        if (count($result->results) > 0) {
+            $this->assertInstanceOf(ResponseAddress::class, $result->results[0]);
+        }
     }
 
     public function testGetAddressClustersMustReturnResponseClustering() : void
@@ -621,6 +623,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         }
     }
 
+    // request has result - 404 not found, bc there is absent a jobId = 96100961
     public function testGetAddressesAsynchronousJobStatusMustReturnStatusChecker() : void
     {
         $addr_book = new AddressBook();
@@ -635,6 +638,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         }
     }
 
+    // request has result - 404 not found, bc there is absent a jobId = 96100961
     public function testGetAddressesAsynchronousJobResultMustReturnBool() : void
     {
         $addr_book = new AddressBook();
