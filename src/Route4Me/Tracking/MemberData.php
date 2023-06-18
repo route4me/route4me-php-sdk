@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Route4Me\Tracking;
-
 
 class MemberData extends \Route4Me\Common
 {
@@ -32,17 +30,4 @@ class MemberData extends \Route4Me\Common
 
     /** @var boolean $show_superuser_addresses */
     public $show_superuser_addresses;
-
-    public static function fromArray(array $params)
-    {
-        $memberData = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($memberData, $key)) {
-                $memberData->{$key} = $value;
-            }
-        }
-
-        return $memberData;
-    }
 }

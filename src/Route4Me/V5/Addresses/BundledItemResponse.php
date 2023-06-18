@@ -61,20 +61,4 @@ class BundledItemResponse extends \Route4Me\Common
      * @var integer[] $addresses_id
      */
     public $addresses_id = [];
-
-    public static function fromArray(array $params)
-    {
-        $boundedItemResp = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($boundedItemResp, $key)) {
-                $boundedItemResp->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $boundedItemResp;
-    }
-
 }

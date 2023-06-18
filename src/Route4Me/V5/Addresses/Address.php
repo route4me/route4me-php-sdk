@@ -548,22 +548,7 @@ class Address extends \Route4Me\Common
     public function __construct()
     {
         // TO DO: replace with API 5 endpoint after finishing.
-        Route4Me::setBaseUrl(  Endpoint4::BASE_URL);
-    }
-
-    public static function fromArray(array $params)
-    {
-        $address = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($address, $key)) {
-                $address->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $address;
+        Route4Me::setBaseUrl(Endpoint4::BASE_URL);
     }
 
     public static function getAddress($routeId, $addressId)

@@ -24,17 +24,4 @@ class RouteDuplicateResponse extends \Route4Me\Common
      * @var string[] $route_ids
      */
     public $route_ids = [];
-
-    public static function fromArray(array $params)
-    {
-        $duplicateResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($duplicateResponse, $key)) {
-                $duplicateResponse->{$key} = $value;
-            }
-        }
-
-        return $duplicateResponse;
-    }
 }

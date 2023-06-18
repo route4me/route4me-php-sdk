@@ -26,4 +26,15 @@ class Common
             }
         }
     }
+
+    public static function fromArray(array $params)
+    {
+        $_this = new static;
+        foreach ($params as $key => $value) {
+            if (property_exists($_this, $key)) {
+                $_this->{$key} = $value;
+            }
+        }
+        return $_this;
+    }
 }

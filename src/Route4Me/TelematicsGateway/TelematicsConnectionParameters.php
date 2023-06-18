@@ -2,7 +2,7 @@
 
 namespace Route4Me\TelematicsGateway;
 
-use Route4Me\Common As Common;
+use Route4Me\Common as Common;
 
 /**
  * Parameters for requesting the telematics connection.
@@ -80,17 +80,4 @@ class TelematicsConnectionParameters extends Common
      * @var type Boolean
      */
     public $validate_remote_credentials;
-
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

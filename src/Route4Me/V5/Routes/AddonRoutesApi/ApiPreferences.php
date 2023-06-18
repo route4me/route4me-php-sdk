@@ -18,17 +18,4 @@ class ApiPreferences extends \Route4Me\Common
      * @var boolean $simple_pagination
      */
     public $simple_pagination;
-
-    public static function fromArray(array $params)
-    {
-        $apiPrefer = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($apiPrefer, $key)) {
-                $apiPrefer->{$key} = $value;
-            }
-        }
-
-        return $apiPrefer;
-    }
 }

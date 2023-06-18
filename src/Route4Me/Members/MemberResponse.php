@@ -402,18 +402,4 @@ class MemberResponse extends \Route4Me\Common
      * Time in seconds. A user will be logged out after been inactive during specified by this parameter seconds.
      */
     public $auto_logout_ts;
-
-    public static function fromArray(array $params)
-    {
-        $memberResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($memberResponse, $key)) {
-                $memberResponse->{$key} = $value;
-            }
-        }
-
-        return $memberResponse;
-    }
-
 }

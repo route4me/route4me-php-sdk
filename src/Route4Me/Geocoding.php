@@ -15,19 +15,6 @@ class Geocoding extends Common
     public $housenumber;
     public $zipcode;
 
-    public static function fromArray(array $params)
-    {
-        $geocoding = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($geocoding, $key)) {
-                $geocoding->{$key} = $value;
-            }
-        }
-
-        return $geocoding;
-    }
-
     public static function forwardGeocoding($params)
     {
         $allBodyFields = ['strExportFormat', 'addresses'];

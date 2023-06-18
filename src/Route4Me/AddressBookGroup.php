@@ -18,19 +18,6 @@ class AddressBookGroup extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $addressBookGroup = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($addressBookGroup, $key)) {
-                $addressBookGroup->{$key} = $value;
-            }
-        }
-
-        return $addressBookGroup;
-    }
-
     public static function getAddressBookGroup(array $params)
     {
         $abGroup = Route4Me::makeRequst([
@@ -83,7 +70,7 @@ class AddressBookGroup extends Common
         return $abGroup;
     }
 
-    public static function  searchAddressBookGroups(array $params)
+    public static function searchAddressBookGroups(array $params)
     {
         $allBodyFields = ['fields', 'offset', 'limit', 'filter'];
 
@@ -127,7 +114,7 @@ class AddressBookGroup extends Common
     {
         $abGroups = self::getAddressBookGroups($params);
 
-        if (isset($abGroups) && sizeof($abGroups>1)) {
+        if (isset($abGroups) && sizeof($abGroups) > 1) {
             $groupsSize = sizeof($abGroups);
 
                 $randomGroupIndex = rand(0, $groupsSize - 1);

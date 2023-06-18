@@ -30,18 +30,4 @@ class ResultResponse extends \Route4Me\Common
      * @var Array $messages
      */
     public $messages;
-
-    public static function fromArray(array $params)
-    {
-        $resultResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($resultResponse, $key)) {
-                $resultResponse->{$key} = $value;
-            }
-        }
-
-        return $resultResponse;
-    }
-
 }

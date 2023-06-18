@@ -13,19 +13,4 @@ class AddressNoteResponse extends Common
     public $note_id;
     public $upload_id;
     public $note;
-
-    public static function fromArray(array $params)
-    {
-        $addressNoteResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($addressNoteResponse, $key)) {
-                $addressNoteResponse->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $addressNoteResponse;
-    }
 }
