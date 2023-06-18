@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 /**
@@ -29,5 +28,4 @@ class VehicleLocationItem extends \Route4Me\Common
      * @var float $lng
      */
     public $lng;
-
 }

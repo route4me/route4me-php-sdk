@@ -326,7 +326,6 @@ class Schedules extends Common
 
     /**
      * Delete the Route Schedules.
-     * @todo request return true instead of return json status
      *
      * @since 1.2.3
      *
@@ -340,7 +339,7 @@ class Schedules extends Common
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES . '/' . $route_id,
             'method' => 'DELETE'
         ]);
-        return ($result == 1 ? true : false);
+        return (isset($result['status']) ? $result['status'] : false);
     }
 
     /**
@@ -415,7 +414,6 @@ class Schedules extends Common
 
     /**
      * Check if the Scheduled Route was copied by specifying the 'route_id'.
-     * @todo request return true instead of return json status
      *
      * @since 1.2.3
      *
@@ -425,10 +423,11 @@ class Schedules extends Common
      */
     public function isScheduledRouteCopy(string $route_id) : bool
     {
-        return Route4Me::makeRequst([
+        $result = Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_SCHEDULED_ROUTES_IS_COPY . '/' . $route_id,
             'method' => 'GET'
         ]);
+        return (isset($result['status']) ? $result['status'] : false);
     }
 
     /**
@@ -459,7 +458,6 @@ class Schedules extends Common
 
     /**
      * Create a new Master Route by sending the corresponding data.
-     * @todo request return true instead of return json status
      *
      * @since 1.2.3
      *
@@ -485,12 +483,13 @@ class Schedules extends Common
         $allBodyFields = ['route_id', 'route_name', 'member_id', 'schedule_uid', 'vehicle_id', 'name',
             'schedule_blacklist', 'advance_schedule_interval_days', 'schedule', 'timezone', 'sync'];
 
-        return Route4Me::makeRequst([
+        $result = Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_MASTER_ROUTES,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
         ]);
+        return (isset($result['status']) ? $result['status'] : false);
     }
 
     private function toSchedule($result) : Schedule

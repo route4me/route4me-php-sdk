@@ -131,12 +131,14 @@ class Route4Me
                     break;
                 case 'POST':
                     if (isset($body)) {
-                        $bodyData = json_encode($body);
-                        if (isset($options['HTTPHEADER'])) {
-                            if (strpos($options['HTTPHEADER'], 'multipart/form-data') > 0) {
-                                $bodyData = $body;
-                            }
+                        if (isset($options['HTTPHEADER'])
+                            && strpos($options['HTTPHEADER'], 'multipart/form-data') > 0) {
+                            $bodyData = $body;
+                        } else {
+                            $bodyData = json_encode($body);
                         }
+                        curl_setopt($ch, CURLOPT_POST, 1);
+                        curl_setopt($ch, CURLOPT_POSTREDIR, 7);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData);
                     }
                     break;
@@ -203,10 +205,12 @@ class Route4Me
                     if ($msg !== '') {
                         $msg .= PHP_EOL;
                     }
-                    $msg .= $key . ': ' . implode(', ', $value);
+                    $msg .= $key . ': ' . (is_array($value) ? implode(', ', $value) : $value);
                 }
                 throw new ApiError($msg, $code, $result);
-            } elseif (isset($json['errors'])) {
+            } elseif (isset($json['error']) && !empty($json['error'])) {
+                throw new ApiError($json['error'], $code, $result);
+            } elseif (isset($json['error'])) {
                 $msg = '';
                 foreach ($json['errors'] as $key => $value) {
                     if ($msg !== '') {
