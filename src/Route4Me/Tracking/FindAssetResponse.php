@@ -69,8 +69,8 @@ class FindAssetResponse extends \Route4Me\Common
     public $customer_service_phone;
     
     /**
-    * If true, Covid19 warning hidden 
-    * @var type 
+    * If true, Covid19 warning hidden
+    * @var type
     */
     public $hide_covid19_warning;
     
@@ -141,21 +141,8 @@ class FindAssetResponse extends \Route4Me\Common
     public $custom_data;
     
     /**
-     * An array of the asset arrival times 
+     * An array of the asset arrival times
      * @var type array
      */
     public $arrival = [];
-
-    public static function fromArray(array $params)
-    {
-        $findAssetResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($findAssetResponse, $key)) {
-                $findAssetResponse->{$key} = $value;
-            }
-        }
-
-        return $findAssetResponse;
-    }
 }

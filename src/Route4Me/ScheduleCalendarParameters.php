@@ -64,22 +64,6 @@ class ScheduleCalendarParameters extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    /**
-     * Convert an array to this object
-     */
-    public static function fromArray(array $params)
-    {
-        $scheduleCalendarParameters = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($scheduleCalendarParameters, $key)) {
-                $scheduleCalendarParameters->{$key} = $value;
-            }
-        }
-
-        return $scheduleCalendarParameters;
-    }
-
     public function setTimezoneOffsetMinutes($tz)
     {
         $this->timezone_offset_minutes = -$tz;

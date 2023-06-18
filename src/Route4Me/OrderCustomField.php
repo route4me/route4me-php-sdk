@@ -18,18 +18,6 @@ class OrderCustomField extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $orderCustomField = new self();
-        foreach ($params as $key => $value) {
-            if (property_exists($orderCustomField, $key)) {
-                $orderCustomField->{$key} = $value;
-            }
-        }
-
-        return $orderCustomField;
-    }
-
     public static function addOrderCustomUserField($params)
     {
         $excludeFields = ['order_custom_field_id'];

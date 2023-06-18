@@ -67,18 +67,6 @@ class Order extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $order = new self();
-        foreach ($params as $key => $value) {
-            if (property_exists($order, $key)) {
-                $order->{$key} = $value;
-            }
-        }
-
-        return $order;
-    }
-
     /**
      * @param Order $params
      */
@@ -233,18 +221,18 @@ class Order extends Common
         }
 
         switch ($key) {
-        case 'cached_lat':
-        case 'curbside_lat':
-            if ($coord[$key] > 90 || $coord[$key] < -90) {
-                return false;
-            }
-            break;
-        case 'cached_lng':
-        case 'curbside_lng':
-            if ($coord[$key] > 180 || $coord[$key] < -180) {
-                return false;
-            }
-            break;
+            case 'cached_lat':
+            case 'curbside_lat':
+                if ($coord[$key] > 90 || $coord[$key] < -90) {
+                    return false;
+                }
+                break;
+            case 'cached_lng':
+            case 'curbside_lng':
+                if ($coord[$key] > 180 || $coord[$key] < -180) {
+                    return false;
+                }
+                break;
         }
 
         return true;
@@ -286,12 +274,12 @@ class Order extends Common
                         continue;
                     } else {
                         switch ($coord) {
-                        case 'cached_lat':
-                            $cached_lat = doubleval($rows[$ordersFieldsMapping[$coord]]);
-                            break;
-                        case 'cached_lng':
-                            $cached_lng = doubleval($rows[$ordersFieldsMapping[$coord]]);
-                            break;
+                            case 'cached_lat':
+                                $cached_lat = doubleval($rows[$ordersFieldsMapping[$coord]]);
+                                break;
+                            case 'cached_lng':
+                                $cached_lng = doubleval($rows[$ordersFieldsMapping[$coord]]);
+                                break;
                         }
                     }
                 }

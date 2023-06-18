@@ -518,18 +518,6 @@ class RouteParameters extends Common
      */
     public $slowdowns;
 
-    public static function fromArray(array $params)
-    {
-        $routeParams = new self();
-        foreach ($params as $key => $value) {
-            if (property_exists($routeParams, $key)) {
-                $routeParams->{$key} = $value;
-            }
-        }
-
-        return $routeParams;
-    }
-
     public function setAddressBundle($addressBundle)
     {
         $this->bundling = $addressBundle;
