@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 use Route4Me\Common as Common;
@@ -27,12 +26,13 @@ class VehicleOrderResponse extends Common
         $ordParams = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($ordParams, $key)) {
                 $ordParams->$key = $value;
             }
         }
-
         return $ordParams;
     }
 }

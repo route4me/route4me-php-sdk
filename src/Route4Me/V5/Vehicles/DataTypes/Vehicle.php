@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 use Route4Me\Common as Common;
@@ -207,8 +206,8 @@ class Vehicle extends Common
     }
 
     /** Creates a vehicle
-     * @param $vehicleParams
-     * Returns a vehicle object or failure info.
+     * @param  $vehicleParams - an array of vehicle's parameters or Vehicle object
+     * @return array          - a vehicle object or failure info.
      */
     public function createVehicle($vehicleParams)
     {
@@ -219,15 +218,15 @@ class Vehicle extends Common
             'url' => Endpoint::Vehicles,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => 'Content-Type: application/json'
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
         ]);
 
         return $response;
     }
 
     /** Removes a vehicle by specified vehicle ID.
-     * @param string $vehicleID - Vehicle ID
-     * @return Vehicle object - removed vehicle object.
+     * @param  string $vehicleID - Vehicle ID
+     * @return array             - an array of parameers of removed vehicle object.
      * @throws \Route4Me\Exception\ApiError
      */
     public function removeVehicle($vehicleParams)
@@ -243,8 +242,8 @@ class Vehicle extends Common
     }
 
     /** Returns the VehiclesPaginated type object containing an array of the vehicles.
-     * @param array $params - an array from the VehicleParameters object.
-     * @return an array of the Vehicle objects.
+     * @param  $params - an array of pagginated parameters or VehicleParameters object.
+     * @return array   - an array of the Vehicle objects.
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehiclesPaginatedList($params)
@@ -261,8 +260,8 @@ class Vehicle extends Common
     }
 
     /** Creates temporary vehicle in the database.
-     * @param $vehicleParams - an array from the VehicleTemporary object.
-     * @return an object of the type VehicleTemporary.
+     * @param  $vehicleParams - an array of parameters or VehicleTemporary object.
+     * @return array          - an array of parameters of VehicleTemporary.
      * @throws \Route4Me\Exception\ApiError
      */
     public function createTemporaryVehicle($vehicleParams)
@@ -274,15 +273,15 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleTemporary,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => 'Content-Type: application/json'
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
         ]);
 
         return $response;
     }
 
     /** Execute a vehicle order.
-     * @param $vehicleParams - Vehicle order parameters.
-     * @return an object of the type VehicleOrderResponse
+     * @param  $vehicleParams - an array of order parameters or VehicleOrderParameters object
+     * @return array          - an array of parameters of VehicleOrderResponse.
      * @throws \Route4Me\Exception\ApiError
      */
     public function executeVehicleOrder($vehicleParams)
@@ -294,15 +293,15 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleExecuteOrder,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => 'Content-Type: application/json'
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
         ]);
 
         return $response;
     }
 
     /** Get latest vehicle locations by specified vehicle IDs.
-     * @param $vehicleParams - Vehicle query parameters containing vehicle IDs
-     * @return Data with vehicles
+     * @param  $vehicleParams - Vehicle query parameters containing vehicle IDs
+     * @return array          - Data with vehicles
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehicleLocations($vehicleParams)
@@ -319,8 +318,8 @@ class Vehicle extends Common
     }
 
     /** Get the Vehicle by specifying vehicle ID.
-     * @param $vehicleParams - Vehicle query parameters containing vehicle ID.
-     * @return an object of the type Vehicle
+     * @param  $vehicleParams - Vehicle query parameters containing vehicle ID.
+     * @return array          - an array of parameters of Vehicle.
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehicleById($vehicleParams)
@@ -337,8 +336,8 @@ class Vehicle extends Common
     }
 
     /** Get the Vehicle track by specifying vehicle ID.
-     * @param $vehicleParams - Vehicle query parameters containing vehicle ID.
-     * @return Vehicle track object
+     * @param  $vehicleParams - Vehicle query parameters containing vehicle ID.
+     * @return array          - an array of parameters of VehicleTrackResponse.
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehicleTrack($vehicleParams)
@@ -352,6 +351,11 @@ class Vehicle extends Common
         return $response;
     }
 
+    /** Get the Vehicle Profile by license plate.
+     * @param  $vehicleParams - Vehicle query parameters containing 'vehicle_license_plate'.
+     * @return array          - an array of parameters of Vehicle
+     * @throws \Route4Me\Exception\ApiError
+     */
     public function getVehicleByLicensePlate($vehicleParams)
     {
         $allQueryFields = ['vehicle_license_plate'];
@@ -365,6 +369,11 @@ class Vehicle extends Common
         return $response;
     }
 
+    /** Search for the Vehicle by sending the corresponding body payload.
+     * @param  $searchParams - query parameters or VehicleSearchParameters object.
+     * @return array         - an array of Vehicles
+     * @throws \Route4Me\Exception\ApiError
+     */
     public function searchVehicles($searchParams)
     {
         $excludeFields = [];
@@ -374,12 +383,17 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleSearch,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $searchParams),
-            'HTTPHEADER' => 'Content-Type: application/json'
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
         ]);
 
         return $response;
     }
 
+    /** Update the Vehicle Profile by specifying the path parameter ID and by sending.
+     * @param  $vehicleParams - an array of vehicle's parameters or Vehicle object.
+     * @return array          - an array of parameters of Vehicle
+     * @throws \Route4Me\Exception\ApiError
+     */
     public function updateVehicle($vehicleParams)
     {
         $excludeFields = ['vehicle_id', 'is_deleted', 'created_time', 'timestamp_added', 'timestamp_removed'];

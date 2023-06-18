@@ -4,11 +4,12 @@ namespace UnitTestFiles\Test;
 
 use Route4Me\Constants;
 use Route4Me\Route4Me;
+use Route4Me\Route;
 use Route4Me\V5\RecurringRoutes\PageInfo;
 use Route4Me\V5\RecurringRoutes\RouteSchedule;
 use Route4Me\V5\RecurringRoutes\Schedule;
 use Route4Me\V5\RecurringRoutes\Schedules;
-use Route4Me\V5\Routes\AddonRoutesApi\Route;
+// use Route4Me\V5\Routes\AddonRoutesApi\Route;
 use Route4Me\V5\Vehicles\DataTypes\Vehicle;
 
 final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
@@ -252,7 +253,6 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
     {
         $schedules = new Schedules();
         $result = $schedules->isScheduledRouteCopy(self::$route_id);
-
         $this->assertIsBool($result);
     }
 
@@ -286,7 +286,7 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertIsBool($result);
     }
 
-    public function testDeleteRouteScheduleMustReturnTrue() : void
+    public function testDeleteRouteSchedulesMustReturnTrue() : void
     {
         $schedules = new Schedules();
         $result = $schedules->deleteRouteSchedules(self::$route_id);
@@ -302,6 +302,29 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
 
         $this->assertInstanceOf(Schedule::class, self::$schedule);
         self::$schedule = null;
+    }
+
+    public function testDeleteRouteScheduleMustReturnDeletedRouteScahedule() : void
+    {
+        $schedules = new Schedules();
+        self::$schedule = $schedules->createSchedule([
+            'name' => 'The bestest schedule',
+            'schedule_blacklist' => [],
+            'schedule' => null,
+            'timezone' => 'UTC'
+        ]);
+
+        self::$route_schedule = $schedules->createRouteSchedule([
+            'route_id' => self::$route_id,
+            'schedule_uid' => self::$schedule->schedule_uid
+        ]);
+
+        $res_route_schedule = $schedules->deleteRouteSchedule(self::$route_schedule->route_id);
+
+        $this->assertInstanceOf(RouteSchedule::class, $res_route_schedule);
+
+        self::$schedule = null;
+        self::$route_schedule = null;
     }
 
     public static function tearDownAfterClass() : void

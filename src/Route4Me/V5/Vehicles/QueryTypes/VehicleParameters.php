@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\QueryTypes;
 
 use Route4Me\Common as Common;
@@ -42,12 +41,13 @@ class VehicleParameters extends Common
         $vehParams = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($vehParams, $key)) {
                 $vehParams->$key = $value;
             }
         }
-
         return $vehParams;
     }
 }
