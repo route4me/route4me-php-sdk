@@ -177,7 +177,7 @@ class Route4Me
         } else {
             $json = json_decode($result, true);
         }
-        if (200 == $code || 201 == $code || 202 == $code) {
+        if (200 == $code || 201 == $code || 202 == $code || 204 == $code) {
             if (isset($json['errors'])) {
                 throw new ApiError(implode(', ', $json['errors']), $code, $result);
             } else {
@@ -193,6 +193,9 @@ class Route4Me
                             (isset($response_headers[$value]) ? $response_headers[$value] : null);
                     }
                     return $res;
+                }
+                if (204 == $code) {
+                    return true;
                 }
                 return $json;
             }
