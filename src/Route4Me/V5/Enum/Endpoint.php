@@ -123,4 +123,6 @@ class Endpoint
     const ADDRESSES_EXPORT_BY_AREA_IDS = self::MAIN_HOST . "/address-book/addresses/export-by-area-ids";
     const ADDRESSES_JOB_TRACKER_STATUS = self::MAIN_HOST . "/address-book/addresses/job-tracker/status";
     const ADDRESSES_JOB_TRACKER_RESULT = self::MAIN_HOST . "/address-book/addresses/job-tracker/result";
+
+    const POD_WORKFLOW = self::MAIN_HOST . "/workflows";
 }
