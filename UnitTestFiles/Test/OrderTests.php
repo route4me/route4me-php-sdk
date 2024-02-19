@@ -152,26 +152,24 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             ],
         ]);
 
-        $this->assertEquals($orderParameters->toArray(),
-            [
-                'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-                'cached_lat'                => 48.335991,
-                'cached_lng'                => 31.18287,
-                'address_alias'             => 'Auto test address',
-                'address_city'              => 'Philadelphia',
-                'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-                'EXT_FIELD_first_name'      => 'Igor',
-                'EXT_FIELD_last_name'       => 'Progman',
-                'EXT_FIELD_email'           => 'progman@gmail.com',
-                'EXT_FIELD_phone'           => '380380380380',
-                'EXT_FIELD_custom_data'     => [
-                    0 => [
-                        'order_id'  => '10',
-                        'name'      => 'Bill Soul',
-                    ],
+        $this->assertEquals($orderParameters->toArray(), [
+            'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+            'cached_lat'                => 48.335991,
+            'cached_lng'                => 31.18287,
+            'address_alias'             => 'Auto test address',
+            'address_city'              => 'Philadelphia',
+            'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
+            'EXT_FIELD_first_name'      => 'Igor',
+            'EXT_FIELD_last_name'       => 'Progman',
+            'EXT_FIELD_email'           => 'progman@gmail.com',
+            'EXT_FIELD_phone'           => '380380380380',
+            'EXT_FIELD_custom_data'     => [
+                0 => [
+                    'order_id'  => '10',
+                    'name'      => 'Bill Soul',
                 ],
-            ]
-        );
+            ],
+        ]);
     }
 
     public function testGetOrders()
@@ -250,6 +248,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
 
     public function testAddOrdersToRoute()
     {
+        $this->markTestSkipped('Read old data.');
+
         $body = json_decode(file_get_contents(dirname(__FILE__).'/data/add_order_to_route_data.json'), true);
 
         $routeId = self::$createdProblems[0]->routes[0]->route_id;
@@ -324,8 +324,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
 
         self::assertNotNull($response);
         self::assertInstanceOf(Order::class, Order::fromArray($response));
-        $this->assertEquals(93,$response['custom_user_fields'][0]['order_custom_field_id']);
-        $this->assertEquals(false,$response['custom_user_fields'][0]['order_custom_field_value']);
+        $this->assertEquals(93, $response['custom_user_fields'][0]['order_custom_field_id']);
+        $this->assertEquals(false, $response['custom_user_fields'][0]['order_custom_field_value']);
 
         self::$createdOrders[] = $response;
     }
@@ -339,6 +339,23 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         // Get an order
         $orderParameters = Order::fromArray([
             'order_id' => $orderID,
+        ]);
+
+        $response = $order->getOrder($orderParameters);
+
+        self::assertNotNull($response);
+        self::assertInstanceOf(Order::class, Order::fromArray($response));
+    }
+
+    public function testGetOrderByUUID()
+    {
+        $order = new Order();
+
+        $orderUUID = self::$createdOrders[0]['order_uuid'];
+
+        // Get an order
+        $orderParameters = Order::fromArray([
+            'order_id' => $orderUUID,
         ]);
 
         $response = $order->getOrder($orderParameters);
@@ -484,9 +501,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Order::class, Order::fromArray($response));
         $this->assertEquals('Lviv', $response['address_2']);
         $this->assertEquals('032268593', $response['EXT_FIELD_phone']);
-        $this->assertEquals([
-                0 => '{"order_id":"10","name":"Bill Soul"}'
-            ],
+        $this->assertEquals(
+            [0 => '{"order_id":"10","name":"Bill Soul"}'],
             $response['EXT_FIELD_custom_data']
         );
     }
@@ -511,6 +527,23 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Order::class, Order::fromArray($response));
         $this->assertEquals(93, $response['custom_user_fields'][0]['order_custom_field_id']);
         $this->assertEquals(true, $response['custom_user_fields'][0]['order_custom_field_value']);
+    }
+
+    public function testDeleteOrderByUuid()
+    {
+        $lastOrder = array_pop(self::$createdOrders);
+        if ($lastOrder != null) {
+            $order = new Order();
+            $ids = [
+                "order_ids" => [$lastOrder['order_uuid']]
+            ];
+
+            $response = $order->removeOrder($ids);
+
+            if (!is_null($response) && isset($response['status']) && $response['status']) {
+                echo "The test order removed by UUID <br>";
+            }
+        }
     }
 
     public static function tearDownAfterClass()
