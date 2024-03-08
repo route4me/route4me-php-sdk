@@ -34,6 +34,7 @@ class Order extends Common
     public $redirect;
     public $optimization_problem_id;
     public $order_id;
+    public $order_uuid;
     public $order_ids;
 
     public $day_added_YYMMDD;
@@ -73,7 +74,7 @@ class Order extends Common
     public static function addOrder($params)
     {
         $excludeFields = ['route_id', 'redirect', 'optimization_problem_id', 'order_id',
-        'order_ids', 'fields', 'offset', 'limit', 'query', 'created_timestamp', ];
+            'order_ids', 'fields', 'offset', 'limit', 'query', 'created_timestamp', 'order_uuid'];
 
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
@@ -118,7 +119,8 @@ class Order extends Common
 
     public static function getOrder($params)
     {
-        $allQueryFields = ['order_id', 'fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit'];
+        $allQueryFields = ['order_id', 'fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query',
+            'offset', 'limit'];
 
         $response = Route4Me::makeRequst([
             'url'       => Endpoint::ORDER_V4,
@@ -185,8 +187,8 @@ class Order extends Common
 
     public static function updateOrder($params)
     {
-        $excludeFields = ['route_id', 'redirect', 'optimization_problem_id',
-        'order_ids', 'fields', 'offset', 'limit', 'query', 'created_timestamp', ];
+        $excludeFields = ['route_id', 'redirect', 'optimization_problem_id', 'order_ids',
+            'fields', 'offset', 'limit', 'query', 'created_timestamp', 'route_uuid'];
 
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
@@ -249,8 +251,8 @@ class Order extends Common
 
         $columns = fgetcsv($csvFileHandle, $max_line_length, $delemietr);
 
-        $excludeFields = ['route_id', 'redirect', 'optimization_problem_id', 'order_id',
-        'order_ids', 'fields', 'offset', 'limit', 'query', 'created_timestamp', ];
+        $excludeFields = ['route_id', 'redirect', 'optimization_problem_id', 'order_id', 'order_ids',
+            'fields', 'offset', 'limit', 'query', 'created_timestamp', 'order_uuid'];
 
         $allOrderFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
