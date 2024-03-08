@@ -111,6 +111,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
                     'name'      => 'Bill Soul',
                 ],
             ],
+            'EXT_FIELD_cost'            => 50
         ]);
 
         $this->assertEquals('1358 E Luzerne St, Philadelphia, PA 19124, US', $orderParameters->address_1);
@@ -129,6 +130,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
                 'name'      => 'Bill Soul',
             ],
         ], $orderParameters->EXT_FIELD_custom_data);
+        $this->assertEquals(50, $orderParameters->EXT_FIELD_cost);
     }
 
     public function testToArray()
@@ -152,21 +154,24 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             ],
         ]);
 
-        $this->assertEquals($orderParameters->toArray(), [
-            'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-            'cached_lat'                => 48.335991,
-            'cached_lng'                => 31.18287,
-            'address_alias'             => 'Auto test address',
-            'address_city'              => 'Philadelphia',
-            'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-            'EXT_FIELD_first_name'      => 'Igor',
-            'EXT_FIELD_last_name'       => 'Progman',
-            'EXT_FIELD_email'           => 'progman@gmail.com',
-            'EXT_FIELD_phone'           => '380380380380',
-            'EXT_FIELD_custom_data'     => [
-                0 => [
-                    'order_id'  => '10',
-                    'name'      => 'Bill Soul',
+        $this->assertEquals(
+            $orderParameters->toArray(),
+            [
+                'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+                'cached_lat'                => 48.335991,
+                'cached_lng'                => 31.18287,
+                'address_alias'             => 'Auto test address',
+                'address_city'              => 'Philadelphia',
+                'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
+                'EXT_FIELD_first_name'      => 'Igor',
+                'EXT_FIELD_last_name'       => 'Progman',
+                'EXT_FIELD_email'           => 'progman@gmail.com',
+                'EXT_FIELD_phone'           => '380380380380',
+                'EXT_FIELD_custom_data'     => [
+                    0 => [
+                        'order_id'  => '10',
+                        'name'      => 'Bill Soul',
+                    ],
                 ],
             ],
         ]);
@@ -502,7 +507,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Lviv', $response['address_2']);
         $this->assertEquals('032268593', $response['EXT_FIELD_phone']);
         $this->assertEquals(
-            [0 => '{"order_id":"10","name":"Bill Soul"}'],
+            [
+                0 => '{"order_id":"10","name":"Bill Soul"}'
+            ],
             $response['EXT_FIELD_custom_data']
         );
     }
