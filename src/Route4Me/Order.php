@@ -64,31 +64,31 @@ class Order extends Common
 
     /**
      * Weight of the order.
-     * @since 1.2.12
+     * @since 1.2.11
      */
     public $EXT_FIELD_weight;
 
     /**
      * Cost of the order.
-     * @since 1.2.12
+     * @since 1.2.11
      */
     public $EXT_FIELD_cost;
 
     /**
      * The total revenue for the order.
-     * @since 1.2.12
+     * @since 1.2.11
      */
     public $EXT_FIELD_revenue;
 
     /**
      * The cubic volume of the cargo.
-     * @since 1.2.12
+     * @since 1.2.11
      */
     public $EXT_FIELD_cube;
 
     /**
      *The item quantity of the cargo.
-     * @since 1.2.12
+     * @since 1.2.11
      */
     public $EXT_FIELD_pieces;
 
