@@ -111,6 +111,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
                     'name'      => 'Bill Soul',
                 ],
             ],
+            'EXT_FIELD_cost'            => 50
         ]);
 
         $this->assertEquals('1358 E Luzerne St, Philadelphia, PA 19124, US', $orderParameters->address_1);
@@ -129,6 +130,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
                 'name'      => 'Bill Soul',
             ],
         ], $orderParameters->EXT_FIELD_custom_data);
+        $this->assertEquals(50, $orderParameters->EXT_FIELD_cost);
     }
 
     public function testToArray()
@@ -152,7 +154,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             ],
         ]);
 
-        $this->assertEquals($orderParameters->toArray(),
+        $this->assertEquals(
+            $orderParameters->toArray(),
             [
                 'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
                 'cached_lat'                => 48.335991,
@@ -324,8 +327,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
 
         self::assertNotNull($response);
         self::assertInstanceOf(Order::class, Order::fromArray($response));
-        $this->assertEquals(93,$response['custom_user_fields'][0]['order_custom_field_id']);
-        $this->assertEquals(false,$response['custom_user_fields'][0]['order_custom_field_value']);
+        $this->assertEquals(93, $response['custom_user_fields'][0]['order_custom_field_id']);
+        $this->assertEquals(false, $response['custom_user_fields'][0]['order_custom_field_value']);
 
         self::$createdOrders[] = $response;
     }
@@ -484,7 +487,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Order::class, Order::fromArray($response));
         $this->assertEquals('Lviv', $response['address_2']);
         $this->assertEquals('032268593', $response['EXT_FIELD_phone']);
-        $this->assertEquals([
+        $this->assertEquals(
+            [
                 0 => '{"order_id":"10","name":"Bill Soul"}'
             ],
             $response['EXT_FIELD_custom_data']
