@@ -125,4 +125,12 @@ class Endpoint
     const ADDRESSES_JOB_TRACKER_RESULT = self::MAIN_HOST . "/address-book/addresses/job-tracker/result";
 
     const POD_WORKFLOW = self::MAIN_HOST . "/workflows";
+
+    const ORDER = self::MAIN_HOST . "/orders-platform";
+    const ORDER_CREATE = self::ORDER . "/create";
+    const ORDER_BATCH_CREATE = self::ORDER . "/batch-create";
+    const ORDER_BATCH_DELETE = self::ORDER . "/batch-delete";
+    const ORDER_BATCH_UPDATE = self::ORDER . "/batch-update";
+    const ORDER_BATCH_UPDATE_FILTER = self::ORDER_BATCH_UPDATE . "/filter";
+    const ORDER_CUSTOM_FIELDS = self::ORDER . "/order-custom-user-fields";
 }
