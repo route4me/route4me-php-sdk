@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\DataTypes;
-
 
 class VehicleTrackItem extends \Route4Me\Common
 {

@@ -13,17 +13,4 @@ class SetGpsResponse extends \Route4Me\Common
      * Unique ID of the GPS points group.
      */
     public $tx_id;
-
-    public static function fromArray(array $params)
-    {
-        $gpsPosition = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($gpsPosition, $key)) {
-                $gpsPosition->{$key} = $value;
-            }
-        }
-
-        return $gpsPosition;
-    }
 }

@@ -78,19 +78,6 @@ class TelematicsVendor extends Common
      * @var TelematicsVendorFeature[]
      */
     public $features = [];
-    
-    public static function fromArray(array $params)
-    {
-        $vendorsParameters = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($vendorsParameters, $key)) {
-                $vendorsParameters->{$key} = $value;
-            }
-        }
-
-        return $vendorsParameters;
-    }
 
     /**
      * Get vendor(s), search for vendors, compare vendors.

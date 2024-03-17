@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 use Route4Me\Common as Common;
@@ -179,13 +178,20 @@ class VehicleProfile extends Common
         $vehicleProfile = new self();
 
         foreach ($params as $key => $value) {
-            if (is_null(Common::getValue($params, $key))) continue;
+            if (is_null(Common::getValue($params, $key))) {
+                continue;
+            }
             if (property_exists($vehicleProfile, $key)) {
                 $vehicleProfile->$key = $value;
             }
         }
 
         return $vehicleProfile;
+    }
+
+    public function __construct()
+    {
+        Route4Me::setBaseUrl("");
     }
 
     public function removeVehicleProfile($vehicleProfileId)
@@ -202,8 +208,8 @@ class VehicleProfile extends Common
     }
 
     /**
-     * @param $profileParams - an array from the VehicleParameters object.
-     * @return The data including list of the vehicle profiles.
+     * @param  $profileParams - an array from the VehicleParameters object.
+     * @return array          - an array of parameters of the vehicle profiles.
      * @throws \Route4Me\Exception\ApiError
      */
     public function getVehicleProfiles($profileParams)
@@ -221,7 +227,7 @@ class VehicleProfile extends Common
 
     /**
      * @param $profileParams - Vehicle profile body parameters
-     * @return Created vehicle profile
+     * @return array         - Created vehicle profile
      * @throws \Route4Me\Exception\ApiError
      */
     public function createVehicleProfile($profileParams)
@@ -233,7 +239,7 @@ class VehicleProfile extends Common
             'url' => Endpoint::VehicleProfiles,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $profileParams),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
         ]);
 
         return $response;
@@ -258,10 +264,9 @@ class VehicleProfile extends Common
             'url' => Endpoint::VehicleProfiles.'/'.$vehicleProfile['vehicle_profile_id'],
             'method' => 'PATCH',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleProfile),
-            'HTTPHEADER' => Constants::DEFAULT_HTTP_HEADER,
+            'HTTPHEADER' => 'Content-Type: application/json'
         ]);
 
         return $response;
     }
-
 }

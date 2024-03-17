@@ -2,7 +2,7 @@
 
 namespace Route4Me\TelematicsGateway;
 
-use Route4Me\Common As Common;
+use Route4Me\Common as Common;
 
 /**
  * Parameters for requesting the telematics vendors.
@@ -86,17 +86,4 @@ class TelematicsVendorParameters extends Common
      * @var type string
      */
     public $api_token;
-
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

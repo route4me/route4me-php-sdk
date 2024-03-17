@@ -74,18 +74,6 @@ class RouteParameters extends Common
     public $is_dynamic_start_time;
     public $bundling;
 
-    public static function fromArray(array $params)
-    {
-        $routeParams = new self();
-        foreach ($params as $key => $value) {
-            if (property_exists($routeParams, $key)) {
-                $routeParams->{$key} = $value;
-            }
-        }
-
-        return $routeParams;
-    }
-
     public function setAddressBundle($addressBundle)
     {
         $this->bundling = $addressBundle;

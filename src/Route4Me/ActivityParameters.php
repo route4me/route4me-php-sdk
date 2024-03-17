@@ -34,19 +34,6 @@ class ActivityParameters extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $activityparameters = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($activityparameters, $key)) {
-                $activityparameters->{$key} = $value;
-            }
-        }
-
-        return $activityparameters;
-    }
-
     /*
      * Get all the activities limited by query parameters.
      */

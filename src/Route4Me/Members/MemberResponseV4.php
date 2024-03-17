@@ -128,18 +128,4 @@ class MemberResponseV4 extends \Route4Me\Common
 
     /** @var string  $api_key*/
     public $api_key;
-
-    public static function fromArray(array $params)
-    {
-        $memberResponseV4 = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($memberResponseV4, $key)) {
-                $memberResponseV4->{$key} = $value;
-            }
-        }
-
-        return $memberResponseV4;
-    }
-
 }

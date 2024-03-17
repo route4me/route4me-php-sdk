@@ -155,19 +155,6 @@ class TelematicsConnection extends \Route4Me\Common
      * @var Boolean
      */
     public $validate_remote_credentials;
-    
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 
     /**
      * Create a telematics connection.
@@ -244,7 +231,7 @@ class TelematicsConnection extends \Route4Me\Common
     {
         $result = Route4Me::makeRequst([
             'url'    => Endpoint::TELEMATICS_CONNECTION,
-            'method' => 'GE',
+            'method' => 'GET',
             'query'  => [
                 'api_token'         => $apiToken,
                 'connection_token'  => $connectionToken

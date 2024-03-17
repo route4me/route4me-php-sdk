@@ -18,17 +18,4 @@ class RouteDataTableConfigResponse extends \Route4Me\Common
      * @var ApiPreferences $api_preferences
      */
     public $api_preferences = [];
-
-    public static function fromArray(array $params)
-    {
-        $configResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($configResponse, $key)) {
-                $configResponse->{$key} = $value;
-            }
-        }
-
-        return $configResponse;
-    }
 }

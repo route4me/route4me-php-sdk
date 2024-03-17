@@ -7,6 +7,9 @@ use Route4Me\Common as Common;
 
 /**
  * Address book contact class.
+ *
+ * @deprecated 1.2.8
+ * @see \Route4Me\V5\AddressBook\AddressBook
  * @package Route4Me
  */
 class AddressBookLocation extends Common
@@ -264,19 +267,10 @@ class AddressBookLocation extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $addressbooklocation = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($addressbooklocation, $key)) {
-                $addressbooklocation->{$key} = $value;
-            }
-        }
-
-        return $addressbooklocation;
-    }
-
+    /**
+     * @deprecated 1.2.8
+     * @see \Route4Me\V5\AddressBook\AddressBook::getAddressById()
+     */
     public static function getAddressBookLocation($addressId)
     {
         $ablocations = Route4Me::makeRequst([
@@ -291,6 +285,10 @@ class AddressBookLocation extends Common
         return $ablocations;
     }
 
+    /**
+     * @deprecated 1.2.8
+     * @see \Route4Me\V5\AddressBook\AddressBook::getAddressesByBodyPayload()
+     */
     public static function searchAddressBookLocations($params)
     {
         $allQueryFields = ['display', 'query', 'fields', 'limit', 'offset'];
@@ -304,6 +302,10 @@ class AddressBookLocation extends Common
         return $result;
     }
 
+    /**
+     * @deprecated 1.2.8
+     * @see \Route4Me\V5\AddressBook\AddressBook::getAddressesByIds()
+     */
     public static function getAddressBookLocations($params)
     {
         $allQueryFields = ['limit', 'offset', 'address_id'];
@@ -335,6 +337,9 @@ class AddressBookLocation extends Common
     }
 
     /**
+     * @deprecated 1.2.8
+     * @see \Route4Me\V5\AddressBook\AddressBook::addAddress()
+     *
      * @param AddressBookLocation $params
      */
     public static function addAdressBookLocation($params)
@@ -350,6 +355,10 @@ class AddressBookLocation extends Common
         return $response;
     }
 
+    /**
+     * @deprecated 1.2.8
+     * @see \Route4Me\V5\AddressBook\AddressBook::deleteAddressesByIds()
+     */
     public function deleteAdressBookLocation($address_ids)
     {
         $result = Route4Me::makeRequst([
@@ -363,6 +372,10 @@ class AddressBookLocation extends Common
         return $result;
     }
 
+    /**
+     * @deprecated 1.2.8
+     * @see \Route4Me\V5\AddressBook\AddressBook::updateAddressById()
+     */
     public function updateAddressBookLocation($params)
     {
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['in_route_count']);

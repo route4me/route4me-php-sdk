@@ -2,7 +2,7 @@
 
 namespace Route4Me\V5\TelematicsPlatform;
 
-use Route4Me\Common As Common;
+use Route4Me\Common as Common;
 
 /**
  * The response structure from the endpoint /connections
@@ -122,17 +122,4 @@ class Connection extends Common
      * @var type array
      */
     public $metadata = [];
-    
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

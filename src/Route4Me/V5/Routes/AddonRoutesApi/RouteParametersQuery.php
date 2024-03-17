@@ -139,20 +139,6 @@ class RouteParametersQuery extends Common
      */
     public $per_page;
 
-
-    public static function fromArray(array $params)
-    {
-        $routeQueryParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($routeQueryParams, $key)) {
-                $routeQueryParams->{$key} = $value;
-            }
-        }
-
-        return $routeQueryParams;
-    }
-
     public static function getAllProperties()
     {
         $routeQueryParams = new self();
@@ -161,5 +147,4 @@ class RouteParametersQuery extends Common
 
         return $fields;
     }
-
 }

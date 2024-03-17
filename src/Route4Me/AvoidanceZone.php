@@ -32,16 +32,7 @@ class AvoidanceZone extends Common
         if (!isset($params['territory'])) {
             throw new BadParam('Territory must be provided');
         }
-
-        $avoidanceZoneParameters = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($avoidanceZoneParameters, $key)) {
-                $avoidanceZoneParameters->{$key} = $value;
-            }
-        }
-
-        return $avoidanceZoneParameters;
+        return parent::fromArray($params);
     }
 
     public static function getAvoidanceZone($territory_id)
