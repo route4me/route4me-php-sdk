@@ -18,19 +18,6 @@ class AddressBookGroup extends Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $addressBookGroup = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($addressBookGroup, $key)) {
-                $addressBookGroup->{$key} = $value;
-            }
-        }
-
-        return $addressBookGroup;
-    }
-
     public static function getAddressBookGroup(array $params)
     {
         $abGroup = Route4Me::makeRequst([

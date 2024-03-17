@@ -37,19 +37,4 @@ class CustomNoteType extends Common
      * Note custom type
      */
     public $note_custom_type;
-
-    public static function fromArray(array $params)
-    {
-        $customNoteType = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($customNoteType, $key)) {
-                $customNoteType->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $customNoteType;
-    }
 }

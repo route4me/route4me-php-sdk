@@ -59,18 +59,4 @@ class OrderInventory extends \Route4Me\Common
      * @var string $updated_at
      */
     public $updated_at;
-
-    public static function fromArray(array $params)
-    {
-        $orderInventory = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($orderInventory, $key)) {
-                $orderInventory->{$key} = $value;
-            }
-        }
-
-        return $orderInventory;
-    }
-
 }

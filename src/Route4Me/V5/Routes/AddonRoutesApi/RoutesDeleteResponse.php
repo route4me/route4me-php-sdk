@@ -29,17 +29,4 @@ class RoutesDeleteResponse extends \Route4Me\Common
      * @var string[] $route_ids
      */
     public $route_ids;
-
-    public static function fromArray(array $params)
-    {
-        $deleteResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($deleteResponse, $key)) {
-                $deleteResponse->{$key} = $value;
-            }
-        }
-
-        return $deleteResponse;
-    }
 }

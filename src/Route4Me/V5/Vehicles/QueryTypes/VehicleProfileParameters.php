@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\V5\Vehicles\QueryTypes;
 
 use Route4Me\Common as Common;

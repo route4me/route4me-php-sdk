@@ -4,13 +4,14 @@ namespace Route4Me\V5\Addresses;
 
 use Route4Me\Enum\Endpoint;
 use Route4Me\Exception\BadParam;
+use Route4Me\Route4Me;
 
 /**
  * Class AddressNote
  * @package Route4Me\V5\Addresses
  * The class for address note
  */
-class AddressNote extends Common
+class AddressNote extends \Route4Me\Common
 {
     /** An unique ID of a note
      * @var integer $note_id
@@ -84,22 +85,6 @@ class AddressNote extends Common
 
     public function __construct()
     {
-
-    }
-
-    public static function fromArray(array $params)
-    {
-        $addressNote = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($addressNote, $key)) {
-                $addressNote->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $addressNote;
     }
 
     /*Get notes from the specified route destination

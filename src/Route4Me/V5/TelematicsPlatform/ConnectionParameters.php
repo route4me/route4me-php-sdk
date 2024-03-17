@@ -2,7 +2,7 @@
 
 namespace Route4Me\V5\TelematicsPlatform;
 
-use Route4Me\Common As Common;
+use Route4Me\Common as Common;
 
 /**
  * The telematics connection query parameters.
@@ -89,17 +89,4 @@ class ConnectionParameters extends Common
      * @var type string
      */
     public $connection_token;
-
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

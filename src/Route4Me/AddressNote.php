@@ -97,22 +97,6 @@ class AddressNote extends Common
 
     public function __construct()
     {
-
-    }
-
-    public static function fromArray(array $params)
-    {
-        $addressNote = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($addressNote, $key)) {
-                $addressNote->{$key} = $value;
-            } else {
-                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
-            }
-        }
-
-        return $addressNote;
     }
 
     /**

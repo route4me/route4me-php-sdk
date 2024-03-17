@@ -22,17 +22,4 @@ class GeoPoint extends Common
      * @var double
      */
     public $lng;
-
-    public static function fromArray(array $params)
-    {
-        $thisParams = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($thisParams, $key)) {
-                $thisParams->{$key} = $value;
-            }
-        }
-
-        return $thisParams;
-    }
 }

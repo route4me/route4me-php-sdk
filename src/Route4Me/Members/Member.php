@@ -71,19 +71,6 @@ class Member extends \Route4Me\Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    public static function fromArray(array $params)
-    {
-        $member = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($member, $key)) {
-                $member->{$key} = $value;
-            }
-        }
-
-        return $member;
-    }
-
     public static function getUsers()
     {
         $response = Route4Me::makeRequst([

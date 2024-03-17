@@ -45,17 +45,4 @@ class GeocodingResponse extends Common
      * @var Route
      */
     public $original;
-
-    public static function fromArray(array $params)
-    {
-        $geocodingResponse = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($geocodingResponse, $key)) {
-                $geocodingResponse->{$key} = $value;
-            }
-        }
-
-        return $geocodingResponse;
-    }
 }

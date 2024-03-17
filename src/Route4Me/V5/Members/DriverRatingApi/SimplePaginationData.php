@@ -39,17 +39,4 @@ class SimplePaginationData extends \Route4Me\Common
      * @var string $next
      */
     public $next;
-
-    public static function fromArray(array $params)
-    {
-        $spData = new self();
-
-        foreach ($params as $key => $value) {
-            if (property_exists($spData, $key)) {
-                $spData->{$key} = $value;
-            }
-        }
-
-        return $spData;
-    }
 }
