@@ -43,6 +43,21 @@ class MemberConfiguration extends \Route4Me\Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
+    public static function fromArray(array $params)
+    {
+        $memberConfiguration = new self();
+
+        foreach ($params as $key => $value) {
+            if (property_exists($memberConfiguration, $key)) {
+                $memberConfiguration->{$key} = $value;
+            } else {
+                throw new BadParam("Correct parameter must be provided. Wrong Parameter: $key");
+            }
+        }
+
+        return $memberConfiguration;
+    }
+
     /*
     * Create new member configuration key-value pair.
     * @param array $params

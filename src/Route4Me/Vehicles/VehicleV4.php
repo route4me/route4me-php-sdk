@@ -263,8 +263,6 @@ class VehicleV4 extends \Route4Me\Common
         $excludeFields = ['vehicle_id','is_deleted','created_time','timestamp_added','timestamp_removed'];
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
-        //Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $response = Route4Me::makeRequst([
             'url' => Endpoint::VEHICLE_V4,
             'method' => 'POST',
