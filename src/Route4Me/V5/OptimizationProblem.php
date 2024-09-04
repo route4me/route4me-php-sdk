@@ -74,6 +74,7 @@ class OptimizationProblem extends Common
 
 
         $problem->optimization_problem_id = Common::getValue($params, 'optimization_problem_id');
+        $problem->optimization_profile_id = Common::getValue($params, 'optimization_profile_id');
         $problem->user_errors = Common::getValue($params, 'user_errors', []);
         $problem->state = Common::getValue($params, 'state', []);
         $problem->sent_to_background = Common::getValue($params, 'sent_to_background', []);
@@ -115,9 +116,10 @@ class OptimizationProblem extends Common
             'method'    => 'POST',
             'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body'      => [
-                'addresses'     => $params->getAddressesArray(),
-                'depots'        => $params->getDepotsArray(),
-                'parameters'    => $params->getParametersArray(),
+                'addresses'               => $params->getAddressesArray(),
+                'depots'                  => $params->getDepotsArray(),
+                'parameters'              => $params->getParametersArray(),
+                'optimization_profile_id' => $params->optimization_profile_id
             ],
         ]);
 
@@ -162,5 +164,4 @@ class OptimizationProblem extends Common
 
         return $response;
     }
-
 }
