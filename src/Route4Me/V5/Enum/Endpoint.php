@@ -133,4 +133,8 @@ class Endpoint
     const ORDER_BATCH_UPDATE = self::ORDER . "/batch-update";
     const ORDER_BATCH_UPDATE_FILTER = self::ORDER_BATCH_UPDATE . "/filter";
     const ORDER_CUSTOM_FIELDS = self::ORDER . "/order-custom-user-fields";
+
+    const OPTIMIZATION_PROFILES_LIST = self::MAIN_HOST . "/optimization-profiles/data-list";
+    const OPTIMIZATION_PROFILES_SAVE = self::MAIN_HOST . "/optimization-profiles/save-entities";
+    const OPTIMIZATION_PROFILES_DELETE = self::MAIN_HOST . "/optimization-profiles/delete-entities";
 }
