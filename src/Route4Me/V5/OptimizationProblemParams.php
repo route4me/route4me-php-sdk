@@ -18,6 +18,7 @@ class OptimizationProblemParams extends \Route4Me\Common
     public $route_path_output;
     public $optimized_callback_url;
     public $redirect = true;
+    public $optimization_profile_id;
 
     public static function fromArray($params)
     {
@@ -44,7 +45,7 @@ class OptimizationProblemParams extends \Route4Me\Common
             $param->addAddress($address);
         }
 
-        if (isset($params['depots'] )) {
+        if (isset($params['depots'])) {
             foreach ($params['depots'] as $depot) {
                 if (!($depot instanceof AddressV5)) {
                     $depot = AddressV5::fromArray($depot);
@@ -61,6 +62,7 @@ class OptimizationProblemParams extends \Route4Me\Common
         $param->optimization_problem_id = self::getValue($params, 'optimization_problem_id');
         $param->reoptimize = self::getValue($params, 'reoptimize');
         $param->redirect = filter_var(self::getValue($params, 'redirect', true), FILTER_VALIDATE_BOOLEAN);
+        $param->optimization_profile_id = self::getValue($params, 'optimization_profile_id');
 
         return $param;
     }
