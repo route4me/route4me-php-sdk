@@ -61,6 +61,8 @@ class Order extends Common
     public $is_completed;
     public $custom_user_fields;
 
+    public $address_stop_type = \Route4Me\Enum\AddressType::DELIVERY;
+
     public $addresses = [];
 
     /**
