@@ -24,12 +24,10 @@ class TelematicsVendor extends Common
 
     public static function GetTelematicsVendors($params)
     {
-        Route4Me::setBaseUrl(Endpoint::TELEMATICS_VENDORS);
-
         $allQueryFields = ['vendor_id', 'is_integrated', 'page', 'per_page', 'country', 'feature', 'search', 'vendors'];
 
         $vendors = Route4Me::makeRequst([
-            'url'       => '',
+            'url'       => Endpoint::TELEMATICS_VENDORS,
             'method'    => 'GET',
             'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);

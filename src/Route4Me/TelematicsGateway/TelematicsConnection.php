@@ -165,8 +165,6 @@ class TelematicsConnection extends \Route4Me\Common
      */
     public function createTelematicsConnection($apiToken, $params)
     {
-        Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $excludeFields = ['id', 'connection_token'];
 
         $allBodyFields = Route4Me::getObjectProperties(new TelematicsConnectionParameters(), $excludeFields);
@@ -191,8 +189,6 @@ class TelematicsConnection extends \Route4Me\Common
      */
     public function deleteTelematicsConnection($apiToken, $connectionToken)
     {
-        Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $result = Route4Me::makeRequst([
             'url'    => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'DELETE',
@@ -213,8 +209,6 @@ class TelematicsConnection extends \Route4Me\Common
      */
     public function getTelematicsConnections($apiToken)
     {
-        Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $result = Route4Me::makeRequst([
             'url'    => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'GET',
@@ -235,8 +229,6 @@ class TelematicsConnection extends \Route4Me\Common
      */
     public function getTelematicsConnection($apiToken, $connectionToken)
     {
-        Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $result = Route4Me::makeRequst([
             'url'    => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'GET',
