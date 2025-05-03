@@ -100,7 +100,7 @@ The time required to integrate the SDK can be as little as 1 hour or may take se
 ### Installation and Usage
 
 
-## Setup
+## Add route4me to an existing project
 
 set in composer.json
 
@@ -114,7 +114,14 @@ Now execute the dependency manager (https://getcomposer.org/download/) in your p
 
     php composer.phar install
 
+### or create new project from package Route4Me
+
+    php composer.phar create-project route4me/route4me-php my-project
+    cd my-project
+
 ## Examples
+
+### All Route4Me examples can be found [here](https://github.com/route4me/route4me-php-sdk/tree/master/examples)
 
 ### Single Driver Route Optimization
 

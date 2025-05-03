@@ -174,7 +174,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
                     ],
                 ],
             ],
-        ]);
+        );
     }
 
     public function testGetOrders()
