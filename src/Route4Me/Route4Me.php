@@ -78,13 +78,19 @@ class Route4Me
 
         $ch = curl_init();
 
-        $url = isset($options['url'])
-            ? $options['url'] . '?' . http_build_query(array_merge(
-                $query,
-                ['api_key' => self::getApiKey()]
-            )) : '';
-
         $baseUrl = self::getBaseUrl();
+        $host = parse_url($baseUrl . (isset($options['url']) ? $options['url'] : ''), PHP_URL_HOST);
+        $url = null;
+        if (isset($host) && strtolower(substr($host, 0, 2)) == "wh") {
+            $url = (isset($options['url']) ? $options['url'] . '?' . http_build_query($query) : '');
+            $headers[] = 'Authorization: Bearer ' . self::getApiKey();
+        } else {
+            $url = (isset($options['url'])
+                ? $options['url'] . '?' . http_build_query(array_merge(
+                    $query,
+                    ['api_key' => self::getApiKey()]
+                )) : '');
+        }
 
         $curlOpts = [
             CURLOPT_URL             => $baseUrl.$url,
