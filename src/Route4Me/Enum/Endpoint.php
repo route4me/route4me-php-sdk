@@ -15,6 +15,7 @@ class Endpoint
 
     const ADDRESS_V4 = '/api.v4/address.php';
     const MOVE_ROUTE_DESTINATION = '/actions/route/move_route_destination.php';
+    const DELETE_ROUTE_DESTINATION = '/actions/route/delete_route_destination.php';
     const MARK_ADDRESS_DEPARTED = '/api/route/mark_address_departed.php';
     const UPDATE_ADDRESS_VISITED = '/actions/address/update_address_visited.php';
 

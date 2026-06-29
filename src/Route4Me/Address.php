@@ -211,6 +211,22 @@ class Address extends Common
         return $result;
     }
 
+    public function deleteRouteDestinations(array $routeDestinationIds)
+    {
+        $result = Route4Me::makeRequst([
+            'url'           => Endpoint::DELETE_ROUTE_DESTINATION,
+            'method'        => 'POST',
+            'query'         => ['format' => 'json'],
+            'body'          => [
+                'route_destination_ids' => implode(',', $routeDestinationIds),
+            ],
+            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'HTTPHEADERS'   => ['Accept: application/json'],
+        ]);
+
+        return $result;
+    }
+
     public function getAddressId()
     {
         return $this->route_destination_id;
