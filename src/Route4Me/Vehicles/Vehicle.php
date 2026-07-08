@@ -78,7 +78,6 @@ class Vehicle extends \Route4Me\Common
 
     public function __construct()
     {
-        Route4Me::setBaseUrl(Endpoint::WH_BASE_URL);
     }
 
     public static function fromArray(array $params)
@@ -106,6 +105,7 @@ class Vehicle extends \Route4Me\Common
         $allQueryFields = ['with_pagination', 'page', 'perPage'];
 
         $response = Route4Me::makeRequst([
+            'baseUrl' => Endpoint::WH_BASE_URL,
             'url' => Endpoint::VEHICLE_V4,
             'method' => 'GET',
             'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
@@ -140,6 +140,7 @@ class Vehicle extends \Route4Me\Common
     public function getVehicleByID($vehicleID)
     {
         $response = Route4Me::makeRequst([
+            'baseUrl' => Endpoint::WH_BASE_URL,
             'url' => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
             'method' => 'GET',
         ]);
@@ -158,6 +159,7 @@ class Vehicle extends \Route4Me\Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['vehicle_id']);
 
         $response = Route4Me::makeRequst([
+            'baseUrl' => Endpoint::WH_BASE_URL,
             'url' => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
             'method' => 'PUT',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
@@ -176,9 +178,8 @@ class Vehicle extends \Route4Me\Common
         $excludeFields = ['vehicle_id', 'is_deleted', 'created_time', 'timestamp_added', 'timestamp_removed'];
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
-        Route4Me::setBaseUrl(Endpoint::BASE_URL);
-
         $response = Route4Me::makeRequst([
+            'baseUrl' => Endpoint::BASE_URL,
             'url' => Endpoint::VEHICLE_V4_API,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
@@ -197,6 +198,7 @@ class Vehicle extends \Route4Me\Common
         $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
 
         $response = Route4Me::makeRequst([
+            'baseUrl' => Endpoint::WH_BASE_URL,
             'url' => Endpoint::VEHICLE_V4 . '/' . $vehicleID,
             'method' => 'DELETE',
             'HTTPHEADER' => 'Content-Type: application/json',
