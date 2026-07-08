@@ -44,8 +44,6 @@ class Geocoding extends Common
 
     public static function getStreetData($params)
     {
-        Route4Me::setBaseUrl(Endpoint::STREET_DATA);
-
         $allPathFields = ['pk', 'offset', 'limit'];
 
         $url_query = Route4Me::generateUrlPath($allPathFields, $params);
@@ -53,6 +51,7 @@ class Geocoding extends Common
         $query = [];
 
         $response = Route4Me::makeRequst([
+            'baseUrl'   => Endpoint::STREET_DATA,
             'url'       => $url_query,
             'method'    => 'GET',
             'query'     => $query,
@@ -63,8 +62,6 @@ class Geocoding extends Common
 
     public static function getZipCode($params)
     {
-        Route4Me::setBaseUrl(Endpoint::STREET_DATA_ZIPCODE);
-
         $allPathFields = ['zipcode', 'offset', 'limit'];
 
         $url_query = Route4Me::generateUrlPath($allPathFields, $params);
@@ -72,6 +69,7 @@ class Geocoding extends Common
         $query = [];
 
         $response = Route4Me::makeRequst([
+            'baseUrl'   => Endpoint::STREET_DATA_ZIPCODE,
             'url'       => $url_query,
             'method'    => 'GET',
             'query'     => $query,
@@ -82,8 +80,6 @@ class Geocoding extends Common
 
     public static function getService($params)
     {
-        Route4Me::setBaseUrl(Endpoint::STREET_DATA_SERVICE);
-
         $allPathFields = ['zipcode', 'housenumber', 'offset', 'limit'];
 
         $url_query = Route4Me::generateUrlPath($allPathFields, $params);
@@ -91,6 +87,7 @@ class Geocoding extends Common
         $query = [];
 
         $response = Route4Me::makeRequst([
+            'baseUrl'   => Endpoint::STREET_DATA_SERVICE,
             'url'       => $url_query,
             'method'    => 'GET',
             'query'     => $query,

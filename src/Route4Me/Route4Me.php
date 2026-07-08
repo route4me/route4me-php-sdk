@@ -84,7 +84,10 @@ class Route4Me
                 ['api_key' => self::getApiKey()]
             )) : '';
 
-        $baseUrl = self::getBaseUrl();
+        // Per-request host override; falls back to the global default so existing
+        // setBaseUrl() callers are unaffected. Prevents one call's host from leaking
+        // into a later unrelated request.
+        $baseUrl = isset($options['baseUrl']) ? $options['baseUrl'] : self::getBaseUrl();
 
         $curlOpts = [
             CURLOPT_URL             => $baseUrl.$url,
