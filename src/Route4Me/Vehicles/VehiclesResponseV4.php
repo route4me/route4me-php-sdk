@@ -75,7 +75,6 @@ class VehiclesResponseV4 extends \Route4Me\Common
 
     public function __construct()
     {
-        Route4Me::setBaseUrl(Endpoint::WH_BASE_URL);
     }
 
     public static function fromArray(array $params)
