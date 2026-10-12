@@ -34,7 +34,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
     public static $removedRouteIDs = [];
     public static $removedVehicle;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
             $className = str_replace('UnitTestFiles\\Test\\','',get_class());
@@ -806,7 +806,7 @@ class RouteExampleTests extends \PHPUnit\Framework\TestCase
         $this->assertNotNull(sizeof($problem->routes)>1);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdProblems)>0) {
             $optimizationProblemIDs = [];

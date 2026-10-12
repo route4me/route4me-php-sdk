@@ -9,7 +9,7 @@ class CommonUnitTests extends \PHPUnit\Framework\TestCase
 {
     public $address;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->address = [
             'address'           => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',

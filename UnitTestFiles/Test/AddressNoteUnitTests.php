@@ -35,7 +35,7 @@ class AddressNoteUnitTests extends \PHPUnit\Framework\TestCase
 
     public static $createdCustomNotes;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
             $className = str_replace('UnitTestFiles\\Test\\','',get_class());
@@ -394,7 +394,7 @@ class AddressNoteUnitTests extends \PHPUnit\Framework\TestCase
         array_shift(self::$createdCustomNotes);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         $optimizationProblemId = self:: $problem->optimization_problem_id;
 

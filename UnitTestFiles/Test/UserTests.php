@@ -15,7 +15,7 @@ class UserTests extends \PHPUnit\Framework\TestCase
 {
     public static $createdMembers=[];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
         $date = new \DateTime();
@@ -413,7 +413,7 @@ class UserTests extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdMembers)>0) {
             $member = new Member();

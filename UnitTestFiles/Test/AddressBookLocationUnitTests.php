@@ -13,7 +13,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
     public static $csvImportedAddressIDs=[];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -437,7 +437,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue(sizeof(self::$csvImportedAddressIDs)==10);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         $addressBookLocations=[];
 

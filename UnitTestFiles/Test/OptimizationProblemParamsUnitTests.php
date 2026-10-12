@@ -12,7 +12,7 @@ class OptimizationProblemParamsUnitTests extends \PHPUnit\Framework\TestCase
     public static $routeParameters = null;
     public static $addresses = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         //region Addresses
         self::$addresses[] = Address::fromArray([
@@ -212,7 +212,7 @@ class OptimizationProblemParamsUnitTests extends \PHPUnit\Framework\TestCase
 
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         self::$addresses[] = null;
         self::$routeParameters = null;

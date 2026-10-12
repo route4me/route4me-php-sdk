@@ -12,7 +12,7 @@ class MemberConfigurationTest extends \PHPUnit\Framework\TestCase
 {
     public static $createdConfigurationKeys;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -179,7 +179,7 @@ class MemberConfigurationTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         $memberConfiguration = new MemberConfiguration();
 

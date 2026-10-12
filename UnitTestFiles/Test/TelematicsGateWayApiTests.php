@@ -21,7 +21,7 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
     static $api_token;
     static $tomtom_vendor;
     
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
         
@@ -486,7 +486,7 @@ class TelematicsGateWayApiTests extends \PHPUnit\Framework\TestCase
             TelematicsConnection);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdConnections)>0) {
 

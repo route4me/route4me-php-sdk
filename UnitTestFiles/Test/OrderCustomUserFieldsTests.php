@@ -10,7 +10,7 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
 {
     public static $createdCustomUserFields = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -170,7 +170,7 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
         array_shift(self::$createdCustomUserFields);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdCustomUserFields)>0) {
             $orderCustomField = new OrderCustomField();

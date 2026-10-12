@@ -11,7 +11,7 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
     protected $avoidanceZone;
     protected $createdAvoidanceZones;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->avoidanceZone = new AvoidanceZone();
 
@@ -189,7 +189,7 @@ class AvoidanceZoneUnitTests extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('ff5500',$updatedRoute->territory_color, "The territory color not updated");
     }
 
-    public function tearDown()
+    public function tearDown() : void
     {
         foreach ($this->createdAvoidanceZones as $avZone)
         {
