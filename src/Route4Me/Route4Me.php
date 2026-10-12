@@ -94,8 +94,8 @@ class Route4Me
             CURLOPT_RETURNTRANSFER  => true,
             CURLOPT_TIMEOUT         => 120,
             CURLOPT_FOLLOWLOCATION  => true,
-            CURLOPT_SSL_VERIFYHOST  => false,
-            CURLOPT_SSL_VERIFYPEER  => false,
+            CURLOPT_SSL_VERIFYHOST  => 2,
+            CURLOPT_SSL_VERIFYPEER  => true,
             CURLOPT_HTTPHEADER      => $headers,
         ];
 
@@ -171,6 +171,7 @@ class Route4Me
 
         $result = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
         curl_close($ch);
 
         $json = null;
@@ -203,7 +204,7 @@ class Route4Me
                 return $json;
             }
         } elseif (isset($code) && (!isset($result) || !$result)) {
-            throw new ApiError('', $code, $result);
+            throw new ApiError($curlError, $code, $result);
         } else {
             if (isset($json['messages'])) {
                 $msg = '';

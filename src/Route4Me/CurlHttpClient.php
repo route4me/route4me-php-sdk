@@ -23,10 +23,8 @@ class CurlHttpClient
         curl_setopt($this->ch, CURLOPT_FAILONERROR, true);
         // use gzip if possible
         curl_setopt($this->ch, CURLOPT_ENCODING, 'gzip, deflate');
-        // do not veryfy ssl
-        // this is important for windows
-        // as well for being able to access pages with non valid cert
-        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, 2);
     }
 
     /**
