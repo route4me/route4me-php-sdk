@@ -14,7 +14,7 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
 {
     public static $createdVehicles=[];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -434,7 +434,7 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
         self::$createdVehicles[] = $result->vehicle_id;
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (!is_null(self::$createdVehicles) && sizeof(self::$createdVehicles)>0) {
             $vehicle = new VehicleV4();

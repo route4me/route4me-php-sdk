@@ -16,7 +16,7 @@ use Route4Me\V5\Addresses\RouteAdvancedConstraints;
 class AdvancedConstraintsUnitTests extends \PHPUnit\Framework\TestCase {
     public static $problem;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
         self::$problem = null;
@@ -71,7 +71,7 @@ class AdvancedConstraintsUnitTests extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(self::$problem->parameters->route_name, 'Drivers Schedules - 3 Territories');
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if(!is_null(self::$problem->optimization_problem_id))
         {

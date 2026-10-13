@@ -11,7 +11,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
 {
     public static $createdTerritories = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -292,7 +292,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         self::$createdTerritories[] = array_pop(self::$createdTerritories);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdTerritories)<1) return;
 

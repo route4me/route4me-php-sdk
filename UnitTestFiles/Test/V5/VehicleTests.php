@@ -30,7 +30,7 @@ class VehicleTests extends TestCase
     public static $createdVehicles = [];
     public static $createdVehicleProfiles = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -639,7 +639,7 @@ class VehicleTests extends TestCase
         );
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         $vehicle = new Vehicle();
 

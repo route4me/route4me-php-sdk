@@ -12,13 +12,13 @@ use Route4Me\Route4Me;
  */
 class BaseUrlLeakUnitTests extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp() : void
     {
         // Start every case from the known-good default host.
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
     }

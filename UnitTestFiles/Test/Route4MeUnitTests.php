@@ -13,7 +13,7 @@ use Route4Me\AvoidanceZone;
 class Route4MeUnitTests extends \PHPUnit\Framework\TestCase {
     protected $AvoidanceZone;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->AvoidanceZone = new AvoidanceZone();
     }

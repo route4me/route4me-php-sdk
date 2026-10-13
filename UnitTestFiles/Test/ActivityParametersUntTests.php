@@ -17,7 +17,7 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
     public static $route_id = null;
     public static $problem = null;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
             $className = str_replace('UnitTestFiles\\Test\\','',get_class());
@@ -194,7 +194,7 @@ class ActivityParametersUntTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue(isset($result['status']));
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         $optimizationProblemId = self:: $problem->optimization_problem_id;
 

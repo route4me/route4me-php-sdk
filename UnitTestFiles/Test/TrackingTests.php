@@ -29,7 +29,7 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
     public static $createdProblems = [];
     public static $testRoutes = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -256,7 +256,7 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue(isset($result->tracking_history));
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdProblems)>0) {
             $optimizationProblemIDs = [];

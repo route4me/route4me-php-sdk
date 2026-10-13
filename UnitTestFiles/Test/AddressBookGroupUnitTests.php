@@ -11,7 +11,7 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
 {
     public static $createdGroups = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -263,7 +263,7 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue(in_array($firstGroup->group_id, $groupIds));
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         foreach (self::$createdGroups as $createdGroup) {
             $groupId = $createdGroup->group_id;

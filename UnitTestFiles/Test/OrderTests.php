@@ -23,7 +23,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public static $createdOrders = [];
     public static $createdProblems = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -174,7 +174,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
                     ],
                 ],
             ],
-        ]);
+        );
     }
 
     public function testGetOrders()
@@ -553,7 +553,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdOrders)) {
             $orderIDs = [];

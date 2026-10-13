@@ -30,7 +30,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
     public static $removedRouteIDs = [];
     public static $removedVehicleIDs = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
@@ -761,7 +761,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue($result['deleted']);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass() : void
     {
         if (sizeof(self::$createdProblems)>0) {
             $optimizationProblemIDs = [];
