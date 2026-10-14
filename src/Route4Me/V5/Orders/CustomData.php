@@ -33,7 +33,7 @@ class CustomData extends Common
      */
     public ?int $sorted_on_utc = null;
 
-    public function __construct(array $params = null)
+    public function __construct(?array $params = null)
     {
         if ($params != null) {
             $this->fillFromArray($params);

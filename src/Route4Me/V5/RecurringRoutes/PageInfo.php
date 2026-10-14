@@ -63,7 +63,7 @@ class PageInfo extends Common
      */
     public ?int $total_items = null;
 
-    public function __construct(array $links = null, array $meta = null)
+    public function __construct(?array $links = null, ?array $meta = null)
     {
         if ($links !== null && is_array($links)) {
             $this->url_of_first_page = Common::getValue($links, 'first');

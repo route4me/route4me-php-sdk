@@ -210,7 +210,7 @@ class Order extends Common
      */
     public ?array $custom_fields = null;
 
-    public function __construct(array $params = null)
+    public function __construct(?array $params = null)
     {
         if ($params !== null) {
             foreach ($this as $key => $value) {

@@ -23,7 +23,7 @@ class GPSCoords extends Common
      */
     public ?float $lng = null;
 
-    public function __construct($params_or_lat = null, float $lng = null)
+    public function __construct($params_or_lat = null, ?float $lng = null)
     {
         if (is_array($params_or_lat)) {
             $this->fillFromArray($params_or_lat);

@@ -23,7 +23,7 @@ class LocalTimeWindow extends Common
      */
     public ?int $end = null;
 
-    public function __construct($params_or_start = null, int $end = null)
+    public function __construct($params_or_start = null, ?int $end = null)
     {
         if (is_array($params_or_start)) {
             $this->fillFromArray($params_or_start);
