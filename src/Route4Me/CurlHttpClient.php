@@ -8,7 +8,7 @@ class CurlHttpClient
     public $debug = false;
     public $error_msg;
 
-    public function CurlHttpClient($debug = false)
+    public function __construct($debug = false)
     {
         $this->debug = $debug;
         $this->init();
@@ -374,7 +374,10 @@ class CurlHttpClient
     public function close()
     {
         //close curl session and free up resources
-        curl_close($this->ch);
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($this->ch);
+        }
+        $this->ch = null;
     }
 }
 
