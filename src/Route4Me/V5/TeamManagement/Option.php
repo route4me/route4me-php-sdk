@@ -5,11 +5,9 @@ namespace Route4Me\V5\TeamManagement;
 use Route4Me\Common as Common;
 
 /**
- * Team Management API Option structure
+ * Team Management API Option structure.
  *
  * @since 1.2.7
- *
- * @package Route4Me
  */
 class Option extends Common
 {

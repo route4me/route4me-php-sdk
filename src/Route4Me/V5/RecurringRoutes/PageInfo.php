@@ -5,61 +5,59 @@ namespace Route4Me\V5\RecurringRoutes;
 use Route4Me\Common as Common;
 
 /**
- * The PageInfo structure
+ * The PageInfo structure.
  *
  * @since 1.2.3
- *
- * @package Route4Me
  */
 class PageInfo extends Common
 {
     /**
-     * URL of first page
+     * URL of first page.
      */
     public ?string $url_of_first_page = null;
 
     /**
-     * URL of last page
+     * URL of last page.
      */
     public ?string $url_of_last_page = null;
 
     /**
-     * URL of previous page
+     * URL of previous page.
      */
     public ?string $url_of_previous_page = null;
 
     /**
-     * URL of next page
+     * URL of next page.
      */
     public ?string $url_of_next_page = null;
 
     /**
-     * Number of current page
+     * Number of current page.
      */
     public ?int $number_of_current_page = null;
 
     /**
-     * Number of last page
+     * Number of last page.
      */
     public ?int $number_of_last_page = null;
 
     /**
-     * Items per page
+     * Items per page.
      */
     public ?int $items_per_page = null;
 
     /**
-     * Index of first item on page
+     * Index of first item on page.
      */
     public ?int $index_of_first = null;
 
     /**
-     * Index of last item on page
+     * Index of last item on page.
      */
     public ?int $index_of_last = null;
 
     /**
-     * Total items
+     * Total items.
      */
     public ?int $total_items = null;
 

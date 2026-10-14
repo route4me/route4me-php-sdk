@@ -2,18 +2,15 @@
 
 namespace Route4Me\V5\TeamManagement;
 
+use Route4Me\Common;
 use Route4Me\Exception\ApiError;
 use Route4Me\Route4Me;
-use Route4Me\Common;
 use Route4Me\V5\Enum\Endpoint;
-use Route4Me\V5\TeamManagement\ResponseTeam;
 
 /**
- * Team Management API
+ * Team Management API.
  *
  * @since 1.2.7
- *
- * @package Route4Me
  */
 class TeamManagement extends Common
 {
@@ -71,14 +68,14 @@ class TeamManagement extends Common
             'user_reg_state_id', 'user_reg_country_id', 'DriverHourlyRate', 'HIDE_ROUTED_ADDRESSES',
             'HIDE_VISITED_ADDRESSES', 'HIDE_NONFUTURE_ROUTES', 'READONLY_USER', 'SHOW_SUSR_ADDR', 'SHOW_SUSR_ORDERS',
             'SHOW_ALL_DRIVERS', 'SHOW_ALL_VEHICLES', 'display_max_routes_future_days', 'vendor_id', 'driving_rate',
-            'working_rate', 'mile_rate', 'idling_rate', 'timezone', 'optimization_profile_id', 'permissions'
+            'working_rate', 'mile_rate', 'idling_rate', 'timezone', 'optimization_profile_id', 'permissions',
         ];
 
         return $this->toResponseTeam(Route4Me::makeRequst([
             'url' => Endpoint::TEAM_USERS,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -94,7 +91,7 @@ class TeamManagement extends Common
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::TEAM_USERS,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
 
         if (is_array($result)) {
@@ -102,8 +99,10 @@ class TeamManagement extends Common
             foreach ($result as $key => $value) {
                 array_push($arr, $this->toResponseTeam($value));
             }
+
             return $arr;
         }
+
         return null;
     }
 
@@ -120,7 +119,7 @@ class TeamManagement extends Common
     {
         return $this->toResponseTeam(Route4Me::makeRequst([
             'url' => Endpoint::TEAM_USERS . '/' . $userId,
-            'method' => 'GET'
+            'method' => 'GET',
         ]));
     }
 
@@ -137,7 +136,7 @@ class TeamManagement extends Common
     {
         return $this->toResponseTeam(Route4Me::makeRequst([
             'url' => Endpoint::TEAM_USERS . '/' . $userId,
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]));
     }
 
@@ -191,20 +190,20 @@ class TeamManagement extends Common
             'user_reg_state_id', 'user_reg_country_id', 'DriverHourlyRate', 'HIDE_ROUTED_ADDRESSES',
             'HIDE_VISITED_ADDRESSES', 'HIDE_NONFUTURE_ROUTES', 'READONLY_USER', 'SHOW_SUSR_ADDR', 'SHOW_SUSR_ORDERS',
             'SHOW_ALL_DRIVERS', 'SHOW_ALL_VEHICLES', 'display_max_routes_future_days', 'vendor_id', 'driving_rate',
-            'working_rate', 'mile_rate', 'idling_rate', 'timezone', 'optimization_profile_id', 'permissions'
+            'working_rate', 'mile_rate', 'idling_rate', 'timezone', 'optimization_profile_id', 'permissions',
         ];
 
         return $this->toResponseTeam(Route4Me::makeRequst([
             'url' => Endpoint::TEAM_USERS . '/' . $userId,
             'method' => 'PATCH',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
     /**
      * Add multiple sub-users to the User account by sending the corresponding
-     * body payload with the array of the sub-users' parameters
+     * body payload with the array of the sub-users' parameters.
      *
      * @see {@link https://virtserver.swaggerhub.com/Route4Me}
      *
@@ -255,7 +254,7 @@ class TeamManagement extends Common
             'user_reg_state_id', 'user_reg_country_id', 'DriverHourlyRate', 'HIDE_ROUTED_ADDRESSES',
             'HIDE_VISITED_ADDRESSES', 'HIDE_NONFUTURE_ROUTES', 'READONLY_USER', 'SHOW_SUSR_ADDR', 'SHOW_SUSR_ORDERS',
             'SHOW_ALL_DRIVERS', 'SHOW_ALL_VEHICLES', 'display_max_routes_future_days', 'vendor_id', 'driving_rate',
-            'working_rate', 'mile_rate', 'idling_rate', 'timezone', 'optimization_profile_id', 'permissions'
+            'working_rate', 'mile_rate', 'idling_rate', 'timezone', 'optimization_profile_id', 'permissions',
         ];
 
         $allQueryFields = ['api_key', 'conflicts'];
@@ -270,7 +269,7 @@ class TeamManagement extends Common
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
             'body' => ['users' => $body],
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $options)
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $options),
         ]);
 
         if (is_array($result)) {
@@ -278,8 +277,10 @@ class TeamManagement extends Common
             foreach ($result as $key => $value) {
                 array_push($arr, $this->toResponseTeam($value));
             }
+
             return $arr;
         }
+
         return null;
     }
 

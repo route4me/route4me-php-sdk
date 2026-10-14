@@ -2,12 +2,11 @@
 
 namespace Route4Me;
 
+use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\OptimizationType;
-use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\TravelMode;
-use PHPUnit\Framework;
 
 class OptimizationProblemParamsTest extends \PHPUnit_Framework_TestCase
 {
@@ -53,7 +52,7 @@ class OptimizationProblemParamsTest extends \PHPUnit_Framework_TestCase
 
         $this->addresses = $addresses;
         $this->parameters = RouteParameters::fromArray([
-            'algorithm_type' => Algorithmtype::TSP,
+            'algorithm_type' => AlgorithmType::TSP,
             'device_type' => DeviceType::WEB,
             'distance_unit' => DistanceUnit::MILES,
             'optimize' => OptimizationType::DISTANCE,
@@ -113,11 +112,14 @@ class OptimizationProblemParamsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($opParams->parameters->toArray()));
         $this->assertEquals(
             $opParams->parameters->toarray(),
-            $this->parameters->toArray());
+            $this->parameters->toArray()
+        );
 
         $this->assertEquals($opParams->directions, 0);
         $this->assertEquals($opParams->format, 'json');
         $this->assertEquals(
-            $opParams->optimized_callback_url, 'http://google.com');
+            $opParams->optimized_callback_url,
+            'http://google.com'
+        );
     }
 }

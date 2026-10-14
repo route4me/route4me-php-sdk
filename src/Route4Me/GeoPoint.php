@@ -1,25 +1,23 @@
 <?php
 
-
 namespace Route4Me;
 
 use Route4Me\Common as Common;
 
 /**
  * Class GeoPoint (geographic point).
- * @package Route4Me
  */
 class GeoPoint extends Common
 {
     /**
-     * Latitude
-     * @var double
+     * Latitude.
+     * @var float
      */
     public $lat;
 
     /**
-     * Longitude
-     * @var double
+     * Longitude.
+     * @var float
      */
     public $lng;
 }

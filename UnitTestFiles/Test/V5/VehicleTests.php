@@ -2,19 +2,17 @@
 
 namespace UnitTestFiles\Test\V5;
 
-use Doctrine\Common\Annotations\Annotation\Enum;
 use PHPUnit\Framework\TestCase as TestCase;
-use Route4Me\Exception\ApiError;
 use Route4Me\Constants as Constants;
+use Route4Me\Exception\ApiError;
 use Route4Me\Route4Me as Route4Me;
 use Route4Me\V5\Enum\FuelConsumptionUnits;
 use Route4Me\V5\Enum\FuelTypes;
 use Route4Me\V5\Enum\VehicleSizeUnits;
 use Route4Me\V5\Enum\VehicleWeightUnits;
-use Route4Me\V5\Routes\AddonRoutesApi\Route as Route;
 use Route4Me\V5\Vehicles\DataTypes\Vehicle as Vehicle;
-use Route4Me\V5\Vehicles\DataTypes\VehicleOrderResponse;
 use Route4Me\V5\Vehicles\DataTypes\VehicleLocationResponse as VehicleLocationResponse;
+use Route4Me\V5\Vehicles\DataTypes\VehicleOrderResponse;
 use Route4Me\V5\Vehicles\DataTypes\VehicleProfile;
 use Route4Me\V5\Vehicles\DataTypes\VehicleProfilesResponse;
 use Route4Me\V5\Vehicles\DataTypes\VehicleResponse;
@@ -39,23 +37,23 @@ class VehicleTests extends TestCase
         //region Create Test Vehicles
 
         $class6TruckParams = Vehicle::fromArray([
-            'vehicle_alias'             => 'GMC TopKick C5500 TST 6',
-            'vehicle_vin'               => 'SAJXA01A06FN08012',
-            'vehicle_license_plate'     => 'CVH4561',
-            'vehicle_model'             => 'TopKick C5500',
-            'vehicle_model_year'        => 1995,
-            'vehicle_year_acquired'     => 2008,
-            'vehicle_reg_country_id'    => 223,
-            'vehicle_reg_state_id'      => 12,
-            'vehicle_make'              => 'GMC',
-            'vehicle_type_id'           => 'pickup_truck',
-            'vehicle_cost_new'          => 60000,
-            'purchased_new'             => true,
-            'mpg_city'                  => 8,
-            'mpg_highway'               => 14,
-            'fuel_type'                 => 'diesel',
-            'license_start_date'        => '2021-01-01',
-            'license_end_date'          => '2031-01-01',
+            'vehicle_alias' => 'GMC TopKick C5500 TST 6',
+            'vehicle_vin' => 'SAJXA01A06FN08012',
+            'vehicle_license_plate' => 'CVH4561',
+            'vehicle_model' => 'TopKick C5500',
+            'vehicle_model_year' => 1995,
+            'vehicle_year_acquired' => 2008,
+            'vehicle_reg_country_id' => 223,
+            'vehicle_reg_state_id' => 12,
+            'vehicle_make' => 'GMC',
+            'vehicle_type_id' => 'pickup_truck',
+            'vehicle_cost_new' => 60000,
+            'purchased_new' => true,
+            'mpg_city' => 8,
+            'mpg_highway' => 14,
+            'fuel_type' => 'diesel',
+            'license_start_date' => '2021-01-01',
+            'license_end_date' => '2031-01-01',
         ]);
 
         $result = $vehicle->createVehicle($class6TruckParams);
@@ -68,26 +66,25 @@ class VehicleTests extends TestCase
 
         self::$createdVehicles[] = $result;
 
-
         $class7TruckParams = Vehicle::fromArray([
-            'vehicle_alias'             => 'FORD F750 TST 7',
-            'vehicle_vin'               => '1NPAX6EX2YD550743',
-            'vehicle_license_plate'     => 'FFV9547',
-            'vehicle_model'             => 'F-750',
-            'vehicle_model_year'        => 2010,
-            'vehicle_year_acquired'     => 2018,
-            'vehicle_reg_country_id'    => 223,
-            'vehicle_make'              => 'Ford',
-            'vehicle_type_id'           => 'livestock_carrier',
-            'vehicle_cost_new'          => 60000,
-            'purchased_new'             => true,
-            'mpg_city'                  => 7,
-            'mpg_highway'               => 14,
-            'fuel_consumption_city'     => 7,
-            'fuel_consumption_highway'  => 14,
-            'fuel_type'                 => 'diesel',
-            'license_start_date'        => '2021-01-01',
-            'license_end_date'          => '2031-01-01',
+            'vehicle_alias' => 'FORD F750 TST 7',
+            'vehicle_vin' => '1NPAX6EX2YD550743',
+            'vehicle_license_plate' => 'FFV9547',
+            'vehicle_model' => 'F-750',
+            'vehicle_model_year' => 2010,
+            'vehicle_year_acquired' => 2018,
+            'vehicle_reg_country_id' => 223,
+            'vehicle_make' => 'Ford',
+            'vehicle_type_id' => 'livestock_carrier',
+            'vehicle_cost_new' => 60000,
+            'purchased_new' => true,
+            'mpg_city' => 7,
+            'mpg_highway' => 14,
+            'fuel_consumption_city' => 7,
+            'fuel_consumption_highway' => 14,
+            'fuel_type' => 'diesel',
+            'license_start_date' => '2021-01-01',
+            'license_end_date' => '2031-01-01',
         ]);
 
         $result = $vehicle->createVehicle($class7TruckParams);
@@ -102,7 +99,7 @@ class VehicleTests extends TestCase
 
         //endregion
 
-        #region Create Test Vehicle Profiles
+        //region Create Test Vehicle Profiles
 
         // TODO: comment as since 20230605 VehicleProfile is not creatable
         // $profile1 = new VehicleProfile();
@@ -165,29 +162,29 @@ class VehicleTests extends TestCase
 
         // self::$createdVehicleProfiles[] = $result2;
 
-        #endregion
+        //endregion
     }
 
     public function testFromArray()
     {
         $class6TruckParams = Vehicle::fromArray([
-            'vehicle_alias'             => 'GMC TopKick C5500 TST 6',
-            'vehicle_vin'               => 'SAJXA01A06FN08012',
-            'vehicle_license_plate'     => 'CVH4561',
-            'vehicle_model'             => 'TopKick C5500',
-            'vehicle_model_year'        => 1995,
-            'vehicle_year_acquired'     => 2008,
-            'vehicle_reg_country_id'    => 223,
-            'vehicle_reg_state_id'      => 12,
-            'vehicle_make'              => 'GMC',
-            'vehicle_type_id'           => 'pickup_truck',
-            'vehicle_cost_new'          => 60000,
-            'purchased_new'             => true,
-            'mpg_city'                  => 8,
-            'mpg_highway'               => 14,
-            'fuel_type'                 => 'diesel',
-            'license_start_date'        => '2021-01-01',
-            'license_end_date'          => '2031-01-01',
+            'vehicle_alias' => 'GMC TopKick C5500 TST 6',
+            'vehicle_vin' => 'SAJXA01A06FN08012',
+            'vehicle_license_plate' => 'CVH4561',
+            'vehicle_model' => 'TopKick C5500',
+            'vehicle_model_year' => 1995,
+            'vehicle_year_acquired' => 2008,
+            'vehicle_reg_country_id' => 223,
+            'vehicle_reg_state_id' => 12,
+            'vehicle_make' => 'GMC',
+            'vehicle_type_id' => 'pickup_truck',
+            'vehicle_cost_new' => 60000,
+            'purchased_new' => true,
+            'mpg_city' => 8,
+            'mpg_highway' => 14,
+            'fuel_type' => 'diesel',
+            'license_start_date' => '2021-01-01',
+            'license_end_date' => '2031-01-01',
         ]);
 
         $this->assertEquals($class6TruckParams->vehicle_alias, 'GMC TopKick C5500 TST 6');
@@ -214,7 +211,7 @@ class VehicleTests extends TestCase
         $vlr = new VehicleLocationResponse();
         $vlr = $vlr->fromArray([
             'data' => [],
-            'null_data' => null
+            'null_data' => null,
         ]);
 
         self::assertInstanceOf(VehicleLocationResponse::class, $vlr);
@@ -228,7 +225,7 @@ class VehicleTests extends TestCase
         $vor = $vor->fromArray([
             'vehicle_id' => '12345',
             'order_id' => 15,
-            'null_data' => null
+            'null_data' => null,
         ]);
 
         self::assertInstanceOf(VehicleOrderResponse::class, $vor);
@@ -241,7 +238,7 @@ class VehicleTests extends TestCase
         $vt = new VehicleTemporary();
         $vt = $vt->fromArray([
             'vehicle_id' => '12345',
-            'null_data' => null
+            'null_data' => null,
         ]);
 
         self::assertInstanceOf(VehicleTemporary::class, $vt);
@@ -253,7 +250,7 @@ class VehicleTests extends TestCase
         $vtr = new VehicleTrackResponse();
         $vtr = $vtr->fromArray([
             'data' => [],
-            'null_data' => null
+            'null_data' => null,
         ]);
 
         self::assertInstanceOf(VehicleTrackResponse::class, $vtr);
@@ -266,7 +263,7 @@ class VehicleTests extends TestCase
         $vr = new VehicleResponse();
         $vr = $vr->fromArray([
             'data' => [],
-            'null_data' => null
+            'null_data' => null,
         ]);
 
         self::assertInstanceOf(VehicleResponse::class, $vr);
@@ -288,7 +285,7 @@ class VehicleTests extends TestCase
 
         $this->assertNotNull($result);
         $this->assertTrue(is_array($result));
-        $this->assertTrue(sizeof($result)>0);
+        $this->assertTrue(sizeof($result) > 0);
         $this->assertInstanceOf(Vehicle::class, Vehicle::fromArray($result));
     }
 
@@ -297,25 +294,25 @@ class VehicleTests extends TestCase
         $vehicle = new Vehicle();
 
         $class7TruckParams = Vehicle::fromArray([
-            'vehicle_alias'             => 'FORD F750 TST 7',
-            'vehicle_vin'               => '1NPAX6EX2YD550743',
-            'vehicle_license_plate'     => 'FFV9547',
-            'vehicle_model'             => 'F-750',
-            'vehicle_model_year'        => 2010,
-            'vehicle_year_acquired'     => 2018,
-            'vehicle_reg_country_id'    => 223,
-            'vehicle_reg_state_id'      => 12,
-            'vehicle_make'              => 'Ford',
-            'vehicle_type_id'           => 'livestock_carrier',
-            'vehicle_cost_new'          => 70000,
-            'purchased_new'             => false,
-            'mpg_city'                  => 6,
-            'mpg_highway'               => 12,
-            'fuel_consumption_city'     => 6,
-            'fuel_consumption_highway'  => 12,
-            'fuel_type'                 => 'diesel',
-            'license_start_date'        => '2020-03-01',
-            'license_end_date'          => '2028-12-01',
+            'vehicle_alias' => 'FORD F750 TST 7',
+            'vehicle_vin' => '1NPAX6EX2YD550743',
+            'vehicle_license_plate' => 'FFV9547',
+            'vehicle_model' => 'F-750',
+            'vehicle_model_year' => 2010,
+            'vehicle_year_acquired' => 2018,
+            'vehicle_reg_country_id' => 223,
+            'vehicle_reg_state_id' => 12,
+            'vehicle_make' => 'Ford',
+            'vehicle_type_id' => 'livestock_carrier',
+            'vehicle_cost_new' => 70000,
+            'purchased_new' => false,
+            'mpg_city' => 6,
+            'mpg_highway' => 12,
+            'fuel_consumption_city' => 6,
+            'fuel_consumption_highway' => 12,
+            'fuel_type' => 'diesel',
+            'license_start_date' => '2020-03-01',
+            'license_end_date' => '2028-12-01',
         ]);
 
         $result = $vehicle->createVehicle($class7TruckParams);
@@ -491,7 +488,7 @@ class VehicleTests extends TestCase
 
         $profile = new VehicleProfile();
 
-        $profile->name = "Heavy Duty - 48 Semitrailer ".date('Y-m-d H:i');
+        $profile->name = 'Heavy Duty - 48 Semitrailer ' . date('Y-m-d H:i');
         $profile->height_units = VehicleSizeUnits::METER;
         $profile->width_units = VehicleSizeUnits::METER;
         $profile->length_units = VehicleSizeUnits::METER;
@@ -527,7 +524,7 @@ class VehicleTests extends TestCase
 
         $vehicleProfile = new VehicleProfile();
 
-        $vehProfileId = self::$createdVehicleProfiles[sizeof(self::$createdVehicleProfiles)-1]['vehicle_profile_id'];
+        $vehProfileId = self::$createdVehicleProfiles[sizeof(self::$createdVehicleProfiles) - 1]['vehicle_profile_id'];
 
         $result = $vehicleProfile->removeVehicleProfile($vehProfileId);
 
@@ -547,7 +544,7 @@ class VehicleTests extends TestCase
 
         $vehicleProfile = new VehicleProfile();
 
-        $vehProfileId = self::$createdVehicleProfiles[sizeof(self::$createdVehicleProfiles)-1]['vehicle_profile_id'];
+        $vehProfileId = self::$createdVehicleProfiles[sizeof(self::$createdVehicleProfiles) - 1]['vehicle_profile_id'];
 
         $result = $vehicleProfile->getVehicleProfileById($vehProfileId);
 
@@ -603,7 +600,7 @@ class VehicleTests extends TestCase
     {
         $vehicle = new Vehicle();
 
-        $vehicle->vehicle_alias = self::$createdVehicles[0]['vehicle_alias'] .' Updated';
+        $vehicle->vehicle_alias = self::$createdVehicles[0]['vehicle_alias'] . ' Updated';
         $vehicle->vehicle_vin = '11111111111111111';
         $vehicle->vehicle_id = self::$createdVehicles[0]['vehicle_id'];
 
@@ -625,7 +622,7 @@ class VehicleTests extends TestCase
 
         $vehProfileId = self::$createdVehicleProfiles[0]['vehicle_profile_id'];
 
-        $vehicleProfile->name = self::$createdVehicleProfiles[0]['name'].'Updated';
+        $vehicleProfile->name = self::$createdVehicleProfiles[0]['name'] . 'Updated';
         $vehicleProfile->fuel_consumption_city_unit = FuelConsumptionUnits::MILES_PER_GALLON_US;
         $vehicleProfile->fuel_consumption_highway_unit = FuelConsumptionUnits::MILES_PER_GALLON_US;
         $vehicleProfile->vehicle_profile_id = self::$createdVehicleProfiles[0]['vehicle_profile_id'];

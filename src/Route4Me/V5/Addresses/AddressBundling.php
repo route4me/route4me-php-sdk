@@ -1,20 +1,18 @@
 <?php
 
-
 namespace Route4Me\V5\Addresses;
 
 use Route4Me\Common as Common;
 
 /**
- * Class for the address bundling query
- * @package Route4Me\V5\Addresses
+ * Class for the address bundling query.
  */
 class AddressBundling extends Common
 {
     /**
-     * Address bundling mode
+     * Address bundling mode.
      * @see Enum\AddressBundlingModes\Mode
-     * @var integer
+     * @var int
      */
     public $mode;
 
@@ -27,14 +25,14 @@ class AddressBundling extends Common
     public $mode_params;
 
     /**
-     * Address bundling merge mode
+     * Address bundling merge mode.
      * @see Enum\AddressBundlingModes\MergeMode
-     * @var integer
+     * @var int
      */
     public $merge_mode;
 
     /**
-     * Service time rules of the address bundling
+     * Service time rules of the address bundling.
      * @var ServiceTimeRulesClass
      */
     public $service_time_rules;

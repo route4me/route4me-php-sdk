@@ -10,71 +10,71 @@ use Route4Me\Common as Common;
 class TelematicsConnectionParameters extends Common
 {
     /**
-     * Account ID
+     * Account ID.
      * @var type string
      */
     public $account_id;
-    
+
     /**
-     * User name
+     * User name.
      * @var type string
      */
     public $username;
-    
+
     /**
-     * Password
+     * Password.
      * @var type string
      */
     public $password;
-    
+
     /**
-     * Connection host
+     * Connection host.
      * @var type string
      */
     public $host;
-    
+
     /**
      * An unique ID of a telematics vendor.
      * @var type integer
      */
     public $vendor_id;
-    
+
     /**
-     * Telematics connection name
+     * Telematics connection name.
      * @var type string
      */
     public $name;
-    
+
     /**
-     * Vehicle tracking interval in seconds
+     * Vehicle tracking interval in seconds.
      * @var type integer
      */
     public $vehicle_position_refresh_rate;
-    
+
     /**
-     * Connection token
+     * Connection token.
      * @var type string
      */
     public $connection_token;
-    
+
     /**
-     * Connection user ID
+     * Connection user ID.
      * @var type integer
      */
     public $user_id;
-    
+
     /**
-     * Connection ID
+     * Connection ID.
      * @var type integer
      */
     public $id;
-    
+
     /**
-     * Telemetics connection type
+     * Telemetics connection type.
      * @var type string
      */
     public $vendor;
-    
+
     /**
      * Validate connections credentials.
      * @var type Boolean

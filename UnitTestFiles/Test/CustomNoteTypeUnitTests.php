@@ -9,11 +9,11 @@ class CustomNoteTypeUnitTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $customNoteType = CustomNoteType::fromArray([
-            'note_custom_entry_id'  => 'ABCBA1228FA18888DBEECBFA2DA7777C850E15CA',
-            'note_id'               => '3237302',
-            'note_custom_type_id'   => '10',
-            'note_custom_value'     => 'Backdoor',
-            'note_custom_type'      => 'Dropoff Location'
+            'note_custom_entry_id' => 'ABCBA1228FA18888DBEECBFA2DA7777C850E15CA',
+            'note_id' => '3237302',
+            'note_custom_type_id' => '10',
+            'note_custom_value' => 'Backdoor',
+            'note_custom_type' => 'Dropoff Location',
         ]);
 
         $this->assertEquals('ABCBA1228FA18888DBEECBFA2DA7777C850E15CA', $customNoteType->note_custom_entry_id);
@@ -22,5 +22,4 @@ class CustomNoteTypeUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Backdoor', $customNoteType->note_custom_value);
         $this->assertEquals('Dropoff Location', $customNoteType->note_custom_type);
     }
-
 }

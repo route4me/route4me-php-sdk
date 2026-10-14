@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -11,16 +11,16 @@ assert_options(ASSERT_BAIL, 1);
 // Set the api key in the Route4Me class
 Route4Me::setApiKey(Constants::API_KEY);
 
-$MamberParames =Member::fromArray([ ]);
+$MamberParames = Member::fromArray([]);
 
 $member = new Member();
 
 $response = $member->getUsers($MamberParames);
 
 assert(isset($response['results']), 'Cannot retrieve the users! <br>');
-assert(sizeof($response['results'])>1, 'Cannot retrieve more than 1 users');
+assert(sizeof($response['results']) > 1, 'Cannot retrieve more than 1 users');
 
-$memberId = $response['results'][1]["member_id"];
+$memberId = $response['results'][1]['member_id'];
 
 $activityParameters = ActivityParameters::fromArray([
     'member_id' => $memberId,

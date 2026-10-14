@@ -5,11 +5,9 @@ namespace Route4Me\V5\Orders;
 use Route4Me\Common;
 
 /**
- * The Local time window structure
+ * The Local time window structure.
  *
  * @since 1.3.0
- *
- * @package Route4Me
  */
 class LocalTimeWindow extends Common
 {

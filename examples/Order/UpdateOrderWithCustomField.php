@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -14,13 +14,13 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
-    'order_id'           => 65936,
+    'order_id' => 65936,
     'custom_user_fields' => [
         OrderCustomField::fromArray([
-            'order_custom_field_id'    => 93,
-            'order_custom_field_value' => 'true'
-        ])
-    ]
+            'order_custom_field_id' => 93,
+            'order_custom_field_value' => 'true',
+        ]),
+    ],
 ]);
 
 $order = new Order();

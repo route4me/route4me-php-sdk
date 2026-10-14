@@ -1,9 +1,10 @@
 <?php
 
-
 namespace Route4Me\V5\Enum;
 
-/** Vehicle weight units. */
+/**
+ * Vehicle weight units.
+ */
 class VehicleWeightUnits
 {
     const KILOGRAM = 'kg';

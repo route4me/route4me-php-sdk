@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Set the api key in the Route4Me class
 Route4Me::setApiKey(Constants::API_KEY);
@@ -11,8 +11,8 @@ Route4Me::setApiKey(Constants::API_KEY);
 // Example refers to getting the address book locations
 
 $AddressBookLocationParameters = [
-    'limit'     => 30,
-    'offset'    => 0,
+    'limit' => 30,
+    'offset' => 0,
 ];
 
 $abContacts = new AddressBookLocation();

@@ -5,11 +5,9 @@ namespace Route4Me\V5\AddressBook;
 use Route4Me\Common;
 
 /**
- * Address Book API StatusChecker structure
+ * Address Book API StatusChecker structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class StatusChecker extends Common
 {

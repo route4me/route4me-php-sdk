@@ -4,38 +4,38 @@ namespace Route4Me\V5\Vehicles\DataTypes;
 
 class VehicleTrackItem extends \Route4Me\Common
 {
-    /** The vehicle ID
-     * @var string $vehicle_id
+    /** The vehicle ID.
+     * @var string
      */
     public $vehicle_id;
 
-    /** The member ID
-     * @var integer $member_id
+    /** The member ID.
+     * @var int
      */
     public $member_id;
 
     /** Latitude of a vehicle position.
-     * @var float $lat
+     * @var float
      */
     public $lat;
 
     /** Longitude of a vehicle position.
-     * @var float $lng
+     * @var float
      */
     public $lng;
 
-    /** The geographic altitude
-     * @var integer $altitude
+    /** The geographic altitude.
+     * @var int
      */
     public $altitude;
 
-    /** Vehicle speed
-     * @var integer $speed
+    /** Vehicle speed.
+     * @var int
      */
     public $speed;
 
     /** When a vehicle activity was detected.
-     * @var integer $timestamp
+     * @var int
      */
     public $timestamp;
 }

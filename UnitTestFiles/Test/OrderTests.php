@@ -3,7 +3,6 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\Address;
-use Route4Me\AddressBundling;
 use Route4Me\Constants;
 use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\DeviceType;
@@ -30,7 +29,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         //region -- Create Test Optimization --
 
         // Huge list of addresses
-        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__) . '/data/addresses.json'), true);
         $json = array_slice($json, 0, 10);
 
         $addresses = [];
@@ -39,14 +38,14 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         }
 
         $parameters = RouteParameters::fromArray([
-            'algorithm_type'    => Algorithmtype::TSP,
-            'route_name'        => 'Single Driver Multiple TW 10 Stops '.date('Y-m-d H:i'),
-            'route_date'        => time() + 24 * 60 * 60,
-            'route_time'        => 5 * 3600 + 30 * 60,
-            'distance_unit'     => DistanceUnit::MILES,
-            'device_type'       => DeviceType::WEB,
-            'optimize'          => OptimizationType::DISTANCE,
-            'metric'            => Metric::GEODESIC,
+            'algorithm_type' => AlgorithmType::TSP,
+            'route_name' => 'Single Driver Multiple TW 10 Stops ' . date('Y-m-d H:i'),
+            'route_date' => time() + 24 * 60 * 60,
+            'route_time' => 5 * 3600 + 30 * 60,
+            'distance_unit' => DistanceUnit::MILES,
+            'device_type' => DeviceType::WEB,
+            'optimize' => OptimizationType::DISTANCE,
+            'metric' => Metric::GEODESIC,
         ]);
 
         $optimizationParams = new OptimizationProblemParams();
@@ -62,20 +61,20 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         //region -- Create Test Order --
 
         $orderParameters = Order::fromArray([
-            'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-            'cached_lat'                => 48.335991,
-            'cached_lng'                => 31.18287,
-            'address_alias'             => 'Auto test address',
-            'address_city'              => 'Philadelphia',
-            'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-            'EXT_FIELD_first_name'      => 'Igor',
-            'EXT_FIELD_last_name'       => 'Progman',
-            'EXT_FIELD_email'           => 'progman@gmail.com',
-            'EXT_FIELD_phone'           => '380380380380',
-            'EXT_FIELD_custom_data'     => [
+            'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+            'cached_lat' => 48.335991,
+            'cached_lng' => 31.18287,
+            'address_alias' => 'Auto test address',
+            'address_city' => 'Philadelphia',
+            'day_scheduled_for_YYMMDD' => date('Y-m-d'),
+            'EXT_FIELD_first_name' => 'Igor',
+            'EXT_FIELD_last_name' => 'Progman',
+            'EXT_FIELD_email' => 'progman@gmail.com',
+            'EXT_FIELD_phone' => '380380380380',
+            'EXT_FIELD_custom_data' => [
                 0 => [
-                    'order_id'  => '10',
-                    'name'      => 'Bill Soul',
+                    'order_id' => '10',
+                    'name' => 'Bill Soul',
                 ],
             ],
         ]);
@@ -95,23 +94,23 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $orderParameters = Order::fromArray([
-            'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-            'cached_lat'                => 48.335991,
-            'cached_lng'                => 31.18287,
-            'address_alias'             => 'Auto test address',
-            'address_city'              => 'Philadelphia',
-            'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-            'EXT_FIELD_first_name'      => 'Igor',
-            'EXT_FIELD_last_name'       => 'Progman',
-            'EXT_FIELD_email'           => 'progman@gmail.com',
-            'EXT_FIELD_phone'           => '380380380380',
-            'EXT_FIELD_custom_data'     => [
+            'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+            'cached_lat' => 48.335991,
+            'cached_lng' => 31.18287,
+            'address_alias' => 'Auto test address',
+            'address_city' => 'Philadelphia',
+            'day_scheduled_for_YYMMDD' => date('Y-m-d'),
+            'EXT_FIELD_first_name' => 'Igor',
+            'EXT_FIELD_last_name' => 'Progman',
+            'EXT_FIELD_email' => 'progman@gmail.com',
+            'EXT_FIELD_phone' => '380380380380',
+            'EXT_FIELD_custom_data' => [
                 0 => [
-                    'order_id'  => '10',
-                    'name'      => 'Bill Soul',
+                    'order_id' => '10',
+                    'name' => 'Bill Soul',
                 ],
             ],
-            'EXT_FIELD_cost'            => 50
+            'EXT_FIELD_cost' => 50,
         ]);
 
         $this->assertEquals('1358 E Luzerne St, Philadelphia, PA 19124, US', $orderParameters->address_1);
@@ -126,8 +125,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals('380380380380', $orderParameters->EXT_FIELD_phone);
         $this->assertEquals([
             0 => [
-                'order_id'  => '10',
-                'name'      => 'Bill Soul',
+                'order_id' => '10',
+                'name' => 'Bill Soul',
             ],
         ], $orderParameters->EXT_FIELD_custom_data);
         $this->assertEquals(50, $orderParameters->EXT_FIELD_cost);
@@ -136,20 +135,20 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testToArray()
     {
         $orderParameters = Order::fromArray([
-            'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-            'cached_lat'                => 48.335991,
-            'cached_lng'                => 31.18287,
-            'address_alias'             => 'Auto test address',
-            'address_city'              => 'Philadelphia',
-            'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-            'EXT_FIELD_first_name'      => 'Igor',
-            'EXT_FIELD_last_name'       => 'Progman',
-            'EXT_FIELD_email'           => 'progman@gmail.com',
-            'EXT_FIELD_phone'           => '380380380380',
-            'EXT_FIELD_custom_data'     => [
+            'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+            'cached_lat' => 48.335991,
+            'cached_lng' => 31.18287,
+            'address_alias' => 'Auto test address',
+            'address_city' => 'Philadelphia',
+            'day_scheduled_for_YYMMDD' => date('Y-m-d'),
+            'EXT_FIELD_first_name' => 'Igor',
+            'EXT_FIELD_last_name' => 'Progman',
+            'EXT_FIELD_email' => 'progman@gmail.com',
+            'EXT_FIELD_phone' => '380380380380',
+            'EXT_FIELD_custom_data' => [
                 0 => [
-                    'order_id'  => '10',
-                    'name'      => 'Bill Soul',
+                    'order_id' => '10',
+                    'name' => 'Bill Soul',
                 ],
             ],
         ]);
@@ -157,20 +156,20 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             $orderParameters->toArray(),
             [
-                'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-                'cached_lat'                => 48.335991,
-                'cached_lng'                => 31.18287,
-                'address_alias'             => 'Auto test address',
-                'address_city'              => 'Philadelphia',
-                'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-                'EXT_FIELD_first_name'      => 'Igor',
-                'EXT_FIELD_last_name'       => 'Progman',
-                'EXT_FIELD_email'           => 'progman@gmail.com',
-                'EXT_FIELD_phone'           => '380380380380',
-                'EXT_FIELD_custom_data'     => [
+                'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+                'cached_lat' => 48.335991,
+                'cached_lng' => 31.18287,
+                'address_alias' => 'Auto test address',
+                'address_city' => 'Philadelphia',
+                'day_scheduled_for_YYMMDD' => date('Y-m-d'),
+                'EXT_FIELD_first_name' => 'Igor',
+                'EXT_FIELD_last_name' => 'Progman',
+                'EXT_FIELD_email' => 'progman@gmail.com',
+                'EXT_FIELD_phone' => '380380380380',
+                'EXT_FIELD_custom_data' => [
                     0 => [
-                        'order_id'  => '10',
-                        'name'      => 'Bill Soul',
+                        'order_id' => '10',
+                        'name' => 'Bill Soul',
                     ],
                 ],
             ],
@@ -182,8 +181,8 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $order = new Order();
 
         $orderParameters = Order::fromArray([
-            'offset'    => 0,
-            'limit'     => 5,
+            'offset' => 0,
+            'limit' => 5,
         ]);
 
         $response = $order->getOrders($orderParameters);
@@ -201,23 +200,23 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testCreateNewOrder()
     {
         $orderParameters = Order::fromArray([
-            'address_1'                 => '106 Liberty St, New York, NY 10006, USA',
-            'address_alias'             => 'BK Restaurant #: 2446',
-            'cached_lat'                => 40.709637,
-            'cached_lng'                => -74.011912,
-            'curbside_lat'              => 40.709637,
-            'curbside_lng'              => -74.011912,
-            'address_city'              => 'New York',
-            'EXT_FIELD_first_name'      => 'Lui',
-            'EXT_FIELD_last_name'       => 'Carol',
-            'EXT_FIELD_email'           => 'lcarol654@yahoo.com',
-            'EXT_FIELD_phone'           => '897946541',
-            'local_time_window_end'     => 39000,
-            'local_time_window_end_2'   => 46200,
-            'local_time_window_start'   => 37800,
+            'address_1' => '106 Liberty St, New York, NY 10006, USA',
+            'address_alias' => 'BK Restaurant #: 2446',
+            'cached_lat' => 40.709637,
+            'cached_lng' => -74.011912,
+            'curbside_lat' => 40.709637,
+            'curbside_lng' => -74.011912,
+            'address_city' => 'New York',
+            'EXT_FIELD_first_name' => 'Lui',
+            'EXT_FIELD_last_name' => 'Carol',
+            'EXT_FIELD_email' => 'lcarol654@yahoo.com',
+            'EXT_FIELD_phone' => '897946541',
+            'local_time_window_end' => 39000,
+            'local_time_window_end_2' => 46200,
+            'local_time_window_start' => 37800,
             'local_time_window_start_2' => 45000,
-            'local_timezone_string'     => 'America/New_York',
-            'order_icon'                => 'emoji/emoji-bank',
+            'local_timezone_string' => 'America/New_York',
+            'order_icon' => 'emoji/emoji-bank',
         ]);
 
         $order = new Order();
@@ -232,15 +231,15 @@ class OrderTests extends \PHPUnit\Framework\TestCase
 
     public function testAddOrdersToOptimization()
     {
-        $body = json_decode(file_get_contents(dirname(__FILE__).'/data/add_order_to_optimization_data.json'), true);
+        $body = json_decode(file_get_contents(dirname(__FILE__) . '/data/add_order_to_optimization_data.json'), true);
 
         $optimizationProblemId = self::$createdProblems[0]->optimization_problem_id;
 
         $orderParameters = [
-            'optimization_problem_id'   => $optimizationProblemId,
-            'redirect'                  => 0,
-            'device_type'               => 'web',
-            'addresses'                 => $body['addresses'],
+            'optimization_problem_id' => $optimizationProblemId,
+            'redirect' => 0,
+            'device_type' => 'web',
+            'addresses' => $body['addresses'],
         ];
 
         $order = new Order();
@@ -255,13 +254,13 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     {
         $this->markTestSkipped('Read old data.');
 
-        $body = json_decode(file_get_contents(dirname(__FILE__).'/data/add_order_to_route_data.json'), true);
+        $body = json_decode(file_get_contents(dirname(__FILE__) . '/data/add_order_to_route_data.json'), true);
 
         $routeId = self::$createdProblems[0]->routes[0]->route_id;
 
         $orderParameters = Order::fromArray([
-            'route_id'  => $routeId,
-            'redirect'  => 0,
+            'route_id' => $routeId,
+            'redirect' => 0,
             'addresses' => $body['addresses'],
         ]);
 
@@ -276,25 +275,25 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testAddScheduledOrder()
     {
         $orderParameters = Order::fromArray([
-            'address_1'                 => '318 S 39th St, Louisville, KY 40212, USA',
-            'cached_lat'                => 38.259326,
-            'cached_lng'                => -85.814979,
-            'curbside_lat'              => 38.259326,
-            'curbside_lng'              => -85.814979,
-            'address_alias'             => '318 S 39th St 40212',
-            'address_city'              => 'Louisville',
-            'EXT_FIELD_first_name'      => 'Lui',
-            'EXT_FIELD_last_name'       => 'Carol',
-            'EXT_FIELD_email'           => 'lcarol654@yahoo.com',
-            'EXT_FIELD_phone'           => '897946541',
-            'EXT_FIELD_custom_data'     => ['order_type' => 'scheduled order'],
-            'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-            'local_time_window_end'     => 39000,
-            'local_time_window_end_2'   => 46200,
-            'local_time_window_start'   => 37800,
+            'address_1' => '318 S 39th St, Louisville, KY 40212, USA',
+            'cached_lat' => 38.259326,
+            'cached_lng' => -85.814979,
+            'curbside_lat' => 38.259326,
+            'curbside_lng' => -85.814979,
+            'address_alias' => '318 S 39th St 40212',
+            'address_city' => 'Louisville',
+            'EXT_FIELD_first_name' => 'Lui',
+            'EXT_FIELD_last_name' => 'Carol',
+            'EXT_FIELD_email' => 'lcarol654@yahoo.com',
+            'EXT_FIELD_phone' => '897946541',
+            'EXT_FIELD_custom_data' => ['order_type' => 'scheduled order'],
+            'day_scheduled_for_YYMMDD' => date('Y-m-d'),
+            'local_time_window_end' => 39000,
+            'local_time_window_end_2' => 46200,
+            'local_time_window_start' => 37800,
             'local_time_window_start_2' => 45000,
-            'local_timezone_string'     => 'America/New_York',
-            'order_icon'                => 'emoji/emoji-bank',
+            'local_timezone_string' => 'America/New_York',
+            'order_icon' => 'emoji/emoji-bank',
         ]);
 
         $order = new Order();
@@ -310,17 +309,17 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testCreateOrderWithCustomField()
     {
         $orderParameters = Order::fromArray([
-            'address_1'                => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-            'cached_lat'               => 48.335991,
-            'cached_lng'               => 31.18287,
+            'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+            'cached_lat' => 48.335991,
+            'cached_lng' => 31.18287,
             'day_scheduled_for_YYMMDD' => '2019-10-11',
-            'address_alias'            => 'Auto test address',
+            'address_alias' => 'Auto test address',
             'custom_user_fields' => [
                 OrderCustomField::fromArray([
-                    'order_custom_field_id'    => 93,
-                    'order_custom_field_value' => 'false'
-                ])
-            ]
+                    'order_custom_field_id' => 93,
+                    'order_custom_field_value' => 'false',
+                ]),
+            ],
         ]);
 
         $order = new Order();
@@ -372,9 +371,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrderByInsertedDate()
     {
         $orderParameters = Order::fromArray([
-            'day_added_YYMMDD'  => date('Y-m-d', strtotime('0 days')),
-            'offset'            => 0,
-            'limit'             => 5,
+            'day_added_YYMMDD' => date('Y-m-d', strtotime('0 days')),
+            'offset' => 0,
+            'limit' => 5,
         ]);
 
         $order = new Order();
@@ -394,9 +393,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrderByScheduledDate()
     {
         $orderParameters = Order::fromArray([
-            'day_scheduled_for_YYMMDD'  => date('Y-m-d', strtotime('0 days')),
-            'offset'                    => 0,
-            'limit'                     => 5,
+            'day_scheduled_for_YYMMDD' => date('Y-m-d', strtotime('0 days')),
+            'offset' => 0,
+            'limit' => 5,
         ]);
 
         $order = new Order();
@@ -416,9 +415,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrdersByCustomFields()
     {
         $orderParameters = Order::fromArray([
-            'fields'    => 'order_id,member_id',
-            'offset'    => 0,
-            'limit'     => 5,
+            'fields' => 'order_id,member_id',
+            'offset' => 0,
+            'limit' => 5,
         ]);
 
         $order = new Order();
@@ -441,14 +440,14 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrdersByScheduleFilter()
     {
         $orderParameters = Order::fromArray([
-            'limit'  => 5,
+            'limit' => 5,
             'filter' => [
-                'display'               => 'all',
-                'scheduled_for_YYMMDD'  => [
+                'display' => 'all',
+                'scheduled_for_YYMMDD' => [
                     date('Y-m-d', strtotime('-1 days')),
-                    date('Y-m-d', strtotime('1 days'))
-                ]
-            ]
+                    date('Y-m-d', strtotime('1 days')),
+                ],
+            ],
         ]);
 
         $order = new Order();
@@ -468,9 +467,9 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testGetOrdersBySpecifiedText()
     {
         $orderParameters = Order::fromArray([
-            'query'     => 'Auto test',
-            'offset'    => 0,
-            'limit'     => 5,
+            'query' => 'Auto test',
+            'offset' => 0,
+            'limit' => 5,
         ]);
 
         $order = new Order();
@@ -508,7 +507,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals('032268593', $response['EXT_FIELD_phone']);
         $this->assertEquals(
             [
-                0 => '{"order_id":"10","name":"Bill Soul"}'
+                0 => '{"order_id":"10","name":"Bill Soul"}',
             ],
             $response['EXT_FIELD_custom_data']
         );
@@ -517,13 +516,13 @@ class OrderTests extends \PHPUnit\Framework\TestCase
     public function testUpdateOrderWithCustomFiel()
     {
         $orderParameters = Order::fromArray([
-            'order_id'              => self::$createdOrders[0]['order_id'],
-            'custom_user_fields'    => [
+            'order_id' => self::$createdOrders[0]['order_id'],
+            'custom_user_fields' => [
                 OrderCustomField::fromArray([
-                    'order_custom_field_id'    => 93,
-                    'order_custom_field_value' => 'true'
-                ])
-            ]
+                    'order_custom_field_id' => 93,
+                    'order_custom_field_value' => 'true',
+                ]),
+            ],
         ]);
 
         $order = new Order();
@@ -542,13 +541,13 @@ class OrderTests extends \PHPUnit\Framework\TestCase
         if ($lastOrder != null) {
             $order = new Order();
             $ids = [
-                "order_ids" => [$lastOrder['order_uuid']]
+                'order_ids' => [$lastOrder['order_uuid']],
             ];
 
             $response = $order->removeOrder($ids);
 
             if (!is_null($response) && isset($response['status']) && $response['status']) {
-                echo "The test order removed by UUID <br>";
+                echo 'The test order removed by UUID <br>';
             }
         }
     }
@@ -563,7 +562,7 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             }
 
             $orderParameters = Order::fromArray([
-                'order_ids' => $orderIDs
+                'order_ids' => $orderIDs,
             ]);
 
             $order = new Order();
@@ -573,11 +572,11 @@ class OrderTests extends \PHPUnit\Framework\TestCase
             if (!is_null($response) &&
                 isset($response['status']) &&
                 $response['status']) {
-                echo "The test orders removed <br>";
+                echo 'The test orders removed <br>';
             }
         }
 
-        if (sizeof(self::$createdProblems)>0) {
+        if (sizeof(self::$createdProblems) > 0) {
             $optimizationProblemIDs = [];
 
             foreach (self::$createdProblems as $problem) {
@@ -588,16 +587,16 @@ class OrderTests extends \PHPUnit\Framework\TestCase
 
             $params = [
                 'optimization_problem_ids' => $optimizationProblemIDs,
-                'redirect'                 => 0,
+                'redirect' => 0,
             ];
 
             $problem = new OptimizationProblem();
             $result = $problem->removeOptimization($params);
 
-            if ($result!=null && $result['status']==true) {
-                echo "The test optimizations were removed <br>";
+            if ($result != null && $result['status'] == true) {
+                echo 'The test optimizations were removed <br>';
             } else {
-                echo "Cannot remove the test optimizations <br>";
+                echo 'Cannot remove the test optimizations <br>';
             }
         }
     }

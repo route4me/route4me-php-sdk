@@ -22,6 +22,4 @@ class MemberConfigurationResponse extends \Route4Me\Common
      */
     public $data = [];
 
-
-
 }

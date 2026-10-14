@@ -3,70 +3,68 @@
 namespace Route4Me;
 
 use Route4Me\Enum\Endpoint;
-use Route4Me\Exception\BadParam;
 
 /**
  * The address note object structure.
- * @package Route4Me
  */
 class AddressNote extends Common
 {
     /**
-     * An unique ID of a note
-     * @var integer
+     * An unique ID of a note.
+     * @var int
      */
     public $note_id;
 
     /**
-     * The route ID
+     * The route ID.
      * @var string
      */
     public $route_id;
 
     /**
-     * The route destination ID
-     * @var integer
+     * The route destination ID.
+     * @var int
      */
     public $route_destination_id;
 
     /**
-     * An unique ID of an uploaded file
+     * An unique ID of an uploaded file.
      * @var string
      */
     public $upload_id;
 
     /**
-     * When the note was added
-     * @var integer
+     * When the note was added.
+     * @var int
      */
     public $ts_added;
 
     /**
-     * The position latitude where the address note was added
-     * @var double
+     * The position latitude where the address note was added.
+     * @var float
      */
     public $lat;
 
     /**
-     * The position longitude where the address note was added
-     * @var double
+     * The position longitude where the address note was added.
+     * @var float
      */
     public $lng;
 
     /**
-     * The activity type
+     * The activity type.
      * @var string
      */
     public $activity_type;
 
     /**
-     * The note text contents
+     * The note text contents.
      * @var string
      */
     public $contents;
 
     /**
-     * An upload type of the note
+     * An upload type of the note.
      * @var string
      */
     public $upload_type;
@@ -106,12 +104,11 @@ class AddressNote extends Common
     public static function GetAddressesNotes($noteParams)
     {
         $address = Route4Me::makeRequst([
-            'url'       => Endpoint::ADDRESS_V4,
-            'method'    => 'GET',
-            'query'     => [
-                'route_id'              => isset($noteParams['route_id']) ? $noteParams['route_id'] : null,
-                'route_destination_id'  => isset($noteParams['route_destination_id'])
-                    ? $noteParams['route_destination_id'] : null,
+            'url' => Endpoint::ADDRESS_V4,
+            'method' => 'GET',
+            'query' => [
+                'route_id' => $noteParams['route_id'] ?? null,
+                'route_destination_id' => $noteParams['route_destination_id'] ?? null,
                 'notes' => 1,
             ],
         ]);
@@ -124,9 +121,9 @@ class AddressNote extends Common
         $allBodyFields = ['type', 'values'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::NOTE_CUSTOM_TYPES_V4,
-            'method'    => 'POST',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $result;
@@ -135,10 +132,10 @@ class AddressNote extends Common
     public function removeCustomNoteType($params)
     {
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::NOTE_CUSTOM_TYPES_V4,
-            'method'    => 'DELETE',
-            'body'      => [
-                'id' => isset($params['id']) ? $params['id'] : null,
+            'url' => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'DELETE',
+            'body' => [
+                'id' => $params['id'] ?? null,
             ],
         ]);
 
@@ -148,8 +145,8 @@ class AddressNote extends Common
     public function getAllCustomNoteTypes()
     {
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::NOTE_CUSTOM_TYPES_V4,
-            'method'    => 'GET',
+            'url' => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'GET',
         ]);
 
         return $result;
@@ -158,14 +155,14 @@ class AddressNote extends Common
     public function getCustomNoteTypeByKey($params)
     {
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::NOTE_CUSTOM_TYPES_V4,
-            'method'    => 'GET',
+            'url' => Endpoint::NOTE_CUSTOM_TYPES_V4,
+            'method' => 'GET',
         ]);
 
         if (is_null($result) || !is_array($result)) return null;
 
         foreach ($result as $custNoteType) {
-            if (isset($custNoteType["note_custom_type"]) && $custNoteType["note_custom_type"] == $params) {
+            if (isset($custNoteType['note_custom_type']) && $custNoteType['note_custom_type'] == $params) {
                 return $custNoteType;
             }
         }
@@ -177,11 +174,11 @@ class AddressNote extends Common
         $allBodyFields = ['strNoteContents', 'strUpdateType'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTE_NOTES_ADD,
-            'method'        => 'POST',
-            'query'         => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'url' => Endpoint::ROUTE_NOTES_ADD,
+            'method' => 'POST',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;
@@ -189,18 +186,18 @@ class AddressNote extends Common
 
     public function AddNoteFile($params)
     {
-        $fname = isset($params['strFilename']) ? $params['strFilename'] : null;
+        $fname = $params['strFilename'] ?? null;
 
         $allQueryFields = ['route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type'];
         $allBodyFields = ['strFilename', 'strUpdateType', 'strNoteContents'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTE_NOTES_ADD,
-            'method'        => 'POST',
-            'query'         => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'FILE'          => $fname,
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data'
+            'url' => Endpoint::ROUTE_NOTES_ADD,
+            'method' => 'POST',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'FILE' => $fname,
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;
@@ -211,7 +208,7 @@ class AddressNote extends Common
         $customArray = [];
 
         foreach ($params as $key => $value) {
-            if (false !== strpos($key, 'custom_note_type')) {
+            if (strpos($key, 'custom_note_type') !== false) {
                 $customArray[$key] = $value;
             }
         }
@@ -220,11 +217,11 @@ class AddressNote extends Common
         $allBodyFields = ['strUpdateType', 'strUpdateType', 'strNoteContents'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTE_NOTES_ADD,
-            'method'        => 'POST',
-            'query'         => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'          => array_merge(Route4Me::generateRequestParameters($allBodyFields, $params), $customArray),
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'url' => Endpoint::ROUTE_NOTES_ADD,
+            'method' => 'POST',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => array_merge(Route4Me::generateRequestParameters($allBodyFields, $params), $customArray),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;

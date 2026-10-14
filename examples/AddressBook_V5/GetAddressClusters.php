@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\AddressBook;
@@ -23,7 +23,7 @@ try {
     // get the clusters of unrouted addresses that match quere 'France'
     $options = [
         'display' => 'unrouted',
-        'query' => 'France'
+        'query' => 'France',
     ];
     $res = $ab->getAddressClusters($options);
     print_r($res);

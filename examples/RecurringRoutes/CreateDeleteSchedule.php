@@ -6,12 +6,12 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
-use Route4Me\V5\Routes\AddonRoutesApi\Route;
 use Route4Me\V5\RecurringRoutes\Schedules;
+use Route4Me\V5\Routes\AddonRoutesApi\Route;
 use Route4Me\V5\Vehicles\DataTypes\Vehicle;
 
 // Set the api key in the Route4me class
@@ -22,7 +22,7 @@ try {
     $route = new Route;
     $routes = $route->getRoutes([
         'limit' => 1,
-        'offset' => 0
+        'offset' => 0,
     ]);
 
     $route_id = null;
@@ -42,7 +42,7 @@ try {
     $vehicles = $vehicle->getVehiclesPaginatedList([
         'with_pagination' => true,
         'page' => 1,
-        'perPage' => 1
+        'perPage' => 1,
     ]);
 
     $vehicle_id = null;
@@ -62,19 +62,19 @@ try {
         'name' => 'The bestest schedule',
         'schedule_blacklist' => [],
         'schedule' => null,
-        'timezone' => 'UTC'
+        'timezone' => 'UTC',
     ]);
 
     // work with RouteSchedule
     $route_schedule = $schedules->createRouteSchedule([
         'route_id' => $route_id,
-        'schedule_uid' => $schedule->schedule_uid
+        'schedule_uid' => $schedule->schedule_uid,
     ]);
 
     $route_schedule = $schedules->updateRouteSchedule($route_id, [
         'schedule_uid' => $schedule->schedule_uid,
         'member_id' => $member_id,
-        'vehicle_id' => $vehicle_id
+        'vehicle_id' => $vehicle_id,
     ]);
 
     $route_schedule = $schedules->getRouteSchedule($route_id);

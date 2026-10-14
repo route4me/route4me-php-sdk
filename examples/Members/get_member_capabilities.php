@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Route4Me\Members\Member;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -17,6 +17,6 @@ Route4Me::setApiKey(Constants::API_KEY);
 
 $member = new Member();
 
-$memberCapabalities = member::getMemberCapabilities();
+$memberCapabalities = Member::getMemberCapabilities();
 
 Route4Me::simplePrint($memberCapabalities);

@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\Address;
@@ -29,7 +29,7 @@ try {
         'address_stop_type' => 'DELIVERY',
         'address_city' => 'Tbilisi Vah',
         'first_name' => 'Tusha',
-        'last_name' => 'Grigoriani'
+        'last_name' => 'Grigoriani',
     ];
     $res = $ab->addAddress($params);
     print_r($res);

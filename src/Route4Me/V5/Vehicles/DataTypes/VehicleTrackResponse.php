@@ -5,14 +5,12 @@ namespace Route4Me\V5\Vehicles\DataTypes;
 use Route4Me\Common as Common;
 
 /**
- * Class VehicleTrackResponse
- * @package Route4Me\V5\Vehicles
- * Response from the endpoint /vehicles/{id}/track
+ * Class VehicleTrackResponse.
  */
 class VehicleTrackResponse extends Common
 {
-    /** An array of the vehicle locations
-     * @var VehicleTrackItem[]  $data
+    /** An array of the vehicle locations.
+     * @var VehicleTrackItem[]
      */
     public $data = [];
 
@@ -28,6 +26,7 @@ class VehicleTrackResponse extends Common
                 $vehicleTrack->$key = $value;
             }
         }
+
         return $vehicleTrack;
     }
 }

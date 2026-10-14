@@ -5,24 +5,22 @@ namespace Route4Me\V5\Vehicles\QueryTypes;
 use Route4Me\Common as Common;
 
 /**
- * Class VehicleSearchParameters
- * @package Route4Me\V5\Vehicles\QueryTypes
- * Vehicle search parameters.
+ * Class VehicleSearchParameters.
  */
-class VehicleSearchParameters extends \Route4Me\Common
+class VehicleSearchParameters extends Common
 {
     /** An array of the vehicle IDs.
-     * @var string[] $vehicle_ids
+     * @var string[]
      */
     public $vehicle_ids = [];
 
     /** Latitude of a vehicle position.
-     * @var float $lat
+     * @var float
      */
     public $lat;
 
     /** Longitude of a vehicle position.
-     * @var float $lng
+     * @var float
      */
     public $lng;
 }

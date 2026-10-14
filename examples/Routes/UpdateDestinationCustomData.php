@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -17,10 +17,10 @@ $route = new Route();
 
 // Get a random route ID
 $route_id = $route->getRandomRouteId(0, 10);
-assert(!is_null($route_id), "Cannot retrieve a random route ID");
+assert(!is_null($route_id), 'Cannot retrieve a random route ID');
 
 // Get a random address ID from selected route above
-$addressRand = (array) $route->GetRandomAddressFromRoute($route_id);
+$addressRand = (array)$route->GetRandomAddressFromRoute($route_id);
 
 $route->route_id = $route_id;
 $route->route_destination_id = $addressRand['route_destination_id'];
@@ -30,7 +30,7 @@ $route->parameters = new \stdClass();
 
 $route->parameters->custom_fields = [
         'animal' => 'tiger',
-        'bird'   => 'canary',
+        'bird' => 'canary',
 ];
 
 $route->httpheaders = 'Content-type: application/json';

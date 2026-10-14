@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\TeamManagement\TeamManagement;
@@ -19,7 +19,7 @@ Route4Me::setApiKey(Constants::API_KEY);
 $userId = 2565363;
 $params = [
     'HIDE_ROUTED_ADDRESSES' => true,
-    'member_type' => 'SUB_ACCOUNT_DISPATCHER'
+    'member_type' => 'SUB_ACCOUNT_DISPATCHER',
 ];
 
 try {

@@ -2,16 +2,16 @@
 
 namespace UnitTestFiles\Test;
 
-use Route4Me\SearchResponse;
-use Route4Me\Route4Me;
 use Route4Me\AddressBookLocation;
 use Route4Me\Constants;
+use Route4Me\Route4Me;
+use Route4Me\SearchResponse;
 
 class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 {
-    public static $createdContacts=[];
+    public static $createdContacts = [];
 
-    public static $csvImportedAddressIDs=[];
+    public static $csvImportedAddressIDs = [];
 
     public static function setUpBeforeClass() : void
     {
@@ -20,23 +20,23 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $abl = new AddressBookLocation();
 
         $AddressBookLocationParameters = AddressBookLocation::fromArray([
-            'address_1'             => '1407 MCCOY, Louisville, KY, 40215',
-            'address_alias'         => '1407 MCCOY 40215',
-            'address_group'         => 'Scheduled weekly',
-            'first_name'            => 'Bart',
-            'last_name'             => 'Douglas',
-            'address_email'         => 'bdouglas9514@yahoo.com',
-            'address_phone_number'  => '95487454',
-            'cached_lat'            => 38.202496,
-            'cached_lng'            => -85.786514,
-            'curbside_lat'          => 38.202496,
-            'curbside_lng'          => -85.786514,
-            'address_city'          => 'Louisville',
+            'address_1' => '1407 MCCOY, Louisville, KY, 40215',
+            'address_alias' => '1407 MCCOY 40215',
+            'address_group' => 'Scheduled weekly',
+            'first_name' => 'Bart',
+            'last_name' => 'Douglas',
+            'address_email' => 'bdouglas9514@yahoo.com',
+            'address_phone_number' => '95487454',
+            'cached_lat' => 38.202496,
+            'cached_lng' => -85.786514,
+            'curbside_lat' => 38.202496,
+            'curbside_lng' => -85.786514,
+            'address_city' => 'Louisville',
             'schedule' => [[
-                'enabled'   => true,
-                'mode'      => 'weekly',
-                'weekly'    => [
-                    'every'    => 1,
+                'enabled' => true,
+                'mode' => 'weekly',
+                'weekly' => [
+                    'every' => 1,
                     'weekdays' => [1, 2, 3, 4, 5],
                 ],
             ]],
@@ -45,36 +45,36 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
         self::$createdContacts[] = AddressBookLocation::fromArray(
             $abl->addAdressBookLocation($AddressBookLocationParameters)
-         );
+        );
 
         $AddressBookLocationParameters = AddressBookLocation::fromArray([
-            'address_1'             => '4805 BELLEVUE AVE, Louisville, KY, 40215',
-            'address_2'             => '4806 BELLEVUE AVE, Louisville, KY, 40215',
-            'address_alias'         => '4805 BELLEVUE AVE 40215',
-            'address_group'         => 'Scheduled monthly',
-            'first_name'            => 'Bart',
-            'last_name'             => 'Douglas',
-            'address_email'         => 'bdouglas9514@yahoo.com',
-            'address_phone_number'  => '95487454',
-            'cached_lat'            => 38.178844,
-            'cached_lng'            => -85.774864,
-            'curbside_lat'          => 38.178844,
-            'curbside_lng'          => -85.774864,
-            'address_city'          => 'Louisville',
-            'address_country_id'    => 'US',
-            'address_state_id'      => 'KY',
-            'address_zip'           => '40215',
+            'address_1' => '4805 BELLEVUE AVE, Louisville, KY, 40215',
+            'address_2' => '4806 BELLEVUE AVE, Louisville, KY, 40215',
+            'address_alias' => '4805 BELLEVUE AVE 40215',
+            'address_group' => 'Scheduled monthly',
+            'first_name' => 'Bart',
+            'last_name' => 'Douglas',
+            'address_email' => 'bdouglas9514@yahoo.com',
+            'address_phone_number' => '95487454',
+            'cached_lat' => 38.178844,
+            'cached_lng' => -85.774864,
+            'curbside_lat' => 38.178844,
+            'curbside_lng' => -85.774864,
+            'address_city' => 'Louisville',
+            'address_country_id' => 'US',
+            'address_state_id' => 'KY',
+            'address_zip' => '40215',
             'schedule' => [[
-                'enabled'   => true,
-                'mode'      => 'monthly',
-                'monthly'   => [
+                'enabled' => true,
+                'mode' => 'monthly',
+                'monthly' => [
                     'every' => 1,
-                    'mode'  => 'dates',
+                    'mode' => 'dates',
                     'dates' => [20, 22, 23, 24, 25],
                 ],
             ]],
             'service_time' => 750,
-            'color'        => 'red',
+            'color' => 'red',
         ]);
 
         self::$createdContacts[] = AddressBookLocation::fromArray(
@@ -85,24 +85,24 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
     public function testAddressBookLocationFromArray()
     {
         $location = AddressBookLocation::fromArray([
-            'address_1'             => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
-            'cached_lat'            => 38.141598,
-            'cached_lng'            => -85.793846,
-            'address_alias'         => '1604 PARKRIDGE PKWY 40214',
-            'address_group'         => 'Scheduled daily',
-            'first_name'            => 'Peter',
-            'last_name'             => 'Newman',
-            'address_email'         => 'pnewman6564@yahoo.com',
-            'address_phone_number'  => '65432178',
-            'address_city'          => 'Louisville',
-            'address_custom_data'   => ['scheduled'     => 'yes',
-                                        'serice type'   => 'publishing', ],
+            'address_1' => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
+            'cached_lat' => 38.141598,
+            'cached_lng' => -85.793846,
+            'address_alias' => '1604 PARKRIDGE PKWY 40214',
+            'address_group' => 'Scheduled daily',
+            'first_name' => 'Peter',
+            'last_name' => 'Newman',
+            'address_email' => 'pnewman6564@yahoo.com',
+            'address_phone_number' => '65432178',
+            'address_city' => 'Louisville',
+            'address_custom_data' => ['scheduled' => 'yes',
+                                        'serice type' => 'publishing', ],
             'schedule' => [[
-                'enabled'   => true,
-                'mode'      => 'daily',
-                'daily'     => ['every' => 1],
+                'enabled' => true,
+                'mode' => 'daily',
+                'daily' => ['every' => 1],
             ]],
-            'service_time'          => 900,
+            'service_time' => 900,
         ]);
 
         $this->assertEquals('1604 PARKRIDGE PKWY, Louisville, KY, 40214', $location->address_1);
@@ -120,46 +120,47 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
     public function testToArray()
     {
         $location = AddressBookLocation::fromArray([
-            'address_1'             => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
-            'cached_lat'            => 38.141598,
-            'cached_lng'            => -85.793846,
-            'address_alias'         => '1604 PARKRIDGE PKWY 40214',
-            'address_group'         => 'Scheduled daily',
-            'first_name'            => 'Peter',
-            'last_name'             => 'Newman',
-            'address_email'         => 'pnewman6564@yahoo.com',
-            'address_phone_number'  => '65432178',
-            'address_city'          => 'Louisville',
-            'address_custom_data'   => ['scheduled'     => 'yes',
-                'serice type'   => 'publishing', ],
+            'address_1' => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
+            'cached_lat' => 38.141598,
+            'cached_lng' => -85.793846,
+            'address_alias' => '1604 PARKRIDGE PKWY 40214',
+            'address_group' => 'Scheduled daily',
+            'first_name' => 'Peter',
+            'last_name' => 'Newman',
+            'address_email' => 'pnewman6564@yahoo.com',
+            'address_phone_number' => '65432178',
+            'address_city' => 'Louisville',
+            'address_custom_data' => ['scheduled' => 'yes',
+                'serice type' => 'publishing', ],
             'schedule' => [[
-                'enabled'   => true,
-                'mode'      => 'daily',
-                'daily'     => ['every' => 1],
+                'enabled' => true,
+                'mode' => 'daily',
+                'daily' => ['every' => 1],
             ]],
-            'service_time'          => 900,
+            'service_time' => 900,
         ]);
 
-        $this->assertEquals($location->toArray(),
+        $this->assertEquals(
+            $location->toArray(),
             [
-                'address_1'             => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
-                'cached_lat'            => 38.141598,
-                'cached_lng'            => -85.793846,
-                'address_alias'         => '1604 PARKRIDGE PKWY 40214',
-                'address_group'         => 'Scheduled daily',
-                'first_name'            => 'Peter',
-                'last_name'             => 'Newman',
-                'address_email'         => 'pnewman6564@yahoo.com',
-                'address_phone_number'  => '65432178',
-                'address_city'          => 'Louisville',
-                'address_custom_data'   => ['scheduled'     => 'yes',
-                    'serice type'   => 'publishing', ],
+                'address_1' => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
+                'cached_lat' => 38.141598,
+                'cached_lng' => -85.793846,
+                'address_alias' => '1604 PARKRIDGE PKWY 40214',
+                'address_group' => 'Scheduled daily',
+                'first_name' => 'Peter',
+                'last_name' => 'Newman',
+                'address_email' => 'pnewman6564@yahoo.com',
+                'address_phone_number' => '65432178',
+                'address_city' => 'Louisville',
+                'address_custom_data' => ['scheduled' => 'yes',
+                    'serice type' => 'publishing', ],
                 'schedule' => [[
-                    'enabled'   => true,
-                    'mode'      => 'daily',
-                    'daily'     => ['every' => 1],
+                    'enabled' => true,
+                    'mode' => 'daily',
+                    'daily' => ['every' => 1],
                 ]],
-                'service_time'          => 900,
+                'service_time' => 900,
             ]
         );
     }
@@ -184,28 +185,28 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $abl = new AddressBookLocation();
 
         $params = [
-            'query'  => 'Douglas',
+            'query' => 'Douglas',
             'fields' => 'first_name,address_email,schedule_blacklist,schedule,address_custom_data,address_1',
             'offset' => 0,
-            'limit'  => 5,
+            'limit' => 5,
         ];
-                                                                                                                                
-        $result =  SearchResponse::fromArray(
+
+        $result = SearchResponse::fromArray(
             $abl->searchAddressBookLocations($params)
         );
 
         $this->assertNotNull($result);
-        $this->assertTrue(sizeof($result->fields)==6);
-        $this->assertContains('first_name',$result->fields);
-        $this->assertContains('address_email',$result->fields);
+        $this->assertTrue(sizeof($result->fields) == 6);
+        $this->assertContains('first_name', $result->fields);
+        $this->assertContains('address_email', $result->fields);
 
         $this->assertNotNull($result->results);
 
         $txt = json_encode($result->results[0]);
 
         $firstRecord = strtolower($txt);
-        
-        $this->assertTrue(strpos($firstRecord, 'douglas')>=0);
+
+        $this->assertTrue(strpos($firstRecord, 'douglas') >= 0);
     }
 
     public function testGetAddressBookLocations()
@@ -213,7 +214,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $abl = new AddressBookLocation();
 
         $AddressBookLocationParameters = [
-            'limit'  => 5,
+            'limit' => 5,
             'offset' => 0,
         ];
 
@@ -233,7 +234,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
     public function testGetRandomAddressBookLocation()
     {
         $AddressBookLocationParameters = [
-            'limit'  => 30,
+            'limit' => 30,
             'offset' => 0,
         ];
 
@@ -250,10 +251,10 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
         $abl = new AddressBookLocation();
 
         $AddressBookLocationParameters = AddressBookLocation::fromArray([
-            'first_name'    => 'Test FirstName '.strval(rand(10000, 99999)),
-            'address_1'     => 'Test Address1 '.strval(rand(10000, 99999)),
-            'cached_lat'    => 38.024654,
-            'cached_lng'    => -77.338814,
+            'first_name' => 'Test FirstName ' . strval(rand(10000, 99999)),
+            'address_1' => 'Test Address1 ' . strval(rand(10000, 99999)),
+            'cached_lat' => 38.024654,
+            'cached_lng' => -77.338814,
         ]);
 
         $result = AddressBookLocation::fromArray(
@@ -288,7 +289,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
         $firstContact = self::$createdContacts[0];
 
-        $firstContact->first_name = $firstContact->first_name.' updated';
+        $firstContact->first_name = $firstContact->first_name . ' updated';
 
         $result = AddressBookLocation::fromArray(
             $abl->updateAddressBookLocation($firstContact)
@@ -344,11 +345,11 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
     public function testValidateScheduleMonthlyMode()
     {
         $this->assertTrue(AddressBookLocation::validateScheduleMonthlyMode('dates'));
-        $this->assertTrue(AddressBookLocation::validateScheduleMonthlyMode('nth' ));
+        $this->assertTrue(AddressBookLocation::validateScheduleMonthlyMode('nth'));
 
-        $this->assertFalse(AddressBookLocation::validateScheduleMonthlyMode('wrongParam' ));
-        $this->assertFalse(AddressBookLocation::validateScheduleMonthlyMode(4 ));
-        $this->assertFalse(AddressBookLocation::validateScheduleMonthlyMode(true ));
+        $this->assertFalse(AddressBookLocation::validateScheduleMonthlyMode('wrongParam'));
+        $this->assertFalse(AddressBookLocation::validateScheduleMonthlyMode(4));
+        $this->assertFalse(AddressBookLocation::validateScheduleMonthlyMode(true));
     }
 
     public function testValidateScheduleMonthlyDates()
@@ -383,7 +384,7 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testValidateScheduleNthWhat()
     {
-        for ($i=1;$i<11;$i++) $this->assertTrue(AddressBookLocation::validateScheduleNthWhat($i));
+        for ($i = 1; $i < 11; $i++) $this->assertTrue(AddressBookLocation::validateScheduleNthWhat($i));
 
         $this->assertFalse(AddressBookLocation::validateScheduleNthWhat(0));
         $this->assertFalse(AddressBookLocation::validateScheduleNthWhat(14));
@@ -394,8 +395,8 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testAddLocationsFromCsvFile()
     {
-        $root = realpath(dirname(__FILE__).'/../../');
-        $source_file = $root.'/UnitTestFiles/Test/data/addresses_10.csv';
+        $root = realpath(dirname(__FILE__) . '/../../');
+        $source_file = $root . '/UnitTestFiles/Test/data/addresses_10.csv';
 
         $locationsFieldsMapping['cached_lat'] = 0;
         $locationsFieldsMapping['cached_lng'] = 1;
@@ -434,25 +435,25 @@ class AddressBookLocationUnitTests extends \PHPUnit\Framework\TestCase
             self::$csvImportedAddressIDs[] = filter_var($sc, FILTER_SANITIZE_NUMBER_INT);
         }
 
-        $this->assertTrue(sizeof(self::$csvImportedAddressIDs)==10);
+        $this->assertTrue(sizeof(self::$csvImportedAddressIDs) == 10);
     }
 
     public static function tearDownAfterClass() : void
     {
-        $addressBookLocations=[];
+        $addressBookLocations = [];
 
         foreach (self::$createdContacts as $createdContact) {
             $addressBookLocations[] = $createdContact->address_id;
         }
 
-        $addressBookLocations = array_merge($addressBookLocations,self::$csvImportedAddressIDs);
+        $addressBookLocations = array_merge($addressBookLocations, self::$csvImportedAddressIDs);
 
         $abl = new AddressBookLocation();
 
         $deleteResult = $abl->deleteAdressBookLocation($addressBookLocations);
 
         if (isset($deleteResult['status']) && $deleteResult['status']) {
-            echo "Created contacts were removed.<br>";
+            echo 'Created contacts were removed.<br>';
         }
     }
 }

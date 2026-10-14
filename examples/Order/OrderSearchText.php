@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to searching of the orders for specified text containing in any field.
 
@@ -12,9 +12,9 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
-    'query'     => 'Auto',
-    'offset'    => 0,
-    'limit'     => 5,
+    'query' => 'Auto',
+    'offset' => 0,
+    'limit' => 5,
 ]);
 
 $order = new Order();

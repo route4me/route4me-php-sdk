@@ -6,8 +6,8 @@ use Route4Me\Common as Common;
 
 class DataVehicle extends Common
 {
-    /** Reduced vehicle object
-     * @var VehicleReduced $vehicle
+    /** Reduced vehicle object.
+     * @var VehicleReduced
      */
     public $vehicle = [];
 }

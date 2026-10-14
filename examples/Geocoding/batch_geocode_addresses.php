@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to the process of batch geocoding of the addresses
 
@@ -19,15 +19,15 @@ $addressList = [
 $addressesString = implode('\n', $addressList);
 
 $geoCodingParameters = [
-    'strExportFormat'   => 'json',
-    'addresses'         => $addressesString,
+    'strExportFormat' => 'json',
+    'addresses' => $addressesString,
 ];
 
 $fGeoCoding = new Geocoding();
 
 $bgResults = $fGeoCoding->forwardGeocoding($geoCodingParameters);
 
-if ('json' == $geoCodingParameters['strExportFormat']) {
+if ($geoCodingParameters['strExportFormat'] == 'json') {
     foreach ($bgResults as $bgResult) {
         Route4Me::simplePrint($bgResult);
         echo '<br>';

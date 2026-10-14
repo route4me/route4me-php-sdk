@@ -1,20 +1,24 @@
 <?php
 
-
 namespace Route4Me\Tracking;
 
 /**
- * Class UserLocation - response from the endpoint USER_LOCATION
- * @package Route4Me
+ * Class UserLocation - response from the endpoint USER_LOCATION.
  */
 class UserLocation extends \Route4Me\Common
 {
-    /** @var MemberData[] $member_data */
-    public $member_data=[];
+    /**
+     * @var MemberData[]
+     */
+    public $member_data = [];
 
-    /** @var UserTracking[] $tracking */
+    /**
+     * @var UserTracking[]
+     */
     public $tracking = [];
 
-    /** @var boolean $from_cache*/
+    /**
+     * @var bool
+     */
     public $from_cache;
 }

@@ -3,14 +3,11 @@
 namespace Route4Me\V5\TeamManagement;
 
 use Route4Me\Common as Common;
-use Route4Me\V5\TeamManagement\Option;
 
 /**
- * Team Management API Permission structure
+ * Team Management API Permission structure.
  *
  * @since 1.2.7
- *
- * @package Route4Me
  */
 class Permission extends Common
 {
@@ -19,12 +16,12 @@ class Permission extends Common
     public ?string $type = null;
 
     /**
-     * Array of Options
+     * Array of Options.
      */
     public ?array $options = null;
 
     /**
-     * Array of strings
+     * Array of strings.
      */
     public ?array $value = null;
 
@@ -34,7 +31,7 @@ class Permission extends Common
             foreach ($this as $key => $value) {
                 if (isset($params[$key])) {
                     if ($key === 'options') {
-                        $this->{$key} = array();
+                        $this->{$key} = [];
                         foreach ($params[$key] as $opt_key => $opt_value) {
                             array_push($this->{$key}, new Option($opt_value));
                         }

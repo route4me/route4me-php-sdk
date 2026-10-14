@@ -10,7 +10,7 @@ use Route4Me\Enum\AddressBundlingModes;
 class AddressBundling extends Common
 {
     /**
-     * Address bundling mode
+     * Address bundling mode.
      */
     public $mode = AddressBundlingModes\Mode::ADDRESS;
 
@@ -19,15 +19,15 @@ class AddressBundling extends Common
      * - If Mode=3, contains an array of the field names of the Address object;
      * - If Mode=4, contains an array of the custom fields of the Address object.
      */
-    public $mode_params= [];
+    public $mode_params = [];
 
     /**
-     * Address bundling merge mode
+     * Address bundling merge mode.
      */
     public $merge_mode = AddressBundlingModes\MergeMode::KEEP_AS_SEPARATE_DESTINATIONS;
 
     /**
-     * Service time rules of the address bundling
+     * Service time rules of the address bundling.
      */
     public $service_time_rules;
 
@@ -35,5 +35,4 @@ class AddressBundling extends Common
     {
         $this->service_time_rules = new ServiceTimeRulesClass();
     }
-
 }

@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\AddressBook;
@@ -22,22 +22,22 @@ try {
     /////////////////////////////////////////////
     // update adresses in circle aria
     $filter = [
-        'query' => "Tusha",
+        'query' => 'Tusha',
         'bounding_box' => null,
         'selected_areas' => [[
             'type' => 'circle',
             'value' => [
                 'center' => [
                     'lat' => 38.024654,
-                    'lng' => 77.338814
+                    'lng' => 77.338814,
                 ],
-                'distance' => 10000
-            ]
-        ]]
+                'distance' => 10000,
+            ],
+        ]],
     ];
 
     $params = [
-        'last_name' => 'Grigoriani VII'
+        'last_name' => 'Grigoriani VII',
     ];
     $res = $ab->updateAddressesByAreas($filter, $params);
     print_r($res);

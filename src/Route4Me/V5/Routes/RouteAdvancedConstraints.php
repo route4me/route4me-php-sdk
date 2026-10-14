@@ -1,44 +1,42 @@
 <?php
 
-
 namespace Route4Me\V5\Routes;
 
 /**
- * Class RouteAdvancedConstraints
- * @package Route4Me\V5\Routes
+ * Class RouteAdvancedConstraints.
  */
 class RouteAdvancedConstraints extends \Route4Me\Common
 {
-    /** Maximum cargo volume per route
-     * @var double $max_cargo_volume
+    /** Maximum cargo volume per route.
+     * @var float
      */
     public $max_cargo_volume;
 
     /** Vehicle capacity.
-     * <para>How much total cargo can be transported per route (units, e.g. cubic meters)</para>
-     * @var integer $max_capacity
+     * <para>How much total cargo can be transported per route (units, e.g. cubic meters)</para>.
+     * @var int
      */
     public $max_capacity;
 
     /** Legacy feature which permits a user to request an example number of optimized routes.
-     * @var integer $members_count
+     * @var int
      */
     public $members_count;
 
-    /** An array of the available time windows (e.g. [ [25200, 75000 ] )
-     * @var Array $available_time_windows
+    /** An array of the available time windows (e.g. [ [25200, 75000 ] ).
+     * @var array
      */
     public $available_time_windows;
 
     /** The driver tags specified in a team member's custom data.
      * (e.g. "driver skills":
      * ["Class A CDL", "Class B CDL", "Forklift", "Skid Steer Loader", "Independent Contractor"]
-     * @var string[] $tags
+     * @var string[]
      */
     public $tags;
 
     /** An array of the skilled driver IDs.
-     * @var integer[] $route4me_members_id
+     * @var int[]
      */
     public $route4me_members_id;
 

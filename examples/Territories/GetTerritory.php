@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Enum\TerritoryTypes;
 
@@ -23,17 +23,17 @@ $territoryParams['data'] = [
 ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_name'    => 'Test Territory '.strval(rand(10000, 99999)),
-    'territory_color'   => 'ff7700',
-    'territory'         => $territoryParams,
+    'territory_name' => 'Test Territory ' . strval(rand(10000, 99999)),
+    'territory_color' => 'ff7700',
+    'territory' => $territoryParams,
 ]);
 
 $territory = new Territory();
 
-$result = (array) $territory->addTerritory($TerritoryParameters);
+$result = (array)$territory->addTerritory($TerritoryParameters);
 
-assert(!is_null($result), "Cannot create a territory");
-assert(isset($result['territory_id']), "Cannot create a territory");
+assert(!is_null($result), 'Cannot create a territory');
+assert(isset($result['territory_id']), 'Cannot create a territory');
 
 $territory_id = $result['territory_id'];
 

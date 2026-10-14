@@ -6,10 +6,8 @@ namespace Route4Me\Members;
  * The member's configuration data structure
  */
 
-use Route4Me\Route4Me;
 use Route4Me\Enum\Endpoint;
-use Route4Me\Exception\BadParam;
-use Unirest\Exception;
+use Route4Me\Route4Me;
 
 class MemberConfiguration extends \Route4Me\Common
 {
@@ -86,7 +84,7 @@ class MemberConfiguration extends \Route4Me\Common
             $response = Route4Me::makeRequst([
                 'url' => Endpoint::CONFIGURATION_SETTINGS,
                 'method' => 'PUT',
-                'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+                'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
             ]);
         } catch (\Exception $ex) {
             $errorText = $ex->getMessage();
@@ -106,6 +104,7 @@ class MemberConfiguration extends \Route4Me\Common
     {
         if (!isset($params['config_key'])) {
             $errorText = 'The parameter config_key is not specified';
+
             return null;
         }
 
@@ -116,7 +115,7 @@ class MemberConfiguration extends \Route4Me\Common
                 'url' => Endpoint::CONFIGURATION_SETTINGS,
                 'method' => 'DELETE',
                 'body' => [
-                    'config_key' => isset($params['config_key']) ? $params['config_key'] : null
+                    'config_key' => $params['config_key'] ?? null,
                 ],
             ]);
         } catch (\Exception $ex) {
@@ -140,7 +139,7 @@ class MemberConfiguration extends \Route4Me\Common
             'url' => Endpoint::CONFIGURATION_SETTINGS,
             'method' => 'GET',
             'query' => [
-                'config_key' => isset($params['config_key']) ? $params['config_key'] : null
+                'config_key' => $params['config_key'] ?? null,
             ],
         ]);
 

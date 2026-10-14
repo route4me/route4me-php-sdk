@@ -3,12 +3,12 @@
 namespace Route4Me\Tracking;
 
 use Route4Me;
-use Route4Me\Exception\BadParam;
 use Route4Me\Enum\DeviceType;
-use Route4Me\Enum\Format;
 use Route4Me\Enum\Endpoint;
+use Route4Me\Enum\Format;
+use Route4Me\Exception\BadParam;
 
-class TrackSetParams extends \Route4Me\Common
+class TrackSetParams extends Route4Me\Common
 {
     public $format;
     public $member_id;

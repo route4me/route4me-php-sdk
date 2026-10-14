@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Route4Me\Members\Member;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to member authentication.
 
@@ -13,9 +13,9 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $Parameters = Member::fromArray([
-    'strEmail'      => 'rrrrrrrrrrrrr@gmail.com',
-    'strPassword'   => 'dddddddd',
-    'format'        => 'json',
+    'strEmail' => 'rrrrrrrrrrrrr@gmail.com',
+    'strPassword' => 'dddddddd',
+    'format' => 'json',
 ]);
 
 $member = new Member();

@@ -26,11 +26,11 @@ try {
             'value' => [
                 'center' => [
                     'lat' => 38.024654,
-                    'lng' => 77.338814
+                    'lng' => 77.338814,
                 ],
-                'distance' => 10000
-            ]
-        ]]
+                'distance' => 10000,
+            ],
+        ]],
     ];
     $res = $ab->deleteAddressesByAreas($filter);
     print_r($res);

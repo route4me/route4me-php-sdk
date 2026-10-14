@@ -7,12 +7,12 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
-use Route4Me\V5\AddressBook\UpdateAddress;
 use Route4Me\V5\AddressBook\AddressBook;
+use Route4Me\V5\AddressBook\UpdateAddress;
 
 // Set the api key in the Route4me class
 Route4Me::setApiKey(Constants::API_KEY);
@@ -26,7 +26,7 @@ try {
     $params = [
         'service_time' => 16,
         'last_name' => 'Grigoriani V',
-        'address_phone_number' => '+1234567890'
+        'address_phone_number' => '+1234567890',
     ];
     $res = $ab->updateAddressesByIds($addressIds, $params);
     print_r($res);

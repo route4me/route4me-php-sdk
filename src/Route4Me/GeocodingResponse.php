@@ -2,46 +2,43 @@
 
 namespace Route4Me;
 
-use Route4Me\Route4Me;
-
 /**
  * The data structure of the geocoding process response.
- * @package Route4Me
  */
 class GeocodingResponse extends Common
 {
     /**
-     * A geocoded address
+     * A geocoded address.
      * @var string
      */
     public $address;
 
     /**
-     * Latitude
-     * @var double
+     * Latitude.
+     * @var float
      */
     public $lat;
 
     /**
-     * Longitude
-     * @var double
+     * Longitude.
+     * @var float
      */
     public $lng;
 
     /**
-     * Geocoded area level type
+     * Geocoded area level type.
      * @var string
      */
     public $type;
 
     /**
-     * Confidence ("high", "medium", "low")
+     * Confidence ("high", "medium", "low").
      * @var string
      */
     public $confidence;
 
     /**
-     * Content of the original string (an address or geopoint) sent by HTTP
+     * Content of the original string (an address or geopoint) sent by HTTP.
      * @var Route
      */
     public $original;

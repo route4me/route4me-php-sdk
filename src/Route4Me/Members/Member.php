@@ -4,7 +4,6 @@ namespace Route4Me\Members;
 
 use Route4Me\Enum\Endpoint;
 use Route4Me\Route4Me;
-use Unirest\Exception;
 
 class Member extends \Route4Me\Common
 {
@@ -87,7 +86,7 @@ class Member extends \Route4Me\Common
             'url' => Endpoint::USER_V4,
             'method' => 'GET',
             'query' => [
-                'member_id' => isset($params['member_id']) ? $params['member_id'] : null,
+                'member_id' => $params['member_id'] ?? null,
             ],
         ]);
 
@@ -190,7 +189,7 @@ class Member extends \Route4Me\Common
                 'url' => Endpoint::USER_V4,
                 'method' => 'DELETE',
                 'body' => [
-                    'member_id' => isset($body->member_id) ? $body->member_id : null,
+                    'member_id' => $body->member_id ?? null,
                 ],
             ]);
         } catch (\Exception $ex) {
@@ -220,7 +219,7 @@ class Member extends \Route4Me\Common
             ]);
         } catch (\Exception $ex) {
             $response = null;
-            $errorText = "Cannot registrate new account <br> ".$ex->getMessage();
+            $errorText = 'Cannot registrate new account <br> ' . $ex->getMessage();
         } finally {
             return $response;
         }

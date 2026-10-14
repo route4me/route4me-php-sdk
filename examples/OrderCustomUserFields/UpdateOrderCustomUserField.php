@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to the process of updating an order custom user field.
 
@@ -14,10 +14,10 @@ Route4Me::setApiKey(Constants::API_KEY);
 $orderCustomField = new OrderCustomField();
 
 $orderCustomFieldParameters = OrderCustomField::fromArray([
-    'order_custom_field_id'        => 182,
-    'order_custom_field_label'     => 'ustom Field 44',
-    'order_custom_field_type'      => 'checkbox',
-    'order_custom_field_type_info' => ['short_label' => 'cFl44']
+    'order_custom_field_id' => 182,
+    'order_custom_field_label' => 'ustom Field 44',
+    'order_custom_field_type' => 'checkbox',
+    'order_custom_field_type_info' => ['short_label' => 'cFl44'],
 ]);
 
 $response = $orderCustomField->updateOrderCustomUserField($orderCustomFieldParameters);

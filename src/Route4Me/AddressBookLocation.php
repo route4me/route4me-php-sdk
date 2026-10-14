@@ -2,15 +2,14 @@
 
 namespace Route4Me;
 
-use Route4Me\Enum\Endpoint;
 use Route4Me\Common as Common;
+use Route4Me\Enum\Endpoint;
 
 /**
  * Address book contact class.
  *
  * @deprecated 1.2.8
- * @see \Route4Me\V5\AddressBook\AddressBook
- * @package Route4Me
+ * @see V5\AddressBook\AddressBook
  */
 class AddressBookLocation extends Common
 {
@@ -94,25 +93,25 @@ class AddressBookLocation extends Common
 
     /**
      * A latitude of the contact's cached position.
-     * @var double
+     * @var float
      */
     public $cached_lat;
 
     /**
      * A longitude of the contact's cached position.
-     * @var double
+     * @var float
      */
     public $cached_lng;
 
     /**
      * A latitude of the contact's curbside.
-     * @var double
+     * @var float
      */
     public $curbside_lat;
 
     /**
      * A longitude of the contact's curbside.
-     * @var double
+     * @var float
      */
     public $curbside_lng;
 
@@ -142,7 +141,7 @@ class AddressBookLocation extends Common
 
     /**
      * Unique ID of the member.
-     * @var integer
+     * @var int
      */
     public $member_id;
 
@@ -154,7 +153,7 @@ class AddressBookLocation extends Common
 
     /**
      * Number of the routes containing the contact.
-     * @var integer
+     * @var int
      */
     public $in_route_count;
 
@@ -196,7 +195,7 @@ class AddressBookLocation extends Common
 
     /**
      * The service time at the contact's address.
-     * @var integer
+     * @var int
      */
     public $service_time;
 
@@ -220,13 +219,13 @@ class AddressBookLocation extends Common
 
     /**
      * The cubic volume of the contact's cargo.
-     * @var double
+     * @var float
      */
     public $address_cube;
 
     /**
      * The number of pieces/pallets that this destination/order/line-item consumes/contains on a vehicle.
-     * @var integer
+     * @var int
      */
     public $address_pieces;
 
@@ -238,13 +237,13 @@ class AddressBookLocation extends Common
 
     /**
      * The revenue from the contact.
-     * @var double
+     * @var float
      */
     public $address_revenue;
 
     /**
      * The weight of the contact's cargo.
-     * @var double
+     * @var float
      */
     public $address_weight;
 
@@ -252,7 +251,7 @@ class AddressBookLocation extends Common
      * If present, the priority will sequence addresses in all the optimal routes so that
      * higher priority addresses are general at the beginning of the route sequence.<br>
      * 1 is the highest priority, 100000 is the lowest.
-     * @var integer
+     * @var int
      */
     public $address_priority;
 
@@ -269,14 +268,14 @@ class AddressBookLocation extends Common
 
     /**
      * @deprecated 1.2.8
-     * @see \Route4Me\V5\AddressBook\AddressBook::getAddressById()
+     * @see V5\AddressBook\AddressBook::getAddressById()
      */
     public static function getAddressBookLocation($addressId)
     {
         $ablocations = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query'  => [
+            'query' => [
                 'query' => $addressId,
                 'limit' => 30,
             ],
@@ -287,7 +286,7 @@ class AddressBookLocation extends Common
 
     /**
      * @deprecated 1.2.8
-     * @see \Route4Me\V5\AddressBook\AddressBook::getAddressesByBodyPayload()
+     * @see V5\AddressBook\AddressBook::getAddressesByBodyPayload()
      */
     public static function searchAddressBookLocations($params)
     {
@@ -296,7 +295,7 @@ class AddressBookLocation extends Common
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $result;
@@ -304,7 +303,7 @@ class AddressBookLocation extends Common
 
     /**
      * @deprecated 1.2.8
-     * @see \Route4Me\V5\AddressBook\AddressBook::getAddressesByIds()
+     * @see V5\AddressBook\AddressBook::getAddressesByIds()
      */
     public static function getAddressBookLocations($params)
     {
@@ -313,7 +312,7 @@ class AddressBookLocation extends Common
         $ablocations = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_BOOK_V4,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $ablocations;
@@ -338,7 +337,7 @@ class AddressBookLocation extends Common
 
     /**
      * @deprecated 1.2.8
-     * @see \Route4Me\V5\AddressBook\AddressBook::addAddress()
+     * @see V5\AddressBook\AddressBook::addAddress()
      *
      * @param AddressBookLocation $params
      */
@@ -347,9 +346,9 @@ class AddressBookLocation extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['address_id', 'in_route_count']);
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ADDRESS_BOOK_V4,
-            'method'    => 'POST',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ADDRESS_BOOK_V4,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -357,14 +356,14 @@ class AddressBookLocation extends Common
 
     /**
      * @deprecated 1.2.8
-     * @see \Route4Me\V5\AddressBook\AddressBook::deleteAddressesByIds()
+     * @see V5\AddressBook\AddressBook::deleteAddressesByIds()
      */
     public function deleteAdressBookLocation($address_ids)
     {
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::ADDRESS_BOOK_V4,
-            'method'    => 'DELETEARRAY',
-            'query'     => [
+            'url' => Endpoint::ADDRESS_BOOK_V4,
+            'method' => 'DELETEARRAY',
+            'query' => [
                 'address_ids' => $address_ids,
             ],
         ]);
@@ -374,16 +373,16 @@ class AddressBookLocation extends Common
 
     /**
      * @deprecated 1.2.8
-     * @see \Route4Me\V5\AddressBook\AddressBook::updateAddressById()
+     * @see V5\AddressBook\AddressBook::updateAddressById()
      */
     public function updateAddressBookLocation($params)
     {
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['in_route_count']);
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ADDRESS_BOOK_V4,
-            'method'    => 'PUT',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ADDRESS_BOOK_V4,
+            'method' => 'PUT',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -403,13 +402,13 @@ class AddressBookLocation extends Common
     public static function validateScheduleEnable($scheduleEnabled)
     {
         if (is_string($scheduleEnabled)) {
-            if (strtolower($scheduleEnabled)=="true") $scheduleEnabled = true;
-            if (strtolower($scheduleEnabled)=="false") $scheduleEnabled = false;
+            if (strtolower($scheduleEnabled) == 'true') $scheduleEnabled = true;
+            if (strtolower($scheduleEnabled) == 'false') $scheduleEnabled = false;
         }
 
-        $schedEnables = [true, false,];
+        $schedEnables = [true, false];
 
-        if (in_array($scheduleEnabled, $schedEnables,true)) {
+        if (in_array($scheduleEnabled, $schedEnables, true)) {
             return true;
         } else {
             return false;
@@ -419,7 +418,7 @@ class AddressBookLocation extends Common
     public static function validateScheduleEvery($scheduleEvery)
     {
         if (is_numeric($scheduleEvery)) {
-            if ($scheduleEvery>0) {
+            if ($scheduleEvery > 0) {
                 return true;
             } else {
                 return false;
@@ -462,7 +461,7 @@ class AddressBookLocation extends Common
     {
         $schedMonthlyMmodes = ['dates', 'nth'];
 
-        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes,true)) {
+        if (in_array($scheduleMonthlyMode, $schedMonthlyMmodes, true)) {
             return true;
         } else {
             return false;
@@ -564,7 +563,7 @@ class AddressBookLocation extends Common
 
             if (isset($rows[$locationsFieldsMapping['schedule_mode']])) {
                 if ($this->validateScheduleMode($rows[$locationsFieldsMapping['schedule_mode']])) {
-                    $curSchedule = '"mode":"'.$rows[$locationsFieldsMapping['schedule_mode']].'",';
+                    $curSchedule = '"mode":"' . $rows[$locationsFieldsMapping['schedule_mode']] . '",';
                     $mode = $rows[$locationsFieldsMapping['schedule_mode']];
                 } else {
                     array_push($results['fail'], "$iRow --> Wrong schedule mode parameter");
@@ -575,7 +574,7 @@ class AddressBookLocation extends Common
 
             if (isset($rows[$locationsFieldsMapping['schedule_enabled']])) {
                 if ($this->validateScheduleEnable($rows[$locationsFieldsMapping['schedule_enabled']])) {
-                    $curSchedule .= '"enabled":'.$rows[$locationsFieldsMapping['schedule_enabled']].',';
+                    $curSchedule .= '"enabled":' . $rows[$locationsFieldsMapping['schedule_enabled']] . ',';
                 } else {
                     array_push($results['fail'], "$iRow --> The schedule enabled parameter is not set ");
                 }
@@ -583,8 +582,8 @@ class AddressBookLocation extends Common
 
             if (isset($rows[$locationsFieldsMapping['schedule_every']])) {
                 if ($this->validateScheduleEvery($rows[$locationsFieldsMapping['schedule_every']])) {
-                    $curSchedule .= '"'.$mode.'":{'.'"every":'.$rows[$locationsFieldsMapping['schedule_every']].',';
-                    if ('daily' == $mode) {
+                    $curSchedule .= '"' . $mode . '":{' . '"every":' . $rows[$locationsFieldsMapping['schedule_every']] . ',';
+                    if ($mode == 'daily') {
                         $curSchedule = trim($curSchedule, ',');
                         $curSchedule .= '}';
                     }
@@ -593,12 +592,12 @@ class AddressBookLocation extends Common
                 }
             }
 
-            if ('daily' != $mode) {
+            if ($mode != 'daily') {
                 switch ($mode) {
                     case 'weekly':
                         if (isset($rows[$locationsFieldsMapping['schedule_weekdays']])) {
                             if ($this->validateScheduleWeekDays($rows[$locationsFieldsMapping['schedule_weekdays']])) {
-                                $curSchedule .= '"weekdays":['.$rows[$locationsFieldsMapping['schedule_weekdays']].']}';
+                                $curSchedule .= '"weekdays":[' . $rows[$locationsFieldsMapping['schedule_weekdays']] . ']}';
                             } else {
                                 array_push($results['fail'], "$iRow --> Wrong weekdays");
                             }
@@ -611,7 +610,7 @@ class AddressBookLocation extends Common
                         if (isset($rows[$locationsFieldsMapping['monthly_mode']])) {
                             if ($this->validateScheduleMonthlyMode($rows[$locationsFieldsMapping['monthly_mode']])) {
                                 $monthlyMode = $rows[$locationsFieldsMapping['monthly_mode']];
-                                $curSchedule .= '"mode": "'.$rows[$locationsFieldsMapping['monthly_mode']].'",';
+                                $curSchedule .= '"mode": "' . $rows[$locationsFieldsMapping['monthly_mode']] . '",';
                             } else {
                                 array_push($results['fail'], "$iRow --> Wrong monthly mode");
                             }
@@ -619,12 +618,12 @@ class AddressBookLocation extends Common
                             array_push($results['fail'], "$iRow --> The parameter sched_monthly_mode is not set");
                         }
 
-                        if ('' != $monthlyMode) {
+                        if ($monthlyMode != '') {
                             switch ($monthlyMode) {
                                 case 'dates':
                                     if (isset($rows[$locationsFieldsMapping['monthly_dates']])) {
                                         if ($this->validateScheduleMonthlyDates($rows[$locationsFieldsMapping['monthly_dates']])) {
-                                            $curSchedule .= '"dates":['.$rows[$locationsFieldsMapping['monthly_dates']].']}';
+                                            $curSchedule .= '"dates":[' . $rows[$locationsFieldsMapping['monthly_dates']] . ']}';
                                         } else {
                                             array_push($results['fail'], "$iRow --> Wrong monthly dates");
                                         }
@@ -633,7 +632,7 @@ class AddressBookLocation extends Common
                                 case 'nth':
                                     if (isset($rows[$locationsFieldsMapping['monthly_nth_n']])) {
                                         if ($this->validateScheduleNthN($rows[$locationsFieldsMapping['monthly_nth_n']])) {
-                                            $curSchedule .= '"nth":{"n":'.$rows[$locationsFieldsMapping['monthly_nth_n']].',';
+                                            $curSchedule .= '"nth":{"n":' . $rows[$locationsFieldsMapping['monthly_nth_n']] . ',';
                                         } else {
                                             array_push($results['fail'], "$iRow --> Wrong parameter sched_nth_n");
                                         }
@@ -641,10 +640,10 @@ class AddressBookLocation extends Common
                                         array_push($results['fail'], "$iRow --> The parameter sched_nth_n is not set");
                                     }
 
-                                    if ('' != $curSchedule) {
+                                    if ($curSchedule != '') {
                                         if (isset($rows[$locationsFieldsMapping['monthly_nth_what']])) {
                                             if ($this->validateScheduleNthWhat($rows[$locationsFieldsMapping['monthly_nth_what']])) {
-                                                $curSchedule .= '"what":'.$rows[$locationsFieldsMapping['monthly_nth_what']].'}}';
+                                                $curSchedule .= '"what":' . $rows[$locationsFieldsMapping['monthly_nth_what']] . '}}';
                                             } else {
                                                 array_push($results['fail'], "$iRow --> Wrong parameter sched_nth_what");
                                             }
@@ -666,14 +665,14 @@ class AddressBookLocation extends Common
                 $curSchedule = '';
             }
 
-            if (('daily' == $mode || 'weekly' == $mode || 'monthy' == $mode) && '' == $curSchedule) {
+            if (($mode == 'daily' || $mode == 'weekly' || $mode == 'monthy') && $curSchedule == '') {
                 ++$iRow;
                 continue;
             }
 
             $curSchedule = strtolower($curSchedule);
 
-            $curSchedule = '[{'.$curSchedule.'}]';
+            $curSchedule = '[{' . $curSchedule . '}]';
 
             $parametersArray = [];
 
@@ -691,7 +690,7 @@ class AddressBookLocation extends Common
 
             array_push(
                 $results['success'],
-                'The schedule location with address_id = '.strval($abcResults['address_id']).' added successfuly.'
+                'The schedule location with address_id = ' . strval($abcResults['address_id']) . ' added successfuly.'
             );
         }
 

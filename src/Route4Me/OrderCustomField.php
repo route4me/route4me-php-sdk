@@ -1,4 +1,5 @@
 <?php
+
 namespace Route4Me;
 
 use Route4Me\Enum\Endpoint;
@@ -25,9 +26,9 @@ class OrderCustomField extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_CUSTOM_FIELDS_V4,
-            'method'    => 'POST',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ORDER_CUSTOM_FIELDS_V4,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -38,9 +39,9 @@ class OrderCustomField extends Common
         $allQueryFields = [];
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_CUSTOM_FIELDS_V4,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::ORDER_CUSTOM_FIELDS_V4,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;
@@ -53,9 +54,9 @@ class OrderCustomField extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_CUSTOM_FIELDS_V4,
-            'method'    => 'PUT',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ORDER_CUSTOM_FIELDS_V4,
+            'method' => 'PUT',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -68,15 +69,15 @@ class OrderCustomField extends Common
             'order_custom_field_type',
             'order_custom_field_label',
             'order_custom_field_type_info',
-            'root_owner_member_id'
+            'root_owner_member_id',
         ];
 
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_CUSTOM_FIELDS_V4,
-            'method'    => 'DELETE',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ORDER_CUSTOM_FIELDS_V4,
+            'method' => 'DELETE',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;

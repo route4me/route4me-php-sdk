@@ -2,21 +2,17 @@
 
 namespace Route4Me\V5\AddressBook;
 
-use Route4Me\Exception\ApiError;
 use Route4Me\Common;
-use Route4Me\V5\AddressBook\Cluster;
 
 /**
- * Address Book API ResponseCluster structure
+ * Address Book API ResponseCluster structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class ResponseCluster extends Common
 {
     /**
-     * Cluster of addresses
+     * Cluster of addresses.
      */
     public ?Cluster $cluster = null;
 

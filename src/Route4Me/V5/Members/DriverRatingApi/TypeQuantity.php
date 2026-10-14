@@ -3,9 +3,7 @@
 namespace Route4Me\V5\Members;
 
 /**
- * Class TypeQuantity
- * @package Route4Me\V5\Members
- * Driver rating quantity by types.
+ * Class TypeQuantity.
  */
 class TypeQuantity extends \Route4Me\Common
 {

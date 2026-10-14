@@ -61,7 +61,7 @@ class Order extends Common
     public $is_completed;
     public $custom_user_fields;
 
-    public $address_stop_type = \Route4Me\Enum\AddressType::DELIVERY;
+    public $address_stop_type = Enum\AddressType::DELIVERY;
 
     public $addresses = [];
 
@@ -111,9 +111,9 @@ class Order extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_V4,
-            'method'    => 'POST',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ORDER_V4,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -125,10 +125,10 @@ class Order extends Common
         $allBodyFields = ['addresses'];
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ROUTE_V4,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -137,13 +137,13 @@ class Order extends Common
     public static function addOrder2Optimization($params)
     {
         $allQueryFields = ['optimization_problem_id', 'redirect', 'device_type'];
-        $allBodyFields  = ['addresses'];
+        $allBodyFields = ['addresses'];
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::OPTIMIZATION_PROBLEM,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::OPTIMIZATION_PROBLEM,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -155,9 +155,9 @@ class Order extends Common
             'offset', 'limit'];
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_V4,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::ORDER_V4,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;
@@ -168,9 +168,9 @@ class Order extends Common
         $allQueryFields = ['offset', 'limit'];
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_V4,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::ORDER_V4,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;
@@ -209,9 +209,9 @@ class Order extends Common
         $allBodyFields = ['order_ids'];
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_V4,
-            'method'    => 'DELETE',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ORDER_V4,
+            'method' => 'DELETE',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -225,9 +225,9 @@ class Order extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_V4,
-            'method'    => 'PUT',
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ORDER_V4,
+            'method' => 'PUT',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $response;
@@ -238,9 +238,9 @@ class Order extends Common
         $allQueryFields = ['fields', 'day_added_YYMMDD', 'scheduled_for_YYMMDD', 'query', 'offset', 'limit'];
 
         $response = Route4Me::makeRequst([
-            'url'       => Endpoint::ORDER_V4,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::ORDER_V4,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $response;
@@ -322,11 +322,11 @@ class Order extends Common
 
                 foreach (['order_city', 'order_state_id', 'order_zip_code', 'order_country_id'] as $addressPart) {
                     if (isset($ordersFieldsMapping[$addressPart])) {
-                        $address .= ', '.$rows[$ordersFieldsMapping[$addressPart]];
+                        $address .= ', ' . $rows[$ordersFieldsMapping[$addressPart]];
                     }
                 }
 
-                echo "$iRow --> ".$ordersFieldsMapping['day_scheduled_for_YYMMDD'].', '.$rows[$ordersFieldsMapping['day_scheduled_for_YYMMDD']].'<br>';
+                echo "$iRow --> " . $ordersFieldsMapping['day_scheduled_for_YYMMDD'] . ', ' . $rows[$ordersFieldsMapping['day_scheduled_for_YYMMDD']] . '<br>';
 
                 $parametersArray = [];
 
@@ -345,7 +345,7 @@ class Order extends Common
 
                 $orderResults = $order->addOrder($orderParameters);
 
-                array_push($results['success'], 'The order with order_id = '.strval($orderResults['order_id']).' added successfuly.');
+                array_push($results['success'], 'The order with order_id = ' . strval($orderResults['order_id']) . ' added successfuly.');
             } else {
                 array_push($results['fail'], "$iRow --> one of the parameters cached_lat, cached_lng, address_1 is not set");
             }

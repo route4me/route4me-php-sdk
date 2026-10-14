@@ -118,8 +118,8 @@ class CurlHttpClient
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
-                echo 'Error number: '.curl_errno($this->ch)."\n";
-                echo 'Error message: '.curl_error($this->ch)."\n";
+                echo 'Error number: ' . curl_errno($this->ch) . "\n";
+                echo 'Error message: ' . curl_error($this->ch) . "\n";
             }
 
             return false;
@@ -165,8 +165,8 @@ class CurlHttpClient
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
-                echo 'Error number: '.curl_errno($this->ch)."\n";
-                echo 'Error message: '.curl_error($this->ch)."\n";
+                echo 'Error number: ' . curl_errno($this->ch) . "\n";
+                echo 'Error message: ' . curl_error($this->ch) . "\n";
             }
 
             return false;
@@ -211,8 +211,8 @@ class CurlHttpClient
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
-                echo 'Error number: '.curl_errno($this->ch)."\n";
-                echo 'Error message: '.curl_error($this->ch)."\n";
+                echo 'Error number: ' . curl_errno($this->ch) . "\n";
+                echo 'Error message: ' . curl_error($this->ch) . "\n";
             }
 
             return false;
@@ -271,7 +271,7 @@ class CurlHttpClient
 
         foreach ($postdata as $key => $value) {
             $post_array[$key] = $value;
-            $post_string_array[] = urlencode($key).'='.urlencode($value);
+            $post_string_array[] = urlencode($key) . '=' . urlencode($value);
         }
 
         $post_string = implode('&', $post_string_array);
@@ -284,10 +284,10 @@ class CurlHttpClient
         // set multipart form data - file array field-value pairs
         if (!empty($file_field_array)) {
             foreach ($file_field_array as $var_name => $var_value) {
-                if (false !== strpos(PHP_OS, 'WIN')) {
+                if (strpos(PHP_OS, 'WIN') !== false) {
                     $var_value = str_replace('/', '\\', $var_value);
                 } // win hack
-                $file_field_array[$var_name] = '@'.$var_value;
+                $file_field_array[$var_name] = '@' . $var_value;
             }
         }
 
@@ -300,8 +300,8 @@ class CurlHttpClient
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
-                echo 'Error number: '.curl_errno($this->ch)."\n";
-                echo 'Error message: '.curl_error($this->ch)."\n";
+                echo 'Error number: ' . curl_errno($this->ch) . "\n";
+                echo 'Error message: ' . curl_error($this->ch) . "\n";
             }
 
             return false;
@@ -360,8 +360,8 @@ class CurlHttpClient
      */
     public function getErrorMsg()
     {
-        $err = 'Error number: '.curl_errno($this->ch)."\n";
-        $err .= 'Error message: '.curl_error($this->ch)."\n";
+        $err = 'Error number: ' . curl_errno($this->ch) . "\n";
+        $err .= 'Error message: ' . curl_error($this->ch) . "\n";
 
         return $err;
     }
@@ -408,7 +408,7 @@ function curlExecRedir($ch)
     //echo "*** Got HTTP code: $http_code ***\n";
     //echo "**  Got headers: \n$header\n\n";
 
-    if (301 == $http_code || 302 == $http_code) {
+    if ($http_code == 301 || $http_code == 302) {
         // If we're redirected, we should revert to GET
         curl_setopt($ch, CURLOPT_HTTPGET, true);
 
@@ -436,7 +436,7 @@ function curlExecRedir($ch)
             $url['path'] = $last_url['path'];
         }
 
-        $new_url = $url['scheme'].'://'.$url['host'].$url['path'].(!empty($url['query']) ? '?'.$url['query'] : '');
+        $new_url = $url['scheme'] . '://' . $url['host'] . $url['path'] . (!empty($url['query']) ? '?' . $url['query'] : '');
         //echo "Being redirected to $new_url\n";
         curl_setopt($ch, CURLOPT_URL, $new_url);
 

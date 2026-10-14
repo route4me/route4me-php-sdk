@@ -2,8 +2,7 @@
 
 namespace Route4Me\V5\Routes;
 
-use Route4Me\Route4Me as Route4Me;
-use \Route4Me\Common as Common;
+use Route4Me\Common as Common;
 
 class RouteParameters extends Common
 {

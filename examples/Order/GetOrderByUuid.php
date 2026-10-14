@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Exception;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to getting of an order details by UUID.
 
@@ -14,14 +14,14 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParams = Order::fromArray([
-    'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-    'cached_lat'                => 48.335991,
-    'cached_lng'                => 31.18287,
-    'address_alias'             => 'Auto test address',
-    'address_city'              => 'Philadelphia',
-    'EXT_FIELD_first_name'      => 'John',
-    'EXT_FIELD_last_name'       => 'Doe',
-    'EXT_FIELD_email'           => 'some@company.com'
+    'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+    'cached_lat' => 48.335991,
+    'cached_lng' => 31.18287,
+    'address_alias' => 'Auto test address',
+    'address_city' => 'Philadelphia',
+    'EXT_FIELD_first_name' => 'John',
+    'EXT_FIELD_last_name' => 'Doe',
+    'EXT_FIELD_email' => 'some@company.com',
 ]);
 
 $order = null;
@@ -46,9 +46,9 @@ try {
 
     // compare orders
     if ($orderById == $orderByUuid) {
-        echo "The Orders are equal." . PHP_EOL;
+        echo 'The Orders are equal.' . PHP_EOL;
     } else {
-        echo "The Orders are not equal." . PHP_EOL;
+        echo 'The Orders are not equal.' . PHP_EOL;
     }
 
     // delete order
@@ -59,7 +59,7 @@ try {
         echo "Order with uuid='" . $orderUuid . "' was not deleted." . PHP_EOL;
     }
 } catch (Exception $e) {
-    echo "ERROR: " . $e->getMessage() . PHP_EOL;
+    echo 'ERROR: ' . $e->getMessage() . PHP_EOL;
 
     if ($order && $orderId) {
         try {

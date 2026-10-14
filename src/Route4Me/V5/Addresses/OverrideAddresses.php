@@ -1,13 +1,9 @@
 <?php
 
-
 namespace Route4Me\V5\Addresses;
 
-use Route4Me\Common as Common;
-
 /**
- * Structure of the property RoutePArameters->override_addresses
- * @package Route4Me\V5\Addresses
+ * Structure of the property RoutePArameters->override_addresses.
  */
 class OverrideAddresses
 {
@@ -18,13 +14,13 @@ class OverrideAddresses
     public $time;
 
     /**
-     * Route address stop type
+     * Route address stop type.
      * @var string
      */
     public $address_stop_type;
 
     /**
-     * The address group
+     * The address group.
      * @var string
      */
     public $group;

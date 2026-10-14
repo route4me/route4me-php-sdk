@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Route4Me\Members\Member;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to creating of a mobile device license record.
 
@@ -13,9 +13,9 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $recordParameters = Member::fromArray([
-    'device_id'     => '546546516',
-    'device_type'   => 'IPAD',
-    'format'        => 'json',
+    'device_id' => '546546516',
+    'device_type' => 'IPAD',
+    'format' => 'json',
 ]);
 
 $member = new Member();

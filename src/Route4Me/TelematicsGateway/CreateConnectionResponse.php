@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Route4Me\TelematicsGateway;
 
 use Route4Me\Common as Common;
@@ -8,32 +7,32 @@ use Route4Me\Common as Common;
 class CreateConnectionResponse extends Common
 {
     /**
-     * Telematics connection access account_id
+     * Telematics connection access account_id.
      * @var string
      */
     public $account_id;
 
     /**
-     * Telematics connection access api_key
+     * Telematics connection access api_key.
      * @var string
      */
     public $api_key;
 
     /**
-     * Telematics connection access token
+     * Telematics connection access token.
      * @var string
      */
     public $connection_token;
 
     /**
-     * When the connection created
+     * When the connection created.
      * @var string
      */
     public $created_at;
 
     /**
-     * Telemetics connection ID
-     * @var integer
+     * Telemetics connection ID.
+     * @var int
      */
     public $id;
 
@@ -44,62 +43,62 @@ class CreateConnectionResponse extends Common
     public $metadata;
 
     /**
-     * Telemetics connection name
+     * Telemetics connection name.
      * @var string
      */
     public $name;
 
     /**
-     * Telematics connection access password
+     * Telematics connection access password.
      * @var string
      */
     public $password;
 
     /**
-     * Synchronized vehicles number
-     * @var integer
+     * Synchronized vehicles number.
+     * @var int
      */
     public $synced_vehicles_count;
 
     /**
-     * Total vehicles number
-     * @var integer
+     * Total vehicles number.
+     * @var int
      */
     public $total_vehicles_count;
 
     /**
-     * When the connection updated
+     * When the connection updated.
      * @var string
      */
     public $updated_at;
 
     /**
-     * Connection user ID
-     * @var integer
+     * Connection user ID.
+     * @var int
      */
     public $user_id;
 
     /**
-     * Telematics connection access username
+     * Telematics connection access username.
      * @var string
      */
     public $username;
 
     /**
      * Vehicle tracking interval in seconds.
-     * @var integer
+     * @var int
      */
     public $vehicle_position_refresh_rate;
 
     /**
-     * Telemetics connection vendor
+     * Telemetics connection vendor.
      * @var string
      */
-    public $vendor ;
+    public $vendor;
 
     /**
-     * Telemetics connection type ID
-     * @var integer
+     * Telemetics connection type ID.
+     * @var int
      */
-    public $vendor_id ;
+    public $vendor_id;
 }

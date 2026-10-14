@@ -3,18 +3,17 @@
 namespace Route4Me\Vehicles;
 
 use Route4Me\Common;
-use Route4Me\Route4Me;
 use Route4Me\Enum\Endpoint;
+use Route4Me\Route4Me;
 
 /**
  * Class Vehicle
- * (Vehicle response from the endpoint https://wh.route4me.com/modules/api.v4/vehicle.php)
+ * (Vehicle response from the endpoint https://wh.route4me.com/modules/api.v4/vehicle.php).
  *
  * @deprecated 1.2.6
  * @see \Route4Me\V5\Vehicles\DataTypes\Vehicle
- * @package Route4Me\Vehicles
  */
-class Vehicle extends \Route4Me\Common
+class Vehicle extends Common
 {
     public $vehicle_id;
     public $member_id;
@@ -117,8 +116,8 @@ class Vehicle extends \Route4Me\Common
     public function getRandomVehicleId($page, $perPage)
     {
         $params = [
-            'page' => isset($page) ? $page : 1,
-            'perPage' => isset($perPage) ? $perPage : 10,
+            'page' => $page ?? 1,
+            'perPage' => $perPage ?? 10,
             'with_pagination' => true,
         ];
 
@@ -154,7 +153,7 @@ class Vehicle extends \Route4Me\Common
      */
     public function updateVehicle($params)
     {
-        $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
+        $vehicleID = $params->vehicle_id ?? null;
 
         $allBodyFields = Route4Me::getObjectProperties(new self(), ['vehicle_id']);
 
@@ -195,7 +194,7 @@ class Vehicle extends \Route4Me\Common
      */
     public function removeVehicle($params)
     {
-        $vehicleID = isset($params->vehicle_id) ? $params->vehicle_id : null;
+        $vehicleID = $params->vehicle_id ?? null;
 
         $response = Route4Me::makeRequst([
             'baseUrl' => Endpoint::WH_BASE_URL,

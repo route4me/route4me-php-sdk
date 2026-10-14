@@ -62,8 +62,8 @@ class BaseUrlLeakUnitTests extends \PHPUnit\Framework\TestCase
         try {
             Route4Me::makeRequst([
                 'baseUrl' => 'https://example.invalid',
-                'url'     => '/nowhere',
-                'method'  => 'GET',
+                'url' => '/nowhere',
+                'method' => 'GET',
             ]);
         } catch (\Exception $e) {
         }

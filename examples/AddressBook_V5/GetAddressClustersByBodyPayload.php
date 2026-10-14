@@ -6,8 +6,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\AddressBook;
@@ -22,8 +22,8 @@ try {
     // get the clusters with precision 1
     $options = [
         'clustering' => [
-            'precision' => 1
-        ]
+            'precision' => 1,
+        ],
     ];
     $res = $ab->getAddressClustersByBodyPayload($options);
     print_r($res);
@@ -32,7 +32,7 @@ try {
     // get the clusters with precision 2 from selected area
     $options = [
         'clustering' => [
-            'precision' => 2
+            'precision' => 2,
         ],
         'filter' => [
             'selected_areas' => [[
@@ -40,12 +40,12 @@ try {
                 'value' => [
                     'center' => [
                         'lat' => 52.4025,
-                        'lng' => 4.5601
+                        'lng' => 4.5601,
                     ],
-                    'distance' => 10000
-                ]
-            ]]
-        ]
+                    'distance' => 10000,
+                ],
+            ]],
+        ],
     ];
     $res = $ab->getAddressClustersByBodyPayload($options);
     print_r($res);

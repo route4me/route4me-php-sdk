@@ -2,8 +2,8 @@
 
 namespace Route4Me\TelematicsGateway;
 
-use Route4Me\Enum\Endpoint;
 use Route4Me\Common as Common;
+use Route4Me\Enum\Endpoint;
 use Route4Me\Route4Me as Route4Me;
 
 /**
@@ -16,65 +16,65 @@ class TelematicsVendor extends Common
      * @var string
      */
     public $id;
-    
+
     /**
-     * Vendor name
+     * Vendor name.
      * @var string
      */
     public $name;
-    
+
     /**
-     * Vendor slug
+     * Vendor slug.
      * @var string
      */
     public $slug;
-    
+
     /**
-     * Vendor description
+     * Vendor description.
      * @var string
      */
     public $description;
-    
+
     /**
      * URL to the telematics vendor's logo.
      * @var string
      */
     public $logo_url;
-    
+
     /**
      * Website URL of a telematics vendor.
      * @var string
      */
     public $website_url;
-    
+
     /**
      * API URL of a telematics vendor.
      * @var string
      */
     public $api_docs_url;
-    
+
     /**
-     * If 1, the vendor is integrated in Route4Me
+     * If 1, the vendor is integrated in Route4Me.
      * @var string
      */
     public $is_integrated;
-    
+
     /**
      * Vendors size.
      * <para>Accepted values:</para>
-     * <para>global, regional, local. </para>
+     * <para>global, regional, local. </para>.
      * @var string
      */
     public $size;
-    
+
     /**
      * An array of the countries, the vendor is operating.
      * @var Country[]
      */
     public $countries = [];
-    
+
     /**
-     * An array the vendor features
+     * An array the vendor features.
      * @var TelematicsVendorFeature[]
      */
     public $features = [];
@@ -89,10 +89,10 @@ class TelematicsVendor extends Common
         $allQueryFields = ['vendor_id', 'is_integrated', 'page', 'per_page', 'country', 'feature', 'search', 'vendors'];
 
         $vendors = Route4Me::makeRequst([
-            'baseUrl'   => Endpoint::TELEMATICS_VENDORS,
-            'url'       => '',
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'baseUrl' => Endpoint::TELEMATICS_VENDORS,
+            'url' => '',
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $vendors;
@@ -129,9 +129,9 @@ class TelematicsVendor extends Common
     }
 
     /**
-     * Register telematics member
+     * Register telematics member.
      * @param TelematicsVendorParameters $params contains:
-     * @param integer member_id : member ID
+     * @param int member_id : member ID
      * @param string api_key    : API key
      * @return array from a TelematicsRegisterMemberResponse type object
      * @throws \Route4Me\Exception\ApiError
@@ -143,22 +143,22 @@ class TelematicsVendor extends Common
         $allQueryFields = ['member_id', 'api_key'];
 
         $vendors = Route4Me::makeRequst([
-            'url'       => Endpoint::TELEMATICS_REGISTER_MEMBER,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::TELEMATICS_REGISTER_MEMBER,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $vendors;
     }
 
     /**
-     * Get a vendor by ID
+     * Get a vendor by ID.
      * @param string $vendorId
      * @return TelematicsVendor type object
      */
     public static function getVendorById($vendorId)
     {
-        if ($vendorId!=null) {
+        if ($vendorId != null) {
             return self::GetTelematicsVendors($vendorId);
         } else {
             return null;

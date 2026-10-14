@@ -34,7 +34,7 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
             'barcode' => '1',
             'airbillno' => '2',
             'sorted_on_date' => '3',
-            'sorted_on_utc' => 1
+            'sorted_on_utc' => 1,
         ]));
     }
 
@@ -47,7 +47,7 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(CustomField::class, new CustomField([
             'order_custom_field_uuid' => 'uuid',
-            'order_custom_field_value' => 'value'
+            'order_custom_field_value' => 'value',
         ]));
     }
 
@@ -68,7 +68,7 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
     {
         $coords = new GPSCoords([
             'lat' => 40.5,
-            'lng' => 90.0
+            'lng' => 90.0,
         ]);
         $this->assertInstanceOf(GPSCoords::class, $coords);
         $this->assertEquals($coords->lat, 40.5);
@@ -92,7 +92,7 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
     {
         $coords = new LocalTimeWindow([
             'start' => 1,
-            'end' => 2
+            'end' => 2,
         ]);
         $this->assertInstanceOf(LocalTimeWindow::class, $coords);
         $this->assertEquals($coords->start, 1);
@@ -109,7 +109,7 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
         $order = new Order([
             'first_name' => 'John',
             'last_name' => 'Doe',
-            'email' => 'some@company.com'
+            'email' => 'some@company.com',
         ]);
         $this->assertInstanceOf(Order::class, $order);
         $this->assertEquals($order->first_name, 'John');
@@ -126,7 +126,7 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
         $order = new ResponseOrder([
             'first_name' => 'John',
             'last_name' => 'Doe',
-            'email' => 'some@company.com'
+            'email' => 'some@company.com',
         ]);
         $this->assertInstanceOf(ResponseOrder::class, $order);
         $this->assertEquals($order->first_name, 'John');
@@ -142,17 +142,17 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
             'address_city' => 'Philadelphia',
             'address_geo' => [
                 'lat' => 48.335991,
-                'lng' => 31.18287
+                'lng' => 31.18287,
             ],
             'first_name' => 'John',
             'last_name' => 'Doe',
-            'email' => 'some@company.com'
+            'email' => 'some@company.com',
         ]);
 
         $this->assertInstanceOf(ResponseOrder::class, $order);
         $this->assertNotNull($order->first_name);
         $this->assertEquals($order->first_name, 'John');
-        
+
         self::$created_uuid = $order->order_uuid;
     }
 
@@ -194,9 +194,9 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
         if (self::$created_uuid !== null) {
             $orders = new Orders();
             $params = [
-                "filters" => [
-                    "order_ids" => [self::$created_uuid]
-                ]
+                'filters' => [
+                    'order_ids' => [self::$created_uuid],
+                ],
             ];
             $res = $orders->search($params);
 
@@ -218,23 +218,23 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
                 'address_city' => 'Philadelphia',
                 'address_geo' => [
                     'lat' => 48.335991,
-                    'lng' => 31.18287
+                    'lng' => 31.18287,
                 ],
                 'first_name' => 'John',
                 'last_name' => 'Doe',
-                'email' => 'some@company.com'
+                'email' => 'some@company.com',
             ], [
                 'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
                 'address_alias' => 'Address for batch workflow 1',
                 'address_city' => 'Philadelphia',
                 'address_geo' => [
                     'lat' => 48.335991,
-                    'lng' => 31.18287
+                    'lng' => 31.18287,
                 ],
                 'first_name' => 'John',
                 'last_name' => 'Doe',
-                'email' => 'some@company.com'
-            ]
+                'email' => 'some@company.com',
+            ],
         ];
         $res = $orders->batchCreate($params);
 
@@ -249,7 +249,7 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
         $orders = new Orders();
         $orderIds = ['', ''];
         $data = [
-            'first_name' => 'Jane'
+            'first_name' => 'Jane',
         ];
         $res = $orders->batchUpdate($orderIds, $data);
 
@@ -263,11 +263,11 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
         $orders = new Orders();
         $params = [
             'data' => [
-                'first_name' => 'John'
+                'first_name' => 'John',
             ],
             'filters' => [
-                'orderIds' => ['', '']
-            ]
+                'orderIds' => ['', ''],
+            ],
         ];
         $res = $orders->batchUpdateByFilters($params);
 
@@ -303,14 +303,14 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
             'order_custom_field_label' => 'Custom Field 1',
             'order_custom_field_type' => 'checkbox',
             'order_custom_field_type_info' => [
-                'short_label' => 'cFl1'
-            ]
+                'short_label' => 'cFl1',
+            ],
         ]);
 
         $this->assertInstanceOf(CustomField::class, $field);
         $this->assertNotNull($field->order_custom_field_label);
         $this->assertEquals($field->order_custom_field_label, 'Custom Field 1');
-        
+
         self::$created_field_uuid = $field->order_custom_field_uuid;
     }
 
@@ -322,8 +322,8 @@ final class OrderUnitTests extends \PHPUnit\Framework\TestCase
                 'order_custom_field_label' => 'Custom Field New',
                 'order_custom_field_type' => 'checkbox',
                 'order_custom_field_type_info' => [
-                    'short_label' => 'cFl1'
-                ]
+                    'short_label' => 'cFl1',
+                ],
             ]);
 
             $this->assertInstanceOf(CustomField::class, $field);

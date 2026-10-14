@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -15,7 +15,7 @@ $optimization = new OptimizationProblem();
 
 $optimizationProblemId = $optimization->getRandomOptimizationId(0, 10);
 
-assert(!is_null($optimizationProblemId), "Cannot retrieve a random optimization problem ID");
+assert(!is_null($optimizationProblemId), 'Cannot retrieve a random optimization problem ID');
 
 // Reoptimize an optimization
 $problemParams = [

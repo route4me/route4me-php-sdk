@@ -1,62 +1,59 @@
 <?php
 
-
 namespace Route4Me\V5\Orders\OrderInventoriesApi;
 
 /**
- * Class OrderInventory
- * @package Route4Me\V5\Orders\OrderInventoriesApi
- * Order inventory class
+ * Class OrderInventory.
  */
 class OrderInventory extends \Route4Me\Common
 {
-    /** Unique inventory ID
-     * @var integer $inventory_id
+    /** Unique inventory ID.
+     * @var int
      */
     public $inventory_id;
 
-    /** Unique order ID
-     * @var integer $order_id
+    /** Unique order ID.
+     * @var int
      */
     public $order_id;
 
-    /** Order inventory name
-     * @var string $name
+    /** Order inventory name.
+     * @var string
      */
     public $name;
 
-    /** Order inventory quantity
-     * @var integer $quantity
+    /** Order inventory quantity.
+     * @var int
      */
     public $quantity;
 
     /** Total weight of the order inventory.
-     * @var double $total_weight
+     * @var float
      */
     public $total_weight;
 
     /** Total volume of the inventory.
-     * @var double $total_volume
+     * @var float
      */
     public $total_volume;
 
     /** Total cost of the inventory.
-     * @var double $total_cost
+     * @var float
      */
     public $total_cost;
 
     /** Total price of the inventory.
-     * @var double $total_price
+     * @var float
      */
     public $total_price;
 
     /** When the inventory created.
-     * @var string $created_at
+     * @var string
      */
     public $created_at;
 
     /** When the inventory updated.
-     * @var string $updated_at
+     * @var string
      */
     public $updated_at;
 }

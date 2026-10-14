@@ -2,14 +2,10 @@
 
 namespace Route4Me\V5\AddressBook;
 
-use Route4Me\V5\AddressBook\ResponseAll;
-
 /**
- * Address Book API ResponsePagination structure
+ * Address Book API ResponsePagination structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class ResponsePagination extends ResponseAll
 {

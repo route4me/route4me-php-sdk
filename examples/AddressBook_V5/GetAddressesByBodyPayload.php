@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\AddressBook;
@@ -23,7 +23,7 @@ try {
     // get the first 5 addresses
     $options = [
         'limit' => 5,
-        'offset' => 0
+        'offset' => 0,
     ];
     $res = $ab->getAddressesByBodyPayload($options);
     print_r($res);
@@ -38,14 +38,14 @@ try {
                 'value' => [
                     'center' => [
                         'lat' => 38.024654,
-                        'lng' => 77.338814
+                        'lng' => 77.338814,
                         ],
-                    'distance' => 10000
-                ]
-            ]]
+                    'distance' => 10000,
+                ],
+            ]],
         ],
         'limit' => 5,
-        'offset' => 0
+        'offset' => 0,
     ];
     $res = $ab->getAddressesByBodyPayload($options);
     print_r($res);

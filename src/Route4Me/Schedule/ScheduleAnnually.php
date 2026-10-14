@@ -1,32 +1,29 @@
 <?php
 
-
 namespace Route4Me\Schedule;
 
-use phpDocumentor\Reflection\Types\Boolean;
 use Route4Me\Common as Common;
 
 /**
  * Subclass of the class Schedule.
- * @package Route4Me\Schedule
  */
 class ScheduleAnnually extends Common
 {
     /**
      * Repeat every year next 'Every' months.
-     * @var integer
+     * @var int
      */
     public $every;
 
     /**
      * If true, use NTH mode.
-     * @var Boolean
+     * @var bool
      */
     public $use_nth;
 
     /**
      * An array of the month numbers.
-     * @var integer[]
+     * @var int[]
      */
     public $months;
 

@@ -3,12 +3,11 @@
 namespace Route4Me;
 
 use Exception;
-use Route4Me\Exception\ApiError;
 use Route4Me\V5\Orders\Order;
 use Route4Me\V5\Orders\Orders;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to getting of an order details by UUID.
 
@@ -22,11 +21,11 @@ $order = new Order([
     'address_city' => 'Philadelphia',
     'address_geo' => [
         'lat' => 48.335991,
-        'lng' => 31.18287
+        'lng' => 31.18287,
     ],
     'first_name' => 'John',
     'last_name' => 'Doe',
-    'email' => 'some@company.com'
+    'email' => 'some@company.com',
 ]);
 
 $orders = null;
@@ -51,9 +50,9 @@ try {
 
     // compare orders
     if ($orderById == $orderByUuid) {
-        echo "The Orders are equal." . PHP_EOL;
+        echo 'The Orders are equal.' . PHP_EOL;
     } else {
-        echo "The Orders are not equal." . PHP_EOL;
+        echo 'The Orders are not equal.' . PHP_EOL;
     }
 
     // delete order
@@ -63,7 +62,7 @@ try {
         echo "Order with uuid='" . $orderUuid . "' was not deleted." . PHP_EOL;
     }
 } catch (Exception $e) {
-    echo "ERROR: " . $e->getMessage() . PHP_EOL;
+    echo 'ERROR: ' . $e->getMessage() . PHP_EOL;
 
     if ($orders && $orderId) {
         try {

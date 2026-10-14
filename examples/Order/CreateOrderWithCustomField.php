@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -14,17 +14,17 @@ assert_options(ASSERT_BAIL, 1);
 Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
-    'address_1'                => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-    'cached_lat'               => 48.335991,
-    'cached_lng'               => 31.18287,
+    'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+    'cached_lat' => 48.335991,
+    'cached_lng' => 31.18287,
     'day_scheduled_for_YYMMDD' => '2019-10-11',
-    'address_alias'            => 'Auto test address',
+    'address_alias' => 'Auto test address',
     'custom_user_fields' => [
         OrderCustomField::fromArray([
-                'order_custom_field_id'    => 93,
-                'order_custom_field_value' => 'false'
-            ])
-    ]
+                'order_custom_field_id' => 93,
+                'order_custom_field_value' => 'false',
+            ]),
+    ],
 ]);
 
 $order = new Order();

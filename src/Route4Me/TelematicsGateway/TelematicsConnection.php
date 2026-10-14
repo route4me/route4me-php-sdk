@@ -2,149 +2,148 @@
 
 namespace Route4Me\TelematicsGateway;
 
-use phpDocumentor\Reflection\Types\Boolean;
 use Route4Me\Enum\Endpoint;
 use Route4Me\Route4Me;
 
 /**
- * The response structure from the endpoint /connections
+ * The response structure from the endpoint /connections.
  */
 class TelematicsConnection extends \Route4Me\Common
 {
     /**
-     * Telematics connection access account_id
+     * Telematics connection access account_id.
      * @var string
      */
     public $account_id;
-    
+
     /**
-     * Telematics connection access username
+     * Telematics connection access username.
      * @var string
      */
     public $username;
-    
+
     /**
-     * Telematics connection access password
+     * Telematics connection access password.
      * @var string
      */
     public $password;
-    
+
     /**
-     * Telematics connection access host
+     * Telematics connection access host.
      * @var string
      */
     public $host;
-    
+
     /**
-     * Telematics connection access api_key
+     * Telematics connection access api_key.
      * @var string
      */
     public $api_key;
-    
+
     /**
-     * Telemetics connection type ID
-     * @var integer
+     * Telemetics connection type ID.
+     * @var int
      */
     public $vendor_id;
-    
+
     /**
-     * Telemetics connection name
+     * Telemetics connection name.
      * @var string
      */
     public $name;
-    
+
     /**
      * Vehicle tracking interval in seconds.
-     * @var integer
+     * @var int
      */
     public $vehicle_position_refresh_rate;
-    
+
     /**
-     * Maximum idle time
-     * @var integer
+     * Maximum idle time.
+     * @var int
      */
     public $max_idle_time;
-    
+
     /**
-     * Disable/enable vehicle tracking
-     * @var integer
+     * Disable/enable vehicle tracking.
+     * @var int
      */
     public $is_enabled;
-    
+
     /**
      * The last timestamp, when the vehicles reloaded.
-     * @var integer
+     * @var int
      */
     public $last_vehicles_reload;
-    
+
     /**
      * The last timestamp, when the addresses reloaded.
-     * @var integer
+     * @var int
      */
     public $last_addresses_reload;
-    
+
     /**
      * The last timestamp, when the positions reloaded.
-     * @var integer
+     * @var int
      */
     public $last_position_reload;
-    
+
     /**
-     * Telematics connection access token
+     * Telematics connection access token.
      * @var string
      */
     public $connection_token;
-    
+
     /**
-     * Connection user ID
-     * @var integer
+     * Connection user ID.
+     * @var int
      */
     public $user_id;
-    
+
     /**
-     * When the connection updated
+     * When the connection updated.
      * @var string
      */
     public $updated_at;
-    
+
     /**
-     * When the connection created
+     * When the connection created.
      * @var string
      */
     public $created_at;
-    
+
     /**
-     * Telemetics connection ID
-     * @var integer
+     * Telemetics connection ID.
+     * @var int
      */
     public $id;
-    
+
     /**
      * Metadata, custom key-value storage.
      * @var array
      */
     public $metadata;
-    
+
     /**
-     * Total vehicles number
-     * @var integer
+     * Total vehicles number.
+     * @var int
      */
     public $total_vehicles_count;
-    
+
     /**
-     * Total addresses number
-     * @var integer
+     * Total addresses number.
+     * @var int
      */
     public $total_addresses_count;
-    
+
     /**
-     * Synchronized vehicles number
-     * @var integer
+     * Synchronized vehicles number.
+     * @var int
      */
     public $synced_vehicles_count;
-    
+
     /**
-     * Telemetics connection vendor
+     * Telemetics connection vendor.
      * @var string
      */
     public $vendor;
@@ -152,7 +151,7 @@ class TelematicsConnection extends \Route4Me\Common
     /**
      * Validate connections credentials.<br>
      * If true, the connection validated.
-     * @var Boolean
+     * @var bool
      */
     public $validate_remote_credentials;
 
@@ -172,11 +171,11 @@ class TelematicsConnection extends \Route4Me\Common
         $allBodyFields = Route4Me::getObjectProperties(new TelematicsConnectionParameters(), $excludeFields);
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::TELEMATICS_CONNECTION,
+            'url' => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'POST',
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'query'  => ['api_token' => $apiToken],
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'query' => ['api_token' => $apiToken],
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;
@@ -194,11 +193,11 @@ class TelematicsConnection extends \Route4Me\Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::TELEMATICS_CONNECTION,
+            'url' => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'DELETE',
-            'query'  => [
-                    'api_token'         => $apiToken,
-                    'connection_token'  => $connectionToken
+            'query' => [
+                    'api_token' => $apiToken,
+                    'connection_token' => $connectionToken,
                 ],
         ]);
 
@@ -216,10 +215,10 @@ class TelematicsConnection extends \Route4Me\Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::TELEMATICS_CONNECTION,
+            'url' => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'GET',
-            'query'  => [
-                'api_token' => $apiToken
+            'query' => [
+                'api_token' => $apiToken,
             ],
         ]);
 
@@ -227,7 +226,7 @@ class TelematicsConnection extends \Route4Me\Common
     }
 
     /**
-     * Get a telematics connection
+     * Get a telematics connection.
      * @param $apiToken string : API token
      * @param $connectionToken string : connection token
      * @return array Array from a TelematicsConnection type object
@@ -238,11 +237,11 @@ class TelematicsConnection extends \Route4Me\Common
         Route4Me::setBaseUrl(Endpoint::BASE_URL);
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::TELEMATICS_CONNECTION,
+            'url' => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'GET',
-            'query'  => [
-                'api_token'         => $apiToken,
-                'connection_token'  => $connectionToken
+            'query' => [
+                'api_token' => $apiToken,
+                'connection_token' => $connectionToken,
             ],
         ]);
 
@@ -250,7 +249,7 @@ class TelematicsConnection extends \Route4Me\Common
     }
 
     /**
-     * Update telematics connection
+     * Update telematics connection.
      * @param $apiToken string : API token
      * @param $connectionToken string : connection token
      * @param $teleConParams TelematicsConnectionParameters : Telematics connection parameters
@@ -264,11 +263,11 @@ class TelematicsConnection extends \Route4Me\Common
         $allBodyFields = Route4Me::getObjectProperties(new TelematicsConnectionParameters(), $excludeFields);
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::TELEMATICS_CONNECTION,
+            'url' => Endpoint::TELEMATICS_CONNECTION,
             'method' => 'PUT',
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $teleConParams),
-            'query'  => ['api_token' => $apiToken, 'connection_token' => $connectionToken],
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $teleConParams),
+            'query' => ['api_token' => $apiToken, 'connection_token' => $connectionToken],
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;

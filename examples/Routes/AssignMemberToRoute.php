@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -18,7 +18,7 @@ $member = new Member();
 $users = $member->getUsers();
 
 assert(!is_null($users), 'Cannot retrieve list of the users');
-assert(2 == sizeof($users), 'Cannot retrieve list of the users');
+assert(sizeof($users) == 2, 'Cannot retrieve list of the users');
 assert(isset($users['results']), 'Cannot retrieve list of the users');
 assert(isset($users['total']), 'Cannot retrieve list of the users');
 
@@ -32,7 +32,7 @@ $route = new Route();
 // Get a random route ID
 $routeId = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeId), "Cannot retrieve a random route ID");
+assert(!is_null($routeId), 'Cannot retrieve a random route ID');
 
 // Update the route parameters
 $route->route_id = $routeId;
@@ -49,7 +49,6 @@ $route->update();
 
 $route = new Route();
 
-$assignedRoute= $route->getRoutes(['route_id' => $routeId]);
+$assignedRoute = $route->getRoutes(['route_id' => $routeId]);
 
-echo "Assigned member id -> ".$assignedRoute->parameters->{'member_id'};
-
+echo 'Assigned member id -> ' . $assignedRoute->parameters->{'member_id'};

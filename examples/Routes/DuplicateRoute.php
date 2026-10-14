@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -15,7 +15,7 @@ $route = new Route();
 
 // Get random route ID
 $randomRouteID = $route->getRandomRouteId(0, 25);
-assert(!is_null($randomRouteID), "Cannot retrieve a random route ID");
+assert(!is_null($randomRouteID), 'Cannot retrieve a random route ID');
 
 $routeIDs = [$randomRouteID];
 

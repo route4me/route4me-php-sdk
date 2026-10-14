@@ -3,15 +3,11 @@
 namespace Route4Me\V5\AddressBook;
 
 use Route4Me\Common;
-use Route4Me\V5\AddressBook\AssignedTo;
-use Route4Me\V5\AddressBook\ScheduleItem;
 
 /**
- * Address Book API ResponseAddress structure
+ * Address Book API ResponseAddress structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class ResponseAddress extends Common
 {
@@ -207,7 +203,7 @@ class ResponseAddress extends Common
     /**
      * The contact's stop type.
      * String array, available types: 'DELIVERY', 'PICKUP',
-     *   'BREAK', 'MEETUP', 'SERVICE', 'VISIT', 'DRIVEBY'
+     *   'BREAK', 'MEETUP', 'SERVICE', 'VISIT', 'DRIVEBY'.
      */
     public ?string $address_stop_type = null;
 
@@ -239,7 +235,7 @@ class ResponseAddress extends Common
     /**
      * If present, the priority will sequence addresses in all the optimal routes so that
      * higher priority addresses are general at the beginning of the route sequence.
-     * 0 is the highest priority, n has higher priority than n + 1
+     * 0 is the highest priority, n has higher priority than n + 1.
      */
     public ?int $address_priority = null;
 
@@ -269,7 +265,7 @@ class ResponseAddress extends Common
             foreach ($this as $key => $value) {
                 if (isset($params[$key])) {
                     if ($key === 'schedule') {
-                        $this->{$key} = array();
+                        $this->{$key} = [];
                         foreach ($params[$key] as $si_key => $si_value) {
                             if (is_array($si_value)) {
                                 array_push($this->{$key}, new ScheduleItem($si_value));

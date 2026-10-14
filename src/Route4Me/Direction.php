@@ -1,24 +1,22 @@
 <?php
 
-
 namespace Route4Me;
 
 use Route4Me\Common as Common;
 
 /**
- * Movement direction structure
- * @package Route4Me
+ * Movement direction structure.
  */
 class Direction extends Common
 {
     /**
-     * Starting location of a direction
+     * Starting location of a direction.
      * @var DirectionLocation
      */
     public $location = [];
 
     /**
-     * The direction steps
+     * The direction steps.
      * @var DirectionStep[]
      */
     public $steps = [];

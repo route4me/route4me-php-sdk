@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Enum\TerritoryTypes;
 
@@ -23,14 +23,14 @@ $territoryParams['data'] = [
 ];
 
 $avoidanceZoneParameters = AvoidanceZone::fromArray([
-    'territory_name'    => 'Test Territory '.strval(rand(10000, 99999)),
-    'territory_color'   => 'ff7700',
-    'territory'         => $territoryParams,
+    'territory_name' => 'Test Territory ' . strval(rand(10000, 99999)),
+    'territory_color' => 'ff7700',
+    'territory' => $territoryParams,
 ]);
 
 $avoidanceZone = new AvoidanceZone();
 
-$result = (array) $avoidanceZone->addAvoidanceZone($avoidanceZoneParameters);
+$result = (array)$avoidanceZone->addAvoidanceZone($avoidanceZoneParameters);
 
 assert(isset($result), 'Failed to create new Avoidance Zone');
 
@@ -46,10 +46,10 @@ $territory->data = [
 ];
 
 $avoidanceZoneParameters = [
-    'territory_id'      => $territory_id,
-    'territory_name'    => 'Test Territory Updated',
-    'territory_color'   => 'ff5500',
-    'territory'         => $territory,
+    'territory_id' => $territory_id,
+    'territory_name' => 'Test Territory Updated',
+    'territory_color' => 'ff5500',
+    'territory' => $territory,
 ];
 
 $result1 = $avoidanceZone->updateAvoidanceZone($avoidanceZoneParameters);

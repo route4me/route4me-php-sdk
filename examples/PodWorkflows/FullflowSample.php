@@ -6,8 +6,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Exception;
 use Route4Me\Exception\ApiError;
@@ -27,13 +27,13 @@ $params = [
     'done_actions' => [[
         'title' => 'Signee Name',
         'type' => 'signeeName',
-        'required' => true
+        'required' => true,
     ]],
     'failed_actions' => [[
         'title' => 'Signee Name Failed',
         'type' => 'signeeName',
-        'required' => false
-    ]]
+        'required' => false,
+    ]],
 ];
 
 $pws = new PodWorkflows();
@@ -54,7 +54,7 @@ try {
         $params['title'] = 'A new Super title from 15';
         $updated_pod = $pws->updatePodWorkflow($created_pod_guid, $params);
         echo 'Updated PodWorkflow with GUID: ' . $updated_pod->workflow_guid
-            . ', new title is "'. $updated_pod->title . '"' . PHP_EOL;
+            . ', new title is "' . $updated_pod->title . '"' . PHP_EOL;
 
         //delete
         $res = $pws->deletePodWorkflow($created_pod_guid);
@@ -67,6 +67,7 @@ try {
 
     if ($created_pod_guid) {
         echo 'Cleanup PodWorkflow with GUID: ' . $created_pod_guid . PHP_EOL;
+
         try {
             $pws->deletePodWorkflow($created_pod_guid);
         } catch (Exception | ApiError $e) {

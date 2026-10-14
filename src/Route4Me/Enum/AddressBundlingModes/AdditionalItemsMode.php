@@ -11,6 +11,8 @@ class AdditionalItemsMode
      * INHERIT_FROM_PRIMARY = 3, don't add service times.
      */
     const KEEP_ORIGINAL = 1;
+
     const CUSTOM_TIME = 2;
+
     const INHERIT_FROM_PRIMARY = 3;
 }

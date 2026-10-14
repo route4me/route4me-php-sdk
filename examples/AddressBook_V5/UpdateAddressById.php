@@ -8,8 +8,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\AddressBook;
@@ -24,7 +24,7 @@ try {
     // update adress's last_name
     $addressId = 96100576;
     $params = [
-        'last_name' => 'Grigoriani III'
+        'last_name' => 'Grigoriani III',
     ];
     $res = $ab->updateAddressById($addressId, $params);
     print_r($res);

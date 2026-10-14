@@ -24,34 +24,34 @@ class ScheduleCalendarParameters extends Common
     public $date_to_string;
 
     /**
-     * Member ID
-     * @var integer
+     * Member ID.
+     * @var int
      */
     public $member_id;
 
     /**
      * Timezone offset (in minutes)<br>
      * (e.g. NYT: -4*60 = -480, Kiev: 3*60 = 180).
-     * @var integer
+     * @var int
      */
     public $timezone_offset_minutes;
 
     /**
      * If true, the scheduled orders are included in the calendar.
-     * @var Boolean
+     * @var bool
      */
     public $orders;
 
     /**
      * If true, the scheduled address book contacts
      * are included in the calendar.
-     * @var Boolean
+     * @var bool
      */
     public $ab;
 
     /**
      * If true, the scheduled routes are included in the calendar.
-     * @var Boolean
+     * @var bool
      */
     public $routes_count;
 
@@ -83,9 +83,9 @@ class ScheduleCalendarParameters extends Common
         $allQueryFields = ['date_from_string', 'date_to_string', 'member_id', 'timezone_offset_minutes', 'orders', 'ab', 'routes_count'];
 
         $schedCalendar = Route4Me::makeRequst([
-            'url'       => Endpoint::SCHEDULE_CALENDAR,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::SCHEDULE_CALENDAR,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $schedCalendar;

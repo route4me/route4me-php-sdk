@@ -3,173 +3,169 @@
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 use Route4Me\Common as Common;
-use Route4Me\Constants as Constants;
 use Route4Me\Route4Me as Route4Me;
 use Route4Me\V5\Enum\Endpoint as Endpoint;
-use Route4Me\V5\Vehicles\QueryTypes\VehicleOrderParameters as VehicleOrderParameters;
 
 /**
- * Class VehicleProfile
- * @package Route4Me\V5\Vehicles
- * Vehicle profile data structure.
+ * Class VehicleProfile.
  */
 class VehicleProfile extends Common
 {
-    /** Vehicle profile ID
-     * @var integer $vehicle_profile_id
+    /** Vehicle profile ID.
+     * @var int
      */
     public $vehicle_profile_id;
 
-    /** Root member ID
-     * @var integer $root_member_id
+    /** Root member ID.
+     * @var int
      */
     public $root_member_id;
 
-    /** Vehicle profile name
-     * @var string $name
+    /** Vehicle profile name.
+     * @var string
      */
     public $name;
 
-    /** Vehicle height
-     * @var float $height
+    /** Vehicle height.
+     * @var float
      */
     public $height;
 
-    /** Vehicle width
-     * @var float $width
+    /** Vehicle width.
+     * @var float
      */
     public $width;
 
-    /** Vehicle length
-     * @var float $length
+    /** Vehicle length.
+     * @var float
      */
     public $length;
 
-    /** Vehicle weight
-     * @var float $weight
+    /** Vehicle weight.
+     * @var float
      */
     public $weight;
 
     /** Maximum weight per axle.
-     * @var float $max_weight_per_axle
+     * @var float
      */
     public $max_weight_per_axle;
 
-    /** When the profile deleted
-     * @var string $deleted_at
+    /** When the profile deleted.
+     * @var string
      */
     public $deleted_at;
 
-    /** When the profile created
-     * @var string $created_at
+    /** When the profile created.
+     * @var string
      */
     public $created_at;
 
-    /** When the profile updated
-     * @var string $updated_at
+    /** When the profile updated.
+     * @var string
      */
     public $updated_at;
 
     /** A type of the fuel
      * enum: ['unleaded 87','unleaded 89','unleaded 91',
-     * 'unleaded 93','diesel','electric','hybrid']
-     * @var string $fuel_type
+     * 'unleaded 93','diesel','electric','hybrid'].
+     * @var string
      */
     public $fuel_type;
 
-    /** Fuel consumption city
-     * @var float $fuel_consumption_city
+    /** Fuel consumption city.
+     * @var float
      */
     public $fuel_consumption_city;
 
-    /** Fuel consumption in the highway area
-     * @var float $fuel_consumption_highway
+    /** Fuel consumption in the highway area.
+     * @var float
      */
     public $fuel_consumption_highway;
 
     /** Type of a hazardous material.
-     * enum: ['general', 'explosives', 'flammable', 'inhalants', 'caustic', 'radioactive']
-     * @var string $hazmat_type
+     * enum: ['general', 'explosives', 'flammable', 'inhalants', 'caustic', 'radioactive'].
+     * @var string
      */
     public $hazmat_type;
 
     /** If true, the profile is predefined.
-     * @var boolean $is_predefined
+     * @var bool
      */
     public $is_predefined;
 
     /** If true, the profile is default.
-     * @var boolean $is_default
+     * @var bool
      */
     public $is_default;
 
-    /** Height units (e.g. 'ft', 'm')
-     * @var string $height_units
+    /** Height units (e.g. 'ft', 'm').
+     * @var string
      */
     public $height_units;
 
-    /** Width units (e.g. 'ft', 'm')
-     * @var string $width_units
+    /** Width units (e.g. 'ft', 'm').
+     * @var string
      */
     public $width_units;
 
-    /** Length units (e.g. 'ft', 'm')
-     * @var string $length_units
+    /** Length units (e.g. 'ft', 'm').
+     * @var string
      */
     public $length_units;
 
-    /** Weight units (e.g. 'lb', 'kg')
-     * @var string $weight_units
+    /** Weight units (e.g. 'lb', 'kg').
+     * @var string
      */
     public $weight_units;
 
-    /** Maximum weight per axle units (e.g. 'lb', 'kg')
-     * @var string $max_weight_per_axle_units
+    /** Maximum weight per axle units (e.g. 'lb', 'kg').
+     * @var string
      */
     public $max_weight_per_axle_units;
 
-    /** Fuel consumption units in the city area (e.g. mpg)
-     * @var string $fuel_consumption_city_unit
+    /** Fuel consumption units in the city area (e.g. mpg).
+     * @var string
      */
     public $fuel_consumption_city_unit;
 
-    /** Fuel consumption units in the highway area (e.g. mpg)
-     * @var string $fuel_consumption_highway_unit
+    /** Fuel consumption units in the highway area (e.g. mpg).
+     * @var string
      */
     public $fuel_consumption_highway_unit;
 
-    /** Height UF value (e.g. "7'")
-     * @var string $height_uf_value
+    /** Height UF value (e.g. "7'").
+     * @var string
      */
     public $height_uf_value;
 
-    /** Width UF value (e.g. "8'")
-     * @var string $width_uf_value
+    /** Width UF value (e.g. "8'").
+     * @var string
      */
     public $width_uf_value;
 
-    /** Length UF value (e.g. "20'")
-     * @var string $length_uf_value
+    /** Length UF value (e.g. "20'").
+     * @var string
      */
     public $length_uf_value;
 
-    /** Weight UF value (e.g. "8,500lb")
-     * @var string $weight_uf_value
+    /** Weight UF value (e.g. "8,500lb").
+     * @var string
      */
     public $weight_uf_value;
 
-    /** Maximum weight per axle (UF value, e.g. "8,500lb")
-     * @var string $max_weight_per_axle_uf_value
+    /** Maximum weight per axle (UF value, e.g. "8,500lb").
+     * @var string
      */
     public $max_weight_per_axle_uf_value;
 
-    /** Fuel consumption city (UF value, e.g. "20.01 mi/l")
-     * @var string $fuel_consumption_city_uf_value
+    /** Fuel consumption city (UF value, e.g. "20.01 mi/l").
+     * @var string
      */
     public $fuel_consumption_city_uf_value;
 
-    /** Fuel consumption highway (UF value, e.g. "2,000.01 mpg")
-     * @var string $fuel_consumption_highway_uf_value
+    /** Fuel consumption highway (UF value, e.g. "2,000.01 mpg").
+     * @var string
      */
     public $fuel_consumption_highway_uf_value;
 
@@ -191,7 +187,7 @@ class VehicleProfile extends Common
 
     public function __construct()
     {
-        Route4Me::setBaseUrl("");
+        Route4Me::setBaseUrl('');
     }
 
     public function removeVehicleProfile($vehicleProfileId)
@@ -239,7 +235,7 @@ class VehicleProfile extends Common
             'url' => Endpoint::VehicleProfiles,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $profileParams),
-            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
         ]);
 
         return $response;
@@ -261,10 +257,10 @@ class VehicleProfile extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::VehicleProfiles.'/'.$vehicleProfile['vehicle_profile_id'],
+            'url' => Endpoint::VehicleProfiles . '/' . $vehicleProfile['vehicle_profile_id'],
             'method' => 'PATCH',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleProfile),
-            'HTTPHEADER' => 'Content-Type: application/json'
+            'HTTPHEADER' => 'Content-Type: application/json',
         ]);
 
         return $response;

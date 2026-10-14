@@ -3,10 +3,10 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\Constants;
+use Route4Me\Geocoding;
 use Route4Me\GeocodingResponse;
 use Route4Me\RapidAddressSearchResponse;
 use Route4Me\Route4Me;
-use Route4Me\Geocoding;
 
 class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 {
@@ -18,8 +18,8 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $geocoding = Geocoding::fromArray([
-            'strExportFormat'   => 'json',
-            'addresses'         => 'Los20%Angeles20%International20%Airport,20%CA',
+            'strExportFormat' => 'json',
+            'addresses' => 'Los20%Angeles20%International20%Airport,20%CA',
         ]);
 
         $this->assertEquals('json', $geocoding->strExportFormat);
@@ -29,8 +29,8 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
     public function testForwardGeocoding()
     {
         $geoCodingParameters = [
-            'strExportFormat'   => 'json',
-            'addresses'         => 'Los20%Angeles20%International20%Airport,20%CA',
+            'strExportFormat' => 'json',
+            'addresses' => 'Los20%Angeles20%International20%Airport,20%CA',
         ];
 
         $fGeocoding = new Geocoding();
@@ -38,7 +38,7 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         $result = $fGeocoding->forwardGeocoding($geoCodingParameters);
 
         $this->assertNotNull($result);
-        $this->assertTrue(sizeof($result)>0);
+        $this->assertTrue(sizeof($result) > 0);
 
         $firstGeocoding = GeocodingResponse::fromArray(
             $result[0]
@@ -50,8 +50,8 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
     public function testReverseGeocoding()
     {
         $geoCodingParameters = [
-            'strExportFormat'   => 'json',
-            'addresses'         => '42.35863,-71.05670',
+            'strExportFormat' => 'json',
+            'addresses' => '42.35863,-71.05670',
         ];
 
         $rGeocoding = new Geocoding();
@@ -59,10 +59,10 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         $result = $rGeocoding->reverseGeocoding($geoCodingParameters);
 
         $this->assertNotNull($result);
-        $this->assertTrue(sizeof($result)>0);
+        $this->assertTrue(sizeof($result) > 0);
 
         $firstGeocoding = GeocodingResponse::fromArray(
-            $result["destination"]
+            $result['destination']
         );
 
         $this->assertContainsOnlyInstancesOf(GeocodingResponse::class, [$firstGeocoding]);
@@ -73,8 +73,8 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         $this->markTestSkipped('must be revisited.');
 
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
-            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
-            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+            $className = str_replace('UnitTestFiles\\Test\\', '', get_class());
+            self::markTestSkipped('PHPUnit will skip ' . $className . ' class - it impossible run with demo API key');
         }
 
         //region Get Single Street Address
@@ -90,7 +90,7 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         $resultAll = Geocoding::getStreetData([]);
 
         $this->assertNotNull($resultAll);
-        $this->assertTrue(sizeof($resultAll)>0);
+        $this->assertTrue(sizeof($resultAll) > 0);
 
         $firstGeocoding = RapidAddressSearchResponse::fromArray(
             $resultAll[0]
@@ -102,11 +102,11 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         //region Get Street Data Limited
         $resultLimited = Geocoding::getStreetData([
             'offset' => 0,
-            'limit'  => 5,
+            'limit' => 5,
         ]);
 
         $this->assertNotNull($resultLimited);
-        $this->assertTrue(sizeof($resultLimited)>0);
+        $this->assertTrue(sizeof($resultLimited) > 0);
 
         $firstGeocoding = RapidAddressSearchResponse::fromArray(
             $resultLimited[0]
@@ -121,15 +121,15 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         $this->markTestSkipped('must be revisited.');
 
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
-            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
-            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+            $className = str_replace('UnitTestFiles\\Test\\', '', get_class());
+            self::markTestSkipped('PHPUnit will skip ' . $className . ' class - it impossible run with demo API key');
         }
 
         //region Get All Geocodings With Specified Zipcode
         $resultZipAll = Geocoding::getZipCode(['zipcode' => '00601']);
 
         $this->assertNotNull($resultZipAll);
-        $this->assertTrue(sizeof($resultZipAll)>0);
+        $this->assertTrue(sizeof($resultZipAll) > 0);
 
         $firstGeocoding = RapidAddressSearchResponse::fromArray(
             $resultZipAll[0]
@@ -141,12 +141,12 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         //region Get Limited Geocodings With Specified Zipcode
         $resultZipLimited = Geocoding::getZipCode([
             'zipcode' => '00601',
-            'offset'  => 0,
-            'limit'   => 20,
+            'offset' => 0,
+            'limit' => 20,
         ]);
 
         $this->assertNotNull($resultZipLimited);
-        $this->assertTrue(sizeof($resultZipLimited)>0);
+        $this->assertTrue(sizeof($resultZipLimited) > 0);
 
         $firstGeocoding = RapidAddressSearchResponse::fromArray(
             $resultZipLimited[0]
@@ -161,18 +161,18 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
         $this->markTestSkipped('must be revisited.');
 
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
-            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
-            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+            $className = str_replace('UnitTestFiles\\Test\\', '', get_class());
+            self::markTestSkipped('PHPUnit will skip ' . $className . ' class - it impossible run with demo API key');
         }
 
         //region Get All Geocodings With Specified Zipcode And House Number
         $resultZipHouseAll = Geocoding::getService([
-            'zipcode'     => '00601',
+            'zipcode' => '00601',
             'housenumber' => 17,
         ]);
 
         $this->assertNotNull($resultZipHouseAll);
-        $this->assertTrue(sizeof($resultZipHouseAll)>0);
+        $this->assertTrue(sizeof($resultZipHouseAll) > 0);
 
         $firstGeocoding = RapidAddressSearchResponse::fromArray(
             $resultZipHouseAll[0]
@@ -183,14 +183,14 @@ class GeocodingUnitTests extends \PHPUnit\Framework\TestCase
 
         //region Get Limited Geocodings With Specified Zipcode And House Number
         $resultZipHouseLimited = Geocoding::getService([
-            'zipcode'       => '00601',
-            'housenumber'   => 17,
-            'offset'        => 0,
-            'limit'         => 10,
+            'zipcode' => '00601',
+            'housenumber' => 17,
+            'offset' => 0,
+            'limit' => 10,
         ]);
 
         $this->assertNotNull($resultZipHouseLimited);
-        $this->assertTrue(sizeof($resultZipHouseLimited)>0);
+        $this->assertTrue(sizeof($resultZipHouseLimited) > 0);
 
         $firstGeocoding = RapidAddressSearchResponse::fromArray(
             $resultZipHouseLimited[0]

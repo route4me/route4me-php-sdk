@@ -9,14 +9,14 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
-use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\AlgorithmType;
-use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\OptimizationStates;
+use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\TravelMode;
 use Route4Me\V5\Addresses\RouteAdvancedConstraints;
 
@@ -29,15 +29,15 @@ $depots = [
         'alias' => 'Start Depot',
         'address' => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
         'lat' => 38.141598,
-        'lng' => -80.190211
-    ])
+        'lng' => -80.190211,
+    ]),
 ];
 
 //**********************************************************************
 // General Route Parameters
 $parameters = RouteParameters::fromArray([
-    'algorithm_type' => Algorithmtype::ADVANCED_CVRP_TW,
-    'route_name' => 'Drivers Different Working Time Example - Single Depot, Multiple Driver '.date('Y-m-d H:i:s', time()),
+    'algorithm_type' => AlgorithmType::ADVANCED_CVRP_TW,
+    'route_name' => 'Drivers Different Working Time Example - Single Depot, Multiple Driver ' . date('Y-m-d H:i:s', time()),
     'route_date' => time() + 24 * 60 * 60,
     'route_time' => 6 * 3600,
     'distance_unit' => DistanceUnit::MILES,
@@ -46,7 +46,7 @@ $parameters = RouteParameters::fromArray([
     'travel_mode' => TravelMode::DRIVING,
     'route_max_duration' => 8 * 60 * 60,
     'parts' => 6,
-    'advanced_constraints' => []
+    'advanced_constraints' => [],
 ]);
 
 //**********************************************************************
@@ -57,7 +57,7 @@ $parameters = RouteParameters::fromArray([
 $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
     'max_cargo_volume' => 0.0,
     'members_count' => 4,
-    'available_time_windows' => [[(7 + 5) * 3600 , (11 + 5) * 3600]]
+    'available_time_windows' => [[(7 + 5) * 3600, (11 + 5) * 3600]],
 ]);
 
 // Schedule full time
@@ -66,12 +66,12 @@ $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
 $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
     'max_cargo_volume' => 0.0,
     'members_count' => 2,
-    'available_time_windows' => [[(7 + 5) * 3600 , (15 + 5) * 3600]]
+    'available_time_windows' => [[(7 + 5) * 3600, (15 + 5) * 3600]],
 ]);
 
 //**********************************************************************
 // Addresses
-$json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_9.json'), true);
+$json = json_decode(file_get_contents(dirname(__FILE__) . '/data/addresses_9.json'), true);
 $addresses = [];
 
 foreach ($json as $address) {
@@ -79,7 +79,7 @@ foreach ($json as $address) {
         'address' => $address['address'],
         'lat' => $address['lat'],
         'lng' => $address['lng'],
-        'time' => $address['time']
+        'time' => $address['time'],
     ]);
 }
 
@@ -90,15 +90,14 @@ $optimizationParams->setParameters($parameters);
 
 $problem = OptimizationProblem::optimize($optimizationParams);
 
-echo "Optimization Problem ID: " . $problem->optimization_problem_id . PHP_EOL;
-echo "State: " . OptimizationStates::getName($problem->state) . " (" . $problem->state . ")" . PHP_EOL;
+echo 'Optimization Problem ID: ' . $problem->optimization_problem_id . PHP_EOL;
+echo 'State: ' . OptimizationStates::getName($problem->state) . ' (' . $problem->state . ')' . PHP_EOL;
 
-echo "Optimization Problem ID: " . $problem->optimization_problem_id . PHP_EOL;
-echo "State: " . OptimizationStates::getName($problem->state) . " (" . $problem->state . ")" . PHP_EOL;
+echo 'Optimization Problem ID: ' . $problem->optimization_problem_id . PHP_EOL;
+echo 'State: ' . OptimizationStates::getName($problem->state) . ' (' . $problem->state . ')' . PHP_EOL;
 
-echo "Routes:" . PHP_EOL;
-foreach($problem->routes as $route)
-{
+echo 'Routes:' . PHP_EOL;
+foreach($problem->routes as $route) {
     echo "\tID: " . $route->route_id . PHP_EOL;
     echo "\tDistance: " . $route->trip_distance . PHP_EOL;
     echo "\tAddresses:" . PHP_EOL;

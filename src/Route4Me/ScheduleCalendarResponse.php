@@ -2,11 +2,8 @@
 
 namespace Route4Me;
 
-use Route4Me\Enum\Endpoint;
-
 /**
  * Data structure of the schedule calendar response.
- * @package Route4Me
  */
 class ScheduleCalendarResponse extends Common
 {

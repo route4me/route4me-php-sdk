@@ -24,7 +24,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_name' => 'Test Territory '.strval(rand(10000, 99999)),
+            'territory_name' => 'Test Territory ' . strval(rand(10000, 99999)),
             'territory_color' => 'ff7700',
             'territory' => $territoryParams,
         ]);
@@ -43,17 +43,17 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
 
     public function testFromArray()
     {
-        $terrName = 'Test Territory '.strval(rand(10000, 99999));
+        $terrName = 'Test Territory ' . strval(rand(10000, 99999));
 
         $territory = Territory::fromArray([
-            'territory_name'    => $terrName,
-            'territory_color'   => 'ff7700',
-            'territory'         => [
+            'territory_name' => $terrName,
+            'territory_color' => 'ff7700',
+            'territory' => [
                 'type' => TerritoryTypes::CIRCLE,
                 'data' => [
                     '37.569752822786455,-77.47833251953125',
                     '5000',
-                ]
+                ],
             ],
         ]);
 
@@ -65,38 +65,39 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
                 'data' => [
                     '37.569752822786455,-77.47833251953125',
                     '5000',
-                ]
+                ],
             ],
-            $territory->territory);
+            $territory->territory
+        );
     }
 
     public function testToArray()
     {
-        $terrName = 'Test Territory '.strval(rand(10000, 99999));
+        $terrName = 'Test Territory ' . strval(rand(10000, 99999));
 
         $territory = Territory::fromArray([
-            'territory_name'    => $terrName,
-            'territory_color'   => 'ff7700',
-            'territory'         => [
+            'territory_name' => $terrName,
+            'territory_color' => 'ff7700',
+            'territory' => [
                 'type' => TerritoryTypes::CIRCLE,
                 'data' => [
                     '37.569752822786455,-77.47833251953125',
                     '5000',
-                ]
+                ],
             ],
         ]);
 
         $this->assertEquals(
             $territory->toArray(),
             [
-                'territory_name'    => $terrName,
-                'territory_color'   => 'ff7700',
-                'territory'         => [
+                'territory_name' => $terrName,
+                'territory_color' => 'ff7700',
+                'territory' => [
                     'type' => TerritoryTypes::CIRCLE,
                     'data' => [
                         '37.569752822786455,-77.47833251953125',
                         '5000',
-                    ]
+                    ],
                 ],
             ]
         );
@@ -108,18 +109,19 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
 
         $queryParameters = [
             'offset' => 0,
-            'limit'  => 20,
+            'limit' => 20,
         ];
 
         $response = $territory->getTerritories($queryParameters);
 
         $this->assertNotNull($response);
         $this->assertTrue(is_array($response));
-        $this->assertTrue(sizeof($response)>0);
+        $this->assertTrue(sizeof($response) > 0);
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response[0]));
     }
 
-    public function testGetTerritory(){
+    public function testGetTerritory()
+    {
         $territory = new Territory();
 
         $params = [
@@ -132,7 +134,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_array($response));
         $this->assertInstanceOf(Territory::class, Territory::fromArray($response));
         $this->assertTrue(isset($response['territory_id']));
-        $this->assertEquals(self::$createdTerritories[0],$response['territory_id']);
+        $this->assertEquals(self::$createdTerritories[0], $response['territory_id']);
     }
 
     public function testCreateCircleTerritory()
@@ -144,8 +146,8 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_name'    => 'Test Circle Territory '.strval(rand(10000, 99999)),
-            'territory_color'   => 'ff7700',
+            'territory_name' => 'Test Circle Territory ' . strval(rand(10000, 99999)),
+            'territory_color' => 'ff7700',
             'territory' => $territoryParams,
         ]);
 
@@ -176,8 +178,8 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_name'    => 'Test Rectangular Territory '.strval(rand(10000, 99999)),
-            'territory_color'   => 'ff7705',
+            'territory_name' => 'Test Rectangular Territory ' . strval(rand(10000, 99999)),
+            'territory_color' => 'ff7705',
             'territory' => $territoryParams,
         ]);
 
@@ -215,8 +217,8 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_name'    => 'Test Polygon Territory '.strval(rand(10000, 99999)),
-            'territory_color'   => 'ff7707',
+            'territory_name' => 'Test Polygon Territory ' . strval(rand(10000, 99999)),
+            'territory_color' => 'ff7707',
             'territory' => $territoryParams,
         ]);
 
@@ -252,10 +254,10 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
         ];
 
         $TerritoryParameters = Territory::fromArray([
-            'territory_id'      => self::$createdTerritories[0],
-            'territory_name'    => 'Test Territory Updated as rectangle',
-            'territory_color'   => 'ff5500',
-            'territory'         => $territoryParameters,
+            'territory_id' => self::$createdTerritories[0],
+            'territory_name' => 'Test Territory Updated as rectangle',
+            'territory_color' => 'ff5500',
+            'territory' => $territoryParameters,
         ]);
 
         $response = $territory->updateTerritory($TerritoryParameters);
@@ -281,7 +283,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
     {
         $territory = new Territory();
 
-        $territoryId = self::$createdTerritories[sizeof(self::$createdTerritories)-1];
+        $territoryId = self::$createdTerritories[sizeof(self::$createdTerritories) - 1];
 
         $response = $territory->deleteTerritory($territoryId);
 
@@ -294,7 +296,7 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
 
     public static function tearDownAfterClass() : void
     {
-        if (sizeof(self::$createdTerritories)<1) return;
+        if (sizeof(self::$createdTerritories) < 1) return;
 
         $territory = new Territory();
 
@@ -302,9 +304,9 @@ class TerritoryTests extends \PHPUnit\Framework\TestCase
             $result1 = $territory->deleteTerritory($createdTerritoryId);
 
             if (!is_null($result1) && isset($result1['status']) && $result1['status']) {
-                echo "Removed the territory ".$createdTerritoryId." <br>";
+                echo 'Removed the territory ' . $createdTerritoryId . ' <br>';
             } else {
-                echo "Cannot removed the territory ".$createdTerritoryId." <br>";
+                echo 'Cannot removed the territory ' . $createdTerritoryId . ' <br>';
             }
         }
     }

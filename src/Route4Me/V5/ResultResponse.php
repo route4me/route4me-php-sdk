@@ -1,33 +1,29 @@
 <?php
 
-
 namespace Route4Me\V5;
 
 /**
- * Class ResultResponse
- * @package Route4Me\V5
- * Response data structure. As default in the failure case,
- * sometimes - in the success case too.
+ * Class ResultResponse.
  */
 class ResultResponse extends \Route4Me\Common
 {
-    /** Status  (true/false)
-     * @var boolean $status
+    /** Status  (true/false).
+     * @var bool
      */
     public $status;
 
-    /** Status code
-     * @var integer $code
+    /** Status code.
+     * @var int
      */
     public $code;
 
-    /** Exit code
-     * @var integer $exit_code
+    /** Exit code.
+     * @var int
      */
     public $exit_code;
 
     /** An array of the error messages.
-     * @var Array $messages
+     * @var array
      */
     public $messages;
 }

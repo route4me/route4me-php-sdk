@@ -2,20 +2,15 @@
 
 namespace Route4Me\V5\RecurringRoutes;
 
+use Route4Me\Common;
 use Route4Me\Exception\ApiError;
 use Route4Me\Route4Me;
-use Route4Me\Common;
 use Route4Me\V5\Enum\Endpoint;
-use Route4Me\V5\RecurringRoutes\Schedule;
-use Route4Me\V5\RecurringRoutes\RouteSchedule;
-use Route4Me\V5\RecurringRoutes\PageInfo;
 
 /**
- * The recurring routes Schedules structure
+ * The recurring routes Schedules structure.
  *
  * @since 1.2.3
- *
- * @package Route4Me
  */
 class Schedules extends Common
 {
@@ -51,7 +46,7 @@ class Schedules extends Common
             'url' => Endpoint::RECURRING_ROUTES_SCHEDULES,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -68,7 +63,7 @@ class Schedules extends Common
     {
         return $this->toSchedule(Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_SCHEDULES . '/' . $scheduleId,
-            'method' => 'GET'
+            'method' => 'GET',
         ]));
     }
 
@@ -78,13 +73,13 @@ class Schedules extends Common
      * @since 1.2.3
      *
      * @return Schedule[]
-      * @throws Exception\ApiError
-    */
+     * @throws Exception\ApiError
+     */
     public function getAllSchedules() : array
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_SCHEDULES,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
 
         if (is_array($result) && isset($result['data'])) {
@@ -94,9 +89,11 @@ class Schedules extends Common
                 foreach ($data as $key => $value) {
                     array_push($arr, new Schedule($value));
                 }
+
                 return $arr;
             }
         }
+
         return null;
     }
 
@@ -118,8 +115,8 @@ class Schedules extends Common
             'query' => [
                 'with_pagination' => true,
                 'page' => $page,
-                'per_page' => $per_page
-            ]
+                'per_page' => $per_page,
+            ],
         ]);
 
         if (is_array($result) && isset($result['data'])) {
@@ -130,11 +127,13 @@ class Schedules extends Common
                     array_push($schedules, new Schedule($value));
                 }
             }
+
             return [
                 'schedules' => $schedules,
-                'page_info' => new PageInfo($result['links'], $result['meta'])
+                'page_info' => new PageInfo($result['links'], $result['meta']),
             ];
         }
+
         return null;
     }
 
@@ -166,7 +165,7 @@ class Schedules extends Common
             'url' => Endpoint::RECURRING_ROUTES_SCHEDULES . '/' . $scheduleId,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -187,7 +186,7 @@ class Schedules extends Common
         return $this->toSchedule(Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_SCHEDULES . '/' . $scheduleId,
             'method' => 'DELETE',
-            'query' => ['with_routes' => $withRoutes]
+            'query' => ['with_routes' => $withRoutes],
         ]));
     }
 
@@ -212,7 +211,7 @@ class Schedules extends Common
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -229,7 +228,7 @@ class Schedules extends Common
     {
         return $this->toRouteSchedule(Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES . '/' . $route_id,
-            'method' => 'GET'
+            'method' => 'GET',
         ]));
     }
 
@@ -245,7 +244,7 @@ class Schedules extends Common
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
 
         if (is_array($result) && isset($result['data'])) {
@@ -255,9 +254,11 @@ class Schedules extends Common
                 foreach ($data as $key => $value) {
                     array_push($arr, new RouteSchedule($value));
                 }
+
                 return $arr;
             }
         }
+
         return null;
     }
 
@@ -274,13 +275,13 @@ class Schedules extends Common
     public function getRouteSchedules(int $page = 1, int $per_page = 15) : array
     {
         $result = Route4Me::makeRequst([
-            'url' =>    Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES_PAGINATION,
+            'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES_PAGINATION,
             'method' => 'GET',
             'query' => [
                 'with_pagination' => true,
                 'page' => $page,
-                'per_page' => $per_page
-            ]
+                'per_page' => $per_page,
+            ],
         ]);
 
         if (is_array($result) && isset($result['data'])) {
@@ -291,11 +292,13 @@ class Schedules extends Common
                     array_push($route_schedules, new RouteSchedule($value));
                 }
             }
+
             return [
                 'route_schedules' => $route_schedules,
-                'page_info' => new PageInfo($result['links'], $result['meta'])
+                'page_info' => new PageInfo($result['links'], $result['meta']),
             ];
         }
+
         return null;
     }
 
@@ -320,7 +323,7 @@ class Schedules extends Common
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES . '/' . $route_id,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -337,9 +340,10 @@ class Schedules extends Common
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES . '/' . $route_id,
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
-        return (isset($result['status']) ? $result['status'] : false);
+
+        return $result['status'] ?? false;
     }
 
     /**
@@ -354,8 +358,8 @@ class Schedules extends Common
     public function deleteRouteSchedule(string $route_id) : RouteSchedule
     {
         return $this->toRouteSchedule(Route4Me::makeRequst([
-            'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES . '/' . $route_id  . '/items',
-            'method' => 'DELETE'
+            'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES . '/' . $route_id . '/items',
+            'method' => 'DELETE',
         ]));
     }
 
@@ -388,7 +392,7 @@ class Schedules extends Common
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES_REPLACE . '/' . $route_id,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -408,7 +412,7 @@ class Schedules extends Common
         return Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_ROUTE_SCHEDULES . '/' . $route_id . '/preview',
             'method' => 'GET',
-            'query' => ['start' => $start, 'end' => $end]
+            'query' => ['start' => $start, 'end' => $end],
         ]);
     }
 
@@ -425,9 +429,10 @@ class Schedules extends Common
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::RECURRING_ROUTES_SCHEDULED_ROUTES_IS_COPY . '/' . $route_id,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
-        return (isset($result['status']) ? $result['status'] : false);
+
+        return $result['status'] ?? false;
     }
 
     /**
@@ -451,8 +456,8 @@ class Schedules extends Common
             'body' => [
                 'route_id' => $route_id,
                 'schedule_uid' => $schedule_uid,
-                'route_date' => $route_date
-            ]
+                'route_date' => $route_date,
+            ],
         ]);
     }
 
@@ -487,9 +492,10 @@ class Schedules extends Common
             'url' => Endpoint::RECURRING_ROUTES_MASTER_ROUTES,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
-        return (isset($result['status']) ? $result['status'] : false);
+
+        return $result['status'] ?? false;
     }
 
     private function toSchedule($result) : Schedule

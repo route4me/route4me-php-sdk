@@ -6,8 +6,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Exception;
 use Route4Me\Exception\ApiError;
@@ -33,7 +33,7 @@ try {
     }
 
     if (!$owner_member_id) {
-        throw new Exception("Cannot find OWNER_MEMBER_ID.");
+        throw new Exception('Cannot find OWNER_MEMBER_ID.');
     }
 
     // new sub-user
@@ -43,7 +43,7 @@ try {
         'member_last_name' => 'Pupkindzes',
         'member_email' => 'the_I@best.com',
         'member_type' => 'SUB_ACCOUNT_DRIVER',
-        'OWNER_MEMBER_ID' => $owner_member_id
+        'OWNER_MEMBER_ID' => $owner_member_id,
     ];
 
     $tm = new TeamManagement();

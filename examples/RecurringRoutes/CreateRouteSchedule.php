@@ -6,8 +6,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\V5\RecurringRoutes\Schedules as Schedules;
 
@@ -19,7 +19,7 @@ try {
 
     $params = [
         'route_id' => '66C2AC4A323053FF0A40FEB6918ACF5E',
-        'schedule_uid' => '1515E9A65DD2DEF79CAD7A7E68D91515'
+        'schedule_uid' => '1515E9A65DD2DEF79CAD7A7E68D91515',
     ];
 
     $schedule = $route_schedules->createRouteSchedule($params);

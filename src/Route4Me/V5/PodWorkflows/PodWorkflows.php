@@ -2,19 +2,15 @@
 
 namespace Route4Me\V5\PodWorkflows;
 
+use Route4Me\Common;
 use Route4Me\Exception\ApiError;
 use Route4Me\Route4Me;
-use Route4Me\Common;
 use Route4Me\V5\Enum\Endpoint;
-use Route4Me\V5\PodWorkflows\ResponsePodWorkflow;
-use Route4Me\V5\PodWorkflows\ResponsePodWorkflows;
 
 /**
- * The proof of delivery workflow API
+ * The proof of delivery workflow API.
  *
  * @since 1.2.10
- *
- * @package Route4Me
  */
 class PodWorkflows extends Common
 {
@@ -48,7 +44,7 @@ class PodWorkflows extends Common
             'url' => Endpoint::POD_WORKFLOW,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -64,8 +60,8 @@ class PodWorkflows extends Common
      *   array   [order_by]          - Array of pairs PodWorkflow field and its sorting direction,
      *                                 e.g. [["title", "asc"], ["last_updated_timestamp", "desc"]]
      * @return ResponsePodWorkflows
-      * @throws Exception\ApiError
-    */
+     * @throws Exception\ApiError
+     */
     public function getAllPodWorkflows(?array $params = null) : ResponsePodWorkflows
     {
         $allBodyFields = ['per_page', 'cursor', 'search_query', 'order_by'];
@@ -73,7 +69,7 @@ class PodWorkflows extends Common
         $result = Route4Me::makeRequst([
             'url' => Endpoint::POD_WORKFLOW,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'query' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         if (is_array($result) && isset($result['data'])) {
@@ -95,7 +91,7 @@ class PodWorkflows extends Common
     {
         return $this->toResponsePodWorkflow(Route4Me::makeRequst([
             'url' => Endpoint::POD_WORKFLOW . '/' . $workflow_guid,
-            'method' => 'GET'
+            'method' => 'GET',
         ]));
     }
 
@@ -119,7 +115,7 @@ class PodWorkflows extends Common
             'url' => Endpoint::POD_WORKFLOW . '/' . $workflow_guid,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -136,8 +132,9 @@ class PodWorkflows extends Common
     {
         $res = Route4Me::makeRequst([
             'url' => Endpoint::POD_WORKFLOW . '/' . $workflow_guid,
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
+
         return isset($res);
     }
 
