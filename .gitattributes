@@ -4,6 +4,8 @@
 /.php-cs-fixer.dist.php export-ignore
 /.releaserc.json export-ignore
 /examples export-ignore
+/phpstan-baseline.neon export-ignore
+/phpstan.neon.dist export-ignore
 /phpunit.xml export-ignore
 /tests export-ignore
 /UnitTestFiles export-ignore

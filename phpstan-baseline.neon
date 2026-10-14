@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: src/Route4Me/Common.php
+
+		-
+			message: '#^Access to an undefined property Route4Me\\MyQ\:\:\$_doorState\.$#'
+			identifier: property.notFound
+			count: 2
+			path: src/Route4Me/MyQ.php
+
+		-
+			message: '#^Access to an undefined property Route4Me\\MyQ\:\:\$_doorStateTime\.$#'
+			identifier: property.notFound
+			count: 2
+			path: src/Route4Me/MyQ.php
+
+		-
+			message: '#^Method Route4Me\\MyQ\:\:login\(\) should return Route4Me\\MyQ but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/Route4Me/MyQ.php
+
+		-
+			message: '#^Access to an undefined property Route4Me\\V5\\OptimizationProblem\:\:\$parameters\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Route4Me/V5/OptimizationProblem.php
