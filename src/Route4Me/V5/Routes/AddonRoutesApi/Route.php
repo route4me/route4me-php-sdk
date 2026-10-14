@@ -354,7 +354,8 @@ class Route extends DataObjectBase
         $allQueryFields = ['route_id', 'route_path_output', 'compress_path_points', 'directions'];
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url'    => EndpointV4::ROUTE_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'GET',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
@@ -370,7 +371,8 @@ class Route extends DataObjectBase
         $allBodyFields = ['addresses'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::ROUTE_V4,
+            'url'       => EndpointV4::ROUTE_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method'    => 'PUT',
             'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
@@ -384,7 +386,8 @@ class Route extends DataObjectBase
         $allQueryFields = ['route_id', 'disable_optimization', 'optimize'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::REOPTIMIZE_V3_2,
+            'url'       => EndpointV4::REOPTIMIZE_V3_2,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method'    => 'GET',
             'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
@@ -397,7 +400,8 @@ class Route extends DataObjectBase
         $allBodyFields = ['route_ids', 'depot_address', 'remove_origin', 'depot_lat',  'depot_lng'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTES_MERGE,
+            'url'           => EndpointV4::ROUTES_MERGE,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method'        => 'POST',
             'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
             'HTTPHEADER'    => 'Content-Type: multipart/form-data',
@@ -412,7 +416,8 @@ class Route extends DataObjectBase
         $allBodyFields = ['recipient_email'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTE_SHARE,
+            'url'           => EndpointV4::ROUTE_SHARE,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method'        => 'POST',
             'query'         => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
@@ -450,7 +455,8 @@ class Route extends DataObjectBase
         $allBodyFields = ['addresses', 'parameters', 'unlink_from_master_optimization'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::ROUTE_V4,
+            'url'       => EndpointV4::ROUTE_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method'    => 'PUT',
             'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body'      => (isset($params['addresses']) || isset($params['parameters']) || isset($params['unlink_from_master_optimization']))
@@ -464,7 +470,8 @@ class Route extends DataObjectBase
     public function update()
     {
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url'    => EndpointV4::ROUTE_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'PUT',
             'query'  => [
                 'route_id' => isset($this->route_id) ? $this->route_id : null,
@@ -484,7 +491,8 @@ class Route extends DataObjectBase
             : (isset($this->addresses[0]) ? $this->addresses[0] : get_object_vars($this->parameters));
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ADDRESS_V4,
+            'url'    => EndpointV4::ADDRESS_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'PUT',
             'query'  => [
                 'route_id' => isset($this->route_id) ? $this->route_id : null,
@@ -500,7 +508,8 @@ class Route extends DataObjectBase
     public function updateRouteAddress()
     {
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ADDRESS_V4,
+            'url'    => EndpointV4::ADDRESS_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'PUT',
             'query'  => [
                 'route_id' => isset($this->route_id) ? $this->route_id : null,
@@ -522,7 +531,8 @@ class Route extends DataObjectBase
         $allBodyFields = ['addresses'];
 
         $route = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTE_V4,
+            'url'           => EndpointV4::ROUTE_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method'        => 'PUT',
             'query'         => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
@@ -538,7 +548,8 @@ class Route extends DataObjectBase
         $allBodyFields = ['addresses', 'optimal_position'];
 
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url'    => EndpointV4::ROUTE_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'PUT',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
@@ -556,7 +567,8 @@ class Route extends DataObjectBase
         $allBodyFields = ['strUpdateType', 'strFilename', 'strNoteContents'];
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_NOTES_ADD,
+            'url'    => EndpointV4::ROUTE_NOTES_ADD,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'POST',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
             'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
@@ -612,7 +624,8 @@ class Route extends DataObjectBase
         $allQueryFields = ['route_id', 'device_tracking_history'];
 
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url'    => EndpointV4::ROUTE_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'GET',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
@@ -625,7 +638,8 @@ class Route extends DataObjectBase
         $allQueryFields = ['route_id', 'format', 'time_period', 'start_date', 'end_date'];
 
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::GET_DEVICE_LOCATION,
+            'url'    => EndpointV4::GET_DEVICE_LOCATION,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'GET',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
@@ -638,7 +652,8 @@ class Route extends DataObjectBase
         $allQueryFields = ['tracking'];
 
         $assetResponse = Route4Me::makeRequst([
-            'url'    => Endpoint::STATUS_V4,
+            'url'    => EndpointV4::STATUS_V4,
+            'baseUrl' => EndpointV4::BASE_URL,
             'method' => 'GET',
             'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
