@@ -114,7 +114,7 @@ class CurlHttpClient
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $postdata);
 
         //and finally send curl request
-        $result = curl_exec_redir($this->ch);
+        $result = curlExecRedir($this->ch);
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
@@ -161,7 +161,7 @@ class CurlHttpClient
         curl_setopt($this->ch, CURLOPT_TIMEOUT, $timeout);
 
         //and finally send curl request
-        $result = curl_exec_redir($this->ch);
+        $result = curlExecRedir($this->ch);
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
@@ -207,7 +207,7 @@ class CurlHttpClient
         curl_setopt($this->ch, CURLOPT_TIMEOUT, $timeout);
 
         //and finally send curl request
-        $result = curl_exec_redir($this->ch);
+        $result = curlExecRedir($this->ch);
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
@@ -296,7 +296,7 @@ class CurlHttpClient
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $result_post);
 
         //and finally send curl request
-        $result = curl_exec_redir($this->ch);
+        $result = curlExecRedir($this->ch);
         if (curl_errno($this->ch)) {
             if ($this->debug) {
                 echo "Error Occured in Curl\n";
@@ -437,7 +437,7 @@ function curlExecRedir($ch)
         //echo "Being redirected to $new_url\n";
         curl_setopt($ch, CURLOPT_URL, $new_url);
 
-        return curl_exec_redir($ch);
+        return curlExecRedir($ch);
     } else {
         $curl_loops = 0;
 
