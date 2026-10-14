@@ -1,0 +1,9 @@
+/.github export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/.releaserc.json export-ignore
+/examples export-ignore
+/phpunit.xml export-ignore
+/tests export-ignore
+/UnitTestFiles export-ignore
