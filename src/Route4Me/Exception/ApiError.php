@@ -6,7 +6,7 @@ class ApiError extends \Exception
 {
     protected string $source = '';
 
-    public function __construct(string $message = '', int $code = 0, string $source = '', \Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, string $source = '', ?\Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->source = $source;

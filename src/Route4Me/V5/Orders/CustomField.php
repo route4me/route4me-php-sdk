@@ -43,7 +43,7 @@ class CustomField extends Common
      */
     public ?string $order_custom_field_value = null;
 
-    public function __construct(array $params = null)
+    public function __construct(?array $params = null)
     {
         if ($params != null) {
             $this->fillFromArray($params);
