@@ -434,9 +434,6 @@ class Orders extends Common
             'url' => Endpoint::ORDER_CUSTOM_FIELDS,
             'method' => 'GET'
         ]);
-        if (isset($result) && isset($result['data']) && is_array($result['data']) && is_array($result['data'][0])) {
-            return new ResponseOrder($result['data'][0]);
-        }
         $ocf = [];
         if (isset($res) && isset($res['data']) && is_array($res['data'])) {
             foreach ($res['data'] as $key => $value) {
