@@ -6,6 +6,7 @@ use Route4Me\Constants;
 use Route4Me\Exception\ApiError;
 use Route4Me\Route4Me;
 use Route4Me\V5\AddressBook\Address;
+use Route4Me\V5\AddressBook\AddressBook;
 use Route4Me\V5\AddressBook\AssignedTo;
 use Route4Me\V5\AddressBook\Cluster;
 use Route4Me\V5\AddressBook\ResponseAddress;
@@ -16,7 +17,6 @@ use Route4Me\V5\AddressBook\ResponsePagination;
 use Route4Me\V5\AddressBook\ScheduleItem;
 use Route4Me\V5\AddressBook\StatusChecker;
 use Route4Me\V5\AddressBook\UpdateAddress;
-use Route4Me\V5\AddressBook\AddressBook;
 
 final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
 {
@@ -33,7 +33,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'address_1' => '17205 RICHMOND TNPK, MILFORD, VA, 22514',
             'cached_lat' => 38.024654,
             'cached_lng' => 77.338814,
-            'address_stop_type' => 'DELIVERY'
+            'address_stop_type' => 'DELIVERY',
         ]));
     }
 
@@ -56,7 +56,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(AssignedTo::class, new AssignedTo([
             'member_id' => '1',
-            'member_first_name' => 'John Doe'
+            'member_first_name' => 'John Doe',
         ]));
     }
 
@@ -69,7 +69,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(Cluster::class, new Cluster([
             'geohash' => '1gmlagrpoarepker',
-            'lat' => 34.3456
+            'lat' => 34.3456,
         ]));
     }
 
@@ -85,12 +85,12 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'address_id' => 1234567,
             'schedule' => [
                 'enable' => true,
-                'mode' => 'monthly'
+                'mode' => 'monthly',
             ],
             'assigned_to' => [
                 'member_id' => 123453,
-                'member_first_name' => 'Jane Doe'
-            ]
+                'member_first_name' => 'Jane Doe',
+            ],
         ]));
     }
 
@@ -100,7 +100,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'created_timestamp' => 15,
             'address_id' => 1234567,
             'schedule' => new ScheduleItem(),
-            'assigned_to' => new AssignedTo()
+            'assigned_to' => new AssignedTo(),
         ]));
     }
 
@@ -114,12 +114,12 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(ResponseAll::class, new ResponseAll([
             'results' => [[
                 'created_timestamp' => 1,
-                'address_id' => 11
+                'address_id' => 11,
             ], [
                 'created_timestamp' => 2,
-                'address_id' => 22
+                'address_id' => 22,
             ]],
-            'total' => 0
+            'total' => 0,
         ]));
     }
 
@@ -130,7 +130,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
                 new ResponseAddress(),
                 new ResponseAddress(),
             ],
-            'total' => 0
+            'total' => 0,
         ]));
     }
 
@@ -144,9 +144,9 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(ResponseCluster::class, new ResponseCluster([
             'cluster' => [
                 'geohash' => 'tipageohash',
-                'lat' => 123.5657
+                'lat' => 123.5657,
             ],
-            'address_count' => 1
+            'address_count' => 1,
         ]));
     }
 
@@ -154,7 +154,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(ResponseCluster::class, new ResponseCluster([
             'cluster' => new Cluster(),
-            'address_count' => 1
+            'address_count' => 1,
         ]));
     }
 
@@ -168,12 +168,12 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(ResponseClustering::class, new ResponseClustering([
             'clusters' => [[
                 'geohash' => 'tipageohash',
-                'lat' => 123.5657
+                'lat' => 123.5657,
             ], [
                 'geohash' => 'tipageohashtoo',
-                'lat' => 23.56578
+                'lat' => 23.56578,
             ]],
-            'total' => 2
+            'total' => 2,
         ]));
     }
 
@@ -182,9 +182,9 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(ResponseClustering::class, new ResponseClustering([
             'clusters' => [
                 new Cluster(),
-                new Cluster()
+                new Cluster(),
             ],
-            'total' => 2
+            'total' => 2,
         ]));
     }
 
@@ -197,7 +197,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(ResponsePagination::class, new ResponsePagination([
             'current_page' => 1,
-            'last_page' => 2
+            'last_page' => 2,
         ]));
     }
 
@@ -210,7 +210,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(ScheduleItem::class, new ScheduleItem([
             'enable' => true,
-            'mode' => 'monthly'
+            'mode' => 'monthly',
         ]));
     }
 
@@ -223,7 +223,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(StatusChecker::class, new StatusChecker([
             'code' => 200,
-            'data' => []
+            'data' => [],
         ]));
     }
 
@@ -247,7 +247,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'address_stop_type' => 'DELIVERY',
             'address_city' => 'Tbilisi Vah',
             'first_name' => 'Tusha I',
-            'last_name' => 'Grigoriani'
+            'last_name' => 'Grigoriani',
         ]);
 
         $this->assertInstanceOf(ResponseAddress::class, $res_addr);
@@ -283,7 +283,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'address_stop_type' => 'DELIVERY',
             'address_city' => 'Tbilisi Vah',
             'first_name' => 'Tusha I',
-            'last_name' => 'Grigoriani'
+            'last_name' => 'Grigoriani',
         ], [
             'address_1' => '17205 RICHMOND TNPK, MILFORD, VA, 22514',
             'cached_lat' => 38.024654,
@@ -291,7 +291,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
             'address_stop_type' => 'DELIVERY',
             'address_city' => 'Tbilisi Vah',
             'first_name' => 'Tusha II',
-            'last_name' => 'Grigoriani'
+            'last_name' => 'Grigoriani',
         ]]);
 
         $this->assertIsBool($res);
@@ -303,7 +303,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         $addr_book = new AddressBook();
         $addresses = [
             new Address('17205 Tbilisi Vah, GEORGIAN, GE, 22514', 38.024654, 77.338814, 'DELIVERY'),
-            new Address('17205 Tbilisi Vah, GEORGIAN, GE, 22514', 38.024654, 77.338814, 'DELIVERY')
+            new Address('17205 Tbilisi Vah, GEORGIAN, GE, 22514', 38.024654, 77.338814, 'DELIVERY'),
         ];
         $addresses[0]->first_name = 'Tusha I';
         $addresses[1]->first_name = 'Tusha II';
@@ -316,10 +316,10 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     public function testGetAddressesMustReturnResponseAll() : void
     {
         $options = [
-            'fields' => "address_id, address_1, first_name, last_name, address_city",
+            'fields' => 'address_id, address_1, first_name, last_name, address_city',
             'query' => 'Tusha',
             'limit' => 5,
-            'offset' => 0
+            'offset' => 0,
         ];
         $addr_book = new AddressBook();
         $result = $addr_book->getAddresses($options);
@@ -340,14 +340,14 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
                     'value' => [
                         'center' => [
                             'lat' => 38.024654,
-                            'lng' => 77.338814
+                            'lng' => 77.338814,
                             ],
-                        'distance' => 10000
-                    ]
-                ]]
+                        'distance' => 10000,
+                    ],
+                ]],
             ],
             'limit' => 5,
-            'offset' => 0
+            'offset' => 0,
         ];
         $addr_book = new AddressBook();
         $result = $addr_book->getAddressesByBodyPayload($options);
@@ -360,10 +360,10 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     public function testGetAddressesPaginatedMustReturnResponsePaginated() : void
     {
         $options = [
-            'fields' => "address_id, address_1, first_name, last_name, address_city",
+            'fields' => 'address_id, address_1, first_name, last_name, address_city',
             'query' => 'Tusha',
             'per_page' => 5,
-            'page' => 0
+            'page' => 0,
         ];
         $addr_book = new AddressBook();
         $result = $addr_book->getAddressesPaginated($options);
@@ -385,14 +385,14 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
                     'value' => [
                         'center' => [
                             'lat' => 52.4025,
-                            'lng' => 4.5601
+                            'lng' => 4.5601,
                         ],
-                        'distance' => 10000
-                    ]
-                ]]
+                        'distance' => 10000,
+                    ],
+                ]],
             ],
             'page' => 2,
-            'per_page' => 10
+            'per_page' => 10,
         ];
         $addr_book = new AddressBook();
         $result = $addr_book->getAddressesPaginatedByBodyPayload($options);
@@ -409,7 +409,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $options = [
             'display' => 'unrouted',
-            'query' => 'Tusha'
+            'query' => 'Tusha',
         ];
         $addr_book = new AddressBook();
         $result = $addr_book->getAddressClusters($options);
@@ -423,7 +423,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $options = [
             'clustering' => [
-                'precision' => 2
+                'precision' => 2,
             ],
             'filter' => [
                 'query' => 'Tusha',
@@ -432,12 +432,12 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
                     'value' => [
                         'center' => [
                             'lat' => 52.4025,
-                            'lng' => 4.5601
+                            'lng' => 4.5601,
                         ],
-                        'distance' => 10000
-                    ]
-                ]]
-            ]
+                        'distance' => 10000,
+                    ],
+                ]],
+            ],
         ];
         $addr_book = new AddressBook();
         $result = $addr_book->getAddressClustersByBodyPayload($options);
@@ -490,23 +490,24 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $addr_book = new AddressBook();
         $filter = [
-            'query' => "Tusha",
+            'query' => 'Tusha',
             'bounding_box' => null,
             'selected_areas' => [[
                 'type' => 'circle',
                 'value' => [
                     'center' => [
                         'lat' => 38.024654,
-                        'lng' => 77.338814
+                        'lng' => 77.338814,
                     ],
-                    'distance' => 10000
-                ]
-            ]]
+                    'distance' => 10000,
+                ],
+            ]],
         ];
-    
+
         $params = [
-            'last_name' => 'Grigoriani V'
+            'last_name' => 'Grigoriani V',
         ];
+
         try {
             $result = $addr_book->updateAddressesByAreas($filter, $params);
 
@@ -536,12 +537,13 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
                 'value' => [
                     'center' => [
                         'lat' => 38.024654,
-                        'lng' => 77.338814
+                        'lng' => 77.338814,
                     ],
-                    'distance' => 10000
-                ]
-            ]]
+                    'distance' => 10000,
+                ],
+            ]],
         ];
+
         try {
             $result = $addr_book->deleteAddressesByAreas($filter);
 
@@ -583,20 +585,21 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $addr_book = new AddressBook();
         $filter = [
-            'query' => "Tusha",
+            'query' => 'Tusha',
             'bounding_box' => null,
             'selected_areas' => [[
                 'type' => 'circle',
                 'value' => [
                     'center' => [
                         'lat' => 38.024654,
-                        'lng' => 77.338814
+                        'lng' => 77.338814,
                     ],
-                    'distance' => 10000
-                ]
+                    'distance' => 10000,
+                ],
             ]],
-            'filename' => 'test_export.csv'
+            'filename' => 'test_export.csv',
         ];
+
         try {
             $result = $addr_book->exportAddressesByAreas($filter);
 
@@ -613,6 +616,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
         $addr_book = new AddressBook();
         $territoryIds = [96100573, 96100961];
         $filename = 'test_export.csv';
+
         try {
             $result = $addr_book->exportAddressesByAreaIds($territoryIds, $filename);
 
@@ -628,6 +632,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $addr_book = new AddressBook();
         $jobId = 96100961;
+
         try {
             $result = $addr_book->getAddressesAsynchronousJobStatus($jobId);
 
@@ -643,6 +648,7 @@ final class AddressBookUnitTests extends \PHPUnit\Framework\TestCase
     {
         $addr_book = new AddressBook();
         $jobId = 96100961;
+
         try {
             $result = $addr_book->getAddressesAsynchronousJobResult($jobId);
 

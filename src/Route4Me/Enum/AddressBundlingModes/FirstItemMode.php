@@ -10,5 +10,6 @@ namespace Route4Me\Enum\AddressBundlingModes;
 class FirstItemMode
 {
     const KEEP_ORIGINAL = 1;
+
     const CUSTOM_TIME = 2;
 }

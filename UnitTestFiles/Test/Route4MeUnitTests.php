@@ -1,16 +1,18 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: User
  * Date: 7/18/20
- * Time: 11:40 PM
+ * Time: 11:40 PM.
  */
 
 namespace UnitTestFiles\Test;
 
 use Route4Me\AvoidanceZone;
 
-class Route4MeUnitTests extends \PHPUnit\Framework\TestCase {
+class Route4MeUnitTests extends \PHPUnit\Framework\TestCase
+{
     protected $AvoidanceZone;
 
     public function setUp() : void
@@ -20,9 +22,8 @@ class Route4MeUnitTests extends \PHPUnit\Framework\TestCase {
 
     public function testgetAvoidanceZones()
     {
-        echo "This Is Route4MeUnitTests <br>";
+        echo 'This Is Route4MeUnitTests <br>';
         $condition = true;
         $this->assertTrue($condition);
     }
 }
- 

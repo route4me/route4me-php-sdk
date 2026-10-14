@@ -1,27 +1,24 @@
 <?php
 
-
 namespace Route4Me\V5\Members;
 
 /**
- * Class DriverReviewsResponse
- * @package Route4Me\V5\Members
- * The data structure of a retrieved driver reviews list.
+ * Class DriverReviewsResponse.
  */
 class DriverReviewsResponse extends \Route4Me\Common
 {
     /** An array of the driver reviews.
-     * @var DriverReview[] $data
+     * @var DriverReview[]
      */
     public $data = [];
 
     /** The response pagination info.
-     * @var SimplePaginationData $simple_pagination
+     * @var SimplePaginationData
      */
     public $simple_pagination = [];
 
     /** Statistics by driver rating.
-     * @var TypeQuantity[] $total
+     * @var TypeQuantity[]
      */
     public $total = [];
 }

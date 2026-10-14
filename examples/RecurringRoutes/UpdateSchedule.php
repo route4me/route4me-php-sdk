@@ -6,8 +6,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\V5\RecurringRoutes\Schedules as Schedules;
 
@@ -22,7 +22,7 @@ try {
         'name' => 'The bestest schedule 2',
         'schedule_blacklist' => ['2023-02-01', '2023-03-01'],
         'schedule' => '{"enabled":true,"mode":"daily"}',
-        'timezone' => 'America/New_York'
+        'timezone' => 'America/New_York',
     ];
 
     $schedule = $schedules->updateSchedule($schedule_uid, $params);

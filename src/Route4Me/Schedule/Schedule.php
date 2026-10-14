@@ -1,20 +1,17 @@
 <?php
 
-
 namespace Route4Me\Schedule;
 
-use phpDocumentor\Reflection\Types\Boolean;
 use Route4Me\Common as Common;
 
 /**
- * A trip schedule to a location
- * @package Route4Me\Schedule
+ * A trip schedule to a location.
  */
 class Schedule extends Common
 {
     /**
      * Gets or sets a value indicating whether this is enabled.
-     * @var Boolean
+     * @var bool
      */
     public $enabled;
 
@@ -27,7 +24,7 @@ class Schedule extends Common
     /**
      * Schedule mode<br>
      * Available values:<br>
-     * daily, weekly, monthly, annually
+     * daily, weekly, monthly, annually.
      * @var string
      */
     public $mode;

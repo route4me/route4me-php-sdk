@@ -4,30 +4,48 @@ namespace Route4Me\Tracking;
 
 class MemberData extends \Route4Me\Common
 {
-    /** @var int $account_type_id */
+    /**
+     * @var int
+     */
     public $account_type_id;
 
-    /** @var string $member_email */
+    /**
+     * @var string
+     */
     public $member_email;
 
-    /** @var string $member_first_name */
+    /**
+     * @var string
+     */
     public $member_first_name;
 
-    /** @var int $member_id */
+    /**
+     * @var int
+     */
     public $member_id;
 
-    /** @var string $member_last_name */
+    /**
+     * @var string
+     */
     public $member_last_name;
 
-    /** @var string $member_type */
+    /**
+     * @var string
+     */
     public $member_type;
 
-    /** @var string $phone_number */
+    /**
+     * @var string
+     */
     public $phone_number;
 
-    /** @var boolean $readonly_user */
+    /**
+     * @var bool
+     */
     public $readonly_user;
 
-    /** @var boolean $show_superuser_addresses */
+    /**
+     * @var bool
+     */
     public $show_superuser_addresses;
 }

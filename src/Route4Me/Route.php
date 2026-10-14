@@ -4,106 +4,104 @@ namespace Route4Me;
 
 use Route4Me\Enum\Endpoint;
 use Route4Me\Vehicles\Vehicle;
-use Route4Me\RouteParameters;
 
 /**
- * The route data structure
- * @package Route4Me
+ * The route data structure.
  */
 class Route extends Common
 {
     /**
-     * The route ID
+     * The route ID.
      * @var string
      */
     public $route_id;
 
     /**
-     * Member ID of a route owner
-     * @var integer
+     * Member ID of a route owner.
+     * @var int
      */
     public $member_id;
 
     /**
-     * Optimization problem ID
+     * Optimization problem ID.
      * @var string
      */
     public $optimization_problem_id;
 
     /**
-     * Vehicle alias
+     * Vehicle alias.
      * @var string
      */
     public $vehicle_alias;
 
     /**
-     * Driver alias
+     * Driver alias.
      * @var string
      */
     public $driver_alias;
 
     /**
-     * Total route's trip distance
-     * @var double
+     * Total route's trip distance.
+     * @var float
      */
     public $trip_distance;
 
     /**
-     * The UDU distance measurement unit for the route.<br>
+     * The UDU distance measurement unit for the route.<br>.
      * @note km or mi, the route4me api will convert all distance measurements into these units.
      * @var string
      */
     public $udu_distance_unit;
 
     /**
-     * Total route's UDU trip distance
-     * @var double
+     * Total route's UDU trip distance.
+     * @var float
      */
     public $udu_trip_distance;
 
-    /** Miles per gallon
-     * @var double
+    /** Miles per gallon.
+     * @var float
      */
     public $mpg;
 
     /**
-     * Gas price
-     * @var double
+     * Gas price.
+     * @var float
      */
     public $gas_price;
 
     /**
-     * Total route duration (seconds)
-     * @var integer
+     * Total route duration (seconds).
+     * @var int
      */
     public $route_duration_sec;
 
     /**
      * Number of the destinations in the route.
-     * @var integer
+     * @var int
      */
     public $destination_count;
 
     /**
      * Notes count in the route.
-     * @var integer
+     * @var int
      */
     public $notes_count;
 
     /**
-     * Route parameters
+     * Route parameters.
      * @var RouteParameters
      */
     public $parameters;
 
     /**
-     * An array of the route addresses
+     * An array of the route addresses.
      * @var Address[]
      */
     public $addresses = [];
 
     /**
-     * An array of the links
+     * An array of the links.
      * @var string[]
      */
     public $links = [];
@@ -127,32 +125,32 @@ class Route extends Common
     public $tracking_history = [];
 
     /**
-     * HTTP headers
+     * HTTP headers.
      * @var string
      */
     public $httpheaders;
 
     /**
      * If true, the route is unrouted.
-     * @var Boolean
+     * @var bool
      */
     public $is_unrouted;
 
     /**
      * User route rating [0, 5]. A null value means no rating was given.<br>
      * Users can rate routes so that future optimizations take these ratings into account.
-     * @var integer
+     * @var int
      */
     public $user_route_rating;
 
     /**
-     * The member's email
+     * The member's email.
      * @var string
      */
     public $member_email;
 
     /**
-     * URL to a member picture
+     * URL to a member picture.
      * @var string
      */
     public $member_picture;
@@ -165,13 +163,13 @@ class Route extends Common
 
     /**
      * If true, the order is approved for execution.
-     * @var Boolean
+     * @var bool
      */
     public $approved_for_execution;
 
     /**
      * Counter of the approved revisions.
-     * @var integer
+     * @var int
      */
     public $approved_revisions_counter;
 
@@ -188,119 +186,119 @@ class Route extends Common
     public $member_last_name;
 
     /**
-     * Channel name
+     * Channel name.
      * @var string
      */
     public $channel_name;
 
     /**
      * Total cost of the route.
-     * @var double
+     * @var float
      */
     public $route_cost;
 
     /**
-     * Total route revenue
-     * @var double
+     * Total route revenue.
+     * @var float
      */
     public $route_revenue;
 
     /**
      * Net revenue per distance unit.
-     * @var double
+     * @var float
      */
     public $net_revenue_per_distance_unit;
 
     /**
      * When route created (UNIX format timestamp).
-     * @var integer
+     * @var int
      */
     public $created_timestamp;
 
     /**
      * Planned total route duration (seconds).
-     * @var integer
+     * @var int
      */
     public $planned_total_route_duration;
 
     /**
      * Total wait time (seconds).
-     * @var integer
+     * @var int
      */
     public $total_wait_time;
 
     /**
      * UDU Actual travel distance.
-     * @var double
+     * @var float
      */
     public $udu_actual_travel_distance;
 
     /**
      * Actual travel distance.
-     * @var double
+     * @var float
      */
     public $actual_travel_distance;
 
     /**
      * Actual travel time (seconds).
-     * @var integer
+     * @var int
      */
     public $actual_travel_time;
 
     /**
      * Actual footsteps.
-     * @var integer
+     * @var int
      */
     public $actual_footsteps;
 
     /**
      * Working time.
-     * @var integer
+     * @var int
      */
     public $working_time;
 
     /**
      * Driving time.
-     * @var integer
+     * @var int
      */
     public $driving_time;
 
     /**
      * Idling time.
-     * @var integer
+     * @var int
      */
     public $idling_time;
 
     /**
-     * Paying miles
-     * @var double
+     * Paying miles.
+     * @var float
      */
     public $paying_miles;
 
     /**
      * Geofence polygon type.<br>
-     * enum: ["circle", "poly", "rect"]
+     * enum: ["circle", "poly", "rect"].
      * @var string
      */
     public $geofence_polygon_type;
 
     /**
      * Geofence polygon size.
-     * @var integer
+     * @var int
      */
     public $geofence_polygon_size;
 
     /**
-     * Route notes
+     * Route notes.
      * @var AddressNote[]
      */
-    public $notes=[];
+    public $notes = [];
 
     /**
      * A vehicle assigned to the route.
      * @var Vehicles\VehicleResponseV4
      */
-    public $vehicle=[];
+    public $vehicle = [];
 
     /**
      * Member config key-value pairs.
@@ -309,14 +307,14 @@ class Route extends Common
     public $member_config_storage;
 
     /**
-     * Original route
+     * Original route.
      * @var Route
      */
     public $original_route;
 
     /**
      * If true, the route will be unlinked from the master optimization.
-     * @var Boolean
+     * @var bool
      */
     public $unlink_from_master_optimization;
 
@@ -372,7 +370,7 @@ class Route extends Common
             $route->vehicle = new Vehicle();
             $route->vehicle = Vehicle::fromArray($params['vehicle']);
             Route4Me::setBaseUrl(Endpoint::BASE_URL);
-        };
+        }
 
         $route->member_config_storage = Common::getvalue($params, 'member_config_storage');
 
@@ -401,7 +399,7 @@ class Route extends Common
 
         if (isset($params['original_route'])) {
             $route->original_route = Route::fromArray($params['original_route']);
-        };
+        }
 
         return $route;
     }
@@ -413,16 +411,16 @@ class Route extends Common
      */
     public static function getRoutes($params = null)
     {
-        $allQueryFields = ['route_id', 'original', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset','start_date','end_date'];
+        $allQueryFields = ['route_id', 'original', 'route_path_output', 'query', 'directions', 'device_tracking_history', 'limit', 'offset', 'start_date', 'end_date'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::ROUTE_V4,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         if (isset($params['route_id'])) {
-            if (strlen($params['route_id'])==32) {
+            if (strlen($params['route_id']) == 32) {
                 return self::fromArray($result);
             } else {
                 return $result;
@@ -442,9 +440,9 @@ class Route extends Common
         $allQueryFields = ['route_id', 'route_path_output', 'compress_path_points', 'directions'];
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url' => Endpoint::ROUTE_V4,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $result;
@@ -453,10 +451,10 @@ class Route extends Common
     public function duplicateRoute($routeIDs)
     {
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url' => Endpoint::ROUTE_V4,
             'method' => 'POST',
-            'body'   => [
-                'duplicate_routes_id' => $routeIDs
+            'body' => [
+                'duplicate_routes_id' => $routeIDs,
             ],
         ]);
 
@@ -469,10 +467,10 @@ class Route extends Common
         $allBodyFields = ['addresses'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::ROUTE_V4,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $result;
@@ -488,16 +486,16 @@ class Route extends Common
         $allQueryFields = ['route_id', 'disable_optimization', 'optimize'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::REOPTIMIZE_V3_2,
-            'method'    => 'GET',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::REOPTIMIZE_V3_2,
+            'method' => 'GET',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $result;
     }
 
     /**
-     * Reoptimize a route
+     * Reoptimize a route.
      * @param $params type Route
      * @return mixed|string
      * @throws Exception\ApiError
@@ -507,16 +505,16 @@ class Route extends Common
         $allQueryFields = ['route_id', 'reoptimize', 'remaining', 'device_type'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::ROUTE_V4,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $result;
     }
 
     /**
-     * Merges the routes
+     * Merges the routes.
      * @param $params array contains:
      * @param route_ids IDs of the routes to be merged.
      * @param depot_address a depot address of the merged route.
@@ -531,17 +529,17 @@ class Route extends Common
         $allBodyFields = ['route_ids', 'depot_address', 'remove_origin', 'depot_lat',  'depot_lng'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTES_MERGE,
-            'method'        => 'POST',
-            'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'url' => Endpoint::ROUTES_MERGE,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;
     }
 
     /**
-     * Share a route by an email
+     * Share a route by an email.
      * @param $params RouteParametersQuery contains:
      * @param route_id a route ID to be shared.
      * @param response_format the response format.
@@ -555,18 +553,18 @@ class Route extends Common
         $allBodyFields = ['recipient_email'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTE_SHARE,
-            'method'        => 'POST',
-            'query'         => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'url' => Endpoint::ROUTE_SHARE,
+            'method' => 'POST',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;
     }
 
     /**
-     * Returns random route_id from existing routes between $offset and $offset+$limit
+     * Returns random route_id from existing routes between $offset and $offset+$limit.
      * @param $offset integer The page number for route listing pagination.
      * @param $limit integer The maximum number of the returned routes.
      * @return string random route ID
@@ -575,8 +573,8 @@ class Route extends Common
     public function getRandomRouteId($offset, $limit)
     {
         $params = [
-            'offset'    => !is_null($offset) ? $offset : 0,
-            'limit'     => !is_null($limit) ? $limit : 30,
+            'offset' => !is_null($offset) ? $offset : 0,
+            'limit' => !is_null($limit) ? $limit : 30,
         ];
 
         $route = new self();
@@ -594,7 +592,7 @@ class Route extends Common
     }
 
     /**
-     * Update a route
+     * Update a route.
      * @param $params array contains:
      * @param route_id string : route ID
      * @param reoptimize int : if equal to 1 the route re-optimized.
@@ -607,14 +605,14 @@ class Route extends Common
      */
     public function updateRoute($params)
     {
-        $allQueryFields = ['route_id', 'reoptimize','route_destination_id'];
+        $allQueryFields = ['route_id', 'reoptimize', 'route_destination_id'];
         $allBodyFields = ['addresses', 'parameters', 'unlink_from_master_optimization'];
 
         $result = Route4Me::makeRequst([
-            'url'       => Endpoint::ROUTE_V4,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'      => (isset($params['addresses']) || isset($params['parameters']) || isset($params['unlink_from_master_optimization']))
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => (isset($params['addresses']) || isset($params['parameters']) || isset($params['unlink_from_master_optimization']))
                             ? Route4Me::generateRequestParameters($allBodyFields, $params)
                             : null,
         ]);
@@ -625,15 +623,15 @@ class Route extends Common
     public function update()
     {
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url' => Endpoint::ROUTE_V4,
             'method' => 'PUT',
-            'query'  => [
-                'route_id' => isset($this->route_id) ? $this->route_id : null,
+            'query' => [
+                'route_id' => $this->route_id ?? null,
             ],
-            'body'   => [
+            'body' => [
                 'parameters' => $this->parameters,
                 ],
-            'HTTPHEADER' => isset($this->httpheaders) ? $this->httpheaders : null,
+            'HTTPHEADER' => $this->httpheaders ?? null,
         ]);
 
         return self::fromArray($route);
@@ -642,17 +640,17 @@ class Route extends Common
     public function updateAddress($address = null)
     {
         $body = sizeof($this->addresses) < 1 ? get_object_vars($this->parameters)
-            : (isset($this->addresses[0]) ? $this->addresses[0] : get_object_vars($this->parameters));
+            : ($this->addresses[0] ?? get_object_vars($this->parameters));
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ADDRESS_V4,
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'PUT',
-            'query'  => [
-                'route_id' => isset($this->route_id) ? $this->route_id : null,
-                'route_destination_id' => isset($this->route_destination_id) ? $this->route_destination_id : null,
+            'query' => [
+                'route_id' => $this->route_id ?? null,
+                'route_destination_id' => $this->route_destination_id ?? null,
             ],
-            'body'   => $body,
-            'HTTPHEADER' => isset($this->httpheaders) ? $this->httpheaders : null,
+            'body' => $body,
+            'HTTPHEADER' => $this->httpheaders ?? null,
         ]);
 
         return $result;
@@ -661,17 +659,17 @@ class Route extends Common
     public function updateRouteAddress()
     {
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ADDRESS_V4,
+            'url' => Endpoint::ADDRESS_V4,
             'method' => 'PUT',
-            'query'  => [
-                'route_id' => isset($this->route_id) ? $this->route_id : null,
-                'route_destination_id' => isset($this->route_destination_id) ? $this->route_destination_id : null,
+            'query' => [
+                'route_id' => $this->route_id ?? null,
+                'route_destination_id' => $this->route_destination_id ?? null,
             ],
-            'body'   => [
+            'body' => [
                 'parameters' => isset($this->parameters) ? get_object_vars($this->parameters) : null,
-                'addresses' => isset($this->addresses) ? $this->addresses : null,
+                'addresses' => $this->addresses ?? null,
             ],
-            'HTTPHEADER' => isset($this->httpheaders) ? $this->httpheaders : null,
+            'HTTPHEADER' => $this->httpheaders ?? null,
         ]);
 
         return $result;
@@ -683,11 +681,11 @@ class Route extends Common
         $allBodyFields = ['addresses'];
 
         $route = Route4Me::makeRequst([
-            'url'           => Endpoint::ROUTE_V4,
-            'method'        => 'PUT',
-            'query'         => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'    => isset($this->httpheaders) ? $this->httpheaders : null,
+            'url' => Endpoint::ROUTE_V4,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => $this->httpheaders ?? null,
         ]);
 
         return self::fromArray($route);
@@ -699,10 +697,10 @@ class Route extends Common
         $allBodyFields = ['addresses', 'optimal_position'];
 
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url' => Endpoint::ROUTE_V4,
             'method' => 'PUT',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return self::fromArray($route);
@@ -710,18 +708,18 @@ class Route extends Common
 
     public function addNoteFile($params)
     {
-        $fname = isset($params['strFilename']) ? $params['strFilename'] : null;
+        $fname = $params['strFilename'] ?? null;
         $rpath = realpath($fname);
 
         $allQueryFields = ['route_id', 'address_id', 'dev_lat', 'dev_lng', 'device_type'];
         $allBodyFields = ['strUpdateType', 'strFilename', 'strNoteContents'];
 
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_NOTES_ADD,
+            'url' => Endpoint::ROUTE_NOTES_ADD,
             'method' => 'POST',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'   => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'FILE'   => $rpath,
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'FILE' => $rpath,
             'HTTPHEADER' => [
                 'Content-Type: application/x-www-form-urlencoded',
             ],
@@ -733,9 +731,9 @@ class Route extends Common
     public function deleteRoutes($route_id)
     {
         $result = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url' => Endpoint::ROUTE_V4,
             'method' => 'DELETE',
-            'query'  => [
+            'query' => [
                 'route_id' => $route_id,
             ],
         ]);
@@ -784,9 +782,9 @@ class Route extends Common
         $allQueryFields = ['route_id', 'device_tracking_history'];
 
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::ROUTE_V4,
+            'url' => Endpoint::ROUTE_V4,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return self::fromArray($route);
@@ -797,9 +795,9 @@ class Route extends Common
         $allQueryFields = ['route_id', 'format', 'time_period', 'start_date', 'end_date'];
 
         $route = Route4Me::makeRequst([
-            'url'    => Endpoint::GET_DEVICE_LOCATION,
+            'url' => Endpoint::GET_DEVICE_LOCATION,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $route;
@@ -810,9 +808,9 @@ class Route extends Common
         $allQueryFields = ['tracking'];
 
         $assetResponse = Route4Me::makeRequst([
-            'url'    => Endpoint::STATUS_V4,
+            'url' => Endpoint::STATUS_V4,
             'method' => 'GET',
-            'query'  => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $assetResponse;

@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\Address;
@@ -29,7 +29,7 @@ try {
         'address_stop_type' => 'DELIVERY',
         'address_city' => 'Tbilisi Vah',
         'first_name' => 'Tusha',
-        'last_name' => 'Grigoriani I'
+        'last_name' => 'Grigoriani I',
     ], [
         'address_1' => '17205 RICHMOND TNPK, MILFORD, VA, 22514',
         'cached_lat' => 38.024654,
@@ -37,7 +37,7 @@ try {
         'address_stop_type' => 'DELIVERY',
         'address_city' => 'Tbilisi Vah',
         'first_name' => 'Tusha',
-        'last_name' => 'Grigoriani II'
+        'last_name' => 'Grigoriani II',
     ]];
     $res = $ab->addMultipleAddresses($arr);
     print_r($res);
@@ -46,7 +46,7 @@ try {
     // add 2 adresses from Address
     $arr = [
         new Address('17205 Tbilisi Vah, GEORGIAN, GE, 22514', 38.024654, 77.338814, 'DELIVERY'),
-        new Address('17206 Tbilisi Vah, GEORGIAN, GE, 22515', 38.024654, 77.338814, 'VISIT')
+        new Address('17206 Tbilisi Vah, GEORGIAN, GE, 22515', 38.024654, 77.338814, 'VISIT'),
     ];
     $res = $ab->addMultipleAddresses($arr);
     print_r($res);

@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to the process of removing of a specified configuration key belonging to an account.
 
@@ -14,8 +14,8 @@ $member = new Member();
 
 // Create a config key
 $createParams = Member::fromArray([
-    'config_key'    => 'My height',
-    'config_value'  => '182',
+    'config_key' => 'My height',
+    'config_value' => '182',
 ]);
 
 $response = $member->newMemberConfigKey($createParams);

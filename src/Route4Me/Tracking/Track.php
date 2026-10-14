@@ -5,7 +5,7 @@ namespace Route4Me\Tracking;
 use Route4Me;
 use Route4Me\Enum\Endpoint;
 
-class Track extends \Route4Me\Common
+class Track extends Route4Me\Common
 {
     public function __construct()
     {
@@ -25,12 +25,12 @@ class Track extends \Route4Me\Common
         return $json;
     }
 
-    public static function getUserLocations($query=null)
+    public static function getUserLocations($query = null)
     {
         $json = Route4Me\Route4Me::makeRequst([
             'url' => Endpoint::USER_LOCATION,
             'method' => 'GET',
-            'query' => isset($query) ? ['query' => $query] : null
+            'query' => isset($query) ? ['query' => $query] : null,
         ]);
 
         return $json;

@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Route4Me\Members\Member;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -27,11 +27,11 @@ $params = Member::fromArray([
     'member_id' => $randomMemberID,
 ]);
 
-$errorText = "";
+$errorText = '';
 $response = $member->deleteMember($params, $errorText);
 
 if (!is_null($response)) {
     Route4Me::simplePrint($response);
 } else {
-    echo $errorText."<br>";
+    echo $errorText . '<br>';
 }

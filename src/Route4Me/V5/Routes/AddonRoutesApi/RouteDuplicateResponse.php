@@ -1,27 +1,24 @@
 <?php
 
-
 namespace Route4Me\V5\Routes\AddonRoutesApi;
 
 /**
- * Class RouteDuplicateResponse
- * @package Route4Me\V5\Routes\AddonRoutesApi
- * The response from the route delete process.
+ * Class RouteDuplicateResponse.
  */
 class RouteDuplicateResponse extends \Route4Me\Common
 {
     /** If true, the route duplicated successfully.
-     * @var boolean $status
+     * @var bool
      */
     public $status;
 
     /** If true, the route duplication process was asynchronous.
-     * @var boolean $async
+     * @var bool
      */
     public $async;
 
     /** An array of the duplicated route IDs.
-     * @var string[] $route_ids
+     * @var string[]
      */
     public $route_ids = [];
 }

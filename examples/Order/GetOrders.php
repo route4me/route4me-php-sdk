@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to getting of orders list with details.
 
@@ -15,7 +15,7 @@ $order = new Order();
 
 $orderParameters = Order::fromArray([
     'offset' => 0,
-    'limit'  => 5,
+    'limit' => 5,
 ]);
 
 $response = $order->getOrders($orderParameters);

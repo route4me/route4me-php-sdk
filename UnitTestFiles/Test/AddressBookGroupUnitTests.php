@@ -2,9 +2,9 @@
 
 namespace UnitTestFiles\Test;
 
+use Route4Me\AddressBookGroup;
 use Route4Me\Constants;
 use Route4Me\Route4Me;
-use Route4Me\AddressBookGroup;
 use Route4Me\SearchResponse;
 
 class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
@@ -17,18 +17,18 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
 
         $abg = new AddressBookGroup();
 
-        $createParameters= [
-            'group_name'    => 'All Group',
-            'group_color'   => '92e1c0',
-            'filter'        => [
+        $createParameters = [
+            'group_name' => 'All Group',
+            'group_color' => '92e1c0',
+            'filter' => [
                 'condition' => 'AND',
-                'rules'     => [[
-                    'id'       => 'address_1',
-                    'field'    => 'address_1',
+                'rules' => [[
+                    'id' => 'address_1',
+                    'field' => 'address_1',
                     'operator' => 'not_equal',
-                    'value'    => 'qwerty123456'
-                ]]
-            ]
+                    'value' => 'qwerty123456',
+                ]],
+            ],
         ];
 
         $createdAddressBookGroup = AddressBookGroup::fromArray(
@@ -37,18 +37,18 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
 
         self::$createdGroups[] = $createdAddressBookGroup;
 
-        $createParameters= [
-            'group_name'    => 'All Group',
-            'group_color'   => '92e1c0',
-            'filter'        => [
+        $createParameters = [
+            'group_name' => 'All Group',
+            'group_color' => '92e1c0',
+            'filter' => [
                 'condition' => 'AND',
-                'rules'     => [[
-                    'id'       => 'address_1',
-                    'field'    => 'address_1',
+                'rules' => [[
+                    'id' => 'address_1',
+                    'field' => 'address_1',
                     'operator' => 'not_equal',
-                    'value'    => 'qwerty123456'
-                ]]
-            ]
+                    'value' => 'qwerty123456',
+                ]],
+            ],
         ];
 
         $createdAddressBookGroup = AddressBookGroup::fromArray(
@@ -61,21 +61,21 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $addressBookGroup = AddressBookGroup::fromArray([
-            'group_id'      => '137F9F99544DB34C160B2B9AF8FC6A12',
-            'group_name'    => 'Ocassion example',
-            'group_color'   => '92e1c0',
-            'group_icon'    => 'emoji-pushpin',
-            'member_id'     => 444333,
+            'group_id' => '137F9F99544DB34C160B2B9AF8FC6A12',
+            'group_name' => 'Ocassion example',
+            'group_color' => '92e1c0',
+            'group_icon' => 'emoji-pushpin',
+            'member_id' => 444333,
             'filter' => [
-              'condition'   => 'AND',
-              'rules'       => [
+              'condition' => 'AND',
+              'rules' => [
                 [
-                  'id'          => 'custom_data.occasion',
-                  'field'       => 'custom_data.occasion',
-                  'operator'    => 'equal',
-                  'value'       => '100'
-                ]]
-            ]
+                  'id' => 'custom_data.occasion',
+                  'field' => 'custom_data.occasion',
+                  'operator' => 'equal',
+                  'value' => '100',
+                ]],
+            ],
         ]);
 
         $this->assertEquals('137F9F99544DB34C160B2B9AF8FC6A12', $addressBookGroup->group_id);
@@ -84,14 +84,14 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $this->assertEquals('emoji-pushpin', $addressBookGroup->group_icon);
         $this->assertEquals(444333, $addressBookGroup->member_id);
         $this->assertEquals([
-            'condition'   => 'AND',
-            'rules'       => [
+            'condition' => 'AND',
+            'rules' => [
                 [
-                    'id'          => 'custom_data.occasion',
-                    'field'       => 'custom_data.occasion',
-                    'operator'    => 'equal',
-                    'value'       => '100'
-                ]]
+                    'id' => 'custom_data.occasion',
+                    'field' => 'custom_data.occasion',
+                    'operator' => 'equal',
+                    'value' => '100',
+                ]],
         ], $addressBookGroup->filter);
     }
 
@@ -113,9 +113,9 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
     {
         $groupId = self::$createdGroups[0]->group_id;
 
-        $updateParameters= [
-            'group_id'      => $groupId,
-            'group_color'   => '7bd148'
+        $updateParameters = [
+            'group_id' => $groupId,
+            'group_color' => '7bd148',
         ];
 
         $result = AddressBookGroup::fromArray(
@@ -131,8 +131,8 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
     {
         $groupId = end(self::$createdGroups)->group_id;
 
-        $removeParameters= [
-            'group_id' => $groupId
+        $removeParameters = [
+            'group_id' => $groupId,
         ];
 
         $result = AddressBookGroup::removeAddressBookGroup($removeParameters);
@@ -146,18 +146,18 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
 
     public function testCreateAddressBookGroup()
     {
-        $createParameters= [
-            'group_name'    => 'All Group',
-            'group_color'   => '92e2cd',
-            'filter'        => [
+        $createParameters = [
+            'group_name' => 'All Group',
+            'group_color' => '92e2cd',
+            'filter' => [
                 'condition' => 'AND',
-                'rules'     => [[
-                    'id'       => 'address_1',
-                    'field'    => 'address_1',
+                'rules' => [[
+                    'id' => 'address_1',
+                    'field' => 'address_1',
                     'operator' => 'not_equal',
-                    'value'    => 'qwerty654321'
-                ]]
-            ]
+                    'value' => 'qwerty654321',
+                ]],
+            ],
         ];
 
         $createdAddressBookGroup = AddressBookGroup::fromArray(
@@ -178,9 +178,9 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
             'limit' => 10,
             'offset' => 0,
             'filter' => [
-                'query' => "Louisville",
-                "display" => "all"
-            ]
+                'query' => 'Louisville',
+                'display' => 'all',
+            ],
         ];
 
         $addressBookGroups = SearchResponse::fromArray(
@@ -188,15 +188,15 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         );
 
         $this->assertNotNull($addressBookGroups);
-        $this->assertTrue(sizeof($addressBookGroups->fields)==3);
+        $this->assertTrue(sizeof($addressBookGroups->fields) == 3);
         $this->assertContains('address_id', $addressBookGroups->fields);
         $this->assertContains('address_1', $addressBookGroups->fields);
         $this->assertContains('address_group', $addressBookGroups->fields);
 
         $this->assertNotNull($addressBookGroups->results);
 
-        if (sizeof($addressBookGroups->results)>0) {
-            $this->assertContains('Louisville', implode(", ", $addressBookGroups->results[0]));
+        if (sizeof($addressBookGroups->results) > 0) {
+            $this->assertContains('Louisville', implode(', ', $addressBookGroups->results[0]));
         }
     }
 
@@ -207,8 +207,8 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         $groupId = self::$createdGroups[0]->group_id;
 
         $searchParameters = [
-            'fields'    => ['address_id'],
-            'group_id'  => $groupId,
+            'fields' => ['address_id'],
+            'group_id' => $groupId,
         ];
 
         $result = AddressBookGroup::getAddressBookContactsByGroup($searchParameters);
@@ -222,7 +222,7 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
     public function testGetAddressBookGroups()
     {
         $addressBookGroupParameters = [
-            'limit'  => 20,
+            'limit' => 20,
             'offset' => 0,
         ];
 
@@ -234,14 +234,14 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
             $addressBookGroups[0]
         );
 
-        $this->assertTrue(sizeof($addressBookGroups)>0);
+        $this->assertTrue(sizeof($addressBookGroups) > 0);
         $this->assertContainsOnlyInstancesOf(AddressBookGroup::class, [$firstGroup]);
     }
 
     public function testgGetRandomAddressBookGroup()
     {
         $addressBookGroupParameters = [
-            'limit'  => 20,
+            'limit' => 20,
             'offset' => 0,
         ];
 
@@ -268,16 +268,16 @@ class AddressBookGroupUnitTests extends \PHPUnit\Framework\TestCase
         foreach (self::$createdGroups as $createdGroup) {
             $groupId = $createdGroup->group_id;
 
-            $removeParameters= [
-                'group_id' => $groupId
+            $removeParameters = [
+                'group_id' => $groupId,
             ];
 
             $result = AddressBookGroup::removeAddressBookGroup($removeParameters);
 
-            if ($result!=null && isset($result['status']) && isset($result['status'])) {
-                echo "The address book group ".$groupId." removed successfully <br>";
+            if ($result != null && isset($result['status']) && isset($result['status'])) {
+                echo 'The address book group ' . $groupId . ' removed successfully <br>';
             } else {
-                echo "Cannot remove the address book group ".$groupId."<br>";
+                echo 'Cannot remove the address book group ' . $groupId . '<br>';
             }
         }
     }

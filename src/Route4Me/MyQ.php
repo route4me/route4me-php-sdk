@@ -13,22 +13,38 @@ class MyQException extends \Exception
 
 class MyQ
 {
-    /** @var string|null $username contains the username used to authenticate with the MyQ API */
+    /**
+     * @var string|null contains the username used to authenticate with the MyQ API
+     */
     protected $username = null;
-    /** @var string|null $password contains the password used to authenticate with the MyQ API */
+    /**
+     * @var string|null contains the password used to authenticate with the MyQ API
+     */
     protected $password = null;
-    /** @var string|null $appId is the application ID used to register with the MyQ API */
+    /**
+     * @var string|null is the application ID used to register with the MyQ API
+     */
     protected $appId = 'NWknvuBd7LoFHfXmKNMBcgajXtZEgKUh4V7WNzMidrpUUluDpVYVZx+xT4PCM5Kx';
     //protected $appId = 'Vj8pQggXLhLy0WHahglCD4N1nAkkXQtGYpq2HrHD7H1nvmbT55KqtN6RSF4ILB%2fi';
-    /** @var string|null $securityToken is the auth token returned after a successful login */
+    /**
+     * @var string|null is the auth token returned after a successful login
+     */
     protected $securityToken = null;
-    /** @var string|null $userAgent is the User-Agent header value sent with each API request */
+    /**
+     * @var string|null is the User-Agent header value sent with each API request
+     */
     protected $userAgent = 'Chamberlain/3.4.1';
-    /** @var string|null $culture is the API culture code for the API */
+    /**
+     * @var string|null is the API culture code for the API
+     */
     protected $culture = 'en';
-    /** @var string|null $contentType is the content type used for all cURL requests */
+    /**
+     * @var string|null is the content type used for all cURL requests
+     */
     protected $contentType = 'application/json';
-    /** @var array $headers contain HTTP headers for cURL requests */
+    /**
+     * @var array contain HTTP headers for cURL requests
+     */
     protected $_headers = [];
     protected $_deviceId = null;
     protected $_locationName = null;
@@ -36,7 +52,9 @@ class MyQ
     protected $_loginUrl = 'https://myqexternal.myqdevice.com/api/v4/User/Validate';
     protected $_getDeviceDetailUrl = 'https://myqexternal.myqdevice.com/api/v4/userdevicedetails/get?&filterOn=true';
     protected $_putDeviceStateUrl = '/api/v4/DeviceAttribute/PutDeviceAttribute';
-    /** @var resource|null $_conn is the web connection to the MyQ API */
+    /**
+     * @var resource|null is the web connection to the MyQ API
+     */
     protected $_conn = null;
 
     /**
@@ -54,7 +72,7 @@ class MyQ
         }
 
         // Initialize cURL request headers
-        if (0 == sizeof($this->_headers)) {
+        if (sizeof($this->_headers) == 0) {
             $this->_headers = [
                 'MyQApplicationId' => $this->appId,
                 'Culture' => $this->culture,
@@ -99,7 +117,7 @@ class MyQ
         }
 
         if (sizeof($error) > 0) {
-            throw new MyQException('Missing required auth credential: '.implode(',', $error));
+            throw new MyQException('Missing required auth credential: ' . implode(',', $error));
         }
 
         $this->_login();
@@ -113,7 +131,7 @@ class MyQ
             $this->_locationName,
             $this->_doorName,
             $this->_doorState,
-            (int) $timeInState,
+            (int)$timeInState,
         ]);
     }
 
@@ -170,7 +188,7 @@ class MyQ
 
         $data = json_decode($output);
 
-        if (false == $data || !isset($data->SecurityToken)) {
+        if ($data == false || !isset($data->SecurityToken)) {
             throw new MyQException("Error processing login request: $output");
         }
 
@@ -190,16 +208,16 @@ class MyQ
 
         $data = json_decode($output);
 
-        if (false == $data || !isset($data->Devices)) {
+        if ($data == false || !isset($data->Devices)) {
             throw new MyQException("Error fetching device details: $output");
         }
 
         // Find our door device ID
         foreach ($data->Devices as $device) {
-            if (false !== stripos($device->MyQDeviceTypeName, 'Gateway')) {
+            if (stripos($device->MyQDeviceTypeName, 'Gateway') !== false) {
                 // Find location name
                 foreach ($device->Attributes as $attr) {
-                    if ('desc' == $attr->AttributeDisplayName) {
+                    if ($attr->AttributeDisplayName == 'desc') {
                         $this->_locationName = $attr->Value;
                     }
                 }
@@ -215,10 +233,10 @@ class MyQ
                     case 'doorstate':
                         $this->_doorState = $attr->Value;
                         // UpdatedTime is a timestamp in ms, so we truncate
-                        $this->_doorStateTime = (int) $attr->UpdatedTime / 1000;
+                        $this->_doorStateTime = (int)$attr->UpdatedTime / 1000;
                         break;
                     default:
-                        continue;
+                        break;
                 }
             }
         }

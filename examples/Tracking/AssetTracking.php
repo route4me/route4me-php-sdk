@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -18,10 +18,10 @@ $trackingNumber = null;
 $route = new Route();
 
 $routeId = $route->getRandomRouteId(0, 20);
-assert(!is_null($routeId), "Cannot retrieve a random route ID");
+assert(!is_null($routeId), 'Cannot retrieve a random route ID');
 
 $addresses = $route->GetAddressesFromRoute($routeId);
-assert(!is_null($addresses), "Cannot retrieve a random route ID");
+assert(!is_null($addresses), 'Cannot retrieve a random route ID');
 
 foreach ($addresses as $addr1) {
     if (!is_null($addr1->tracking_number)) {
@@ -30,7 +30,7 @@ foreach ($addresses as $addr1) {
     }
 }
 
-assert(!is_null($trackingNumber), "Cannot select a tracking number");
+assert(!is_null($trackingNumber), 'Cannot select a tracking number');
 
 $params = [
     'tracking' => $trackingNumber,

@@ -1,0 +1,64 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  syntax:
+    name: syntax (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      # php -l exits 0 on deprecations and warnings, so fail on any output line
+      # that is not a clean result.
+      - name: Check syntax and deprecations
+        run: |
+          git ls-files -z '*.php' | xargs -0 -n1 php -d error_reporting=E_ALL -d display_errors=1 -d log_errors=0 -l > lint.txt 2>&1 || true
+          if grep -v -e '^No syntax errors detected' -e '^$' lint.txt; then exit 1; fi
+
+  phpstan:
+    name: phpstan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: phpstan:2.3.1
+
+      - name: Analyse
+        run: phpstan analyse --no-progress --memory-limit=1G
+
+  php-cs-fixer:
+    name: php-cs-fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      # PHP 7.4 is the SDK minimum, so the fixer cannot suggest newer syntax.
+      # The fixer version is pinned, so a new release cannot fail untouched code.
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: php-cs-fixer:3.95.27
+
+      - name: Check code style
+        run: php-cs-fixer check --diff --show-progress=none

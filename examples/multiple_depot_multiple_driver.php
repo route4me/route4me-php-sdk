@@ -2,15 +2,15 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../');
+require $root . '/vendor/autoload.php';
 
-use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\AlgorithmType;
-use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\DeviceType;
-use Route4Me\Enum\TravelMode;
+use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\Metric;
+use Route4Me\Enum\OptimizationType;
+use Route4Me\Enum\TravelMode;
 
 // Set the api key in the Route4me class
 // This example is not available for demo API key
@@ -25,16 +25,16 @@ foreach ($json as $address) {
 }
 
 $parameters = RouteParameters::fromArray([
-    'algorithm_type'            => AlgorithmType::CVRP_TW_SD,
-    'distance_unit'             => DistanceUnit::MILES,
-    'device_type'               => DeviceType::WEB,
-    'optimize'                  => OptimizationType::DISTANCE,
-    'metric'                    => Metric::GEODESIC,
-    'route_max_duration'        => 86400 * 2,
-    'travel_mode'               => TravelMode::DRIVING,
-    'vehicle_capacity'          => 50,
-    'vehicle_max_distance_mi'   => 10000,
-    'parts'                     => 50,
+    'algorithm_type' => AlgorithmType::CVRP_TW_SD,
+    'distance_unit' => DistanceUnit::MILES,
+    'device_type' => DeviceType::WEB,
+    'optimize' => OptimizationType::DISTANCE,
+    'metric' => Metric::GEODESIC,
+    'route_max_duration' => 86400 * 2,
+    'travel_mode' => TravelMode::DRIVING,
+    'vehicle_capacity' => 50,
+    'vehicle_max_distance_mi' => 10000,
+    'parts' => 50,
 ]);
 
 $optimizationParams = new OptimizationProblemParams();
@@ -43,4 +43,4 @@ $optimizationParams->setParameters($parameters);
 
 $problem = OptimizationProblem::optimize($optimizationParams);
 
-Route4Me::simplePrint((array) $problem, true);
+Route4Me::simplePrint((array)$problem, true);

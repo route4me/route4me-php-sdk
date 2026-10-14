@@ -4,84 +4,138 @@ namespace Route4Me\Tracking;
 
 class UserTracking extends \Route4Me\Common
 {
-    /** @var string $route_id */
+    /**
+     * @var string
+     */
     public $route_id;
 
-    /** @var string $device_id */
+    /**
+     * @var string
+     */
     public $device_id;
 
-    /** @var long $activity_timestamp */
+    /**
+     * @var long
+     */
     public $activity_timestamp;
 
-    /** @var string $activity_timestamp */
+    /**
+     * @var string
+     */
     public $device_timestamp;
 
-    /** @var int $device_type */
+    /**
+     * @var int
+     */
     public $device_type;
 
-    /** @var int $member_id */
+    /**
+     * @var int
+     */
     public $member_id;
 
-    /** @var int $root_member_id */
+    /**
+     * @var int
+     */
     public $root_member_id;
 
-    /** @var string $vehicle_id */
+    /**
+     * @var string
+     */
     public $vehicle_id;
 
-    /** @var int $direction */
+    /**
+     * @var int
+     */
     public $direction;
 
-    /** @var int $speed */
+    /**
+     * @var int
+     */
     public $speed;
 
-    /** @var string $calculated_speed */
+    /**
+     * @var string
+     */
     public $calculated_speed;
 
-    /** @var string $speed_accuracy */
+    /**
+     * @var string
+     */
     public $speed_accuracy;
 
-    /** @var string $speed_unit */
+    /**
+     * @var string
+     */
     public $speed_unit;
 
-    /** @var int $bearing */
+    /**
+     * @var int
+     */
     public $bearing;
 
-    /** @var string $bearing_accuracy */
+    /**
+     * @var string
+     */
     public $bearing_accuracy;
 
-    /** @var string $accuracy */
+    /**
+     * @var string
+     */
     public $accuracy;
 
-    /** @var int $day_id */
+    /**
+     * @var int
+     */
     public $day_id;
 
-    /** @var double $position_lat */
+    /**
+     * @var float
+     */
     public $position_lat;
 
-    /** @var double $position_lng */
+    /**
+     * @var float
+     */
     public $position_lng;
 
-    /** @var int $altitude */
+    /**
+     * @var int
+     */
     public $altitude;
 
-    /** @var int $footsteps */
+    /**
+     * @var int
+     */
     public $footsteps;
 
-    /** @var string $data_source_name */
+    /**
+     * @var string
+     */
     public $data_source_name;
 
-    /** @var string $custom_data */
+    /**
+     * @var string
+     */
     public $custom_data;
 
-    /** @var string $device_timezone */
+    /**
+     * @var string
+     */
     public $device_timezone;
 
-    /** @var int $device_timezone_offset */
+    /**
+     * @var int
+     */
     public $device_timezone_offset;
 
-    /** @var string $activity_timestamp_friendly */
+    /**
+     * @var string
+     */
     public $activity_timestamp_friendly;
 
-    /** @var long $LAST_KNOWN */
+    /**
+     * @var long
+     */
     public $LAST_KNOWN;
 }

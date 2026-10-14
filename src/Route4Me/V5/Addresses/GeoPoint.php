@@ -1,22 +1,19 @@
 <?php
 
-
 namespace Route4Me\V5;
 
 /**
- * Class GeoPoint
- * @package Route4Me\V5\Address
- * Geographic point structure
+ * Class GeoPoint.
  */
 class GeoPoint extends \Route4Me\Common
 {
-    /** Latitude
-     * @var double $lat
+    /** Latitude.
+     * @var float
      */
     public $lat;
 
-    /** Longitude
-     * @var double $lng
+    /** Longitude.
+     * @var float
      */
     public $lng;
 }

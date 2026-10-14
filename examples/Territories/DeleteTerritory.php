@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Enum\TerritoryTypes;
 
@@ -23,17 +23,17 @@ $territoryParams['data'] = [
 ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_name'    => 'Test Territory '.strval(rand(10000, 99999)),
-    'territory_color'   => 'ff7700',
-    'territory'         => $territoryParams,
+    'territory_name' => 'Test Territory ' . strval(rand(10000, 99999)),
+    'territory_color' => 'ff7700',
+    'territory' => $territoryParams,
 ]);
 
 $territory = new Territory();
 
-$result = (array) $territory->addTerritory($TerritoryParameters);
+$result = (array)$territory->addTerritory($TerritoryParameters);
 
-assert(!is_null($result), "Cannot create a territory");
-assert(isset($result['territory_id']), "Cannot create a territory");
+assert(!is_null($result), 'Cannot create a territory');
+assert(isset($result['territory_id']), 'Cannot create a territory');
 
 $territory_id = $result['territory_id'];
 
@@ -41,7 +41,7 @@ echo "New Territory with territory_id = $territory_id created successfuly<br>";
 echo '------------------------------------------------------------------------<br><br>';
 
 $result1 = $territory->deleteTerritory($territory_id);
-assert(isset($result), "Cannot delete the territory");
+assert(isset($result), 'Cannot delete the territory');
 echo "Territory with territory_id = $territory_id was deleted successfuly<br>";
 
 Route4Me::simplePrint($result1);

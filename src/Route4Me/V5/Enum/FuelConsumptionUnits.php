@@ -1,9 +1,10 @@
 <?php
 
-
 namespace Route4Me\V5\Enum;
 
-/** Fuel consumption units enumeration. */
+/**
+ * Fuel consumption units enumeration.
+ */
 class FuelConsumptionUnits
 {
     const LITERS_PER_100_KILOMETERS = 'L/100km';

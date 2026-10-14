@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-use Route4Me\Exception\ApiError;
 use Route4Me\Enum\Endpoint;
+use Route4Me\Exception\ApiError;
 
 class Route4Me
 {
@@ -31,7 +31,7 @@ class Route4Me
     }
 
     /**
-     * Make request with CURL
+     * Make request with CURL.
      *
      * @since 1.2.3 changed error handling
      * @since 1.2.8 added $options['return_headers']
@@ -48,23 +48,23 @@ class Route4Me
      *   array  HTTPHEADERS                - Array of headers.
      *   string FILE                       - Path to uploading file.
      *   array  return_headers             - Array of response headers to return as a result.
-     * @throws Exception\ApiError
+     * @throws ApiError
      */
     public static function makeRequst($options)
     {
-        $method = isset($options['method']) ? $options['method'] : 'GET';
+        $method = $options['method'] ?? 'GET';
         $query = isset($options['query'])
             ? array_filter($options['query'], function ($x) {
                 return !is_null($x);
             }) : [];
 
-        $body = isset($options['body']) ? $options['body'] : null;
-        $file = isset($options['FILE']) ? $options['FILE'] : null;
+        $body = $options['body'] ?? null;
+        $file = $options['FILE'] ?? null;
         $headers = [
             'User-Agent: Route4Me php-sdk',
         ];
 
-        $return_headers = (isset($options['return_headers']) ? $options['return_headers'] : null);
+        $return_headers = ($options['return_headers'] ?? null);
 
         if (isset($options['HTTPHEADER'])) {
             $headers[] = $options['HTTPHEADER'];
@@ -87,16 +87,16 @@ class Route4Me
         // Per-request host override; falls back to the global default so existing
         // setBaseUrl() callers are unaffected. Prevents one call's host from leaking
         // into a later unrelated request.
-        $baseUrl = isset($options['baseUrl']) ? $options['baseUrl'] : self::getBaseUrl();
+        $baseUrl = $options['baseUrl'] ?? self::getBaseUrl();
 
         $curlOpts = [
-            CURLOPT_URL             => $baseUrl.$url,
-            CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_TIMEOUT         => 120,
-            CURLOPT_FOLLOWLOCATION  => true,
-            CURLOPT_SSL_VERIFYHOST  => 2,
-            CURLOPT_SSL_VERIFYPEER  => true,
-            CURLOPT_HTTPHEADER      => $headers,
+            CURLOPT_URL => $baseUrl . $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 120,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_HTTPHEADER => $headers,
         ];
 
         curl_setopt_array($ch, $curlOpts);
@@ -110,13 +110,14 @@ class Route4Me
                 if (count($header) >= 2) {
                     $response_headers[strtolower(trim($header[0]))] = trim($header[1]);
                 }
+
                 return $len;
             });
         }
 
-        if (null != $file) {
+        if ($file != null) {
             $cfile = new \CURLFile($file, '', '');
-            $body['strFilename']=$cfile;
+            $body['strFilename'] = $cfile;
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
@@ -183,7 +184,7 @@ class Route4Me
         } else {
             $json = json_decode($result, true);
         }
-        if (200 == $code || 201 == $code || 202 == $code || 204 == $code) {
+        if ($code == 200 || $code == 201 || $code == 202 || $code == 204) {
             if (isset($json['errors'])) {
                 throw new ApiError(implode(', ', $json['errors']), $code, $result);
             } else {
@@ -191,18 +192,20 @@ class Route4Me
                 if (count($response_headers) !== 0) {
                     $res = [
                         'code' => $code,
-                        'data' => $json
+                        'data' => $json,
                     ];
                     foreach ($return_headers as $key => $value) {
                         // most headers has char '-' but it is forbidden in PHP names replace it with '_'
                         $res[strtolower(str_replace('-', '_', $value))] =
-                            (isset($response_headers[$value]) ? $response_headers[$value] : null);
+                            ($response_headers[$value] ?? null);
                     }
+
                     return $res;
                 }
-                if (204 == $code) {
+                if ($code == 204) {
                     return true;
                 }
+
                 return $json;
             }
         } elseif (isset($code) && (!isset($result) || !$result)) {
@@ -261,21 +264,21 @@ class Route4Me
                                     self::simplePrint($result1, true);
                                     echo '------<br>';
                                 } else {
-                                    echo $key1.' --> '.'Array() <br>';
+                                    echo $key1 . ' --> ' . 'Array() <br>';
                                 }
                             } else {
                                 if (is_object($result1)) {
                                     if ($deepPrinting) {
                                         echo "<br>$key1 ------><br>";
-                                        $oarray = (array) $result1;
+                                        $oarray = (array)$result1;
                                         self::simplePrint($oarray, true);
                                         echo '------<br>';
                                     } else {
-                                        echo $key1.' --> '.'Object <br>';
+                                        echo $key1 . ' --> ' . 'Object <br>';
                                     }
                                 } else {
                                     if (!is_null($result1)) {
-                                        echo $key1.' --> '.$result1.'<br>';
+                                        echo $key1 . ' --> ' . $result1 . '<br>';
                                     }
                                 }
                             }
@@ -284,15 +287,15 @@ class Route4Me
                         if (is_object($result)) {
                             if ($deepPrinting) {
                                 echo "<br>$key ------><br>";
-                                $oarray = (array) $result;
+                                $oarray = (array)$result;
                                 self::simplePrint($oarray, true);
                                 echo '------<br>';
                             } else {
-                                echo $key.' --> '.'Object <br>';
+                                echo $key . ' --> ' . 'Object <br>';
                             }
                         } else {
                             if (!is_null($result)) {
-                                echo $key.' --> '.$result.'<br>';
+                                echo $key . ' --> ' . $result . '<br>';
                             }
                         }
                     }
@@ -363,13 +366,13 @@ class Route4Me
         if (is_array($params)) {
             foreach ($allFields as $field) {
                 if (isset($params[$field])) {
-                    $generatedPath .= $params[$field].'/';
+                    $generatedPath .= $params[$field] . '/';
                 }
             }
         } elseif (is_object($params)) {
             foreach ($allFields as $field) {
                 if (isset($params->{$field})) {
-                    $generatedPath .= $params->{$field}.'/';
+                    $generatedPath .= $params->{$field} . '/';
                 }
             }
         }
@@ -379,7 +382,7 @@ class Route4Me
 
     public static function getFileRealPath($fileName)
     {
-        $rpath = function_exists('curl_file_create') ? curl_file_create(realpath($fileName)) : '@'.realpath($fileName);
+        $rpath = function_exists('curl_file_create') ? curl_file_create(realpath($fileName)) : '@' . realpath($fileName);
 
         return $rpath;
     }

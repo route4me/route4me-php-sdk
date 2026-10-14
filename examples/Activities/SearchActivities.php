@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Enum\ActivityTypes;
 
@@ -18,8 +18,8 @@ $activityTypes = new ActivityTypes();
 foreach ($activityTypes->getConstants() as $prop => $value) {
     $activityParameters = ActivityParameters::fromArray([
         'activity_type' => $value,
-        'limit'         => 2,
-        'offset'        => 0,
+        'limit' => 2,
+        'offset' => 0,
     ]);
 
     $activities = new ActivityParameters();

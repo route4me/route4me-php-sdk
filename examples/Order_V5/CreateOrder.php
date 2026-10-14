@@ -3,11 +3,11 @@
 namespace Route4Me;
 
 use Exception;
-use Route4Me\V5\Orders\Orders;
 use Route4Me\V5\Orders\Order;
+use Route4Me\V5\Orders\Orders;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // An example of creating, reading, changing and deleting an order.
 
@@ -21,11 +21,11 @@ $order = new Order([
     'address_city' => 'Philadelphia',
     'address_geo' => [
         'lat' => 48.335991,
-        'lng' => 31.18287
+        'lng' => 31.18287,
     ],
     'first_name' => 'John',
     'last_name' => 'Doe',
-    'email' => 'some@company.com'
+    'email' => 'some@company.com',
 ]);
 
 $orders = null;
@@ -45,11 +45,11 @@ try {
 
     // update order
     $params = [
-        'first_name' => 'Jane'
+        'first_name' => 'Jane',
     ];
     $updateOrder = $orders->update($orderId, $params);
     echo "Update Order first_name is '" . $updateOrder->first_name . "'" . PHP_EOL;
-    
+
     // delete order
     if ($orders->delete($orderId)) {
         echo "Order with uuid='" . $orderId . "' was deleted successful." . PHP_EOL;
@@ -57,7 +57,7 @@ try {
         echo "Order with uuid='" . $orderId . "' was not deleted." . PHP_EOL;
     }
 } catch (Exception $e) {
-    echo "ERROR: " . $e->getMessage() . PHP_EOL;
+    echo 'ERROR: ' . $e->getMessage() . PHP_EOL;
 
     if ($orders && $orderId) {
         try {

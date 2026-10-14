@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Route4Me\Vehicles\Vehicle;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to getting all vehicles.
 
@@ -15,9 +15,9 @@ Route4Me::setApiKey(Constants::API_KEY);
 $vehicle = new Vehicle();
 
 $vehicleParameters = [
-        'with_pagination'   => true,
-        'page'              => 2,
-        'perPage'           => 10,
+        'with_pagination' => true,
+        'page' => 2,
+        'perPage' => 10,
     ];
 
 $response = $vehicle->getVehicles($vehicleParameters);

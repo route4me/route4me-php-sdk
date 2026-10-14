@@ -2,10 +2,10 @@
 
 namespace Route4Me;
 
+use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\DeviceType;
 use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\OptimizationType;
-use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\TravelMode;
 
 class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
@@ -49,7 +49,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
     public function testOptimizationAsyncRedirect()
     {
         $parameters = RouteParameters::fromArray([
-            'algorithm_type' => Algorithmtype::TSP,
+            'algorithm_type' => AlgorithmType::TSP,
             'device_type' => DeviceType::WEB,
             'distance_unit' => DistanceUnit::MILES,
             'optimize' => OptimizationType::DISTANCE,
@@ -77,7 +77,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
     public function testCreateSingleDriverRoute()
     {
         $parameters = RouteParameters::fromArray([
-            'algorithm_type' => Algorithmtype::TSP,
+            'algorithm_type' => AlgorithmType::TSP,
             'device_type' => DeviceType::WEB,
             'distance_unit' => DistanceUnit::MILES,
             'optimize' => OptimizationType::DISTANCE,
@@ -104,7 +104,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
     public function testCreateSingleDriverRouteWithRoundTrip()
     {
         $parameters = RouteParameters::fromArray([
-            'algorithm_type' => Algorithmtype::TSP,
+            'algorithm_type' => AlgorithmType::TSP,
             'device_type' => DeviceType::WEB,
             'distance_unit' => DistanceUnit::MILES,
             'optimize' => OptimizationType::DISTANCE,
@@ -131,7 +131,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
     public function testCreateMultipleDriverProblem()
     {
         $parameters = RouteParameters::fromArray([
-            'algorithm_type' => Algorithmtype::CVRP_TW_SD,
+            'algorithm_type' => AlgorithmType::CVRP_TW_SD,
             'device_type' => DeviceType::WEB,
             'distance_unit' => DistanceUnit::MILES,
             'optimize' => OptimizationType::DISTANCE,
@@ -159,7 +159,7 @@ class OptimizationProblemTest extends \PHPUnit_Framework_TestCase
     public function testCreateSingleDriverWithTimeWindow()
     {
         $parameters = RouteParameters::fromArray([
-            'algorithm_type' => Algorithmtype::CVRP_TW_MD,
+            'algorithm_type' => AlgorithmType::CVRP_TW_MD,
             'device_type' => DeviceType::WEB,
             'distance_unit' => DistanceUnit::MILES,
             'optimize' => OptimizationType::DISTANCE,

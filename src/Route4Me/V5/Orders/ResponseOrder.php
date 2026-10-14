@@ -3,17 +3,11 @@
 namespace Route4Me\V5\Orders;
 
 use Route4Me\Common;
-use Route4Me\V5\Orders\CustomData;
-use Route4Me\V5\Orders\CustomField;
-use Route4Me\V5\Orders\GPSCoords;
-use Route4Me\V5\Orders\LocalTimeWindow;
 
 /**
- * The Response order structure
+ * The Response order structure.
  *
  * @since 1.3.0
- *
- * @package Route4Me
  */
 class ResponseOrder extends Common
 {
@@ -107,7 +101,7 @@ class ResponseOrder extends Common
 
     /**
      * Priority of address
-     * 0 is the highest priority, n has higher priority than n + 1
+     * 0 is the highest priority, n has higher priority than n + 1.
      */
     public ?int $address_priority = null;
 
@@ -222,7 +216,7 @@ class ResponseOrder extends Common
     public ?bool $is_completed = null;
 
     /**
-     * Tracking number
+     * Tracking number.
      */
     public ?string $tracking_number = null;
 
@@ -233,7 +227,7 @@ class ResponseOrder extends Common
     public ?string $address_stop_type = null;
 
     /**
-     * Last known status
+     * Last known status.
      */
     public ?int $last_status = null;
 
@@ -270,7 +264,7 @@ class ResponseOrder extends Common
             foreach ($this as $key => $value) {
                 if (isset($params[$key])) {
                     if ($key === 'local_time_windows') {
-                        $this->{$key} = array();
+                        $this->{$key} = [];
                         foreach ($params[$key] as $ltw_key => $ltw_value) {
                             if (is_array($ltw_value)) {
                                 array_push($this->{$key}, new LocalTimeWindow($ltw_value));
@@ -279,7 +273,7 @@ class ResponseOrder extends Common
                             }
                         }
                     } elseif ($key === 'custom_user_fields') {
-                        $this->{$key} = array();
+                        $this->{$key} = [];
                         foreach ($params[$key] as $cf_key => $cf_value) {
                             if (is_array($cf_value)) {
                                 array_push($this->{$key}, new CustomField($cf_value));

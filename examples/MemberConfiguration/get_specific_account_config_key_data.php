@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -21,7 +21,7 @@ $randomParams = Member::fromArray([]);
 $response = $member->getMemberConfigData($randomParams);
 
 assert(!is_null($response), 'Cannot retrieve all config data');
-assert(2 == sizeof($response), 'Cannot retrieve all config data');
+assert(sizeof($response) == 2, 'Cannot retrieve all config data');
 assert(isset($response['data']), 'Cannot retrieve all config data');
 
 $randomKey = $response['data'][rand(0, sizeof($response['data']) - 1)]['config_key'];

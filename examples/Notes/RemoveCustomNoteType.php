@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -16,7 +16,7 @@ $addressNote = new AddressNote();
 
 $customNotes = $addressNote->getAllCustomNoteTypes();
 
-assert(!is_null($customNotes), "Cannot retrieve all custom note types");
+assert(!is_null($customNotes), 'Cannot retrieve all custom note types');
 assert(sizeof($customNotes) > 0, "There is no custom note type in the user's account");
 
 $randomCustomNoteID = $customNotes[rand(0, sizeof($customNotes) - 1)]['note_custom_type_id'];

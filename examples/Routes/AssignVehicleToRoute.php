@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -16,9 +16,9 @@ Route4Me::setApiKey(Constants::API_KEY);
 $vehicle = new Vehicles\Vehicle();
 
 $vehicleParameters = [
-    'with_pagination'   => true,
-    'page'              => 1,
-    'perPage'           => 10,
+    'with_pagination' => true,
+    'page' => 1,
+    'perPage' => 10,
 ];
 
 $response = $vehicle->getVehicles($vehicleParameters);
@@ -32,7 +32,7 @@ $route = new Route();
 // Get a random route ID
 $routeId = $route->getRandomRouteId(0, 10);
 
-assert(!is_null($routeId), "Cannot retrieve a random route ID");
+assert(!is_null($routeId), 'Cannot retrieve a random route ID');
 
 // Update the route parameters
 $route->route_id = $routeId;
@@ -49,6 +49,6 @@ $route->update();
 
 $route = new Route();
 
-$assignedRoute= $route->getRoutes(['route_id' => $routeId]);
+$assignedRoute = $route->getRoutes(['route_id' => $routeId]);
 
 Route4Me::simplePrint((array)$assignedRoute->vehicle, true);

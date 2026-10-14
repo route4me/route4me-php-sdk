@@ -5,24 +5,22 @@ namespace Route4Me\V5\Vehicles\QueryTypes;
 use Route4Me\Common as Common;
 
 /**
- * Class VehicleOrderParameters
- * @package Route4Me\V5\Vehicles\QueryTypes
- * Parameters for execution of a vehicle order.
+ * Class VehicleOrderParameters.
  */
 class VehicleOrderParameters extends Common
 {
-    /** The vehicle ID
-     * @var string $vehicle_id
+    /** The vehicle ID.
+     * @var string
      */
     public $vehicle_id;
 
     /** Latitude of a vehicle position.
-     * @var float $lat
+     * @var float
      */
     public $lat;
 
     /** Longitude of a vehicle position.
-     * @var float $lng
+     * @var float
      */
     public $lng;
 
@@ -38,6 +36,7 @@ class VehicleOrderParameters extends Common
                 $orderParams->$key = $value;
             }
         }
+
         return $orderParams;
     }
 }

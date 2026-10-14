@@ -5,29 +5,27 @@ namespace Route4Me\V5\Vehicles\QueryTypes;
 use Route4Me\Common as Common;
 
 /**
- * Class VehicleProfileParameters
- * @package Route4Me\V5\Vehicles\QueryTypes
- * Request parameters for the vehicle profiles.
+ * Class VehicleProfileParameters.
  */
 class VehicleProfileParameters extends Common
 {
     /** If true, returned vehicle profile is paginated.
-     * @var boolean $with_pagination
+     * @var bool
      */
     public $with_pagination;
 
-    /** Current page number in the vehicles collection
-     * @var integer $page
+    /** Current page number in the vehicles collection.
+     * @var int
      */
     public $page;
 
-    /** Returned vehicles number per page
-     * @var integer $perPage
+    /** Returned vehicles number per page.
+     * @var int
      */
     public $perPage;
 
-    /** Vehicle profile ID
-     * @var integer $id
+    /** Vehicle profile ID.
+     * @var int
      */
     public $id;
 }

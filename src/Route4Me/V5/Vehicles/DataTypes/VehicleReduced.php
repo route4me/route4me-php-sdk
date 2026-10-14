@@ -3,29 +3,27 @@
 namespace Route4Me\V5\Vehicles\DataTypes;
 
 /**
- * Class VehicleReduced
- * @package Route4Me\V5\Vehicles
- * Reduced vehicle structure
+ * Class VehicleReduced.
  */
 class VehicleReduced extends \Route4Me\Common
 {
-    /** The vehicle ID
-     * @var string $vehicle_id
+    /** The vehicle ID.
+     * @var string
      */
     public $vehicle_id;
 
-    /** Vehicle alias
-     * @var string $vehicle_alias
+    /** Vehicle alias.
+     * @var string
      */
     public $vehicle_alias;
 
-    /** Vehicle VIN
-     * @var string $vehicle_vin
+    /** Vehicle VIN.
+     * @var string
      */
     public $vehicle_vin;
 
     /** A license plate of the vehicle.
-     * @var string $vehicle_license_plate
+     * @var string
      */
     public $vehicle_license_plate;
 
@@ -34,48 +32,48 @@ class VehicleReduced extends \Route4Me\Common
      * "american coleman", "bmw", "chevrolet", "ford", "freightliner", "gmc",
      * <para>"hino", "honda", "isuzu", "kenworth", "mack", "mercedes-benz", "mitsubishi", </para>
      * "navistar", "nissan", "peterbilt", "renault", "scania", "sterling", "toyota",
-     * <para>"volvo", "western star" </para>
-     * @var string $vehicle_make
+     * <para>"volvo", "western star" </para>.
+     * @var string
      */
     public $vehicle_make;
 
-    /** Vehicle model year
-     * @var integer $vehicle_model_year
+    /** Vehicle model year.
+     * @var int
      */
     public $vehicle_model_year;
 
-    /** Vehicle model
-     * @var string $vehicle_model
+    /** Vehicle model.
+     * @var string
      */
     public $vehicle_model;
 
-    /** The year, vehicle was acquired
-     * @var integer $vehicle_year_acquired
+    /** The year, vehicle was acquired.
+     * @var int
      */
     public $vehicle_year_acquired;
 
-    /** A cost of the new vehicle
-     * @var float $vehicle_cost_new
+    /** A cost of the new vehicle.
+     * @var float
      */
     public $vehicle_cost_new;
 
     /** If true, the vehicle was purchased new.
-     * @var boolean $purchased_new
+     * @var bool
      */
     public $purchased_new;
 
-    /** Start date of the license
-     * @var string $license_start_date
+    /** Start date of the license.
+     * @var string
      */
     public $license_start_date;
 
-    /** End date of the license
-     * @var string $license_end_date
+    /** End date of the license.
+     * @var string
      */
     public $license_end_date;
 
     /** If equal to '1', the vehicle is operational.
-     * @var boolean $is_operational
+     * @var bool
      */
     public $is_operational;
 }

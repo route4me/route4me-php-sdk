@@ -1,10 +1,10 @@
 <?php
 
-define('FS_ROOT', __DIR__.'/../..');
+define('FS_ROOT', __DIR__ . '/../..');
 
-require_once FS_ROOT.'/global_includes/functions/global_functions.php';
-require_once FS_ROOT.'/config/global_configuration.php';
-require_once __DIR__.'/../common.php';
+require_once FS_ROOT . '/global_includes/functions/global_functions.php';
+require_once FS_ROOT . '/config/global_configuration.php';
+require_once __DIR__ . '/../common.php';
 
 $apiKey = '11111111111111111111111111111111';
 $OrderBody = [
@@ -14,7 +14,7 @@ $OrderBody = [
 ];
 
     echo 'Add new address book', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php?api_key='.$apiKey;
+    $url = SITE_DOMAIN . '/api.v4/order.php?api_key=' . $apiKey;
     $res = curl_test([
         CURLOPT_URL => $url, CURLOPT_POSTFIELDS => json_encode($OrderBody), CURLOPT_POST => true, CURLOPT_FOLLOWLOCATION => true,
     ]);
@@ -51,15 +51,15 @@ $OrderBody = [
     assert($OrderBody['cached_lng'] == $obj->cached_lng);
     assert(isset($obj->EXT_FIELD_custom_data));
     assert(is_object($obj->EXT_FIELD_custom_data));
-    assert(2 === count((array) $obj->EXT_FIELD_custom_data));
+    assert(count((array)$obj->EXT_FIELD_custom_data) === 2);
     assert($OrderBody['EXT_FIELD_custom_data']['order_id'] === $obj->EXT_FIELD_custom_data->order_id);
     assert($OrderBody['EXT_FIELD_custom_data']['name'] === $obj->EXT_FIELD_custom_data->name);
 
     $order_id = $obj->order_id;
 
     echo 'Get address by id', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'order_id' => $order_id, 'api_key' => $apiKey,
     ]);
 
@@ -71,13 +71,13 @@ $OrderBody = [
     assert($obj->address_1 == $OrderBody['address_1']);
     assert(isset($obj->EXT_FIELD_custom_data));
     assert(is_object($obj->EXT_FIELD_custom_data));
-    assert(2 == count((array) $obj->EXT_FIELD_custom_data));
-    assert('123ff' === $obj->EXT_FIELD_custom_data->order_id);
-    assert('Dan Khasis' === $obj->EXT_FIELD_custom_data->name);
+    assert(count((array)$obj->EXT_FIELD_custom_data) == 2);
+    assert($obj->EXT_FIELD_custom_data->order_id === '123ff');
+    assert($obj->EXT_FIELD_custom_data->name === 'Dan Khasis');
 
     echo 'Get addresses', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?api_key='.$apiKey;
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?api_key=' . $apiKey;
 
     $res = curl_test([CURLOPT_URL => $url]);
     $obj = json_decode($res['res']);
@@ -93,8 +93,8 @@ $OrderBody = [
     }
 
     echo 'Get addresses with custom fields', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'api_key' => $apiKey, 'fields' => 'order_id,member_id', 'limit' => 0,
     ]);
 
@@ -108,12 +108,12 @@ $OrderBody = [
     assert(isset($obj->total));
     assert(is_int($obj->total));
     foreach ($obj->results as $address) {
-        assert(2 == count($address));
+        assert(count($address) == 2);
     }
 
     echo 'Get addresses by query', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'query' => 'Igor', 'api_key' => $apiKey,
     ]);
 
@@ -130,8 +130,8 @@ $OrderBody = [
     }
 
     echo 'Update address', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'api_key' => $apiKey,
     ]);
 
@@ -148,18 +148,18 @@ $OrderBody = [
     $obj = json_decode($res['res']);
     assert($res['info']['http_code'] == 200);
     assert(isset($obj->address_2));
-    assert('Lviv' == $obj->address_2);
-    assert('032268593' == $obj->EXT_FIELD_phone);
+    assert($obj->address_2 == 'Lviv');
+    assert($obj->EXT_FIELD_phone == '032268593');
     assert(isset($obj->EXT_FIELD_custom_data));
     assert(is_object($obj->EXT_FIELD_custom_data));
     assert(!isset($obj->EXT_FIELD_custom_data->order_id));
     assert(!isset($obj->EXT_FIELD_custom_data->name));
     assert(isset($obj->EXT_FIELD_custom_data->customer_no));
-    assert(11 == $obj->EXT_FIELD_custom_data->customer_no);
+    assert($obj->EXT_FIELD_custom_data->customer_no == 11);
 
     echo 'Check time windows', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'api_key' => $apiKey,
     ]);
 
@@ -175,14 +175,14 @@ $OrderBody = [
 
     $obj = json_decode($res['res']);
     assert($res['info']['http_code'] == 200);
-    assert(500 == $obj->local_time_window_start);
-    assert(700 == $obj->local_time_window_end);
-    assert(900 == $obj->local_time_window_start_2);
-    assert(1050 == $obj->local_time_window_end_2);
+    assert($obj->local_time_window_start == 500);
+    assert($obj->local_time_window_end == 700);
+    assert($obj->local_time_window_start_2 == 900);
+    assert($obj->local_time_window_end_2 == 1050);
 
     echo 'Check time windows (failed)', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'api_key' => $apiKey,
     ]);
 
@@ -199,12 +199,12 @@ $OrderBody = [
     $obj = json_decode($res['res']);
     assert($res['info']['http_code'] == 400);
     assert(is_array($obj->errors));
-    assert(1 == count($obj->errors));
-    assert('The time window ranges should not overlap each other.' == array_pop($obj->errors));
+    assert(count($obj->errors) == 1);
+    assert(array_pop($obj->errors) == 'The time window ranges should not overlap each other.');
 
     echo 'Start time cant be more that end time', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'api_key' => $apiKey,
     ]);
 
@@ -221,12 +221,12 @@ $OrderBody = [
     $obj = json_decode($res['res']);
     assert($res['info']['http_code'] == 400);
     assert(is_array($obj->errors));
-    assert(1 == count($obj->errors));
-    assert('The opening (start) of the first time window cannot be later than the closing (end) of the time window.' == array_pop($obj->errors));
+    assert(count($obj->errors) == 1);
+    assert(array_pop($obj->errors) == 'The opening (start) of the first time window cannot be later than the closing (end) of the time window.');
 
     echo 'Update address with service_time', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'api_key' => $apiKey,
     ]);
 
@@ -243,11 +243,11 @@ $OrderBody = [
     $obj = json_decode($res['res']);
     assert($res['info']['http_code'] == 200);
     assert(isset($obj->address_2));
-    assert(1800 == $obj->service_time);
+    assert($obj->service_time == 1800);
 
     echo 'Remove address', "\n";
-    $url = SITE_DOMAIN.'/api.v4/order.php';
-    $url .= '?'.http_build_query([
+    $url = SITE_DOMAIN . '/api.v4/order.php';
+    $url .= '?' . http_build_query([
       'api_key' => $apiKey,
     ]);
 
@@ -261,6 +261,6 @@ $OrderBody = [
     $obj = json_decode($res['res']);
 
     assert($res['info']['http_code'] == 200);
-    assert(true == $obj->status);
+    assert($obj->status == true);
 
 echo 'Done', "\n";

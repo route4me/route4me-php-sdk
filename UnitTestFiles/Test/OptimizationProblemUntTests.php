@@ -3,7 +3,6 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\Address;
-use Route4Me\Common;
 use Route4Me\Constants;
 use Route4Me\Enum\AlgorithmType;
 use Route4Me\Enum\DeviceType;
@@ -11,11 +10,12 @@ use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\OptimizationStates;
 use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\TravelMode;
+use Route4Me\OptimizationProblem;
 use Route4Me\OptimizationProblemParams;
 use Route4Me\Route;
 use Route4Me\Route4Me;
-use Route4Me\OptimizationProblem;
 use Route4Me\RouteParameters;
+
 //use function Sodium\add;
 
 class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
@@ -28,8 +28,8 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
     public static function setUpBeforeClass() : void
     {
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
-            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
-            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+            $className = str_replace('UnitTestFiles\\Test\\', '', get_class());
+            self::markTestSkipped('PHPUnit will skip ' . $className . ' class - it impossible run with demo API key');
         }
 
         Route4Me::setApiKey(Constants::API_KEY);
@@ -37,55 +37,55 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         //region Prepae Addresses
         $addresses = [];
         $addresses[] = Address::fromArray([
-            'address'           => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
-            'is_depot'          => true,
-            'lat'               => 30.159341812134,
-            'lng'               => -81.538619995117,
-            'time'              => 300,
+            'address' => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
+            'is_depot' => true,
+            'lat' => 30.159341812134,
+            'lng' => -81.538619995117,
+            'time' => 300,
             'time_window_start' => 28800,
-            'time_window_end'   => 32400,
+            'time_window_end' => 32400,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '214 Edgewater Branch Drive 32259',
-            'lat'               => 30.103567123413,
-            'lng'               => -81.595352172852,
-            'time'              => 300,
+            'address' => '214 Edgewater Branch Drive 32259',
+            'lat' => 30.103567123413,
+            'lng' => -81.595352172852,
+            'time' => 300,
             'time_window_start' => 36000,
-            'time_window_end'   => 37200,
+            'time_window_end' => 37200,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '756 eagle point dr 32092',
-            'lat'               => 30.046422958374,
-            'lng'               => -81.508758544922,
-            'time'              => 300,
+            'address' => '756 eagle point dr 32092',
+            'lat' => 30.046422958374,
+            'lng' => -81.508758544922,
+            'time' => 300,
             'time_window_start' => 39600,
-            'time_window_end'   => 41400,
+            'time_window_end' => 41400,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '63 Stone Creek Cir St Johns, FL 32259, USA',
-            'lat'               => 30.048496,
-            'lng'               => -81.558716,
-            'time'              => 300,
+            'address' => '63 Stone Creek Cir St Johns, FL 32259, USA',
+            'lat' => 30.048496,
+            'lng' => -81.558716,
+            'time' => 300,
             'time_window_start' => 43200,
-            'time_window_end'   => 45000,
+            'time_window_end' => 45000,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => 'St Johns Florida 32259, USA',
-            'lat'               => 30.099642,
-            'lng'               => -81.547201,
-            'time'              => 300,
+            'address' => 'St Johns Florida 32259, USA',
+            'lat' => 30.099642,
+            'lng' => -81.547201,
+            'time' => 300,
             'time_window_start' => 46800,
-            'time_window_end'   => 48600,
+            'time_window_end' => 48600,
         ]);
 
         $parameters = RouteParameters::fromArray([
-            'device_type'           => DeviceType::IPAD,
-            'disable_optimization'  => false,
-            'route_name'            => 'phpunit test '.date('Y-m-d H:i'),
+            'device_type' => DeviceType::IPAD,
+            'disable_optimization' => false,
+            'route_name' => 'phpunit test ' . date('Y-m-d H:i'),
         ]);
         //endregion
 
@@ -98,31 +98,31 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         //region Extra Testing Addresses
         $addresses = [];
         $addresses[] = Address::fromArray([
-            'address'           => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
-            'is_depot'          => true,
-            'lat'               => 30.159341812134,
-            'lng'               => -81.538619995117,
-            'time'              => 300,
+            'address' => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
+            'is_depot' => true,
+            'lat' => 30.159341812134,
+            'lng' => -81.538619995117,
+            'time' => 300,
             'time_window_start' => 28800,
-            'time_window_end'   => 32400,
+            'time_window_end' => 32400,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '214 Edgewater Branch Drive 32259',
-            'lat'               => 30.103567123413,
-            'lng'               => -81.595352172852,
-            'time'              => 300,
+            'address' => '214 Edgewater Branch Drive 32259',
+            'lat' => 30.103567123413,
+            'lng' => -81.595352172852,
+            'time' => 300,
             'time_window_start' => 36000,
-            'time_window_end'   => 37200,
+            'time_window_end' => 37200,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '756 eagle point dr 32092',
-            'lat'               => 30.046422958374,
-            'lng'               => -81.508758544922,
-            'time'              => 300,
+            'address' => '756 eagle point dr 32092',
+            'lat' => 30.046422958374,
+            'lng' => -81.508758544922,
+            'time' => 300,
             'time_window_start' => 39600,
-            'time_window_end'   => 41400,
+            'time_window_end' => 41400,
         ]);
         //endregion
 
@@ -140,13 +140,13 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         $this->assertContainsOnlyInstancesOf(RouteParameters::class, [$problem->parameters]);
 
         $this->assertTrue(isset($problem->addresses));
-        $this->assertTrue(sizeof($problem->addresses)>0);
+        $this->assertTrue(sizeof($problem->addresses) > 0);
 
         $firstAddress = $problem->addresses[0];
         $this->assertContainsOnlyInstancesOf(Address::class, [$firstAddress]);
 
         $this->assertTrue(isset($problem->routes));
-        $this->assertTrue(sizeof($problem->routes)>0);
+        $this->assertTrue(sizeof($problem->routes) > 0);
 
         $firstRoute = $problem->routes[0];
         $this->assertContainsOnlyInstancesOf(Route::class, [$firstRoute]);
@@ -155,16 +155,16 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
     public function testOptimize()
     {
         $parameters = RouteParameters::fromArray([
-            'algorithm_type'            => Algorithmtype::TSP,
-            'device_type'               => DeviceType::WEB,
-            'distance_unit'             => DistanceUnit::MILES,
-            'optimize'                  => OptimizationType::DISTANCE,
-            'route_max_duration'        => 86400,
-            'store_route'               => true,
-            'travel_mode'               => TravelMode::DRIVING,
-            'vehicle_capacity'          => 1,
-            'vehicle_max_distance_mi'   => 10000,
-            'route_name'                => 'phpunit testOptimize',
+            'algorithm_type' => AlgorithmType::TSP,
+            'device_type' => DeviceType::WEB,
+            'distance_unit' => DistanceUnit::MILES,
+            'optimize' => OptimizationType::DISTANCE,
+            'route_max_duration' => 86400,
+            'store_route' => true,
+            'travel_mode' => TravelMode::DRIVING,
+            'vehicle_capacity' => 1,
+            'vehicle_max_distance_mi' => 10000,
+            'route_name' => 'phpunit testOptimize',
         ]);
 
         $optimizationParameters = new OptimizationProblemParams();
@@ -195,14 +195,14 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
     public function testGetOptizationsByState()
     {
         $problems = OptimizationProblem::get([
-            'state'     => OptimizationStates::OPTIMIZED,
-            'limit'     => 5,
-            'offset'    => 0,
+            'state' => OptimizationStates::OPTIMIZED,
+            'limit' => 5,
+            'offset' => 0,
         ]);
 
         $this->assertNotNull($problems);
         $this->assertTrue(is_array($problems));
-        $this->assertTrue(sizeof($problems)>0);
+        $this->assertTrue(sizeof($problems) > 0);
         $this->assertInstanceOf(OptimizationProblem::class, $problems[0]);
 
         foreach ($problems as $problem) {
@@ -215,14 +215,14 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         $this->markTestSkipped('must be revisited.');
 
         $problems = OptimizationProblem::get([
-            'id_only'   => 1,
-            'limit'     => 5,
-            'offset'    => 0,
+            'id_only' => 1,
+            'limit' => 5,
+            'offset' => 0,
         ]);
 
         $this->assertNotNull($problems);
         $this->assertTrue(is_array($problems));
-        $this->assertTrue(sizeof($problems)>0);
+        $this->assertTrue(sizeof($problems) > 0);
     }
 
     public function testReoptimize()
@@ -237,7 +237,8 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
 
         $this->assertInstanceOf(
             OptimizationProblem::class,
-            OptimizationProblem::fromArray($problem));
+            OptimizationProblem::fromArray($problem)
+        );
     }
 
     public function testUpdate()
@@ -252,9 +253,9 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         $extraAddresses[] = self::$addresses[2]->toArray();
 
         $OptimizationParameters = OptimizationProblem::fromArray([
-            'optimization_problem_id'   => $problem->optimization_problem_id,
-            'addresses'                 => $extraAddresses,
-            'reoptimize'                => 1,
+            'optimization_problem_id' => $problem->optimization_problem_id,
+            'addresses' => $extraAddresses,
+            'reoptimize' => 1,
         ]);
 
         $result = OptimizationProblem::fromArray(
@@ -263,7 +264,7 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($result);
         $this->assertTrue($result instanceof OptimizationProblem);
-        $this->assertTrue(sizeof($result->addresses)==$initialAddresses+2);
+        $this->assertTrue(sizeof($result->addresses) == $initialAddresses + 2);
     }
 
     public function testGetRandomOptimizationId()
@@ -272,11 +273,11 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         $optimization_problem_id = self::$createdProblems[0]->getRandomOptimizationId(0, 10);
 
         $this->assertNotNull($optimization_problem_id);
-        $this->assertTrue(strlen($optimization_problem_id)==32);
+        $this->assertTrue(strlen($optimization_problem_id) == 32);
 
         define('R_MD5_MATCH', '/^[a-fA-F0-9]{32}$/i');
 
-        $this->assertTrue(preg_match(R_MD5_MATCH, $optimization_problem_id)==1);
+        $this->assertTrue(preg_match(R_MD5_MATCH, $optimization_problem_id) == 1);
     }
 
     public function testGetAddresses()
@@ -286,7 +287,7 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         $addresses = $problem->getAddresses($problem->optimization_problem_id);
 
         $this->assertNotNull($addresses);
-        $this->assertTrue(sizeof($addresses)>0);
+        $this->assertTrue(sizeof($addresses) > 0);
 
         $this->assertContainsOnlyInstancesOf(Address::class, [$addresses[0]]);
     }
@@ -309,7 +310,7 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
 
         $params = [
             'optimization_problem_id' => $problem->optimization_problem_id,
-            'route_destination_id'    => $address->route_destination_id,
+            'route_destination_id' => $address->route_destination_id,
         ];
 
         $result = $problem->removeAddress($params);
@@ -351,7 +352,7 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         $scheduleDate = date('Y-m-d', $ep);
 
         $hybridParams = [
-            'target_date_string'      => $scheduleDate,
+            'target_date_string' => $scheduleDate,
             'timezone_offset_minutes' => 480,
         ];
 
@@ -375,7 +376,7 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
         $scheduleDate = date('Y-m-d', $ep);
 
         $hybridParams = [
-            'target_date_string'      => $scheduleDate,
+            'target_date_string' => $scheduleDate,
             'timezone_offset_minutes' => 480,
         ];
 
@@ -394,7 +395,7 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
 
         $depotsParams = [
             'optimization_problem_id' => $hybridOptimization->optimization_problem_id,
-            'delete_old_depots'       => true,
+            'delete_old_depots' => true,
         ];
 
         $depotAddresses[] = self::$addresses[0];
@@ -429,17 +430,17 @@ class OptimizationProblemUntTests extends \PHPUnit\Framework\TestCase
 
         $params = [
             'optimization_problem_ids' => $optimizationProblemIDs,
-            'redirect'                 => 0,
+            'redirect' => 0,
         ];
 
         $optProblem = new OptimizationProblem();
 
         $result = $optProblem->removeOptimization($params);
 
-        if ($result!=null && $result['status']==true) {
-            echo "The test optimization was removed <br>";
+        if ($result != null && $result['status'] == true) {
+            echo 'The test optimization was removed <br>';
         } else {
-            echo "Cannot remove the test optimization <br>";
+            echo 'Cannot remove the test optimization <br>';
         }
     }
 }

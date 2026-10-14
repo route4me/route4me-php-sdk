@@ -11,18 +11,18 @@ use Route4Me\Enum\Format;
 use Route4Me\Enum\Metric;
 use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\TravelMode;
-use Route4Me\Tracking\FindAssetResponse;
-use Route4Me\Tracking\MemberData;
 use Route4Me\OptimizationProblem;
 use Route4Me\OptimizationProblemParams;
 use Route4Me\Route;
 use Route4Me\Route4Me;
 use Route4Me\RouteParameters;
+use Route4Me\Tracking\FindAssetResponse;
+use Route4Me\Tracking\MemberData;
+use Route4Me\Tracking\SetGpsResponse;
 use Route4Me\Tracking\Track;
 use Route4Me\Tracking\TrackSetParams;
 use Route4Me\Tracking\UserLocation;
 use Route4Me\Tracking\UserTracking;
-use Route4Me\Tracking\SetGpsResponse;
 
 class TrackingTests extends \PHPUnit\Framework\TestCase
 {
@@ -33,7 +33,7 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
     {
         Route4Me::setApiKey(Constants::API_KEY);
 
-        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_md_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__) . '/data/addresses_md_tw.json'), true);
 
         $addresses = [];
         foreach ($json as $address) {
@@ -41,16 +41,16 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         }
 
         $parameters = RouteParameters::fromArray([
-            'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
-            'distance_unit'             => DistanceUnit::MILES,
-            'device_type'               => DeviceType::WEB,
-            'optimize'                  => OptimizationType::DISTANCE,
-            'metric'                    => Metric::GEODESIC,
-            'route_max_duration'        => 86400 * 2,
-            'travel_mode'               => TravelMode::DRIVING,
-            'vehicle_capacity'          => 50,
-            'vehicle_max_distance_mi'   => 10000,
-            'parts'                     => 50,
+            'algorithm_type' => AlgorithmType::CVRP_TW_MD,
+            'distance_unit' => DistanceUnit::MILES,
+            'device_type' => DeviceType::WEB,
+            'optimize' => OptimizationType::DISTANCE,
+            'metric' => Metric::GEODESIC,
+            'route_max_duration' => 86400 * 2,
+            'travel_mode' => TravelMode::DRIVING,
+            'vehicle_capacity' => 50,
+            'vehicle_max_distance_mi' => 10000,
+            'parts' => 50,
         ]);
         //endregion
 
@@ -63,37 +63,37 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         self::$testRoutes = self::$createdProblems[0]->routes;
 
         $params = TrackSetParams::fromArray([
-            'format'            => Format::SERIALIZED,
-            'route_id'          => self::$testRoutes[0]->route_id,
-            'member_id'         => self::$testRoutes[0]->parameters->member_id,
-            'course'            => 1,
-            'speed'             => 120,
-            'lat'               => 41.8927521,
-            'lng'               => -109.0803888,
-            'device_type'       => 'android_phone',
-            'device_guid'       => 'qweqweqwe',
-            'device_timestamp'  => date('Y-m-d H:i:s', strtotime('-2 day')),
+            'format' => Format::SERIALIZED,
+            'route_id' => self::$testRoutes[0]->route_id,
+            'member_id' => self::$testRoutes[0]->parameters->member_id,
+            'course' => 1,
+            'speed' => 120,
+            'lat' => 41.8927521,
+            'lng' => -109.0803888,
+            'device_type' => 'android_phone',
+            'device_guid' => 'qweqweqwe',
+            'device_timestamp' => date('Y-m-d H:i:s', strtotime('-2 day')),
         ]);
 
         $status = Track ::set($params);
 
-        self::assertNotNull($status, "Cannot send GPS position to the selected route");
-        self::assertTrue(isset($status['status']), "Cannot send GPS position to the selected route");
-        self::assertTrue($status['status'], "Cannot send GPS position to the selected route");
+        self::assertNotNull($status, 'Cannot send GPS position to the selected route');
+        self::assertTrue(isset($status['status']), 'Cannot send GPS position to the selected route');
+        self::assertTrue($status['status'], 'Cannot send GPS position to the selected route');
     }
 
     public function testFromArray()
     {
         $trackingParams = TrackSetParams::fromArray([
-            'member_id'     => 44444,
-            'format'        => 'json',
-            'route_id'      => '489D597EE62534C906096F1AAC278D26',
-            'course'        => 72,
-            'speed'         => 65,
-            'lat'           => 38.218662,
-            'lng'           => -85.789032,
-            'device_type'   => 'android_phone',
-            'device_guid'   => 'HK5454H0K454564WWER445'
+            'member_id' => 44444,
+            'format' => 'json',
+            'route_id' => '489D597EE62534C906096F1AAC278D26',
+            'course' => 72,
+            'speed' => 65,
+            'lat' => 38.218662,
+            'lng' => -85.789032,
+            'device_type' => 'android_phone',
+            'device_guid' => 'HK5454H0K454564WWER445',
         ]);
 
         $this->assertEquals(44444, $trackingParams->member_id);
@@ -115,7 +115,7 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         $routeId = self::$testRoutes[0]->route_id;
 
         $addresses = self::$testRoutes[0]->addresses;
-        assert(!is_null($addresses), "Cannot retrieve a random route ID");
+        assert(!is_null($addresses), 'Cannot retrieve a random route ID');
 
         foreach ($addresses as $addr1) {
             if (!is_null($addr1->tracking_number)) {
@@ -124,7 +124,7 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
             }
         }
 
-        $this->assertNotNull($trackingNumber, "Cannot select a tracking number");
+        $this->assertNotNull($trackingNumber, 'Cannot select a tracking number');
 
         //endregion
 
@@ -148,16 +148,19 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($userLocations);
         $this->assertTrue(is_array($userLocations));
-        $this->assertTrue(sizeof($userLocations)>0);
+        $this->assertTrue(sizeof($userLocations) > 0);
         $this->assertInstanceOf(
             UserLocation::class,
-            UserLocation::fromArray($userLocations[0]));
+            UserLocation::fromArray($userLocations[0])
+        );
         $this->assertInstanceOf(
             MemberData::class,
-            MemberData::fromArray($userLocations[0]['member_data']));
+            MemberData::fromArray($userLocations[0]['member_data'])
+        );
         $this->assertInstanceOf(
             UserTracking::class,
-            UserTracking::fromArray($userLocations[0]['tracking']));
+            UserTracking::fromArray($userLocations[0]['tracking'])
+        );
     }
 
     public function testQueryUserLocations()
@@ -172,7 +175,7 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($queriedUserLocations);
         $this->assertTrue(is_array($queriedUserLocations));
-        $this->assertTrue(sizeof($queriedUserLocations)>0);
+        $this->assertTrue(sizeof($queriedUserLocations) > 0);
         $this->assertInstanceOf(
             UserLocation::class,
             UserLocation::fromArray($queriedUserLocations[0])
@@ -193,11 +196,11 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         $endDate = time() + 1 * 24 * 3600;
 
         $params = [
-            'route_id'      => self::$testRoutes[0]->route_id,
-            'format'        => Format::JSON,
-            'time_period'   => 'custom',
-            'start_date'    => $startDate,
-            'end_date'      => $endDate,
+            'route_id' => self::$testRoutes[0]->route_id,
+            'format' => Format::JSON,
+            'time_period' => 'custom',
+            'start_date' => $startDate,
+            'end_date' => $endDate,
         ];
 
         $route = new Route();
@@ -216,16 +219,16 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         // Set GPS postion to the selected route
         // Set right member_id corresponding to the API key
         $params = TrackSetParams::fromArray([
-            'format'            => Format::CSV,
-            'route_id'          => $routeId,
-            'member_id'         => self::$testRoutes[0]->parameters->member_id,
-            'course'            => 1,
-            'speed'             => 120,
-            'lat'               => 41.8927521,
-            'lng'               => -109.0803888,
-            'device_type'       => 'android_phone',
-            'device_guid'       => 'qweqweqwe',
-            'device_timestamp'  => date('Y-m-d H:i:s', strtotime('-1 day')),
+            'format' => Format::CSV,
+            'route_id' => $routeId,
+            'member_id' => self::$testRoutes[0]->parameters->member_id,
+            'course' => 1,
+            'speed' => 120,
+            'lat' => 41.8927521,
+            'lng' => -109.0803888,
+            'device_type' => 'android_phone',
+            'device_guid' => 'qweqweqwe',
+            'device_timestamp' => date('Y-m-d H:i:s', strtotime('-1 day')),
         ]);
 
         $status = Track::set($params);
@@ -245,8 +248,8 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
         $routeId = self::$testRoutes[0]->route_id;
 
         $params = [
-            'route_id'                  => $routeId,
-            'device_tracking_history'   => '1',
+            'route_id' => $routeId,
+            'device_tracking_history' => '1',
         ];
 
         $result = $route->GetLastLocation($params);
@@ -258,7 +261,7 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
 
     public static function tearDownAfterClass() : void
     {
-        if (sizeof(self::$createdProblems)>0) {
+        if (sizeof(self::$createdProblems) > 0) {
             $optimizationProblemIDs = [];
 
             foreach (self::$createdProblems as $problem) {
@@ -269,16 +272,16 @@ class TrackingTests extends \PHPUnit\Framework\TestCase
 
             $params = [
                 'optimization_problem_ids' => $optimizationProblemIDs,
-                'redirect'                 => 0,
+                'redirect' => 0,
             ];
 
             $problem = new OptimizationProblem();
             $result = $problem->removeOptimization($params);
 
-            if ($result!=null && $result['status']==true) {
-                echo "The test optimizations were removed <br>";
+            if ($result != null && $result['status'] == true) {
+                echo 'The test optimizations were removed <br>';
             } else {
-                echo "Cannot remove the test optimizations <br>";
+                echo 'Cannot remove the test optimizations <br>';
             }
         }
     }

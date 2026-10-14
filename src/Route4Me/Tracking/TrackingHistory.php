@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Route4Me\Tracking;
 
-use \Route4Me\Common as Common;
+use Route4Me\Common as Common;
 
 /**
  * Device tracking history data structure.
  * Tracking data key names are shortened to reduce bandwidth usage.
- * @package Route4Me\Tracking
  */
 class TrackingHistory extends Common
 {
@@ -19,7 +17,7 @@ class TrackingHistory extends Common
     public $s;
 
     /**
-     * Speed unit ('mph', 'kph')
+     * Speed unit ('mph', 'kph').
      * @var type string
      */
     public $su;
@@ -31,7 +29,7 @@ class TrackingHistory extends Common
     public $lt;
 
     /**
-     * Member ID
+     * Member ID.
      * @var type integer
      */
     public $m;

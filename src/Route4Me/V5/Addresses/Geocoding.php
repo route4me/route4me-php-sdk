@@ -3,65 +3,63 @@
 namespace Route4Me\V5\Addresses;
 
 /**
- * Class Geocoding
- * @package Route4Me\V5\Address
- * Subcalss of the Address class. See <see cref="Address.Geocodings"/>
+ * Class Geocoding.
  */
 class Geocoding extends \Route4Me\Common
 {
-    /** A unique identifier for the geocoding
-     * @var string $key
+    /** A unique identifier for the geocoding.
+     * @var string
      */
     public $key;
 
-    /** Specific description of the geocoding result
-     * @var string $name
+    /** Specific description of the geocoding result.
+     * @var string
      */
     public $name;
 
-    /** Boundary box
-     * @var double[] $bbox
+    /** Boundary box.
+     * @var float[]
      */
     public $bbox = [];
 
-    /** The latitude of the geocoded address
-     * @var double $lat
+    /** The latitude of the geocoded address.
+     * @var float
      */
     public $lat;
 
-    /** The longitude of the geocoded address
-     * @var double $lng
+    /** The longitude of the geocoded address.
+     * @var float
      */
     public $lng;
 
     /** Confidance level in the address geocoding:
-     * <para>high, medium, low</para>
-     * @var string $confidence
+     * <para>high, medium, low</para>.
+     * @var string
      */
     public $confidence;
 
-    /** The postal code of the geocoded address
-     * @var string $postalCode
+    /** The postal code of the geocoded address.
+     * @var string
      */
     public $postalCode;
 
-    /** Country region
-     * @var string $countryRegion
+    /** Country region.
+     * @var string
      */
     public $countryRegion;
 
-    /** The address curbside coordinates
-     * @var GeoPoint $curbside_coordinates
+    /** The address curbside coordinates.
+     * @var GeoPoint
      */
     public $curbside_coordinates = [];
 
-    /** The address without number
-     * @var string $address_without_number
+    /** The address without number.
+     * @var string
      */
     public $address_without_number;
 
-    /** The place ID
-     * @var string $place_id
+    /** The place ID.
+     * @var string
      */
     public $place_id;
 

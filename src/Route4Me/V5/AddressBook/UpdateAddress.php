@@ -2,15 +2,10 @@
 
 namespace Route4Me\V5\AddressBook;
 
-use Route4Me\Exception\ApiError;
-use Route4Me\V5\AddressBook\ResponseAddress;
-
 /**
- * Address Book API UpdateAddress structure
+ * Address Book API UpdateAddress structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class UpdateAddress extends ResponseAddress
 {

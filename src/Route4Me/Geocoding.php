@@ -20,10 +20,10 @@ class Geocoding extends Common
         $allBodyFields = ['strExportFormat', 'addresses'];
 
         $fgCoding = Route4Me::makeRequst([
-            'url'           => Endpoint::GEOCODER,
-            'method'        => 'POST',
-            'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'url' => Endpoint::GEOCODER,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $fgCoding;
@@ -34,9 +34,9 @@ class Geocoding extends Common
         $allQueryFields = ['format', 'addresses', 'detailed'];
 
         $fgcoding = Route4Me::makeRequst([
-            'url'       => Endpoint::GEOCODER,
-            'method'    => 'POST',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::GEOCODER,
+            'method' => 'POST',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $fgcoding;
@@ -51,10 +51,10 @@ class Geocoding extends Common
         $query = [];
 
         $response = Route4Me::makeRequst([
-            'baseUrl'   => Endpoint::STREET_DATA,
-            'url'       => $url_query,
-            'method'    => 'GET',
-            'query'     => $query,
+            'baseUrl' => Endpoint::STREET_DATA,
+            'url' => $url_query,
+            'method' => 'GET',
+            'query' => $query,
         ]);
 
         return $response;
@@ -69,10 +69,10 @@ class Geocoding extends Common
         $query = [];
 
         $response = Route4Me::makeRequst([
-            'baseUrl'   => Endpoint::STREET_DATA_ZIPCODE,
-            'url'       => $url_query,
-            'method'    => 'GET',
-            'query'     => $query,
+            'baseUrl' => Endpoint::STREET_DATA_ZIPCODE,
+            'url' => $url_query,
+            'method' => 'GET',
+            'query' => $query,
         ]);
 
         return $response;
@@ -87,10 +87,10 @@ class Geocoding extends Common
         $query = [];
 
         $response = Route4Me::makeRequst([
-            'baseUrl'   => Endpoint::STREET_DATA_SERVICE,
-            'url'       => $url_query,
-            'method'    => 'GET',
-            'query'     => $query,
+            'baseUrl' => Endpoint::STREET_DATA_SERVICE,
+            'url' => $url_query,
+            'method' => 'GET',
+            'query' => $query,
         ]);
 
         return $response;

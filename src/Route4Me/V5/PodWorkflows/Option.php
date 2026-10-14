@@ -5,21 +5,19 @@ namespace Route4Me\V5\PodWorkflows;
 use Route4Me\Common as Common;
 
 /**
- * The proof of delivery workflow API Option structure
+ * The proof of delivery workflow API Option structure.
  *
  * @since 1.2.10
- *
- * @package Route4Me
  */
 class Option extends Common
 {
     /**
-     * Title of action
+     * Title of action.
      */
     public ?string $name = null;
 
     /**
-     * Type of action
+     * Type of action.
      */
     public ?string $value = null;
 

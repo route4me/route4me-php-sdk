@@ -2,10 +2,10 @@
 
 namespace Route4Me;
 
-use Route4Me\TelematicsGateway\TelematicsVendor As TelematicsVendor;
+use Route4Me\TelematicsGateway\TelematicsVendor as TelematicsVendor;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -17,9 +17,9 @@ $vendorsParameters = TelematicsVendor::fromArray([
     //"country"       => "GB",  // uncomment this line for searching by Country
     'is_integrated' => 1,
     //"feature"       => "satellite",  // uncomment this line for searching by Feature
-    'search'        => 'Fleet',
-    'page'          => 1,
-    'per_page'      => 5,
+    'search' => 'Fleet',
+    'page' => 1,
+    'per_page' => 5,
 ]);
 
 $vendors = new TelematicsVendor();

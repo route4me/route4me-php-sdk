@@ -4,15 +4,14 @@ namespace UnitTestFiles\Test;
 
 use Route4Me\Constants;
 use Route4Me\Route4Me;
-use Route4Me\Vehicles\Vehicle;
 use Route4Me\V5\Vehicles\DataTypes\DataVehicle;
+use Route4Me\Vehicles\Vehicle;
 use Route4Me\Vehicles\VehicleCreateResponseV4;
-use Route4Me\Vehicles\VehiclesResponseV4;
 use Route4Me\Vehicles\VehicleV4;
 
 class VehicleTests extends \PHPUnit\Framework\TestCase
 {
-    public static $createdVehicles=[];
+    public static $createdVehicles = [];
 
     public static function setUpBeforeClass() : void
     {
@@ -21,18 +20,18 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
         $vehicle = new VehicleV4();
 
         $vehicleParameters = Vehicle::fromArray([
-            'vehicle_name'              => 'Ford Transit Test 5',
-            'vehicle_alias'             => 'Ford Transit Test 5',
-            'vehicle_vin'               => 'JS3TD62V1Y4107898',
-            'vehicle_reg_country_id'    => '223',
-            'vehicle_make'              => 'Ford',
-            'vehicle_model_year'        => 2013,
-            'vehicle_axle_count'        => 2,
-            'mpg_city'                  => 8,
-            'mpg_highway'               => 14,
-            'fuel_type'                 => 'unleaded 93',
-            'height_inches'             => 72,
-            'weight_lb'                 => 2000,
+            'vehicle_name' => 'Ford Transit Test 5',
+            'vehicle_alias' => 'Ford Transit Test 5',
+            'vehicle_vin' => 'JS3TD62V1Y4107898',
+            'vehicle_reg_country_id' => '223',
+            'vehicle_make' => 'Ford',
+            'vehicle_model_year' => 2013,
+            'vehicle_axle_count' => 2,
+            'mpg_city' => 8,
+            'mpg_highway' => 14,
+            'fuel_type' => 'unleaded 93',
+            'height_inches' => 72,
+            'weight_lb' => 2000,
         ]);
 
         $result = $vehicle->createVehicle($vehicleParameters);
@@ -49,37 +48,37 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $vehicleParameters = VehicleV4::fromArray([
-            'vehicle_id'                        => '43B1DC9C2C4DC3A8FE080A126B12ACBD',
-            'member_id'                         => 18154,
-            'is_deleted'                        => false,
-            'vehicle_alias'                     => 'Ford Transit Test 5',
-            'vehicle_vin'                       => 'JS3TD62V1Y4107898',
-            'vehicle_reg_state_id'              => null,
-            'vehicle_reg_country_id'            => 223,
-            'vehicle_license_plate'             => null,
-            'vehicle_type_id'                   => null,
-            'timestamp_added'                   => '2020-12-20T17:25:14+00:00',
-            'vehicle_make'                      => 'Ford',
-            'vehicle_model_year'                => 2013,
-            'vehicle_model'                     => null,
-            'vehicle_year_acquired'             => null,
-            'vehicle_cost_new'                  => null,
-            'purchased_new'                     => null,
-            'license_start_date'                => '2020-12-20',
-            'license_end_date'                  => '2020-12-20',
-            'is_operational'                    => true,
-            'fuel_type'                         => 'unleaded 93',
-            'external_telematics_vehicle_id'    => null,
-            'timestamp_removed'                 => null,
-            'vehicle_profile_id'                => null,
-            'fuel_consumption_city'             => '8',
-            'fuel_consumption_highway'          => '14',
-            'fuel_consumption_city_unit'        => 'mi\/l',
-            'fuel_consumption_highway_unit'     => 'mi\/l',
-            'mpg_city'                          => 30.28,
-            'mpg_highway'                       => 53,
-            'fuel_consumption_city_uf_value'    => '8 mi\/l',
-            'fuel_consumption_highway_uf_value' => '14 mi\/l'
+            'vehicle_id' => '43B1DC9C2C4DC3A8FE080A126B12ACBD',
+            'member_id' => 18154,
+            'is_deleted' => false,
+            'vehicle_alias' => 'Ford Transit Test 5',
+            'vehicle_vin' => 'JS3TD62V1Y4107898',
+            'vehicle_reg_state_id' => null,
+            'vehicle_reg_country_id' => 223,
+            'vehicle_license_plate' => null,
+            'vehicle_type_id' => null,
+            'timestamp_added' => '2020-12-20T17:25:14+00:00',
+            'vehicle_make' => 'Ford',
+            'vehicle_model_year' => 2013,
+            'vehicle_model' => null,
+            'vehicle_year_acquired' => null,
+            'vehicle_cost_new' => null,
+            'purchased_new' => null,
+            'license_start_date' => '2020-12-20',
+            'license_end_date' => '2020-12-20',
+            'is_operational' => true,
+            'fuel_type' => 'unleaded 93',
+            'external_telematics_vehicle_id' => null,
+            'timestamp_removed' => null,
+            'vehicle_profile_id' => null,
+            'fuel_consumption_city' => '8',
+            'fuel_consumption_highway' => '14',
+            'fuel_consumption_city_unit' => 'mi\/l',
+            'fuel_consumption_highway_unit' => 'mi\/l',
+            'mpg_city' => 30.28,
+            'mpg_highway' => 53,
+            'fuel_consumption_city_uf_value' => '8 mi\/l',
+            'fuel_consumption_highway_uf_value' => '14 mi\/l',
         ]);
 
         $this->assertEquals('43B1DC9C2C4DC3A8FE080A126B12ACBD', $vehicleParameters->vehicle_id);
@@ -138,10 +137,11 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
             'mpg_city' => 30.28,
             'mpg_highway' => 53,
             'fuel_consumption_city_uf_value' => '8 mi\/l',
-            'fuel_consumption_highway_uf_value' => '14 mi\/l'
+            'fuel_consumption_highway_uf_value' => '14 mi\/l',
         ]);
 
-        $this->assertEquals($vehicleParameters->toArray(),
+        $this->assertEquals(
+            $vehicleParameters->toArray(),
             [
                 'vehicle_id' => '43B1DC9C2C4DC3A8FE080A126B12ACBD',
                 'member_id' => 18154,
@@ -163,7 +163,7 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
                 'mpg_city' => 30.28,
                 'mpg_highway' => 53,
                 'fuel_consumption_city_uf_value' => '8 mi\/l',
-                'fuel_consumption_highway_uf_value' => '14 mi\/l'
+                'fuel_consumption_highway_uf_value' => '14 mi\/l',
             ]
         );
     }
@@ -186,7 +186,6 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
             DataVehicle::class,
             DataVehicle::fromArray($result)
         );
-
 
 //        $this->assertTrue(isset($result['current_page']));
 //        $this->assertTrue(isset($result['data']));
@@ -313,7 +312,7 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
             VehicleCreateResponseV4::fromArray($response)
         );
 
-        $result =  VehicleCreateResponseV4::fromArray($response);
+        $result = VehicleCreateResponseV4::fromArray($response);
 
         $this->assertEquals('ISUZU FTR', $result->vehicle_alias);
         $this->assertEquals('1NP5DB9X93N507873', $result->vehicle_vin);
@@ -396,7 +395,7 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
             VehicleCreateResponseV4::fromArray($response)
         );
 
-        $result =  VehicleCreateResponseV4::fromArray($response);
+        $result = VehicleCreateResponseV4::fromArray($response);
 
         $this->assertEquals('Peterbilt 579', $result->vehicle_alias);
         $this->assertEquals('1NP5DB9X93N507873', $result->vehicle_vin);
@@ -436,7 +435,7 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
 
     public static function tearDownAfterClass() : void
     {
-        if (!is_null(self::$createdVehicles) && sizeof(self::$createdVehicles)>0) {
+        if (!is_null(self::$createdVehicles) && sizeof(self::$createdVehicles) > 0) {
             $vehicle = new VehicleV4();
 
             foreach (self::$createdVehicles as $createdVehicleId) {
@@ -447,10 +446,10 @@ class VehicleTests extends \PHPUnit\Framework\TestCase
                 $result = $vehicle->removeVehicle($vehicleParameters);
 
                 if (!is_null($result) && (VehicleV4::fromArray($result) instanceof VehicleV4)) {
-                    echo "The vehicle ".$result['vehicle_id']." removed <br>";
+                    echo 'The vehicle ' . $result['vehicle_id'] . ' removed <br>';
                 } else {
-                    echo "Cannot remove the vehicle ".$result['vehicle_id']." <br>";
-                };
+                    echo 'Cannot remove the vehicle ' . $result['vehicle_id'] . ' <br>';
+                }
 
             }
         }

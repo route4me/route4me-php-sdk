@@ -2,38 +2,35 @@
 
 namespace Route4Me\V5\Addresses;
 
-use Route4Me\V5\Enum\Endpoint;
 use Route4Me\Enum\Endpoint as Endpoint4;
-use Route4Me\Exception\BadParam;
 use Route4Me\Route4Me;
+use Route4Me\V5\Enum\Endpoint;
 
 /**
- * Class Address
- * @package Route4Me\V5
- * Route destination class.
+ * Class Address.
  */
 class Address extends \Route4Me\Common
 {
     /**
-     * Route destination ID
-     * @var integer
+     * Route destination ID.
+     * @var int
      */
     public $route_destination_id;
 
     /**
-     * Route alias
+     * Route alias.
      * @var string
      */
     public $alias;
 
     /**
      * The ID of the member inside the Route4Me system.
-     * @var integer
+     * @var int
      */
     public $member_id;
 
     /**
-     * Route destination address
+     * Route destination address.
      * @var string
      */
     public $address;
@@ -41,51 +38,51 @@ class Address extends \Route4Me\Common
     /**
      * Designate this stop as a depot.
      * A route may have multiple depots/points of origin.
-     * @var boolean
+     * @var bool
      */
     public $is_depot;
 
     /**
-     * Timeframe violation state
-     * @var integer
+     * Timeframe violation state.
+     * @var int
      */
     public $timeframe_violation_state;
 
     /**
-     * Timeframe violation time
-     * @var integer
+     * Timeframe violation time.
+     * @var int
      */
     public $timeframe_violation_time;
 
     /**
-     * Timeframe violation rate
-     * @var double
+     * Timeframe violation rate.
+     * @var float
      */
     public $timeframe_violation_rate;
 
     /**
-     * The latitude of this address
-     * @var double
+     * The latitude of this address.
+     * @var float
      */
     public $lat;
 
     /**
-     * The longitude of this address
-     * @var double
+     * The longitude of this address.
+     * @var float
      */
     public $lng;
 
     /**
      * Curbside latitude.
      * Generate optimal routes and driving directions to this curbside latitude.
-     * @var double
+     * @var float
      */
     public $curbside_lat;
 
     /**
      * Curbside longitude.
      * Generate optimal routes and driving directions to the curbside longitude.
-     * @var double
+     * @var float
      */
     public $curbside_lng;
 
@@ -93,7 +90,7 @@ class Address extends \Route4Me\Common
      * If present, the priority will sequence addresses in all the optimal routes so that
      * higher priority addresses are general at the beginning of the route sequence.
      * 1 is the highest priority, 100000 is the lowest.
-     * @var integer
+     * @var int
      */
     public $priority;
 
@@ -124,25 +121,25 @@ class Address extends \Route4Me\Common
 
     /**
      * The destination's sequence number in the route.
-     * @var integer
+     * @var int
      */
     public $sequence_no;
 
     /**
      * True if the address is geocoded.
-     * @var boolean
+     * @var bool
      */
     public $geocoded;
 
     /**
      * The preferred geocoding number.
-     * @var integer
+     * @var int
      */
     public $preferred_geocoding;
 
     /**
      * True if geocoding failed.
-     * @var boolean
+     * @var bool
      */
     public $failed_geocoding;
 
@@ -157,71 +154,71 @@ class Address extends \Route4Me\Common
      * pass the address book ID (contact_id) for an address so that Route4Me can run
      * analytics on the address book addresses that were used to plan routes, and to find previous visits to
      * favorite addresses.
-     * @var integer
+     * @var int
      */
     public $contact_id;
 
     /**
-     * The address order ID
-     * @var integer
+     * The address order ID.
+     * @var int
      */
     public $order_id;
 
     /**
-     * Route address stop type
+     * Route address stop type.
      * @var string
      */
     public $address_stop_type;
 
     /**
      * The status flag to mark an address as visited (aka check in).
-     * @var boolean
+     * @var bool
      */
     public $is_visited;
 
     /**
      * The last known visited timestamp of this address.
-     * @var integer
+     * @var int
      */
     public $timestamp_last_visited;
 
     /**
-     * Latitude of the visited address
-     * @var double
+     * Latitude of the visited address.
+     * @var float
      */
     public $visited_lat;
 
     /**
-     * Longitude of the visited address
-     * @var double
+     * Longitude of the visited address.
+     * @var float
      */
     public $visited_lng;
 
     /**
      * The status flag to mark an address as departed (aka check out).
-     * @var boolean
+     * @var bool
      */
     public $is_departed;
 
     /**
-     * Departed address latitude
-     * @var double
+     * Departed address latitude.
+     * @var float
      */
     public $departed_lat;
 
-    /** Departed address longitude
-     * @var double
+    /** Departed address longitude.
+     * @var float
      */
     public $departed_lng;
 
     /**
      * he last known departed timestamp of this address.
-     * @var integer
+     * @var int
      */
     public $timestamp_last_departed;
 
     /**
-     * The address group
+     * The address group.
      * @var string
      */
     public $group;
@@ -255,44 +252,44 @@ class Address extends \Route4Me\Common
     public $order_no;
 
     /**
-     * The address cargo weight
-     * @var double
+     * The address cargo weight.
+     * @var float
      */
     public $weight;
 
     /**
-     * The address cost
-     * @var double
+     * The address cost.
+     * @var float
      */
     public $cost;
 
     /**
-     * The address revenue
-     * @var double
+     * The address revenue.
+     * @var float
      */
     public $revenue;
 
     /**
      * The cubic volume that this destination/order/line-item consumes/contains.<br>
      * This is how much space it will take up on a vehicle.
-     * @var double
+     * @var float
      */
     public $cube;
 
     /**
      * The number of pieces/palllets that this destination/order/line-item consumes/contains on a vehicle.
-     * @var integer
+     * @var int
      */
     public $pieces;
 
     /**
-     * First name
+     * First name.
      * @var string
      */
     public $first_name;
 
     /**
-     * Last name
+     * Last name.
      * @var string
      */
     public $last_name;
@@ -315,39 +312,39 @@ class Address extends \Route4Me\Common
 
     /**
      * The number of notes that are already associated with this address on the route.
-     * @var integer
+     * @var int
      */
     public $destination_note_count;
 
     /**
      * Server-side generated amount of km/miles that
      * it will take to get to the next location on the route.
-     * @var integer
+     * @var int
      */
     public $drive_time_to_next_destination;
 
     /**
      * Abnormal traffic time to next destination.
-     * @var integer
+     * @var int
      */
     public $abnormal_traffic_time_to_next_destination;
 
     /**
      * Uncongested time to next destination.
-     * @var integer
+     * @var int
      */
     public $uncongested_time_to_next_destination;
 
     /**
      * Traffic time to next destination.
-     * @var integer
+     * @var int
      */
     public $traffic_time_to_next_destination;
 
     /**
      * Server-side generated amount of seconds
      * that it will take to get to the next location.
-     * @var double
+     * @var float
      */
     public $distance_to_next_destination;
 
@@ -374,93 +371,93 @@ class Address extends \Route4Me\Common
      * If equal to 1, the pickup and dropoff addresses are joint
      * (one by one despite the regular pickup-dropoff addresses
      * when it's possible to have multiple pickup addresses with one dropoff address).
-     * @var integer
+     * @var int
      */
     public $joint;
 
     /**
      * Generated time window start.
-     * @var integer
+     * @var int
      */
     public $generated_time_window_start;
 
     /**
      * Estimated time window end based on the optimization engine,
      * after all the sequencing has been completed.
-     * @var integer
+     * @var int
      */
     public $generated_time_window_end;
 
     /**
      * The address time window start.
-     * @var integer
+     * @var int
      */
     public $time_window_start;
 
     /**
      * The address time window end.
-     * @var integer
+     * @var int
      */
     public $time_window_end;
 
     /**
      * The address time window start 2.
-     * @var integer
+     * @var int
      */
     public $time_window_start_2;
 
     /**
      * The address time window end 2.
-     * @var integer
+     * @var int
      */
     public $time_window_end_2;
 
     /**
-     * Geofence detected visited timestamp
-     * @var integer
+     * Geofence detected visited timestamp.
+     * @var int
      */
     public $geofence_detected_visited_timestamp;
 
     /**
-     * Geofence detected departed timestamp
-     * @var integer
+     * Geofence detected departed timestamp.
+     * @var int
      */
     public $geofence_detected_departed_timestamp;
 
     /**
-     * Geofence detected service time
-     * @var integer
+     * Geofence detected service time.
+     * @var int
      */
     public $geofence_detected_service_time;
 
     /**
-     * Geofence detected visited latitude
-     * @var double
+     * Geofence detected visited latitude.
+     * @var float
      */
     public $geofence_detected_visited_lat;
 
     /**
-     * Geofence detected visited longitude
-     * @var double
+     * Geofence detected visited longitude.
+     * @var float
      */
     public $geofence_detected_visited_lng;
 
     /**
-     * Geofence detected departed latitude
-     * @var double
+     * Geofence detected departed latitude.
+     * @var float
      */
     public $geofence_detected_departed_lat;
 
     /**
-     * Geofence detected departed longitude
-     * @var double
+     * Geofence detected departed longitude.
+     * @var float
      */
     public $geofence_detected_departed_lng;
 
     /**
      * The expected amount of time that will be spent
      * at this address by the driver/user.
-     * @var integer
+     * @var int
      */
     public $time;
 
@@ -496,38 +493,38 @@ class Address extends \Route4Me\Common
     public $custom_fields_config_str_json;
 
     /**
-     * The address notes
+     * The address notes.
      * @var AddressNote[]
      */
     public $notes = [];
 
     /**
-     * Bundle count
-     * @var integer
+     * Bundle count.
+     * @var int
      */
     public $bundle_count;
 
     /**
-     * Bundle items
+     * Bundle items.
      * @var BundledItemResponse[]
      */
     public $bundle_items;
 
     /**
-     * List of the order inventories
+     * List of the order inventories.
      * @var OrderInventory[]
      */
     public $order_inventory;
 
     /**
      * UDU distance to next destination.
-     * @var double
+     * @var float
      */
     public $udu_distance_to_next_destination;
 
     /**
      * Wait time to next destination.
-     * @var integer
+     * @var int
      */
     public $wait_time_to_next_destination;
 

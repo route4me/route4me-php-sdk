@@ -2,20 +2,15 @@
 
 namespace Route4Me\V5\Orders;
 
+use Route4Me\Common;
 use Route4Me\Exception\ApiError;
 use Route4Me\Route4Me;
-use Route4Me\Common;
 use Route4Me\V5\Enum\Endpoint;
-use Route4Me\V5\Orders\CustomField;
-use Route4Me\V5\Orders\ResponseOrder;
-use Route4Me\V5\Orders\ResponseSearch;
 
 /**
- * Orders v5 API
+ * Orders v5 API.
  *
  * @since 1.3.0
- *
- * @package Route4Me
  */
 class Orders extends Common
 {
@@ -25,7 +20,7 @@ class Orders extends Common
     }
 
     /**
-     * Create single order
+     * Create single order.
      *
      * @since 1.3.0
      *
@@ -98,19 +93,19 @@ class Orders extends Common
             'last_name', 'email', 'custom_data', 'local_time_windows', 'local_timezone_string',
             'service_time', 'color', 'tracking_number', 'address_stop_type', 'last_status', 'weight',
             'cost', 'revenue', 'cube', 'pieces', 'group', 'address_priority',
-            'address_customer_po', 'custom_fields'
+            'address_customer_po', 'custom_fields',
         ];
 
         return $this->toResponseOrder(Route4Me::makeRequst([
             'url' => Endpoint::ORDER_CREATE,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_order)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_order),
         ]));
     }
 
     /**
-     * Show single order by its id
+     * Show single order by its id.
      *
      * @since 1.3.0
      *
@@ -122,12 +117,12 @@ class Orders extends Common
     {
         return $this->toResponseOrder(Route4Me::makeRequst([
             'url' => Endpoint::ORDER . '/' . $order_id,
-            'method' => 'GET'
+            'method' => 'GET',
         ]));
     }
 
     /**
-     * Update single order by its id
+     * Update single order by its id.
      *
      * @since 1.3.0
      *
@@ -146,19 +141,19 @@ class Orders extends Common
             'last_name', 'email', 'custom_data', 'local_time_windows', 'local_timezone_string',
             'service_time', 'color', 'tracking_number', 'address_stop_type', 'last_status', 'weight',
             'cost', 'revenue', 'cube', 'pieces', 'group', 'address_priority',
-            'address_customer_po', 'custom_fields'
+            'address_customer_po', 'custom_fields',
         ];
 
         return $this->toResponseOrder(Route4Me::makeRequst([
             'url' => Endpoint::ORDER . '/' . $order_id,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
     /**
-     * Delete (soft) single order by its id
+     * Delete (soft) single order by its id.
      *
      * @since 1.3.0
      *
@@ -170,13 +165,14 @@ class Orders extends Common
     {
         $res = Route4Me::makeRequst([
             'url' => Endpoint::ORDER . '/' . $order_id,
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
-        return (isset($res['status']) ? $res['status'] : false);
+
+        return $res['status'] ?? false;
     }
 
     /**
-     * Search orders in ElasticSearch storage or in Spanner database
+     * Search orders in ElasticSearch storage or in Spanner database.
      *
      * @since 1.3.0
      *
@@ -278,24 +274,25 @@ class Orders extends Common
     public function search(?array $params = null) : ResponseSearch
     {
         $allBodyFields = ['order_ids', 'return_provided_fields_as_map', 'orderBy', 'limit',
-            'offset', 'fields', 'addition', 'search', 'filters'
+            'offset', 'fields', 'addition', 'search', 'filters',
         ];
 
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ORDER,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => ($params ? Route4Me::generateRequestParameters($allBodyFields, $params) : [])
+            'body' => ($params ? Route4Me::generateRequestParameters($allBodyFields, $params) : []),
         ]);
 
         if (isset($result)) {
             return new ResponseSearch($result);
         }
+
         return [];
     }
 
     /**
-     * Update the batch of orders (asynchronous, by filters)
+     * Update the batch of orders (asynchronous, by filters).
      *
      * @since 1.3.0
      *
@@ -317,13 +314,14 @@ class Orders extends Common
             'url' => Endpoint::ORDER_BATCH_UPDATE_FILTER,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
-        return (isset($res['success']) && $res['success'] == 1 ? true : false);
+
+        return isset($res['success']) && $res['success'] == 1 ? true : false;
     }
 
     /**
-     * Delete the batch of orders
+     * Delete the batch of orders.
      *
      * @since 1.3.0
      *
@@ -337,13 +335,14 @@ class Orders extends Common
             'url' => Endpoint::ORDER_BATCH_DELETE,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => ['order_ids' => $orderIds]
+            'body' => ['order_ids' => $orderIds],
         ]);
-        return (isset($res['status']) ? $res['status'] : false);
+
+        return $res['status'] ?? false;
     }
 
     /**
-     * Update the batch of orders by ids
+     * Update the batch of orders by ids.
      *
      * @since 1.3.0
      *
@@ -362,7 +361,7 @@ class Orders extends Common
             'last_name', 'email', 'custom_data', 'local_time_windows', 'local_timezone_string',
             'service_time', 'color', 'tracking_number', 'address_stop_type', 'last_status', 'weight',
             'cost', 'revenue', 'cube', 'pieces', 'group', 'address_priority',
-            'address_customer_po', 'custom_fields'
+            'address_customer_po', 'custom_fields',
         ];
 
         $res = Route4Me::makeRequst([
@@ -371,8 +370,8 @@ class Orders extends Common
             'HTTPHEADER' => 'Content-Type: application/json',
             'body' => [
                 'order_ids' => $orderIds,
-                'data' => Route4Me::generateRequestParameters($allBodyFields, $data)
-            ]
+                'data' => Route4Me::generateRequestParameters($allBodyFields, $data),
+            ],
         ]);
 
         $orders = [];
@@ -381,11 +380,12 @@ class Orders extends Common
                 $orders[] = new ResponseOrder($value);
             }
         }
+
         return $orders;
     }
 
     /**
-     * Create the batch of orders
+     * Create the batch of orders.
      *
      * @since 1.3.0
      *
@@ -403,7 +403,7 @@ class Orders extends Common
             'last_name', 'email', 'custom_data', 'local_time_windows', 'local_timezone_string',
             'service_time', 'color', 'tracking_number', 'address_stop_type', 'last_status', 'weight',
             'cost', 'revenue', 'cube', 'pieces', 'group', 'address_priority',
-            'address_customer_po', 'custom_fields'
+            'address_customer_po', 'custom_fields',
         ];
 
         $body = [];
@@ -415,13 +415,14 @@ class Orders extends Common
             'url' => Endpoint::ORDER_BATCH_CREATE,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => ['data' => $body]
+            'body' => ['data' => $body],
         ]);
-        return (isset($res['status']) ? $res['status'] : false);
+
+        return $res['status'] ?? false;
     }
 
     /**
-     * Get a list of Order Custom Fields
+     * Get a list of Order Custom Fields.
      *
      * @since 1.3.0
      *
@@ -432,7 +433,7 @@ class Orders extends Common
     {
         $res = Route4Me::makeRequst([
             'url' => Endpoint::ORDER_CUSTOM_FIELDS,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
         $ocf = [];
         if (isset($res) && isset($res['data']) && is_array($res['data'])) {
@@ -440,11 +441,12 @@ class Orders extends Common
                 $ocf[] = new CustomField($value);
             }
         }
+
         return $ocf;
     }
 
     /**
-     * Create one Order Custom Field
+     * Create one Order Custom Field.
      *
      * @since 1.3.0
      *
@@ -465,12 +467,12 @@ class Orders extends Common
             'url' => Endpoint::ORDER_CUSTOM_FIELDS,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_custom_field)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_custom_field),
         ]));
     }
 
     /**
-     * Update one Order Custom Fields
+     * Update one Order Custom Fields.
      *
      * @since 1.3.0
      *
@@ -490,12 +492,12 @@ class Orders extends Common
             'url' => Endpoint::ORDER_CUSTOM_FIELDS . '/' . $uuid,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_custom_field)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_custom_field),
         ]));
     }
 
     /**
-     * Delete an Order Custom Fields
+     * Delete an Order Custom Fields.
      *
      * @since 1.3.0
      *
@@ -507,7 +509,7 @@ class Orders extends Common
     {
         return $this->toCustomField(Route4Me::makeRequst([
             'url' => Endpoint::ORDER_CUSTOM_FIELDS . '/' . $uuid,
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]));
     }
 

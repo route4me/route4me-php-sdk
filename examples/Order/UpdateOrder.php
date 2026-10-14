@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -19,7 +19,7 @@ $order = new Order();
 
 $randomOrder = $order->getRandomOrder(0, 30);
 
-assert(!is_null($randomOrder), "Cannot retrieve a random order");
+assert(!is_null($randomOrder), 'Cannot retrieve a random order');
 
 // Update the order
 $randomOrder['address_2'] = 'Lviv';

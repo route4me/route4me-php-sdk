@@ -3,14 +3,11 @@
 namespace Route4Me\V5\AddressBook;
 
 use Route4Me\Common;
-use Route4Me\V5\AddressBook\ResponseAddress;
 
 /**
- * Address Book API ResponseAll structure
+ * Address Book API ResponseAll structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class ResponseAll extends Common
 {
@@ -38,7 +35,7 @@ class ResponseAll extends Common
             foreach ($this as $key => $value) {
                 if (isset($params[$key])) {
                     if ($key === 'results') {
-                        $this->{$key} = array();
+                        $this->{$key} = [];
                         foreach ($params[$key] as $ra_key => $ra_value) {
                             if (is_array($ra_value)) {
                                 array_push($this->{$key}, new ResponseAddress($ra_value));

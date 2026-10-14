@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -15,14 +15,14 @@ $territory = new Territory();
 
 // Select a terriotry with the enclosed addresses and orders from the list
 $params = [
-    'offset'    => 0,
-    'limit'     => 50,
+    'offset' => 0,
+    'limit' => 50,
     'addresses' => 1,
-    'orders'    => 1
+    'orders' => 1,
 ];
 
 $results = $territory->getTerritories($params);
-assert(!is_null($results), "Cannot retrieve the territories with addresses");
+assert(!is_null($results), 'Cannot retrieve the territories with addresses');
 
 $territory1 = null;
 
@@ -35,15 +35,15 @@ foreach ($results as $terr) {
     }
 }
 
-assert(isset($territory1['territory_id']), "Cannot retrieve a random territory ID");
+assert(isset($territory1['territory_id']), 'Cannot retrieve a random territory ID');
 $territory_id = $territory1['territory_id'];
 
 echo "Territory ID -> $territory_id <br><br>";
 
 // Get a territory with the addresses
 $params = [
-    'territory_id'  => $territory_id,
-    'addresses'     => 1,
+    'territory_id' => $territory_id,
+    'addresses' => 1,
 ];
 
 $result1 = $territory->getTerritory($params);

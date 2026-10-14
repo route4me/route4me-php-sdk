@@ -5,31 +5,31 @@ namespace Route4Me\V5;
 use Route4Me\Common as Common;
 
 /**
- * Telematics vendor's feature
+ * Telematics vendor's feature.
  */
 class TelematicsVendorFeature extends Common
 {
     /**
-     * Feature ID
+     * Feature ID.
      * @var type string
      */
     public $id;
-   
-   /**
-    * Feature name
-    * @var type string
-    */
+
+    /**
+     * Feature name.
+     * @var type string
+     */
     public $name;
-   
-   /**
-    * Feature slug
-    * @var type string
-    */
+
+    /**
+     * Feature slug.
+     * @var type string
+     */
     public $slug;
-   
-   /**
-    * Feature group
-    * @var type string
-    */
+
+    /**
+     * Feature group.
+     * @var type string
+     */
     public $feature_group;
 }

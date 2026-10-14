@@ -3,19 +3,17 @@
 namespace Route4Me\V5\Routes\AddonRoutesApi;
 
 /**
- * Class RouteDataTableConfigResponse
- * @package Route4Me\V5\Routes
- * Route datatable configuration
+ * Class RouteDataTableConfigResponse.
  */
 class RouteDataTableConfigResponse extends \Route4Me\Common
 {
-    /** API Capabilities
-     * @var ApiCapabilities $api_capabilities
+    /** API Capabilities.
+     * @var ApiCapabilities
      */
     public $api_capabilities = [];
 
-    /** API Preferences
-     * @var ApiPreferences $api_preferences
+    /** API Preferences.
+     * @var ApiPreferences
      */
     public $api_preferences = [];
 }

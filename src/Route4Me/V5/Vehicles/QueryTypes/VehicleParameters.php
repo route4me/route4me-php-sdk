@@ -6,33 +6,33 @@ use Route4Me\Common as Common;
 
 class VehicleParameters extends Common
 {
-    /** If true, returned vehicles array will be paginated
-     * @var boolean $with_pagination
+    /** If true, returned vehicles array will be paginated.
+     * @var bool
      */
     public $with_pagination;
 
-    /** Current page number in the vehicles collection
-     * @var integer $page
+    /** Current page number in the vehicles collection.
+     * @var int
      */
     public $page;
 
-    /** Returned vehicles number per page
-     * @var integer $perPage
+    /** Returned vehicles number per page.
+     * @var int
      */
     public $perPage;
 
     /** An array of the Vehicle IDs.
-     * @var string[] $ids = []
+     * @var string[] = []
      */
     public $ids;
 
-    /** Vehicle ID
-     * @var string $vehicle_id
+    /** Vehicle ID.
+     * @var string
      */
     public $vehicle_id;
 
-    /** Vehicle license plate
-     * @var string $vehicle_license_plate
+    /** Vehicle license plate.
+     * @var string
      */
     public $vehicle_license_plate;
 
@@ -48,6 +48,7 @@ class VehicleParameters extends Common
                 $vehParams->$key = $value;
             }
         }
+
         return $vehParams;
     }
 }

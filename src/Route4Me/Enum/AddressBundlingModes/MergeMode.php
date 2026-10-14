@@ -10,5 +10,6 @@ namespace Route4Me\Enum\AddressBundlingModes;
 class MergeMode
 {
     const  KEEP_AS_SEPARATE_DESTINATIONS = 1;
+
     const  MERGE_INTO_SINGLE_DESTINATION = 2;
 }

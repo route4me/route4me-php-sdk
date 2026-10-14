@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Route4Me\Members\Member;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to getting of users with details.
 

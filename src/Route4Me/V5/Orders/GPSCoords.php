@@ -5,11 +5,9 @@ namespace Route4Me\V5\Orders;
 use Route4Me\Common;
 
 /**
- * The GPS coords structure
+ * The GPS coords structure.
  *
  * @since 1.3.0
- *
- * @package Route4Me
  */
 class GPSCoords extends Common
 {

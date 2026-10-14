@@ -10,19 +10,19 @@ use Route4Me\Common as Common;
 class Country extends Common
 {
     /**
-     * Country ID
+     * Country ID.
      * @var type string
      */
     public $id;
-    
+
     /**
-     * Country code
+     * Country code.
      * @var type string
      */
     public $country_code;
-    
+
     /**
-     * Country name
+     * Country name.
      * @var type string
      */
     public $country_name;

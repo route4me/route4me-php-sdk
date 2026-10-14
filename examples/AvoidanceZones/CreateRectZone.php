@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Enum\TerritoryTypes;
 
@@ -21,9 +21,9 @@ $territoryParams['data'] = [
 ];
 
 $AvoidanceZoneParameters = AvoidanceZone::fromArray([
-    'territory_name'    => 'Test Rectangular Avoidance Zone '.strval(rand(10000, 99999)),
-    'territory_color'   => 'ff7700',
-    'territory'         => $territoryParams,
+    'territory_name' => 'Test Rectangular Avoidance Zone ' . strval(rand(10000, 99999)),
+    'territory_color' => 'ff7700',
+    'territory' => $territoryParams,
 ]);
 
 $avoidanceZone = new AvoidanceZone();

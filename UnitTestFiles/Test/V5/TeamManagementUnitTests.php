@@ -3,8 +3,8 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\Constants;
-use Route4Me\Route4Me;
 use Route4Me\Members\Member;
+use Route4Me\Route4Me;
 use Route4Me\V5\TeamManagement\Option;
 use Route4Me\V5\TeamManagement\Permission;
 use Route4Me\V5\TeamManagement\ResponseTeam;
@@ -24,7 +24,7 @@ final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
     {
         $member = new Member();
         $res_members = $member->getUsers();
-    
+
         if (is_array($res_members) && isset($res_members['results'])) {
             foreach ($res_members['results'] as $key => $value) {
                 if ($value['OWNER_MEMBER_ID'] == 0) {
@@ -45,7 +45,7 @@ final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(Option::class, new Option([
             'value' => '1',
-            'title' => '2'
+            'title' => '2',
         ]));
     }
 
@@ -61,12 +61,12 @@ final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
             'options' => [
                 [
                     'value' => '2',
-                    'title' => '3'
+                    'title' => '3',
                 ], [
                     'value' => '4',
-                    'title' => '5'
-                ]
-            ]
+                    'title' => '5',
+                ],
+            ],
         ]));
     }
 
@@ -79,7 +79,7 @@ final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(ResponseTeam::class, new ResponseTeam([
             'member_id' => '1',
-            'member_first_name' => '2'
+            'member_first_name' => '2',
         ]));
     }
 
@@ -97,13 +97,13 @@ final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
             'member_last_name' => 'Pupkindzes',
             'member_email' => 'The_I@best.com',
             'member_type' => 'SUB_ACCOUNT_DRIVER',
-            'OWNER_MEMBER_ID' => self::$owner_member_id
+            'OWNER_MEMBER_ID' => self::$owner_member_id,
         ]);
 
         $this->assertInstanceOf(ResponseTeam::class, $res_team);
         $this->assertNotNull($res_team->member_id);
         $this->assertEquals($res_team->member_first_name, 'Tusha I');
-        
+
         self::$member_id = $res_team->member_id;
     }
 
@@ -133,7 +133,7 @@ final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
         $team_mng = new TeamManagement();
         $res_team = $team_mng->update(self::$member_id, [
             'HIDE_ROUTED_ADDRESSES' => true,
-            'member_type' => 'SUB_ACCOUNT_DISPATCHER'
+            'member_type' => 'SUB_ACCOUNT_DISPATCHER',
         ]);
 
         $this->assertInstanceOf(ResponseTeam::class, $res_team);
@@ -161,22 +161,22 @@ final class TeamManagementUnitTests extends \PHPUnit\Framework\TestCase
                 'member_last_name' => 'Pupkindzes',
                 'member_email' => 'the_I@best.com',
                 'member_type' => 'SUB_ACCOUNT_DRIVER',
-                'OWNER_MEMBER_ID' => self::$owner_member_id
+                'OWNER_MEMBER_ID' => self::$owner_member_id,
             ], [
                 'new_password' => '12345&Qwerty',
                 'member_first_name' => 'Tusha II',
                 'member_last_name' => 'Pupkindzes',
                 'member_email' => 'the_II@best.com',
                 'member_type' => 'SUB_ACCOUNT_DRIVER',
-                'OWNER_MEMBER_ID' => self::$owner_member_id
-                ]
+                'OWNER_MEMBER_ID' => self::$owner_member_id,
+                ],
         ], [
-            'conflicts' => 'overwrite'
+            'conflicts' => 'overwrite',
         ]);
 
         $this->assertIsArray($result);
     }
-    
+
     public static function tearDownAfterClass() : void
     {
         sleep(5);

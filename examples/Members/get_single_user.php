@@ -4,8 +4,8 @@ namespace Route4Me;
 
 use Route4Me\Members\Member;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_BAIL, 1);
@@ -21,7 +21,7 @@ $member = new Member();
 $users = $member->getUsers();
 
 assert(!is_null($users), 'Cannot retrieve list of the users');
-assert(2 == sizeof($users), 'Cannot retrieve list of the users');
+assert(sizeof($users) == 2, 'Cannot retrieve list of the users');
 assert(isset($users['results']), 'Cannot retrieve list of the users');
 assert(isset($users['total']), 'Cannot retrieve list of the users');
 

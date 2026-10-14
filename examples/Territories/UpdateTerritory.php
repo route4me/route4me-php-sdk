@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Enum\TerritoryTypes;
 
@@ -23,13 +23,13 @@ $territoryParams['data'] = [
 ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_name'    => 'Test Territory '.strval(rand(10000, 99999)),
-    'territory_color'   => 'ff7700',
-    'territory'         => $territoryParams,
+    'territory_name' => 'Test Territory ' . strval(rand(10000, 99999)),
+    'territory_color' => 'ff7700',
+    'territory' => $territoryParams,
 ]);
 
-$result = (array) $territory->addTerritory($TerritoryParameters);
-assert(!is_null($result), "Cannot create a territory");
+$result = (array)$territory->addTerritory($TerritoryParameters);
+assert(!is_null($result), 'Cannot create a territory');
 
 $territory_id = $result['territory_id'];
 
@@ -46,13 +46,13 @@ $territoryParameters = [
    ];
 
 $TerritoryParameters = Territory::fromArray([
-    'territory_id'      => $territory_id,
-    'territory_name'    => 'Test Territory Updated as rectangle',
-    'territory_color'   => 'ff5500',
-    'territory'         => $territoryParameters,
+    'territory_id' => $territory_id,
+    'territory_name' => 'Test Territory Updated as rectangle',
+    'territory_color' => 'ff5500',
+    'territory' => $territoryParameters,
 ]);
 
 $result1 = $territory->updateTerritory($TerritoryParameters);
-assert(isset($result1), "Cannot update the territory");
+assert(isset($result1), 'Cannot update the territory');
 
 Route4Me::simplePrint($result1, true);

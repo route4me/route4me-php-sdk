@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to creating a new Order.
 
@@ -12,21 +12,21 @@ require $root.'/vendor/autoload.php';
 Route4Me::setApiKey(Constants::API_KEY);
 
 $orderParameters = Order::fromArray([
-    'address_1'                 => '1358 E Luzerne St, Philadelphia, PA 19124, US',
-    'cached_lat'                => 48.335991,
-    'cached_lng'                => 31.18287,
-    'address_alias'             => 'Auto test address',
-    'address_city'              => 'Philadelphia',
-    'day_scheduled_for_YYMMDD'  => date('Y-m-d'),
-    'EXT_FIELD_first_name'      => 'Igor',
-    'EXT_FIELD_last_name'       => 'Progman',
-    'EXT_FIELD_email'           => 'progman@gmail.com',
-    'EXT_FIELD_phone'           => '380380380380',
-    'EXT_FIELD_weight'          => 100.0,
-    'EXT_FIELD_cost'            => 50,
-    'EXT_FIELD_revenue'         => 150,
-    'EXT_FIELD_cube'            => 5,
-    'EXT_FIELD_pieces'          => 10
+    'address_1' => '1358 E Luzerne St, Philadelphia, PA 19124, US',
+    'cached_lat' => 48.335991,
+    'cached_lng' => 31.18287,
+    'address_alias' => 'Auto test address',
+    'address_city' => 'Philadelphia',
+    'day_scheduled_for_YYMMDD' => date('Y-m-d'),
+    'EXT_FIELD_first_name' => 'Igor',
+    'EXT_FIELD_last_name' => 'Progman',
+    'EXT_FIELD_email' => 'progman@gmail.com',
+    'EXT_FIELD_phone' => '380380380380',
+    'EXT_FIELD_weight' => 100.0,
+    'EXT_FIELD_cost' => 50,
+    'EXT_FIELD_revenue' => 150,
+    'EXT_FIELD_cube' => 5,
+    'EXT_FIELD_pieces' => 10,
 ]);
 
 $order = new Order();

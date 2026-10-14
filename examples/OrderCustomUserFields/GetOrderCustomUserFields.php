@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // Example refers to getting of all the order custom user fields list with details.
 
@@ -21,4 +21,3 @@ foreach ($response as $key => $orderCustomField) {
     Route4Me::simplePrint($orderCustomField);
     echo '<br>';
 }
-

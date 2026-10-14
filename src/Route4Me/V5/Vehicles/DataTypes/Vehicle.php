@@ -5,56 +5,53 @@ namespace Route4Me\V5\Vehicles\DataTypes;
 use Route4Me\Common as Common;
 use Route4Me\Route4Me as Route4Me;
 use Route4Me\V5\Enum\Endpoint as Endpoint;
-use Route4Me\V5\Vehicles\QueryTypes\VehicleParameters as VehicleParameters;
 use Route4Me\V5\Vehicles\QueryTypes\VehicleOrderParameters as VehicleOrderParameters;
-use Route4Me\Constants as Constants;
+use Route4Me\V5\Vehicles\QueryTypes\VehicleParameters as VehicleParameters;
 use Route4Me\V5\Vehicles\QueryTypes\VehicleSearchParameters;
 
 /**
  * Class Vehicle
- * (Vehicle response from the endpoint https://wh.route4me.com/modules/api/v5.0/vehicles)
- *
- * @package Route4Me\V5\Vehicles
+ * (Vehicle response from the endpoint https://wh.route4me.com/modules/api/v5.0/vehicles).
  */
 class Vehicle extends Common
 {
-    /** The vehicle ID
-     * @var string $vehicle_id
+    /** The vehicle ID.
+     * @var string
      */
     public $vehicle_id;
 
     /** Member ID assigned to the vehicle.
-     * @var integer $member_id
+     * @var int
      */
     public $member_id;
 
     /** If true, the vehicle is marked as deleted.
-     * @var boolean $is_deleted
+     * @var bool
      */
     public $is_deleted;
 
-    /** Vehicle alias
-     * @var string $vehicle_alias
+    /** Vehicle alias.
+     * @var string
      */
     public $vehicle_alias;
 
-    /** Vehicle VIN
-     * @var string $vehicle_vin
+    /** Vehicle VIN.
+     * @var string
      */
     public $vehicle_vin;
 
     /** Vehicle registration state ID.
-     * @var integer $vehicle_reg_state_id
+     * @var int
      */
     public $vehicle_reg_state_id;
 
     /** Vehicle registration country ID.
-     * @var integer $vehicle_reg_country_id
+     * @var int
      */
     public $vehicle_reg_country_id;
 
     /** A license plate of the vehicle.
-     * @var string $vehicle_license_plate
+     * @var string
      */
     public $vehicle_license_plate;
 
@@ -63,12 +60,12 @@ class Vehicle extends Common
      * sedan', 'suv', 'pickup_truck', 'van', '18wheeler', 'cabin', 'hatchback',
      * '<para>motorcyle', 'waste_disposal', 'tree_cutting', 'bigrig', 'cement_mixer', </para>
      * 'livestock_carrier', 'dairy','tractor_trailer'.
-     * @var string $vehicle_type_id
+     * @var string
      */
     public $vehicle_type_id;
 
     /** When the vehicle was added.
-     * @var string $timestamp_added
+     * @var string
      */
     public $timestamp_added;
 
@@ -78,109 +75,109 @@ class Vehicle extends Common
      * <para>"hino", "honda", "isuzu", "kenworth", "mack", "mercedes-benz", "mitsubishi", </para>
      * "navistar", "nissan", "peterbilt", "renault", "scania", "sterling", "toyota",
      * <para>"volvo", "western star" </para>
-     * </value>"
-     * @var string $vehicle_make
+     * </value>".
+     * @var string
      */
     public $vehicle_make;
 
-    /** Vehicle model year
-     * @var integer $vehicle_model_year
+    /** Vehicle model year.
+     * @var int
      */
     public $vehicle_model_year;
 
-    /** Vehicle model
-     * @var string $vehicle_model
+    /** Vehicle model.
+     * @var string
      */
     public $vehicle_model;
 
-    /** The year, vehicle was acquired
-     * @var integer $vehicle_year_acquired
+    /** The year, vehicle was acquired.
+     * @var int
      */
     public $vehicle_year_acquired;
 
-    /** A cost of the new vehicle
-     * @var float $vehicle_cost_new
+    /** A cost of the new vehicle.
+     * @var float
      */
     public $vehicle_cost_new;
 
     /** If true, the vehicle was purchased new.
-     * @var boolean $purchased_new
+     * @var bool
      */
     public $purchased_new;
 
-    /** Start date of the license
-     * @var string $license_start_date
+    /** Start date of the license.
+     * @var string
      */
     public $license_start_date;
 
-    /** End date of the license
-     * @var string $license_end_date
+    /** End date of the license.
+     * @var string
      */
     public $license_end_date;
 
     /** If equal to '1', the vehicle is operational.
-     * @var boolean $is_operational
+     * @var bool
      */
     public $is_operational;
 
-    /** A type of the fuel
-     * @var string $fuel_type
+    /** A type of the fuel.
+     * @var string
      * enum: ['unleaded 87','unleaded 89','unleaded 91','unleaded 93','diesel','electric','hybrid']
      */
     public $fuel_type;
 
-    /** External telematics vehicle IDs
-     * @var integer $external_telematics_vehicle_ids
+    /** External telematics vehicle IDs.
+     * @var int
      */
     public $external_telematics_vehicle_id;
 
     /** When the vehcile was marked as deleted.
-     * @var integer $timestamp_removed
+     * @var int
      */
     public $timestamp_removed;
 
-    /** Vehicle profile ID
-     * @var integer $vehicle_profile_id
+    /** Vehicle profile ID.
+     * @var int
      */
     public $vehicle_profile_id;
 
-    /** Fuel consumption city
-     * @var float $fuel_consumption_city
+    /** Fuel consumption city.
+     * @var float
      */
     public $fuel_consumption_city;
 
-    /** Fuel consumption in the highway area
-     * @var float $fuel_consumption_highway
+    /** Fuel consumption in the highway area.
+     * @var float
      */
     public $fuel_consumption_highway;
 
-    /** Fuel consumption units in the city area (e.g. mi/l)
-     * @var string $fuel_consumption_city_unit
+    /** Fuel consumption units in the city area (e.g. mi/l).
+     * @var string
      */
     public $fuel_consumption_city_unit;
 
-    /** Fuel consumption units in the highway area (e.g. mi/l)
-     * @var string $fuel_consumption_highway_unit
+    /** Fuel consumption units in the highway area (e.g. mi/l).
+     * @var string
      */
     public $fuel_consumption_highway_unit;
 
-    /** Miles per gallon in the city area
-     * @var float $mpg_city
+    /** Miles per gallon in the city area.
+     * @var float
      */
     public $mpg_city;
 
-    /** Miles per gallon in the highway area
-     * @var float $mpg_highway
+    /** Miles per gallon in the highway area.
+     * @var float
      */
     public $mpg_highway;
 
-    /** Fuel consumption UF value in the city area (e.g. '20.01 mi/l')
-     * @var string $fuel_consumption_city_uf_value
+    /** Fuel consumption UF value in the city area (e.g. '20.01 mi/l').
+     * @var string
      */
     public $fuel_consumption_city_uf_value;
 
-    /** Fuel consumption UF value in the highway area (e.g. '2,000.01 mpg')
-     * @var string $fuel_consumption_highway_uf_value
+    /** Fuel consumption UF value in the highway area (e.g. '2,000.01 mpg').
+     * @var string
      */
     public $fuel_consumption_highway_uf_value;
 
@@ -202,10 +199,10 @@ class Vehicle extends Common
 
     public function __construct()
     {
-        Route4Me::setBaseUrl("");
+        Route4Me::setBaseUrl('');
     }
 
-    /** Creates a vehicle
+    /** Creates a vehicle.
      * @param  $vehicleParams - an array of vehicle's parameters or Vehicle object
      * @return array          - a vehicle object or failure info.
      */
@@ -218,7 +215,7 @@ class Vehicle extends Common
             'url' => Endpoint::Vehicles,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
         ]);
 
         return $response;
@@ -235,7 +232,7 @@ class Vehicle extends Common
 
         $response = Route4Me::makeRequst([
             'url' => Endpoint::Vehicles . '/' . $vehicleId,
-            'method' => 'DELETE'
+            'method' => 'DELETE',
         ]);
 
         return $response;
@@ -273,7 +270,7 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleTemporary,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
         ]);
 
         return $response;
@@ -293,7 +290,7 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleExecuteOrder,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
         ]);
 
         return $response;
@@ -327,7 +324,7 @@ class Vehicle extends Common
         $allQueryFields = ['vehicle_id'];
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::Vehicles.'/'.$vehicleParams['vehicle_id'],
+            'url' => Endpoint::Vehicles . '/' . $vehicleParams['vehicle_id'],
             'method' => 'GET',
             'query' => null,
         ]);
@@ -343,7 +340,7 @@ class Vehicle extends Common
     public function getVehicleTrack($vehicleParams)
     {
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::Vehicles.'/'.$vehicleParams['vehicle_id'].'/track',
+            'url' => Endpoint::Vehicles . '/' . $vehicleParams['vehicle_id'] . '/track',
             'method' => 'GET',
             'query' => null,
         ]);
@@ -383,7 +380,7 @@ class Vehicle extends Common
             'url' => Endpoint::VehicleSearch,
             'method' => 'POST',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $searchParams),
-            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json']
+            'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
         ]);
 
         return $response;
@@ -400,10 +397,10 @@ class Vehicle extends Common
         $allBodyFields = Route4Me::getObjectProperties(new self(), $excludeFields);
 
         $response = Route4Me::makeRequst([
-            'url' => Endpoint::Vehicles.'/'.$vehicleParams['vehicle_id'],
+            'url' => Endpoint::Vehicles . '/' . $vehicleParams['vehicle_id'],
             'method' => 'PATCH',
             'body' => Route4Me::generateRequestParameters($allBodyFields, $vehicleParams),
-            'HTTPHEADER' => 'Content-Type: application/json'
+            'HTTPHEADER' => 'Content-Type: application/json',
         ]);
 
         return $response;

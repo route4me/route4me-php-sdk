@@ -3,8 +3,8 @@
 namespace UnitTestFiles\Test;
 
 use Route4Me\Constants;
-use Route4Me\Route4Me;
 use Route4Me\Route;
+use Route4Me\Route4Me;
 use Route4Me\V5\RecurringRoutes\PageInfo;
 use Route4Me\V5\RecurringRoutes\RouteSchedule;
 use Route4Me\V5\RecurringRoutes\Schedule;
@@ -39,7 +39,7 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(Schedule::class, new Schedule([
             'schedule_uid' => '1',
-            'name' => 'The best Schedule'
+            'name' => 'The best Schedule',
         ]));
     }
 
@@ -52,7 +52,7 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(RouteSchedule::class, new RouteSchedule([
             'route_id' => '1',
-            'schedule_uid' => '2'
+            'schedule_uid' => '2',
         ]));
     }
 
@@ -65,10 +65,10 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(PageInfo::class, new PageInfo([
             'first' => 'URL_first',
-            'last' => 'URL_last'
+            'last' => 'URL_last',
         ], [
             'current_page' => 1,
-            'last_page' => 15
+            'last_page' => 15,
         ]));
     }
 
@@ -84,7 +84,7 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
             'name' => 'The bestest schedule',
             'schedule_blacklist' => [],
             'schedule' => null,
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
         ]);
 
         $this->assertInstanceOf(Schedule::class, self::$schedule);
@@ -131,7 +131,7 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
     {
         $schedules = new Schedules();
         self::$schedule = $schedules->updateSchedule(self::$schedule->schedule_uid, [
-            'name' => 'The bestest schedule 1'
+            'name' => 'The bestest schedule 1',
         ]);
 
         $this->assertInstanceOf(Schedule::class, self::$schedule);
@@ -143,9 +143,9 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
         $route = new Route;
         $routes = $route->getRoutes([
             'limit' => 1,
-            'offset' => 0
+            'offset' => 0,
         ]);
-    
+
         if (is_array($routes) && isset($routes[0])) {
             self::$route_id = $routes[0]->route_id;
             self::$member_id = $routes[0]->member_id;
@@ -153,11 +153,11 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
         $route = null;
 
         $this->assertNotNull(self::$route_id);
-    
+
         $schedules = new Schedules();
         self::$route_schedule = $schedules->createRouteSchedule([
             'route_id' => self::$route_id,
-            'schedule_uid' => self::$schedule->schedule_uid
+            'schedule_uid' => self::$schedule->schedule_uid,
         ]);
 
         $this->assertInstanceOf(RouteSchedule::class, self::$route_schedule);
@@ -205,21 +205,21 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
         $vehicles = $vehicle->getVehiclesPaginatedList([
             'with_pagination' => true,
             'page' => 1,
-            'perPage' => 1
+            'perPage' => 1,
         ]);
-    
+
         if (is_array($vehicles) && isset($vehicles[0]) && is_array($vehicles[0]) && isset($vehicles[0]['vehicle_id'])) {
             self::$vehicle_id = $vehicles[0]['vehicle_id'];
         }
         $vehicle = null;
-    
+
         $this->assertNotNull(self::$vehicle_id);
 
         $schedules = new Schedules();
         self::$route_schedule = $schedules->updateRouteSchedule(self::$route_id, [
             'schedule_uid' => self::$route_schedule->schedule_uid,
             'member_id' => self::$member_id,
-            'vehicle_id' => self::$vehicle_id
+            'vehicle_id' => self::$vehicle_id,
         ]);
 
         $this->assertInstanceOf(RouteSchedule::class, self::$route_schedule);
@@ -232,7 +232,7 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
         self::$route_schedule = $schedules->replaceRouteSchedule(self::$route_id, [
             'schedule_uid' => self::$route_schedule->schedule_uid,
             'member_id' => self::$member_id,
-            'vehicle_id' => self::$vehicle_id
+            'vehicle_id' => self::$vehicle_id,
         ]);
 
         $this->assertInstanceOf(RouteSchedule::class, self::$route_schedule);
@@ -280,7 +280,7 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
             'name' => 'The bestest schedule',
             'schedule_blacklist' => [],
             'schedule' => null,
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
         ]);
 
         $this->assertIsBool($result);
@@ -311,12 +311,12 @@ final class RecurringRoutesUnitTests extends \PHPUnit\Framework\TestCase
             'name' => 'The bestest schedule',
             'schedule_blacklist' => [],
             'schedule' => null,
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
         ]);
 
         self::$route_schedule = $schedules->createRouteSchedule([
             'route_id' => self::$route_id,
-            'schedule_uid' => self::$schedule->schedule_uid
+            'schedule_uid' => self::$schedule->schedule_uid,
         ]);
 
         $res_route_schedule = $schedules->deleteRouteSchedule(self::$route_schedule->route_id);

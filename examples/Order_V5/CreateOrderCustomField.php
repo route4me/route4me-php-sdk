@@ -3,11 +3,11 @@
 namespace Route4Me;
 
 use Exception;
-use Route4Me\V5\Orders\Orders;
 use Route4Me\V5\Orders\CustomField;
+use Route4Me\V5\Orders\Orders;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 // An example of creating, reading, changing and deleting an order.
 
@@ -20,8 +20,8 @@ $customField = new CustomField([
     'order_custom_field_label' => 'Custom Field 1',
     'order_custom_field_type' => 'checkbox',
     'order_custom_field_type_info' => [
-        'short_label' => 'cFl1'
-    ]
+        'short_label' => 'cFl1',
+    ],
 ]);
 
 print_r($customField);
@@ -57,7 +57,7 @@ try {
         echo "Custom field with uuid='" . $uuid . "' was not deleted." . PHP_EOL;
     }
 } catch (Exception $e) {
-    echo "ERROR: " . $e->getMessage() . PHP_EOL;
+    echo 'ERROR: ' . $e->getMessage() . PHP_EOL;
 
     if ($orders && $uuid) {
         try {

@@ -1,36 +1,34 @@
 <?php
 
-
 namespace Route4Me;
 
 use Route4Me\Common as Common;
 
 /**
  * Structure of the DirectionStep type object.
- * @package Route4Me
  */
 class DirectionStep extends Common
 {
     /**
-     * Name (detailed)
+     * Name (detailed).
      * @var string
      */
     public $direction;
 
     /**
-     * Name (brief)
+     * Name (brief).
      * @var strng
      */
     public $directions;
 
     /**
-     * Distance
-     * @var double
+     * Distance.
+     * @var float
      */
     public $distance;
 
     /**
-     * Distance unit
+     * Distance unit.
      * @var string
      */
     public $distance_unit;
@@ -48,25 +46,25 @@ class DirectionStep extends Common
 
     /**
      * Compass Direction. Available values:<br>
-     *  N, S, W, E, NW, NE, SW, SE
+     *  N, S, W, E, NW, NE, SW, SE.
      * @var string
      */
     public $compass_direction;
 
     /**
      * UDU Distance (UDU: User Distance Unit).
-     * @var double
+     * @var float
      */
     public $udu_distance;
 
     /**
-     * Direction step duration(seconds)
-     * @var integer
+     * Direction step duration(seconds).
+     * @var int
      */
     public $duration_sec;
 
     /**
-     * Maneuver Point
+     * Maneuver Point.
      * @var GeoPoint
      */
     public $maneuverPoint;

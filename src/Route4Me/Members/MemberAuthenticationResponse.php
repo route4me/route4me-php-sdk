@@ -1,101 +1,98 @@
 <?php
 
-
 namespace Route4Me\Members;
 
 /**
- * Class MemberAuthenticationResponse
- * @package Route4Me\Members
- * Members Authentication Response
+ * Class MemberAuthenticationResponse.
  */
 class MemberAuthenticationResponse extends \Route4Me\Common
 {
-    /** @var boolean $status
+    /** @var bool
      * True, if authentication process was finished successfuly.
      */
     public $status;
 
-    /** @var string $geocoding_service
+    /** @var string
      * Geocoding service
      */
     public $geocoding_service;
 
-    /** @var int $session_id
+    /** @var int
      * Session ID
      */
     public $session_id;
 
-    /** @var string $session_guid
+    /** @var string
      * Session guid
      */
     public $session_guid;
 
-    /** @var int $member_id
+    /** @var int
      * Member ID
      */
     public $member_id;
 
-    /** @var string $api_key
+    /** @var string
      * API key of an user
      */
     public $api_key;
 
-    /** @var int $tracking_ttl
+    /** @var int
      * Tracking TTL
      */
     public $tracking_ttl;
 
-    /** @var string $update_channel_name
+    /** @var string
      * Update channel name
      */
     public $update_channel_name;
 
-    /** @var string $geofence_polygon_shape
+    /** @var string
      * Geofence polygon shape. ENUM('circle', 'poly', 'rect').
      */
-    public $geofence_polygon_shape ;
+    public $geofence_polygon_shape;
 
-    /** @var int $geofence_polygon_size
+    /** @var int
      * Geofence polygon size
      */
     public $geofence_polygon_size;
 
-    /** @var int $geofence_time_onsite_trigger_secs
+    /** @var int
      * Geofence time onsite trigger in seconds.
      */
     public $geofence_time_onsite_trigger_secs;
 
-    /** @var int $geofence_minimum_trigger_speed
+    /** @var int
      * Geofence minimum trigger speed.
      */
     public $geofence_minimum_trigger_speed;
 
-    /** @var boolean $is_subscription_past_due
+    /** @var bool
      * If true, subscription is past due.
      */
     public $is_subscription_past_due;
 
-    /** @var string $visited_departed_enabled
+    /** @var string
      * if true, triggering of the visited and departed activities is enabled.
      */
     public $visited_departed_enabled;
 
-    /** @var string $long_press_enabled
+    /** @var string
      * if true, long press is enabled.
      */
     public $long_press_enabled;
 
-    /** @var string $account_type_id
+    /** @var string
      * The account type ID
      */
     public $account_type_id;
 
-    /** @var string $account_type_alias
+    /** @var string
      * Account type alias.
      */
     public $account_type_alias;
 
-    /** @var string $member_type
+    /** @var string
      * A type of the member.
      * Available values:
      * 'PRIMARY_ACCOUNT',
@@ -110,72 +107,72 @@ class MemberAuthenticationResponse extends \Route4Me\Common
      */
     public $member_type;
 
-    /** @var string $max_stops_per_route
+    /** @var string
      * Maximum stops per route.
      */
     public $max_stops_per_route;
 
-    /** @var string $max_routes
+    /** @var string
      * Maximum number of the routes.
      */
     public $max_routes;
 
-    /** @var int $routes_planned
+    /** @var int
      * Number of the planned routes by an user.
      */
     public $routes_planned;
 
-    /** @var string $preferred_units
+    /** @var string
      * Preferred units. Enum('km', 'mi').
      */
     public $preferred_units;
 
-    /** @var string $preferred_language
+    /** @var string
      * Preferred language. Enum('en', 'fr').
      */
     public $preferred_language;
 
-    /** @var string $HIDE_ROUTED_ADDRESSES
+    /** @var string
      * If true, routed addresses will be hidden.
      */
     public $HIDE_ROUTED_ADDRESSES;
 
-    /** @var string $HIDE_VISITED_ADDRESSES
+    /** @var string
      * If true, visited addresses will be hidden.
      */
     public $HIDE_VISITED_ADDRESSES;
 
-    /** @var string $HIDE_NONFUTURE_ROUTES
+    /** @var string
      * If equal to true, nonfuture addresses will be hidden.
      */
     public $HIDE_NONFUTURE_ROUTES;
 
-    /** @var string $READONLY_USER
+    /** @var string
      * If equal to true, user can only read data.
      */
     public $READONLY_USER;
 
-    /** @var int $auto_logout_ts
+    /** @var int
      * Time in seconds. If a user is inactive during this period, he will be logout.
      */
     public $auto_logout_ts;
 
-    /** @var string $last_known_member_payment_device
+    /** @var string
      * Last known member payment device (e.g. 'web')
      */
     public $last_known_member_payment_device;
 
-    /** @var int $account_expires_timestamp
+    /** @var int
      * Account expire date
      */
     public $account_expires_timestamp;
 
-    /** @var boolean $account_past_due
+    /** @var bool
      * Account past due
      */
     public $account_past_due;
 
-    /** @var array  $licensed_modules
+    /** @var array
      * Licensed module. e.g.:
      * 'MODULE__ROUTE_EDITOR_CUSTOM_DATA_EDITING',
      * 'MODULE__VOICE_NAVIGATION:TRUE',
@@ -183,7 +180,7 @@ class MemberAuthenticationResponse extends \Route4Me\Common
      */
     public $licensed_modules;
 
-    /** @var int $last_active_timestamp
+    /** @var int
      * Last active timestamp
      */
     public $last_active_timestamp;

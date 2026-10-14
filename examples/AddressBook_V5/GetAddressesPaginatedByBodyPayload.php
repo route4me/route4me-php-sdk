@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\AddressBook;
@@ -29,7 +29,7 @@ try {
     $options = [
         'fields' => ['address_id', 'address_1', 'first_name', 'last_name', 'address_city'],
         'page' => 2,
-        'per_page' => 10
+        'per_page' => 10,
     ];
     $res = $ab->getAddressesPaginatedByBodyPayload($options);
     print_r($res);
@@ -43,14 +43,14 @@ try {
                 'value' => [
                     'center' => [
                         'lat' => 52.4025,
-                        'lng' => 4.5601
+                        'lng' => 4.5601,
                     ],
-                    'distance' => 10000
-                ]
-            ]]
+                    'distance' => 10000,
+                ],
+            ]],
         ],
         'page' => 2,
-        'per_page' => 10
+        'per_page' => 10,
     ];
     $res = $ab->getAddressesPaginatedByBodyPayload($options);
     print_r($res);

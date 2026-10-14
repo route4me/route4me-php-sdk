@@ -5,11 +5,9 @@ namespace Route4Me\V5\AddressBook;
 use Route4Me\Common;
 
 /**
- * Address Book API AddressBook structure
+ * Address Book API AddressBook structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class ScheduleItem extends Common
 {

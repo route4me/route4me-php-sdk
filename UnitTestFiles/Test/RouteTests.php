@@ -35,7 +35,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         Route4Me::setApiKey(Constants::API_KEY);
 
         //region -- Prepae Addresses --
-        $json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_md_tw.json'), true);
+        $json = json_decode(file_get_contents(dirname(__FILE__) . '/data/addresses_md_tw.json'), true);
 
         $addresses = [];
         foreach ($json as $address) {
@@ -43,16 +43,16 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         }
 
         $parameters = RouteParameters::fromArray([
-            'algorithm_type'            => AlgorithmType::CVRP_TW_MD,
-            'distance_unit'             => DistanceUnit::MILES,
-            'device_type'               => DeviceType::WEB,
-            'optimize'                  => OptimizationType::DISTANCE,
-            'metric'                    => Metric::GEODESIC,
-            'route_max_duration'        => 86400 * 2,
-            'travel_mode'               => TravelMode::DRIVING,
-            'vehicle_capacity'          => 50,
-            'vehicle_max_distance_mi'   => 10000,
-            'parts'                     => 50,
+            'algorithm_type' => AlgorithmType::CVRP_TW_MD,
+            'distance_unit' => DistanceUnit::MILES,
+            'device_type' => DeviceType::WEB,
+            'optimize' => OptimizationType::DISTANCE,
+            'metric' => Metric::GEODESIC,
+            'route_max_duration' => 86400 * 2,
+            'travel_mode' => TravelMode::DRIVING,
+            'vehicle_capacity' => 50,
+            'vehicle_max_distance_mi' => 10000,
+            'parts' => 50,
         ]);
         //endregion
 
@@ -67,39 +67,37 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         //region -- Extra Testing Addresses --
         $addresses = [];
         $addresses[] = Address::fromArray([
-            'address'           => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
-            'is_depot'          => true,
-            'lat'               => 30.159341812134,
-            'lng'               => -81.538619995117,
-            'time'              => 300,
+            'address' => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
+            'is_depot' => true,
+            'lat' => 30.159341812134,
+            'lng' => -81.538619995117,
+            'time' => 300,
             'time_window_start' => 28800,
-            'time_window_end'   => 32400,
+            'time_window_end' => 32400,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '214 Edgewater Branch Drive 32259',
-            'lat'               => 30.103567123413,
-            'lng'               => -81.595352172852,
-            'time'              => 300,
+            'address' => '214 Edgewater Branch Drive 32259',
+            'lat' => 30.103567123413,
+            'lng' => -81.595352172852,
+            'time' => 300,
             'time_window_start' => 36000,
-            'time_window_end'   => 37200,
+            'time_window_end' => 37200,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '756 eagle point dr 32092',
-            'lat'               => 30.046422958374,
-            'lng'               => -81.508758544922,
-            'time'              => 300,
+            'address' => '756 eagle point dr 32092',
+            'lat' => 30.046422958374,
+            'lng' => -81.508758544922,
+            'time' => 300,
             'time_window_start' => 39600,
-            'time_window_end'   => 41400,
+            'time_window_end' => 41400,
         ]);
         //endregion
 
         self::$addresses = $addresses;
 
         //region -- Create Test Order --
-
-
 
         //endregion
     }
@@ -110,62 +108,62 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $addresses = [];
         $addresses[] = [
-            'address'           => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
-            'is_depot'          => true,
-            'lat'               => 30.159341812134,
-            'lng'               => -81.538619995117,
-            'time'              => 300,
+            'address' => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
+            'is_depot' => true,
+            'lat' => 30.159341812134,
+            'lng' => -81.538619995117,
+            'time' => 300,
             'time_window_start' => 28800,
-            'time_window_end'   => 32400,
+            'time_window_end' => 32400,
         ];
 
         $addresses[] = [
-            'address'           => '214 Edgewater Branch Drive 32259',
-            'lat'               => 30.103567123413,
-            'lng'               => -81.595352172852,
-            'time'              => 300,
+            'address' => '214 Edgewater Branch Drive 32259',
+            'lat' => 30.103567123413,
+            'lng' => -81.595352172852,
+            'time' => 300,
             'time_window_start' => 36000,
-            'time_window_end'   => 37200,
+            'time_window_end' => 37200,
         ];
 
         $addresses[] = [
-            'address'           => '756 eagle point dr 32092',
-            'lat'               => 30.046422958374,
-            'lng'               => -81.508758544922,
-            'time'              => 300,
+            'address' => '756 eagle point dr 32092',
+            'lat' => 30.046422958374,
+            'lng' => -81.508758544922,
+            'time' => 300,
             'time_window_start' => 39600,
-            'time_window_end'   => 41400,
+            'time_window_end' => 41400,
         ];
 
         $addresses[] = [
-            'address'           => '63 Stone Creek Cir St Johns, FL 32259, USA',
-            'lat'               => 30.048496,
-            'lng'               => -81.558716,
-            'time'              => 300,
+            'address' => '63 Stone Creek Cir St Johns, FL 32259, USA',
+            'lat' => 30.048496,
+            'lng' => -81.558716,
+            'time' => 300,
             'time_window_start' => 43200,
-            'time_window_end'   => 45000,
+            'time_window_end' => 45000,
         ];
 
         $addresses[] = [
-            'address'           => 'St Johns Florida 32259, USA',
-            'lat'               => 30.099642,
-            'lng'               => -81.547201,
-            'time'              => 300,
+            'address' => 'St Johns Florida 32259, USA',
+            'lat' => 30.099642,
+            'lng' => -81.547201,
+            'time' => 300,
             'time_window_start' => 46800,
-            'time_window_end'   => 48600,
+            'time_window_end' => 48600,
         ];
 
         //endregion
 
         $parameters = [
-            'device_type'           => DeviceType::IPAD,
-            'disable_optimization'  => false,
-            'route_name'            => 'phpunit test '.date('Y-m-d H:i'),
+            'device_type' => DeviceType::IPAD,
+            'disable_optimization' => false,
+            'route_name' => 'phpunit test ' . date('Y-m-d H:i'),
         ];
 
         $routeParameters = Route::fromArray([
-            'parameters'    => $parameters,
-            'addresses'     => $addresses
+            'parameters' => $parameters,
+            'addresses' => $addresses,
         ]);
 
         $this->assertEquals(RouteParameters::fromArray($parameters), $routeParameters->parameters);
@@ -180,7 +178,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $users = $member->getUsers();
 
         assert(!is_null($users), 'Cannot retrieve list of the users');
-        assert(2 == sizeof($users), 'Cannot retrieve list of the users');
+        assert(sizeof($users) == 2, 'Cannot retrieve list of the users');
         assert(isset($users['results']), 'Cannot retrieve list of the users');
         assert(isset($users['total']), 'Cannot retrieve list of the users');
 
@@ -211,7 +209,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->update();
 
         $this->assertNotNull($route);
-        $this->assertInstanceOf(Route::class,$route);
+        $this->assertInstanceOf(Route::class, $route);
 
         //endregion
 
@@ -219,10 +217,10 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $route = new Route();
 
-        $assignedRoute= $route->getRoutes(['route_id' => $routeId]);
+        $assignedRoute = $route->getRoutes(['route_id' => $routeId]);
 
         $this->assertNotNull($assignedRoute);
-        $this->assertInstanceOf(Route::class,$assignedRoute);
+        $this->assertInstanceOf(Route::class, $assignedRoute);
         $this->assertEquals($randomUserID, $assignedRoute->parameters->member_id);
 
         //endregion
@@ -235,9 +233,9 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $vehicle = new Vehicle();
 
         $vehicleParameters = [
-            'with_pagination'   => true,
-            'page'              => 1,
-            'perPage'           => 10,
+            'with_pagination' => true,
+            'page' => 1,
+            'perPage' => 10,
         ];
 
         $response = $vehicle->getVehicles($vehicleParameters);
@@ -245,22 +243,22 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($response);
         $this->assertTrue(is_array($response));
 
-        if (sizeof($response)<1) {
+        if (sizeof($response) < 1) {
             $vehicle = new VehicleV4();
 
             $vehicleParameters = Vehicle::fromArray([
-                'vehicle_name'              => 'Ford Transit Test 5',
-                'vehicle_alias'             => 'Ford Transit Test 5',
-                'vehicle_vin'               => 'JS3TD62V1Y4107898',
-                'vehicle_reg_country_id'    => '223',
-                'vehicle_make'              => 'Ford',
-                'vehicle_model_year'        => 2013,
-                'vehicle_axle_count'        => 2,
-                'mpg_city'                  => 8,
-                'mpg_highway'               => 14,
-                'fuel_type'                 => 'unleaded 93',
-                'height_inches'             => 72,
-                'weight_lb'                 => 2000,
+                'vehicle_name' => 'Ford Transit Test 5',
+                'vehicle_alias' => 'Ford Transit Test 5',
+                'vehicle_vin' => 'JS3TD62V1Y4107898',
+                'vehicle_reg_country_id' => '223',
+                'vehicle_make' => 'Ford',
+                'vehicle_model_year' => 2013,
+                'vehicle_axle_count' => 2,
+                'mpg_city' => 8,
+                'mpg_highway' => 14,
+                'fuel_type' => 'unleaded 93',
+                'height_inches' => 72,
+                'weight_lb' => 2000,
             ]);
 
             $result = $vehicle->createVehicle($vehicleParameters);
@@ -276,7 +274,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
             $removedVehicleIDs[] = $result['vehicle_id'];
         }
 
-        $randomIndex = rand(0, sizeof($response)-1);
+        $randomIndex = rand(0, sizeof($response) - 1);
         $vehicleId = $response[$randomIndex]['vehicle_id'];
 
         //endregion
@@ -302,7 +300,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->update();
 
         $this->assertNotNull($route);
-        $this->assertInstanceOf(Route::class,$route);
+        $this->assertInstanceOf(Route::class, $route);
 
         //endregion
 
@@ -310,10 +308,10 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $route = new Route();
 
-        $assignedRoute= $route->getRoutes(['route_id' => $routeId]);
+        $assignedRoute = $route->getRoutes(['route_id' => $routeId]);
 
         $this->assertNotNull($assignedRoute);
-        $this->assertInstanceOf(Route::class,$assignedRoute);
+        $this->assertInstanceOf(Route::class, $assignedRoute);
         $this->assertEquals($vehicleId, $assignedRoute->parameters->vehicle_id);
 
         //endregion
@@ -327,8 +325,8 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $routeDuplicate = $route->duplicateRoute($routeIDs);
 
-        $this->assertTrue(isset($routeDuplicate['status']), "Cannot created duplicate route");
-        $this->assertTrue($routeDuplicate['status'], "Cannot created duplicate route");
+        $this->assertTrue(isset($routeDuplicate['status']), 'Cannot created duplicate route');
+        $this->assertTrue($routeDuplicate['status'], 'Cannot created duplicate route');
 
         $duplicatedRouteId = $routeDuplicate['route_ids'][0];
 
@@ -354,10 +352,10 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($routeResult);
         $this->assertTrue(is_array($routeResult));
-        $this->assertTrue(sizeof($routeResult)>0);
+        $this->assertTrue(sizeof($routeResult) > 0);
         $this->assertInstanceOf(Route::class, Route::fromArray($routeResult));
         $this->assertTrue(isset($routeResult['directions']));
-        $this->assertTrue(sizeof($routeResult['directions'])>0);
+        $this->assertTrue(sizeof($routeResult['directions']) > 0);
     }
 
     public function testGetRoutePathPoints()
@@ -373,17 +371,17 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $params = new RouteParametersQuery();
 
-        $params->route_id           = $route_id;
-        $params->route_path_output  = 'Points';
+        $params->route_id = $route_id;
+        $params->route_path_output = 'Points';
 
-        $routeResult = (array) $route->getRoutePoints($params->toArray());
+        $routeResult = (array)$route->getRoutePoints($params->toArray());
 
         $this->assertNotNull($routeResult);
         $this->assertTrue(is_array($routeResult));
-        $this->assertTrue(sizeof($routeResult)>0);
+        $this->assertTrue(sizeof($routeResult) > 0);
         $this->assertInstanceOf(Route::class, Route::fromArray($routeResult));
         $this->assertTrue(isset($routeResult['path']));
-        $this->assertTrue(sizeof($routeResult['path'])>0);
+        $this->assertTrue(sizeof($routeResult['path']) > 0);
     }
 
     public function testGetRoute()
@@ -414,11 +412,11 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $routeId1 = $routeResults[0]->route_id;
         $routeId2 = $routeResults[1]->route_id;
 
-        $routesResult = $route->getRoutes(['route_id' => $routeId1.','.$routeId2]);
+        $routesResult = $route->getRoutes(['route_id' => $routeId1 . ',' . $routeId2]);
 
         $this->assertNotNull($routesResult);
         $this->assertTrue(is_array($routesResult));
-        $this->assertTrue(sizeof($routesResult)==2);
+        $this->assertTrue(sizeof($routesResult) == 2);
         $this->assertInstanceOf(
             Route::class,
             Route::fromArray($routesResult[0])
@@ -430,7 +428,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $params = new RouteParametersQuery();
 
         $params->start_date = date('Y-m-d', strtotime('-1 days'));
-        $params->end_date   = date('Y-m-d', strtotime('+1 days'));
+        $params->end_date = date('Y-m-d', strtotime('+1 days'));
 
         $route = new Route();
 
@@ -438,7 +436,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($routeResults);
         $this->assertTrue(is_array($routeResults));
-        $this->assertTrue(sizeof($routeResults)>0);
+        $this->assertTrue(sizeof($routeResults) > 0);
         $this->assertInstanceOf(Route::class, Route::fromArray($routeResults));
 
         $startDateUnix = date_create($params->start_date)->format('U');
@@ -468,7 +466,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($routeResults);
         $this->assertTrue(is_array($routeResults));
-        $this->assertTrue(sizeof($routeResults)>0);
+        $this->assertTrue(sizeof($routeResults) > 0);
         $this->assertInstanceOf(Route::class, Route::fromArray($routeResults));
     }
 
@@ -481,14 +479,14 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         // Re-sequence all addresses
         $params = new RouteParametersQuery();
 
-        $params->route_id   = $route_id;
+        $params->route_id = $route_id;
         $params->reoptimize = true;
 
         $routeResult = $route->updateRoute($params->toArray());
 
         $this->assertNotNull($routeResult);
         $this->assertTrue(is_array($routeResult));
-        $this->assertTrue(sizeof($routeResult)>0);
+        $this->assertTrue(sizeof($routeResult) > 0);
         $this->assertInstanceOf(Route::class, Route::fromArray($routeResult));
     }
 
@@ -509,7 +507,8 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull(
             $selectedRoute,
-            "Cannot select a route with more than 4 addresses");
+            'Cannot select a route with more than 4 addresses'
+        );
 
         // Resequence a route destination
         $routeID = $selectedRoute->route_id;
@@ -518,12 +517,12 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         echo "Route ID-> $routeID, Route destination ID -> $routeDestinationID <br>";
 
         $params = [
-            'route_id'              => $routeID,
-            'route_destination_id'  => $routeDestinationID,
-            'addresses'             => [
+            'route_id' => $routeID,
+            'route_destination_id' => $routeDestinationID,
+            'addresses' => [
                 '0' => [
-                    'route_destination_id'  => $routeDestinationID,
-                    'sequence_no'           => 3,
+                    'route_destination_id' => $routeDestinationID,
+                    'sequence_no' => 3,
                 ],
             ],
         ];
@@ -532,7 +531,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($response);
         $this->assertTrue(is_array($response));
-        $this->assertTrue(sizeof($response)>0);
+        $this->assertTrue(sizeof($response) > 0);
         $this->assertInstanceOf(Route::class, Route::fromArray($response));
     }
 
@@ -550,12 +549,12 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         //region -- Re-sequence a route destination --
 
         $params = [
-            'route_id'              => $routeID,
-            'route_destination_id'  => $routeDestinationID,
+            'route_id' => $routeID,
+            'route_destination_id' => $routeDestinationID,
             'addresses' => [
                 '0' => [
-                    'route_destination_id'  => $routeDestinationID,
-                    'sequence_no'           => 3,
+                    'route_destination_id' => $routeDestinationID,
+                    'sequence_no' => 3,
                 ],
             ],
         ];
@@ -564,7 +563,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         $this->assertNotNull($response);
         $this->assertTrue(is_array($response));
-        $this->assertTrue(sizeof($response)>0);
+        $this->assertTrue(sizeof($response) > 0);
         $this->assertInstanceOf(Route::class, Route::fromArray($response));
 
         //endregion
@@ -578,7 +577,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         //endregion
     }
 
-    public function  testRouteOriginParameter()
+    public function testRouteOriginParameter()
     {
         $route = new Route();
 
@@ -618,9 +617,9 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
         // Share a route with an email
         $params = [
-            'route_id'          => $routeID,
-            'response_format'   => 'json',
-            'recipient_email'   => 'rrrrrrrrrrrrrrrr+share1234@gmail.com',
+            'route_id' => $routeID,
+            'response_format' => 'json',
+            'recipient_email' => 'rrrrrrrrrrrrrrrr+share1234@gmail.com',
         ];
 
         $result = $route->shareRoute($params);
@@ -642,8 +641,8 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->parameters = new \stdClass();
 
         $parameters = [
-            'route_id'                          => $routeID,
-            'unlink_from_master_optimization'   => true,
+            'route_id' => $routeID,
+            'unlink_from_master_optimization' => true,
         ];
 
         $route->httpheaders = 'Content-type: application/json';
@@ -656,7 +655,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Route::class, Route::fromArray($result));
         $this->assertNull($result['optimization_problem_id']);
 
-        $removedRouteIDs[]= $result['route_id'];
+        $removedRouteIDs[] = $result['route_id'];
     }
 
     public function testUpdateRouteAvoidanceZone()
@@ -666,13 +665,13 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $routeID = self::$testRoutes[0]->route_id;
 
         $parameters = [
-            'route_id'   => $routeID,
+            'route_id' => $routeID,
             'parameters' => [
                 'avoidance_zones' => [
                     'FAA49711A0F1144CE4E203DC18ABDFFB',
-                    '9C48E8008E9865006336B99D3595E66A'
-                ]
-            ]
+                    '9C48E8008E9865006336B99D3595E66A',
+                ],
+            ],
         ];
 
         $route->httpheaders = 'Content-type: application/json';
@@ -703,8 +702,8 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->parameters = new \stdClass();
 
         $route->parameters->custom_fields = [
-            'animal'    => 'tiger',
-            'bird'      => 'canary',
+            'animal' => 'tiger',
+            'bird' => 'canary',
         ];
 
         $route->httpheaders = 'Content-type: application/json';
@@ -734,10 +733,10 @@ class RouteTests extends \PHPUnit\Framework\TestCase
         $route->parameters = new \stdClass();
 
         $route->parameters = [
-            'member_id'             => $initialRoute->member_id,
-            'optimize'              => 'Distance',
-            'route_max_duration'    => '82400',
-            'route_name'            => 'updated '.date('m-d-Y'),
+            'member_id' => $initialRoute->member_id,
+            'optimize' => 'Distance',
+            'route_max_duration' => '82400',
+            'route_name' => 'updated ' . date('m-d-Y'),
         ];
 
         $route->httpheaders = 'Content-type: application/json';
@@ -763,7 +762,7 @@ class RouteTests extends \PHPUnit\Framework\TestCase
 
     public static function tearDownAfterClass() : void
     {
-        if (sizeof(self::$createdProblems)>0) {
+        if (sizeof(self::$createdProblems) > 0) {
             $optimizationProblemIDs = [];
 
             foreach (self::$createdProblems as $problem) {
@@ -772,40 +771,40 @@ class RouteTests extends \PHPUnit\Framework\TestCase
                 $optimizationProblemIDs[] = $optimizationProblemId;
             }
 
-            if (sizeof(self::$removedOptimizationIDs)>0) {
-                $optimizationProblemIDs = array_merge($optimizationProblemIDs,self::$removedOptimizationIDs);
+            if (sizeof(self::$removedOptimizationIDs) > 0) {
+                $optimizationProblemIDs = array_merge($optimizationProblemIDs, self::$removedOptimizationIDs);
             }
 
             $params = [
                 'optimization_problem_ids' => $optimizationProblemIDs,
-                'redirect'                 => 0,
+                'redirect' => 0,
             ];
 
             $problem = new OptimizationProblem();
             $result = $problem->removeOptimization($params);
 
-            if ($result!=null && $result['status']==true) {
-                echo "The test optimizations were removed <br>";
+            if ($result != null && $result['status'] == true) {
+                echo 'The test optimizations were removed <br>';
             } else {
-                echo "Cannot remove the test optimizations <br>";
+                echo 'Cannot remove the test optimizations <br>';
             }
         }
 
-        if (sizeof(self::$removedRouteIDs)>0) {
+        if (sizeof(self::$removedRouteIDs) > 0) {
             $route = new Route();
 
             $route_ids = join(',', self::$removedRouteIDs);
 
             $result = $route->deleteRoutes($route_ids);
 
-            if ($result!=null && $result['deleted']==true) {
-                echo "The test routes were removed <br>";
+            if ($result != null && $result['deleted'] == true) {
+                echo 'The test routes were removed <br>';
             } else {
-                echo "Cannot remove the test routes <br>";
+                echo 'Cannot remove the test routes <br>';
             }
         }
 
-        if (sizeof(self::$removedVehicleIDs)>0) {
+        if (sizeof(self::$removedVehicleIDs) > 0) {
             $vehicle = new VehicleV4();
 
             foreach (self::$removedVehicleIDs as $vehicleID) {
@@ -817,5 +816,4 @@ class RouteTests extends \PHPUnit\Framework\TestCase
             }
         }
     }
-
 }

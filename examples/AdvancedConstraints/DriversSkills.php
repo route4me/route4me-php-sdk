@@ -6,14 +6,14 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
-use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\AlgorithmType;
-use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\OptimizationStates;
+use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\TravelMode;
 use Route4Me\Members\Member;
 use Route4Me\V5\Addresses\RouteAdvancedConstraints;
@@ -26,23 +26,24 @@ Route4Me::setApiKey(Constants::API_KEY);
 $member = new Member();
 $response = $member->getUsers();
 
-if ($response==NULL || !isset($response['results']) || sizeof($response['results'])<3) {
-    echo "Cannot retrieve 3 members" . PHP_EOL;
+if ($response == null || !isset($response['results']) || sizeof($response['results']) < 3) {
+    echo 'Cannot retrieve 3 members' . PHP_EOL;
+
     return;
 }
 
 $members = [
     $response['results'][0]['member_id'],
     $response['results'][1]['member_id'],
-    $response['results'][2]['member_id']
+    $response['results'][2]['member_id'],
 ];
 
 //**********************************************************************
 // General Route Parameters
 $parameters = RouteParameters::fromArray([
     'rt' => true,
-    'algorithm_type' => Algorithmtype::ADVANCED_CVRP_TW,
-    'route_name' => 'Automatic Driver Skills Example - Single Depot, Multiple Driver '.date('Y-m-d H:i:s', time()),
+    'algorithm_type' => AlgorithmType::ADVANCED_CVRP_TW,
+    'route_name' => 'Automatic Driver Skills Example - Single Depot, Multiple Driver ' . date('Y-m-d H:i:s', time()),
     'route_time' => 0,
     'distance_unit' => DistanceUnit::MILES,
     'device_type' => DeviceType::WEB,
@@ -52,7 +53,7 @@ $parameters = RouteParameters::fromArray([
     'vehicle_max_distance_mi' => 10000,
     'route_max_duration' => 86400,
     'parts' => 20,
-    'advanced_constraints'=> []
+    'advanced_constraints' => [],
 ]);
 
 //**********************************************************************
@@ -63,8 +64,8 @@ $parameters = RouteParameters::fromArray([
 $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
     'max_cargo_volume' => 0.0,
     'max_capacity' => 200,
-    'available_time_windows' => [[(2 + 5) * 3600 , (16 + 5) * 3600]],
-    'route4me_members_id' => $members
+    'available_time_windows' => [[(2 + 5) * 3600, (16 + 5) * 3600]],
+    'route4me_members_id' => $members,
 ]);
 
 // Schedule 2
@@ -73,21 +74,21 @@ $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
 $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
     'max_cargo_volume' => 0.0,
     'max_capacity' => 500,
-    'available_time_windows' => [[(8 + 5) * 3600 , (19 + 5) * 3600]],
-    'route4me_members_id' => $members
+    'available_time_windows' => [[(8 + 5) * 3600, (19 + 5) * 3600]],
+    'route4me_members_id' => $members,
 ]);
 
 //**********************************************************************
 // Addresses
-$json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_9.json'), true);
+$json = json_decode(file_get_contents(dirname(__FILE__) . '/data/addresses_9.json'), true);
 
 // Depot
 $addresses[] = Address::fromArray([
     'address' => '1604 PARKRIDGE PKWY, Louisville, KY, 40214',
-    'is_depot' => TRUE,
+    'is_depot' => true,
     'lat' => 38.141598,
     'lng' => -85.793846,
-    'time' => 300
+    'time' => 300,
 ]);
 
 // Stops
@@ -98,11 +99,10 @@ foreach ($json as $address) {
         'lat' => $address['lat'],
         'lng' => $address['lng'],
         'time' => $address['time'],
-        'tags' => [($n < 4 ? 'Class A CDL' : 'Class B CDL')]
+        'tags' => [($n < 4 ? 'Class A CDL' : 'Class B CDL')],
     ]);
 
-    if($n >= 4)
-    {
+    if($n >= 4) {
         $addr_obj->time_window_start = $address['time_window_start'];
         $addr_obj->time_window_end = $address['time_window_end'];
     }
@@ -116,12 +116,11 @@ $optimizationParams->setParameters($parameters);
 
 $problem = OptimizationProblem::optimize($optimizationParams);
 
-echo "Optimization Problem ID: " . $problem->optimization_problem_id . PHP_EOL;
-echo "State: " . OptimizationStates::getName($problem->state) . " (" . $problem->state . ")" . PHP_EOL;
+echo 'Optimization Problem ID: ' . $problem->optimization_problem_id . PHP_EOL;
+echo 'State: ' . OptimizationStates::getName($problem->state) . ' (' . $problem->state . ')' . PHP_EOL;
 
-echo "Routes:" . PHP_EOL;
-foreach($problem->routes as $route)
-{
+echo 'Routes:' . PHP_EOL;
+foreach($problem->routes as $route) {
     echo "\tID: " . $route->route_id . PHP_EOL;
     echo "\tDistance: " . $route->trip_distance . PHP_EOL;
     echo "\tAddresses:" . PHP_EOL;

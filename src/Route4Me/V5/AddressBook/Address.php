@@ -3,14 +3,11 @@
 namespace Route4Me\V5\AddressBook;
 
 use Route4Me\Exception\ApiError;
-use Route4Me\V5\AddressBook\ResponseAddress;
 
 /**
- * Address Book API Address structure
+ * Address Book API Address structure.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class Address extends ResponseAddress
 {
@@ -33,7 +30,7 @@ class Address extends ResponseAddress
             && isset($params_or_address_1['address_stop_type'])
         ) {
             parent::__construct($params_or_address_1);
-        } elseif (is_string($params_or_address_1) && $params_or_address_1 != ""
+        } elseif (is_string($params_or_address_1) && $params_or_address_1 != ''
             && !is_null($cached_lat) && !is_null($cached_lng) && !is_null($address_stop_type)
         ) {
             $this->address_1 = $params_or_address_1;

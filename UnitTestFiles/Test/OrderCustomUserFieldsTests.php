@@ -24,41 +24,41 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
         $field444Id = null;
 
         foreach ($response as $userCustomField) {
-            if ($userCustomField['order_custom_field_name']=='CustomField333') {
+            if ($userCustomField['order_custom_field_name'] == 'CustomField333') {
                 $field333Exists = true;
             }
 
-            if ($userCustomField['order_custom_field_name']=='CustomField444') {
+            if ($userCustomField['order_custom_field_name'] == 'CustomField444') {
                 $field444Id = $userCustomField['order_custom_field_id'];
             }
         }
 
         if (!$field333Exists) {
             $orderCustomFieldParameters = OrderCustomField::fromArray([
-                'order_custom_field_name'      => 'CustomField333',
-                'order_custom_field_label'     => 'Custom Field 333',
-                'order_custom_field_type'      => 'checkbox',
-                'order_custom_field_type_info' => ['short_label' => 'cFl333']
+                'order_custom_field_name' => 'CustomField333',
+                'order_custom_field_label' => 'Custom Field 333',
+                'order_custom_field_type' => 'checkbox',
+                'order_custom_field_type_info' => ['short_label' => 'cFl333'],
             ]);
 
             $newField = $orderCustomField->addOrderCustomUserField($orderCustomFieldParameters);
 
-            if (!is_null($newField) && isset($newField['result']) && $newField['result']=='OK') {
+            if (!is_null($newField) && isset($newField['result']) && $newField['result'] == 'OK') {
                 self::$createdCustomUserFields[] = $newField['data']['order_custom_field_id'];
             }
         }
 
-        if ($field444Id!=null) {
+        if ($field444Id != null) {
             $orderCustomFieldParameters = OrderCustomField::fromArray([
-                'order_custom_field_id' => $field444Id
+                'order_custom_field_id' => $field444Id,
             ]);
 
             $response = $orderCustomField->removeOrderCustomUserField($orderCustomFieldParameters);
 
             if (!is_null($response) &&
                 isset($response['result']) &&
-                $response['result']=='OK' &&
-                $response['affected']==1) {
+                $response['result'] == 'OK' &&
+                $response['affected'] == 1) {
                 echo "The order custom user field $field444Id removed <br>";
             }
         }
@@ -67,10 +67,10 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $orderCustomFields = OrderCustomField::fromArray([
-            'order_custom_field_name'      => 'CustomField4',
-            'order_custom_field_label'     => 'Custom Field 4',
-            'order_custom_field_type'      => 'checkbox',
-            'order_custom_field_type_info' => ['short_label' => 'cFl4']
+            'order_custom_field_name' => 'CustomField4',
+            'order_custom_field_label' => 'Custom Field 4',
+            'order_custom_field_type' => 'checkbox',
+            'order_custom_field_type_info' => ['short_label' => 'cFl4'],
         ]);
 
         $this->assertEquals('CustomField4', $orderCustomFields->order_custom_field_name);
@@ -82,18 +82,19 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
     public function testToArray()
     {
         $orderCustomFields = OrderCustomField::fromArray([
-            'order_custom_field_name'      => 'CustomField4',
-            'order_custom_field_label'     => 'Custom Field 4',
-            'order_custom_field_type'      => 'checkbox',
-            'order_custom_field_type_info' => ['short_label' => 'cFl4']
+            'order_custom_field_name' => 'CustomField4',
+            'order_custom_field_label' => 'Custom Field 4',
+            'order_custom_field_type' => 'checkbox',
+            'order_custom_field_type_info' => ['short_label' => 'cFl4'],
         ]);
 
-        $this->assertEquals($orderCustomFields->toArray(),
+        $this->assertEquals(
+            $orderCustomFields->toArray(),
             [
-                'order_custom_field_name'      => 'CustomField4',
-                'order_custom_field_label'     => 'Custom Field 4',
-                'order_custom_field_type'      => 'checkbox',
-                'order_custom_field_type_info' => ['short_label' => 'cFl4']
+                'order_custom_field_name' => 'CustomField4',
+                'order_custom_field_label' => 'Custom Field 4',
+                'order_custom_field_type' => 'checkbox',
+                'order_custom_field_type_info' => ['short_label' => 'cFl4'],
             ]
         );
     }
@@ -116,10 +117,10 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
         $orderCustomField = new OrderCustomField();
 
         $orderCustomFieldParameters = OrderCustomField::fromArray([
-            'order_custom_field_name'      => 'CustomField444',
-            'order_custom_field_label'     => 'Custom Field 444',
-            'order_custom_field_type'      => 'checkbox',
-            'order_custom_field_type_info' => ['short_label' => 'cFl444']
+            'order_custom_field_name' => 'CustomField444',
+            'order_custom_field_label' => 'Custom Field 444',
+            'order_custom_field_type' => 'checkbox',
+            'order_custom_field_type_info' => ['short_label' => 'cFl444'],
         ]);
 
         $response = $orderCustomField->addOrderCustomUserField($orderCustomFieldParameters);
@@ -136,10 +137,10 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
         $orderCustomField = new OrderCustomField();
 
         $orderCustomFieldParameters = OrderCustomField::fromArray([
-            'order_custom_field_id'        => self::$createdCustomUserFields[0],
-            'order_custom_field_label'     => 'Custom Field 333 Updated',
-            'order_custom_field_type'      => 'checkbox',
-            'order_custom_field_type_info' => ['short_label' => 'cFl333']
+            'order_custom_field_id' => self::$createdCustomUserFields[0],
+            'order_custom_field_label' => 'Custom Field 333 Updated',
+            'order_custom_field_type' => 'checkbox',
+            'order_custom_field_type_info' => ['short_label' => 'cFl333'],
         ]);
 
         $response = $orderCustomField->updateOrderCustomUserField($orderCustomFieldParameters);
@@ -156,7 +157,7 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
         $orderCustomField = new OrderCustomField();
 
         $orderCustomFieldParameters = OrderCustomField::fromArray([
-            'order_custom_field_id' => self::$createdCustomUserFields[0]
+            'order_custom_field_id' => self::$createdCustomUserFields[0],
         ]);
 
         $response = $orderCustomField->removeOrderCustomUserField($orderCustomFieldParameters);
@@ -172,20 +173,20 @@ class OrderCustomUserFieldsTests extends \PHPUnit\Framework\TestCase
 
     public static function tearDownAfterClass() : void
     {
-        if (sizeof(self::$createdCustomUserFields)>0) {
+        if (sizeof(self::$createdCustomUserFields) > 0) {
             $orderCustomField = new OrderCustomField();
 
             foreach (self::$createdCustomUserFields as $customFieldId) {
                 $orderCustomFieldParameters = OrderCustomField::fromArray([
-                    'order_custom_field_id' => $customFieldId
+                    'order_custom_field_id' => $customFieldId,
                 ]);
 
                 $response = $orderCustomField->removeOrderCustomUserField($orderCustomFieldParameters);
 
                 if (!is_null($response) &&
                     isset($response['result']) &&
-                    $response['result']=='OK' &&
-                    $response['affected']==1) {
+                    $response['result'] == 'OK' &&
+                    $response['affected'] == 1) {
                         echo "The order custom user field $customFieldId removed <br>";
                 }
             }

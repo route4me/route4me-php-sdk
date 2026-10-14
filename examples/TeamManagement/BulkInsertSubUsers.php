@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Exception;
 use Route4Me\Exception\ApiError;
@@ -34,7 +34,7 @@ try {
     }
 
     if (!$owner_member_id) {
-        throw new Exception("Cannot find OWNER_MEMBER_ID.");
+        throw new Exception('Cannot find OWNER_MEMBER_ID.');
     }
 
     // insert new sub-users
@@ -45,25 +45,25 @@ try {
             'member_last_name' => 'Pupkindzes',
             'member_email' => 'the_I@best.com',
             'member_type' => 'SUB_ACCOUNT_DRIVER',
-            'OWNER_MEMBER_ID' => $owner_member_id
+            'OWNER_MEMBER_ID' => $owner_member_id,
         ], [
             'new_password' => '12345&Qwerty',
             'member_first_name' => 'Tusha II',
             'member_last_name' => 'Pupkindzes',
             'member_email' => 'the_II@best.com',
             'member_type' => 'SUB_ACCOUNT_DRIVER',
-            'OWNER_MEMBER_ID' => $owner_member_id
-            ]
+            'OWNER_MEMBER_ID' => $owner_member_id,
+            ],
     ];
 
     $options = [
-        'conflicts' => 'overwrite'
+        'conflicts' => 'overwrite',
     ];
 
     $tm = new TeamManagement();
     $res = $tm->bulkInsert($params, $options);
     //print_r($res);
-    echo "Insert two sub-users." . PHP_EOL;
+    echo 'Insert two sub-users.' . PHP_EOL;
 } catch (Exception | ApiError $e) {
     echo $e->getMessage() . PHP_EOL;
 }

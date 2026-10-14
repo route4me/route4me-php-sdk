@@ -1,19 +1,19 @@
 <?php
 
 //**********************************************************************
-// Driver's Time Shift 
+// Driver's Time Shift
 //**********************************************************************
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
-use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\AlgorithmType;
-use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\DeviceType;
+use Route4Me\Enum\DistanceUnit;
 use Route4Me\Enum\OptimizationStates;
+use Route4Me\Enum\OptimizationType;
 use Route4Me\Enum\TravelMode;
 use Route4Me\V5\Addresses\RouteAdvancedConstraints;
 
@@ -24,8 +24,8 @@ Route4Me::setApiKey(Constants::API_KEY);
 // General Route Parameters
 $parameters = RouteParameters::fromArray([
     'rt' => true,
-    'algorithm_type' => Algorithmtype::ADVANCED_CVRP_TW,
-    'route_name' => 'Driver Shift Example - SDMD '.date('Y-m-d H:i:s', time()),
+    'algorithm_type' => AlgorithmType::ADVANCED_CVRP_TW,
+    'route_name' => 'Driver Shift Example - SDMD ' . date('Y-m-d H:i:s', time()),
     'route_time' => 0,
     'distance_unit' => DistanceUnit::MILES,
     'device_type' => DeviceType::WEB,
@@ -35,7 +35,7 @@ $parameters = RouteParameters::fromArray([
     'vehicle_max_distance_mi' => 10000,
     'route_max_duration' => 86400,
     'parts' => 20,
-    'advanced_constraints' => [] 
+    'advanced_constraints' => [],
 ]);
 
 //**********************************************************************
@@ -48,7 +48,7 @@ $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
     'max_capacity' => 200,
     'members_count' => 10,
     'available_time_windows' => [[25200, 75000]],
-    'tags' => ['TAG001', 'TAG002']
+    'tags' => ['TAG001', 'TAG002'],
 ]);
 
 // Schedule 2
@@ -61,12 +61,12 @@ $parameters->advanced_constraints[] = RouteAdvancedConstraints::fromArray([
     'max_capacity' => 500,
     'members_count' => 6,
     'available_time_windows' => [[45200, 55000], [62000, 85000]],
-    'tags' => ['TAG003']
+    'tags' => ['TAG003'],
 ]);
 
 //**********************************************************************
 // Addresses
-$json = json_decode(file_get_contents(dirname(__FILE__).'/data/addresses_9.json'), true);
+$json = json_decode(file_get_contents(dirname(__FILE__) . '/data/addresses_9.json'), true);
 
 // Depot
 $addresses[] = Address::fromArray([
@@ -74,7 +74,7 @@ $addresses[] = Address::fromArray([
     'is_depot' => true,
     'lat' => 38.141598,
     'lng' => -85.793846,
-    'time' => 300
+    'time' => 300,
 ]);
 
 // Stops
@@ -85,11 +85,10 @@ foreach ($json as $address) {
         'lat' => $address['lat'],
         'lng' => $address['lng'],
         'time' => $address['time'],
-        'tags' => ($n < 4 ? ['TAG001', 'TAG002'] : ['TAG003'])
+        'tags' => ($n < 4 ? ['TAG001', 'TAG002'] : ['TAG003']),
     ]);
 
-    if($n >= 4)
-    {
+    if($n >= 4) {
         $addr_obj->time_window_start = $address['time_window_start'];
         $addr_obj->time_window_end = $address['time_window_end'];
     }
@@ -103,12 +102,11 @@ $optimizationParams->setParameters($parameters);
 
 $problem = OptimizationProblem::optimize($optimizationParams);
 
-echo "Optimization Problem ID: " . $problem->optimization_problem_id . PHP_EOL;
-echo "State: " . OptimizationStates::getName($problem->state) . " (" . $problem->state . ")" . PHP_EOL;
+echo 'Optimization Problem ID: ' . $problem->optimization_problem_id . PHP_EOL;
+echo 'State: ' . OptimizationStates::getName($problem->state) . ' (' . $problem->state . ')' . PHP_EOL;
 
-echo "Routes:" . PHP_EOL;
-foreach($problem->routes as $route)
-{
+echo 'Routes:' . PHP_EOL;
+foreach($problem->routes as $route) {
     echo "\tID: " . $route->route_id . PHP_EOL;
     echo "\tDistance: " . $route->trip_distance . PHP_EOL;
     echo "\tAddresses:" . PHP_EOL;

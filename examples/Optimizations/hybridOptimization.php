@@ -2,8 +2,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 /* The example demonstrates process of creating a Hybrid Optimization using scheduling addresses and orders.
  * Please, use your own API key for this example.
@@ -49,13 +49,13 @@ if (false !== ($handle = fopen("$source_file", 'r'))) {
     echo 'Errors: <br><br>';
 
     foreach ($results['fail'] as $eValue) {
-        echo $eValue.'<br>';
+        echo $eValue . '<br>';
     }
 
     echo 'Successes: <br><br>';
 
     foreach ($results['success'] as $sValue) {
-        echo $sValue.'<br>';
+        echo $sValue . '<br>';
     }
 }
 
@@ -82,13 +82,13 @@ if (false !== ($handle = fopen("$orders_file", 'r'))) {
     echo 'Errors: <br><br>';
 
     foreach ($results['fail'] as $eValue) {
-        echo $eValue.'<br>';
+        echo $eValue . '<br>';
     }
 
     echo 'Successes: <br><br>';
 
     foreach ($results['success'] as $sValue) {
-        echo $sValue.'<br>';
+        echo $sValue . '<br>';
     }
 }
 
@@ -98,14 +98,14 @@ $ep = time() + 604800;
 $scheduleDate = date('Y-m-d', $ep);
 
 $hybridParams = [
-    'target_date_string'      => $scheduleDate,
+    'target_date_string' => $scheduleDate,
     'timezone_offset_minutes' => 480,
 ];
 
 $optimization = new OptimizationProblem();
 $hybridOptimization = $optimization->getHybridOptimization($hybridParams);
 
-if (null != $hybridOptimization) {
+if ($hybridOptimization != null) {
     if (isset($hybridOptimization['optimization_problem_id'])) {
         $optId = $hybridOptimization['optimization_problem_id'];
 
@@ -148,7 +148,7 @@ if (null != $hybridOptimization) {
 
             /* Reoptimize hybrid optimization */
 
-            if (null != $resultDepots) {
+            if ($resultDepots != null) {
                 $problemParams = [
                     'optimization_problem_id' => $optId,
                 ];

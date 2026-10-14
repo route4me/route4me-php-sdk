@@ -6,8 +6,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\V5\RecurringRoutes\Schedules as Schedules;
 
@@ -25,7 +25,7 @@ try {
         'name' => 'The bestest schedule',
         'schedule_blacklist' => [],
         'schedule' => null,
-        'timezone' => 'UTC'
+        'timezone' => 'UTC',
     ];
 
     $res = $schedules->createMasterRoute($params);

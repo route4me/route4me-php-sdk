@@ -3,7 +3,6 @@
 namespace Route4Me;
 
 use Route4Me\Enum\Endpoint;
-use Route4Me\Exception\BadParam;
 
 class Address extends Common
 {
@@ -106,11 +105,11 @@ class Address extends Common
     public static function getAddress($routeId, $addressId)
     {
         $address = Route4Me::makeRequst([
-            'url'       => Endpoint::ADDRESS_V4,
-            'method'    => 'GET',
-            'query'     => [
-                'route_id'              => $routeId,
-                'route_destination_id'  => $addressId,
+            'url' => Endpoint::ADDRESS_V4,
+            'method' => 'GET',
+            'query' => [
+                'route_id' => $routeId,
+                'route_destination_id' => $addressId,
             ],
         ]);
 
@@ -120,12 +119,12 @@ class Address extends Common
     public function update()
     {
         $addressUpdate = Route4Me::makeRequst([
-            'url'       => Endpoint::ADDRESS_V4,
-            'method'    => 'PUT',
-            'body'      => $this->toArray(),
-            'query'     => [
-                'route_id'              => $this->route_id,
-                'route_destination_id'  => $this->route_destination_id,
+            'url' => Endpoint::ADDRESS_V4,
+            'method' => 'PUT',
+            'body' => $this->toArray(),
+            'query' => [
+                'route_id' => $this->route_id,
+                'route_destination_id' => $this->route_destination_id,
             ],
         ]);
 
@@ -143,9 +142,9 @@ class Address extends Common
 
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESS_V4,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
-            'body'      => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]);
 
         return $result;
@@ -159,9 +158,9 @@ class Address extends Common
         $allQueryFields = ['route_id', 'address_id', 'is_departed', 'member_id'];
 
         $address = Route4Me::makeRequst([
-            'url'       => Endpoint::MARK_ADDRESS_DEPARTED,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::MARK_ADDRESS_DEPARTED,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $address;
@@ -175,9 +174,9 @@ class Address extends Common
         $allQueryFields = ['route_id', 'address_id', 'is_visited', 'member_id'];
 
         $address = Route4Me::makeRequst([
-            'url'       => Endpoint::UPDATE_ADDRESS_VISITED,
-            'method'    => 'PUT',
-            'query'     => Route4Me::generateRequestParameters($allQueryFields, $params),
+            'url' => Endpoint::UPDATE_ADDRESS_VISITED,
+            'method' => 'PUT',
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $params),
         ]);
 
         return $address;
@@ -186,15 +185,15 @@ class Address extends Common
     public function deleteAddress()
     {
         $address = Route4Me::makeRequst([
-            'url'       => Endpoint::ADDRESS_V4,
-            'method'    => 'DELETE',
-            'query'     => [
-                'route_id'              => $this->route_id,
-                'route_destination_id'  => $this->route_destination_id,
+            'url' => Endpoint::ADDRESS_V4,
+            'method' => 'DELETE',
+            'query' => [
+                'route_id' => $this->route_id,
+                'route_destination_id' => $this->route_destination_id,
             ],
         ]);
 
-        return (bool) $address['deleted'];
+        return (bool)$address['deleted'];
     }
 
     public function moveDestinationToRoute($params)
@@ -202,10 +201,10 @@ class Address extends Common
         $allBodyFields = ['to_route_id', 'route_destination_id', 'after_destination_id'];
 
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::MOVE_ROUTE_DESTINATION,
-            'method'        => 'POST',
-            'body'          => Route4Me::generateRequestParameters($allBodyFields, $params),
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
+            'url' => Endpoint::MOVE_ROUTE_DESTINATION,
+            'method' => 'POST',
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
         ]);
 
         return $result;
@@ -214,14 +213,14 @@ class Address extends Common
     public function deleteRouteDestinations(array $routeDestinationIds)
     {
         $result = Route4Me::makeRequst([
-            'url'           => Endpoint::DELETE_ROUTE_DESTINATION,
-            'method'        => 'POST',
-            'query'         => ['format' => 'json'],
-            'body'          => [
+            'url' => Endpoint::DELETE_ROUTE_DESTINATION,
+            'method' => 'POST',
+            'query' => ['format' => 'json'],
+            'body' => [
                 'route_destination_ids' => implode(',', $routeDestinationIds),
             ],
-            'HTTPHEADER'    => 'Content-Type: multipart/form-data',
-            'HTTPHEADERS'   => ['Accept: application/json'],
+            'HTTPHEADER' => 'Content-Type: multipart/form-data',
+            'HTTPHEADERS' => ['Accept: application/json'],
         ]);
 
         return $result;

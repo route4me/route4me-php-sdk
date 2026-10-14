@@ -1,52 +1,49 @@
 <?php
 
-
 namespace Route4Me\V5\Routes\AddonRoutesApi;
 
 /**
- * Class RouteFilterParameters
- * @package Route4Me\V5\Routes\AddonRoutesApi
- * Elastic search filter.
+ * Class RouteFilterParameters.
  */
 class RouteFilterParameters extends \Route4Me\Common
 {
     /**
-     * @var string $query
+     * @var string
      */
     public $query;
 
     /**
-     * @var RouteFilterParametersFilters $filters
+     * @var RouteFilterParametersFilters
      */
     public $filters = [];
 
     /**
-     * @var boolean $directions
+     * @var bool
      */
     public $directions;
 
     /**
-     * @var boolean $notes
+     * @var bool
      */
     public $notes;
 
     /**
-     * @var integer $page
+     * @var int
      */
     public $page;
 
     /**
-     * @var integer $per_page
+     * @var int
      */
     public $per_page;
 
     /**
-     * @var array $order_by
+     * @var array
      */
     public $order_by = [];
 
     /**
-     * @var string $timezone
+     * @var string
      */
     public $timezone;
 }

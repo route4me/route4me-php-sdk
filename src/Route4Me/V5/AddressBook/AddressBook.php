@@ -2,21 +2,15 @@
 
 namespace Route4Me\V5\AddressBook;
 
+use Route4Me\Common;
 use Route4Me\Exception\ApiError;
 use Route4Me\Route4Me;
-use Route4Me\Common;
 use Route4Me\V5\Enum\Endpoint;
-use Route4Me\V5\AddressBook\ResponseAll;
-use Route4Me\V5\AddressBook\ResponsePagination;
-use Route4Me\V5\AddressBook\ResponseClustering;
-use Route4Me\V5\AddressBook\StatusChecker;
 
 /**
- * Address Book API
+ * Address Book API.
  *
  * @since 1.2.8
- *
- * @package Route4Me
  */
 class AddressBook extends Common
 {
@@ -54,7 +48,7 @@ class AddressBook extends Common
         return $this->toResponseAll(Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES_INDEX_ALL,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $options)
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $options),
         ]));
     }
 
@@ -130,7 +124,7 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_INDEX_ALL,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $options)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $options),
         ]));
     }
 
@@ -163,7 +157,7 @@ class AddressBook extends Common
         return $this->toResponsePagination(Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES_INDEX_PAGINATION,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $options)
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $options),
         ]));
     }
 
@@ -239,7 +233,7 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_INDEX_PAGINATION,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $options)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $options),
         ]));
     }
 
@@ -267,7 +261,7 @@ class AddressBook extends Common
         return $this->toResponseClustering(Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES_INDEX_CLUSTERING,
             'method' => 'GET',
-            'query' => Route4Me::generateRequestParameters($allQueryFields, $options)
+            'query' => Route4Me::generateRequestParameters($allQueryFields, $options),
         ]));
     }
 
@@ -332,7 +326,7 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_INDEX_CLUSTERING,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $options)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $options),
         ]));
     }
 
@@ -350,7 +344,7 @@ class AddressBook extends Common
         return $this->toResponseAddress(Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES_SHOW,
             'method' => 'GET',
-            'query' => ['address_id' => $addressId]
+            'query' => ['address_id' => $addressId],
         ]));
     }
 
@@ -370,7 +364,7 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_SHOW,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => ['address_ids' => $addressIds]
+            'body' => ['address_ids' => $addressIds],
         ]));
     }
 
@@ -454,14 +448,14 @@ class AddressBook extends Common
             'local_time_window_end_2', 'local_timezone_string', 'service_time', 'color', 'address_icon',
             'schedule', 'schedule_blacklist', 'address_cube', 'address_pieces', 'address_reference_no',
             'address_revenue', 'address_weight', 'address_priority', 'address_customer_po', 'eligible_pickup',
-            'eligible_depot', 'assigned_to'
+            'eligible_depot', 'assigned_to',
         ];
 
         return $this->toResponseAddress(Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_address)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params_or_address),
         ]));
     }
 
@@ -485,7 +479,7 @@ class AddressBook extends Common
             'local_time_window_end_2', 'local_timezone_string', 'service_time', 'color', 'address_icon',
             'schedule', 'schedule_blacklist', 'address_cube', 'address_pieces', 'address_reference_no',
             'address_revenue', 'address_weight', 'address_priority', 'address_customer_po', 'eligible_pickup',
-            'eligible_depot', 'assigned_to'
+            'eligible_depot', 'assigned_to',
         ];
 
         $data = [];
@@ -497,12 +491,13 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_BATCH_CREATE,
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => ['data' => $data]
+            'body' => ['data' => $data],
         ]);
 
         if (is_array($result) && isset($result['status'])) {
             return (bool)$result['status'];
         }
+
         return false;
     }
 
@@ -528,14 +523,14 @@ class AddressBook extends Common
             'local_time_window_end_2', 'local_timezone_string', 'service_time', 'color', 'address_icon',
             'schedule', 'schedule_blacklist', 'address_cube', 'address_pieces', 'address_reference_no',
             'address_revenue', 'address_weight', 'address_priority', 'address_customer_po', 'eligible_pickup',
-            'eligible_depot', 'assigned_to'
+            'eligible_depot', 'assigned_to',
         ];
 
         return $this->toResponseAddress(Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES . '/' . $addressId,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => Route4Me::generateRequestParameters($allBodyFields, $params)
+            'body' => Route4Me::generateRequestParameters($allBodyFields, $params),
         ]));
     }
 
@@ -562,7 +557,7 @@ class AddressBook extends Common
             'local_time_window_end_2', 'local_timezone_string', 'service_time', 'color', 'address_icon',
             'schedule', 'schedule_blacklist', 'address_cube', 'address_pieces', 'address_reference_no',
             'address_revenue', 'address_weight', 'address_priority', 'address_customer_po', 'eligible_pickup',
-            'eligible_depot'
+            'eligible_depot',
         ];
 
         $params = Route4Me::generateRequestParameters($allBodyFields, $params_or_updateAddress);
@@ -572,7 +567,7 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_BATCH_UPDATE,
             'method' => 'PUT',
             'HTTPHEADER' => 'Content-Type: application/json',
-            'body' => $params
+            'body' => $params,
         ]);
 
         if (is_array($result)) {
@@ -580,8 +575,10 @@ class AddressBook extends Common
             foreach ($result as $key => $value) {
                 $data[] = $this->toResponseAddress($value);
             }
+
             return $data;
         }
+
         return [];
     }
 
@@ -656,7 +653,7 @@ class AddressBook extends Common
             'address_email', 'address_phone_number', 'address_custom_data', 'local_time_window_start',
             'local_time_window_end', 'local_time_window_start_2', 'local_time_window_end_2',
             'local_timezone_string', 'service_time', 'color', 'address_icon', 'eligible_pickup',
-            'eligible_depot'
+            'eligible_depot',
         ];
 
         return new StatusChecker(Route4Me::makeRequst([
@@ -666,8 +663,8 @@ class AddressBook extends Common
             'return_headers' => ['location'],
             'body' => [
                 'filter' => Route4Me::generateRequestParameters($allFilterFields, $filter),
-                'data' => Route4Me::generateRequestParameters($allParamsFields, $params)
-            ]
+                'data' => Route4Me::generateRequestParameters($allParamsFields, $params),
+            ],
         ]));
     }
 
@@ -688,7 +685,7 @@ class AddressBook extends Common
             'method' => 'DELETE',
             'HTTPHEADER' => 'Content-Type: application/json',
             'return_headers' => ['location', 'x-job-id'],
-            'body' => ['address_ids' => $addressIds]
+            'body' => ['address_ids' => $addressIds],
         ]));
     }
 
@@ -740,7 +737,7 @@ class AddressBook extends Common
             'method' => 'DELETE',
             'return_headers' => ['location', 'x-job-id'],
             'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
-            'body' => ['filter' => Route4Me::generateRequestParameters($allFilterFields, $filter)]
+            'body' => ['filter' => Route4Me::generateRequestParameters($allFilterFields, $filter)],
         ]));
     }
 
@@ -756,7 +753,7 @@ class AddressBook extends Common
     {
         return Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES_CUSTOM_FIELDS,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
     }
 
@@ -772,7 +769,7 @@ class AddressBook extends Common
     {
         return Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES_DEPOTS,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
     }
 
@@ -794,7 +791,7 @@ class AddressBook extends Common
             'method' => 'POST',
             'HTTPHEADER' => 'Content-Type: application/json',
             'return_headers' => ['location'],
-            'body' => ['ids' => $addressIds, 'filename' => $filename]
+            'body' => ['ids' => $addressIds, 'filename' => $filename],
         ]));
     }
 
@@ -847,7 +844,7 @@ class AddressBook extends Common
             'method' => 'POST',
             'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
             'return_headers' => ['location'],
-            'body' => ['filter' => Route4Me::generateRequestParameters($allFilterFields, $filter)]
+            'body' => ['filter' => Route4Me::generateRequestParameters($allFilterFields, $filter)],
         ]));
     }
 
@@ -870,7 +867,7 @@ class AddressBook extends Common
             'method' => 'POST',
             'HTTPHEADERS' => ['Content-Type: application/json', 'Accept: application/json'],
             'return_headers' => ['location'],
-            'body' => ['territory_ids' => $territoryIds, 'filename' => $filename]
+            'body' => ['territory_ids' => $territoryIds, 'filename' => $filename],
         ]));
     }
 
@@ -889,7 +886,7 @@ class AddressBook extends Common
             'url' => Endpoint::ADDRESSES_JOB_TRACKER_STATUS . '/' . $jobId,
             'method' => 'GET',
             'HTTPHEADER' => 'Accept: application/json',
-            'return_headers' => ['X-R4M-Async-Job-Running-Time']
+            'return_headers' => ['X-R4M-Async-Job-Running-Time'],
         ]));
     }
 
@@ -906,9 +903,10 @@ class AddressBook extends Common
     {
         $result = Route4Me::makeRequst([
             'url' => Endpoint::ADDRESSES_JOB_TRACKER_RESULT . '/' . $jobId,
-            'method' => 'GET'
+            'method' => 'GET',
         ]);
-        return (is_array($result) && isset($result['status']) && $result['status'] ? $result['status'] : false);
+
+        return is_array($result) && isset($result['status']) && $result['status'] ? $result['status'] : false;
     }
 
     private function toResponseAddress($result) : ResponseAddress

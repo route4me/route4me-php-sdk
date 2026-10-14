@@ -9,12 +9,12 @@ class GeocodingResponseUnitTests extends \PHPUnit\Framework\TestCase
     public function testFromArray()
     {
         $geocodingResponse = GeocodingResponse::fromArray([
-            'address'       =>  'Los Angeles International Airport (LAX), 1 World Way, Los Angeles, CA 90045, USA',
-            'lat'           =>  33.9415889,
-            'lng'           =>  -118.40853,
-            'type'          =>  'airport, establishment, point_of_interest',
-            'confidence'    =>  'medium',
-            'original'      =>  'Los%20Angeles%20International%20Airport,%20CA'
+            'address' => 'Los Angeles International Airport (LAX), 1 World Way, Los Angeles, CA 90045, USA',
+            'lat' => 33.9415889,
+            'lng' => -118.40853,
+            'type' => 'airport, establishment, point_of_interest',
+            'confidence' => 'medium',
+            'original' => 'Los%20Angeles%20International%20Airport,%20CA',
         ]);
 
         $this->assertEquals('Los Angeles International Airport (LAX), 1 World Way, Los Angeles, CA 90045, USA', $geocodingResponse->address);

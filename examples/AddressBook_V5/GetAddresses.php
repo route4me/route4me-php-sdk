@@ -7,8 +7,8 @@
 
 namespace Route4Me;
 
-$root = realpath(dirname(__FILE__).'/../../');
-require $root.'/vendor/autoload.php';
+$root = realpath(dirname(__FILE__) . '/../../');
+require $root . '/vendor/autoload.php';
 
 use Route4Me\Exception\ApiError;
 use Route4Me\V5\AddressBook\AddressBook;
@@ -23,7 +23,7 @@ try {
     // get the first 5 addresses
     $options = [
         'limit' => 5,
-        'offset' => 0
+        'offset' => 0,
     ];
     $res = $ab->getAddresses($options);
     print_r($res);
@@ -31,9 +31,9 @@ try {
     /////////////////////////////////////////////
     // get only the 5 fields of address
     $options = [
-        'fields' => "address_id, address_1, first_name, last_name, address_city",
+        'fields' => 'address_id, address_1, first_name, last_name, address_city',
         'limit' => 5,
-        'offset' => 0
+        'offset' => 0,
     ];
     $res = $ab->getAddresses($options);
     print_r($res);
@@ -43,7 +43,7 @@ try {
     $options = [
         'query' => 'France',
         'limit' => 10,
-        'offset' => 0
+        'offset' => 0,
     ];
     $res = $ab->getAddresses($options);
     print_r($res);

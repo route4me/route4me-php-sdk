@@ -11,7 +11,8 @@ use Route4Me\OptimizationProblemParams;
 use Route4Me\Route4Me;
 use Route4Me\RouteParameters;
 
-class AddressUnitTests extends \PHPUnit\Framework\TestCase {
+class AddressUnitTests extends \PHPUnit\Framework\TestCase
+{
     protected $address;
     public static $createdAddresses;
 
@@ -33,8 +34,8 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
     public static function setUpBeforeClass() : void
     {
         if (Constants::API_KEY == Constants::DEMO_API_KEY) {
-            $className = str_replace('UnitTestFiles\\Test\\','',get_class());
-            self::markTestSkipped( 'PHPUnit will skip '. $className ." class - it impossible run with demo API key" );
+            $className = str_replace('UnitTestFiles\\Test\\', '', get_class());
+            self::markTestSkipped('PHPUnit will skip ' . $className . ' class - it impossible run with demo API key');
         }
 
         Route4Me::setApiKey(Constants::API_KEY);
@@ -42,55 +43,55 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         //<editor-fold desc="Prepare Addresses">
         $addresses = [];
         $addresses[] = Address::fromArray([
-            'address'           => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
-            'is_depot'          => true,
-            'lat'               => 30.159341812134,
-            'lng'               => -81.538619995117,
-            'time'              => 300,
+            'address' => '11497 Columbia Park Dr W, Jacksonville, FL 32258',
+            'is_depot' => true,
+            'lat' => 30.159341812134,
+            'lng' => -81.538619995117,
+            'time' => 300,
             'time_window_start' => 28800,
-            'time_window_end'   => 32400,
+            'time_window_end' => 32400,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '214 Edgewater Branch Drive 32259',
-            'lat'               => 30.103567123413,
-            'lng'               => -81.595352172852,
-            'time'              => 300,
+            'address' => '214 Edgewater Branch Drive 32259',
+            'lat' => 30.103567123413,
+            'lng' => -81.595352172852,
+            'time' => 300,
             'time_window_start' => 36000,
-            'time_window_end'   => 37200,
+            'time_window_end' => 37200,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '756 eagle point dr 32092',
-            'lat'               => 30.046422958374,
-            'lng'               => -81.508758544922,
-            'time'              => 300,
+            'address' => '756 eagle point dr 32092',
+            'lat' => 30.046422958374,
+            'lng' => -81.508758544922,
+            'time' => 300,
             'time_window_start' => 39600,
-            'time_window_end'   => 41400,
+            'time_window_end' => 41400,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => '63 Stone Creek Cir St Johns, FL 32259, USA',
-            'lat'               => 30.048496,
-            'lng'               => -81.558716,
-            'time'              => 300,
+            'address' => '63 Stone Creek Cir St Johns, FL 32259, USA',
+            'lat' => 30.048496,
+            'lng' => -81.558716,
+            'time' => 300,
             'time_window_start' => 43200,
-            'time_window_end'   => 45000,
+            'time_window_end' => 45000,
         ]);
 
         $addresses[] = Address::fromArray([
-            'address'           => 'St Johns Florida 32259, USA',
-            'lat'               => 30.099642,
-            'lng'               => -81.547201,
-            'time'              => 300,
+            'address' => 'St Johns Florida 32259, USA',
+            'lat' => 30.099642,
+            'lng' => -81.547201,
+            'time' => 300,
             'time_window_start' => 46800,
-            'time_window_end'   => 48600,
+            'time_window_end' => 48600,
         ]);
 
         $parameters = RouteParameters::fromArray([
-            'device_type'           => DeviceType::IPAD,
-            'disable_optimization'  => false,
-            'route_name'            => 'phpunit test '.date('Y-m-d H:i'),
+            'device_type' => DeviceType::IPAD,
+            'disable_optimization' => false,
+            'route_name' => 'phpunit test ' . date('Y-m-d H:i'),
         ]);
         //</editor-fold>
 
@@ -119,23 +120,23 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         self::$addresIdMarkedAsVisited = $addresses[2]->getAddressId();
 
         $params = [
-            'route_id'      =>  self::$route_id,
-            'address_id'    =>  self::$addresIdMarkedAsVisited,
-            'is_visited'    => 1
+            'route_id' => self::$route_id,
+            'address_id' => self::$addresIdMarkedAsVisited,
+            'is_visited' => 1,
         ];
 
-        $result =  $addresses[2]->markAsVisited($params);
+        $result = $addresses[2]->markAsVisited($params);
 
     }
 
     public function testAddressFromArray()
     {
         $address = Address::fromArray([
-            'address'           => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
-            'lat'               => 38.2513427734,
-            'lng'               => -77.5993652344,
-            'time'              => 300,
-            'time_window_end'   => 75600,
+            'address' => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
+            'lat' => 38.2513427734,
+            'lng' => -77.5993652344,
+            'time' => 300,
+            'time_window_end' => 75600,
             'time_window_start' => 28800,
         ]);
 
@@ -150,26 +151,26 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
     public function testToArray()
     {
         $address = Address::fromArray([
-            'address'           => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
-            'lat'               => 38.2513427734,
-            'lng'               => -77.5993652344,
-            'time'              => 300,
-            'time_window_end'   => 75600,
+            'address' => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
+            'lat' => 38.2513427734,
+            'lng' => -77.5993652344,
+            'time' => 300,
+            'time_window_end' => 75600,
             'time_window_start' => 28800,
-            'custom_fields'     => [
+            'custom_fields' => [
                 'cf_1' => 1,
             ],
         ]);
 
         $this->assertEquals($address->toArray(), [
-            'address'           => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
-            'lat'               => 38.2513427734,
-            'lng'               => -77.5993652344,
-            'is_depot'          => false,
-            'time'              => 300,
-            'time_window_end'   => 75600,
+            'address' => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
+            'lat' => 38.2513427734,
+            'lng' => -77.5993652344,
+            'is_depot' => false,
+            'time' => 300,
+            'time_window_end' => 75600,
             'time_window_start' => 28800,
-            'custom_fields'     => [
+            'custom_fields' => [
                 'cf_1' => 1,
             ],
         ]);
@@ -184,7 +185,7 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
             'lng1' => -77.5993652344,
         ]);
 
-        echo "address: ".$address->lat." <br>";
+        echo 'address: ' . $address->lat . ' <br>';
     }
 
     public function testAddressFromArrayWithBadKeys()
@@ -192,10 +193,10 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $this->expectException(BadParam::class);
 
         $address = Address::fromArray([
-            'address'       => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
-            'lat'           => 38.2513427734,
-            'lng'           => -77.5993652344,
-            'demoaddress'   => '333333',
+            'address' => '10609 Mystic Pointe Dr, Fredericksburg, VA 22407',
+            'lat' => 38.2513427734,
+            'lng' => -77.5993652344,
+            'demoaddress' => '333333',
         ]);
 
         $this->assertNotNull($address->address);
@@ -238,9 +239,9 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $address = new Address();
 
         $params = [
-            'route_id'      =>  self::$route_id,
-            'address_id'    =>  self::$addresIdMarkedAsVisited,
-            'is_departed'   => 1
+            'route_id' => self::$route_id,
+            'address_id' => self::$addresIdMarkedAsVisited,
+            'is_departed' => 1,
         ];
 
         $result = $address->markAsDeparted($params);
@@ -255,21 +256,21 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $address = new Address();
 
         $params = [
-            'route_id'   =>  self::$route_id,
-            'address_id' =>  self::$address_id,
-            'is_visited' => 1
+            'route_id' => self::$route_id,
+            'address_id' => self::$address_id,
+            'is_visited' => 1,
         ];
 
         $result = $address->markAsVisited($params);
 
         $this->assertNotNull($result);
         $this->assertIsInt($result);
-        $this->assertEquals(1,$result);
+        $this->assertEquals(1, $result);
     }
 
     public function testDeleteAddress()
     {
-        $lastAddressId = self::$createdAddresses[sizeof(self::$createdAddresses)-1]->route_destination_id;
+        $lastAddressId = self::$createdAddresses[sizeof(self::$createdAddresses) - 1]->route_destination_id;
 
         $address = Address::getAddress(self::$route_id, $lastAddressId);
         $this->assertNotNull($address);
@@ -282,13 +283,13 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
 
     public function testMoveDestinationToRoute()
     {
-        $lastAddressId = self::$createdAddresses[sizeof(self::$createdAddresses)-1]->route_destination_id;
+        $lastAddressId = self::$createdAddresses[sizeof(self::$createdAddresses) - 1]->route_destination_id;
 
         // Move the destination to the route
         $routeParams = [
-            'to_route_id'           => self::$route_id_dest,
-            'route_destination_id'  => $lastAddressId,
-            'after_destination_id'  => self::$afterAddressId,
+            'to_route_id' => self::$route_id_dest,
+            'route_destination_id' => $lastAddressId,
+            'after_destination_id' => self::$afterAddressId,
         ];
 
         $address = new Address();
@@ -296,20 +297,22 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
 
         $this->assertNotNull($result);
         $this->assertNotNull($result['success']);
-        $this->assertEquals(true,$result['success']);
+        $this->assertEquals(true, $result['success']);
     }
 
     public function testChangeRouteDepote()
     {
         $address1 = Address::getAddress(
             self::$route_id,
-            self::$createdAddresses[0]->route_destination_id);
+            self::$createdAddresses[0]->route_destination_id
+        );
 
         $address1->route_id = self::$route_id;
 
         $address2 = Address::getAddress(
             self::$route_id,
-            self::$createdAddresses[1]->route_destination_id);
+            self::$createdAddresses[1]->route_destination_id
+        );
 
         $address2->route_id = self::$route_id;
 
@@ -334,17 +337,17 @@ class AddressUnitTests extends \PHPUnit\Framework\TestCase {
         $params = [
             'optimization_problem_ids' => [
                 '0' => $optimizationProblemId,
-                '1' => $destOptimizationProblemId
+                '1' => $destOptimizationProblemId,
             ],
             'redirect' => 0,
         ];
 
         $result = self:: $problem->removeOptimization($params);
 
-        if ($result!=null && $result['status']==true) {
-            echo "The test optimization was removed <br>";
+        if ($result != null && $result['status'] == true) {
+            echo 'The test optimization was removed <br>';
         } else {
-            echo "Cannot remove the test optimization <br>";
+            echo 'Cannot remove the test optimization <br>';
         }
     }
 }

@@ -12,7 +12,10 @@ namespace Route4Me\Enum\AddressBundlingModes;
 class Mode
 {
     const ADDRESS = 1;
+
     const COORDINATES = 2;
+
     const ADDRESS_ID = 3;
+
     const ADDRESS_CUSTOM_FIELD = 4;
 }

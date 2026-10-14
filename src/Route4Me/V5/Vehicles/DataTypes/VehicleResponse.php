@@ -5,14 +5,12 @@ namespace Route4Me\V5\Vehicles\DataTypes;
 use Route4Me\Common as Common;
 
 /**
- * Class VehicleResponse
- * @package Route4Me\V5\Vehicles
- * Response for the endpoint /vehicles/license
+ * Class VehicleResponse.
  */
 class VehicleResponse extends Common
 {
-    /** Vehicle data
-     * @var DataVehicle $data
+    /** Vehicle data.
+     * @var DataVehicle
      */
     public $data = [];
 
@@ -28,6 +26,7 @@ class VehicleResponse extends Common
                 $vehResp->$key = $value;
             }
         }
+
         return $vehResp;
     }
 }

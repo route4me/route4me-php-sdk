@@ -4,71 +4,68 @@ namespace Route4Me\Vehicles;
 
 use Route4Me\Common;
 use Route4Me\Enum\Endpoint;
-use Route4Me\Route4Me;
 
 /**
- * Class VehiclesResponseV4
- * @package Route4Me\Vehicles
- * Paginated response from the vehicle request.
+ * Class VehiclesResponseV4.
  */
-class VehiclesResponseV4 extends \Route4Me\Common
+class VehiclesResponseV4 extends Common
 {
-    /** @var int $current_page
+    /** @var int
      * Current page number in the driver reviews collection.
      */
     public $current_page;
 
-    /** @var VehicleV4[] $data
+    /** @var VehicleV4[]
      * An array of the vehicles data.
      */
     public $data = [];
 
-    /** @var string $first_page_url
+    /** @var string
      * URL to the first page.
      */
     public $first_page_url;
 
-    /** @var int $from
+    /** @var int
      * From which vehicle is starting the page.
      */
     public $from;
 
-    /** @var int $last_page
+    /** @var int
      * Last page number in the vehicles collection.
      */
     public $last_page;
 
-    /** @var string $last_page_url
+    /** @var string
      * URL to the last page.
      */
     public $last_page_url;
 
-    /** @var string $next_page_url
+    /** @var string
      * URL to the next page.
      */
     public $next_page_url;
 
-    /** @var string $path
+    /** @var string
      * Path to the API endpoint.
      */
     public $path;
 
-    /** @var int $per_page
+    /** @var int
      * Vehicles number per page.
      */
     public $per_page;
 
-    /** @var string $prev_page_url
+    /** @var string
      * URL to the previous page.
      */
     public $prev_page_url;
 
-    /** @var int $to
+    /** @var int
      * To which vehicle is ending the page.
      */
     public $to;
 
-    /** @var int $total
+    /** @var int
      * Total number of the vehicles.
      */
     public $total;

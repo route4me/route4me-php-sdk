@@ -2,7 +2,6 @@
 
 namespace Route4Me\TelematicsGateway;
 
-use Route4Me\Enum\Endpoint;
 use Route4Me\Common as Common;
 use Route4Me\Route4Me as Route4Me;
 
@@ -16,53 +15,53 @@ class TelematicsVendors extends Common
      * @var type string
      */
     public $id;
-    
+
     /**
-     * Vendor name
+     * Vendor name.
      * @var type string
      */
     public $name;
-    
+
     /**
-     * Vendor slug
+     * Vendor slug.
      * @var type string
      */
     public $slug;
-    
+
     /**
-     * Vendor description
+     * Vendor description.
      * @var type string
      */
     public $description;
-    
+
     /**
      * URL to the telematics vendor's logo.
      * @var type string
      */
     public $logo_url;
-    
+
     /**
      * Website URL of a telematics vendor.
      * @var type string
      */
     public $website_url;
-    
+
     /**
      * API URL of a telematics vendor.
      * @var type string
      */
     public $api_docs_url;
-    
+
     /**
-     * If 1, the vendor is integrated in Route4Me
+     * If 1, the vendor is integrated in Route4Me.
      * @var type string
      */
     public $is_integrated;
-    
+
     /**
      * Vendors size.
      * <para>Accepted values:</para>
-     * <para>global, regional, local. </para>
+     * <para>global, regional, local. </para>.
      * @var type string
      */
     public $size;

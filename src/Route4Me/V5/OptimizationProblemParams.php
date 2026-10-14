@@ -3,8 +3,8 @@
 namespace Route4Me\V5;
 
 use Route4Me\Exception\BadParam;
-use Route4Me\V5\Routes\RouteParameters;
 use Route4Me\V5\Addresses\Address as AddressV5;
+use Route4Me\V5\Routes\RouteParameters;
 
 class OptimizationProblemParams extends \Route4Me\Common
 {
@@ -44,7 +44,7 @@ class OptimizationProblemParams extends \Route4Me\Common
             $param->addAddress($address);
         }
 
-        if (isset($params['depots'] )) {
+        if (isset($params['depots'])) {
             foreach ($params['depots'] as $depot) {
                 if (!($depot instanceof AddressV5)) {
                     $depot = AddressV5::fromArray($depot);
